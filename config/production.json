@@ -1,4 +1,4 @@
 {
-  "serverUrl": "https://textsecure-service.whispersystems.org",
-  "cdnUrl": "https://cdn.signal.org"
+  "serverUrl": "https://signal.mach.48b.it",
+  "cdnUrl": "https://cdn.signal.mach.48b.it"
 }
