@@ -171,6 +171,7 @@
     "win": {
       "asarUnpack": "node_modules/spellchecker/vendor/hunspell_dictionaries",
       "artifactName": "${name}-win-${version}.${ext}",
+      "certificateSubjectName": "Signal",
       "publisherName": "Signal (Quiet Riddle Ventures, LLC)",
       "icon": "build/icons/win/icon.ico",
       "publish": [
