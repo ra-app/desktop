@@ -301,7 +301,8 @@
       "!node_modules/@journeyapps/sqlcipher/build/*",
       "!node_modules/@journeyapps/sqlcipher/lib/binding/node-*",
       "!node_modules/@journeyapps/sqlcipher/lib/binding/electron-*/msvcp140.dll",
-      "!node_modules/@journeyapps/sqlcipher/lib/binding/electron-*/vcruntime140.dll"
+      "!node_modules/@journeyapps/sqlcipher/lib/binding/electron-*/vcruntime140.dll",
+      "node_modules/intl-tel-input/build/img/flags.png"
     ]
   }
 }
