@@ -14,6 +14,10 @@
         "type": "separator"
       },
       {
+        "label": "Set Up as Standalone Device",
+        "click": null
+      },
+      {
         "label": "Preferences…",
         "click": null
       },
