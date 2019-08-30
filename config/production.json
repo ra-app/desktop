@@ -1,6 +1,6 @@
 {
-  "serverUrl": "https://textsecure-service.whispersystems.org",
-  "cdnUrl": "https://cdn.signal.org",
-  "serverTrustRoot": "BXu6QIKVz5MA8gstzfOgRQGqyLqOwNKHL6INkv3IHWMF",
+  "serverUrl": "https://signal.mach.48b.it",
+  "cdnUrl": "https://cdn.signal.mach.48b.it",
+  "serverTrustRoot": "BZgMMOCX2cqOwRlnBI4DGK8uIfqouCjF60iq04XXXHYJ",
   "updatesEnabled": true
 }
