@@ -79,9 +79,9 @@
         throw new TypeError("'id' must be a string");
       }
 
-      if (type !== 'private' && type !== 'group') {
+      if (type !== 'private' && type !== 'group' && type !== 'company') {
         throw new TypeError(
-          `'type' must be 'private' or 'group'; got: '${type}'`
+          `'type' must be 'private', 'group' or 'company'; got: '${type}'`
         );
       }
 

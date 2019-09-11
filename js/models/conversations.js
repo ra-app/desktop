@@ -72,7 +72,15 @@
         return this.id;
       }
 
+      if (this.isCompany()) {
+        return `company(${this.id})`;
+      }
+
       return `group(${this.id})`;
+    },
+
+    isCompany() {
+      return this.get('type') === 'company';
     },
 
     handleMessageError(message, errors) {
@@ -710,7 +718,7 @@
         return `Conversation must have ${missing}`;
       }
 
-      if (attributes.type !== 'private' && attributes.type !== 'group') {
+      if (attributes.type !== 'private' && attributes.type !== 'group' && attributes.type !== 'company') {
         return `Invalid conversation type: ${attributes.type}`;
       }
 
@@ -1021,6 +1029,19 @@
               return textsecure.messaging.sendMessageToGroup(
                 destination,
                 groupNumbers,
+                messageBody,
+                finalAttachments,
+                quote,
+                preview,
+                sticker,
+                now,
+                expireTimer,
+                profileKey,
+                options
+              );
+            case Message.COMPANY:
+              return sendCompanyMessage(
+                destination,
                 messageBody,
                 finalAttachments,
                 quote,
@@ -2005,9 +2026,17 @@
       return this.get('type') === 'private';
     },
 
+    isGroup() {
+      return this.get('type') === 'group';
+    },
+
     getColor() {
-      if (!this.isPrivate()) {
+      if (this.isGroup()) {
         return 'signal-blue';
+      }
+
+      if (this.isCompany()) {
+        return 'red';
       }
 
       const { migrateColor } = Util;
