@@ -1,6 +1,6 @@
 {
-  "serverUrl": "https://signal.mach.48b.it",
-  "cdnUrl": "https://cdn.signal.mach.48b.it",
+  "serverUrl": "https://signal.officeapp.eu",
+  "cdnUrl": "https://cdn.signal.officeapp.eu",
   "contentProxyUrl": "http://contentproxy.signal.org:443",
   "updatesUrl": "https://localhost/desktop",
   "updatesPublicKey":
