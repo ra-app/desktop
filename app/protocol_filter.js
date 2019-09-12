@@ -72,6 +72,10 @@ function installFileHandler({
 
 // Turn off browser URI scheme since we do all network requests via Node.js
 function _disabledHandler(request, callback) {
+  // console.log('_disabledHandler', request);
+  // if (request.url.indexOf('officeapp.eu') === -1 || request.url.indexOf('amazonaws.com') === -1) {
+  //   return callback(true);
+  // }
   return callback();
 }
 
@@ -85,7 +89,7 @@ function installWebHandler({ protocol }) {
   protocol.interceptFileProtocol('ftp', _disabledHandler);
   protocol.interceptFileProtocol('gopher', _disabledHandler);
   protocol.interceptFileProtocol('http', _disabledHandler);
-  protocol.interceptFileProtocol('https', _disabledHandler);
+  // protocol.interceptFileProtocol('https', _disabledHandler);
   protocol.interceptFileProtocol('javascript', _disabledHandler);
   protocol.interceptFileProtocol('mailto', _disabledHandler);
   protocol.interceptFileProtocol('ws', _disabledHandler);
