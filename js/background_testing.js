@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 const API_URL = 'https://luydm9sd26.execute-api.eu-central-1.amazonaws.com/latest/';
 
+// XXX: Queue for sent messages, sent/received/seen indicators, error handling!
 
 // Receives messages to send from conversations.js switchcase.
 async function sendCompanyMessage(destination, messageBody, finalAttachments, quote, preview, sticker, now, expireTimer, profileKey, options) {
@@ -142,19 +143,12 @@ const xhrReq = (url, postdata, authHeader) => {
 };
 
 const getAuth = async () => {
-  return "user:pass";
+  const USERNAME = window.storage.get('number_id');
+  const PASSWORD = window.storage.get('password');
+  const auth = btoa(`${USERNAME}:${PASSWORD}`);
+  return `Basic ${auth}`;
 }
 
 const apiRequest = async (call, data = undefined) => {
   return xhrReq(API_URL + call, data, await getAuth());
-  // const options = {
-  //   method: data ? 'POST' : 'GET',
-  //   body: data,
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //     'Authorization': await getAuth()
-  //   }
-  // };
-  // const res = await fetch(API_URL + call, options);
-  // return res.json();
 };
