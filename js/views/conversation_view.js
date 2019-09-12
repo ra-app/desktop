@@ -264,8 +264,9 @@
 
           isVerified: this.model.isVerified(),
           isMe: this.model.isMe(),
-          isGroup: !this.model.isPrivate(),
+          isGroup: this.model.isGroup(),
           isArchived: this.model.get('isArchived'),
+          isCompany: this.model.isCompany(),
 
           expirationSettingName,
           showBackButton: Boolean(this.panels && this.panels.length),
@@ -565,7 +566,7 @@
       const contact = ConversationController.getOrCreate(sender, 'private');
       const props = {
         ...contact.format(),
-        conversationType: this.model.isPrivate() ? 'direct' : 'group',
+        conversationType: !this.model.isGroup() ? 'direct' : 'group',
       };
 
       if (this.typingBubbleView) {
@@ -1286,6 +1287,7 @@
     showSafetyNumber(id) {
       let conversation;
 
+      // TODO: Change this?
       if (!id && this.model.isPrivate()) {
         // eslint-disable-next-line prefer-destructuring
         conversation = this.model;

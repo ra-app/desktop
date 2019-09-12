@@ -1050,7 +1050,7 @@
 
     if (conversation) {
       // We drop typing notifications in groups we're not a part of
-      if (!conversation.isPrivate() && !conversation.hasMember(ourNumber)) {
+      if (conversation.isGroup() && !conversation.hasMember(ourNumber)) {
         window.log.warn(
           `Received typing indicator for group ${conversation.idForLogging()}, which we're not a part of. Dropping.`
         );
@@ -1347,7 +1347,7 @@
     //   except for group updates
     if (
       conversation &&
-      !conversation.isPrivate() &&
+      conversation.isGroup() &&
       !conversation.hasMember(ourNumber) &&
       !isGroupUpdate
     ) {

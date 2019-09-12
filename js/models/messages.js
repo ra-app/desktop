@@ -351,7 +351,7 @@
     },
     getPropsForSafetyNumberNotification() {
       const conversation = this.getConversation();
-      const isGroup = conversation && !conversation.isPrivate();
+      const isGroup = conversation && conversation.isGroup();
       const phoneNumber = this.get('key_changed');
       const showIdentity = id => this.trigger('show-identity', id);
 
@@ -467,7 +467,7 @@
           : null;
 
       const conversation = this.getConversation();
-      const isGroup = conversation && !conversation.isPrivate();
+      const isGroup = conversation && conversation.isGroup();
       const sticker = this.get('sticker');
 
       const isTapToView = this.isTapToView();
@@ -1190,6 +1190,7 @@
       let promise;
       const options = conversation.getSendOptions();
 
+      // TODO: Change this too?
       if (conversation.isPrivate()) {
         const [number] = recipients;
         promise = textsecure.messaging.sendMessageToNumber(

@@ -20,7 +20,7 @@
         return [];
       }
       let ids = [];
-      if (conversation.isPrivate()) {
+      if (!conversation.isGroup()) {
         ids = [conversation.id];
       } else {
         ids = conversation.get('members');

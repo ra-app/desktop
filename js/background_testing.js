@@ -1,3 +1,5 @@
+'use strict';
+
 // Testing Playground
 document.addEventListener('DOMContentLoaded', async () => {
   await ensureCompanyConversation('0000000', 'Mega Corporate');
@@ -7,19 +9,43 @@ document.addEventListener('DOMContentLoaded', async () => {
 // ===
 
 // Receives messages to send from conversations.js switchcase.
-async function sendCompanyMessage(destination, messageBody, finalAttachments, quote, preview, sticker, now, expireTimer, profileKey, options) {
-  console.log('SEND TO COMPANY:', { destination, messageBody, finalAttachments, quote, preview, sticker, now, expireTimer, profileKey, options });
+async function sendCompanyMessage(
+  destination,
+  messageBody,
+  finalAttachments,
+  quote,
+  preview,
+  sticker,
+  now,
+  expireTimer,
+  profileKey,
+  options
+) {
+  console.log('SEND TO COMPANY:', {
+    destination,
+    messageBody,
+    finalAttachments,
+    quote,
+    preview,
+    sticker,
+    now,
+    expireTimer,
+    profileKey,
+    options,
+  });
   setTimeout(() => {
     const data = {
       source: destination,
       sourceDevice: 1,
       sent_at: Date.now(),
       conversationId: destination,
-      message: "Echo: " + messageBody
+      message: {
+        body: 'Echo: ' + messageBody,
+      },
     };
 
     receiveCompanyMessage(data, (...args) => {
-      console.log("receiveCompanyMessage CB", args);
+      console.log('receiveCompanyMessage CB', args);
     });
   }, 1000);
   return { sent_to: destination };
@@ -37,9 +63,13 @@ async function receiveCompanyMessage(data, confirm) {
     unread: 1,
   });
 
+  console.log(message);
+
   // const message = await initIncomingMessage(data);
-  await ConversationController.getOrCreateAndWait(data.source, "company");
-  return message.handleDataMessage(data.message, confirm, { initialLoadComplete: true });
+  await ConversationController.getOrCreateAndWait(data.source, 'company');
+  return message.handleDataMessage(data.message, confirm, {
+    initialLoadComplete: true,
+  });
 }
 
 // Create company conversation if missing.

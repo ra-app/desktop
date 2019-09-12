@@ -29,6 +29,7 @@ interface Props {
   isMe: boolean;
   isGroup: boolean;
   isArchived: boolean;
+  isCompany: boolean;
 
   expirationSettingName?: string;
   showBackButton: boolean;
@@ -202,46 +203,55 @@ export class ConversationHeader extends React.Component<Props> {
       onArchive,
       onMoveToInbox,
       timerOptions,
+      isCompany,
     } = this.props;
 
     const disappearingTitle = i18n('disappearingMessages') as any;
 
     return (
       <ContextMenu id={triggerId}>
-        <SubMenu title={disappearingTitle}>
-          {(timerOptions || []).map(item => (
-            <MenuItem
-              key={item.value}
-              onClick={() => {
-                onSetDisappearingMessages(item.value);
-              }}
-            >
-              {item.name}
-            </MenuItem>
-          ))}
-        </SubMenu>
+        {!isCompany ? (
+          <SubMenu title={disappearingTitle}>
+            {(timerOptions || []).map(item => (
+              <MenuItem
+                key={item.value}
+                onClick={() => {
+                  onSetDisappearingMessages(item.value);
+                }}
+              >
+                {item.name}
+              </MenuItem>
+            ))}
+          </SubMenu>
+        ) : null}
         <MenuItem onClick={onShowAllMedia}>{i18n('viewAllMedia')}</MenuItem>
         {isGroup ? (
           <MenuItem onClick={onShowGroupMembers}>
             {i18n('showMembers')}
           </MenuItem>
         ) : null}
-        {!isGroup && !isMe ? (
+        {!isGroup && !isMe && !isCompany ? (
           <MenuItem onClick={onShowSafetyNumber}>
             {i18n('showSafetyNumber')}
           </MenuItem>
         ) : null}
-        {!isGroup ? (
+        {!isGroup && !isCompany ? (
           <MenuItem onClick={onResetSession}>{i18n('resetSession')}</MenuItem>
         ) : null}
+
         {isArchived ? (
           <MenuItem onClick={onMoveToInbox}>
             {i18n('moveConversationToInbox')}
           </MenuItem>
-        ) : (
+        ) : !isCompany ? (
           <MenuItem onClick={onArchive}>{i18n('archiveConversation')}</MenuItem>
-        )}
-        <MenuItem onClick={onDeleteMessages}>{i18n('deleteMessages')}</MenuItem>
+        ) : null}
+
+        {!isCompany ? (
+          <MenuItem onClick={onDeleteMessages}>
+            {i18n('deleteMessages')}
+          </MenuItem>
+        ) : null}
       </ContextMenu>
     );
   }

@@ -824,6 +824,8 @@ function _getConversationLoggingName(conversation) {
   let name = conversation.active_at || 'inactive';
   if (conversation.type === 'private') {
     name += ` (${conversation.id})`;
+  } else if (conversation.type === 'company') {
+    name += ` ([COMPANY]${conversation.id})`;
   } else {
     name += ` ([REDACTED_GROUP]${conversation.id.slice(-3)})`;
   }

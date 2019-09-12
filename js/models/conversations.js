@@ -8,7 +8,8 @@
   libsignal,
   storage,
   textsecure,
-  Whisper
+  Whisper,
+  sendCompanyMessage
 */
 
 /* eslint-disable more/no-then */
@@ -226,8 +227,8 @@
     },
 
     sendTypingMessage(isTyping) {
-      const groupId = !this.isPrivate() ? this.id : null;
-      const recipientId = this.isPrivate() ? this.id : null;
+      const groupId = this.isGroup() ? this.id : null;
+      const recipientId = !this.isGroup() ? this.id : null;
       const groupNumbers = this.getRecipients();
 
       const sendOptions = this.getSendOptions();
@@ -327,7 +328,7 @@
         activeAt: this.get('active_at'),
         avatarPath: this.getAvatarPath(),
         color,
-        type: this.isPrivate() ? 'direct' : 'group',
+        type: !this.isGroup() ? 'direct' : 'group',
         isMe: this.isMe(),
         isTyping: typingKeys.length > 0,
         lastUpdated: this.get('timestamp'),
@@ -475,6 +476,9 @@
       );
     },
     isVerified() {
+      if (this.isCompany()) {
+        return true;
+      }
       if (this.isPrivate()) {
         return this.get('verified') === this.verifiedEnum.VERIFIED;
       }
@@ -490,6 +494,9 @@
       });
     },
     isUnverified() {
+      if (this.isCompany()) {
+        return false;
+      }
       if (this.isPrivate()) {
         const verified = this.get('verified');
         return (
@@ -718,7 +725,11 @@
         return `Conversation must have ${missing}`;
       }
 
-      if (attributes.type !== 'private' && attributes.type !== 'group' && attributes.type !== 'company') {
+      if (
+        attributes.type !== 'private' &&
+        attributes.type !== 'group' &&
+        attributes.type !== 'company'
+      ) {
         return `Invalid conversation type: ${attributes.type}`;
       }
 
@@ -757,7 +768,7 @@
     },
 
     getRecipients() {
-      if (this.isPrivate()) {
+      if (!this.isGroup()) {
         return [this.id];
       }
       const me = textsecure.storage.user.getNumber();
@@ -936,7 +947,7 @@
           sticker,
         });
 
-        if (this.isPrivate()) {
+        if (!this.isGroup()) {
           messageWithSchema.destination = destination;
         }
         const attributes = {
@@ -1174,7 +1185,7 @@
       }
       // END
 
-      if (!this.isPrivate()) {
+      if (this.isGroup()) {
         const infoArray = this.contactCollection.map(conversation =>
           conversation.getNumberInfo(options)
         );
@@ -1318,7 +1329,7 @@
         },
       });
 
-      if (this.isPrivate()) {
+      if (this.isPrivate() || this.isCompany()) {
         model.set({ destination: this.id });
       }
       if (model.isOutgoing()) {
@@ -1580,7 +1591,8 @@
     getProfiles() {
       // request all conversation members' keys
       let ids = [];
-      if (this.isPrivate()) {
+      if (this.isPrivate() || this.isCompany()) {
+        // if (this.isPrivate()) {
         ids = [this.id];
       } else {
         ids = this.get('members');
@@ -1906,6 +1918,7 @@
       return _.contains(this.get('members'), number);
     },
     fetchContacts() {
+      // if (this.isPrivate() || this.isCompany()) {
       if (this.isPrivate()) {
         this.contactCollection.reset([this]);
         return Promise.resolve();
