@@ -17,7 +17,7 @@
   Whisper.DeliveryReceipts = new (Backbone.Collection.extend({
     forMessage(conversation, message) {
       let recipients;
-      if (conversation.isPrivate()) {
+      if (!conversation.isGroup()) {
         recipients = [conversation.id];
       } else {
         recipients = conversation.get('members') || [];

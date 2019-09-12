@@ -48,6 +48,10 @@
       {
         "label": "Set Up as New Device",
         "click": null
+      },
+      {
+        "label": "Set Up as Standalone Device",
+        "click": null
       }
     ]
   },

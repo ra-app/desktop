@@ -380,6 +380,14 @@
         ]);
       }
 
+      if (window.isBeforeVersion(lastVersion, 'v1.26.0')) {
+        // Ensure that we re-register our support for sealed sender
+        await storage.put(
+          'hasRegisterSupportForUnauthenticatedDelivery',
+          false
+        );
+      }
+
       // This one should always be last - it could restart the app
       if (window.isBeforeVersion(lastVersion, 'v1.15.0-beta.5')) {
         await window.Signal.Logs.deleteAll();
@@ -1042,7 +1050,7 @@
 
     if (conversation) {
       // We drop typing notifications in groups we're not a part of
-      if (!conversation.isPrivate() && !conversation.hasMember(ourNumber)) {
+      if (conversation.isGroup() && !conversation.hasMember(ourNumber)) {
         window.log.warn(
           `Received typing indicator for group ${conversation.idForLogging()}, which we're not a part of. Dropping.`
         );
@@ -1339,7 +1347,7 @@
     //   except for group updates
     if (
       conversation &&
-      !conversation.isPrivate() &&
+      conversation.isGroup() &&
       !conversation.hasMember(ourNumber) &&
       !isGroupUpdate
     ) {
@@ -1690,13 +1698,12 @@
   }
 
   async function onViewSync(ev) {
-    const { viewedAt, source, timestamp } = ev;
-    window.log.info(`view sync ${source} ${timestamp}, viewed at ${viewedAt}`);
+    const { source, timestamp } = ev;
+    window.log.info(`view sync ${source} ${timestamp}`);
 
     const sync = Whisper.ViewSyncs.add({
       source,
       timestamp,
-      viewedAt,
     });
 
     sync.on('remove', ev.confirm);

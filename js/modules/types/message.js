@@ -11,6 +11,7 @@ const MessageTS = require('../../../ts/types/Message');
 
 const GROUP = 'group';
 const PRIVATE = 'private';
+const COMPANY = 'company';
 
 // Schema version history
 //
@@ -55,6 +56,7 @@ const INITIAL_SCHEMA_VERSION = 0;
 // Public API
 exports.GROUP = GROUP;
 exports.PRIVATE = PRIVATE;
+exports.COMPANY = COMPANY;
 
 // Placeholder until we have stronger preconditions:
 exports.isValid = () => true;

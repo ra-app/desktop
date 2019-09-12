@@ -1512,7 +1512,17 @@
   height: 35px;
   min-width: 35px;
   vertical-align: text-bottom;
-  cursor: pointer;
+  border: none;
+  opacity: 0;
+  transition: opacity 250ms ease-out;
+
+  &:disabled {
+    cursor: default;
+  }
+
+  &--show {
+    opacity: 1;
+  }
 }
 
 .module-conversation-header__title-container {
@@ -1595,7 +1605,17 @@
   height: 20px;
   width: 20px;
   margin-left: 4px;
-  cursor: pointer;
+  border: none;
+  opacity: 0;
+  transition: opacity 250ms ease-out;
+
+  &:disabled {
+    cursor: default;
+  }
+
+  &--show {
+    opacity: 1;
+  }
 }
 
 // Module: Message Detail
@@ -4684,7 +4704,6 @@
     border: 1px solid;
     border-radius: 18px;
     font-size: 14px;
-    font-family: Roboto;
     overflow: hidden;
     word-break: break-word;
 

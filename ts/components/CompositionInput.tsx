@@ -16,7 +16,7 @@ import {
 } from 'draft-js';
 import Measure, { ContentRect } from 'react-measure';
 import { Manager, Popper, Reference } from 'react-popper';
-import { clamp, noop } from 'lodash';
+import { get, head, noop, trimEnd } from 'lodash';
 import classNames from 'classnames';
 import emojiRegex from 'emoji-regex';
 import { Emoji } from './emoji/Emoji';
@@ -153,7 +153,7 @@ export const CompositionInput = ({
   onSubmit,
   skinTone,
 }: Props) => {
-  const [editorState, setEditorState] = React.useState(
+  const [editorRenderState, setEditorRenderState] = React.useState(
     EditorState.createEmpty(compositeDecorator)
   );
   const [searchText, setSearchText] = React.useState<string>('');
@@ -165,7 +165,7 @@ export const CompositionInput = ({
   );
   const dirtyRef = React.useRef(false);
   const focusRef = React.useRef(false);
-  const editorStateRef = React.useRef<EditorState>(editorState);
+  const editorStateRef = React.useRef<EditorState>(editorRenderState);
   const rootElRef = React.useRef<HTMLDivElement>();
 
   // This function sets editorState and also keeps a reference to the newly set
@@ -173,17 +173,17 @@ export const CompositionInput = ({
   // excessive cleanup
   const setAndTrackEditorState = React.useCallback(
     (newState: EditorState) => {
-      setEditorState(newState);
+      setEditorRenderState(newState);
       editorStateRef.current = newState;
     },
-    [setEditorState, editorStateRef]
+    [setEditorRenderState, editorStateRef]
   );
 
   const updateExternalStateListeners = React.useCallback(
     (newState: EditorState) => {
       const plainText = newState.getCurrentContent().getPlainText();
       const currentBlockKey = newState.getSelection().getStartKey();
-      const currentBlockIndex = editorState
+      const currentBlockIndex = editorStateRef.current
         .getCurrentContent()
         .getBlockMap()
         .keySeq()
@@ -216,7 +216,7 @@ export const CompositionInput = ({
         onEditorStateChange(plainText, caretLocation);
       }
     },
-    [onDirtyChange, onEditorStateChange]
+    [onDirtyChange, onEditorStateChange, editorStateRef]
   );
 
   const resetEmojiResults = React.useCallback(
@@ -241,7 +241,18 @@ export const CompositionInput = ({
 
       // Update the state to indicate emojiable text at the current position.
       const newSearchText = match ? match.trim().substr(1) : '';
-      if (newSearchText.length >= 2 && focusRef.current) {
+      if (newSearchText.endsWith(':')) {
+        const bareText = trimEnd(newSearchText, ':');
+        const emoji = head(search(bareText));
+        if (emoji && bareText === emoji.short_name) {
+          handleEditorCommand('enter-emoji', newState, emoji);
+
+          // Prevent inserted colon from persisting to state
+          return;
+        } else {
+          resetEmojiResults();
+        }
+      } else if (newSearchText.length >= 2 && focusRef.current) {
         setEmojiResults(search(newSearchText, 10));
         setSearchText(newSearchText);
         setEmojiResultsIndex(0);
@@ -273,11 +284,12 @@ export const CompositionInput = ({
 
   const submit = React.useCallback(
     () => {
-      const text = editorState.getCurrentContent().getPlainText();
+      const { current: state } = editorStateRef;
+      const text = state.getCurrentContent().getPlainText();
       const emojidText = replaceColons(text);
       onSubmit(emojidText);
     },
-    [editorState, onSubmit]
+    [editorStateRef, onSubmit]
   );
 
   const handleEditorSizeChange = React.useCallback(
@@ -300,19 +312,31 @@ export const CompositionInput = ({
         }
 
         if (dir === 'next') {
-          setEmojiResultsIndex(
-            clamp(emojiResultsIndex + 1, 0, emojiResults.length - 1)
-          );
+          setEmojiResultsIndex(index => {
+            const next = index + 1;
+
+            if (next >= emojiResults.length) {
+              return 0;
+            }
+
+            return next;
+          });
         }
 
         if (dir === 'prev') {
-          setEmojiResultsIndex(
-            clamp(emojiResultsIndex - 1, 0, emojiResults.length - 1)
-          );
+          setEmojiResultsIndex(index => {
+            const next = index - 1;
+
+            if (next < 0) {
+              return emojiResults.length - 1;
+            }
+
+            return next;
+          });
         }
       }
     },
-    [setEmojiResultsIndex, emojiResultsIndex, emojiResults]
+    [emojiResultsIndex, emojiResults]
   );
 
   const handleEditorArrowKey = React.useCallback(
@@ -338,26 +362,24 @@ export const CompositionInput = ({
     [resetEmojiResults, emojiResults]
   );
 
-  const getWordAtCaret = React.useCallback(
-    () => {
-      const selection = editorState.getSelection();
-      const index = selection.getAnchorOffset();
+  const getWordAtCaret = React.useCallback((state = editorStateRef.current) => {
+    const selection = state.getSelection();
+    const index = selection.getAnchorOffset();
 
-      return getWordAtIndex(
-        editorState
-          .getCurrentContent()
-          .getBlockForKey(selection.getAnchorKey())
-          .getText(),
-        index
-      );
-    },
-    [editorState]
-  );
+    return getWordAtIndex(
+      state
+        .getCurrentContent()
+        .getBlockForKey(selection.getAnchorKey())
+        .getText(),
+      index
+    );
+  }, []);
 
   const insertEmoji = React.useCallback(
     (e: EmojiPickDataType, replaceWord: boolean = false) => {
-      const selection = editorState.getSelection();
-      const oldContent = editorState.getCurrentContent();
+      const { current: state } = editorStateRef;
+      const selection = state.getSelection();
+      const oldContent = state.getCurrentContent();
       const emojiContent = convertShortName(e.shortName, e.skinTone);
       const emojiEntityKey = oldContent
         .createEntity('emoji', 'IMMUTABLE', {
@@ -396,27 +418,29 @@ export const CompositionInput = ({
       }
 
       const newState = EditorState.push(
-        editorState,
+        state,
         newContent,
         'insert-emoji' as EditorChangeType
       );
       setAndTrackEditorState(newState);
       resetEmojiResults();
     },
-    [editorState, setAndTrackEditorState, resetEmojiResults]
+    [editorStateRef, setAndTrackEditorState, resetEmojiResults]
   );
 
   const handleEditorCommand = React.useCallback(
     (
       command: CompositionInputEditorCommand,
-      state: EditorState
+      state: EditorState,
+      emojiOverride?: EmojiData
     ): DraftHandleValue => {
       if (command === 'enter-emoji') {
-        const shortName = emojiResults[emojiResultsIndex].short_name;
+        const { short_name: shortName } =
+          emojiOverride || emojiResults[emojiResultsIndex];
 
         const content = state.getCurrentContent();
         const selection = state.getSelection();
-        const word = getWordAtCaret();
+        const word = getWordAtCaret(state);
         const emojiContent = convertShortName(shortName, skinTone);
         const emojiEntityKey = content
           .createEntity('emoji', 'IMMUTABLE', {
@@ -493,9 +517,9 @@ export const CompositionInput = ({
       }
 
       e.preventDefault();
-      handleEditorCommand('enter-emoji', editorState);
+      handleEditorCommand('enter-emoji', editorStateRef.current);
     },
-    [emojiResults, editorState, handleEditorCommand, resetEmojiResults]
+    [emojiResults, editorStateRef, handleEditorCommand, resetEmojiResults]
   );
 
   const editorKeybindingFn = React.useCallback(
@@ -522,6 +546,18 @@ export const CompositionInput = ({
         e.preventDefault();
 
         return 'prev-emoji';
+      }
+
+      // Get rid of default draft.js ctrl-m binding which interferes with Windows minimize
+      if (e.key === 'm' && e.ctrlKey) {
+        return null;
+      }
+
+      if (get(window, 'platform') === 'linux') {
+        // Get rid of default draft.js shift-del binding which interferes with Linux cut
+        if (e.key === 'Delete' && e.shiftKey) {
+          return null;
+        }
       }
 
       return getDefaultKeyBinding(e);
@@ -614,7 +650,7 @@ export const CompositionInput = ({
                 <div className="module-composition-input__input__scroller">
                   <Editor
                     ref={editorRef}
-                    editorState={editorState}
+                    editorState={editorRenderState}
                     onChange={handleEditorStateChange}
                     placeholder={i18n('sendMessage')}
                     onUpArrow={handleEditorArrowKey}

@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 
 import { Emojify } from './Emojify';
 import { Avatar } from '../Avatar';
@@ -28,6 +29,7 @@ interface Props {
   isMe: boolean;
   isGroup: boolean;
   isArchived: boolean;
+  isCompany: boolean;
 
   expirationSettingName?: string;
   showBackButton: boolean;
@@ -49,7 +51,7 @@ interface Props {
 }
 
 export class ConversationHeader extends React.Component<Props> {
-  public showMenuBound: (event: React.MouseEvent<HTMLDivElement>) => void;
+  public showMenuBound: (event: React.MouseEvent<HTMLButtonElement>) => void;
   public menuTriggerRef: React.RefObject<any>;
 
   public constructor(props: Props) {
@@ -59,7 +61,7 @@ export class ConversationHeader extends React.Component<Props> {
     this.showMenuBound = this.showMenu.bind(this);
   }
 
-  public showMenu(event: React.MouseEvent<HTMLDivElement>) {
+  public showMenu(event: React.MouseEvent<HTMLButtonElement>) {
     if (this.menuTriggerRef.current) {
       this.menuTriggerRef.current.handleContextClick(event);
     }
@@ -68,15 +70,14 @@ export class ConversationHeader extends React.Component<Props> {
   public renderBackButton() {
     const { onGoBack, showBackButton } = this.props;
 
-    if (!showBackButton) {
-      return null;
-    }
-
     return (
-      <div
+      <button
         onClick={onGoBack}
-        role="button"
-        className="module-conversation-header__back-icon"
+        className={classNames(
+          'module-conversation-header__back-icon',
+          showBackButton ? 'module-conversation-header__back-icon--show' : null
+        )}
+        disabled={!showBackButton}
       />
     );
   }
@@ -171,16 +172,17 @@ export class ConversationHeader extends React.Component<Props> {
   public renderGear(triggerId: string) {
     const { showBackButton } = this.props;
 
-    if (showBackButton) {
-      return null;
-    }
-
     return (
       <ContextMenuTrigger id={triggerId} ref={this.menuTriggerRef}>
-        <div
-          role="button"
+        <button
           onClick={this.showMenuBound}
-          className="module-conversation-header__gear-icon"
+          className={classNames(
+            'module-conversation-header__gear-icon',
+            showBackButton
+              ? null
+              : 'module-conversation-header__gear-icon--show'
+          )}
+          disabled={showBackButton}
         />
       </ContextMenuTrigger>
     );
@@ -201,46 +203,55 @@ export class ConversationHeader extends React.Component<Props> {
       onArchive,
       onMoveToInbox,
       timerOptions,
+      isCompany,
     } = this.props;
 
     const disappearingTitle = i18n('disappearingMessages') as any;
 
     return (
       <ContextMenu id={triggerId}>
-        <SubMenu title={disappearingTitle}>
-          {(timerOptions || []).map(item => (
-            <MenuItem
-              key={item.value}
-              onClick={() => {
-                onSetDisappearingMessages(item.value);
-              }}
-            >
-              {item.name}
-            </MenuItem>
-          ))}
-        </SubMenu>
+        {!isCompany ? (
+          <SubMenu title={disappearingTitle}>
+            {(timerOptions || []).map(item => (
+              <MenuItem
+                key={item.value}
+                onClick={() => {
+                  onSetDisappearingMessages(item.value);
+                }}
+              >
+                {item.name}
+              </MenuItem>
+            ))}
+          </SubMenu>
+        ) : null}
         <MenuItem onClick={onShowAllMedia}>{i18n('viewAllMedia')}</MenuItem>
         {isGroup ? (
           <MenuItem onClick={onShowGroupMembers}>
             {i18n('showMembers')}
           </MenuItem>
         ) : null}
-        {!isGroup && !isMe ? (
+        {!isGroup && !isMe && !isCompany ? (
           <MenuItem onClick={onShowSafetyNumber}>
             {i18n('showSafetyNumber')}
           </MenuItem>
         ) : null}
-        {!isGroup ? (
+        {!isGroup && !isCompany ? (
           <MenuItem onClick={onResetSession}>{i18n('resetSession')}</MenuItem>
         ) : null}
+
         {isArchived ? (
           <MenuItem onClick={onMoveToInbox}>
             {i18n('moveConversationToInbox')}
           </MenuItem>
-        ) : (
+        ) : !isCompany ? (
           <MenuItem onClick={onArchive}>{i18n('archiveConversation')}</MenuItem>
-        )}
-        <MenuItem onClick={onDeleteMessages}>{i18n('deleteMessages')}</MenuItem>
+        ) : null}
+
+        {!isCompany ? (
+          <MenuItem onClick={onDeleteMessages}>
+            {i18n('deleteMessages')}
+          </MenuItem>
+        ) : null}
       </ContextMenu>
     );
   }

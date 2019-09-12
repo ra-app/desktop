@@ -4,7 +4,7 @@
   "description": "Private messaging from your desktop",
   "desktopName": "signal-desktop.desktop",
   "repository": "https://github.com/signalapp/Signal-Desktop.git",
-  "version": "1.26.0-beta.3",
+  "version": "1.26.2",
   "license": "GPL-3.0",
   "author": {
     "name": "Open Whisper Systems",
@@ -41,7 +41,8 @@
     "clean-transpile": "rimraf ts/**/*.js && rimraf ts/*.js",
     "open-coverage": "open coverage/lcov-report/index.html",
     "styleguide": "styleguidist server",
-    "ready": "yarn clean-transpile && yarn grunt && yarn lint && yarn test-node && yarn test-electron && yarn lint-deps"
+    "ready": "yarn clean-transpile && yarn grunt && yarn lint && yarn test-node && yarn test-electron && yarn lint-deps",
+    "just-build": "yarn install && yarn ready && SIGNAL_ENV=production yarn build"
   },
   "dependencies": {
     "@journeyapps/sqlcipher": "https://github.com/scottnonnenberg-signal/node-sqlcipher.git#2e28733b61640556b0272a3bfc78b0357daf71e6",
@@ -59,7 +60,6 @@
     "electron-is-dev": "0.3.0",
     "emoji-datasource": "4.1.0",
     "emoji-datasource-apple": "4.1.0",
-    "emoji-js": "3.4.0",
     "emoji-regex": "8.0.0",
     "filesize": "3.6.1",
     "firstline": "1.2.1",
@@ -183,7 +183,7 @@
     "webpack": "4.4.1"
   },
   "engines": {
-    "node": "10.16.0"
+    "node": "*"
   },
   "build": {
     "appId": "org.whispersystems.signal-desktop",
@@ -269,8 +269,6 @@
       "ts/**/*.js",
       "ts/*.js",
       "stylesheets/*.css",
-      "!js/register.js",
-      "!js/views/standalone_registration_view.js",
       "app/*",
       "preload.js",
       "about_preload.js",
@@ -303,7 +301,8 @@
       "!node_modules/@journeyapps/sqlcipher/build/*",
       "!node_modules/@journeyapps/sqlcipher/lib/binding/node-*",
       "!node_modules/@journeyapps/sqlcipher/lib/binding/electron-*/msvcp140.dll",
-      "!node_modules/@journeyapps/sqlcipher/lib/binding/electron-*/vcruntime140.dll"
+      "!node_modules/@journeyapps/sqlcipher/lib/binding/electron-*/vcruntime140.dll",
+      "node_modules/intl-tel-input/build/img/flags.png"
     ]
   }
 }

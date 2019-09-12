@@ -715,7 +715,7 @@ async function exportConversation(conversation, options = {}) {
       count += 1;
 
       // skip message if it is disappearing, no matter the amount of time left
-      if (message.expireTimer || message.messageTimer) {
+      if (message.expireTimer || message.messageTimer || message.isViewOnce) {
         // eslint-disable-next-line no-continue
         continue;
       }
@@ -824,6 +824,8 @@ function _getConversationLoggingName(conversation) {
   let name = conversation.active_at || 'inactive';
   if (conversation.type === 'private') {
     name += ` (${conversation.id})`;
+  } else if (conversation.type === 'company') {
+    name += ` ([COMPANY]${conversation.id})`;
   } else {
     name += ` ([REDACTED_GROUP]${conversation.id.slice(-3)})`;
   }

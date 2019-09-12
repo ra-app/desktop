@@ -8,7 +8,8 @@
   libsignal,
   storage,
   textsecure,
-  Whisper
+  Whisper,
+  sendCompanyMessage
 */
 
 /* eslint-disable more/no-then */
@@ -72,7 +73,15 @@
         return this.id;
       }
 
+      if (this.isCompany()) {
+        return `company(${this.id})`;
+      }
+
       return `group(${this.id})`;
+    },
+
+    isCompany() {
+      return this.get('type') === 'company';
     },
 
     handleMessageError(message, errors) {
@@ -218,8 +227,8 @@
     },
 
     sendTypingMessage(isTyping) {
-      const groupId = !this.isPrivate() ? this.id : null;
-      const recipientId = this.isPrivate() ? this.id : null;
+      const groupId = this.isGroup() ? this.id : null;
+      const recipientId = !this.isGroup() ? this.id : null;
       const groupNumbers = this.getRecipients();
 
       const sendOptions = this.getSendOptions();
@@ -319,7 +328,7 @@
         activeAt: this.get('active_at'),
         avatarPath: this.getAvatarPath(),
         color,
-        type: this.isPrivate() ? 'direct' : 'group',
+        type: !this.isGroup() ? 'direct' : 'group',
         isMe: this.isMe(),
         isTyping: typingKeys.length > 0,
         lastUpdated: this.get('timestamp'),
@@ -467,6 +476,9 @@
       );
     },
     isVerified() {
+      if (this.isCompany()) {
+        return true;
+      }
       if (this.isPrivate()) {
         return this.get('verified') === this.verifiedEnum.VERIFIED;
       }
@@ -482,6 +494,9 @@
       });
     },
     isUnverified() {
+      if (this.isCompany()) {
+        return false;
+      }
       if (this.isPrivate()) {
         const verified = this.get('verified');
         return (
@@ -613,14 +628,15 @@
       const id = await window.Signal.Data.saveMessage(message, {
         Message: Whisper.Message,
       });
-
-      this.trigger(
-        'newmessage',
+      const model = MessageController.register(
+        id,
         new Whisper.Message({
           ...message,
           id,
         })
       );
+
+      this.trigger('newmessage', model);
     },
     async addVerifiedChange(verifiedChangeId, verified, providedOptions) {
       const options = providedOptions || {};
@@ -657,14 +673,15 @@
       const id = await window.Signal.Data.saveMessage(message, {
         Message: Whisper.Message,
       });
-
-      this.trigger(
-        'newmessage',
+      const model = MessageController.register(
+        id,
         new Whisper.Message({
           ...message,
           id,
         })
       );
+
+      this.trigger('newmessage', model);
 
       if (this.isPrivate()) {
         ConversationController.getAllGroupsInvolvingId(this.id).then(groups => {
@@ -708,7 +725,11 @@
         return `Conversation must have ${missing}`;
       }
 
-      if (attributes.type !== 'private' && attributes.type !== 'group') {
+      if (
+        attributes.type !== 'private' &&
+        attributes.type !== 'group' &&
+        attributes.type !== 'company'
+      ) {
         return `Invalid conversation type: ${attributes.type}`;
       }
 
@@ -747,7 +768,7 @@
     },
 
     getRecipients() {
-      if (this.isPrivate()) {
+      if (!this.isGroup()) {
         return [this.id];
       }
       const me = textsecure.storage.user.getNumber();
@@ -926,7 +947,7 @@
           sticker,
         });
 
-        if (this.isPrivate()) {
+        if (!this.isGroup()) {
           messageWithSchema.destination = destination;
         }
         const attributes = {
@@ -1019,6 +1040,19 @@
               return textsecure.messaging.sendMessageToGroup(
                 destination,
                 groupNumbers,
+                messageBody,
+                finalAttachments,
+                quote,
+                preview,
+                sticker,
+                now,
+                expireTimer,
+                profileKey,
+                options
+              );
+            case Message.COMPANY:
+              return sendCompanyMessage(
+                destination,
                 messageBody,
                 finalAttachments,
                 quote,
@@ -1151,7 +1185,7 @@
       }
       // END
 
-      if (!this.isPrivate()) {
+      if (this.isGroup()) {
         const infoArray = this.contactCollection.map(conversation =>
           conversation.getNumberInfo(options)
         );
@@ -1278,7 +1312,7 @@
         Conversation: Whisper.Conversation,
       });
 
-      const message = this.messageCollection.add({
+      const model = new Whisper.Message({
         // Even though this isn't reflected to the user, we want to place the last seen
         //   indicator above it. We set it to 'unread' to trigger that placement.
         unread: 1,
@@ -1294,17 +1328,21 @@
           fromGroupUpdate: options.fromGroupUpdate,
         },
       });
-      if (this.isPrivate()) {
-        message.set({ destination: this.id });
-      }
-      if (message.isOutgoing()) {
-        message.set({ recipients: this.getRecipients() });
-      }
 
-      const id = await window.Signal.Data.saveMessage(message.attributes, {
+      if (this.isPrivate() || this.isCompany()) {
+        model.set({ destination: this.id });
+      }
+      if (model.isOutgoing()) {
+        model.set({ recipients: this.getRecipients() });
+      }
+      const id = await window.Signal.Data.saveMessage(model.attributes, {
         Message: Whisper.Message,
       });
-      message.set({ id });
+
+      model.set({ id });
+
+      const message = MessageController.register(id, model);
+      this.messageCollection.add(message);
 
       // if change was made remotely, don't send it to the number/group
       if (receivedAt) {
@@ -1553,7 +1591,8 @@
     getProfiles() {
       // request all conversation members' keys
       let ids = [];
-      if (this.isPrivate()) {
+      if (this.isPrivate() || this.isCompany()) {
+        // if (this.isPrivate()) {
         ids = [this.id];
       } else {
         ids = this.get('members');
@@ -1879,6 +1918,7 @@
       return _.contains(this.get('members'), number);
     },
     fetchContacts() {
+      // if (this.isPrivate() || this.isCompany()) {
       if (this.isPrivate()) {
         this.contactCollection.reset([this]);
         return Promise.resolve();
@@ -1999,9 +2039,17 @@
       return this.get('type') === 'private';
     },
 
+    isGroup() {
+      return this.get('type') === 'group';
+    },
+
     getColor() {
-      if (!this.isPrivate()) {
+      if (this.isGroup()) {
         return 'signal-blue';
+      }
+
+      if (this.isCompany()) {
+        return 'red';
       }
 
       const { migrateColor } = Util;

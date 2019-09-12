@@ -7,7 +7,7 @@ interface Props {
    */
   ios: boolean;
   theme: 'light-theme' | 'dark-theme';
-  type: 'private' | 'group';
+  type: 'private' | 'group' | 'company';
 }
 
 /**
