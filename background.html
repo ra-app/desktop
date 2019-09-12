@@ -19,7 +19,7 @@
             script-src 'self';
             style-src 'self' 'unsafe-inline';"
   >
-  <title>Signal</title>
+  <title>OfficeApp</title>
   <link href='images/icon_128.png' rel='shortcut icon'>
   <link href="stylesheets/manifest.css" rel="stylesheet" type="text/css" />
   <link href="node_modules/draft-js/dist/Draft.css" rel="stylesheet" type="text/css" />
@@ -30,11 +30,12 @@
 
   <script type='text/x-tmpl-mustache' id='app-loading-screen'>
     <div class='content'>
-      <img src='images/icon_250.png' height='150'>
+      <img src='images/icon_300.png'>
+      <div class='header'>OfficeApp</div>
       <div class='container'>
-        <span class='dot'></span>
-        <span class='dot'></span>
-        <span class='dot'></span>
+          <span class='dot'></span>
+          <span class='dot'></span>
+          <span class='dot'></span>
       </div>
       <div class='message'>{{ message }}</div>
     </div>
@@ -468,6 +469,174 @@
     </div>
   </script>
 
+  <script type='text/x-tmpl-mustache' id='install-flow-template'>
+    <div class='content-column'>
+      {{#isStepEula}}
+      <div class='content-header'>
+        <div class='content-left'>
+          <div class='content-holder'>{{EULATitle}}</div>
+        </div>
+      </div>
+      <div class='content-row content-main'>
+        <div class='content-center'>
+          <div class='content-holder card eula-text'>{{EULAText}}</div>
+        </div>
+      </div>
+      <div class='content-footer'>
+        <div class='content-left'>
+          <div class='content-holder'>
+            <input type='checkbox' name='accept-eula-check' id='accept-eula-check' disabled />
+            <label for='accept-eula-check'>Accept EULA</label>
+          </div>
+        </div>
+        <div class='content-right'>
+          <div class='content-holder'>
+            <a class='button disabled' id='continue-eula'>{{continueButton}}</a>
+          </div>
+        </div>
+      </div>
+      <div class='content-footer'>
+        <div class='content-holder'>OfficeApp links etc TODO.</div>
+      </div>
+      {{/isStepEula}}
+      {{#isStepSetupType}}
+      <div class='content-row'>
+        <div class='content-center'>
+          <div class='content-holder'>
+            <div class='content-row'>
+              <div class='content-left'>
+                <div>
+                  <img src='images/icon_300.png' class='logo'>
+                </div>
+              </div>
+              <div class='content-right'>
+                <div>
+                  <div>OfficeApp</div>
+                  <div>{{appTagLine}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='content-row'>
+        <div class='content-left align-right'>
+          <div class='content-holder card register'>
+            <div>{{registerCompany}}</div>
+            <div>{{welcomeCompany}}</div>
+            <a class='button' id='continue-setup-company'>{{continueButton}}</a>
+          </div>
+        </div>
+        <div class='content-right align-left'>
+          <div class='content-holder card register'>
+            <div>{{registerAdmin}}</div>
+            <div>{{welcomeAdmin}}</div>
+            <div>
+              <input type='text' name='admin-signup-code' id='admin-signup-code' />
+              <label for='admin-signup-code'>{{signupCode}}</label>
+            </div>
+            <a class='button' id='continue-setup-admin'>{{continueButton}}</a>
+          </div>
+        </div>
+      </div>
+      {{/isStepSetupType}}
+      {{#isStepSetupPhone}}
+      <div class='content-row'>
+        <div class='content-center'>
+          <div class='content-holder card setup-form'>
+            <div class='card-header'>
+              <div class='title'>{{phoneSetupTitle}}</div>
+              <div class='subtitle'>{{phoneSetupSubtitle}}</div>
+            </div>
+            <div id='phone-number-input'>
+              <div class='phone-input-form'>
+                <div id='phone-number-container' class='number-container'>
+                  <input type='tel' class='number' id='phone-number-value' name='phone-number-value' />
+                </div>
+              </div>
+            </div>
+            <label for='phone-number-value'>{{phoneNumber}}</label>
+            <a class='button' id='request-verify-call'>{{callPhone}}</a>
+            <div class='action-link'><a id='request-verify-sms'>{{sendSMSInstead}}</a></div>
+            <div>
+              <input type='text' class='number' name='phone-verification-code' id='phone-verification-code' />
+              <label for='phone-verification-code'>{{verifyCode}}</label>
+            </div>
+            <a class='button' id='verify-phone-code'>{{verifyPhone}}</a>
+          </div>
+        </div>
+      </div>
+      {{/isStepSetupPhone}}
+      {{#isStepSetupCompanyProfile}}
+      <div class='content-row'>
+        <div class='content-center'>
+          <div class='content-holder card'>
+            <div class='card-header'>
+              <div class='title'>{{companyDetails}}</div>
+            </div>
+            <input type='text' id='tax-number-input' />
+            <label for='tax-number-input'>{{taxNumber}}</label>
+
+            <input type='text' id='tax-id-input' />
+            <label for='tax-id-input'>{{taxID}}</label>
+
+            <input type='text' id='company-register-id-input' />
+            <label for='company-register-id-input'>{{companyRegistrationID}}</label>
+
+            <input type='text' id='imprint-input' />
+            <label for='imprint-input'>{{imprint}}</label>
+
+            {{uploadCompanyRegister}}
+            <a class='button' id='company-profile-done'>{{continueButton}}</a>
+          </div>
+        </div>
+      </div>
+      {{/isStepSetupCompanyProfile}}
+    </div>
+    {{#isStepSetupCompanyUsers}}
+    <div class='container'>
+      <div class='header'>
+        <div class='title'>TODO</div>
+      </div>
+      <div class='body'>
+        <a class='button' id='company-users-done'>{{continueButton}}</a>
+      </div>
+    </div>
+    {{/isStepSetupCompanyUsers}}
+    {{#isStepSetupCompanyBank}}
+    <div class='container'>
+      <div class='header'>
+        <div class='title'>TODO</div>
+      </div>
+      <div class='body'>
+        <a class='button' id='company-users-done'>{{continueButton}}</a>
+        <div><a id='company-users-skip'>{{notNow}}</a></div>
+      </div>
+    </div>
+    {{/isStepSetupCompanyBank}}
+    {{#isStepSetupAdminProfile}}
+    <div class='container'>
+      <div class='header'>
+        <div class='title'>TODO ADMIN SETUP HEADER</div>
+      </div>
+      <div class='body'>
+        <a class='button' id='company-users-done'>{{continueButton}}</a>
+      </div>
+    </div>
+    {{/isStepSetupAdminProfile}}
+    {{#isStepSetupContactImport}}
+    <div class='container'>
+      <div class='header'>
+        <div class='title'>TODO</div>
+      </div>
+      <div class='body'>
+        <a class='button' id='contact-import-done'>{{continueButton}}</a>
+        <div><a id='contact-import-skip'>{{notNow}}</a></div>
+      </div>
+    </div>
+    {{/isStepSetupContactImport}}
+  </script>
+
   <script type='text/javascript' src='js/components.js'></script>
   <script type='text/javascript' src='js/reliable_trigger.js'></script>
   <script type='text/javascript' src='js/database.js'></script>
@@ -528,7 +697,8 @@
 <body class="overflow-hidden">
   <div class='app-loading-screen'>
     <div class='content'>
-      <img src='images/icon_250.png' height='150'>
+      <img src='images/icon_300.png'>
+      <div class='header'>OfficeApp</div>
       <div class='container'>
         <span class='dot'></span>
         <span class='dot'></span>

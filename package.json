@@ -1,6 +1,6 @@
 {
   "name": "signal-desktop",
-  "productName": "Signal",
+  "productName": "OfficeApp",
   "description": "Private messaging from your desktop",
   "desktopName": "signal-desktop.desktop",
   "repository": "https://github.com/signalapp/Signal-Desktop.git",
@@ -183,7 +183,7 @@
     "webpack": "4.4.1"
   },
   "engines": {
-    "node": "10.13.0"
+    "node": "10.16.0"
   },
   "build": {
     "appId": "org.whispersystems.signal-desktop",
@@ -206,8 +206,8 @@
     "win": {
       "asarUnpack": "node_modules/spellchecker/vendor/hunspell_dictionaries",
       "artifactName": "${name}-win-${version}.${ext}",
-      "certificateSubjectName": "Signal",
-      "publisherName": "Signal (Quiet Riddle Ventures, LLC)",
+      "certificateSubjectName": "OfficeApp",
+      "publisherName": "RA-Micro",
       "icon": "build/icons/win/icon.ico",
       "publish": [
         {
@@ -235,7 +235,7 @@
     "linux": {
       "category": "Network;InstantMessaging;Chat",
       "desktop": {
-        "StartupWMClass": "Signal"
+        "StartupWMClass": "OfficeApp"
       },
       "asarUnpack": "node_modules/spellchecker/vendor/hunspell_dictionaries",
       "target": [

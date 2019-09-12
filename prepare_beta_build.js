@@ -27,16 +27,16 @@ const PRODUCTION_NAME = 'signal-desktop';
 const BETA_NAME = 'signal-desktop-beta';
 
 const PRODUCT_NAME_PATH = 'productName';
-const PRODUCTION_PRODUCT_NAME = 'Signal';
-const BETA_PRODUCT_NAME = 'Signal Beta';
+const PRODUCTION_PRODUCT_NAME = 'OfficeApp';
+const BETA_PRODUCT_NAME = 'OfficeApp Beta';
 
 const APP_ID_PATH = 'build.appId';
 const PRODUCTION_APP_ID = 'org.whispersystems.signal-desktop';
 const BETA_APP_ID = 'org.whispersystems.signal-desktop-beta';
 
 const STARTUP_WM_CLASS_PATH = 'build.linux.desktop.StartupWMClass';
-const PRODUCTION_STARTUP_WM_CLASS = 'Signal';
-const BETA_STARTUP_WM_CLASS = 'Signal Beta';
+const PRODUCTION_STARTUP_WM_CLASS = 'OfficeApp';
+const BETA_STARTUP_WM_CLASS = 'OfficeApp Beta';
 
 const DESKTOP_NAME_PATH = 'desktopName';
 const PRODUCTION_DESKTOP_NAME = `${PRODUCTION_NAME}.desktop`;

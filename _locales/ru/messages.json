@@ -1530,5 +1530,85 @@
     "privacyPolicy": {
         "message": "Условия и политика конфиденциальности",
         "description": "Shown in the about box for the link to https://signal.org/legal"
+    },
+    "appTagLine": {
+        "message": "Modern secure communications... TODO",
+        "description": "Tagline of the OfficeApp application"
+    },
+    "registerCompany": {
+        "message": "Company registration",
+        "description": "Header for company registration"
+    },
+    "registerAdmin": {
+        "message": "Admin registration",
+        "description": "Header for admin registration"
+    },
+    "welcomeCompany": {
+        "message": "Welcome to the OfficeApp. Please register your company here.",
+        "description": "Description for registering company"
+    },
+    "welcomeAdmin": {
+        "message": "Welcome to the OfficeApp. Please enter your code here.",
+        "description": "Description for registering admin"
+    },
+    "continueButton": {
+        "message": "Continue",
+        "description": "Button label for continuing to next step"
+    },
+    "signupCode": {
+        "message": "Code",
+        "description": "Label for signup code input"
+    },
+    "phoneSetupTitle": {
+        "message": "Phone number setup",
+        "description": "Title for phone setup container"
+    },
+    "phoneSetupSubtitle": {
+        "message": "Please add your office phone number. You will be called and will receive a verification code. This may incur fees.",
+        "description": "Phone setup container subtitle"
+    },
+    "phoneNumber": {
+        "message": "Phone number",
+        "description": "Title for phone number input"
+    },
+    "verifyCode": {
+        "message": "Verification code",
+        "description": "Title for verification code input"
+    },
+    "countryCode": {
+        "message": "Country code",
+        "description": "Title for country code input"
+    },
+    "verifyPhone": {
+        "message": "Verify",
+        "description": "Label for phone verify button"
+    },
+    "callPhone": {
+        "message": "Call",
+        "description": "Label for phone verify call phone"
+    },
+    "sendSMSInstead": {
+        "message": "Send an SMS message instead.",
+        "description": "Text for requesting SMS instead of call"
+    },
+    "companyDetails": {
+        "message": "Company details",
+        "description": "Title for company details entry"
+    },
+    "taxNumber": {
+        "message": "Tax Number",
+        "description": "Label for tax number input"
+    },
+    "taxID": {
+        "message": "Tax ID",
+        "description": "Label for tax id input"
+    },
+    "companyRegistrationID": {
+        "message": "Commercial Register ID",
+        "description": "Label for commercial register id input"
+    },
+    "imprint": {
+        "message": "Imprint",
+        "description": "Label for imprint input"
     }
 }
