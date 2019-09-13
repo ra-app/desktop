@@ -39,17 +39,20 @@ async function inboxMessage(messageInfo) {
   const response = await apiRequest('api/inbox', messageInfo);
   console.log('inboxMessage -- response:', response);
 
-  const data = {
-    source: messageInfo.destination,
-    sourceDevice: 1,
-    sent_at: Date.now(),
-    conversationId: messageInfo.destination,
-    message: {
-      body: response.text,
-    },
-  };
-
-  return receiveCompanyMessage(data);
+  if (response && response.success) {
+    const data = {
+      source: messageInfo.destination,
+      sourceDevice: 1,
+      sent_at: Date.now(),
+      conversationId: messageInfo.destination,
+      message: {
+        body: response.text,
+      },
+    }; 
+    return receiveCompanyMessage(data);
+  } else {
+    console.error('inboxMessage', response);
+  }
 }
 
 function receiveCompanyMessage(data) {
