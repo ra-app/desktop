@@ -1,9 +1,20 @@
+/* eslint strict: ["error", "global"] */
 'use strict';
 
 // Testing Playground
 document.addEventListener('DOMContentLoaded', async () => {
-  await ensureCompanyConversation('0000000', 'Mega Corporate');
-  await ensureCompanyConversation('0000001', "Boris's Great Solutions");
+  // await ensureCompanyConversation('000000', 'Mega Corporate');
+  // await ensureCompanyConversation('000001', "Boris's Great Solutions");
+  
+  await waitForConversationController();
+
+  // exampleInfo.name += ' V' + Math.floor(Math.random() * 100);
+  // await createCompany(exampleInfo);
+
+  const res = await getAllCompanies();
+  res.companies.forEach(async (company) => {
+    return ensureCompanyConversation(company.company_number, company.name);
+  });
 });
 
 // ===
@@ -20,6 +31,8 @@ async function sendCompanyMessage(destination, messageBody, finalAttachments, qu
 
   return { sent_to: destination };
 }
+
+// let retryQueue = [];
 
 async function inboxMessage(messageInfo) {
   console.log('inboxMessage -- MessageInfo:', messageInfo);
@@ -152,3 +165,24 @@ const getAuth = async () => {
 const apiRequest = async (call, data = undefined) => {
   return xhrReq(API_URL + call, data, await getAuth());
 };
+
+const createCompany = async (info) => {
+  const res = await apiRequest('api/registercompany', info);
+  console.log('CreateCompany', info, res);
+  return res;
+};
+
+const getAllCompanies = async () => {
+  return apiRequest('api/getcompanyinfo');
+};
+
+const exampleInfo = {
+  name: 'Mega Corporate',
+  business: 'Corporationing',
+  tax_number: '0xDEADBEEF',
+  tax_id: '0xDEADBEEF',
+  commercial_register: '0xDEADBEEF',
+  iban: '0xDEADBEEF',
+  bic: '0xDEADBEEF',
+};
+
