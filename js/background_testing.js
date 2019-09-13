@@ -41,19 +41,23 @@ async function inboxMessage(messageInfo) {
   console.log('inboxMessage -- response:', response);
 
   if (response && response.success && response.text) {
-    const data = {
-      source: messageInfo.destination,
-      sourceDevice: 1,
-      sent_at: Date.now(),
-      conversationId: messageInfo.destination,
-      message: {
-        body: response.text,
-      },
-    }; 
-    return receiveCompanyMessage(data);
+    await receiveCompanyText(messageInfo.destination, response.text);
   } else {
     console.error('inboxMessage', response);
   }
+}
+
+async function receiveCompanyText(source, text) {
+  const data = {
+    source: source,
+    sourceDevice: 1,
+    sent_at: Date.now(),
+    conversationId: source,
+    message: {
+      body: text,
+    },
+  };
+  return receiveCompanyMessage(data);
 }
 
 function receiveCompanyMessage(data) {
@@ -109,6 +113,9 @@ const ensureCompanyConversation = async (company_id) => {
       Conversation: Whisper.Conversation,
     }
   );
+
+  const welcomeText = `Welcome to ${companyInfo.name} support chat.`;
+  await receiveCompanyText(company_id, welcomeText);
 };
 
 // Crutch to ensure conversations controller is ready.
