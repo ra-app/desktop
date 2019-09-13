@@ -8,68 +8,58 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 // ===
 
-// Receives messages to send from conversations.js switchcase.
-async function sendCompanyMessage(
-  destination,
-  messageBody,
-  finalAttachments,
-  quote,
-  preview,
-  sticker,
-  now,
-  expireTimer,
-  profileKey,
-  options
-) {
-  console.log('SEND TO COMPANY:', {
-    destination,
-    messageBody,
-    finalAttachments,
-    quote,
-    preview,
-    sticker,
-    now,
-    expireTimer,
-    profileKey,
-    options,
-  });
-  setTimeout(() => {
-    const data = {
-      source: destination,
-      sourceDevice: 1,
-      sent_at: Date.now(),
-      conversationId: destination,
-      message: {
-        body: 'Echo: ' + messageBody,
-      },
-    };
+const API_URL = 'https://luydm9sd26.execute-api.eu-central-1.amazonaws.com/latest/';
 
-    receiveCompanyMessage(data, (...args) => {
-      console.log('receiveCompanyMessage CB', args);
-    });
-  }, 1000);
+// XXX: Queue for sent messages, sent/received/seen indicators, error handling!
+
+// Receives messages to send from conversations.js switchcase.
+async function sendCompanyMessage(destination, messageBody, finalAttachments, quote, preview, sticker, now, expireTimer, profileKey, options) {
+  const messageInfo = { destination, messageBody, finalAttachments, quote, preview, sticker, now };
+  
+  inboxMessage(messageInfo);
+
   return { sent_to: destination };
 }
 
-async function receiveCompanyMessage(data, confirm) {
-  const message = new Whisper.Message({
-    source: data.source,
-    sourceDevice: data.sourceDevice || 1,
-    sent_at: data.timestamp || Date.now(),
-    received_at: data.receivedAt || Date.now(),
-    conversationId: data.source,
-    unidentifiedDeliveryReceived: data.unidentifiedDeliveryReceived,
-    type: 'incoming',
-    unread: 1,
-  });
+async function inboxMessage(messageInfo) {
+  console.log('inboxMessage -- MessageInfo:', messageInfo);
+  const response = await apiRequest('api/inbox', messageInfo);
+  console.log('inboxMessage -- response:', response);
 
-  console.log(message);
+  const data = {
+    source: messageInfo.destination,
+    sourceDevice: 1,
+    sent_at: Date.now(),
+    conversationId: messageInfo.destination,
+    message: {
+      body: response.text,
+    },
+  };
 
-  // const message = await initIncomingMessage(data);
-  await ConversationController.getOrCreateAndWait(data.source, 'company');
-  return message.handleDataMessage(data.message, confirm, {
-    initialLoadComplete: true,
-  });
+  return receiveCompanyMessage(data);
+}
+
+function receiveCompanyMessage(data) {
+  return new Promise(async (resolve) => {
+    const message = new Whisper.Message({
+      source: data.source,
+      sourceDevice: data.sourceDevice || 1,
+      sent_at: data.timestamp || Date.now(),
+      received_at: data.receivedAt || Date.now(),
+      conversationId: data.source,
+      unidentifiedDeliveryReceived: data.unidentifiedDeliveryReceived,
+      type: 'incoming',
+      unread: 1,
+    });
+    
+    console.log('receiveCompanyMessage', data, message);
+    
+    // const message = await initIncomingMessage(data);
+    await ConversationController.getOrCreateAndWait(data.source, 'company');
+    return message.handleDataMessage(data.message, resolve, {
+      initialLoadComplete: true,
+    });
+  })
 }
 
 // Create company conversation if missing.
@@ -115,4 +105,50 @@ const waitForConversationController = () => {
     };
     setTimeout(check, 1000);
   });
+};
+
+// Helper for async get/post json api calls with optional auth header
+const xhrReq = (url, postdata, authHeader) => {
+  return new Promise((resolve, reject) => {
+    const req = new window.XMLHttpRequest();
+    req.onload = function() {
+      try {
+        if (req.status === 200) {
+          try {
+            resolve(JSON.parse(req.response));
+          } catch (err) {
+            resolve(req.response);
+          }
+        } else {
+          console.warn('xhrReq BadStatus', req.status, req.response);
+          reject(new Error('Network request returned bad status: ' + req.status + ' ' + req.response));
+        }
+      } catch (err) {
+        reject(err);
+      }
+    };
+    req.onerror = (event) => {
+      if (event.target.status === 0) {
+        console.warn('xhrReq onerror (status 0):', event);
+        reject(new Error('Unexpected failure in network request. Please check your network connection.'));
+      }
+    };
+    req.open(postdata ? 'POST' : 'GET', url, true);
+    if (authHeader) req.setRequestHeader('Authorization', authHeader);
+    if (postdata) req.setRequestHeader('Content-Type', 'application/json');
+    if (typeof postdata === 'object') postdata = JSON.stringify(postdata);
+    console.log(postdata);
+    postdata ? req.send(postdata) : req.send();
+  });
+};
+
+const getAuth = async () => {
+  const USERNAME = window.storage.get('number_id');
+  const PASSWORD = window.storage.get('password');
+  const auth = btoa(`${USERNAME}:${PASSWORD}`);
+  return `Basic ${auth}`;
+}
+
+const apiRequest = async (call, data = undefined) => {
+  return xhrReq(API_URL + call, data, await getAuth());
 };
