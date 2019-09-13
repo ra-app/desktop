@@ -1610,5 +1610,29 @@
     "imprint": {
         "message": "Imprint",
         "description": "Label for imprint input"
+    },
+    "branch": {
+        "message": "Branch",
+        "description": "Label for company branch input"
+    },
+    "companyName": {
+        "message": "Company Name",
+        "description": "Label for company name input"
+    },
+    "userProfile": {
+        "message": "User profile",
+        "description": "Title for user profile setup"
+    },
+    "userName": {
+        "message": "User name",
+        "description": "Label for user name input"
+    },
+    "bankDetails": {
+        "message": "Bank details",
+        "description": "Title for company bank detail input"
+    },
+    "notNow": {
+        "message": "Not now",
+        "description": "Text for skipping actions for now"
     }
 }

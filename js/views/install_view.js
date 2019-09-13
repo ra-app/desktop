@@ -31,17 +31,15 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     SETUP_TYPE: 2,
     SETUP_PHONE: 3,
     SETUP_COMPANY_PROFILE: 4,
-    SETUP_COMPANY_USERS: 5,
-    SETUP_COMPANY_BANK: 6,
-    SETUP_ADMIN_PROFILE: 7,
-    SETUP_CONTACT_IMPORT: 8,
+    SETUP_COMPANY_BANK: 5,
+    SETUP_USER_PROFILE: 6,
+    SETUP_CONTACT_IMPORT: 7,
   };
 
   Whisper.InstallView = Whisper.View.extend({
     templateName: 'install-flow-template',
     className: 'main full-screen-flow',
     events: {
-      'before:destroy': 'onDestroy',
       'change #accept-eula-check': 'onChangeAcceptEula',
       'click #continue-eula': 'onContinueEula',
       'click #continue-setup-company': 'onCompanySetup',
@@ -51,20 +49,114 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       'click #request-verify-sms': 'onRequestVerifySMS',
       // 'change #phone-verification-code': 'onChangeVerifyCode',
       'click #verify-phone-code': 'onVerifyPhone',
+      'click #company-profile-done': 'onCompanyProfileDone',
+      'click #user-profile-done': 'onUserProfileDone',
+      'click #bank-details-done': 'onBankDetailsDone',
+      'click #bank-details-skip': 'onBankDetailsSkip',
+      'click #contact-import-done': 'onContactImportDone',
+      'click #contact-import-skip': 'onContactImportSkip',
+    },
+    onSetupCompleted() {
+      const company = textsecure.storage.get('companySetupInfo', null);
+      const user = textsecure.storage.get('userSetupInfo', null);
+      const bank = textsecure.storage.get('bankSetupInfo', null);
+      console.log('setupCompleted', company, user, bank);
+      this.$el.trigger('openInbox');
+    },
+    onContactImportDone() {
+      this.onSetupCompleted();
+    },
+    onContactImportSkip() {
+      this.onSetupCompleted();
+    },
+    onCompanyProfileDone() {
+      const company = {
+        name: this.$('#company-name-input').val(),
+        taxNumber: this.$('#tax-number-input').val(),
+        taxID: this.$('#tax-id-input').val(),
+        registerID: this.$('#company-register-id-input').val(),
+        imprint: this.$('#imprint-input').val(),
+        branch: this.$('#branch-select').val(),
+      }
+      textsecure.storage.put('companySetupInfo', company).then(() => {
+        this.selectStep(Steps.SETUP_USER_PROFILE);
+      });
+    },
+    onUserProfileDone() {
+      const profile = {
+        name: this.$('#user-name-input').val(),
+      };
+      textsecure.storage.put('userSetupInfo', profile).then(() => {
+        this.selectStep(this.setupType === 'admin' ? Steps.SETUP_CONTACT_IMPORT : Steps.SETUP_COMPANY_BANK);
+      });
+    },
+    onBankDetailsDone() {
+      const bank = {
+        iban: this.$('#bank-iban-input').val(),
+        bic: this.$('#bank-bic-input').val(),
+      };
+      textsecure.storage.put('bankSetupInfo', bank).then(() => {
+        this.selectStep(Steps.SETUP_CONTACT_IMPORT);
+      });
+    },
+    onBankDetailsSkip() {
+      textsecure.storage.remove('bankSetupInfo').then(() => {
+        this.selectStep(Steps.SETUP_CONTACT_IMPORT);
+      });
     },
     initialize(options = {}) {
       this.accountManager = getAccountManager();
 
-      // Keep data around if it's a re-link, or the middle of a light import
-      this.shouldRetainData =
-        Whisper.Registration.everDone() || options.hasExistingData;
-
-      this.selectStep(Steps.ACCEPT_EULA);
-      this.$el.find('.eula-text').on('scroll', _.debounce(this.onEulaScroll.bind(this), 100));
+      const eulaAccepted = textsecure.storage.get('eulaAccepted', false);
+      this.setupType = textsecure.storage.get('setupType', null);
+      const number = textsecure.storage.user.getNumber();
+      if (!eulaAccepted) {
+        this.selectStep(Steps.ACCEPT_EULA);
+      } else if (!this.setupType) {
+        this.selectStep(Steps.SETUP_TYPE);
+      } else if (this.setupType) {
+        if (!number) this.selectStep(Steps.SETUP_PHONE);
+        else this.selectStep(this.setupType === 'admin' ? Steps.SETUP_USER_PROFILE : Steps.SETUP_COMPANY_PROFILE);
+      }
     },
     selectStep(step) {
+      if (this.step === Steps.ACCEPT_EULA) {
+        this.$('.eula-text').off('scroll');
+      }
+
       this.step = step;
       this.render();
+
+      if (this.step === Steps.SETUP_COMPANY_PROFILE) {
+        const info = textsecure.storage.get('companySetupInfo', null);
+        if (info) {
+          this.$('#company-name-input').val(info.name);
+          this.$('#tax-number-input').val(info.taxNumber);
+          this.$('#tax-id-input').val(info.taxID);
+          this.$('#company-register-id-input').val(info.registerID);
+          this.$('#imprint-input').val(info.imprint);
+          this.$('#branch-select').val(info.branch);
+        }
+      }
+
+      if (this.step === Steps.SETUP_USER_PROFILE) {
+        const info = textsecure.storage.get('userSetupInfo', null);
+        if (info) {
+          this.$('#user-name-input').val(info.name);
+        }
+      }
+
+      if (this.step === Steps.SETUP_COMPANY_BANK) {
+        const info = textsecure.storage.get('bankSetupInfo', null);
+        if (info) {
+          this.$('#bank-iban-input').val(info.iban);
+          this.$('#bank-bic-input').val(info.bic);
+        }
+      }
+
+      if (this.step === Steps.ACCEPT_EULA) {
+        this.$('.eula-text').on('scroll', _.debounce(this.onEulaScroll.bind(this), 100));
+      }
       if (this.step === Steps.SETUP_PHONE) {
         const number = textsecure.storage.user.getNumber();
         if (number) this.$('#phone-number-value').val(number);
@@ -72,7 +164,8 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
           el: this.$('#phone-number-input'),
         });
       } else {
-        delete this.phoneView;
+        if (this.phoneView) this.phoneView.remove();
+        this.phoneView = null;
       }
     },
     onRequestVerifyCall() {
@@ -91,21 +184,31 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         });
       }
     },
-    onDestroy() {
-      this.$el.find('.eula-text').off('scroll');
-    },
     onCompanySetup() {
       this.setupType = 'company';
-      this.selectStep(Steps.SETUP_PHONE);
+      textsecure.storage.put('setupType', this.setupType).then(() => {
+        this.selectStep(Steps.SETUP_PHONE);
+      });
     },
     onAdminSetup() {
       // TODO: check code is present & valid
       this.setupType = 'admin';
-      this.selectStep(Steps.SETUP_PHONE);
+      textsecure.storage.put('setupType', this.setupType).then(() => {
+        this.selectStep(Steps.SETUP_PHONE);
+      });
     },
     onVerifyPhone() {
       // TODO: check phone verification code
-      this.selectStep(this.setupType === 'admin' ? Steps.SETUP_ADMIN_PROFILE : Steps.SETUP_COMPANY_PROFILE);
+      const number = this.phoneView.validateNumber();
+      const code = this.$('#phone-verification-code').val().replace(/\D+/g, '');
+
+      this.accountManager.registerSingleDevice(number, code)
+        .then(() => {
+          this.selectStep(this.setupType === 'admin' ? Steps.SETUP_USER_PROFILE : Steps.SETUP_COMPANY_PROFILE);
+        })
+        .catch(err => {
+          console.error('Error registering single device', err);
+        })
     },
     onChangeAcceptEula() {
       console.log('Change accept eula');
@@ -135,7 +238,9 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       const button = this.$el.find('#continue-eula');
       if (button.is('.disabled')) return;
       console.log('Continue eula');
-      this.selectStep(Steps.SETUP_TYPE);
+      textsecure.storage.put('eulaAccepted', true).then(() => {
+        this.selectStep(Steps.SETUP_TYPE);
+      });
     },
     render_attributes() {
       return {
@@ -155,19 +260,24 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         sendSMSInstead: i18n('sendSMSInstead'),
         verifyPhone: i18n('verifyPhone'),
         companyDetails: i18n('companyDetails'),
+        companyName: i18n('companyName'),
         taxNumber: i18n('taxNumber'),
         taxID: i18n('taxID'),
         companyRegistrationID: i18n('companyRegistrationID'),
         imprint: i18n('imprint'),
+        branch: i18n('branch'),
         uploadCompanyRegister: i18n('uploadCompanyRegister'),
+        userProfile: i18n('userProfile'),
+        userName: i18n('userName'),
+        bankDetails: i18n('bankDetails'),
+        notNow: i18n('notNow'),
 
         isStepEula: this.step === Steps.ACCEPT_EULA,
         isStepSetupType: this.step === Steps.SETUP_TYPE,
         isStepSetupPhone: this.step === Steps.SETUP_PHONE,
         isStepSetupCompanyProfile: this.step === Steps.SETUP_COMPANY_PROFILE,
-        isStepSetupCompanyUsers: this.step === Steps.SETUP_COMPANY_USERS,
         isStepSetupCompanyBank: this.step === Steps.SETUP_COMPANY_BANK,
-        isStepSetupAdminProfile: this.step === Steps.SETUP_ADMIN_PROFILE,
+        isStepSetupUserProfile: this.step === Steps.SETUP_USER_PROFILE,
         isStepSetupContactImport: this.step === Steps.SETUP_CONTACT_IMPORT,
 
         EULATitle: 'End-User License Agreement',

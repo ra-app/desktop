@@ -574,6 +574,9 @@
             <div class='card-header'>
               <div class='title'>{{companyDetails}}</div>
             </div>
+            <input type='text' id='company-name-input' />
+            <label for='company-name-input'>{{companyName}}</label>
+
             <input type='text' id='tax-number-input' />
             <label for='tax-number-input'>{{taxNumber}}</label>
 
@@ -586,55 +589,71 @@
             <input type='text' id='imprint-input' />
             <label for='imprint-input'>{{imprint}}</label>
 
+            <select id='branch-select'>
+              <option value='test'>Testing</option>
+            </select>
+            <label for='branch-select'>{{branch}}</label>
+
             {{uploadCompanyRegister}}
             <a class='button' id='company-profile-done'>{{continueButton}}</a>
           </div>
         </div>
       </div>
       {{/isStepSetupCompanyProfile}}
+      {{#isStepSetupUserProfile}}
+      <div class='content-row'>
+        <div class='content-center'>
+          <div class='content-holder card'>
+            <div class='card-header'>
+              {{userProfile}}
+            </div>
+            <input type='text' id='user-name-input' />
+            <label for='user-name-input'>{{userName}}</label>
+
+            <a class='button' id='user-profile-done'>{{continueButton}}</a>
+          </div>
+        </div>
+      </div>
+      {{/isStepSetupUserProfile}}
+      {{#isStepSetupCompanyBank}}
+      <div class='content-row'>
+        <div class='content-center'>
+          <div class='content-holder card'>
+            <div class='card-header'>
+              {{bankDetails}}
+            </div>
+            <div class='content-row'>
+              <div class='content-left'>
+                <div style='width: 100%; margin-right: 10px'>
+                  <input type='text' id='bank-iban-input' />
+                  <label for='bank-iban-input'>IBAN</label>
+                </div>
+              </div>
+              <div class='content-right' style='width: 50px'>
+                <div style='width: 100%'>
+                  <input type='text' id='bank-bic-input' />
+                  <label for='bank-bic-input'>BIC</label>
+                </div>
+              </div>
+            </div>
+            <a class='button' id='bank-details-done'>{{continueButton}}</a>
+            <div class='action-link'><a id='bank-details-skip'>{{notNow}}</a></div>
+          </div>
+        </div>
+      </div>
+      {{/isStepSetupCompanyBank}}
+      {{#isStepSetupContactImport}}
+      <div class='content-row'>
+        <div class='content-center'>
+          <div class='content-holder card'>
+            CONTACT IMPORT TODO
+            <a class='button' id='contact-import-done'>{{continueButton}}</a>
+            <div class='action-link'><a id='contact-import-skip'>{{notNow}}</a></div>
+          </div>
+        </div>
+      </div>
+      {{/isStepSetupContactImport}}
     </div>
-    {{#isStepSetupCompanyUsers}}
-    <div class='container'>
-      <div class='header'>
-        <div class='title'>TODO</div>
-      </div>
-      <div class='body'>
-        <a class='button' id='company-users-done'>{{continueButton}}</a>
-      </div>
-    </div>
-    {{/isStepSetupCompanyUsers}}
-    {{#isStepSetupCompanyBank}}
-    <div class='container'>
-      <div class='header'>
-        <div class='title'>TODO</div>
-      </div>
-      <div class='body'>
-        <a class='button' id='company-users-done'>{{continueButton}}</a>
-        <div><a id='company-users-skip'>{{notNow}}</a></div>
-      </div>
-    </div>
-    {{/isStepSetupCompanyBank}}
-    {{#isStepSetupAdminProfile}}
-    <div class='container'>
-      <div class='header'>
-        <div class='title'>TODO ADMIN SETUP HEADER</div>
-      </div>
-      <div class='body'>
-        <a class='button' id='company-users-done'>{{continueButton}}</a>
-      </div>
-    </div>
-    {{/isStepSetupAdminProfile}}
-    {{#isStepSetupContactImport}}
-    <div class='container'>
-      <div class='header'>
-        <div class='title'>TODO</div>
-      </div>
-      <div class='body'>
-        <a class='button' id='contact-import-done'>{{continueButton}}</a>
-        <div><a id='contact-import-skip'>{{notNow}}</a></div>
-      </div>
-    </div>
-    {{/isStepSetupContactImport}}
   </script>
 
   <script type='text/javascript' src='js/components.js'></script>
