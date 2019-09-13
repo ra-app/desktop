@@ -43,7 +43,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       'change #accept-eula-check': 'onChangeAcceptEula',
       'click #continue-eula': 'onContinueEula',
       'click #continue-setup-company': 'onCompanySetup',
-      'click #continue-setup-admin': 'onAdminSetup',
+      // 'click #continue-setup-admin': 'onAdminSetup',
       // 'validation #phone-number-value': 'onNumberValidation',
       'click #request-verify-call': 'onRequestVerifyCall',
       'click #request-verify-sms': 'onRequestVerifySMS',
@@ -121,20 +121,27 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       }
     },
     async onSetupCompleted() {
-      const phone = textsecure.storage.user.getNumber();
-      const user = textsecure.storage.get('userSetupInfo', null);
-
-      const data = {phone, user};
-      if (this.setupType === 'company') {
-        data.company = textsecure.storage.get('companySetupInfo', null);
-        data.bank = textsecure.storage.get('bankSetupInfo', null);
-      }
-      console.log(data);
-
       try {
-        // const response = await apiRequest('register/complete', data);
-        const response = {success: true};
-        if (!response.success) throw new Error(`Error registering: ${response.error}`);
+        /*
+        const phone = textsecure.storage.user.getNumber();
+        const user = textsecure.storage.get('userSetupInfo', null);
+        */
+
+        if (this.setupType === 'company') {
+          const company = textsecure.storage.get('companySetupInfo', null);
+          const bank = textsecure.storage.get('bankSetupInfo', null);
+          const result = await createCompany({
+            name: company.name,
+            business: company.branch,
+            tax_number: company.taxNumber,
+            tax_id: company.taxID,
+            commarcial_register: company.registerID,
+            iban: bank ? bank.iban : null,
+            bic: bank ? bank.bic : null,
+          });
+          if (!result.success) throw new Error(result);
+          await ensureCompanyConversation(result.info.company_number);
+        }
         await Promise.all([
           textsecure.storage.put('registerDone', true),
           textsecure.storage.remove('companySetupInfo'),
@@ -142,7 +149,6 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
           textsecure.storage.remove('bankSetupInfo'),
           textsecure.storage.remove('setupType'),
         ])
-        console.log('setupCompleted', data);
         window.removeSetupMenuItems();
         this.$el.trigger('openInbox');
       } catch (err) {
