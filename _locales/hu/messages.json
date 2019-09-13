@@ -52,7 +52,7 @@
         "description": "Application menu command to show all application windows"
     },
     "appMenuQuit": {
-        "message": "Kilépés a Signalból",
+        "message": "Kilépés a OfficeAppból",
         "description": "Application menu command to close the application"
     },
     "editMenuUndo": {
@@ -190,7 +190,7 @@
         "description": "Header shown on the first screen in the data import process"
     },
     "loadDataDescription": {
-        "message": "Sikeresen befejezted az exportálást, és most kontaktjaid, valamint üzeneteid türelmesen várnak számítógépeden. Válaszd ki a lementett Signal adataidat tartalmazó könyvtárat!",
+        "message": "Sikeresen befejezted az exportálást, és most kontaktjaid, valamint üzeneteid türelmesen várnak számítógépeden. Válaszd ki a lementett OfficeApp adataidat tartalmazó könyvtárat!",
         "description": "Introduction to the process of importing messages and contacts from disk"
     },
     "importChooserTitle": {
@@ -206,7 +206,7 @@
         "description": "Header of screen shown as data is import"
     },
     "importErrorFirst": {
-        "message": "Bizonyosodj meg róla, hogy a megfelelő, Signal adataidat tartalmazó könyvtárat választottad ki! A nevének 'Signal Export'-tal kell kezdődnie. Emellett készíthetsz egy új másolatot a Chrome alkalmazás adataiból is.",
+        "message": "Bizonyosodj meg róla, hogy a megfelelő, OfficeApp adataidat tartalmazó könyvtárat választottad ki! A nevének 'OfficeApp Export'-tal kell kezdődnie. Emellett készíthetsz egy új másolatot a Chrome alkalmazás adataiból is.",
         "description": "Message shown if the import went wrong; first paragraph"
     },
     "importErrorSecond": {
@@ -222,7 +222,7 @@
         "description": "Header shown on the screen at the end of a successful import process"
     },
     "importCompleteStartButton": {
-        "message": "A Signal Desktop használatának megkezdése",
+        "message": "A OfficeApp Desktop használatának megkezdése",
         "description": "Button shown at end of successful import process, nothing left but a restart"
     },
     "importCompleteLinkButton": {
@@ -330,11 +330,11 @@
         "description": "When there are multiple previously-verified group members with safety number changes, a banner will be shown. The list of contacts with safety number changes is shown, and this text introduces that list."
     },
     "changedSinceVerifiedMultiple": {
-        "message": "Biztonsági számod a csoport több tagjával is megváltozott az utolsó hitelesítés óta. Ez arra utalhat, hogy valaki megpróbálja lehallgatni a beszélgetéseteket, vagy valaki egyszerűen csak újratelepítette a Signal-t.",
+        "message": "Biztonsági számod a csoport több tagjával is megváltozott az utolsó hitelesítés óta. Ez arra utalhat, hogy valaki megpróbálja lehallgatni a beszélgetéseteket, vagy valaki egyszerűen csak újratelepítette a OfficeApp-t.",
         "description": "Shown on confirmation dialog when user attempts to send a message"
     },
     "changedSinceVerified": {
-        "message": "Biztonsági számod $name$ nevű partnereddel megváltozott az utolsó hitelesítés óta. Ez arra utalhat, hogy valaki megpróbálja lehallgatni a beszélgetéseteket, vagy $name$ egyszerűen csak újratelepítette a Signal-t.",
+        "message": "Biztonsági számod $name$ nevű partnereddel megváltozott az utolsó hitelesítés óta. Ez arra utalhat, hogy valaki megpróbálja lehallgatni a beszélgetéseteket, vagy $name$ egyszerűen csak újratelepítette a OfficeApp-t.",
         "description": "Shown on confirmation dialog when user attempts to send a message",
         "placeholders": {
             "name": {
@@ -344,7 +344,7 @@
         }
     },
     "changedRightAfterVerify": {
-        "message": "A hitelesítés alatt álló biztonsági szám megváltozott. Kérlek ellenőrizd új biztonsági számodat $name$ nevű partnereddel. Ne felejtsd, ez arra utalhat, hogy valaki megpróbálja lehallgatni a beszélgetéseteket, de azt is jelentheti, hogy $name$ egyszerűen csak újratelepítette a Signal-t.",
+        "message": "A hitelesítés alatt álló biztonsági szám megváltozott. Kérlek ellenőrizd új biztonsági számodat $name$ nevű partnereddel. Ne felejtsd, ez arra utalhat, hogy valaki megpróbálja lehallgatni a beszélgetéseteket, de azt is jelentheti, hogy $name$ egyszerűen csak újratelepítette a OfficeApp-t.",
         "description": "Shown on the safety number screen when the user has selected to verify/unverify a contact's safety number, and we immediately discover a safety number change",
         "placeholders": {
             "name": {
@@ -354,11 +354,11 @@
         }
     },
     "changedRecentlyMultiple": {
-        "message": "Biztonsági számod a csoport több tagjával is megváltozott az utóbbi időben. Ez arra utalhat, hogy valaki megpróbálja lehallgatni a beszélgetéseteket, vagy valaki egyszerűen csak újratelepítette a Signal-t.",
+        "message": "Biztonsági számod a csoport több tagjával is megváltozott az utóbbi időben. Ez arra utalhat, hogy valaki megpróbálja lehallgatni a beszélgetéseteket, vagy valaki egyszerűen csak újratelepítette a OfficeApp-t.",
         "description": "Shown on confirmation dialog when user attempts to send a message"
     },
     "changedRecently": {
-        "message": "Biztonsági számod $name$ nevű partnereddel nemrég megváltozott. Ez arra utalhat, hogy valaki megpróbálja lehallgatni a beszélgetéseteket, vagy $name$ egyszerűen csak újratelepítette a Signal-t.",
+        "message": "Biztonsági számod $name$ nevű partnereddel nemrég megváltozott. Ez arra utalhat, hogy valaki megpróbálja lehallgatni a beszélgetéseteket, vagy $name$ egyszerűen csak újratelepítette a OfficeApp-t.",
         "description": "Shown on confirmation dialog when user attempts to send a message",
         "placeholders": {
             "name": {
@@ -368,7 +368,7 @@
         }
     },
     "identityKeyErrorOnSend": {
-        "message": "Biztonsági számod $name$ nevű partnereddel megváltozott. Ez arra utalhat, hogy valaki megpróbálja lehallgatni a beszélgetéseteket, de azt is jelentheti, hogy $name$ egyszerűen csak újratelepítette a Signal-t. Javasolt újraellenőrizni a partnereddel közös biztonsági számotokat.",
+        "message": "Biztonsági számod $name$ nevű partnereddel megváltozott. Ez arra utalhat, hogy valaki megpróbálja lehallgatni a beszélgetéseteket, de azt is jelentheti, hogy $name$ egyszerűen csak újratelepítette a OfficeApp-t. Javasolt újraellenőrizni a partnereddel közös biztonsági számotokat.",
         "description": "Shown when user clicks on a failed recipient in the message detail view after an identity key change",
         "placeholders": {
             "name": {
@@ -456,7 +456,7 @@
         "description": "Header for a key change dialog"
     },
     "identityChanged": {
-        "message": "A partnerhez kapcsolódó biztonsági számod megváltozott. Ez arra utalhat, hogy valaki megpróbálja lehallgatni a beszélgetést. De az is előfordulhat, hogy partnered egyszerűen újratelepítette a Signal-t. Lentebb lehetőséged van az új biztonsági szám hitelesítésére.",
+        "message": "A partnerhez kapcsolódó biztonsági számod megváltozott. Ez arra utalhat, hogy valaki megpróbálja lehallgatni a beszélgetést. De az is előfordulhat, hogy partnered egyszerűen újratelepítette a OfficeApp-t. Lentebb lehetőséged van az új biztonsági szám hitelesítésére.",
         "description": ""
     },
     "incomingError": {
@@ -517,11 +517,11 @@
     },
     "loadingPreview": {
         "message": "Előnézet betöltése...",
-        "description": "Shown while Signal Desktop is fetching metadata for a url in composition area"
+        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area"
     },
     "stagedPreviewThumbnail": {
         "message": "A $domain$ hivatkozás előnézeti képének vázlata",
-        "description": "Shown while Signal Desktop is fetching metadata for a url in composition area",
+        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area",
         "placeholders": {
             "path": {
                 "content": "$1",
@@ -531,7 +531,7 @@
     },
     "previewThumbnail": {
         "message": "A $domain$ hivatkozás előnézeti képe",
-        "description": "Shown while Signal Desktop is fetching metadata for a url in composition area",
+        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area",
         "placeholders": {
             "path": {
                 "content": "$1",
@@ -620,11 +620,11 @@
         "description": "Item under the Help menu, takes you to GitHub new issue form (title case)"
     },
     "signalDesktopPreferences": {
-        "message": "A Signal Desktop beállításai",
-        "description": "Title of the window that pops up with Signal Desktop preferences in it"
+        "message": "A OfficeApp Desktop beállításai",
+        "description": "Title of the window that pops up with OfficeApp Desktop preferences in it"
     },
     "aboutSignalDesktop": {
-        "message": "A Signal Desktop-ról",
+        "message": "A OfficeApp Desktop-ról",
         "description": "Item under the Help menu, which opens a small about window"
     },
     "speech": {
@@ -644,7 +644,7 @@
         "description": "Command in the tray icon menu, to quit the application"
     },
     "signalDesktop": {
-        "message": "Signal Desktop",
+        "message": "OfficeApp Desktop",
         "description": "Tooltip for the tray icon"
     },
     "search": {
@@ -674,7 +674,7 @@
         "description": "Shown to separate the types of search results"
     },
     "welcomeToSignal": {
-        "message": "Üdvözöl a Signal!",
+        "message": "Üdvözöl a OfficeApp!",
         "description": ""
     },
     "selectAContact": {
@@ -770,7 +770,7 @@
         }
     },
     "audioPermissionNeeded": {
-        "message": "Hangüzenetek küldéséhez engedélyezd, hogy a Signal Desktop hozzáférjen mikrofonodhoz",
+        "message": "Hangüzenetek küldéséhez engedélyezd, hogy a OfficeApp Desktop hozzáférjen mikrofonodhoz",
         "description": "Shown if the user attempts to send an audio message without audio permssions turned on"
     },
     "allowAccess": {
@@ -798,11 +798,11 @@
         "description": "Shown as the title of our update error dialogs on windows"
     },
     "cannotUpdateDetail": {
-        "message": "Signal Desktop failed to update, but there is a new version available. Please go to https://signal.org/download and install the new version manually, then either contact support or file a bug about this problem.",
+        "message": "OfficeApp Desktop failed to update, but there is a new version available. Please go to https://signal.org/download and install the new version manually, then either contact support or file a bug about this problem.",
         "description": "Shown if a general error happened while trying to install update package"
     },
     "readOnlyVolume": {
-        "message": "Signal Desktop is likely in a macOS quarantine, and will not be able to auto-update. Please try moving Signal.app to /Applications with Finder.",
+        "message": "OfficeApp Desktop is likely in a macOS quarantine, and will not be able to auto-update. Please try moving OfficeApp.app to /Applications with Finder.",
         "description": "Shown on MacOS if running on a read-only volume and we cannot update"
     },
     "ok": {
@@ -948,32 +948,32 @@
         "description": "Used in the media gallery documents tab to visually represent a file"
     },
     "installWelcome": {
-        "message": "Üdvözöl a Signal Desktop!",
+        "message": "Üdvözöl a OfficeApp Desktop!",
         "description": "Welcome title on the install page"
     },
     "installTagline": {
-        "message": "A magánélet védelme nem lehetetlen. A Signal ezt egyszerűvé teszi.",
+        "message": "A magánélet védelme nem lehetetlen. A OfficeApp ezt egyszerűvé teszi.",
         "description": "Tagline displayed under 'installWelcome' string on the install page"
     },
     "linkYourPhone": {
-        "message": "Telefonod összepárosítása Signal Desktop-pal",
+        "message": "Telefonod összepárosítása OfficeApp Desktop-pal",
         "description": "Shown on the front page when the application first starst, above the QR code"
     },
     "signalSettings": {
-        "message": "Signal beállítások",
-        "description": "Used in the guidance to help people find the 'link new device' area of their Signal mobile app"
+        "message": "OfficeApp beállítások",
+        "description": "Used in the guidance to help people find the 'link new device' area of their OfficeApp mobile app"
     },
     "linkedDevices": {
         "message": "Párosított eszközök",
-        "description": "Used in the guidance to help people find the 'link new device' area of their Signal mobile app"
+        "description": "Used in the guidance to help people find the 'link new device' area of their OfficeApp mobile app"
     },
     "plusButton": {
         "message": "'+' gomb",
-        "description": "The button used in Signal Android to add a new linked device"
+        "description": "The button used in OfficeApp Android to add a new linked device"
     },
     "linkNewDevice": {
         "message": "Új eszköz párosítása",
-        "description": "The menu option shown in Signal iOS to add a new linked device"
+        "description": "The menu option shown in OfficeApp iOS to add a new linked device"
     },
     "deviceName": {
         "message": "Eszköz neve",
@@ -1112,7 +1112,7 @@
         "description": "Text that links to a support article on verifying safety numbers"
     },
     "expiredWarning": {
-        "message": "A Signal Desktop ezen verziója elavult. Kérlek frissíts a legújabb verzióra, hogy folytatni tudd a beszélgetést!",
+        "message": "A OfficeApp Desktop ezen verziója elavult. Kérlek frissíts a legújabb verzióra, hogy folytatni tudd a beszélgetést!",
         "description": "Warning notification that this version of the app has expired"
     },
     "upgrade": {
@@ -1132,7 +1132,7 @@
         "description": "Label for contact and group sync settings"
     },
     "syncExplanation": {
-        "message": "Az összes Signal csoport és kontakt importálása mobileszközödről.",
+        "message": "Az összes OfficeApp csoport és kontakt importálása mobileszközödről.",
         "description": "Explanatory text for sync settings"
     },
     "lastSynced": {
@@ -1442,7 +1442,7 @@
         "description": "When a person inputs a number that is invalid"
     },
     "unlinkedWarning": {
-        "message": "Párosítsd újra a Signal Desktopot mobilkészülékeiddel az beszélgetés folytatásához!",
+        "message": "Párosítsd újra a OfficeApp Desktopot mobilkészülékeiddel az beszélgetés folytatásához!",
         "description": ""
     },
     "unlinked": {
@@ -1454,19 +1454,19 @@
         "description": ""
     },
     "autoUpdateNewVersionTitle": {
-        "message": "Signal frissítés elérhető",
+        "message": "OfficeApp frissítés elérhető",
         "description": ""
     },
     "autoUpdateNewVersionMessage": {
-        "message": "A Signal új verziója érhető el.",
+        "message": "A OfficeApp új verziója érhető el.",
         "description": ""
     },
     "autoUpdateNewVersionInstructions": {
-        "message": "Kattints a Signal újraindítására a frissítések alkalmazásához! ",
+        "message": "Kattints a OfficeApp újraindítására a frissítések alkalmazásához! ",
         "description": ""
     },
     "autoUpdateRestartButtonLabel": {
-        "message": "Signal újraindítása",
+        "message": "OfficeApp újraindítása",
         "description": ""
     },
     "autoUpdateLaterButtonLabel": {

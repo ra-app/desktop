@@ -190,7 +190,7 @@
         "description": "Header shown on the first screen in the data import process"
     },
     "loadDataDescription": {
-        "message": "Właśnie przeszedłeś proces eksportu, twoje kontakty i wiadomości czekają cierpliwie na twoim komputerze. Wybierz folder zawierający zapisane dane Signal.",
+        "message": "Właśnie przeszedłeś proces eksportu, twoje kontakty i wiadomości czekają cierpliwie na twoim komputerze. Wybierz folder zawierający zapisane dane OfficeApp.",
         "description": "Introduction to the process of importing messages and contacts from disk"
     },
     "importChooserTitle": {
@@ -206,7 +206,7 @@
         "description": "Header of screen shown as data is import"
     },
     "importErrorFirst": {
-        "message": "Upewnij się, że wybrałeś właściwy folder zawierający dane Signal. Jego nazwa powinna zaczynać się na \"Signal Export\". Możesz też zapisać nową kopię danych z aplikacji Chrome.",
+        "message": "Upewnij się, że wybrałeś właściwy folder zawierający dane OfficeApp. Jego nazwa powinna zaczynać się na \"OfficeApp Export\". Możesz też zapisać nową kopię danych z aplikacji Chrome.",
         "description": "Message shown if the import went wrong; first paragraph"
     },
     "importErrorSecond": {
@@ -222,7 +222,7 @@
         "description": "Header shown on the screen at the end of a successful import process"
     },
     "importCompleteStartButton": {
-        "message": "Rozpocznij korzystanie z Signal Desktop",
+        "message": "Rozpocznij korzystanie z OfficeApp Desktop",
         "description": "Button shown at end of successful import process, nothing left but a restart"
     },
     "importCompleteLinkButton": {
@@ -330,11 +330,11 @@
         "description": "When there are multiple previously-verified group members with safety number changes, a banner will be shown. The list of contacts with safety number changes is shown, and this text introduces that list."
     },
     "changedSinceVerifiedMultiple": {
-        "message": "Twoje numery bezpieczeństwa z tymi członkami grupy zmieniły się od ostatniego czasu gdy je weryfikowałeś(aś). To może oznaczać, że ktoś próbuje przechwycić Twoją komunikację, albo że członkowie grupy po prostu przeinstalowali aplikację Signal.",
+        "message": "Twoje numery bezpieczeństwa z tymi członkami grupy zmieniły się od ostatniego czasu gdy je weryfikowałeś(aś). To może oznaczać, że ktoś próbuje przechwycić Twoją komunikację, albo że członkowie grupy po prostu przeinstalowali aplikację OfficeApp.",
         "description": "Shown on confirmation dialog when user attempts to send a message"
     },
     "changedSinceVerified": {
-        "message": "Twój numer bezpieczeństwa z $name$ zmienił się od ostatniego czasu gdy go zweryfikowałeś. To może oznaczać, że ktoś próbuje przechwycić Twoją komunikację, albo że $name$ po prostu przeinstalował(a) aplikację Signal. ",
+        "message": "Twój numer bezpieczeństwa z $name$ zmienił się od ostatniego czasu gdy go zweryfikowałeś. To może oznaczać, że ktoś próbuje przechwycić Twoją komunikację, albo że $name$ po prostu przeinstalował(a) aplikację OfficeApp. ",
         "description": "Shown on confirmation dialog when user attempts to send a message",
         "placeholders": {
             "name": {
@@ -344,7 +344,7 @@
         }
     },
     "changedRightAfterVerify": {
-        "message": "Numer bezpieczeństwa, który próbujesz zweryfikować zmienił się. Proszę sprawdź go z $name$. Pamiętaj, że to może oznaczać, że ktoś próbuje przechwycić Twoją komunikację lub po prostu $name$ przeinstalował(a) aplikację Signal. ",
+        "message": "Numer bezpieczeństwa, który próbujesz zweryfikować zmienił się. Proszę sprawdź go z $name$. Pamiętaj, że to może oznaczać, że ktoś próbuje przechwycić Twoją komunikację lub po prostu $name$ przeinstalował(a) aplikację OfficeApp. ",
         "description": "Shown on the safety number screen when the user has selected to verify/unverify a contact's safety number, and we immediately discover a safety number change",
         "placeholders": {
             "name": {
@@ -354,11 +354,11 @@
         }
     },
     "changedRecentlyMultiple": {
-        "message": "Twoje numbery bezpieczeństwa z wieloma członkami grupy ostatnio się zmieniły. To może znaczyć, że ktoś próbuje przechwycić Twoją komunikację, albo że członkowie grupy po prostu przeinstalowali aplikację Signal.",
+        "message": "Twoje numbery bezpieczeństwa z wieloma członkami grupy ostatnio się zmieniły. To może znaczyć, że ktoś próbuje przechwycić Twoją komunikację, albo że członkowie grupy po prostu przeinstalowali aplikację OfficeApp.",
         "description": "Shown on confirmation dialog when user attempts to send a message"
     },
     "changedRecently": {
-        "message": "Numer bezpieczeństwa $name$ zmienił się. To może oznaczać, że ktoś próbuje przechwycić Twoją komunikację lub że po prostu $name$ przeinstalował(a) aplikację Signal. ",
+        "message": "Numer bezpieczeństwa $name$ zmienił się. To może oznaczać, że ktoś próbuje przechwycić Twoją komunikację lub że po prostu $name$ przeinstalował(a) aplikację OfficeApp. ",
         "description": "Shown on confirmation dialog when user attempts to send a message",
         "placeholders": {
             "name": {
@@ -368,7 +368,7 @@
         }
     },
     "identityKeyErrorOnSend": {
-        "message": "Numer bezpieczeństwa z $name$ zmienił się. To może oznaczać, że ktoś próbuje przechwycić Twoją komunikację lub, że po prostu $name$ przeinstalował(a) aplikację Signal. Możesz zweryfikować nowy numer bezpieczeństwa poniżej.",
+        "message": "Numer bezpieczeństwa z $name$ zmienił się. To może oznaczać, że ktoś próbuje przechwycić Twoją komunikację lub, że po prostu $name$ przeinstalował(a) aplikację OfficeApp. Możesz zweryfikować nowy numer bezpieczeństwa poniżej.",
         "description": "Shown when user clicks on a failed recipient in the message detail view after an identity key change",
         "placeholders": {
             "name": {
@@ -456,7 +456,7 @@
         "description": "Header for a key change dialog"
     },
     "identityChanged": {
-        "message": "Numer bezpieczeństwa dla tego kontaktu zmienił się. To może oznaczać, że ktoś próbuje przechwycić Twoją komunikację lub że po prostu kontakt przeinstalował Signal. Możesz zweryfikować jego nowy numer bezpieczeństwa poniżej.",
+        "message": "Numer bezpieczeństwa dla tego kontaktu zmienił się. To może oznaczać, że ktoś próbuje przechwycić Twoją komunikację lub że po prostu kontakt przeinstalował OfficeApp. Możesz zweryfikować jego nowy numer bezpieczeństwa poniżej.",
         "description": ""
     },
     "incomingError": {
@@ -517,11 +517,11 @@
     },
     "loadingPreview": {
         "message": "Wczytywanie podglądu...",
-        "description": "Shown while Signal Desktop is fetching metadata for a url in composition area"
+        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area"
     },
     "stagedPreviewThumbnail": {
         "message": "Projekt miniaturki podglądu linku do $domain$",
-        "description": "Shown while Signal Desktop is fetching metadata for a url in composition area",
+        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area",
         "placeholders": {
             "path": {
                 "content": "$1",
@@ -531,7 +531,7 @@
     },
     "previewThumbnail": {
         "message": "Podgląd miniaturki linku dla $domain$",
-        "description": "Shown while Signal Desktop is fetching metadata for a url in composition area",
+        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area",
         "placeholders": {
             "path": {
                 "content": "$1",
@@ -621,10 +621,10 @@
     },
     "signalDesktopPreferences": {
         "message": "Preferencje",
-        "description": "Title of the window that pops up with Signal Desktop preferences in it"
+        "description": "Title of the window that pops up with OfficeApp Desktop preferences in it"
     },
     "aboutSignalDesktop": {
-        "message": "O Signal Desktop",
+        "message": "O OfficeApp Desktop",
         "description": "Item under the Help menu, which opens a small about window"
     },
     "speech": {
@@ -644,7 +644,7 @@
         "description": "Command in the tray icon menu, to quit the application"
     },
     "signalDesktop": {
-        "message": "Signal Desktop",
+        "message": "OfficeApp Desktop",
         "description": "Tooltip for the tray icon"
     },
     "search": {
@@ -674,7 +674,7 @@
         "description": "Shown to separate the types of search results"
     },
     "welcomeToSignal": {
-        "message": "Witamy w Signal",
+        "message": "Witamy w OfficeApp",
         "description": ""
     },
     "selectAContact": {
@@ -770,7 +770,7 @@
         }
     },
     "audioPermissionNeeded": {
-        "message": "Aby wysyłać wiadomości audio, zezwól aplikacji Signal Desktop na dostęp do mikrofonu.",
+        "message": "Aby wysyłać wiadomości audio, zezwól aplikacji OfficeApp Desktop na dostęp do mikrofonu.",
         "description": "Shown if the user attempts to send an audio message without audio permssions turned on"
     },
     "allowAccess": {
@@ -798,11 +798,11 @@
         "description": "Shown as the title of our update error dialogs on windows"
     },
     "cannotUpdateDetail": {
-        "message": "Signal Desktop failed to update, but there is a new version available. Please go to https://signal.org/download and install the new version manually, then either contact support or file a bug about this problem.",
+        "message": "OfficeApp Desktop failed to update, but there is a new version available. Please go to https://signal.org/download and install the new version manually, then either contact support or file a bug about this problem.",
         "description": "Shown if a general error happened while trying to install update package"
     },
     "readOnlyVolume": {
-        "message": "Signal Desktop is likely in a macOS quarantine, and will not be able to auto-update. Please try moving Signal.app to /Applications with Finder.",
+        "message": "OfficeApp Desktop is likely in a macOS quarantine, and will not be able to auto-update. Please try moving OfficeApp.app to /Applications with Finder.",
         "description": "Shown on MacOS if running on a read-only volume and we cannot update"
     },
     "ok": {
@@ -948,32 +948,32 @@
         "description": "Used in the media gallery documents tab to visually represent a file"
     },
     "installWelcome": {
-        "message": "Witamy w Signal Desktop",
+        "message": "Witamy w OfficeApp Desktop",
         "description": "Welcome title on the install page"
     },
     "installTagline": {
-        "message": "Prywatność jest możliwa i łatwa dzięki Signal.",
+        "message": "Prywatność jest możliwa i łatwa dzięki OfficeApp.",
         "description": "Tagline displayed under 'installWelcome' string on the install page"
     },
     "linkYourPhone": {
-        "message": "Połącz swój telefon z Signal Desktop",
+        "message": "Połącz swój telefon z OfficeApp Desktop",
         "description": "Shown on the front page when the application first starst, above the QR code"
     },
     "signalSettings": {
-        "message": "Ustawienia Signal",
-        "description": "Used in the guidance to help people find the 'link new device' area of their Signal mobile app"
+        "message": "Ustawienia OfficeApp",
+        "description": "Used in the guidance to help people find the 'link new device' area of their OfficeApp mobile app"
     },
     "linkedDevices": {
         "message": "Połączone urządzenia",
-        "description": "Used in the guidance to help people find the 'link new device' area of their Signal mobile app"
+        "description": "Used in the guidance to help people find the 'link new device' area of their OfficeApp mobile app"
     },
     "plusButton": {
         "message": "'+' Przycisk",
-        "description": "The button used in Signal Android to add a new linked device"
+        "description": "The button used in OfficeApp Android to add a new linked device"
     },
     "linkNewDevice": {
         "message": "Połącz nowe urządzenie",
-        "description": "The menu option shown in Signal iOS to add a new linked device"
+        "description": "The menu option shown in OfficeApp iOS to add a new linked device"
     },
     "deviceName": {
         "message": "Nazwa urządzenia",
@@ -1112,7 +1112,7 @@
         "description": "Text that links to a support article on verifying safety numbers"
     },
     "expiredWarning": {
-        "message": "Ta wersja Signal Desktop jest przestarzała. Aby nadal wysyłać wiadomości, wykonaj aktualizację.",
+        "message": "Ta wersja OfficeApp Desktop jest przestarzała. Aby nadal wysyłać wiadomości, wykonaj aktualizację.",
         "description": "Warning notification that this version of the app has expired"
     },
     "upgrade": {
@@ -1442,7 +1442,7 @@
         "description": "When a person inputs a number that is invalid"
     },
     "unlinkedWarning": {
-        "message": "Połącz ponownie Signal Desktop z urządzeniem mobilnym, aby móc dalej wysyłać wiadomości.",
+        "message": "Połącz ponownie OfficeApp Desktop z urządzeniem mobilnym, aby móc dalej wysyłać wiadomości.",
         "description": ""
     },
     "unlinked": {
@@ -1454,11 +1454,11 @@
         "description": ""
     },
     "autoUpdateNewVersionTitle": {
-        "message": "Dostępna aktualizacja aplikacji Signal",
+        "message": "Dostępna aktualizacja aplikacji OfficeApp",
         "description": ""
     },
     "autoUpdateNewVersionMessage": {
-        "message": "Dostępna nowa wersja Signal",
+        "message": "Dostępna nowa wersja OfficeApp",
         "description": ""
     },
     "autoUpdateNewVersionInstructions": {

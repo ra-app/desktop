@@ -52,7 +52,7 @@
         "description": "Application menu command to show all application windows"
     },
     "appMenuQuit": {
-        "message": "Zapusti Signal",
+        "message": "Zapusti OfficeApp",
         "description": "Application menu command to close the application"
     },
     "editMenuUndo": {
@@ -206,7 +206,7 @@
         "description": "Header of screen shown as data is import"
     },
     "importErrorFirst": {
-        "message": "Preverite, če ste izbrali pravo mapo s shranjenimi podatki. Ime mape bi moralo biti \"Signal Export\". Lahko tudi ponovno izvozite podatke iz aplikacije v brskalniku Chrome.",
+        "message": "Preverite, če ste izbrali pravo mapo s shranjenimi podatki. Ime mape bi moralo biti \"OfficeApp Export\". Lahko tudi ponovno izvozite podatke iz aplikacije v brskalniku Chrome.",
         "description": "Message shown if the import went wrong; first paragraph"
     },
     "importErrorSecond": {
@@ -222,7 +222,7 @@
         "description": "Header shown on the screen at the end of a successful import process"
     },
     "importCompleteStartButton": {
-        "message": "Začni z uporabo aplikacije Signal Desktop",
+        "message": "Začni z uporabo aplikacije OfficeApp Desktop",
         "description": "Button shown at end of successful import process, nothing left but a restart"
     },
     "importCompleteLinkButton": {
@@ -330,11 +330,11 @@
         "description": "When there are multiple previously-verified group members with safety number changes, a banner will be shown. The list of contacts with safety number changes is shown, and this text introduces that list."
     },
     "changedSinceVerifiedMultiple": {
-        "message": "Varnostna števila z večimi člani skupine so bila nedavno spremenjena. To lahko pomeni, da skuša nekdo prestrezati vašo komunikacijo ali pa, da so te osebe zgolj ponovno namestile aplikacijo Signal.",
+        "message": "Varnostna števila z večimi člani skupine so bila nedavno spremenjena. To lahko pomeni, da skuša nekdo prestrezati vašo komunikacijo ali pa, da so te osebe zgolj ponovno namestile aplikacijo OfficeApp.",
         "description": "Shown on confirmation dialog when user attempts to send a message"
     },
     "changedSinceVerified": {
-        "message": "Vaše varnostno število z uporabnikom $name$ je bilo od zadnjega preverjanja spremenjeno. To lahko pomeni, da skuša nekdo prestrezati vajino komunikacijo ali pa, da je uporabnik $name$ zgolj ponovno namestil aplikacijo Signal.",
+        "message": "Vaše varnostno število z uporabnikom $name$ je bilo od zadnjega preverjanja spremenjeno. To lahko pomeni, da skuša nekdo prestrezati vajino komunikacijo ali pa, da je uporabnik $name$ zgolj ponovno namestil aplikacijo OfficeApp.",
         "description": "Shown on confirmation dialog when user attempts to send a message",
         "placeholders": {
             "name": {
@@ -344,7 +344,7 @@
         }
     },
     "changedRightAfterVerify": {
-        "message": "Varnostno število, ki ga potrjujete, je bilo spremenjeno. Prosimo, še enkrat preverite svoje novo varnostno število z uporabnikom $name$. Pozor, ta sprememba lahko pomeni, da skuša nekdo prestrezati vajino komunikacijo ali pa, da je uporabnik $name$ zgolj ponovno namestil aplikacijo Signal.",
+        "message": "Varnostno število, ki ga potrjujete, je bilo spremenjeno. Prosimo, še enkrat preverite svoje novo varnostno število z uporabnikom $name$. Pozor, ta sprememba lahko pomeni, da skuša nekdo prestrezati vajino komunikacijo ali pa, da je uporabnik $name$ zgolj ponovno namestil aplikacijo OfficeApp.",
         "description": "Shown on the safety number screen when the user has selected to verify/unverify a contact's safety number, and we immediately discover a safety number change",
         "placeholders": {
             "name": {
@@ -354,11 +354,11 @@
         }
     },
     "changedRecentlyMultiple": {
-        "message": "Varnostna števila z večimi člani skupine so bila nedavno spremenjena. To lahko pomeni, da skuša nekdo prestrezati vašo komunikacijo ali pa, da so te osebe zgolj ponovno namestile aplikacijo Signal.",
+        "message": "Varnostna števila z večimi člani skupine so bila nedavno spremenjena. To lahko pomeni, da skuša nekdo prestrezati vašo komunikacijo ali pa, da so te osebe zgolj ponovno namestile aplikacijo OfficeApp.",
         "description": "Shown on confirmation dialog when user attempts to send a message"
     },
     "changedRecently": {
-        "message": "Vaše varnostno število z uporabnikom $name$ je bilo nedavno spremenjeno. To lahko pomeni, da skuša nekdo prestrezati vajino komunikacijo ali pa je uporabnik $name$ zgolj ponovno namestil aplikacijo Signal.",
+        "message": "Vaše varnostno število z uporabnikom $name$ je bilo nedavno spremenjeno. To lahko pomeni, da skuša nekdo prestrezati vajino komunikacijo ali pa je uporabnik $name$ zgolj ponovno namestil aplikacijo OfficeApp.",
         "description": "Shown on confirmation dialog when user attempts to send a message",
         "placeholders": {
             "name": {
@@ -368,7 +368,7 @@
         }
     },
     "identityKeyErrorOnSend": {
-        "message": "Vaše varnostno število z uporabnikom $name$ je bilo spremenjeno. To lahko pomeni, da skuša nekdo prestrezati vajino komunikacijo ali pa, da je uporabnik $name$ zgolj ponovno namestil aplikacijo Signal. Morebiti bi želeli preveriti svoje varnostno število z njim.",
+        "message": "Vaše varnostno število z uporabnikom $name$ je bilo spremenjeno. To lahko pomeni, da skuša nekdo prestrezati vajino komunikacijo ali pa, da je uporabnik $name$ zgolj ponovno namestil aplikacijo OfficeApp. Morebiti bi želeli preveriti svoje varnostno število z njim.",
         "description": "Shown when user clicks on a failed recipient in the message detail view after an identity key change",
         "placeholders": {
             "name": {
@@ -456,7 +456,7 @@
         "description": "Header for a key change dialog"
     },
     "identityChanged": {
-        "message": "Vaše varnostno število s to osebo je bilo spremenjeno. To lahko pomeni, da poskuša nekdo prestrezati vajino komunikacijo ali pa je vaš partner zgolj na novo namestil aplikacijo Signal. Novo varnostno število lahko preverite spodaj.",
+        "message": "Vaše varnostno število s to osebo je bilo spremenjeno. To lahko pomeni, da poskuša nekdo prestrezati vajino komunikacijo ali pa je vaš partner zgolj na novo namestil aplikacijo OfficeApp. Novo varnostno število lahko preverite spodaj.",
         "description": ""
     },
     "incomingError": {
@@ -517,11 +517,11 @@
     },
     "loadingPreview": {
         "message": "Nalagam predogled ...",
-        "description": "Shown while Signal Desktop is fetching metadata for a url in composition area"
+        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area"
     },
     "stagedPreviewThumbnail": {
         "message": "Osnutek predogledne sličice povezave na: $domain$",
-        "description": "Shown while Signal Desktop is fetching metadata for a url in composition area",
+        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area",
         "placeholders": {
             "path": {
                 "content": "$1",
@@ -531,7 +531,7 @@
     },
     "previewThumbnail": {
         "message": "Predogledna sličica povezave na: $domain$",
-        "description": "Shown while Signal Desktop is fetching metadata for a url in composition area",
+        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area",
         "placeholders": {
             "path": {
                 "content": "$1",
@@ -620,11 +620,11 @@
         "description": "Item under the Help menu, takes you to GitHub new issue form (title case)"
     },
     "signalDesktopPreferences": {
-        "message": "Nastavitve Signal Desktop",
-        "description": "Title of the window that pops up with Signal Desktop preferences in it"
+        "message": "Nastavitve OfficeApp Desktop",
+        "description": "Title of the window that pops up with OfficeApp Desktop preferences in it"
     },
     "aboutSignalDesktop": {
-        "message": "O aplikaciji Signal Desktop",
+        "message": "O aplikaciji OfficeApp Desktop",
         "description": "Item under the Help menu, which opens a small about window"
     },
     "speech": {
@@ -644,7 +644,7 @@
         "description": "Command in the tray icon menu, to quit the application"
     },
     "signalDesktop": {
-        "message": "Signal Desktop",
+        "message": "OfficeApp Desktop",
         "description": "Tooltip for the tray icon"
     },
     "search": {
@@ -674,7 +674,7 @@
         "description": "Shown to separate the types of search results"
     },
     "welcomeToSignal": {
-        "message": "Dobrodošli v aplikaciji Signal",
+        "message": "Dobrodošli v aplikaciji OfficeApp",
         "description": ""
     },
     "selectAContact": {
@@ -770,7 +770,7 @@
         }
     },
     "audioPermissionNeeded": {
-        "message": "Za pošiljanje glasovnih sporočil potrebuje aplikacija Signal Desktop dostop do vašega mikrofona.",
+        "message": "Za pošiljanje glasovnih sporočil potrebuje aplikacija OfficeApp Desktop dostop do vašega mikrofona.",
         "description": "Shown if the user attempts to send an audio message without audio permssions turned on"
     },
     "allowAccess": {
@@ -798,11 +798,11 @@
         "description": "Shown as the title of our update error dialogs on windows"
     },
     "cannotUpdateDetail": {
-        "message": "Signal Desktop failed to update, but there is a new version available. Please go to https://signal.org/download and install the new version manually, then either contact support or file a bug about this problem.",
+        "message": "OfficeApp Desktop failed to update, but there is a new version available. Please go to https://signal.org/download and install the new version manually, then either contact support or file a bug about this problem.",
         "description": "Shown if a general error happened while trying to install update package"
     },
     "readOnlyVolume": {
-        "message": "Signal Desktop is likely in a macOS quarantine, and will not be able to auto-update. Please try moving Signal.app to /Applications with Finder.",
+        "message": "OfficeApp Desktop is likely in a macOS quarantine, and will not be able to auto-update. Please try moving OfficeApp.app to /Applications with Finder.",
         "description": "Shown on MacOS if running on a read-only volume and we cannot update"
     },
     "ok": {
@@ -948,32 +948,32 @@
         "description": "Used in the media gallery documents tab to visually represent a file"
     },
     "installWelcome": {
-        "message": "Dobrodošli v aplikaciji Signal Desktop",
+        "message": "Dobrodošli v aplikaciji OfficeApp Desktop",
         "description": "Welcome title on the install page"
     },
     "installTagline": {
-        "message": "Zasebnost obstaja. Signal jo naredi preprosto.",
+        "message": "Zasebnost obstaja. OfficeApp jo naredi preprosto.",
         "description": "Tagline displayed under 'installWelcome' string on the install page"
     },
     "linkYourPhone": {
-        "message": "Povežite svoj telefon z aplikacijo Signal Desktop",
+        "message": "Povežite svoj telefon z aplikacijo OfficeApp Desktop",
         "description": "Shown on the front page when the application first starst, above the QR code"
     },
     "signalSettings": {
-        "message": "Nastavitve Signal",
-        "description": "Used in the guidance to help people find the 'link new device' area of their Signal mobile app"
+        "message": "Nastavitve OfficeApp",
+        "description": "Used in the guidance to help people find the 'link new device' area of their OfficeApp mobile app"
     },
     "linkedDevices": {
         "message": "Povezane naprave",
-        "description": "Used in the guidance to help people find the 'link new device' area of their Signal mobile app"
+        "description": "Used in the guidance to help people find the 'link new device' area of their OfficeApp mobile app"
     },
     "plusButton": {
         "message": "Gumb '+'",
-        "description": "The button used in Signal Android to add a new linked device"
+        "description": "The button used in OfficeApp Android to add a new linked device"
     },
     "linkNewDevice": {
         "message": "Poveži novo napravo",
-        "description": "The menu option shown in Signal iOS to add a new linked device"
+        "description": "The menu option shown in OfficeApp iOS to add a new linked device"
     },
     "deviceName": {
         "message": "Ime naprave",
@@ -1040,7 +1040,7 @@
         "description": "Header of the full-screen delete data confirmation screen"
     },
     "deleteAllDataBody": {
-        "message": "Ste pred korakom, s katerim boste izbrisali vse podatke v aplikaciji Signal, vključno s stiki in sporočili. Naknadno se boste lahko zopet povezali s svojo mobilno napravo, a to ne bo povrnilo izbrisanih sporočil.",
+        "message": "Ste pred korakom, s katerim boste izbrisali vse podatke v aplikaciji OfficeApp, vključno s stiki in sporočili. Naknadno se boste lahko zopet povezali s svojo mobilno napravo, a to ne bo povrnilo izbrisanih sporočil.",
         "description": "Text describing what exactly will happen if the user clicks the button to delete all data"
     },
     "deleteAllDataButton": {
@@ -1112,7 +1112,7 @@
         "description": "Text that links to a support article on verifying safety numbers"
     },
     "expiredWarning": {
-        "message": "Pričujoča različica programa Signal Desktop je potekla. Za ponovno delovanje morate program posodobiti na zadnjo različico.",
+        "message": "Pričujoča različica programa OfficeApp Desktop je potekla. Za ponovno delovanje morate program posodobiti na zadnjo različico.",
         "description": "Warning notification that this version of the app has expired"
     },
     "upgrade": {
@@ -1132,7 +1132,7 @@
         "description": "Label for contact and group sync settings"
     },
     "syncExplanation": {
-        "message": "Uvoz stikov in skupin Signal iz mobilne naprave.",
+        "message": "Uvoz stikov in skupin OfficeApp iz mobilne naprave.",
         "description": "Explanatory text for sync settings"
     },
     "lastSynced": {
@@ -1442,7 +1442,7 @@
         "description": "When a person inputs a number that is invalid"
     },
     "unlinkedWarning": {
-        "message": "Za nadaljevanje komunikacije ponovno povežite aplikacijo Signal Desktop s svojo mobilno napravo.",
+        "message": "Za nadaljevanje komunikacije ponovno povežite aplikacijo OfficeApp Desktop s svojo mobilno napravo.",
         "description": ""
     },
     "unlinked": {
@@ -1454,19 +1454,19 @@
         "description": ""
     },
     "autoUpdateNewVersionTitle": {
-        "message": "Na voljo je posodobitev aplikacije Signal",
+        "message": "Na voljo je posodobitev aplikacije OfficeApp",
         "description": ""
     },
     "autoUpdateNewVersionMessage": {
-        "message": "Na voljo je nova različica aplikacije Signal.",
+        "message": "Na voljo je nova različica aplikacije OfficeApp.",
         "description": ""
     },
     "autoUpdateNewVersionInstructions": {
-        "message": "Za uveljavitev nadgradenj pritisnite tipko Ponovno zaženi Signal",
+        "message": "Za uveljavitev nadgradenj pritisnite tipko Ponovno zaženi OfficeApp",
         "description": ""
     },
     "autoUpdateRestartButtonLabel": {
-        "message": "Ponovno zaženi Signal",
+        "message": "Ponovno zaženi OfficeApp",
         "description": ""
     },
     "autoUpdateLaterButtonLabel": {

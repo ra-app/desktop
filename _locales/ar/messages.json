@@ -52,7 +52,7 @@
         "description": "Application menu command to show all application windows"
     },
     "appMenuQuit": {
-        "message": "Quit Signal",
+        "message": "Quit OfficeApp",
         "description": "Application menu command to close the application"
     },
     "editMenuUndo": {
@@ -190,7 +190,7 @@
         "description": "Header shown on the first screen in the data import process"
     },
     "loadDataDescription": {
-        "message": "You've just gone through the export process, and your contacts and messages are waiting patiently on your computer. Select the folder that contains your saved Signal data.",
+        "message": "You've just gone through the export process, and your contacts and messages are waiting patiently on your computer. Select the folder that contains your saved OfficeApp data.",
         "description": "Introduction to the process of importing messages and contacts from disk"
     },
     "importChooserTitle": {
@@ -206,7 +206,7 @@
         "description": "Header of screen shown as data is import"
     },
     "importErrorFirst": {
-        "message": "Make sure you have chosen the correct directory that contains your saved Signal data. Its name should begin with 'Signal Export.' You can also save a new copy of your data from the Chrome App.",
+        "message": "Make sure you have chosen the correct directory that contains your saved OfficeApp data. Its name should begin with 'OfficeApp Export.' You can also save a new copy of your data from the Chrome App.",
         "description": "Message shown if the import went wrong; first paragraph"
     },
     "importErrorSecond": {
@@ -222,7 +222,7 @@
         "description": "Header shown on the screen at the end of a successful import process"
     },
     "importCompleteStartButton": {
-        "message": "Start using Signal Desktop",
+        "message": "Start using OfficeApp Desktop",
         "description": "Button shown at end of successful import process, nothing left but a restart"
     },
     "importCompleteLinkButton": {
@@ -517,11 +517,11 @@
     },
     "loadingPreview": {
         "message": "Loading Preview...",
-        "description": "Shown while Signal Desktop is fetching metadata for a url in composition area"
+        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area"
     },
     "stagedPreviewThumbnail": {
         "message": "Draft thumbnail link preview for $domain$",
-        "description": "Shown while Signal Desktop is fetching metadata for a url in composition area",
+        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area",
         "placeholders": {
             "path": {
                 "content": "$1",
@@ -531,7 +531,7 @@
     },
     "previewThumbnail": {
         "message": "Thumbnail link preview for $domain$",
-        "description": "Shown while Signal Desktop is fetching metadata for a url in composition area",
+        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area",
         "placeholders": {
             "path": {
                 "content": "$1",
@@ -620,11 +620,11 @@
         "description": "Item under the Help menu, takes you to GitHub new issue form (title case)"
     },
     "signalDesktopPreferences": {
-        "message": "Signal Desktop Preferences",
-        "description": "Title of the window that pops up with Signal Desktop preferences in it"
+        "message": "OfficeApp Desktop Preferences",
+        "description": "Title of the window that pops up with OfficeApp Desktop preferences in it"
     },
     "aboutSignalDesktop": {
-        "message": "About Signal Desktop",
+        "message": "About OfficeApp Desktop",
         "description": "Item under the Help menu, which opens a small about window"
     },
     "speech": {
@@ -644,7 +644,7 @@
         "description": "Command in the tray icon menu, to quit the application"
     },
     "signalDesktop": {
-        "message": "Signal Desktop",
+        "message": "OfficeApp Desktop",
         "description": "Tooltip for the tray icon"
     },
     "search": {
@@ -674,7 +674,7 @@
         "description": "Shown to separate the types of search results"
     },
     "welcomeToSignal": {
-        "message": "مرحبا الى سيجنال Signal",
+        "message": "مرحبا الى سيجنال OfficeApp",
         "description": ""
     },
     "selectAContact": {
@@ -770,7 +770,7 @@
         }
     },
     "audioPermissionNeeded": {
-        "message": "To send audio messages, allow Signal Desktop to access your microphone.",
+        "message": "To send audio messages, allow OfficeApp Desktop to access your microphone.",
         "description": "Shown if the user attempts to send an audio message without audio permssions turned on"
     },
     "allowAccess": {
@@ -798,11 +798,11 @@
         "description": "Shown as the title of our update error dialogs on windows"
     },
     "cannotUpdateDetail": {
-        "message": "Signal Desktop failed to update, but there is a new version available. Please go to https://signal.org/download and install the new version manually, then either contact support or file a bug about this problem.",
+        "message": "OfficeApp Desktop failed to update, but there is a new version available. Please go to https://signal.org/download and install the new version manually, then either contact support or file a bug about this problem.",
         "description": "Shown if a general error happened while trying to install update package"
     },
     "readOnlyVolume": {
-        "message": "Signal Desktop is likely in a macOS quarantine, and will not be able to auto-update. Please try moving Signal.app to /Applications with Finder.",
+        "message": "OfficeApp Desktop is likely in a macOS quarantine, and will not be able to auto-update. Please try moving OfficeApp.app to /Applications with Finder.",
         "description": "Shown on MacOS if running on a read-only volume and we cannot update"
     },
     "ok": {
@@ -952,28 +952,28 @@
         "description": "Welcome title on the install page"
     },
     "installTagline": {
-        "message": "الحفاظ على الخصوصية أمر ممكن. سيجنال Signal يجعل ذلك سهلا.",
+        "message": "الحفاظ على الخصوصية أمر ممكن. سيجنال OfficeApp يجعل ذلك سهلا.",
         "description": "Tagline displayed under 'installWelcome' string on the install page"
     },
     "linkYourPhone": {
-        "message": "Link your phone to Signal Desktop",
+        "message": "Link your phone to OfficeApp Desktop",
         "description": "Shown on the front page when the application first starst, above the QR code"
     },
     "signalSettings": {
-        "message": "Signal Settings",
-        "description": "Used in the guidance to help people find the 'link new device' area of their Signal mobile app"
+        "message": "OfficeApp Settings",
+        "description": "Used in the guidance to help people find the 'link new device' area of their OfficeApp mobile app"
     },
     "linkedDevices": {
         "message": "Linked Devices",
-        "description": "Used in the guidance to help people find the 'link new device' area of their Signal mobile app"
+        "description": "Used in the guidance to help people find the 'link new device' area of their OfficeApp mobile app"
     },
     "plusButton": {
         "message": "'+' Button",
-        "description": "The button used in Signal Android to add a new linked device"
+        "description": "The button used in OfficeApp Android to add a new linked device"
     },
     "linkNewDevice": {
         "message": "Link New Device",
-        "description": "The menu option shown in Signal iOS to add a new linked device"
+        "description": "The menu option shown in OfficeApp iOS to add a new linked device"
     },
     "deviceName": {
         "message": "Device name",
@@ -1454,19 +1454,19 @@
         "description": ""
     },
     "autoUpdateNewVersionTitle": {
-        "message": "Signal update available",
+        "message": "OfficeApp update available",
         "description": ""
     },
     "autoUpdateNewVersionMessage": {
-        "message": "There is a new version of Signal available.",
+        "message": "There is a new version of OfficeApp available.",
         "description": ""
     },
     "autoUpdateNewVersionInstructions": {
-        "message": "Press Restart Signal to apply the updates.",
+        "message": "Press Restart OfficeApp to apply the updates.",
         "description": ""
     },
     "autoUpdateRestartButtonLabel": {
-        "message": "Restart Signal",
+        "message": "Restart OfficeApp",
         "description": ""
     },
     "autoUpdateLaterButtonLabel": {

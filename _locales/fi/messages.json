@@ -52,7 +52,7 @@
         "description": "Application menu command to show all application windows"
     },
     "appMenuQuit": {
-        "message": "Lopeta Signal",
+        "message": "Lopeta OfficeApp",
         "description": "Application menu command to close the application"
     },
     "editMenuUndo": {
@@ -190,7 +190,7 @@
         "description": "Header shown on the first screen in the data import process"
     },
     "loadDataDescription": {
-        "message": "Olet juuri suorittanut vientiprosessin, ja yhteystietosi ja viesisi odottavat nyt kärsivällisesti tietokoneellasi. Valitse kansio, joka sisältää tallennetut Signal tietosi.",
+        "message": "Olet juuri suorittanut vientiprosessin, ja yhteystietosi ja viesisi odottavat nyt kärsivällisesti tietokoneellasi. Valitse kansio, joka sisältää tallennetut OfficeApp tietosi.",
         "description": "Introduction to the process of importing messages and contacts from disk"
     },
     "importChooserTitle": {
@@ -206,7 +206,7 @@
         "description": "Header of screen shown as data is import"
     },
     "importErrorFirst": {
-        "message": "Varmista, että ole valinnut oikean hakemiston, joka sisältää Signalin tiedot. Hakemiston nimen tulisi alkaa sanoilla \"Signal Export\". Voit myös tallentaa uuden kopion tiedoistasi Signalin Chrome-sovelluksen kautta.",
+        "message": "Varmista, että ole valinnut oikean hakemiston, joka sisältää OfficeAppin tiedot. Hakemiston nimen tulisi alkaa sanoilla \"OfficeApp Export\". Voit myös tallentaa uuden kopion tiedoistasi OfficeAppin Chrome-sovelluksen kautta.",
         "description": "Message shown if the import went wrong; first paragraph"
     },
     "importErrorSecond": {
@@ -222,7 +222,7 @@
         "description": "Header shown on the screen at the end of a successful import process"
     },
     "importCompleteStartButton": {
-        "message": "Aloita Signal Desktopin käyttö",
+        "message": "Aloita OfficeApp Desktopin käyttö",
         "description": "Button shown at end of successful import process, nothing left but a restart"
     },
     "importCompleteLinkButton": {
@@ -330,11 +330,11 @@
         "description": "When there are multiple previously-verified group members with safety number changes, a banner will be shown. The list of contacts with safety number changes is shown, and this text introduces that list."
     },
     "changedSinceVerifiedMultiple": {
-        "message": "Turvanumerosi on vaihtunut usean tämän ryhmän jäsenen kanssa sen jälkeen kun olet viimeksi varmentanut ne. Tämä voi tarkoittaa joko sitä, että joku yrittää kaapata viestiliikennettänne, tai sitä, että he on yksinkertaisesti uudelleenasentaneet Signalin.",
+        "message": "Turvanumerosi on vaihtunut usean tämän ryhmän jäsenen kanssa sen jälkeen kun olet viimeksi varmentanut ne. Tämä voi tarkoittaa joko sitä, että joku yrittää kaapata viestiliikennettänne, tai sitä, että he on yksinkertaisesti uudelleenasentaneet OfficeAppin.",
         "description": "Shown on confirmation dialog when user attempts to send a message"
     },
     "changedSinceVerified": {
-        "message": "Turvanumerosi yhteystiedon $name$ kanssa on vaihtunut sen jälkeen kun viimeksi varmensit. Tämä voi tarkoittaa joko sitä, että joku yrittää kaapata viestiliikennettänne, tai sitä, että $name$ on yksinkertaisesti uudelleenasentanut Signalin.",
+        "message": "Turvanumerosi yhteystiedon $name$ kanssa on vaihtunut sen jälkeen kun viimeksi varmensit. Tämä voi tarkoittaa joko sitä, että joku yrittää kaapata viestiliikennettänne, tai sitä, että $name$ on yksinkertaisesti uudelleenasentanut OfficeAppin.",
         "description": "Shown on confirmation dialog when user attempts to send a message",
         "placeholders": {
             "name": {
@@ -344,7 +344,7 @@
         }
     },
     "changedRightAfterVerify": {
-        "message": "Turvanumero jota yrität varmentaa on vaihtunut. Yritä varmentaa uusi turvanumerosi yhteystiedon $name$ kanssa. Muista, että tämä muutos voi tarkoittaa joko sitä, että joku yrittää kaapata viestiliikennettänne, tai sitä, että $name$ on yksinkertaisesti uudelleenasentanut Signalin.",
+        "message": "Turvanumero jota yrität varmentaa on vaihtunut. Yritä varmentaa uusi turvanumerosi yhteystiedon $name$ kanssa. Muista, että tämä muutos voi tarkoittaa joko sitä, että joku yrittää kaapata viestiliikennettänne, tai sitä, että $name$ on yksinkertaisesti uudelleenasentanut OfficeAppin.",
         "description": "Shown on the safety number screen when the user has selected to verify/unverify a contact's safety number, and we immediately discover a safety number change",
         "placeholders": {
             "name": {
@@ -354,11 +354,11 @@
         }
     },
     "changedRecentlyMultiple": {
-        "message": "Turvanumerosi on hiljattain vaihtunut usean tämän ryhmän jäsenen kanssa. Tämä voi tarkoittaa joko sitä, että joku yrittää kaapata viestiliikennettänne, tai sitä, että he on yksinkertaisesti uudelleenasentaneet Signalin.",
+        "message": "Turvanumerosi on hiljattain vaihtunut usean tämän ryhmän jäsenen kanssa. Tämä voi tarkoittaa joko sitä, että joku yrittää kaapata viestiliikennettänne, tai sitä, että he on yksinkertaisesti uudelleenasentaneet OfficeAppin.",
         "description": "Shown on confirmation dialog when user attempts to send a message"
     },
     "changedRecently": {
-        "message": "Turvanumerosi yhteystiedon $name$ kanssa on vaihtunut hiljattain. Tämä voi tarkoittaa joko sitä, että joku yrittää kaapata viestiliikennettänne, tai sitä, että $name$ on yksinkertaisesti uudelleenasentanut Signalin.",
+        "message": "Turvanumerosi yhteystiedon $name$ kanssa on vaihtunut hiljattain. Tämä voi tarkoittaa joko sitä, että joku yrittää kaapata viestiliikennettänne, tai sitä, että $name$ on yksinkertaisesti uudelleenasentanut OfficeAppin.",
         "description": "Shown on confirmation dialog when user attempts to send a message",
         "placeholders": {
             "name": {
@@ -368,7 +368,7 @@
         }
     },
     "identityKeyErrorOnSend": {
-        "message": "Turvanumerosi yhteystiedon $name$ kanssa on vaihtunut. Tämä voi tarkoittaa joko sitä, että joku yrittää kaapata viestiliikennettänne, tai sitä, että $name$ on yksinkertaisesti uudelleenasentanut Signalin. Saatat haluta varmentaa turvanumerosi tämän yhteystiedon kanssa.",
+        "message": "Turvanumerosi yhteystiedon $name$ kanssa on vaihtunut. Tämä voi tarkoittaa joko sitä, että joku yrittää kaapata viestiliikennettänne, tai sitä, että $name$ on yksinkertaisesti uudelleenasentanut OfficeAppin. Saatat haluta varmentaa turvanumerosi tämän yhteystiedon kanssa.",
         "description": "Shown when user clicks on a failed recipient in the message detail view after an identity key change",
         "placeholders": {
             "name": {
@@ -456,7 +456,7 @@
         "description": "Header for a key change dialog"
     },
     "identityChanged": {
-        "message": "Turvanumerosi tämän yhteystiedon kanssa on vaihtunut. Tämä voi tarkoittaa joko sitä, että joku yrittää kaapata viestiliikennettänne, tai sitä, että yhteystietosi on yksinkertaisesti uudelleenasentanut Signalin. Saatat haluta varmentaa alla näkyvän turvanumeron.",
+        "message": "Turvanumerosi tämän yhteystiedon kanssa on vaihtunut. Tämä voi tarkoittaa joko sitä, että joku yrittää kaapata viestiliikennettänne, tai sitä, että yhteystietosi on yksinkertaisesti uudelleenasentanut OfficeAppin. Saatat haluta varmentaa alla näkyvän turvanumeron.",
         "description": ""
     },
     "incomingError": {
@@ -517,11 +517,11 @@
     },
     "loadingPreview": {
         "message": "Ladataan esikatselua...",
-        "description": "Shown while Signal Desktop is fetching metadata for a url in composition area"
+        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area"
     },
     "stagedPreviewThumbnail": {
         "message": "Linkin $domain$esikatselukuvan luonnos",
-        "description": "Shown while Signal Desktop is fetching metadata for a url in composition area",
+        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area",
         "placeholders": {
             "path": {
                 "content": "$1",
@@ -531,7 +531,7 @@
     },
     "previewThumbnail": {
         "message": "Linkin $domain$ esikatselukuva",
-        "description": "Shown while Signal Desktop is fetching metadata for a url in composition area",
+        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area",
         "placeholders": {
             "path": {
                 "content": "$1",
@@ -620,11 +620,11 @@
         "description": "Item under the Help menu, takes you to GitHub new issue form (title case)"
     },
     "signalDesktopPreferences": {
-        "message": "Signal Desktop asetukset",
-        "description": "Title of the window that pops up with Signal Desktop preferences in it"
+        "message": "OfficeApp Desktop asetukset",
+        "description": "Title of the window that pops up with OfficeApp Desktop preferences in it"
     },
     "aboutSignalDesktop": {
-        "message": "Tietoja Signal Desktopista",
+        "message": "Tietoja OfficeApp Desktopista",
         "description": "Item under the Help menu, which opens a small about window"
     },
     "speech": {
@@ -644,7 +644,7 @@
         "description": "Command in the tray icon menu, to quit the application"
     },
     "signalDesktop": {
-        "message": "Signal Desktop",
+        "message": "OfficeApp Desktop",
         "description": "Tooltip for the tray icon"
     },
     "search": {
@@ -674,7 +674,7 @@
         "description": "Shown to separate the types of search results"
     },
     "welcomeToSignal": {
-        "message": "Tervetuloa Signaliin",
+        "message": "Tervetuloa OfficeAppiin",
         "description": ""
     },
     "selectAContact": {
@@ -770,7 +770,7 @@
         }
     },
     "audioPermissionNeeded": {
-        "message": "Lähettääksesi ääniviestejä myönnä Signal Desktopille mikrofonin käyttöoikeus.",
+        "message": "Lähettääksesi ääniviestejä myönnä OfficeApp Desktopille mikrofonin käyttöoikeus.",
         "description": "Shown if the user attempts to send an audio message without audio permssions turned on"
     },
     "allowAccess": {
@@ -798,11 +798,11 @@
         "description": "Shown as the title of our update error dialogs on windows"
     },
     "cannotUpdateDetail": {
-        "message": "Signal Desktop failed to update, but there is a new version available. Please go to https://signal.org/download and install the new version manually, then either contact support or file a bug about this problem.",
+        "message": "OfficeApp Desktop failed to update, but there is a new version available. Please go to https://signal.org/download and install the new version manually, then either contact support or file a bug about this problem.",
         "description": "Shown if a general error happened while trying to install update package"
     },
     "readOnlyVolume": {
-        "message": "Signal Desktop is likely in a macOS quarantine, and will not be able to auto-update. Please try moving Signal.app to /Applications with Finder.",
+        "message": "OfficeApp Desktop is likely in a macOS quarantine, and will not be able to auto-update. Please try moving OfficeApp.app to /Applications with Finder.",
         "description": "Shown on MacOS if running on a read-only volume and we cannot update"
     },
     "ok": {
@@ -948,32 +948,32 @@
         "description": "Used in the media gallery documents tab to visually represent a file"
     },
     "installWelcome": {
-        "message": "Tervetuloa Signal Desktopiin",
+        "message": "Tervetuloa OfficeApp Desktopiin",
         "description": "Welcome title on the install page"
     },
     "installTagline": {
-        "message": "Yksityisyys on mahdollista. Signal tekee siitä helppoa.",
+        "message": "Yksityisyys on mahdollista. OfficeApp tekee siitä helppoa.",
         "description": "Tagline displayed under 'installWelcome' string on the install page"
     },
     "linkYourPhone": {
-        "message": "Yhdistä puhelimesi ja Signal Desktop",
+        "message": "Yhdistä puhelimesi ja OfficeApp Desktop",
         "description": "Shown on the front page when the application first starst, above the QR code"
     },
     "signalSettings": {
-        "message": "Signal Asetukset",
-        "description": "Used in the guidance to help people find the 'link new device' area of their Signal mobile app"
+        "message": "OfficeApp Asetukset",
+        "description": "Used in the guidance to help people find the 'link new device' area of their OfficeApp mobile app"
     },
     "linkedDevices": {
         "message": "Yhdistetyt laitteet",
-        "description": "Used in the guidance to help people find the 'link new device' area of their Signal mobile app"
+        "description": "Used in the guidance to help people find the 'link new device' area of their OfficeApp mobile app"
     },
     "plusButton": {
         "message": "'+' Nappi",
-        "description": "The button used in Signal Android to add a new linked device"
+        "description": "The button used in OfficeApp Android to add a new linked device"
     },
     "linkNewDevice": {
         "message": "Yhdistä uusi laite",
-        "description": "The menu option shown in Signal iOS to add a new linked device"
+        "description": "The menu option shown in OfficeApp iOS to add a new linked device"
     },
     "deviceName": {
         "message": "Laitteen nimi",
@@ -1112,7 +1112,7 @@
         "description": "Text that links to a support article on verifying safety numbers"
     },
     "expiredWarning": {
-        "message": "Käyttämäsi versio Signal Desktopista on vanhentunut. Viestien lähettäminen ja vastaanottaminen eivät enää toimi, ennen kuin olet päiväittänyt uusimpaan versioon.",
+        "message": "Käyttämäsi versio OfficeApp Desktopista on vanhentunut. Viestien lähettäminen ja vastaanottaminen eivät enää toimi, ennen kuin olet päiväittänyt uusimpaan versioon.",
         "description": "Warning notification that this version of the app has expired"
     },
     "upgrade": {
@@ -1132,7 +1132,7 @@
         "description": "Label for contact and group sync settings"
     },
     "syncExplanation": {
-        "message": "Tuo kaikkien Signal-yhteystietojen ja -ryhmien tiedot mobiililaitteestasi.",
+        "message": "Tuo kaikkien OfficeApp-yhteystietojen ja -ryhmien tiedot mobiililaitteestasi.",
         "description": "Explanatory text for sync settings"
     },
     "lastSynced": {
@@ -1442,7 +1442,7 @@
         "description": "When a person inputs a number that is invalid"
     },
     "unlinkedWarning": {
-        "message": "Jotta voit jatkaa viestittelyä, yhdistä Signal Desktop uudelleen mobiililaitteeseesi.",
+        "message": "Jotta voit jatkaa viestittelyä, yhdistä OfficeApp Desktop uudelleen mobiililaitteeseesi.",
         "description": ""
     },
     "unlinked": {
@@ -1454,19 +1454,19 @@
         "description": ""
     },
     "autoUpdateNewVersionTitle": {
-        "message": "Signal päivitys saatavilla",
+        "message": "OfficeApp päivitys saatavilla",
         "description": ""
     },
     "autoUpdateNewVersionMessage": {
-        "message": "Uusi versio Signalista on saatavilla.",
+        "message": "Uusi versio OfficeAppista on saatavilla.",
         "description": ""
     },
     "autoUpdateNewVersionInstructions": {
-        "message": "Paina Käynnistä Signal uudelleen asentaaksesi päivitykset.",
+        "message": "Paina Käynnistä OfficeApp uudelleen asentaaksesi päivitykset.",
         "description": ""
     },
     "autoUpdateRestartButtonLabel": {
-        "message": "Käynnistä Signal uudelleen",
+        "message": "Käynnistä OfficeApp uudelleen",
         "description": ""
     },
     "autoUpdateLaterButtonLabel": {

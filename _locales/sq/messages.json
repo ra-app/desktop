@@ -52,7 +52,7 @@
         "description": "Application menu command to show all application windows"
     },
     "appMenuQuit": {
-        "message": "Mbylle Signal-in",
+        "message": "Mbylle OfficeApp-in",
         "description": "Application menu command to close the application"
     },
     "editMenuUndo": {
@@ -190,7 +190,7 @@
         "description": "Header shown on the first screen in the data import process"
     },
     "loadDataDescription": {
-        "message": "Sapo kaluat nëpër procesin e eksportimit, dhe kontaktet dhe mesazhet tuaj po presin me qetësi në kompjuterin tuaj. Përzgjidhni dosjen që përmban të dhëna tuajat Signal të ruajtura.",
+        "message": "Sapo kaluat nëpër procesin e eksportimit, dhe kontaktet dhe mesazhet tuaj po presin me qetësi në kompjuterin tuaj. Përzgjidhni dosjen që përmban të dhëna tuajat OfficeApp të ruajtura.",
         "description": "Introduction to the process of importing messages and contacts from disk"
     },
     "importChooserTitle": {
@@ -206,7 +206,7 @@
         "description": "Header of screen shown as data is import"
     },
     "importErrorFirst": {
-        "message": "Sigurohuni se keni zgjedhur drejtorinë e duhur që përmban të dhënat tuaja Signal të ruajtura. Emri i saj duhet të fillojë me 'Signal Export.' Mundeni edhe të ruani një kopje të re të të dhënave tuaja që nga Aplikacioni Chrome.",
+        "message": "Sigurohuni se keni zgjedhur drejtorinë e duhur që përmban të dhënat tuaja OfficeApp të ruajtura. Emri i saj duhet të fillojë me 'OfficeApp Export.' Mundeni edhe të ruani një kopje të re të të dhënave tuaja që nga Aplikacioni Chrome.",
         "description": "Message shown if the import went wrong; first paragraph"
     },
     "importErrorSecond": {
@@ -222,7 +222,7 @@
         "description": "Header shown on the screen at the end of a successful import process"
     },
     "importCompleteStartButton": {
-        "message": "Filloni të përdorni Signal-in për Desktop",
+        "message": "Filloni të përdorni OfficeApp-in për Desktop",
         "description": "Button shown at end of successful import process, nothing left but a restart"
     },
     "importCompleteLinkButton": {
@@ -330,11 +330,11 @@
         "description": "When there are multiple previously-verified group members with safety number changes, a banner will be shown. The list of contacts with safety number changes is shown, and this text introduces that list."
     },
     "changedSinceVerifiedMultiple": {
-        "message": "Numrat tuaj të sigurisë me një numër anëtarësh të grupit kanë ndryshuar që nga hera e fundit që i verifikuat. Kjo mund të ishte shenjë se dikush po rreket të përgjojë komunikimin tuaj ose se ata thjesht kanë riinstaluar Signal-in.",
+        "message": "Numrat tuaj të sigurisë me një numër anëtarësh të grupit kanë ndryshuar që nga hera e fundit që i verifikuat. Kjo mund të ishte shenjë se dikush po rreket të përgjojë komunikimin tuaj ose se ata thjesht kanë riinstaluar OfficeApp-in.",
         "description": "Shown on confirmation dialog when user attempts to send a message"
     },
     "changedSinceVerified": {
-        "message": "Numri juaj i sigurisë me $name$ ka ndryshuar që nga hera e fundit që e verifikuat. Kjo mund të ishte shenjë se dikush po rreket të përgjojë komunikimin tuaj ose se $name$ thjesht ka riinstaluar Signal-in.",
+        "message": "Numri juaj i sigurisë me $name$ ka ndryshuar që nga hera e fundit që e verifikuat. Kjo mund të ishte shenjë se dikush po rreket të përgjojë komunikimin tuaj ose se $name$ thjesht ka riinstaluar OfficeApp-in.",
         "description": "Shown on confirmation dialog when user attempts to send a message",
         "placeholders": {
             "name": {
@@ -344,7 +344,7 @@
         }
     },
     "changedRightAfterVerify": {
-        "message": "Numri i sigurisë që po provoni të verifikoni ka ndryshuar. Ju lutemi, shqyrtoni numrin tuaj të ri të sigurisë me $name$. Mos harroni, ky ndryshim mund të ishte shenjë se dikush po rreket të përgjojë komunikimin tuaj ose se $name$ thjesht ka riinstaluar Signal-in.",
+        "message": "Numri i sigurisë që po provoni të verifikoni ka ndryshuar. Ju lutemi, shqyrtoni numrin tuaj të ri të sigurisë me $name$. Mos harroni, ky ndryshim mund të ishte shenjë se dikush po rreket të përgjojë komunikimin tuaj ose se $name$ thjesht ka riinstaluar OfficeApp-in.",
         "description": "Shown on the safety number screen when the user has selected to verify/unverify a contact's safety number, and we immediately discover a safety number change",
         "placeholders": {
             "name": {
@@ -354,11 +354,11 @@
         }
     },
     "changedRecentlyMultiple": {
-        "message": "Numrat tuaj të sigurisë me shumë anëtarë të grupit kanë ndryshuar tani së fundi. Kjo mund të ishte shenjë se dikush po rreket të përgjojë komunikimin tuaj ose se thjesht ata kanë riinstaluar Signal-in.",
+        "message": "Numrat tuaj të sigurisë me shumë anëtarë të grupit kanë ndryshuar tani së fundi. Kjo mund të ishte shenjë se dikush po rreket të përgjojë komunikimin tuaj ose se thjesht ata kanë riinstaluar OfficeApp-in.",
         "description": "Shown on confirmation dialog when user attempts to send a message"
     },
     "changedRecently": {
-        "message": "Numri juaj i sigurisë me $name$ ka ndryshuar tani së fundi. Kjo mund të jetë shenjë se dikush po rreket të përgjojë komunikimin tuaj ose se $name$ thjesht ka riinstaluar Signal-in.",
+        "message": "Numri juaj i sigurisë me $name$ ka ndryshuar tani së fundi. Kjo mund të jetë shenjë se dikush po rreket të përgjojë komunikimin tuaj ose se $name$ thjesht ka riinstaluar OfficeApp-in.",
         "description": "Shown on confirmation dialog when user attempts to send a message",
         "placeholders": {
             "name": {
@@ -368,7 +368,7 @@
         }
     },
     "identityKeyErrorOnSend": {
-        "message": "Numri juaj i sigurisë për me $name$ ka ndryshuar. Kjo mund të ishte shenjë se dikush po rreket të përgjojë komunikimin tuaj ose se $name$ thjesht ka riinstaluar Signal-in. Mund të donit të verifikonit numrin tuaj të sigurisë me këtë kontakt.",
+        "message": "Numri juaj i sigurisë për me $name$ ka ndryshuar. Kjo mund të ishte shenjë se dikush po rreket të përgjojë komunikimin tuaj ose se $name$ thjesht ka riinstaluar OfficeApp-in. Mund të donit të verifikonit numrin tuaj të sigurisë me këtë kontakt.",
         "description": "Shown when user clicks on a failed recipient in the message detail view after an identity key change",
         "placeholders": {
             "name": {
@@ -456,7 +456,7 @@
         "description": "Header for a key change dialog"
     },
     "identityChanged": {
-        "message": "Numri juaj i sigurisë me këtë kontakt ka ndryshuar. Kjo mund të dojë të thotë se ose dikush po rreket të përgjojë komunikimin tuaj, ose se ky kontakt thjesht riinstaloi Signal-in. Mund të donit të verifikoni numrin e ri të sigurisë më poshtë.",
+        "message": "Numri juaj i sigurisë me këtë kontakt ka ndryshuar. Kjo mund të dojë të thotë se ose dikush po rreket të përgjojë komunikimin tuaj, ose se ky kontakt thjesht riinstaloi OfficeApp-in. Mund të donit të verifikoni numrin e ri të sigurisë më poshtë.",
         "description": ""
     },
     "incomingError": {
@@ -517,11 +517,11 @@
     },
     "loadingPreview": {
         "message": "Po ngarkohet Paraparja…",
-        "description": "Shown while Signal Desktop is fetching metadata for a url in composition area"
+        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area"
     },
     "stagedPreviewThumbnail": {
         "message": "Paraparje lidhjeje miniature skice për $domain$",
-        "description": "Shown while Signal Desktop is fetching metadata for a url in composition area",
+        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area",
         "placeholders": {
             "path": {
                 "content": "$1",
@@ -531,7 +531,7 @@
     },
     "previewThumbnail": {
         "message": "Paraparje lidhjeje miniature për $domain$",
-        "description": "Shown while Signal Desktop is fetching metadata for a url in composition area",
+        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area",
         "placeholders": {
             "path": {
                 "content": "$1",
@@ -620,11 +620,11 @@
         "description": "Item under the Help menu, takes you to GitHub new issue form (title case)"
     },
     "signalDesktopPreferences": {
-        "message": "Parapëlqime për Signal-in në Desktop",
-        "description": "Title of the window that pops up with Signal Desktop preferences in it"
+        "message": "Parapëlqime për OfficeApp-in në Desktop",
+        "description": "Title of the window that pops up with OfficeApp Desktop preferences in it"
     },
     "aboutSignalDesktop": {
-        "message": "Mbi Signal-in për Desktop",
+        "message": "Mbi OfficeApp-in për Desktop",
         "description": "Item under the Help menu, which opens a small about window"
     },
     "speech": {
@@ -644,7 +644,7 @@
         "description": "Command in the tray icon menu, to quit the application"
     },
     "signalDesktop": {
-        "message": "Signal Desktop",
+        "message": "OfficeApp Desktop",
         "description": "Tooltip for the tray icon"
     },
     "search": {
@@ -674,7 +674,7 @@
         "description": "Shown to separate the types of search results"
     },
     "welcomeToSignal": {
-        "message": "Mirë se vini te Signal-i",
+        "message": "Mirë se vini te OfficeApp-i",
         "description": ""
     },
     "selectAContact": {
@@ -770,7 +770,7 @@
         }
     },
     "audioPermissionNeeded": {
-        "message": "Për të dërguar mesazhe audio, lejojeni Signal-in për Desktop të përdorë mikrofonin tuaj.",
+        "message": "Për të dërguar mesazhe audio, lejojeni OfficeApp-in për Desktop të përdorë mikrofonin tuaj.",
         "description": "Shown if the user attempts to send an audio message without audio permssions turned on"
     },
     "allowAccess": {
@@ -798,11 +798,11 @@
         "description": "Shown as the title of our update error dialogs on windows"
     },
     "cannotUpdateDetail": {
-        "message": "Signal Desktop failed to update, but there is a new version available. Please go to https://signal.org/download and install the new version manually, then either contact support or file a bug about this problem.",
+        "message": "OfficeApp Desktop failed to update, but there is a new version available. Please go to https://signal.org/download and install the new version manually, then either contact support or file a bug about this problem.",
         "description": "Shown if a general error happened while trying to install update package"
     },
     "readOnlyVolume": {
-        "message": "Signal Desktop is likely in a macOS quarantine, and will not be able to auto-update. Please try moving Signal.app to /Applications with Finder.",
+        "message": "OfficeApp Desktop is likely in a macOS quarantine, and will not be able to auto-update. Please try moving OfficeApp.app to /Applications with Finder.",
         "description": "Shown on MacOS if running on a read-only volume and we cannot update"
     },
     "ok": {
@@ -948,32 +948,32 @@
         "description": "Used in the media gallery documents tab to visually represent a file"
     },
     "installWelcome": {
-        "message": "Mirë se vini te Signal Desktop",
+        "message": "Mirë se vini te OfficeApp Desktop",
         "description": "Welcome title on the install page"
     },
     "installTagline": {
-        "message": "Privatësia është e mundur. Signal-i e bën të lehtë.",
+        "message": "Privatësia është e mundur. OfficeApp-i e bën të lehtë.",
         "description": "Tagline displayed under 'installWelcome' string on the install page"
     },
     "linkYourPhone": {
-        "message": "Lidheni telefonin tuaj me Signal-in për Desktop",
+        "message": "Lidheni telefonin tuaj me OfficeApp-in për Desktop",
         "description": "Shown on the front page when the application first starst, above the QR code"
     },
     "signalSettings": {
-        "message": "Rregullime Signal-i",
-        "description": "Used in the guidance to help people find the 'link new device' area of their Signal mobile app"
+        "message": "Rregullime OfficeApp-i",
+        "description": "Used in the guidance to help people find the 'link new device' area of their OfficeApp mobile app"
     },
     "linkedDevices": {
         "message": "Pajisje të Lidhura",
-        "description": "Used in the guidance to help people find the 'link new device' area of their Signal mobile app"
+        "description": "Used in the guidance to help people find the 'link new device' area of their OfficeApp mobile app"
     },
     "plusButton": {
         "message": "Butoni '+'",
-        "description": "The button used in Signal Android to add a new linked device"
+        "description": "The button used in OfficeApp Android to add a new linked device"
     },
     "linkNewDevice": {
         "message": "Lidhini Pajisje të Re",
-        "description": "The menu option shown in Signal iOS to add a new linked device"
+        "description": "The menu option shown in OfficeApp iOS to add a new linked device"
     },
     "deviceName": {
         "message": "Emër pajisjeje",
@@ -1112,7 +1112,7 @@
         "description": "Text that links to a support article on verifying safety numbers"
     },
     "expiredWarning": {
-        "message": "Ky version i Signal-it për Desktop ka skaduar. Ju lutemi, që të vazhdoni të shkëmbeni mesazhe, përmirësojeni me versionin më të ri.",
+        "message": "Ky version i OfficeApp-it për Desktop ka skaduar. Ju lutemi, që të vazhdoni të shkëmbeni mesazhe, përmirësojeni me versionin më të ri.",
         "description": "Warning notification that this version of the app has expired"
     },
     "upgrade": {
@@ -1132,7 +1132,7 @@
         "description": "Label for contact and group sync settings"
     },
     "syncExplanation": {
-        "message": "Importoni krejt grupet dhe kontaktet Signal nga pajisja juaj celulare.",
+        "message": "Importoni krejt grupet dhe kontaktet OfficeApp nga pajisja juaj celulare.",
         "description": "Explanatory text for sync settings"
     },
     "lastSynced": {
@@ -1442,7 +1442,7 @@
         "description": "When a person inputs a number that is invalid"
     },
     "unlinkedWarning": {
-        "message": "Që të vazhdoni shkëmbim mesazhesh, rilidheni Signal-in për Desktop me pajisjen tuaj celulare.",
+        "message": "Që të vazhdoni shkëmbim mesazhesh, rilidheni OfficeApp-in për Desktop me pajisjen tuaj celulare.",
         "description": ""
     },
     "unlinked": {
@@ -1454,19 +1454,19 @@
         "description": ""
     },
     "autoUpdateNewVersionTitle": {
-        "message": "Ka gati përditësim të Signal-it",
+        "message": "Ka gati përditësim të OfficeApp-it",
         "description": ""
     },
     "autoUpdateNewVersionMessage": {
-        "message": "Ka të gatshëm një version të ri të Signal-it",
+        "message": "Ka të gatshëm një version të ri të OfficeApp-it",
         "description": ""
     },
     "autoUpdateNewVersionInstructions": {
-        "message": "Shtypni Rinise Signal-in që të zbatohen përditësimet.",
+        "message": "Shtypni Rinise OfficeApp-in që të zbatohen përditësimet.",
         "description": ""
     },
     "autoUpdateRestartButtonLabel": {
-        "message": "Riniseni Signal-in",
+        "message": "Riniseni OfficeApp-in",
         "description": ""
     },
     "autoUpdateLaterButtonLabel": {

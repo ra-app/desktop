@@ -56,7 +56,7 @@
         "description": "Application menu command to show all application windows"
     },
     "appMenuQuit": {
-        "message": "Quit Signal",
+        "message": "Quit OfficeApp",
         "description": "Application menu command to close the application"
     },
     "editMenuUndo": {
@@ -194,7 +194,7 @@
         "description": "Header shown on the first screen in the data import process"
     },
     "loadDataDescription": {
-        "message": "You've just gone through the export process, and your contacts and messages are waiting patiently on your computer. Select the folder that contains your saved Signal data.",
+        "message": "You've just gone through the export process, and your contacts and messages are waiting patiently on your computer. Select the folder that contains your saved OfficeApp data.",
         "description": "Introduction to the process of importing messages and contacts from disk"
     },
     "importChooserTitle": {
@@ -210,7 +210,7 @@
         "description": "Header of screen shown as data is import"
     },
     "importErrorFirst": {
-        "message": "Make sure you have chosen the correct directory that contains your saved Signal data. Its name should begin with 'Signal Export.' You can also save a new copy of your data from the Chrome App.",
+        "message": "Make sure you have chosen the correct directory that contains your saved OfficeApp data. Its name should begin with 'OfficeApp Export.' You can also save a new copy of your data from the Chrome App.",
         "description": "Message shown if the import went wrong; first paragraph"
     },
     "importErrorSecond": {
@@ -226,7 +226,7 @@
         "description": "Header shown on the screen at the end of a successful import process"
     },
     "importCompleteStartButton": {
-        "message": "Start using Signal Desktop",
+        "message": "Start using OfficeApp Desktop",
         "description": "Button shown at end of successful import process, nothing left but a restart"
     },
     "importCompleteLinkButton": {
@@ -334,11 +334,11 @@
         "description": "When there are multiple previously-verified group members with safety number changes, a banner will be shown. The list of contacts with safety number changes is shown, and this text introduces that list."
     },
     "changedSinceVerifiedMultiple": {
-        "message": "Your safety numbers with multiple group members have changed since you last verified. This could mean that someone is trying to intercept your communication or that they have simply reinstalled Signal.",
+        "message": "Your safety numbers with multiple group members have changed since you last verified. This could mean that someone is trying to intercept your communication or that they have simply reinstalled OfficeApp.",
         "description": "Shown on confirmation dialog when user attempts to send a message"
     },
     "changedSinceVerified": {
-        "message": "Your safety number with $name$ has changed since you last verified. This could mean that someone is trying to intercept your communication or that $name$ has simply reinstalled Signal.",
+        "message": "Your safety number with $name$ has changed since you last verified. This could mean that someone is trying to intercept your communication or that $name$ has simply reinstalled OfficeApp.",
         "description": "Shown on confirmation dialog when user attempts to send a message",
         "placeholders": {
             "name": {
@@ -348,7 +348,7 @@
         }
     },
     "changedRightAfterVerify": {
-        "message": "The safety number you are trying to verify has changed. Please review your new safety number with $name$. Remember, this change could mean that someone is trying to intercept your communication or that $name$ has simply reinstalled Signal.",
+        "message": "The safety number you are trying to verify has changed. Please review your new safety number with $name$. Remember, this change could mean that someone is trying to intercept your communication or that $name$ has simply reinstalled OfficeApp.",
         "description": "Shown on the safety number screen when the user has selected to verify/unverify a contact's safety number, and we immediately discover a safety number change",
         "placeholders": {
             "name": {
@@ -358,11 +358,11 @@
         }
     },
     "changedRecentlyMultiple": {
-        "message": "Your safety numbers with multiple group members have changed recently. This could mean that someone is trying to intercept your communication or that they have simply reinstalled Signal.",
+        "message": "Your safety numbers with multiple group members have changed recently. This could mean that someone is trying to intercept your communication or that they have simply reinstalled OfficeApp.",
         "description": "Shown on confirmation dialog when user attempts to send a message"
     },
     "changedRecently": {
-        "message": "Your safety number with $name$ has changed recently. This could mean that someone is trying to intercept your communication or that $name$ has simply reinstalled Signal.",
+        "message": "Your safety number with $name$ has changed recently. This could mean that someone is trying to intercept your communication or that $name$ has simply reinstalled OfficeApp.",
         "description": "Shown on confirmation dialog when user attempts to send a message",
         "placeholders": {
             "name": {
@@ -372,7 +372,7 @@
         }
     },
     "identityKeyErrorOnSend": {
-        "message": "Your safety number with $name$ has changed. This could either mean that someone is trying to intercept your communication or that $name$ has simply reinstalled Signal. You may wish to verify your safety number with this contact.",
+        "message": "Your safety number with $name$ has changed. This could either mean that someone is trying to intercept your communication or that $name$ has simply reinstalled OfficeApp. You may wish to verify your safety number with this contact.",
         "description": "Shown when user clicks on a failed recipient in the message detail view after an identity key change",
         "placeholders": {
             "name": {
@@ -454,7 +454,7 @@
         "description": "Header for a key change dialog"
     },
     "identityChanged": {
-        "message": "Your safety number with this contact has changed. This could either mean that someone is trying to intercept your communication, or this contact simply reinstalled Signal. You may wish to verify the new safety number below."
+        "message": "Your safety number with this contact has changed. This could either mean that someone is trying to intercept your communication, or this contact simply reinstalled OfficeApp. You may wish to verify the new safety number below."
     },
     "incomingError": {
         "message": "Error handling incoming message"
@@ -513,11 +513,11 @@
     },
     "loadingPreview": {
         "message": "Loading Preview...",
-        "description": "Shown while Signal Desktop is fetching metadata for a url in composition area"
+        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area"
     },
     "stagedPreviewThumbnail": {
         "message": "Draft thumbnail link preview for $domain$",
-        "description": "Shown while Signal Desktop is fetching metadata for a url in composition area",
+        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area",
         "placeholders": {
             "path": {
                 "content": "$1",
@@ -527,7 +527,7 @@
     },
     "previewThumbnail": {
         "message": "Thumbnail link preview for $domain$",
-        "description": "Shown while Signal Desktop is fetching metadata for a url in composition area",
+        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area",
         "placeholders": {
             "path": {
                 "content": "$1",
@@ -613,11 +613,11 @@
         "description": "Item under the Help menu, takes you to GitHub new issue form (title case)"
     },
     "signalDesktopPreferences": {
-        "message": "Signal Desktop Preferences",
-        "description": "Title of the window that pops up with Signal Desktop preferences in it"
+        "message": "OfficeApp Desktop Preferences",
+        "description": "Title of the window that pops up with OfficeApp Desktop preferences in it"
     },
     "aboutSignalDesktop": {
-        "message": "About Signal Desktop",
+        "message": "About OfficeApp Desktop",
         "description": "Item under the Help menu, which opens a small about window"
     },
     "speech": {
@@ -637,7 +637,7 @@
         "description": "Command in the tray icon menu, to quit the application"
     },
     "signalDesktop": {
-        "message": "Signal Desktop",
+        "message": "OfficeApp Desktop",
         "description": "Tooltip for the tray icon"
     },
     "search": {
@@ -667,7 +667,7 @@
         "description": "Shown to separate the types of search results"
     },
     "welcomeToSignal": {
-        "message": "Welcome to Signal"
+        "message": "Welcome to OfficeApp"
     },
     "selectAContact": {
         "message": "Select a contact or group to start chatting."
@@ -761,7 +761,7 @@
         }
     },
     "audioPermissionNeeded": {
-        "message": "To send audio messages, allow Signal Desktop to access your microphone.",
+        "message": "To send audio messages, allow OfficeApp Desktop to access your microphone.",
         "description": "Shown if the user attempts to send an audio message without audio permssions turned on"
     },
     "allowAccess": {
@@ -789,11 +789,11 @@
         "description": "Shown as the title of our update error dialogs on windows"
     },
     "cannotUpdateDetail": {
-        "message": "Signal Desktop failed to update, but there is a new version available. Please go to https://signal.org/download and install the new version manually, then either contact support or file a bug about this problem.",
+        "message": "OfficeApp Desktop failed to update, but there is a new version available. Please go to https://signal.org/download and install the new version manually, then either contact support or file a bug about this problem.",
         "description": "Shown if a general error happened while trying to install update package"
     },
     "readOnlyVolume": {
-        "message": "Signal Desktop is likely in a macOS quarantine, and will not be able to auto-update. Please try moving Signal.app to /Applications with Finder.",
+        "message": "OfficeApp Desktop is likely in a macOS quarantine, and will not be able to auto-update. Please try moving OfficeApp.app to /Applications with Finder.",
         "description": "Shown on MacOS if running on a read-only volume and we cannot update"
     },
     "ok": {
@@ -926,32 +926,32 @@
         "description": "Used in the media gallery documents tab to visually represent a file"
     },
     "installWelcome": {
-        "message": "Welcome to Signal Desktop",
+        "message": "Welcome to OfficeApp Desktop",
         "description": "Welcome title on the install page"
     },
     "installTagline": {
-        "message": "Privacy is possible. Signal makes it easy.",
+        "message": "Privacy is possible. OfficeApp makes it easy.",
         "description": "Tagline displayed under 'installWelcome' string on the install page"
     },
     "linkYourPhone": {
-        "message": "Link your phone to Signal Desktop",
+        "message": "Link your phone to OfficeApp Desktop",
         "description": "Shown on the front page when the application first starst, above the QR code"
     },
     "signalSettings": {
-        "message": "Signal Settings",
-        "description": "Used in the guidance to help people find the 'link new device' area of their Signal mobile app"
+        "message": "OfficeApp Settings",
+        "description": "Used in the guidance to help people find the 'link new device' area of their OfficeApp mobile app"
     },
     "linkedDevices": {
         "message": "Linked Devices",
-        "description": "Used in the guidance to help people find the 'link new device' area of their Signal mobile app"
+        "description": "Used in the guidance to help people find the 'link new device' area of their OfficeApp mobile app"
     },
     "plusButton": {
         "message": "'+' Button",
-        "description": "The button used in Signal Android to add a new linked device"
+        "description": "The button used in OfficeApp Android to add a new linked device"
     },
     "linkNewDevice": {
         "message": "Link New Device",
-        "description": "The menu option shown in Signal iOS to add a new linked device"
+        "description": "The menu option shown in OfficeApp iOS to add a new linked device"
     },
     "deviceName": {
         "message": "Device name",
@@ -1089,7 +1089,7 @@
         "description": "Text that links to a support article on verifying safety numbers"
     },
     "expiredWarning": {
-        "message": "This version of Signal Desktop has expired. Please upgrade to the latest version to continue messaging.",
+        "message": "This version of OfficeApp Desktop has expired. Please upgrade to the latest version to continue messaging.",
         "description": "Warning notification that this version of the app has expired"
     },
     "upgrade": {
@@ -1109,7 +1109,7 @@
         "description": "Label for contact and group sync settings"
     },
     "syncExplanation": {
-        "message": "Import all Signal groups and contacts from your mobile device.",
+        "message": "Import all OfficeApp groups and contacts from your mobile device.",
         "description": "Explanatory text for sync settings"
     },
     "lastSynced": {
@@ -1427,7 +1427,7 @@
         "description": "When a person inputs a number that is invalid"
     },
     "unlinkedWarning": {
-        "message": "Relink Signal Desktop to your mobile device to continue messaging."
+        "message": "Relink OfficeApp Desktop to your mobile device to continue messaging."
     },
     "unlinked": {
         "message": "Unlinked"
@@ -1436,16 +1436,16 @@
         "message": "Relink"
     },
     "autoUpdateNewVersionTitle": {
-        "message": "Signal update available"
+        "message": "OfficeApp update available"
     },
     "autoUpdateNewVersionMessage": {
-        "message": "There is a new version of Signal available."
+        "message": "There is a new version of OfficeApp available."
     },
     "autoUpdateNewVersionInstructions": {
-        "message": "Press Restart Signal to apply the updates."
+        "message": "Press Restart OfficeApp to apply the updates."
     },
     "autoUpdateRestartButtonLabel": {
-        "message": "Restart Signal"
+        "message": "Restart OfficeApp"
     },
     "autoUpdateLaterButtonLabel": {
         "message": "Later"
@@ -1529,11 +1529,11 @@
         "description": "Shown in the sticker pack manager when you don't have any installed sticker packs."
     },
     "stickers--StickerManager--BlessedPacks": {
-        "message": "Signal Artist Series",
+        "message": "OfficeApp Artist Series",
         "description": "Shown in the sticker pack manager above the default sticker packs."
     },
     "stickers--StickerManager--BlessedPacks--Empty": {
-        "message": "No Signal Artist stickers available",
+        "message": "No OfficeApp Artist stickers available",
         "description": "Shown in the sticker pack manager when there are no blessed sticker packs available."
     },
     "stickers--StickerManager--ReceivedPacks": {
@@ -1558,11 +1558,11 @@
     },
     "stickers--StickerManager--Introduction--Title": {
         "message": "Introducing Stickers",
-        "description": "Shown as the title on a tooltip when the user upgrades to a version of Signal supporting stickers."
+        "description": "Shown as the title on a tooltip when the user upgrades to a version of OfficeApp supporting stickers."
     },
     "stickers--StickerManager--Introduction--Body": {
         "message": "Why use words when you can use stickers?",
-        "description": "Shown as the body on a tooltip when the user upgrades to a version of Signal supporting stickers."
+        "description": "Shown as the body on a tooltip when the user upgrades to a version of OfficeApp supporting stickers."
     },
     "stickers--StickerPicker--DownloadError": {
         "message": "Some stickers could not be downloaded.",
@@ -1619,7 +1619,7 @@
         "description": "Appears on the cancel button in confirmation dialogs."
     },
     "Message--unsupported-message": {
-        "message": "$contact$ sent you a message that can't be processed or displayed because it uses a new Signal feature.",
+        "message": "$contact$ sent you a message that can't be processed or displayed because it uses a new OfficeApp feature.",
         "placeholders": {
             "contact": {
                 "content": "$1",
@@ -1628,7 +1628,7 @@
         }
     },
     "Message--unsupported-message-ask-to-resend": {
-        "message": "You can ask $contact$ to re-send this message now that you are using an up-to-date version of Signal.",
+        "message": "You can ask $contact$ to re-send this message now that you are using an up-to-date version of OfficeApp.",
         "placeholders": {
             "contact": {
                 "content": "$1",
@@ -1637,14 +1637,14 @@
         }
     },
     "Message--from-me-unsupported-message": {
-        "message": "One of your devices sent a message that can't be processed or displayed because it uses a new Signal feature."
+        "message": "One of your devices sent a message that can't be processed or displayed because it uses a new OfficeApp feature."
     },
     "Message--from-me-unsupported-message-ask-to-resend": {
-        "message": "Future messages like this will be synchronized now that you are using an up-to-date version of Signal."
+        "message": "Future messages like this will be synchronized now that you are using an up-to-date version of OfficeApp."
     },
     "Message--update-signal": {
-        "message": "Update Signal",
-        "description": "Text for a button which will take user to Signal download page"
+        "message": "Update OfficeApp",
+        "description": "Text for a button which will take user to OfficeApp download page"
     },
     "Message--tap-to-view-expired": {
         "message": "Viewed",

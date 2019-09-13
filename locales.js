@@ -80,9 +80,26 @@ const del = async () => {
   });
 }
 
+const replace = async () => {
+  const text = await get_line("Enter text to replace");
+  const repl = await get_line("Enter replacement");
+  const regex = new RegExp(text, 'g');
+  const replacer = (str) => {
+    if (!str || str.indexOf(text) === -1) return str;
+    return str.replace(regex, repl);
+  }
+  Object.keys(locales).forEach(locale => {
+    Object.keys(locales[locale]).forEach(key => {
+      locales[locale][key].message = replacer(locales[locale][key].message);
+      locales[locale][key].description = replacer(locales[locale][key].description);
+    })
+  })
+}
+
 const actions = {
   add,
   del,
+  replace,
   save: saveLocales,
   quit() {
     process.exit();
@@ -92,7 +109,7 @@ const actions = {
 const main_loop = async () => {
   await loadLocales();
   while (true) {
-    const action = await get_line("Enter action [add|edit|remove|quit]");
+    const action = await get_line(`Enter action [${Object.keys(actions).join('|')}]`);
     try {
       if (actions[action]) {
         await actions[action]();
