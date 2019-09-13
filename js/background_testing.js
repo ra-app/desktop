@@ -3,19 +3,20 @@
 
 // Testing Playground
 document.addEventListener('DOMContentLoaded', async () => {
-  // await ensureCompanyConversation('000000', 'Mega Corporate');
-  // await ensureCompanyConversation('000001', "Boris's Great Solutions");
-  
   await waitForConversationController(); // Ensure we are ready for things.
 
   // exampleInfo.name += ' V' + Math.floor(Math.random() * 100);
   // await createCompany(exampleInfo);
 
+  // await addAllCompanies();
+});
+
+const addAllCompanies = async () => {
   const companies = await getAllCompanies();
   companies.forEach(async (company) => {
     return ensureCompanyConversation(company.company_number);
   });
-});
+};
 
 // ===
 
