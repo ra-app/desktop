@@ -206,7 +206,6 @@
     "win": {
       "asarUnpack": "node_modules/spellchecker/vendor/hunspell_dictionaries",
       "artifactName": "${name}-win-${version}.${ext}",
-      "certificateSubjectName": "OfficeApp",
       "publisherName": "RA-Micro",
       "icon": "build/icons/win/icon.ico",
       "publish": [
