@@ -1,3 +1,5 @@
+/* eslint strict: ["error", "global"] */
+
 'use strict';
 
 // Testing Playground
@@ -15,7 +17,7 @@ const API_URL = 'https://luydm9sd26.execute-api.eu-central-1.amazonaws.com/lates
 // Receives messages to send from conversations.js switchcase.
 async function sendCompanyMessage(destination, messageBody, finalAttachments, quote, preview, sticker, now, expireTimer, profileKey, options) {
   const messageInfo = { destination, messageBody, finalAttachments, quote, preview, sticker, now };
-  
+
   inboxMessage(messageInfo);
 
   return { sent_to: destination };
@@ -51,9 +53,9 @@ function receiveCompanyMessage(data) {
       type: 'incoming',
       unread: 1,
     });
-    
+
     console.log('receiveCompanyMessage', data, message);
-    
+
     // const message = await initIncomingMessage(data);
     await ConversationController.getOrCreateAndWait(data.source, 'company');
     return message.handleDataMessage(data.message, resolve, {

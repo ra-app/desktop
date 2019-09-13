@@ -219,7 +219,7 @@ function createWindow() {
       backgroundColor:
         config.environment === 'test' || config.environment === 'test-lib'
           ? '#ffffff' // Tests should always be rendered on a white background
-          : '#2090EA',
+          : '#f5f5f5', // '#2090EA',
       webPreferences: {
         nodeIntegration: false,
         nodeIntegrationInWorker: false,
@@ -470,7 +470,7 @@ function showAbout() {
     resizable: false,
     title: locale.messages.aboutSignalDesktop.message,
     autoHideMenuBar: true,
-    backgroundColor: '#2090EA',
+    backgroundColor: '#f5f5f5', // '#2090EA',
     show: false,
     webPreferences: {
       nodeIntegration: false,

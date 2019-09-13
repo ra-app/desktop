@@ -1,4 +1,4 @@
-/* global Whisper, i18n, getAccountManager, $, textsecure, QRCode */
+/* global Whisper, i18n, getAccountManager, $, _, textsecure, QRCode */
 
 /* eslint-disable more/no-then */
 
@@ -55,54 +55,6 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       'click #bank-details-skip': 'onBankDetailsSkip',
       'click #contact-import-done': 'onContactImportDone',
       'click #contact-import-skip': 'onContactImportSkip',
-    },
-    onSetupCompleted() {
-      const company = textsecure.storage.get('companySetupInfo', null);
-      const user = textsecure.storage.get('userSetupInfo', null);
-      const bank = textsecure.storage.get('bankSetupInfo', null);
-      console.log('setupCompleted', company, user, bank);
-      this.$el.trigger('openInbox');
-    },
-    onContactImportDone() {
-      this.onSetupCompleted();
-    },
-    onContactImportSkip() {
-      this.onSetupCompleted();
-    },
-    onCompanyProfileDone() {
-      const company = {
-        name: this.$('#company-name-input').val(),
-        taxNumber: this.$('#tax-number-input').val(),
-        taxID: this.$('#tax-id-input').val(),
-        registerID: this.$('#company-register-id-input').val(),
-        imprint: this.$('#imprint-input').val(),
-        branch: this.$('#branch-select').val(),
-      }
-      textsecure.storage.put('companySetupInfo', company).then(() => {
-        this.selectStep(Steps.SETUP_USER_PROFILE);
-      });
-    },
-    onUserProfileDone() {
-      const profile = {
-        name: this.$('#user-name-input').val(),
-      };
-      textsecure.storage.put('userSetupInfo', profile).then(() => {
-        this.selectStep(this.setupType === 'admin' ? Steps.SETUP_CONTACT_IMPORT : Steps.SETUP_COMPANY_BANK);
-      });
-    },
-    onBankDetailsDone() {
-      const bank = {
-        iban: this.$('#bank-iban-input').val(),
-        bic: this.$('#bank-bic-input').val(),
-      };
-      textsecure.storage.put('bankSetupInfo', bank).then(() => {
-        this.selectStep(Steps.SETUP_CONTACT_IMPORT);
-      });
-    },
-    onBankDetailsSkip() {
-      textsecure.storage.remove('bankSetupInfo').then(() => {
-        this.selectStep(Steps.SETUP_CONTACT_IMPORT);
-      });
     },
     initialize(options = {}) {
       this.accountManager = getAccountManager();
@@ -168,6 +120,72 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         this.phoneView = null;
       }
     },
+    async onSetupCompleted() {
+      const phone = textsecure.storage.user.getNumber();
+      const user = textsecure.storage.get('userSetupInfo', null);
+
+      const data = {phone, user};
+      if (this.setupType === 'company') {
+        data.company = textsecure.storage.get('companySetupInfo', null);
+        data.bank = textsecure.storage.get('bankSetupInfo', null);
+      }
+      console.log(data);
+
+      try {
+        // const response = await apiRequest('register/complete', data);
+        const response = {success: true};
+        if (!response.success) throw new Error(`Error registering: ${response.error}`);
+        await Promise.all([
+          textsecure.storage.put('registerDone', true),
+          textsecure.storage.remove('companySetupInfo'),
+          textsecure.storage.remove('userSetupInfo'),
+          textsecure.storage.remove('bankSetupInfo'),
+          textsecure.storage.remove('setupType'),
+        ])
+        console.log('setupCompleted', data);
+        window.removeSetupMenuItems();
+        this.$el.trigger('openInbox');
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    onContactImportDone() {
+      this.onSetupCompleted();
+    },
+    onContactImportSkip() {
+      this.onSetupCompleted();
+    },
+    async onCompanyProfileDone() {
+      const company = {
+        name: this.$('#company-name-input').val(),
+        taxNumber: this.$('#tax-number-input').val(),
+        taxID: this.$('#tax-id-input').val(),
+        registerID: this.$('#company-register-id-input').val(),
+        imprint: this.$('#imprint-input').val(),
+        branch: this.$('#branch-select').val(),
+      }
+      await textsecure.storage.put('companySetupInfo', company);
+      this.selectStep(Steps.SETUP_USER_PROFILE);
+    },
+    async onUserProfileDone() {
+      const profile = {
+        name: this.$('#user-name-input').val(),
+      };
+      await textsecure.storage.put('userSetupInfo', profile);
+      this.selectStep(this.setupType === 'admin' ? Steps.SETUP_CONTACT_IMPORT : Steps.SETUP_COMPANY_BANK);
+    },
+    async onBankDetailsDone() {
+      const bank = {
+        iban: this.$('#bank-iban-input').val(),
+        bic: this.$('#bank-bic-input').val(),
+      };
+      await textsecure.storage.put('bankSetupInfo', bank);
+      this.selectStep(Steps.SETUP_CONTACT_IMPORT);
+    },
+    async onBankDetailsSkip() {
+      await textsecure.storage.remove('bankSetupInfo');
+      this.selectStep(Steps.SETUP_CONTACT_IMPORT);
+    },
     onRequestVerifyCall() {
       const number = this.phoneView.validateNumber();
       if (number) {
@@ -184,18 +202,16 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         });
       }
     },
-    onCompanySetup() {
+    async onCompanySetup() {
       this.setupType = 'company';
-      textsecure.storage.put('setupType', this.setupType).then(() => {
-        this.selectStep(Steps.SETUP_PHONE);
-      });
+      await textsecure.storage.put('setupType', this.setupType);
+      this.selectStep(Steps.SETUP_PHONE);
     },
-    onAdminSetup() {
+    async onAdminSetup() {
       // TODO: check code is present & valid
       this.setupType = 'admin';
-      textsecure.storage.put('setupType', this.setupType).then(() => {
-        this.selectStep(Steps.SETUP_PHONE);
-      });
+      await textsecure.storage.put('setupType', this.setupType)
+      this.selectStep(Steps.SETUP_PHONE);
     },
     onVerifyPhone() {
       // TODO: check phone verification code

@@ -577,7 +577,6 @@
   Whisper.events.on('setupAsNewDevice', () => {
     const { appView } = window.owsDesktopApp;
     if (appView) {
-      console.log('!!!!!!!!!!!!!!!!!!!openInstaller setupAsNewDevice!!!!!!!!!!!!!!');
       appView.openInstaller();
     }
   });
@@ -663,10 +662,11 @@
     Whisper.ExpiringMessagesListener.init(Whisper.events);
     Whisper.TapToViewMessagesListener.init(Whisper.events);
 
-    if (false && Whisper.Import.isIncomplete()) {
+    const registerDone = textsecure.storage.get('registerDone', false);
+    if (registerDone && Whisper.Import.isIncomplete()) {
       window.log.info('Import was interrupted, showing import error screen');
       appView.openImporter();
-    } else if (false && Whisper.Registration.everDone()) {
+    } else if (registerDone && Whisper.Registration.everDone()) {
       // listeners
       Whisper.RotateSignedPreKeyListener.init(Whisper.events, newVersion);
       window.Signal.RefreshSenderCertificate.initialize({
@@ -680,10 +680,9 @@
       appView.openInbox({
         initialLoadComplete,
       });
-    } else if (false && window.isImportMode()) {
+    } else if (registerDone && window.isImportMode()) {
       appView.openImporter();
     } else {
-      console.log('?????????????????openInstaller background????????????????');
       appView.openInstaller();
     }
 
