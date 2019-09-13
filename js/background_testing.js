@@ -4,8 +4,18 @@
 
 // Testing Playground
 document.addEventListener('DOMContentLoaded', async () => {
-  await ensureCompanyConversation('0000000', 'Mega Corporate');
-  await ensureCompanyConversation('0000001', "Boris's Great Solutions");
+  // await ensureCompanyConversation('000000', 'Mega Corporate');
+  // await ensureCompanyConversation('000001', "Boris's Great Solutions");
+
+  await waitForConversationController(); // Ensure we are ready for things.
+
+  // exampleInfo.name += ' V' + Math.floor(Math.random() * 100);
+  // await createCompany(exampleInfo);
+
+  const companies = await getAllCompanies();
+  companies.forEach(async (company) => {
+    return ensureCompanyConversation(company.company_number);
+  });
 });
 
 // ===
@@ -23,22 +33,27 @@ async function sendCompanyMessage(destination, messageBody, finalAttachments, qu
   return { sent_to: destination };
 }
 
+// let retryQueue = [];
+
 async function inboxMessage(messageInfo) {
   console.log('inboxMessage -- MessageInfo:', messageInfo);
   const response = await apiRequest('api/inbox', messageInfo);
   console.log('inboxMessage -- response:', response);
 
-  const data = {
-    source: messageInfo.destination,
-    sourceDevice: 1,
-    sent_at: Date.now(),
-    conversationId: messageInfo.destination,
-    message: {
-      body: response.text,
-    },
-  };
-
-  return receiveCompanyMessage(data);
+  if (response && response.success) {
+    const data = {
+      source: messageInfo.destination,
+      sourceDevice: 1,
+      sent_at: Date.now(),
+      conversationId: messageInfo.destination,
+      message: {
+        body: response.text,
+      },
+    };
+    return receiveCompanyMessage(data);
+  } else {
+    console.error('inboxMessage', response);
+  }
 }
 
 function receiveCompanyMessage(data) {
@@ -65,26 +80,27 @@ function receiveCompanyMessage(data) {
 }
 
 // Create company conversation if missing.
-const ensureCompanyConversation = async (company_id, company_name) => {
+const ensureCompanyConversation = async (company_id) => {
   await waitForConversationController();
-  console.log('ensureCompanyConversation', company_id, company_name);
+  console.log('ensureCompanyConversation', company_id);
   let conversation = await ConversationController.get(company_id, 'company');
   if (conversation && conversation.get('active_at')) {
     console.log(
       'ensureCompanyConversation existing',
-      company_id,
-      company_name,
       conversation
     );
     return;
   }
 
+  const companyInfo = await getCompany(company_id);
+  if (!companyInfo) throw new Error('Company not found! ' + company_id);
+
   conversation = await ConversationController.getOrCreateAndWait(
     company_id,
     'company'
   );
-  conversation.set({ active_at: Date.now(), name: company_name });
-  console.log('ensureCompanyConversation new', company_id, conversation);
+  conversation.set({ active_at: Date.now(), name: companyInfo.name });
+  console.log('ensureCompanyConversation new', company_id, conversation, companyInfo);
 
   await window.Signal.Data.updateConversation(
     company_id,
@@ -154,3 +170,28 @@ const getAuth = async () => {
 const apiRequest = async (call, data = undefined) => {
   return xhrReq(API_URL + call, data, await getAuth());
 };
+
+const createCompany = async (info) => {
+  const res = await apiRequest('api/registercompany', info);
+  console.log('CreateCompany', info, res);
+  return res;
+};
+
+const getAllCompanies = async () => {
+  return (await apiRequest('api/getcompanyinfo')).companies;
+};
+
+const getCompany = async (number) => {
+  return (await apiRequest('api/getcompanyinfo/' + number)).company;
+};
+
+const exampleInfo = {
+  name: 'Mega Corporate',
+  business: 'Corporationing',
+  tax_number: '0xDEADBEEF',
+  tax_id: '0xDEADBEEF',
+  commercial_register: '0xDEADBEEF',
+  iban: '0xDEADBEEF',
+  bic: '0xDEADBEEF',
+};
+
