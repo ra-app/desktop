@@ -40,7 +40,7 @@ async function inboxMessage(messageInfo) {
   const response = await apiRequest('api/inbox', messageInfo);
   console.log('inboxMessage -- response:', response);
 
-  if (response && response.success) {
+  if (response && response.success && response.text) {
     const data = {
       source: messageInfo.destination,
       sourceDevice: 1,
