@@ -4,24 +4,23 @@
 
 // Testing Playground
 document.addEventListener('DOMContentLoaded', async () => {
-  // await ensureCompanyConversation('000000', 'Mega Corporate');
-  // await ensureCompanyConversation('000001', "Boris's Great Solutions");
-
   await waitForConversationController(); // Ensure we are ready for things.
 
   // exampleInfo.name += ' V' + Math.floor(Math.random() * 100);
   // await createCompany(exampleInfo);
 
+  // await addAllCompanies();
+
   const number = textsecure.storage.get('companyNumber', null);
   if (number) ensureCompanyConversation(number);
+});
 
-  /*
+const addAllCompanies = async () => {
   const companies = await getAllCompanies();
   companies.forEach(async (company) => {
     return ensureCompanyConversation(company.company_number);
   });
-  */
-});
+};
 
 // ===
 
@@ -46,19 +45,23 @@ async function inboxMessage(messageInfo) {
   console.log('inboxMessage -- response:', response);
 
   if (response && response.success && response.text) {
-    const data = {
-      source: messageInfo.destination,
-      sourceDevice: 1,
-      sent_at: Date.now(),
-      conversationId: messageInfo.destination,
-      message: {
-        body: response.text,
-      },
-    };
-    return receiveCompanyMessage(data);
+    await receiveCompanyText(messageInfo.destination, response.text);
   } else {
     console.error('inboxMessage', response);
   }
+}
+
+async function receiveCompanyText(source, text) {
+  const data = {
+    source: source,
+    sourceDevice: 1,
+    sent_at: Date.now(),
+    conversationId: source,
+    message: {
+      body: text,
+    },
+  };
+  return receiveCompanyMessage(data);
 }
 
 function receiveCompanyMessage(data) {
@@ -114,6 +117,9 @@ const ensureCompanyConversation = async (company_id) => {
       Conversation: Whisper.Conversation,
     }
   );
+
+  const welcomeText = `Welcome to ${companyInfo.name} support chat.`;
+  await receiveCompanyText(company_id, welcomeText);
 };
 
 // Crutch to ensure conversations controller is ready.
