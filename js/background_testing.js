@@ -12,10 +12,15 @@ document.addEventListener('DOMContentLoaded', async () => {
   // exampleInfo.name += ' V' + Math.floor(Math.random() * 100);
   // await createCompany(exampleInfo);
 
+  const number = textsecure.storage.get('companyNumber', null);
+  if (number) ensureCompanyConversation(number);
+
+  /*
   const companies = await getAllCompanies();
   companies.forEach(async (company) => {
     return ensureCompanyConversation(company.company_number);
   });
+  */
 });
 
 // ===

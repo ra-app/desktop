@@ -140,6 +140,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
             bic: bank ? bank.bic : null,
           });
           if (!result.success) throw new Error(result);
+          textsecure.storage.put('companyNumber', result.info.company_number);
           await ensureCompanyConversation(result.info.company_number);
         }
         await Promise.all([
