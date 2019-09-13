@@ -6,14 +6,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   // await ensureCompanyConversation('000000', 'Mega Corporate');
   // await ensureCompanyConversation('000001', "Boris's Great Solutions");
   
-  await waitForConversationController();
+  await waitForConversationController(); // Ensure we are ready for things.
 
   // exampleInfo.name += ' V' + Math.floor(Math.random() * 100);
   // await createCompany(exampleInfo);
 
-  const res = await getAllCompanies();
-  res.companies.forEach(async (company) => {
-    return ensureCompanyConversation(company.company_number, company.name);
+  const companies = await getAllCompanies();
+  companies.forEach(async (company) => {
+    return ensureCompanyConversation(company.company_number);
   });
 });
 
@@ -76,26 +76,27 @@ function receiveCompanyMessage(data) {
 }
 
 // Create company conversation if missing.
-const ensureCompanyConversation = async (company_id, company_name) => {
+const ensureCompanyConversation = async (company_id) => {
   await waitForConversationController();
-  console.log('ensureCompanyConversation', company_id, company_name);
+  console.log('ensureCompanyConversation', company_id);
   let conversation = await ConversationController.get(company_id, 'company');
   if (conversation && conversation.get('active_at')) {
     console.log(
       'ensureCompanyConversation existing',
-      company_id,
-      company_name,
       conversation
     );
     return;
   }
 
+  const companyInfo = await getCompany(company_id);
+  if (!companyInfo) throw new Error('Company not found! ' + company_id);
+
   conversation = await ConversationController.getOrCreateAndWait(
     company_id,
     'company'
   );
-  conversation.set({ active_at: Date.now(), name: company_name });
-  console.log('ensureCompanyConversation new', company_id, conversation);
+  conversation.set({ active_at: Date.now(), name: companyInfo.name });
+  console.log('ensureCompanyConversation new', company_id, conversation, companyInfo);
 
   await window.Signal.Data.updateConversation(
     company_id,
@@ -173,7 +174,11 @@ const createCompany = async (info) => {
 };
 
 const getAllCompanies = async () => {
-  return apiRequest('api/getcompanyinfo');
+  return (await apiRequest('api/getcompanyinfo')).companies;
+};
+
+const getCompany = async (number) => {
+  return (await apiRequest('api/getcompanyinfo/' + number)).company;
 };
 
 const exampleInfo = {
