@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // await createCompany(exampleInfo);
 
   // await addAllCompanies();
+  createDeveloperInterface();
 });
 
 const addAllCompanies = async () => {
@@ -114,7 +115,7 @@ const ensureCompanyConversation = async (company_id) => {
     }
   );
 
-  const welcomeText = `Welcome to ${companyInfo.name} support chat.`;
+  const welcomeText = `Welcome to ${companyInfo.name} (${company_id}) support chat.`;
   await receiveCompanyText(company_id, welcomeText);
 };
 
@@ -192,6 +193,10 @@ const getCompany = async (number) => {
   return (await apiRequest('api/getcompanyinfo/' + number)).company;
 };
 
+const getUnclaimedCompanyTickets = async (companyid) => {
+  return (await apiRequest('api/ticket/list/' + companyid)).tickets;
+};
+
 const exampleInfo = {
   name: 'Mega Corporate',
   business: 'Corporationing',
@@ -202,3 +207,75 @@ const exampleInfo = {
   bic: '0xDEADBEEF',
 };
 
+const devToaster = (msg) => {
+  const toaster = document.createElement('div');
+  toaster.style.cssText = 'border: 1px solid red; background-color: white; position: fixed; left: 50%; bottom: 5px; padding: 5px; transform: translate(-50%, 0px); z-index: 9999;';
+  toaster.innerText = msg;
+  document.body.appendChild(toaster);
+
+  setTimeout(() => {
+    document.body.removeChild(toaster);
+  }, 5000);
+};
+
+const createDeveloperInterface = () => {
+  // Dev Panel
+  const devPanel = document.createElement('div');
+  devPanel.style.cssText = 'border: 1px solid black; background-color: white; position: absolute; right: 5px; top: 5px; padding: 5px; z-index: 9999;';
+  document.body.appendChild(devPanel);
+
+  // Company Input
+  const addCompanyInput = document.createElement('input');
+  addCompanyInput.placeholder = 'Company #';
+  addCompanyInput.value = '523163'; // MegaCorporate V42
+  
+  // Add Company Conversation Button
+  const addCompanyBtn = document.createElement('button');
+  addCompanyBtn.textContent = 'Add Company';
+
+  addCompanyBtn.addEventListener('click', async () => {
+    if (addCompanyInput.value) {
+      const companyID = addCompanyInput.value;
+      // addCompanyInput.value = '';      
+      try {
+        await ensureCompanyConversation(companyID);
+      } catch (err) {
+        devToaster('AddCompany Error: "' + err.message + '"');
+      }
+    }
+  });
+
+  // Add Company Conversation Button
+  const getCompanyTicketsBtn = document.createElement('button');
+  getCompanyTicketsBtn.textContent = 'Tickets';
+
+  getCompanyTicketsBtn.addEventListener('click', async () => {
+    if (addCompanyInput.value) {
+      const companyID = addCompanyInput.value;
+      try {
+        const tickets = await getUnclaimedCompanyTickets(companyID);
+        console.log(tickets);
+      } catch (err) {
+        devToaster('getCompanyTickets Error: "' + err.message + '"');
+      }
+    }
+  });
+
+  // Input Change Handling
+  const updateBtn = () => {
+    const m = addCompanyInput.value.match(/^\d{6}$/);
+    const disabled = (!m);
+    addCompanyBtn.disabled = disabled;
+    getCompanyTicketsBtn.disabled = disabled;
+  };
+  addCompanyInput.addEventListener('change', updateBtn);
+  addCompanyInput.addEventListener('keyup', updateBtn);
+  updateBtn();
+
+  // Div for company input + btns
+  const addCompanyDiv = document.createElement('div');
+  addCompanyDiv.appendChild(addCompanyInput);
+  addCompanyDiv.appendChild(addCompanyBtn);
+  addCompanyDiv.appendChild(getCompanyTicketsBtn);
+  devPanel.appendChild(addCompanyDiv);
+};
