@@ -45,6 +45,9 @@ async function inboxMessage(messageInfo) {
     await receiveCompanyText(messageInfo.destination, response.text);
   } else {
     console.error('inboxMessage', response);
+    if (!response.success && response.error) {
+      devToaster('inboxMessage Error: ' + response.error);
+    }
   }
 }
 
