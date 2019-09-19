@@ -5,8 +5,8 @@
 document.addEventListener('DOMContentLoaded', async () => {
   await waitForConversationController(); // Ensure we are ready for things.
 
-  exampleInfo.name += ' V42'; // + Math.floor(Math.random() * 100);
-  await createCompany(exampleInfo);
+  // exampleInfo.name += ' V42'; // + Math.floor(Math.random() * 100);
+  // await createCompany(exampleInfo);
 
   // await addAllCompanies();
   createDeveloperInterface();
@@ -122,6 +122,34 @@ const ensureCompanyConversation = async (company_id) => {
   await receiveCompanyText(company_id, welcomeText);
 };
 
+const ensureConversation = async (phone_number) => {
+  await waitForConversationController();
+  console.log('ensureConversation', phone_number);
+  let conversation = await ConversationController.get(phone_number, 'private');
+  if (conversation && conversation.get('active_at')) {
+    console.log(
+      'ensureConversation existing',
+      conversation
+    );
+    return;
+  }
+
+  conversation = await ConversationController.getOrCreateAndWait(
+    phone_number,
+    'private'
+  );
+  conversation.set({ active_at: Date.now() });
+  console.log('ensureConversation new', phone_number, conversation);
+
+  await window.Signal.Data.updateConversation(
+    phone_number,
+    conversation.attributes,
+    {
+      Conversation: Whisper.Conversation,
+    }
+  );
+};
+
 // Crutch to ensure conversations controller is ready.
 const waitForConversationController = () => {
   const initialPromise = ConversationController.loadPromise();
@@ -179,7 +207,10 @@ const getAuth = async () => {
 }
 
 const apiRequest = async (call, data = undefined) => {
-  return xhrReq(API_URL + call, data, await getAuth());
+  const res = await xhrReq(API_URL + call, data, await getAuth());
+  if (!res.success && res.error) throw new Error('Request Failed! ' + res.error);
+  if (!res.success) throw new Error('Request Failed!');
+  return res;
 };
 
 const createCompany = async (info) => {
@@ -202,6 +233,10 @@ const getUnclaimedCompanyTickets = async (companyid) => {
 
 const getTicketDetails = async (ticket_uuid) => {
   return (await apiRequest('api/ticket/details/' + ticket_uuid)).details;
+};
+
+const claimTicket = async (ticket_uuid) => {
+  return (await apiRequest('api/ticket/claim/' + ticket_uuid)).phone_number;
 };
 
 const exampleInfo = {
@@ -255,7 +290,7 @@ const createDeveloperInterface = () => {
   // Ticket Display
   const ticketsList = document.createElement('ul');
 
-  // Add Company Conversation Button
+  // Tickets Button
   const getCompanyTicketsBtn = document.createElement('button');
   getCompanyTicketsBtn.textContent = 'Tickets';
 
@@ -276,8 +311,11 @@ const createDeveloperInterface = () => {
 
           const detailsList = document.createElement('ul');
           const infoBtn = document.createElement('button');
+          const claimBtn = document.createElement('button');
+          ticketItem.appendChild(claimBtn);
           ticketItem.appendChild(infoBtn);
           ticketItem.appendChild(detailsList);
+          claimBtn.innerText = 'Claim';
           infoBtn.innerText = 'Info';
           infoBtn.addEventListener('click', async () => {
             detailsList.innerText = '';
@@ -290,6 +328,12 @@ const createDeveloperInterface = () => {
               detailsListItem.innerText = event.id + ' ' + event.type + ' ' + event.json;
               detailsList.appendChild(detailsListItem);
             }
+          });
+          claimBtn.addEventListener('click', async () => {
+            const phone_number = await claimTicket(ticket.uuid);
+            console.log(phone_number);
+            await ensureConversation(phone_number);
+            getCompanyTicketsBtn.click();
           });
         }
       } catch (err) {
