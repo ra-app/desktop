@@ -12,27 +12,49 @@ document.addEventListener('DOMContentLoaded', async () => {
   // await addAllCompanies();
 
   const number = textsecure.storage.get('companyNumber', null);
-  if (number) ensureCompanyConversation(number);
-  
-  createDeveloperInterface();
+  if (number) await ensureCompanyConversation(number);
+
+  setInterval(() => {
+    createDeveloperInterface();
+  }, 1000);
 });
 
 const addAllCompanies = async () => {
   const companies = await getAllCompanies();
-  companies.forEach(async (company) => {
+  companies.forEach(async company => {
     return ensureCompanyConversation(company.company_number);
   });
 };
 
 // ===
 
-const API_URL = 'https://luydm9sd26.execute-api.eu-central-1.amazonaws.com/latest/';
+const API_URL =
+  'https://luydm9sd26.execute-api.eu-central-1.amazonaws.com/latest/';
 
 // XXX: Queue for sent messages, sent/received/seen indicators, error handling!
 
 // Receives messages to send from conversations.js switchcase.
-async function sendCompanyMessage(destination, messageBody, finalAttachments, quote, preview, sticker, now, expireTimer, profileKey, options) {
-  const messageInfo = { destination, messageBody, finalAttachments, quote, preview, sticker, now };
+async function sendCompanyMessage(
+  destination,
+  messageBody,
+  finalAttachments,
+  quote,
+  preview,
+  sticker,
+  now,
+  expireTimer,
+  profileKey,
+  options
+) {
+  const messageInfo = {
+    destination,
+    messageBody,
+    finalAttachments,
+    quote,
+    preview,
+    sticker,
+    now,
+  };
 
   inboxMessage(messageInfo);
 
@@ -70,7 +92,7 @@ async function receiveCompanyText(source, text) {
 }
 
 function receiveCompanyMessage(data) {
-  return new Promise(async (resolve) => {
+  return new Promise(async resolve => {
     const message = new Whisper.Message({
       source: data.source,
       sourceDevice: data.sourceDevice || 1,
@@ -89,19 +111,16 @@ function receiveCompanyMessage(data) {
     return message.handleDataMessage(data.message, resolve, {
       initialLoadComplete: true,
     });
-  })
+  });
 }
 
 // Create company conversation if missing.
-const ensureCompanyConversation = async (company_id) => {
+const ensureCompanyConversation = async company_id => {
   await waitForConversationController();
   console.log('ensureCompanyConversation', company_id);
   let conversation = await ConversationController.get(company_id, 'company');
   if (conversation && conversation.get('active_at')) {
-    console.log(
-      'ensureCompanyConversation existing',
-      conversation
-    );
+    console.log('ensureCompanyConversation existing', conversation);
     return;
   }
 
@@ -113,7 +132,12 @@ const ensureCompanyConversation = async (company_id) => {
     'company'
   );
   conversation.set({ active_at: Date.now(), name: companyInfo.name });
-  console.log('ensureCompanyConversation new', company_id, conversation, companyInfo);
+  console.log(
+    'ensureCompanyConversation new',
+    company_id,
+    conversation,
+    companyInfo
+  );
 
   await window.Signal.Data.updateConversation(
     company_id,
@@ -123,19 +147,18 @@ const ensureCompanyConversation = async (company_id) => {
     }
   );
 
-  const welcomeText = `Welcome to ${companyInfo.name} (${company_id}) support chat.`;
+  const welcomeText = `Welcome to ${
+    companyInfo.name
+  } (${company_id}) support chat.`;
   await receiveCompanyText(company_id, welcomeText);
 };
 
-const ensureConversation = async (phone_number) => {
+const ensureConversation = async phone_number => {
   await waitForConversationController();
   console.log('ensureConversation', phone_number);
   let conversation = await ConversationController.get(phone_number, 'private');
   if (conversation && conversation.get('active_at')) {
-    console.log(
-      'ensureConversation existing',
-      conversation
-    );
+    console.log('ensureConversation existing', conversation);
     return;
   }
 
@@ -183,16 +206,27 @@ const xhrReq = (url, postdata, authHeader) => {
           }
         } else {
           console.warn('xhrReq BadStatus', req.status, req.response);
-          reject(new Error('Network request returned bad status: ' + req.status + ' ' + req.response));
+          reject(
+            new Error(
+              'Network request returned bad status: ' +
+                req.status +
+                ' ' +
+                req.response
+            )
+          );
         }
       } catch (err) {
         reject(err);
       }
     };
-    req.onerror = (event) => {
+    req.onerror = event => {
       if (event.target.status === 0) {
         console.warn('xhrReq onerror (status 0):', event);
-        reject(new Error('Unexpected failure in network request. Please check your network connection.'));
+        reject(
+          new Error(
+            'Unexpected failure in network request. Please check your network connection.'
+          )
+        );
       }
     };
     req.open(postdata ? 'POST' : 'GET', url, true);
@@ -209,16 +243,17 @@ const getAuth = async () => {
   const PASSWORD = window.storage.get('password');
   const auth = btoa(`${USERNAME}:${PASSWORD}`);
   return `Basic ${auth}`;
-}
+};
 
 const apiRequest = async (call, data = undefined) => {
   const res = await xhrReq(API_URL + call, data, await getAuth());
-  if (!res.success && res.error) throw new Error('Request Failed! ' + res.error);
+  if (!res.success && res.error)
+    throw new Error('Request Failed! ' + res.error);
   if (!res.success) throw new Error('Request Failed!');
   return res;
 };
 
-const createCompany = async (info) => {
+const createCompany = async info => {
   const res = await apiRequest('api/registercompany', info);
   console.log('CreateCompany', info, res);
   return res;
@@ -228,19 +263,19 @@ const getAllCompanies = async () => {
   return (await apiRequest('api/getcompanyinfo')).companies;
 };
 
-const getCompany = async (number) => {
+const getCompany = async number => {
   return (await apiRequest('api/getcompanyinfo/' + number)).company;
 };
 
-const getUnclaimedCompanyTickets = async (companyid) => {
+const getUnclaimedCompanyTickets = async companyid => {
   return (await apiRequest('api/ticket/list/' + companyid)).tickets;
 };
 
-const getTicketDetails = async (ticket_uuid) => {
+const getTicketDetails = async ticket_uuid => {
   return (await apiRequest('api/ticket/details/' + ticket_uuid)).details;
 };
 
-const claimTicket = async (ticket_uuid) => {
+const claimTicket = async ticket_uuid => {
   return (await apiRequest('api/ticket/claim/' + ticket_uuid)).phone_number;
 };
 
@@ -254,9 +289,10 @@ const exampleInfo = {
   bic: '0xDEADBEEF',
 };
 
-const devToaster = (msg) => {
+const devToaster = msg => {
   const toaster = document.createElement('div');
-  toaster.style.cssText = 'border: 1px solid red; background-color: white; position: fixed; left: 50%; bottom: 5px; padding: 5px; transform: translate(-50%, 0px); z-index: 9999;';
+  toaster.style.cssText =
+    'border: 1px solid red; background-color: white; position: fixed; left: 50%; bottom: 5px; padding: 5px; transform: translate(-50%, 0px); z-index: 9999;';
   toaster.innerText = msg;
   document.body.appendChild(toaster);
 
@@ -266,16 +302,22 @@ const devToaster = (msg) => {
 };
 
 const createDeveloperInterface = () => {
+  const existingPanel = document.getElementById('devPanel');
+  if (existingPanel) return;
+  console.log('createDeveloperInterface');
+
   // Dev Panel
   const devPanel = document.createElement('div');
-  devPanel.style.cssText = 'border: 1px solid black; background-color: white; position: absolute; right: 5px; top: 50px; padding: 5px; z-index: 9999;';
+  devPanel.id = 'devPanel';
+  devPanel.style.cssText =
+    'border: 1px solid black; background-color: white; position: absolute; right: 5px; top: 50px; padding: 5px; z-index: 9999;';
   document.body.appendChild(devPanel);
 
   // Company Input
   const addCompanyInput = document.createElement('input');
   addCompanyInput.placeholder = 'Company #';
   addCompanyInput.value = '675728'; // MegaCorporate V42
-  
+
   // Add Company Conversation Button
   const addCompanyBtn = document.createElement('button');
   addCompanyBtn.textContent = 'Add Company';
@@ -283,7 +325,7 @@ const createDeveloperInterface = () => {
   addCompanyBtn.addEventListener('click', async () => {
     if (addCompanyInput.value) {
       const companyID = addCompanyInput.value;
-      // addCompanyInput.value = '';      
+      // addCompanyInput.value = '';
       try {
         await ensureCompanyConversation(companyID);
       } catch (err) {
@@ -312,7 +354,9 @@ const createDeveloperInterface = () => {
           ticketsList.appendChild(ticketItem);
 
           // ticketItem.innerHTML = JSON.stringify(ticket);
-          ticketItem.innerHTML = `${ticket.uuid} ${ticket.state} ${ticket.client_uuid}`;
+          ticketItem.innerHTML = `${ticket.uuid} ${ticket.state} ${
+            ticket.client_uuid
+          }`;
 
           const detailsList = document.createElement('ul');
           const infoBtn = document.createElement('button');
@@ -330,7 +374,8 @@ const createDeveloperInterface = () => {
               // console.log(x)
               const event = details.events[x];
               const detailsListItem = document.createElement('li');
-              detailsListItem.innerText = event.id + ' ' + event.type + ' ' + event.json;
+              detailsListItem.innerText =
+                event.id + ' ' + event.type + ' ' + event.json;
               detailsList.appendChild(detailsListItem);
             }
           });
@@ -350,7 +395,7 @@ const createDeveloperInterface = () => {
   // Input Change Handling
   const updateBtn = () => {
     const m = addCompanyInput.value.match(/^\d{6}$/);
-    const disabled = (!m);
+    const disabled = !m;
     addCompanyBtn.disabled = disabled;
     getCompanyTicketsBtn.disabled = disabled;
   };

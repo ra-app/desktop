@@ -68,7 +68,12 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         this.selectStep(Steps.SETUP_TYPE);
       } else if (this.setupType) {
         if (!number) this.selectStep(Steps.SETUP_PHONE);
-        else this.selectStep(this.setupType === 'admin' ? Steps.SETUP_USER_PROFILE : Steps.SETUP_COMPANY_PROFILE);
+        else
+          this.selectStep(
+            this.setupType === 'admin'
+              ? Steps.SETUP_USER_PROFILE
+              : Steps.SETUP_COMPANY_PROFILE
+          );
       }
     },
     selectStep(step) {
@@ -107,7 +112,10 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       }
 
       if (this.step === Steps.ACCEPT_EULA) {
-        this.$('.eula-text').on('scroll', _.debounce(this.onEulaScroll.bind(this), 100));
+        this.$('.eula-text').on(
+          'scroll',
+          _.debounce(this.onEulaScroll.bind(this), 100)
+        );
       }
       if (this.step === Steps.SETUP_PHONE) {
         const number = textsecure.storage.user.getNumber();
@@ -149,7 +157,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
           textsecure.storage.remove('userSetupInfo'),
           textsecure.storage.remove('bankSetupInfo'),
           textsecure.storage.remove('setupType'),
-        ])
+        ]);
         window.removeSetupMenuItems();
         this.$el.trigger('openInbox');
       } catch (err) {
@@ -170,7 +178,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         registerID: this.$('#company-register-id-input').val(),
         imprint: this.$('#imprint-input').val(),
         branch: this.$('#branch-select').val(),
-      }
+      };
       await textsecure.storage.put('companySetupInfo', company);
       this.selectStep(Steps.SETUP_USER_PROFILE);
     },
@@ -179,7 +187,11 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         name: this.$('#user-name-input').val(),
       };
       await textsecure.storage.put('userSetupInfo', profile);
-      this.selectStep(this.setupType === 'admin' ? Steps.SETUP_CONTACT_IMPORT : Steps.SETUP_COMPANY_BANK);
+      this.selectStep(
+        this.setupType === 'admin'
+          ? Steps.SETUP_CONTACT_IMPORT
+          : Steps.SETUP_COMPANY_BANK
+      );
     },
     async onBankDetailsDone() {
       const bank = {
@@ -217,21 +229,28 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     async onAdminSetup() {
       // TODO: check code is present & valid
       this.setupType = 'admin';
-      await textsecure.storage.put('setupType', this.setupType)
+      await textsecure.storage.put('setupType', this.setupType);
       this.selectStep(Steps.SETUP_PHONE);
     },
     onVerifyPhone() {
       // TODO: check phone verification code
       const number = this.phoneView.validateNumber();
-      const code = this.$('#phone-verification-code').val().replace(/\D+/g, '');
+      const code = this.$('#phone-verification-code')
+        .val()
+        .replace(/\D+/g, '');
 
-      this.accountManager.registerSingleDevice(number, code)
+      this.accountManager
+        .registerSingleDevice(number, code)
         .then(() => {
-          this.selectStep(this.setupType === 'admin' ? Steps.SETUP_USER_PROFILE : Steps.SETUP_COMPANY_PROFILE);
+          this.selectStep(
+            this.setupType === 'admin'
+              ? Steps.SETUP_USER_PROFILE
+              : Steps.SETUP_COMPANY_PROFILE
+          );
         })
         .catch(err => {
           console.error('Error registering single device', err);
-        })
+        });
     },
     onChangeAcceptEula() {
       console.log('Change accept eula');
@@ -245,7 +264,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     },
     onEulaScroll() {
       const eula = this.$el.find('.eula-text').get(0);
-      const atBottom = (eula.scrollHeight - eula.scrollTop) === eula.clientHeight;
+      const atBottom = eula.scrollHeight - eula.scrollTop === eula.clientHeight;
       // this.model.set('eula_read', atBottom);
       const check = this.$el.find('#accept-eula-check');
       const button = this.$el.find('#continue-eula');
