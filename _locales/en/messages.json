@@ -1934,7 +1934,7 @@
     "description": "Description for registering admin"
   },
   "continueButton": {
-    "message": "Continue",
+    "message": "Weiter",
     "description": "Button label for continuing to next step"
   },
   "signupCode": {
@@ -2017,5 +2017,17 @@
   "notNow": {
     "message": "Not now",
     "description": "Text for skipping actions for now"
+  },
+  "acceptEula":{
+  "message":"Ich akzeptiere die AGB.",
+  "description":"Text for accept eula"
+  },
+  "eulatitle":{
+    "message":"Allgemeine Geschäftsbedingungen",
+    "description":"Text for eula"
+  },
+  "eulaSubTitle":{
+    "message":"Um fortzufahren, lesen und akzeptieren Sie die AGB.",
+    "description":"Text for  eula"
   }
 }
