@@ -276,7 +276,7 @@ $loading-height: 16px;
 
 .app-loading-screen {
   z-index: 99;
-  position: absolute;
+  position: relative;
   left: 0;
   right: 0;
   top: 0;
@@ -285,14 +285,27 @@ $loading-height: 16px;
   color: $color-raapp-text;
   // background-color: $color-signal-blue;
   // color: $color-white;
-  display: flex;
+  // display: flex;
   align-items: center;
   user-select: none;
+  height: 100%;
 
   .content {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+    margin-top: 180px;
+    img{
+      height: 300px;
+      width: 300px;
+    }
+    .header{
+      font-family: $poppins-bold;
+      font-weight: bold;
+      font-size: 35px;
+      color: $color-raapp-text;
+      margin-top: 69px;
+    }
   }
   .container {
     margin-left: auto;
@@ -302,7 +315,12 @@ $loading-height: 16px;
   }
   .message {
     -webkit-user-select: text;
-    max-width: 35em;
+    // max-width: 35em;
+    font-family: Poppins-Regular;
+    font-size: 40px;
+    color: $poppins-bold;
+    max-width: 850px;
+    margin: 32px auto;
   }
 
   .dot {
