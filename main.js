@@ -176,9 +176,11 @@ function captureClicks(window) {
 }
 
 const DEFAULT_WIDTH = 800;
-const DEFAULT_HEIGHT = 610;
-const MIN_WIDTH = 640;
-const MIN_HEIGHT = 550;
+const DEFAULT_HEIGHT = 600;
+const MIN_WIDTH = 800;
+const MIN_HEIGHT = 622;
+const MAX_WIDTH = 1920;
+const MAX_HEIGHT = 1080;
 const BOUNDS_BUFFER = 100;
 
 function isVisible(window, bounds) {
@@ -215,6 +217,8 @@ function createWindow() {
       height: DEFAULT_HEIGHT,
       minWidth: MIN_WIDTH,
       minHeight: MIN_HEIGHT,
+      maxWidth: MAX_WIDTH,
+      maxHeight: MAX_HEIGHT,
       autoHideMenuBar: false,
       backgroundColor:
         config.environment === 'test' || config.environment === 'test-lib'
@@ -245,6 +249,14 @@ function createWindow() {
   if (!_.isNumber(windowOptions.height) || windowOptions.height < MIN_HEIGHT) {
     windowOptions.height = DEFAULT_HEIGHT;
   }
+
+  if (!_.isNumber(windowOptions.width) || windowOptions.width > MAX_WIDTH) {
+    windowOptions.width = MAX_WIDTH;
+  }
+  if (!_.isNumber(windowOptions.height) || windowOptions.height > MAX_HEIGHT) {
+    windowOptions.height = MAX_HEIGHT;
+  }
+
   if (!_.isBoolean(windowOptions.maximized)) {
     delete windowOptions.maximized;
   }
