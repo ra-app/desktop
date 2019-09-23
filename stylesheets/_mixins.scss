@@ -7,7 +7,21 @@
   cursor: pointer;
   outline: inherit;
 }
+@mixin titleRegister {
+  color: $link-color;
+  font-weight: 600;
+  font-family: $poppins;
+  font-size: 17px;
+  margin-bottom: 14px;
+}
 
+@mixin welcomeMessage {
+  font-size: 15px;
+  font-family: $poppins-regular;
+  color: $color-raapp-text;
+  margin-bottom: 10px;
+
+}
 @mixin font13-poppinsMedium{
   font-size: 13px !important;
   font-family: $poppins-medium;

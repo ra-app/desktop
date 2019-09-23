@@ -812,7 +812,7 @@ $debug: 0;
   }
 }
 .content-register{
-  height:30%
+  height:30%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -903,13 +903,22 @@ $debug: 0;
     }
     &.register {
       height: 230px;
-      width: 500px;
+      margin: 0px;
     }
     background: #fff;
     border: 1px solid #c1c9cd;
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 3px;
     padding: 30px;
+    .div-title-register{
+      @include titleRegister;
+    }
+    .div-welcome{
+      @include welcomeMessage;
+    }
+    .empty-div{
+      height: 56px;
+    }
   }
   .action-link {
     margin: 10px;
