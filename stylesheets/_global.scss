@@ -301,9 +301,9 @@ $loading-height: 16px;
     .header{
       font-family: $poppins-bold;
       font-weight: bold;
-      font-size: 35px;
+      font-size: 30px;
       color: $color-raapp-text;
-      margin-top: 20px;
+      margin-top: 25px;
     }
   }
   .footer{
@@ -311,9 +311,10 @@ $loading-height: 16px;
     position: fixed;
     left: 0;
     right: 0;
-    bottom: 52px;
-    font-size: 13px;
+    bottom: 40px;
+    font-size: 12px;
     color: $footer-text-color;
+    font-family: 'Open Sans';
     span{
       color: $link-color;
     }
@@ -328,7 +329,7 @@ $loading-height: 16px;
     -webkit-user-select: text;
     // max-width: 35em;
     font-family: $poppins-regular;
-    font-size: 40px;
+    font-size: 35px;
     color: $poppins-bold;
     max-width: 850px;
     margin: 25px auto;
@@ -927,7 +928,7 @@ $debug: 0;
       width: 15px;
       height: 15px;
       position: relative;
-      top: 3px;
+      top: 0px;
       margin: 0px;
     }
     border: none;
