@@ -717,6 +717,20 @@ $debug: 0;
     align-items: center;
     flex-grow: 0;
   }
+  .footer-copyright{
+    text-align: center;
+    font-size: 13px;
+    font-family: 'Open Sans';
+    letter-spacing: 0;
+    color: #005AF5;
+  }
+  .footer-version{
+    text-align: center;
+    font-size: 13px;
+    font-family: 'Open Sans';
+    letter-spacing: 0;
+    color: #747474;
+  }
   .content-right,
   .content-left,
   .content-center {
