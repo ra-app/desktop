@@ -1552,7 +1552,7 @@
         "description": "Description for registering admin"
     },
     "continueButton": {
-        "message": "Continue",
+        "message": "Weiter",
         "description": "Button label for continuing to next step"
     },
     "signupCode": {

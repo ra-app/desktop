@@ -64,6 +64,38 @@ $roboto-light: Roboto-Light, 'Helvetica Neue', 'Source Sans Pro Light',
   'Hiragino Sans GB Light', 'Hiragino Kaku Gothic Light',
   'Microsoft Yahei UI Light', Helvetica, Arial, sans-serif;
 
+//Poppins fonts
+@font-face {
+  font-family: 'Poppins';
+  src: url('../fonts/Poppins-Light.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Poppins';
+  src: url('../fonts/Poppins-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Poppins';
+  src: url('../fonts/Poppins-Medium.ttf') format('truetype');
+  font-weight: 300;
+}
+@font-face {
+  font-family: 'Poppins';
+  src: url('../fonts/Poppins-Italic.ttf') format('truetype');
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Poppins';
+  src: url('../fonts/Poppins-Bold.ttf') format('truetype');
+  font-weight: bold;
+}
+
+$poppins: Poppins,Roboto, 'Helvetica Neue', 'Source Sans Pro', 'Source Han Sans SC',
+  'Source Han Sans CN', 'Hiragino Sans GB', 'Hiragino Kaku Gothic',
+  'Microsoft Yahei UI', Helvetica, Arial, sans-serif;
+$poppins-light: Poppins-Light,Roboto, 'Helvetica Neue', 'Source Sans Pro Light',
+  'Source Han Sans SC Light', 'Source Han Sans CN Light',
+  'Hiragino Sans GB Light', 'Hiragino Kaku Gothic Light',
+  'Microsoft Yahei UI Light', Helvetica, Arial, sans-serif;
 // New colors
 
 $color-signal-blue: #2090ea;
