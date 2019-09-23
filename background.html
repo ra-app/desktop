@@ -474,24 +474,35 @@
       {{#isStepEula}}
       <div class='content-header'>
         <div class='content-left'>
-          <div class='content-holder'>{{EULATitle}}</div>
+          <!-- <div class='content-holder'>{{EULATitle}}</div> -->
         </div>
       </div>
       <div class='content-row content-main'>
         <div class='content-center'>
-          <div class='content-holder card eula-text'>{{EULAText}}</div>
-        </div>
-      </div>
-      <div class='content-footer'>
-        <div class='content-left'>
-          <div class='content-holder'>
-            <input type='checkbox' name='accept-eula-check' id='accept-eula-check' disabled />
-            <label for='accept-eula-check'>Accept EULA</label>
-          </div>
-        </div>
-        <div class='content-right'>
-          <div class='content-holder'>
-            <a class='button disabled' id='continue-eula'>{{continueButton}}</a>
+          <div class='content-holder card eula-text'>
+            <div class ='eula-title'> 
+                {{EULATitle}}
+            </div>
+            <div class ='eula-Subtitle'> 
+                {{EULASUBTitle}}
+            </div>
+            <div class='eula-content'>
+              {{EULAText}}
+            </div>
+            <hr>
+            <div class='content-footer'>
+                <div class='content-left'>
+                  <div class='content-holder'>
+                    <input type='checkbox' name='accept-eula-check' id='accept-eula-check' disabled />
+                    <label for='accept-eula-check'>Accept EULA</label>
+                  </div>
+                </div>
+                <div class='content-right'>
+                  <div class='content-holder'>
+                    <a class='button disabled' id='continue-eula'>{{continueButton}}</a>
+                  </div>
+                </div>
+              </div>
           </div>
         </div>
       </div>
