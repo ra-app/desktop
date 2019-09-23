@@ -1448,7 +1448,7 @@
         "description": "Label for phone verify call phone"
     },
     "sendSMSInstead": {
-        "message": "Send an SMS message instead.",
+        "message": "Mir Stattdessen eine SMS senden",
         "description": "Text for requesting SMS instead of call"
     },
     "companyDetails": {
