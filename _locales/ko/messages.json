@@ -1580,11 +1580,11 @@
         "description": "Title for country code input"
     },
     "verifyPhone": {
-        "message": "Verify",
+        "message": "Starten",
         "description": "Label for phone verify button"
     },
     "callPhone": {
-        "message": "Call",
+        "message": "Anrufen",
         "description": "Label for phone verify call phone"
     },
     "sendSMSInstead": {

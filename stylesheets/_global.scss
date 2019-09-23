@@ -748,16 +748,17 @@ $debug: 0;
   .register-title{
     text-align: left;
     font-size:40px;
-    font-family:'Poppins';
+    font-family: $poppins;
     letter-spacing: 0;
     color: #476077;
     opacity: 1;
     font-weight: 600;
+    margin-bottom: 30px;
   }
   .register-Subtitle{
     text-align: left;
     font-size:35px;
-    font-family:'Poppins';
+    font-family: $poppins;
     letter-spacing: 0;
     color: #476077;
     opacity: 1;
@@ -792,6 +793,7 @@ $debug: 0;
     justify-content: flex-start;
     &.align-right {
       justify-content: flex-end;
+      margin-right: 50px;
     }
     order: 1;
     @if $debug == 1 {
@@ -811,6 +813,8 @@ $debug: 0;
 }
 .content-register{
   height:30%
+  margin-left: auto;
+  margin-right: auto;
 }
 .content-register-info{
   height:35%;
@@ -894,9 +898,12 @@ $debug: 0;
       margin-top: 20px;
       height: 35px;
       margin-bottom: 20px;
+      padding: 6px;
+      font-family: $poppins-regular;
     }
     &.register {
       height: 230px;
+      width: 500px;
     }
     background: #fff;
     border: 1px solid #c1c9cd;
@@ -922,7 +929,7 @@ $debug: 0;
     border-bottom: 1px solid #c1c9cd;
     overflow-y: scroll;
     font-size:18px;
-    font-family: poppins;
+    font-family: $poppins;
   }
   .eula-title {
     letter-spacing: 0;
