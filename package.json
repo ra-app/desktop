@@ -42,7 +42,9 @@
     "open-coverage": "open coverage/lcov-report/index.html",
     "styleguide": "styleguidist server",
     "ready": "yarn clean-transpile && yarn grunt && yarn lint && yarn test-node && yarn test-electron && yarn lint-deps",
-    "just-build": "yarn install && yarn ready && SIGNAL_ENV=production yarn build"
+    "regen": "yarn clean-transpile && yarn grunt",
+    "just-build": "yarn install && yarn ready && SIGNAL_ENV=production yarn build",
+    "dev": "yarn regen && yarn start"
   },
   "dependencies": {
     "@journeyapps/sqlcipher": "https://github.com/scottnonnenberg-signal/node-sqlcipher.git#2e28733b61640556b0272a3bfc78b0357daf71e6",
