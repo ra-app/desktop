@@ -1914,23 +1914,23 @@
       "Text shown on messages with with individual timers, before user has viewed it"
   },
   "appTagLine": {
-    "message": "Modern secure communications... TODO",
+    "message": "Moderne Kommunikationswelt für jede Firma im sicheren Datenraum",
     "description": "Tagline of the OfficeApp application"
   },
   "registerCompany": {
-    "message": "Company registration",
+    "message": "Unternehmensregistrierung",
     "description": "Header for company registration"
   },
   "registerAdmin": {
-    "message": "Admin registration",
+    "message": "Adminsregistrierung",
     "description": "Header for admin registration"
   },
   "welcomeCompany": {
-    "message": "Welcome to the OfficeApp. Please register your company here.",
+    "message": "Willkommen in der OfficeApp. Bitte registrieren Sie hier Ihr Unternehmen.",
     "description": "Description for registering company"
   },
   "welcomeAdmin": {
-    "message": "Welcome to the OfficeApp. Please enter your code here.",
+    "message": "Willkommen in der OfficeApp. Bitte fügen Sie hier Ihren Code ein.",
     "description": "Description for registering admin"
   },
   "continueButton": {

@@ -738,6 +738,31 @@ $debug: 0;
     display: flex;
     align-items: center;
   }
+  .logo-register{
+    margin-right:40px;
+    & .logo{
+      width:200px;
+      height:200px;
+    }
+  }
+  .register-title{
+    text-align: left;
+    font-size:40px;
+    font-family:'Poppins';
+    letter-spacing: 0;
+    color: #476077;
+    opacity: 1;
+    font-weight: 600;
+  }
+  .register-Subtitle{
+    text-align: left;
+    font-size:35px;
+    font-family:'Poppins';
+    letter-spacing: 0;
+    color: #476077;
+    opacity: 1;
+    max-width:615px;
+  }
   .content-header {
     order: 1;
     min-height: 80px;
@@ -783,6 +808,13 @@ $debug: 0;
       border: 1px solid #00f;
     }
   }
+}
+.content-register{
+  height:30%
+}
+.content-register-info{
+  height:35%;
+  margin-top:60px;
 }
 .content-column {
   flex-direction: column;
