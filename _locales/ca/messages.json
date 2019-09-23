@@ -1560,19 +1560,19 @@
         "description": "Label for signup code input"
     },
     "phoneSetupTitle": {
-        "message": "Phone number setup",
+        "message": "Telefonnummer",
         "description": "Title for phone setup container"
     },
     "phoneSetupSubtitle": {
-        "message": "Please add your office phone number. You will be called and will receive a verification code. This may incur fees.",
+        "message": "Bitte geben Sie Ihre Bürotelefonnummer ein. Sie werden angerufen und erhalten einen Verifikationscode. Dabei können Gebühren anfallen.",
         "description": "Phone setup container subtitle"
     },
     "phoneNumber": {
-        "message": "Phone number",
+        "message": "IHRe Bürotelefonnummer",
         "description": "Title for phone number input"
     },
     "verifyCode": {
-        "message": "Verification code",
+        "message": "Verifikationscode",
         "description": "Title for verification code input"
     },
     "countryCode": {

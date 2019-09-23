@@ -815,14 +815,18 @@ $debug: 0;
     font-size: 15px;
     /* width: 50%;
     height: 50%; */
+    &.content-eula{
+      margin: 0px;
+    }
   }
+
   .card {
     .card-header {
       white-space: pre-line;
       margin: -30px;
-      margin-bottom: 10px;
-      padding: 10px;
-      padding-top: 30px;
+      margin-bottom: 49px;
+      padding: 30px 10px;
+      // padding-top: 30px;
       text-align: center;
       color: #fff;
       background: rgb(0, 90, 245);
@@ -855,6 +859,9 @@ $debug: 0;
     .button {
       width: 100%;
       font-size: 15px;
+      margin-top: 20px;
+      height: 35px;
+      margin-bottom: 20px;
     }
     &.register {
       height: 230px;
@@ -904,6 +911,12 @@ $debug: 0;
     white-space: pre-wrap;
   }
 
+  .label-inputs {
+    color: $placeholder-color;
+    text-transform: uppercase;
+    @include font13-poppinsMedium;
+  }
+
   #phone-number-input {
     margin: 20px 0px 10px;
     .intl-tel-input {
@@ -913,9 +926,12 @@ $debug: 0;
       display: block;
       height: 0px;
       position: relative;
-      top: -55px;
+      top: -60px;
       font-weight: bold;
       width: 100%;
+      color: $placeholder-color;
+      text-transform: uppercase;
+      @include font13-poppinsMedium;
     }
   }
 

@@ -40,7 +40,7 @@ $roboto-light: Roboto-Light, 'Helvetica Neue', 'Source Sans Pro Light',
   src: url('../fonts/Poppins-Regular.ttf') format('truetype');
 }
 @font-face {
-  font-family: 'Poppins';
+  font-family: 'Poppins-Medium';
   src: url('../fonts/Poppins-Medium.ttf') format('truetype');
   font-weight: 300;
 }
@@ -68,8 +68,11 @@ $poppins-bold: Poppins-Bold, 'Helvetica Neue', 'Source Sans Pro', 'Source Han Sa
 $poppins-regular: Poppins-Regular, 'Helvetica Neue', 'Source Sans Pro', 'Source Han Sans SC',
   'Source Han Sans CN', 'Hiragino Sans GB', 'Hiragino Kaku Gothic',
   'Microsoft Yahei UI', Helvetica, Arial, sans-serif;
+$poppins-medium: Poppins-Medium, 'Helvetica Neue', 'Source Sans Pro', 'Source Han Sans SC',
+  'Source Han Sans CN', 'Hiragino Sans GB', 'Hiragino Kaku Gothic',
+  'Microsoft Yahei UI', Helvetica, Arial, sans-serif;
 // New colors
-
+$placeholder-color: #B1BBC0;
 $color-signal-blue: #2090ea;
 $color-core-green: #4caf50;
 $color-core-red: #f44336;

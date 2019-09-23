@@ -492,13 +492,13 @@
             <hr>
             <div class='content-footer'>
                 <div class='content-left'>
-                  <div class=''>
+                  <div class='content-holder content-eula'>
                     <input type='checkbox' name='accept-eula-check' id='accept-eula-check' disabled />
                     <label for='accept-eula-check'>{{acceptEula}}</label>
                   </div>
                 </div>
                 <div class='content-right'>
-                  <div class='content-holder'>
+                  <div class='content-holder content-eula'>
                     <a class='button disabled' id='continue-eula'>{{continueButton}}</a>
                   </div>
                 </div>
@@ -571,7 +571,7 @@
             <div class='action-link'><a id='request-verify-sms'>{{sendSMSInstead}}</a></div>
             <div>
               <input type='text' class='number' name='phone-verification-code' id='phone-verification-code' />
-              <label for='phone-verification-code'>{{verifyCode}}</label>
+              <label for='phone-verification-code' class="label-inputs">{{verifyCode}}</label>
             </div>
             <a class='button' id='verify-phone-code'>{{verifyPhone}}</a>
           </div>
