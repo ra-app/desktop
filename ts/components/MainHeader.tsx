@@ -130,8 +130,13 @@ export class MainHeader extends React.Component<Props> {
     } = this.props;
 
     return (
+      <div>
+        <div className="module-main-header__info">
+          <img src="images/header-chat.png" alt="header chat" />
+          <span>Kommunikation</span>
+        </div>
       <div className="module-main-header">
-        <Avatar
+        {/* <Avatar
           avatarPath={avatarPath}
           color={color}
           conversationType="direct"
@@ -140,7 +145,8 @@ export class MainHeader extends React.Component<Props> {
           phoneNumber={phoneNumber}
           profileName={profileName}
           size={28}
-        />
+        /> */}
+        
         <div className="module-main-header__search">
           <div
             role="button"
@@ -165,6 +171,7 @@ export class MainHeader extends React.Component<Props> {
             />
           ) : null}
         </div>
+      </div>
       </div>
     );
   }

@@ -885,8 +885,21 @@ $debug: 0;
   }
 
   .card {
-    width: 500px;
-    max-width:500px;
+    width: 670px;
+    max-width:670px;
+    .title-contact{
+      color: $link-color;
+      font-size: 20px;
+      font-family: $poppins-semibold;
+      letter-spacing: 0;
+    }
+    .import-contact-text{
+      font-family: $poppins-regular;
+      font-size: 17px;
+      color: $color-raapp-text;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
     .card-header {
       white-space: pre-line;
       margin: -50px;
