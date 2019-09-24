@@ -644,21 +644,24 @@
         <div class='content-center'>
           <div class='content-holder card'>
             <div class='card-header'>
-              {{bankDetails}}
+                <div class='title'>{{bankDetails}}</div>
             </div>
             <div class='content-row'>
               <div class='content-left'>
                 <div style='width: 100%; margin-right: 10px'>
                   <input type='text' id='bank-iban-input' />
-                  <label for='bank-iban-input'>IBAN</label>
+                  <label for='bank-iban-input' class="label-text">IBAN</label>
                 </div>
               </div>
               <div class='content-right' style='width: 50px'>
                 <div style='width: 100%'>
                   <input type='text' id='bank-bic-input' />
-                  <label for='bank-bic-input'>BIC</label>
+                  <label for='bank-bic-input' class="label-text">BIC</label>
                 </div>
               </div>
+            </div>
+            <div class="text-bankdetails">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus iaculis, turpis a gravida varius, mi massa fermentum velit, vitae euismod ante odio nec arcu.
             </div>
             <a class='button' id='bank-details-done'>{{continueButton}}</a>
             <div class='action-link'><a id='bank-details-skip'>{{notNow}}</a></div>

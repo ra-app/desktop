@@ -1628,11 +1628,11 @@
         "description": "Label for user name input"
     },
     "bankDetails": {
-        "message": "Bank details",
+        "message": "Zahlungsdaten",
         "description": "Title for company bank detail input"
     },
     "notNow": {
-        "message": "Not now",
+        "message": "Jetzt nicht",
         "description": "Text for skipping actions for now"
     },
     "uploadCard": {
