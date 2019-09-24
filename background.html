@@ -617,8 +617,15 @@
               {{userProfile}}
             </div>
             <input type='text' id='user-name-input' />
-            <label for='user-name-input'>{{userName}}</label>
-
+            <label for='user-name-input' class='label-text'>{{userName}}</label>
+            <div class='upload-avatar'>
+              <div class='select-avatar'>
+                <img src='images/icons/icon-picture-add-user.svg' />
+              </div>
+              <div class='text-upload-avatar'>
+                <p>{{uploadAvatarText}}</p>
+              </div>
+            </div>
             <a class='button' id='user-profile-done'>{{continueButton}}</a>
           </div>
         </div>
