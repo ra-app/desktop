@@ -883,7 +883,8 @@ $debug: 0;
       white-space: pre-line;
       margin: -50px;
       margin-bottom: 49px;
-      padding: 30px 10px;
+      // padding: 30px 10px;
+      padding: 30px 10px 10px 10px;
       // padding-top: 30px;
       text-align: center;
       color: #fff;
@@ -939,6 +940,7 @@ $debug: 0;
     border-radius: 5px;
     // box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 3px;
     padding: 50px;
+    width: 660px;
     .div-title-register{
       @include titleRegister;
     }
@@ -1007,6 +1009,15 @@ $debug: 0;
     font-weight:500!important;
     font-family: Poppins!important;
     margin-bottom: 14px;
+  }
+
+  .labelsInput{
+    top: -100px !important;
+  }
+
+  .inputsRegister{
+    height: 30px;
+    margin: 20px 0px 29px;
   }
   .label-inputs {
     color: $placeholder-color;
