@@ -506,14 +506,11 @@
           </div>
         </div>
       </div>
-      <div class='content-footer'>
-        <div class='content-holder'><span class='footer-copyright'>&copy; 2018 OfficeApp</span> | <span class='footer-version'>Desktop Version 1.26.2</span></div>
-      </div>
       {{/isStepEula}}
       {{#isStepSetupType}}
       <div class='content-row content-register-info'>
-        <div class='content-center'>
-          <div class='content-holder'>
+        <div class=''>
+          <div class='content-holder content-logo'>
             <div class='content-row '>
               <div class='content-left'>
                 <div class='logo-register'>
@@ -531,7 +528,7 @@
         </div>
       </div>
       <div class='content-row content-register'>
-        <div class='content-left align-right'>
+        <div class='content-new-register'>
           <div class='content-holder card register'>
             <div class="div-title-register">{{registerCompany}}</div>
             <div class="div-welcome">{{welcomeCompany}}</div>
@@ -539,15 +536,15 @@
             <a class='button' id='continue-setup-company'>{{continueButton}}</a>
           </div>
         </div>
-        <div class='content-right align-left'>
+        <div class='content-code'>
           <div class='content-holder card register'>
             <div class="div-title-register">{{registerAdmin}}</div>
             <div class="div-welcome">{{welcomeAdmin}}</div>
             <div>
-              <input type='text' name='admin-signup-code' id='admin-signup-code' />
-              <label for='admin-signup-code' class="label-inputs">{{signupCode}}</label>
+              <input type='text' name='admin-signup-code' class='input-code' id='admin-signup-code' />
+              <label for='admin-signup-code' class="label-inputs code-label">{{signupCode}}</label>
             </div>
-            <a class='button disabled' id='continue-setup-admin'>{{continueButton}}</a>
+            <a class='button disabled ' id='continue-setup-admin'>{{continueButton}}</a>
           </div>
         </div>
       </div>
@@ -665,6 +662,9 @@
         </div>
       </div>
       {{/isStepSetupContactImport}}
+      <div class='content-footer'>
+        <div class='content-holder'><span class='footer-copyright'>&copy; 2018 OfficeApp</span> | <span class='footer-version'>Desktop Version 1.26.2</span></div>
+      </div>
     </div>
   </script>
 
