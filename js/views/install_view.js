@@ -55,6 +55,8 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       'click #bank-details-skip': 'onBankDetailsSkip',
       'click #contact-import-done': 'onContactImportDone',
       'click #contact-import-skip': 'onContactImportSkip',
+      'click #uploadAvatar': 'onUploadAvatar',
+      'change #inputAvatar': 'onChoseAttachment',
     },
     initialize(options = {}) {
       this.accountManager = getAccountManager();
@@ -283,6 +285,15 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       textsecure.storage.put('eulaAccepted', true).then(() => {
         this.selectStep(Steps.SETUP_TYPE);
       });
+    },
+    //Functions for upload User Avatar
+    onUploadAvatar(){
+      this.$('#inputAvatar').click();
+    },
+    //TODO HOOK API for upload avatar
+    async onChoseAttachment() {
+      const fileField = this.$('#inputAvatar');
+      const file = fileField.prop('files');
     },
     render_attributes() {
       return {
