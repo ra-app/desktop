@@ -2018,9 +2018,13 @@
     "message": "Not now",
     "description": "Text for skipping actions for now"
   },
+  "uploadCard": {
+      "message": "Handelsregistereinträge bei Marken oder Ausweisdokumente bei Unternehmen hochladen.",
+      "description": "Text for upload card on company register"
+  },
   "acceptEula":{
-  "message":"Ich akzeptiere die AGB.",
-  "description":"Text for accept eula"
+    "message":"Ich akzeptiere die AGB.",
+    "description":"Text for accept eula"
   },
   "eulatitle":{
     "message":"Allgemeine Geschäftsbedingungen",

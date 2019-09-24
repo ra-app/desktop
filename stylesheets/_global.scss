@@ -851,6 +851,7 @@ $debug: 0;
     border: 1px solid #ff0;
   }
 }
+
 .content-column,
 .content-row {
   .button {
@@ -873,6 +874,7 @@ $debug: 0;
     &.content-eula{
       margin: 0px;
     }
+    
   }
   .content-logo{
     margin-left:270px;
@@ -1001,6 +1003,7 @@ $debug: 0;
     margin-top: unset;
     margin-bottom:unset;
   }
+  
   .upload-avatar{
     display:flex;
     .select-avatar{
@@ -1035,7 +1038,7 @@ $debug: 0;
     font-family: Poppins!important;
     margin-bottom: 14px;
   }
-
+ 
   .labelsInput{
     top: -100px !important;
   }
@@ -1043,6 +1046,19 @@ $debug: 0;
   .inputsRegister{
     height: 30px;
     margin: 20px 0px 29px;
+  }
+  .upload-div{
+    display: flex;
+    img{
+      height: 45px;
+      width: 45px;
+      vertical-align: middle;
+      margin-top: -4px;
+      margin-right: 23px;
+    }
+    span{
+      color: $placeholder-color;
+    }
   }
   .label-inputs {
     color: $placeholder-color;
