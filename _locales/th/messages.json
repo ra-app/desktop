@@ -1628,11 +1628,31 @@
         "description": "Label for user name input"
     },
     "bankDetails": {
-        "message": "Bank details",
+        "message": "Zahlungsdaten",
         "description": "Title for company bank detail input"
     },
     "notNow": {
-        "message": "Not now",
+        "message": "Jetzt nicht",
         "description": "Text for skipping actions for now"
+    },
+    "uploadCard": {
+        "message": "Handelsregistereinträge bei Marken oder Ausweisdokumente bei Unternehmen hochladen.",
+        "description": "Text for upload card on company register"
+    },
+    "acceptEula":{
+      "message":"Ich akzeptiere die AGB.",
+      "description":"Text for accept eula"
+    },
+    "eulatitle":{
+      "message":"Allgemeine Geschäftsbedingungen",
+      "description":"Text for eula"
+    },
+    "eulaSubTitle":{
+      "message":"Um fortzufahren, lesen und akzeptieren Sie die AGB.",
+      "description":"Text for  eula"
+    },
+    "uploadAvatarText":{
+      "message":"Bitte Fügen SIE EIN Profilbild HINZU",
+      "description":"Text for  upload avatar"
     }
 }

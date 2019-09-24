@@ -313,6 +313,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         userName: i18n('userName'),
         bankDetails: i18n('bankDetails'),
         notNow: i18n('notNow'),
+        uploadCard: i18n('uploadCard'),
 
         isStepEula: this.step === Steps.ACCEPT_EULA,
         isStepSetupType: this.step === Steps.SETUP_TYPE,

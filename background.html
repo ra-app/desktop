@@ -472,12 +472,12 @@
   <script type='text/x-tmpl-mustache' id='install-flow-template'>
     <div class='content-column'>
       {{#isStepEula}}
-      <div class='content-header'>
+      <div class='content-header content-header-eula'>
         <div class='content-left'>
           <!-- <div class='content-holder'>{{EULATitle}}</div> -->
         </div>
       </div>
-      <div class='content-row content-main'>
+      <div class='content-row content-main content-main-eula'>
         <div class='content-center'>
           <div class='content-holder card eula-text'>
             <div class ='eula-title'> 
@@ -583,27 +583,35 @@
             <div class='card-header'>
               <div class='title'>{{companyDetails}}</div>
             </div>
-            <input type='text' id='company-name-input' />
-            <label for='company-name-input' class="label-inputs">{{companyName}}</label>
+            <input type='text' id='company-name-input' class="inputsRegister" />
+            <label for='company-name-input' class="label-text labelsInput">{{companyName}}</label>
 
-            <input type='text' id='tax-number-input' />
-            <label for='tax-number-input' class="label-inputs">{{taxNumber}}</label>
+            <input type='text' id='tax-number-input' class="inputsRegister" />
+            <label for='tax-number-input' class="label-text labelsInput">{{taxNumber}}</label>
 
-            <input type='text' id='tax-id-input' />
-            <label for='tax-id-input' class="label-inputs">{{taxID}}</label>
+            <input type='text' id='tax-id-input' class="inputsRegister" />
+            <label for='tax-id-input' class="label-text labelsInput">{{taxID}}</label>
 
-            <input type='text' id='company-register-id-input' />
-            <label for='company-register-id-input' class="label-inputs">{{companyRegistrationID}}</label>
+            <input type='text' id='company-register-id-input' class="inputsRegister" />
+            <label for='company-register-id-input' class="label-text labelsInput">{{companyRegistrationID}}</label>
 
-            <input type='text' id='imprint-input' />
-            <label for='imprint-input' class="label-inputs">{{imprint}}</label>
+            <input type='text' id='imprint-input' class="inputsRegister" />
+            <label for='imprint-input' class="label-text labelsInput">{{imprint}}</label>
 
-            <select id='branch-select'>
+            <select id='branch-select' class="inputsRegister">
               <option value='test'>Testing</option>
             </select>
-            <label for='branch-select' class="label-inputs">{{branch}}</label>
+            <label for='branch-select' class="label-text labelsInput">{{branch}}</label>
 
+            <div class="upload-div">
+              <img src="images/icons/icon-picture-add-200.svg">
+              <span>
+                  {{uploadCard}}
+              <span>
+            </div>
+            
             {{uploadCompanyRegister}}
+
             <a class='button' id='company-profile-done'>{{continueButton}}</a>
           </div>
         </div>
@@ -614,7 +622,7 @@
         <div class='content-center'>
           <div class='content-holder card'>
             <div class='card-header'>
-              {{userProfile}}
+                <div class='title'>{{userProfile}}</div>
             </div>
             <input type='text' id='user-name-input' />
             <label for='user-name-input' class='label-text'>{{userName}}</label>
@@ -636,21 +644,24 @@
         <div class='content-center'>
           <div class='content-holder card'>
             <div class='card-header'>
-              {{bankDetails}}
+                <div class='title'>{{bankDetails}}</div>
             </div>
             <div class='content-row'>
               <div class='content-left'>
                 <div style='width: 100%; margin-right: 10px'>
                   <input type='text' id='bank-iban-input' />
-                  <label for='bank-iban-input'>IBAN</label>
+                  <label for='bank-iban-input' class="label-text">IBAN</label>
                 </div>
               </div>
               <div class='content-right' style='width: 50px'>
                 <div style='width: 100%'>
                   <input type='text' id='bank-bic-input' />
-                  <label for='bank-bic-input'>BIC</label>
+                  <label for='bank-bic-input' class="label-text">BIC</label>
                 </div>
               </div>
+            </div>
+            <div class="text-bankdetails">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus iaculis, turpis a gravida varius, mi massa fermentum velit, vitae euismod ante odio nec arcu.
             </div>
             <a class='button' id='bank-details-done'>{{continueButton}}</a>
             <div class='action-link'><a id='bank-details-skip'>{{notNow}}</a></div>
@@ -669,7 +680,7 @@
         </div>
       </div>
       {{/isStepSetupContactImport}}
-      <div class='content-footer'>
+      <div class='content-footer content-main-footer'>
         <div class='content-holder'><span class='footer-copyright'>&copy; 2018 OfficeApp</span> | <span class='footer-version'>Desktop Version 1.26.2</span></div>
       </div>
     </div>
