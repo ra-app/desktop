@@ -2037,5 +2037,9 @@
   "uploadAvatarText":{
     "message":"Bitte Fügen SIE EIN Profilbild HINZU",
     "description":"Text for  upload avatar"
+  },
+  "contactImportTitle":{
+      "message": "Kontakte synchronisieren",
+      "description": "Text for contact import"
   }
 }

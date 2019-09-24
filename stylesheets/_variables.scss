@@ -49,6 +49,11 @@ $roboto-light: Roboto-Light, 'Helvetica Neue', 'Source Sans Pro Light',
   src: url('../fonts/Poppins-Bold.ttf') format('truetype');
   font-weight: bold;
 }
+@font-face {
+  font-family: 'Poppins-SemiBold';
+  src: url('../fonts/Poppins-SemiBold.ttf') format('truetype');
+  font-weight: 800;
+}
 
 $poppins: Poppins,Roboto, 'Helvetica Neue', 'Source Sans Pro', 'Source Han Sans SC',
   'Source Han Sans CN', 'Hiragino Sans GB', 'Hiragino Kaku Gothic',
@@ -64,6 +69,9 @@ $poppins-regular: Poppins-Regular, 'Helvetica Neue', 'Source Sans Pro', 'Source 
   'Source Han Sans CN', 'Hiragino Sans GB', 'Hiragino Kaku Gothic',
   'Microsoft Yahei UI', Helvetica, Arial, sans-serif;
 $poppins-medium: Poppins-Medium, 'Helvetica Neue', 'Source Sans Pro', 'Source Han Sans SC',
+  'Source Han Sans CN', 'Hiragino Sans GB', 'Hiragino Kaku Gothic',
+  'Microsoft Yahei UI', Helvetica, Arial, sans-serif;
+$poppins-semibold: Poppins-SemiBold, 'Helvetica Neue', 'Source Sans Pro', 'Source Han Sans SC',
   'Source Han Sans CN', 'Hiragino Sans GB', 'Hiragino Kaku Gothic',
   'Microsoft Yahei UI', Helvetica, Arial, sans-serif;
   // OPEN SANS
