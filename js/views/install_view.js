@@ -326,8 +326,8 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         eulatitle: i18n('eulatitle'),
         eulaSubTitle: i18n('eulaSubTitle'),
         EULAText: EULA,
-        acceptEula:i18n('acceptEula'),
-        uploadAvatarText:i18n('uploadAvatarText'),
+        acceptEula: i18n('acceptEula'),
+        uploadAvatarText: i18n('uploadAvatarText'),
       };
     },
   });

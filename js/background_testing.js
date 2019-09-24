@@ -17,6 +17,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   setInterval(() => {
     createDeveloperInterface();
   }, 1000);
+
+  // const server = getServer();
+  // await server.setProfile("HAHAHAHAHAHAHA");
+
+  // const enc = await encryptWithProfileKey("TEST");
+  // const dec = await decryptWithProfileKey(enc);
+  // console.log("DECRYPT", dec);
 });
 
 const addAllCompanies = async () => {
@@ -411,3 +418,40 @@ const createDeveloperInterface = () => {
   addCompanyDiv.appendChild(ticketsList);
   devPanel.appendChild(addCompanyDiv);
 };
+
+
+// PROFILE STUFF START
+
+
+function getServer() {
+  const username = textsecure.storage.get('number_id');
+  const password = textsecure.storage.get('password');
+  const server = WebAPI.connect({ username, password });
+  return server;
+}
+
+async function encryptWithProfileKey(message) {
+  const plaintext = dcodeIO.ByteBuffer.wrap(
+    message,
+    'binary'
+  ).toArrayBuffer();
+  const key = textsecure.storage.get('profileKey');
+  const encrypted = await Signal.Crypto.encryptSymmetric(key, plaintext);
+  const encoded = Signal.Crypto.stringFromBytes(encrypted)
+  return encoded;
+}
+
+async function decryptWithProfileKey(message) {
+  const plaintext = Signal.Crypto.bytesFromString(message);
+  const key = textsecure.storage.get('profileKey');
+  const decrypted = await Signal.Crypto.decryptSymmetric(key, plaintext);
+  const result = dcodeIO.ByteBuffer.wrap(
+    decrypted,
+    'binary'
+  ).toString();
+  return result;
+}
+
+// String ciphertextName = Base64.encodeBytesWithoutPadding(new ProfileCipher(key).encryptName(name.getBytes("UTF-8"), ProfileCipher.NAME_PADDED_LENGTH));
+
+// PROFILE STUFF END
