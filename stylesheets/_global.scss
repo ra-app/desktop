@@ -979,6 +979,7 @@ $debug: 0;
     overflow-y: scroll;
     font-size:18px;
     font-family: $poppins;
+    max-width: unset;
   }
   .eula-title {
     letter-spacing: 0;
@@ -1022,8 +1023,9 @@ $debug: 0;
       text-transform: uppercase;
       opacity: 1;
       font-weight:500;
-      font-size:13px;
-      font-family:'poppins';
+      font-size: 13px !important;
+      font-family: $poppins-medium;
+      width: 134px;
     }
 
   }
@@ -1035,7 +1037,7 @@ $debug: 0;
     opacity: 1;
     font-size: 15px;
     font-weight:500!important;
-    font-family: Poppins!important;
+    font-family: $poppins-medium !important;
     margin-bottom: 14px;
   }
  
@@ -1055,6 +1057,7 @@ $debug: 0;
       vertical-align: middle;
       margin-top: -4px;
       margin-right: 23px;
+      cursor: pointer;
     }
     span{
       color: $placeholder-color;
