@@ -2003,11 +2003,11 @@
     "description": "Label for company name input"
   },
   "userProfile": {
-    "message": "User profile",
+    "message": "Profildetails",
     "description": "Title for user profile setup"
   },
   "userName": {
-    "message": "User name",
+    "message": "ADMINNAME",
     "description": "Label for user name input"
   },
   "bankDetails": {
@@ -2029,5 +2029,9 @@
   "eulaSubTitle":{
     "message":"Um fortzufahren, lesen und akzeptieren Sie die AGB.",
     "description":"Text for  eula"
+  },
+  "uploadAvatarText":{
+    "message":"Bitte Fügen SIE EIN Profilbild HINZU",
+    "description":"Text for  upload avatar"
   }
 }

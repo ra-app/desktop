@@ -867,6 +867,8 @@ $debug: 0;
   }
 
   .card {
+    width: 500px;
+    max-width:500px;
     .card-header {
       white-space: pre-line;
       margin: -50px;
@@ -985,7 +987,30 @@ $debug: 0;
     margin-top: unset;
     margin-bottom:unset;
   }
-  .code-label{
+  .upload-avatar{
+    display:flex;
+    .select-avatar{
+      width: 76px;
+      height: 76px;
+      box-shadow: 0px 3px 6px #00000029;
+      border-radius: 50%;
+      opacity: 1;
+    }
+    .text-upload-avatar{
+      margin-left:36px;
+      width:130px;
+      text-align: left;
+      letter-spacing: 0;
+      color: #B1BBC0;
+      text-transform: uppercase;
+      opacity: 1;
+      font-weight:500;
+      font-size:13px;
+      font-family:'poppins';
+    }
+
+  }
+  .code-label, .label-text{
     text-align: left;
     letter-spacing: 0;
     color: #B1BBC0;
