@@ -398,6 +398,8 @@ const URL_CALLS = {
   messages: 'v1/messages',
   profile: 'v1/profile',
   signed: 'v2/keys/signed',
+  setProfile: 'v1/profile/name',
+  getAvatarUploadForm: 'v1/profile/avatar',
 };
 
 module.exports = {
@@ -449,6 +451,8 @@ function initialize({
       getKeysForNumberUnauth,
       getMessageSocket,
       getMyKeys,
+      getAvatarUploadForm,
+      setProfile,
       getProfile,
       getProfileUnauth,
       getProvisioningSocket,
@@ -540,6 +544,23 @@ function initialize({
       return _ajax({
         call: 'supportUnauthenticatedDelivery',
         httpType: 'PUT',
+        responseType: 'json',
+      });
+    }
+
+    function getAvatarUploadForm(name) {
+      return _ajax({
+        call: 'getAvatarUploadForm',
+        httpType: 'GET',
+        responseType: 'json',
+      });
+    }
+
+    function setProfile(name) {
+      return _ajax({
+        call: 'setProfile',
+        httpType: 'PUT',
+        urlParameters: `/${name}`,
         responseType: 'json',
       });
     }
