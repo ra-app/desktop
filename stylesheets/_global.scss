@@ -703,6 +703,7 @@ $loading-height: 16px;
   overflow: hidden;
 }
 $debug: 0;
+
 .content-column,
 .content-row {
   width: 100%;
@@ -739,11 +740,15 @@ $debug: 0;
     align-items: center;
   }
   .logo-register{
-    margin-right:40px;
+    margin-right:58.4px;
     & .logo{
-      width:200px;
-      height:200px;
+      width:300px;
+      height:300px;
     }
+  }
+  .content-new-register{
+    margin-left: 270px;
+    margin-right: 40px;
   }
   .register-title{
     text-align: left;
@@ -753,7 +758,7 @@ $debug: 0;
     color: #476077;
     opacity: 1;
     font-weight: 600;
-    margin-bottom: 30px;
+    margin-bottom: 28px;
   }
   .register-Subtitle{
     text-align: left;
@@ -762,7 +767,7 @@ $debug: 0;
     letter-spacing: 0;
     color: #476077;
     opacity: 1;
-    max-width:615px;
+    max-width:680px;
   }
   .content-header {
     order: 1;
@@ -773,6 +778,7 @@ $debug: 0;
   }
   .content-footer {
     order: 999;
+    margin-top:230px;
     @if $debug == 1 {
       border: 1px solid #0f0;
     }
@@ -812,13 +818,14 @@ $debug: 0;
   }
 }
 .content-register{
-  height:30%;
+  height:auto;
   margin-left: auto;
   margin-right: auto;
 }
 .content-register-info{
-  height:35%;
-  margin-top:60px;
+  height:auto;
+  margin-top:180px;
+  margin-bottom: 80px;
 }
 .content-column {
   flex-direction: column;
@@ -854,6 +861,9 @@ $debug: 0;
     &.content-eula{
       margin: 0px;
     }
+  }
+  .content-logo{
+    margin-left:270px;
   }
 
   .card {
@@ -902,14 +912,15 @@ $debug: 0;
       font-family: $poppins-regular;
     }
     &.register {
-      height: 230px;
+      height: 310px;
+      width:670px;
       margin: 0px;
     }
     background: #fff;
-    border: 1px solid #c1c9cd;
+    // border: 1px solid #c1c9cd;
     border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 3px;
-    padding: 30px;
+    // box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 3px;
+    padding: 50px;
     .div-title-register{
       @include titleRegister;
     }
@@ -917,7 +928,7 @@ $debug: 0;
       @include welcomeMessage;
     }
     .empty-div{
-      height: 56px;
+      height: 50px;
     }
   }
   .action-link {
@@ -962,10 +973,26 @@ $debug: 0;
   .eula-content{
     white-space: pre-wrap;
   }
-
+  .input-code{
+    height: 60px;
+    margin-top: unset;
+    margin-bottom:unset;
+  }
+  .code-label{
+    text-align: left;
+    letter-spacing: 0;
+    color: #B1BBC0;
+    text-transform: uppercase!important;
+    opacity: 1;
+    font-size: 15px;
+    font-weight:500!important;
+    font-family: Poppins!important;
+    margin-bottom: 14px;
+  }
   .label-inputs {
     color: $placeholder-color;
     text-transform: uppercase;
+    
     @include font13-poppinsMedium;
   }
 
