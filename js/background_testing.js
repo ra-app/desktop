@@ -53,7 +53,8 @@ async function sendCompanyMessage(
     options
   );
 
-  const messageInfo = { destination, messageBody, finalAttachments, quote, preview, sticker, now, message };
+  // const messageInfo = { destination, messageBody, finalAttachments, quote, preview, sticker, now, message };
+  const messageInfo = { destination, message };
 
   inboxMessage(messageInfo);
 
@@ -64,7 +65,7 @@ async function sendCompanyMessage(
 
 async function inboxMessage(messageInfo) {
   console.log('inboxMessage -- MessageInfo:', messageInfo);
-  const response = await apiRequest('api/inbox', messageInfo);
+  const response = await apiRequest('api/inbox/v2', messageInfo);
   console.log('inboxMessage -- response:', response);
 
   if (response && response.success && response.text) {
