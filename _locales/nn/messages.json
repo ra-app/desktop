@@ -1592,7 +1592,7 @@
         "description": "Text for requesting SMS instead of call"
     },
     "companyDetails": {
-        "message": "Company details",
+        "message": "Firmendetails",
         "description": "Title for company details entry"
     },
     "taxNumber": {
