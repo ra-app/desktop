@@ -314,7 +314,7 @@ $loading-height: 16px;
     bottom: 40px;
     font-size: 13px;
     color: $footer-text-color;
-    font-family: 'Open Sans';
+    font-family: $opensans-regular;
     span{
       color: $link-color;
     }
@@ -727,14 +727,14 @@ $debug: 0;
   .footer-copyright{
     text-align: center;
     font-size: 13px;
-    font-family: 'Open Sans';
+    font-family: $opensans-regular;
     letter-spacing: 0;
     color: #005AF5;
   }
   .footer-version{
     text-align: center;
     font-size: 13px;
-    font-family: 'Open Sans';
+    font-family: $opensans-regular;
     letter-spacing: 0;
     color: #747474;
   }
