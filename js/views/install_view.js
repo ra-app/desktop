@@ -50,6 +50,9 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       // 'change #phone-verification-code': 'onChangeVerifyCode',
       'click #verify-phone-code': 'onVerifyPhone',
       'click #company-profile-done': 'onCompanyProfileDone',
+      'keyup #company-name-input, #tax-number-input, #tax-id-input, #company-register-id-input, #imprint-input' : 'activateButtonCompanyInfo',
+      'keyup #user-name-input' : 'activateButtonProfileDetails',
+      'keyup #bank-iban-input, #bank-bic-input' : 'activateButtonBankDetails',
       'click #user-profile-done': 'onUserProfileDone',
       'click #bank-details-done': 'onBankDetailsDone',
       'click #bank-details-skip': 'onBankDetailsSkip',
@@ -99,6 +102,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
           this.$('#imprint-input').val(info.imprint);
           this.$('#branch-select').val(info.branch);
         }
+        this.activateButtonCompanyInfo();
       }
 
       if (this.step === Steps.SETUP_USER_PROFILE) {
@@ -106,6 +110,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         if (info) {
           this.$('#user-name-input').val(info.name);
         }
+        this.activateButtonProfileDetails();
       }
 
       if (this.step === Steps.SETUP_COMPANY_BANK) {
@@ -114,6 +119,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
           this.$('#bank-iban-input').val(info.iban);
           this.$('#bank-bic-input').val(info.bic);
         }
+        this.activateButtonBankDetails();
       }
 
       if (this.step === Steps.ACCEPT_EULA) {
@@ -307,6 +313,38 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       const fileField = this.$('#inputDocument');
       const file = fileField.prop('files');
     },
+    activateButtonCompanyInfo(){
+      const companyompanyName = this.$el.find('#company-name-input')[0].value.length;
+      const taxNumber = this.$el.find('#tax-number-input')[0].value.length;
+      const taxID = this.$el.find('#tax-id-input')[0].value.length;
+      const comercialRegisterId = this.$el.find('#company-register-id-input')[0].value.length;
+      const imprint = this.$el.find('#imprint-input')[0].value.length;
+      const button = this.$el.find('#company-profile-done');
+      if(companyompanyName > 0 && taxNumber > 0 && taxID >0 && comercialRegisterId > 0 && imprint > 0){
+        button.removeClass('disabled');
+      }else {
+        button.addClass('disabled');
+      }
+    },
+    activateButtonProfileDetails(){
+      const username = this.$el.find('#user-name-input')[0].value.length;
+      const button = this.$el.find('#user-profile-done');
+      if(username > 0){ 
+        button.removeClass('disabled');
+      }else {
+        button.addClass('disabled');
+      }
+    },
+    activateButtonBankDetails(){
+      const bankIBAN = this.$el.find('#bank-iban-input')[0].value.length;
+      const bankBIC = this.$el.find('#bank-bic-input')[0].value.length;
+      const button = this.$el.find('#bank-details-done');
+      if(bankIBAN > 0 && bankBIC > 0){ 
+        button.removeClass('disabled');
+      }else {
+        button.addClass('disabled');
+      }
+    },
     render_attributes() {
       return {
         appTagLine: i18n('appTagLine'),
@@ -352,6 +390,8 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         acceptEula: i18n('acceptEula'),
         uploadAvatarText: i18n('uploadAvatarText'),
         contactImportTitle: i18n('contactImportTitle'),
+        
+
       };
     },
   });
