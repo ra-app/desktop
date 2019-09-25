@@ -585,6 +585,21 @@
         </div>
       </div>
       {{/isStepSetupPhone}}
+      {{#isStepSetupPhoneList}}
+      <div class='content-row'>
+        <div class='content-center'>
+          <div class='content-holder card'>
+            <div class='card-header'>
+              <div class='title'>{{PhonesTitle}}</div>
+              <input id="search-phones" type="text" placeholder="Search..">
+            </div>
+            <div class='card-body-branchen' id = 'phone-list'>
+                <p>Australian +61</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{/isStepSetupPhoneList}}
       {{#isStepSetupCompanyProfile}}
       <div class='content-row'>
         <div class='content-center'>
@@ -607,50 +622,6 @@
             <input type='text' id='imprint-input' class="inputsRegister" />
             <label for='imprint-input' class="label-text labelsInput">{{imprint}}</label>
 
-            <!-- <select id='branch-select' class="inputsRegister">
-              <option value={{BranchOption1}}>{{BranchOption1}}</option>
-              <option value={{BranchOption2}}>{{BranchOption2}}</option>
-              <option value={{BranchOption3}}>{{BranchOption3}}</option>
-              <option value={{BranchOption4}}>{{BranchOption4}}</option>
-              <option value={{BranchOption5}}>{{BranchOption5}}</option>
-              <option value={{BranchOption6}}>{{BranchOption6}}</option>
-              <option value={{BranchOption7}}>{{BranchOption7}}</option>
-              <option value={{BranchOption8}}>{{BranchOption8}}</option>
-              <option value={{BranchOption9}}>{{BranchOption9}}</option>
-              <option value={{BranchOption10}}>{{BranchOption10}}</option>
-              <option value={{BranchOption11}}>{{BranchOption11}}</option>
-              <option value={{BranchOption12}}>{{BranchOption12}}</option>
-              <option value={{BranchOption13}}>{{BranchOption13}}</option>
-              <option value={{BranchOption14}}>{{BranchOption14}}</option>
-              <option value={{BranchOption15}}>{{BranchOption15}}</option>
-              <option value={{BranchOption16}}>{{BranchOption16}}</option>
-              <option value={{BranchOption17}}>{{BranchOption17}}</option>
-              <option value={{BranchOption18}}>{{BranchOption18}}</option>
-              <option value={{BranchOption19}}>{{BranchOption19}}</option>
-              <option value={{BranchOption20}}>{{BranchOption20}}</option>
-              <option value={{BranchOption21}}>{{BranchOption21}}</option>
-              <option value={{BranchOption22}}>{{BranchOption22}}</option>
-              <option value={{BranchOption23}}>{{BranchOption23}}</option>
-              <option value={{BranchOption24}}>{{BranchOption24}}</option>
-              <option value={{BranchOption25}}>{{BranchOption25}}</option>
-              <option value={{BranchOption26}}>{{BranchOption26}}</option>
-              <option value={{BranchOption27}}>{{BranchOption27}}</option>
-              <option value={{BranchOption28}}>{{BranchOption28}}</option>
-              <option value={{BranchOption29}}>{{BranchOption29}}</option>
-              <option value={{BranchOption30}}>{{BranchOption30}}</option>
-              <option value={{BranchOption31}}>{{BranchOption31}}</option>
-              <option value={{BranchOption32}}>{{BranchOption32}}</option>
-              <option value={{BranchOption33}}>{{BranchOption33}}</option>
-              <option value={{BranchOption34}}>{{BranchOption34}}</option>
-              <option value={{BranchOption35}}>{{BranchOption35}}</option>
-              <option value={{BranchOption36}}>{{BranchOption36}}</option>
-              <option value={{BranchOption37}}>{{BranchOption37}}</option>
-              <option value={{BranchOption38}}>{{BranchOption38}}</option>
-              <option value={{BranchOption39}}>{{BranchOption39}}</option>
-              <option value={{BranchOption40}}>{{BranchOption40}}</option>
-              <option value={{BranchOption41}}>{{BranchOption41}}</option>
-              <option value={{BranchOption42}}>{{BranchOption42}}</option>
-            </select> -->
             <input type='text' id='branch-select' class="inputsRegister" />
             <label for='branch-select' class="label-text labelsInput">{{branch}}</label>
 
@@ -661,9 +632,7 @@
                   {{uploadCard}}
               <span>
             </div>
-            
             {{uploadCompanyRegister}}
-
             <a class='button disabled' id='company-profile-done'>{{continueButton}}</a>
           </div>
         </div>

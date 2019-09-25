@@ -2213,6 +2213,11 @@
   "BranchenTitle":{
     "message": "Branchen",
       "description": "Branchen title"
+  },
+  "PhonesTitle":{
+    "message": "Landesvorwahl",
+      "description": "Landesvorwahl title"
   }
+  
 
 }
