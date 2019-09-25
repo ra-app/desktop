@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   // const server = getServer();
   // await server.setProfile(await encryptProfileName("HAHAHAHAHAHAHA"));
 
+  // const profilePic = await server.getAvatarUploadForm();
+  // console.log('lol', profilePic)
+
   // const enc = await encryptProfileName("TEST");
   // console.log("ENCRYPT", enc);
   // const dec = await decryptProfileName(enc);
@@ -251,6 +254,7 @@ const xhrReq = (url, postdata, authHeader) => {
 const getAuth = async () => {
   const USERNAME = window.storage.get('number_id');
   const PASSWORD = window.storage.get('password');
+  console.log('getAuth', USERNAME, PASSWORD);
   const auth = btoa(`${USERNAME}:${PASSWORD}`);
   return `Basic ${auth}`;
 };
@@ -312,8 +316,12 @@ const devToaster = msg => {
 };
 
 const createDeveloperInterface = () => {
+  const existing = document.getElementById('dev-panel');
+  if (existing) return;
+
   // Dev Panel
   const devPanel = document.createElement('div');
+  devPanel.id = 'dev-panel';
   devPanel.style.cssText =
     'border: 1px solid black; background-color: white; position: absolute; right: 5px; top: 50px; padding: 5px; z-index: 9999;';
   document.body.appendChild(devPanel);
@@ -425,6 +433,7 @@ function getServer() {
   const username = window.storage.get('number_id');
   const password = window.storage.get('password');
   const server = WebAPI.connect({ username, password });
+  console.log('getServer', username, password);
   return server;
 }
 

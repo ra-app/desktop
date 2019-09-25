@@ -548,7 +548,7 @@ function initialize({
       });
     }
 
-    function getAvatarUploadForm(name) {
+    function getAvatarUploadForm() {
       return _ajax({
         call: 'getAvatarUploadForm',
         httpType: 'GET',
