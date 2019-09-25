@@ -868,8 +868,8 @@ $debug: 0;
   }
 }
 .adminame-button{
-  margin-top:60px!important;
-  margin-bottom: unset!important;
+  margin-top: 20px !important;
+  margin-bottom: 15px !important;
 }
 .content-register{
   height:auto;
@@ -935,8 +935,16 @@ $debug: 0;
   }
 
   .card {
-    width: 670px;
-    max-width:670px;
+    // width: 670px;
+    // max-width:670px;
+    padding: 30px 30px 0px;
+    width: 450px;
+    max-height: calc(100% - 30px);
+    max-width: 450px;
+    &.content-import-contacts{
+      width: 600px;
+      max-width: 600px;
+    }
     .title-contact{
       color: $link-color;
       font-size: 20px;
@@ -952,8 +960,8 @@ $debug: 0;
     }
     .card-header {
       white-space: pre-line;
-      margin: -50px;
-      margin-bottom: 49px;
+      margin: -30px;
+      margin-bottom: 25px;
       // padding: 30px 10px;
       padding: 30px 10px 10px 10px;
       // padding-top: 30px;
@@ -989,7 +997,8 @@ $debug: 0;
       .subtitle {
         margin-top: 10px;
         font-weight: normal;
-        font-size: 17px;
+        font-size: 15px;
+
       }
     }
     .button {
@@ -1021,8 +1030,8 @@ $debug: 0;
     // border: 1px solid #c1c9cd;
     border-radius: 5px;
     // box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 3px;
-    padding: 50px;
-    width: 660px;
+    // padding: 50px;
+    // width: 660px;
     .div-title-register{
       @include titleRegister;
       @media (max-width: 1755px) {
@@ -1058,7 +1067,7 @@ $debug: 0;
     }
   }
   .setup-form {
-    width: 600px;
+    width: 450px;
   }
   .eula-text {
     width: 100%;
@@ -1141,12 +1150,12 @@ $debug: 0;
   }
  
   .labelsInput{
-    top: -100px !important;
+    top: -50px !important;
   }
 
   .inputsRegister{
     height: 30px;
-    margin: 20px 0px 29px;
+    margin: 10px 0px 5px;
   }
   .text-bankdetails{
     margin-top: 49px;
@@ -1240,10 +1249,13 @@ $debug: 0;
       width: 100%;
       font-weight: bold; // opacity: 0.7;
       font-size: 15px;
-      @media (max-width: 1755px) {
-        top: -45px;
-      } 
+      &.code-label{
+        @media (max-width: 1755px) {
+          top: -45px;
+        } 
+      }
     }
+    
     &.errored {
       color: red;
       box-shadow: 0 0 3px red;
