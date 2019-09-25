@@ -1,7 +1,7 @@
 import React from 'react';
 import { debounce } from 'lodash';
 
-import { Avatar } from './Avatar';
+// import { Avatar } from './Avatar';
 
 import { cleanSearchTerm } from '../util/cleanSearchTerm';
 import { LocalizerType } from '../types/Util';
@@ -121,12 +121,12 @@ export class MainHeader extends React.Component<Props> {
   public render() {
     const {
       searchTerm,
-      avatarPath,
+      // avatarPath,
       i18n,
-      color,
-      name,
-      phoneNumber,
-      profileName,
+      // color,
+      // name,
+      // phoneNumber,
+      // profileName,
     } = this.props;
 
     return (

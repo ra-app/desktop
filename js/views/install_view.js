@@ -56,7 +56,10 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       'click #contact-import-done': 'onContactImportDone',
       'click #contact-import-skip': 'onContactImportSkip',
       'click #uploadAvatar': 'onUploadAvatar',
-      'change #inputAvatar': 'onChoseAttachment',
+      'change #inputAvatar': 'onChoseAvatar',
+      'click #uploadDocuments': 'onuploadDocuments',
+      'change #inputDocument': 'onChoseDocument',
+      
     },
     initialize(options = {}) {
       this.accountManager = getAccountManager();
@@ -291,8 +294,17 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       this.$('#inputAvatar').click();
     },
     //TODO HOOK API for upload avatar
-    async onChoseAttachment() {
+    async onChoseAvatar() {
       const fileField = this.$('#inputAvatar');
+      const file = fileField.prop('files');
+    },
+    //Functions for upload documents
+    onuploadDocuments(){
+      this.$('#inputDocument').click();
+    },
+    //TODO HOOK API for upload avatar
+    async onChoseDocument() {
+      const fileField = this.$('#inputDocument');
       const file = fileField.prop('files');
     },
     render_attributes() {
