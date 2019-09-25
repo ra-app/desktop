@@ -1190,10 +1190,23 @@
       let promise;
       const options = conversation.getSendOptions();
 
-      // TODO: Change this too?
       if (conversation.isPrivate()) {
         const [number] = recipients;
         promise = textsecure.messaging.sendMessageToNumber(
+          number,
+          body,
+          attachments,
+          quoteWithData,
+          previewWithData,
+          stickerWithData,
+          this.get('sent_at'),
+          this.get('expireTimer'),
+          profileKey,
+          options
+        );
+      } else if (conversation.isCompany()) {
+        const [number] = recipients;
+        promise = sendCompanyMessage(
           number,
           body,
           attachments,
