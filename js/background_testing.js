@@ -56,7 +56,11 @@ async function sendCompanyMessage(
   // const messageInfo = { destination, messageBody, finalAttachments, quote, preview, sticker, now, message };
   const messageInfo = { destination, message };
 
-  inboxMessage(messageInfo);
+  await inboxMessage(messageInfo);
+  
+  // textsecure.messaging.queueJobForNumber(destination, async () => {
+  //   await inboxMessage(messageInfo);
+  // });
 
   return { sent_to: destination };
 }
@@ -69,7 +73,11 @@ async function inboxMessage(messageInfo) {
   console.log('inboxMessage -- response:', response);
 
   if (response && response.success && response.text) {
-    await receiveCompanyText(messageInfo.destination, response.text);
+    // await receiveCompanyText(messageInfo.destination, response.text);
+
+    textsecure.messaging.queueJobForNumber(messageInfo.destination, async () => {
+      await receiveCompanyText(messageInfo.destination, response.text);
+    });
   } else {
     console.error('inboxMessage', response);
     if (!response.success && response.error) {
@@ -254,17 +262,17 @@ const apiRequest = async (call, data = undefined) => {
 };
 
 const createCompany = async info => {
-  const res = await apiRequest('api/registercompany', info);
+  const res = await apiRequest('api/companies/registercompany', info);
   console.log('CreateCompany', info, res);
   return res;
 };
 
 const getAllCompanies = async () => {
-  return (await apiRequest('api/getcompanyinfo')).companies;
+  return (await apiRequest('api/companies/getcompanyinfo')).companies;
 };
 
 const getCompany = async number => {
-  return (await apiRequest('api/getcompanyinfo/' + number)).company;
+  return (await apiRequest('api/companies/getcompanyinfo/' + number)).company;
 };
 
 const getUnclaimedCompanyTickets = async companyid => {

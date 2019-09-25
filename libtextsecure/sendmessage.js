@@ -1278,7 +1278,6 @@ textsecure.MessageSender = function MessageSenderWrapper(username, password) {
     sender
   );
   this.sendMessageToNumber = sender.sendMessageToNumber.bind(sender);
-  this.uploadMessageAttachments = sender.uploadMessageAttachments.bind(sender);
   this.sendMessage = sender.sendMessage.bind(sender);
   this.resetSession = sender.resetSession.bind(sender);
   this.sendMessageToGroup = sender.sendMessageToGroup.bind(sender);
@@ -1303,6 +1302,8 @@ textsecure.MessageSender = function MessageSenderWrapper(username, password) {
   this.getStickerPackManifest = sender.getStickerPackManifest.bind(sender);
   this.sendStickerPackSync = sender.sendStickerPackSync.bind(sender);
   this.syncViewOnceOpen = sender.syncViewOnceOpen.bind(sender);
+  this.uploadMessageAttachments = sender.uploadMessageAttachments.bind(sender); // Added
+  this.queueJobForNumber = sender.queueJobForNumber.bind(sender); // Added
 };
 
 textsecure.MessageSender.prototype = {
