@@ -297,6 +297,10 @@ $loading-height: 16px;
     img{
       height: 300px;
       width: 300px;
+      @media (max-width: 1755px) {
+        height: 200px;
+        width: 200px;
+      }
     }
     .header{
       font-family: $poppins-bold;
@@ -304,6 +308,9 @@ $loading-height: 16px;
       font-size: 35px;
       color: $color-raapp-text;
       margin-top: 69px;
+      @media (max-width: 1755px) {
+        margin-top: 30px;
+      }
     }
   }
   .footer{
@@ -333,6 +340,9 @@ $loading-height: 16px;
     color: $color-raapp-text;
     max-width: 850px;
     margin: 32px auto;
+    @media (max-width: 1755px) {
+      font-size: 30px;
+    }
   }
 
   .dot {
@@ -596,7 +606,7 @@ $loading-height: 16px;
         #99f26b 100%
       )
       0% 0% no-repeat padding-box;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    // box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     border-radius: 30px;
     height: 30px;
     font-size: 12pt;
@@ -748,14 +758,32 @@ $debug: 0;
   }
   .logo-register{
     margin-right:58.4px;
+    @media (max-width: 1755px) {
+      margin-right: 21.4px;
+    }
     & .logo{
       width:300px;
       height:300px;
+      @media (max-width: 1755px) {
+        width: 200px;
+        height: 200px;
+      }
     }
   }
   .content-new-register{
     margin-left: 270px;
     margin-right: 40px;
+    @media (max-width: 1755px) {
+      margin-right: 20px;
+      width: calc(100% / 2);
+      margin-left: 0px
+    }
+  }
+
+  .content-code{
+    @media (max-width: 1755px) {
+      width: calc(100% / 2);
+    }
   }
   .register-title{
     text-align: left;
@@ -766,6 +794,10 @@ $debug: 0;
     opacity: 1;
     font-weight: 600;
     margin-bottom: 28px;
+    @media (max-width: 1755px) {
+      font-size: 35px;
+      margin-bottom: 10px;
+    }
   }
   .register-Subtitle{
     text-align: left;
@@ -775,6 +807,9 @@ $debug: 0;
     color: #476077;
     opacity: 1;
     max-width:680px;
+    @media (max-width: 1755px) {
+      font-size: 30px;
+    }
   }
   .content-header {
     order: 1;
@@ -802,7 +837,10 @@ $debug: 0;
     &.content-main-eula{
       max-width: 1500px;
       margin: 0 auto;
-      max-height: 850px;
+      max-height: 900px;
+      & .content-center{
+        max-height: calc(100% - 60px);
+      }
   }
   }
   .content-center {
@@ -831,18 +869,26 @@ $debug: 0;
   }
 }
 .adminame-button{
-  margin-top:60px!important;
-  margin-bottom: unset!important;
+  margin-top: 20px !important;
+  margin-bottom: 15px !important;
 }
 .content-register{
   height:auto;
   margin-left: auto;
   margin-right: auto;
+  @media (max-width: 1755px) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }
 .content-register-info{
   height:auto;
   margin-top:180px;
   margin-bottom: 80px;
+  @media (max-width: 1755px) {
+    margin-top: 55px;
+    margin-bottom: 30px;
+  }
 }
 .content-column {
   flex-direction: column;
@@ -883,11 +929,23 @@ $debug: 0;
   }
   .content-logo{
     margin-left:270px;
+    @media (max-width: 1755px) {
+      margin-left: 0px;
+      width: 100%;
+    }
   }
 
   .card {
-    width: 670px;
-    max-width:670px;
+    // width: 670px;
+    // max-width:670px;
+    padding: 30px 30px 0px;
+    width: 450px;
+    max-height: calc(100% - 30px);
+    max-width: 450px;
+    &.content-import-contacts{
+      width: 600px;
+      max-width: 600px;
+    }
     .title-contact{
       color: $link-color;
       font-size: 20px;
@@ -903,8 +961,8 @@ $debug: 0;
     }
     .card-header {
       white-space: pre-line;
-      margin: -50px;
-      margin-bottom: 49px;
+      margin: -30px;
+      margin-bottom: 25px;
       // padding: 30px 10px;
       padding: 30px 10px 10px 10px;
       // padding-top: 30px;
@@ -940,7 +998,8 @@ $debug: 0;
       .subtitle {
         margin-top: 10px;
         font-weight: normal;
-        font-size: 17px;
+        font-size: 15px;
+
       }
     }
     .button {
@@ -951,26 +1010,48 @@ $debug: 0;
       margin-bottom: 20px;
       padding: 8px;
       font-family: $poppins-regular;
+      @media (max-width: 1755px) {
+        margin-bottom: 20px;
+        margin-top: 15px;
+      }
     }
     &.register {
       height: 310px;
       width:670px;
       margin: 0px;
+      @media (max-width: 1755px) {
+        height: 255px;
+        width: 100%;
+        max-width: 100%;
+        margin: 0px;
+        padding: 15px;
+      }
     }
     background: #fff;
     // border: 1px solid #c1c9cd;
     border-radius: 5px;
     // box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 3px;
-    padding: 50px;
-    width: 660px;
+    // padding: 50px;
+    // width: 660px;
     .div-title-register{
       @include titleRegister;
+      @media (max-width: 1755px) {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
     }
     .div-welcome{
       @include welcomeMessage;
+      @media (max-width: 1755px) {
+        font-size: 15px;
+        margin-bottom: 5px;
+      }
     }
     .empty-div{
       height: 50px;
+      @media (max-width: 1755px) {
+        height: 64px;
+      }
     }
   }
   .action-link {
@@ -987,7 +1068,7 @@ $debug: 0;
     }
   }
   .setup-form {
-    width: 600px;
+    width: 450px;
   }
   .eula-text {
     width: 100%;
@@ -1021,6 +1102,9 @@ $debug: 0;
     height: 60px;
     margin-top: unset;
     margin-bottom:unset;
+    @media (max-width: 1755px) {
+      height: 50px;
+    } 
   }
   .file-input-avatar{
     display: none;
@@ -1067,12 +1151,12 @@ $debug: 0;
   }
  
   .labelsInput{
-    top: -100px !important;
+    top: -50px !important;
   }
 
   .inputsRegister{
     height: 30px;
-    margin: 20px 0px 29px;
+    margin: 10px 0px 5px;
   }
   .text-bankdetails{
     margin-top: 49px;
@@ -1166,7 +1250,13 @@ $debug: 0;
       width: 100%;
       font-weight: bold; // opacity: 0.7;
       font-size: 15px;
+      &.code-label{
+        @media (max-width: 1755px) {
+          top: -45px;
+        } 
+      }
     }
+    
     &.errored {
       color: red;
       box-shadow: 0 0 3px red;

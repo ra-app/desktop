@@ -509,6 +509,9 @@
           </div>
         </div>
       </div>
+      <div class='content-footer content-main-footer'>
+        <div class='content-holder'><span class='footer-copyright'>&copy; 2018 OfficeApp</span> | <span class='footer-version'>Desktop Version 1.26.2</span></div>
+      </div>
       {{/isStepEula}}
       {{#isStepSetupType}}
       <div class='content-row content-register-info'>
@@ -550,6 +553,9 @@
             <a class='button disabled ' id='continue-setup-admin'>{{continueButton}}</a>
           </div>
         </div>
+      </div>
+      <div class='content-footer content-main-footer'>
+        <div class='content-holder'><span class='footer-copyright'>&copy; 2018 OfficeApp</span> | <span class='footer-version'>Desktop Version 1.26.2</span></div>
       </div>
       {{/isStepSetupType}}
       {{#isStepSetupPhone}}
@@ -677,7 +683,7 @@
       {{#isStepSetupContactImport}}
       <div class='content-row'>
         <div class='content-center'>
-          <div class='content-holder card'>
+          <div class='content-holder card content-import-contacts'>
             <!-- CONTACT IMPORT TODO -->
             <span class="title-contact">{{contactImportTitle}}</span>
             <p class="import-contact-text">
@@ -689,9 +695,7 @@
         </div>
       </div>
       {{/isStepSetupContactImport}}
-      <div class='content-footer content-main-footer'>
-        <div class='content-holder'><span class='footer-copyright'>&copy; 2018 OfficeApp</span> | <span class='footer-version'>Desktop Version 1.26.2</span></div>
-      </div>
+      
     </div>
   </script>
 
