@@ -38,6 +38,8 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     SETUP_PHONESLIST: 9
   };
 
+  let Tmp = {};
+
   Whisper.InstallView = Whisper.View.extend({
     templateName: 'install-flow-template',
     className: 'main full-screen-flow',
@@ -54,11 +56,13 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       'click #phone-number-country': 'onOpenSelectPhoneList',
       'keyup #search-phones': 'searchPhones',
       'click #phone-list p': 'onSelectPhone',
+      'keyup #phone-number-value': 'activateButtonVerifyCall',
+      'keyup #phone-verification-code': 'activateButtonVerifyCode',
       'click #company-profile-done': 'onCompanyProfileDone',
       'click #branch-select': 'onOpenSelectBranch',
       'keyup #search-branch': 'searchBranch',
       'click #branch-list > p': 'onSelectBranch',
-      'keyup #company-name-input, #tax-number-input, #tax-id-input, #company-register-id-input, #imprint-input' : 'activateButtonCompanyInfo',
+      'keyup #company-name-input, #tax-number-input, #tax-id-input, #company-register-id-input, #imprint-input, #branch-select': 'activateButtonCompanyInfo',
       'keyup #user-name-input' : 'activateButtonProfileDetails',
       'keyup #bank-iban-input, #bank-bic-input' : 'activateButtonBankDetails',
       'click #user-profile-done': 'onUserProfileDone',
@@ -345,8 +349,9 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       const taxID = this.$el.find('#tax-id-input')[0].value.length;
       const comercialRegisterId = this.$el.find('#company-register-id-input')[0].value.length;
       const imprint = this.$el.find('#imprint-input')[0].value.length;
+      const branch = this.$el.find('#branch-select')[0].value.length;
       const button = this.$el.find('#company-profile-done');
-      if(companyompanyName > 0 && taxNumber > 0 && taxID >0 && comercialRegisterId > 0 && imprint > 0){
+      if(companyompanyName > 0 && taxNumber > 0 && taxID >0 && comercialRegisterId > 0 && imprint > 0 && branch > 0) {
         button.removeClass('disabled');
       }else {
         button.addClass('disabled');
@@ -372,11 +377,24 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       }
     },
     onOpenSelectBranch () {
+      Tmp = {
+         companyompanyName: this.$el.find('#company-name-input')[0].value,
+         taxNumber: this.$el.find('#tax-number-input')[0].value,
+         taxID: this.$el.find('#tax-id-input')[0].value,
+         comercialRegisterId: this.$el.find('#company-register-id-input')[0].value,
+        imprint: this.$el.find('#imprint-input')[0].value,
+      };
       this.selectStep(Steps.SETUP_BRANCHEN);
     },
     onSelectBranch (e) {
       this.selectStep(Steps.SETUP_COMPANY_PROFILE);
+      this.$('#company-name-input').val(Tmp.companyompanyName)
+      this.$('#tax-number-input').val(Tmp.taxNumber)
+      this.$('#tax-id-input').val(Tmp.taxID)
+      this.$('#company-register-id-input').val(Tmp.comercialRegisterId)
+      this.$('#imprint-input').val(Tmp.imprint)
       this.$('#branch-select').val(e.target.textContent)
+      this.resetTMP()
     },
     searchBranch(e){
       var value = e.target.value;
@@ -418,6 +436,29 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       $("#phone-list p").filter(function() {
         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
       });
+    },
+    activateButtonVerifyCall(){
+      const number = this.$el.find('#phone-number-value')[0].value.length;
+      const button = this.$el.find('#request-verify-call');
+      if(number > 0){ 
+        button.removeClass('disabled');
+      }else {
+        button.addClass('disabled');
+      }
+
+    },
+    activateButtonVerifyCode(){
+      const code = this.$el.find('#phone-verification-code')[0].value.length;
+      const button = this.$el.find('#verify-phone-code');
+      if(code > 0){ 
+        button.removeClass('disabled');
+      }else {
+        button.addClass('disabled');
+      }
+
+    },
+    resetTMP () {
+      Tmp = {}
     },
     render_attributes() {
       return {
