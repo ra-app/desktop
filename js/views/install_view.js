@@ -34,7 +34,8 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     SETUP_COMPANY_BANK: 5,
     SETUP_USER_PROFILE: 6,
     SETUP_CONTACT_IMPORT: 7,
-    SETUP_BRANCHEN: 8
+    SETUP_BRANCHEN: 8,
+    SETUP_PHONESLIST: 9
   };
 
   Whisper.InstallView = Whisper.View.extend({
@@ -50,8 +51,12 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       'click #request-verify-sms': 'onRequestVerifySMS',
       // 'change #phone-verification-code': 'onChangeVerifyCode',
       'click #verify-phone-code': 'onVerifyPhone',
+      'click #phone-number-value': 'onOpenSelectPhoneList',
+      'keyup #search-phones': 'searchPhones',
+      'click #phone-list p': 'onSelectPhone',
       'click #company-profile-done': 'onCompanyProfileDone',
       'click #branch-select': 'onOpenSelectBranch',
+      'keyup #search-branch': 'searchBranch',
       'click #branch-list > p': 'onSelectBranch',
       'keyup #company-name-input, #tax-number-input, #tax-id-input, #company-register-id-input, #imprint-input' : 'activateButtonCompanyInfo',
       'keyup #user-name-input' : 'activateButtonProfileDetails',
@@ -354,9 +359,26 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     onSelectBranch (e) {
       this.selectStep(Steps.SETUP_COMPANY_PROFILE);
       this.$('#branch-select').val(e.target.textContent)
-
     },
-
+    searchBranch(e){
+      var value = e.target.value;
+      $("#branch-list p").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    },
+    onOpenSelectPhoneList () {
+      this.selectStep(Steps.SETUP_PHONESLIST);
+    },
+    onSelectPhone (e) {
+      this.selectStep(Steps.SETUP_PHONE);
+      this.$('#phone-number-value').val(e.target.textContent)
+    },
+    searchPhones(e){
+      var value = e.target.value;
+      $("#phone-list p").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    },
     render_attributes() {
       return {
         appTagLine: i18n('appTagLine'),
@@ -396,6 +418,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         isStepSetupUserProfile: this.step === Steps.SETUP_USER_PROFILE,
         isStepSetupContactImport: this.step === Steps.SETUP_CONTACT_IMPORT,
         isStepSetupBranchen: this.step === Steps.SETUP_BRANCHEN,
+        isStepSetupPhoneList: this.step === Steps.SETUP_PHONESLIST,
 
         eulatitle: i18n('eulatitle'),
         eulaSubTitle: i18n('eulaSubTitle'),
@@ -403,6 +426,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         acceptEula: i18n('acceptEula'),
         uploadAvatarText: i18n('uploadAvatarText'),
         contactImportTitle: i18n('contactImportTitle'),
+        BranchenTitle: i18n('BranchenTitle'),
         BranchOption1: i18n('BranchOption1'),
         BranchOption2: i18n('BranchOption2'),
         BranchOption3: i18n('BranchOption3'),
@@ -444,7 +468,8 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         BranchOption39: i18n('BranchOption39'),
         BranchOption40: i18n('BranchOption40'),
         BranchOption41: i18n('BranchOption41'),
-        BranchOption42: i18n('BranchOption42')
+        BranchOption42: i18n('BranchOption42'),
+        PhonesTitle: i18n('PhonesTitle'),
       };
     },
   });

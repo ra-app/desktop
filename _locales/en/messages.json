@@ -2209,6 +2209,15 @@
   "BranchOption42":{
     "message": "Öffentliche Verwaltung",
       "description": "Branch option 1"
+  },
+  "BranchenTitle":{
+    "message": "Branchen",
+      "description": "Branchen title"
+  },
+  "PhonesTitle":{
+    "message": "Landesvorwahl",
+      "description": "Landesvorwahl title"
   }
+  
 
 }
