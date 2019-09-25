@@ -297,6 +297,10 @@ $loading-height: 16px;
     img{
       height: 300px;
       width: 300px;
+      @media (max-height: 780px) and (max-width: 1095px) {
+        height: 200px;
+        width: 200px;
+      }
     }
     .header{
       font-family: $poppins-bold;
@@ -304,6 +308,9 @@ $loading-height: 16px;
       font-size: 35px;
       color: $color-raapp-text;
       margin-top: 69px;
+      @media (max-height: 780px) and (max-width: 1095px) {
+        margin-top: 30px;
+      }
     }
   }
   .footer{
@@ -333,6 +340,9 @@ $loading-height: 16px;
     color: $color-raapp-text;
     max-width: 850px;
     margin: 32px auto;
+    @media (max-height: 780px) and (max-width: 1095px) {
+      font-size: 30px;
+    }
   }
 
   .dot {
@@ -802,6 +812,9 @@ $debug: 0;
       max-width: 1500px;
       margin: 0 auto;
       max-height: 900px;
+      & .content-center{
+        max-height: calc(100% - 60px);
+      }
   }
   }
   .content-center {
