@@ -54,6 +54,8 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       'click #phone-number-value': 'onOpenSelectPhoneList',
       'keyup #search-phones': 'searchPhones',
       'click #phone-list p': 'onSelectPhone',
+      'keyup #phone-number-value': 'activateButtonVerifyCall',
+      'keyup #phone-verification-code': 'activateButtonVerifyCode',
       'click #company-profile-done': 'onCompanyProfileDone',
       'click #branch-select': 'onOpenSelectBranch',
       'keyup #search-branch': 'searchBranch',
@@ -367,7 +369,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       });
     },
     onOpenSelectPhoneList () {
-      this.selectStep(Steps.SETUP_PHONESLIST);
+      // this.selectStep(Steps.SETUP_PHONESLIST); //descomeent when dropdown flag remove 
     },
     onSelectPhone (e) {
       this.selectStep(Steps.SETUP_PHONE);
@@ -378,6 +380,26 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       $("#phone-list p").filter(function() {
         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
       });
+    },
+    activateButtonVerifyCall(){
+      const number = this.$el.find('#phone-number-value')[0].value.length;
+      const button = this.$el.find('#request-verify-call');
+      if(number > 0){ 
+        button.removeClass('disabled');
+      }else {
+        button.addClass('disabled');
+      }
+
+    },
+    activateButtonVerifyCode(){
+      const code = this.$el.find('#phone-verification-code')[0].value.length;
+      const button = this.$el.find('#verify-phone-code');
+      if(code > 0){ 
+        button.removeClass('disabled');
+      }else {
+        button.addClass('disabled');
+      }
+
     },
     render_attributes() {
       return {
