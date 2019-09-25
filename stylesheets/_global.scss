@@ -297,7 +297,7 @@ $loading-height: 16px;
     img{
       height: 300px;
       width: 300px;
-      @media (max-height: 780px) and (max-width: 1095px) {
+      @media (max-width: 1755px) {
         height: 200px;
         width: 200px;
       }
@@ -308,7 +308,7 @@ $loading-height: 16px;
       font-size: 35px;
       color: $color-raapp-text;
       margin-top: 69px;
-      @media (max-height: 780px) and (max-width: 1095px) {
+      @media (max-width: 1755px) {
         margin-top: 30px;
       }
     }
@@ -340,7 +340,7 @@ $loading-height: 16px;
     color: $color-raapp-text;
     max-width: 850px;
     margin: 32px auto;
-    @media (max-height: 780px) and (max-width: 1095px) {
+    @media (max-width: 1755px) {
       font-size: 30px;
     }
   }
@@ -606,7 +606,7 @@ $loading-height: 16px;
         #99f26b 100%
       )
       0% 0% no-repeat padding-box;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    // box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     border-radius: 30px;
     height: 30px;
     font-size: 12pt;
@@ -757,14 +757,32 @@ $debug: 0;
   }
   .logo-register{
     margin-right:58.4px;
+    @media (max-width: 1755px) {
+      margin-right: 21.4px;
+    }
     & .logo{
       width:300px;
       height:300px;
+      @media (max-width: 1755px) {
+        width: 200px;
+        height: 200px;
+      }
     }
   }
   .content-new-register{
     margin-left: 270px;
     margin-right: 40px;
+    @media (max-width: 1755px) {
+      margin-right: 20px;
+      width: calc(100% / 2);
+      margin-left: 0px
+    }
+  }
+
+  .content-code{
+    @media (max-width: 1755px) {
+      width: calc(100% / 2);
+    }
   }
   .register-title{
     text-align: left;
@@ -775,6 +793,10 @@ $debug: 0;
     opacity: 1;
     font-weight: 600;
     margin-bottom: 28px;
+    @media (max-width: 1755px) {
+      font-size: 35px;
+      margin-bottom: 10px;
+    }
   }
   .register-Subtitle{
     text-align: left;
@@ -784,6 +806,9 @@ $debug: 0;
     color: #476077;
     opacity: 1;
     max-width:680px;
+    @media (max-width: 1755px) {
+      font-size: 30px;
+    }
   }
   .content-header {
     order: 1;
@@ -850,11 +875,19 @@ $debug: 0;
   height:auto;
   margin-left: auto;
   margin-right: auto;
+  @media (max-width: 1755px) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }
 .content-register-info{
   height:auto;
   margin-top:180px;
   margin-bottom: 80px;
+  @media (max-width: 1755px) {
+    margin-top: 55px;
+    margin-bottom: 30px;
+  }
 }
 .content-column {
   flex-direction: column;
@@ -895,6 +928,10 @@ $debug: 0;
   }
   .content-logo{
     margin-left:270px;
+    @media (max-width: 1755px) {
+      margin-left: 0px;
+      width: 100%;
+    }
   }
 
   .card {
@@ -963,11 +1000,22 @@ $debug: 0;
       margin-bottom: 20px;
       padding: 8px;
       font-family: $poppins-regular;
+      @media (max-width: 1755px) {
+        margin-bottom: 20px;
+        margin-top: 15px;
+      }
     }
     &.register {
       height: 310px;
       width:670px;
       margin: 0px;
+      @media (max-width: 1755px) {
+        height: 255px;
+        width: 100%;
+        max-width: 100%;
+        margin: 0px;
+        padding: 15px;
+      }
     }
     background: #fff;
     // border: 1px solid #c1c9cd;
@@ -977,12 +1025,23 @@ $debug: 0;
     width: 660px;
     .div-title-register{
       @include titleRegister;
+      @media (max-width: 1755px) {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
     }
     .div-welcome{
       @include welcomeMessage;
+      @media (max-width: 1755px) {
+        font-size: 15px;
+        margin-bottom: 5px;
+      }
     }
     .empty-div{
       height: 50px;
+      @media (max-width: 1755px) {
+        height: 64px;
+      }
     }
   }
   .action-link {
@@ -1033,6 +1092,9 @@ $debug: 0;
     height: 60px;
     margin-top: unset;
     margin-bottom:unset;
+    @media (max-width: 1755px) {
+      height: 50px;
+    } 
   }
   .file-input-avatar{
     display: none;
@@ -1178,6 +1240,9 @@ $debug: 0;
       width: 100%;
       font-weight: bold; // opacity: 0.7;
       font-size: 15px;
+      @media (max-width: 1755px) {
+        top: -45px;
+      } 
     }
     &.errored {
       color: red;
