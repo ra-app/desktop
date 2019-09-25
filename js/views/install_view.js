@@ -51,7 +51,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       'click #request-verify-sms': 'onRequestVerifySMS',
       // 'change #phone-verification-code': 'onChangeVerifyCode',
       'click #verify-phone-code': 'onVerifyPhone',
-      'click #phone-number-value': 'onOpenSelectPhoneList',
+      'click #phone-number-country': 'onOpenSelectPhoneList',
       'keyup #search-phones': 'searchPhones',
       'click #phone-list p': 'onSelectPhone',
       'click #company-profile-done': 'onCompanyProfileDone',
@@ -139,9 +139,9 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       if (this.step === Steps.SETUP_PHONE) {
         const number = textsecure.storage.user.getNumber();
         if (number) this.$('#phone-number-value').val(number);
-        this.phoneView = new Whisper.PhoneInputView({
-          el: this.$('#phone-number-input'),
-        });
+        // this.phoneView = new Whisper.PhoneInputView({
+        //   el: this.$('#phone-number-input'),
+        // });
       } else {
         if (this.phoneView) this.phoneView.remove();
         this.phoneView = null;
@@ -224,8 +224,26 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       await textsecure.storage.remove('bankSetupInfo');
       this.selectStep(Steps.SETUP_CONTACT_IMPORT);
     },
+    validateNumber() {
+      const input = this.$('input.number');
+      const dialCode = this.$('#dialCode').text();
+      const number = dialCode + input.val();
+     
+      const regionCode = this.$('#countryCode').text().toLowerCase();
+
+      const parsedNumber = libphonenumber.util.parseNumber(number, regionCode);
+      if (parsedNumber.isValidNumber) {
+        this.$('.number-container').removeClass('invalid');
+        this.$('.number-container').addClass('valid');
+      } else {
+        this.$('.number-container').removeClass('valid');
+      }
+      input.trigger('validation');
+
+      return parsedNumber.e164;
+    },
     onRequestVerifyCall() {
-      const number = this.phoneView.validateNumber();
+      const number = this.validateNumber();
       if (number) {
         this.accountManager.requestVoiceVerification(number).catch(err => {
           console.error('Error requesting Voice verification', err);
@@ -233,7 +251,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       }
     },
     onRequestVerifySMS() {
-      const number = this.phoneView.validateNumber();
+      const number = this.validateNumber();
       if (number) {
         this.accountManager.requestSMSVerification(number).catch(err => {
           console.error('Error requesting SMS verification', err);
@@ -253,7 +271,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     },
     onVerifyPhone() {
       // TODO: check phone verification code
-      const number = this.phoneView.validateNumber();
+      const number = this.validateNumber();
       const code = this.$('#phone-verification-code')
         .val()
         .replace(/\D+/g, '');
@@ -366,12 +384,34 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
       });
     },
+    loadCountries(){
+      const thisElement = this;
+      $.ajax({
+        type: "GET",
+        url: "config/countries.json", // Using our resources.json file to serve results
+        success: function(result) {
+          const countries = JSON.parse(result);
+          countries.sort(function(a, b) {
+            return (a['name'] > b['name']) ? 1 : ((a['name'] < b['name']) ? -1 : 0);
+        });
+        for( let i = 0; i < countries.length; i++){
+          const pItem = `<p class="pCountry" data-country-code="${countries[i].code}" data-dial-code="${countries[i].dial_code}">${countries[i].name} <span class="spanDialCode">${countries[i].dial_code}</span></p>`
+          thisElement.$('#phone-list').append(pItem)
+        }
+        },
+        error: function(e){
+          console.log('Error getting countries', e)
+        }
+      });
+    },
     onOpenSelectPhoneList () {
+      this.loadCountries();
       this.selectStep(Steps.SETUP_PHONESLIST);
     },
     onSelectPhone (e) {
       this.selectStep(Steps.SETUP_PHONE);
-      this.$('#phone-number-value').val(e.target.textContent)
+      this.$('#countryCode').text(`${e.target.getAttribute('data-country-code')}`);
+      this.$('#dialCode').text(` ${e.target.getAttribute('data-dial-code')}`);
     },
     searchPhones(e){
       var value = e.target.value;

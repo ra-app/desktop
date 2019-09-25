@@ -569,11 +569,14 @@
             <div id='phone-number-input'>
               <div class='phone-input-form'>
                 <div id='phone-number-container' class='number-container'>
-                  <input type='tel' class='number' id='phone-number-value' name='phone-number-value' />
+                  <div id="phone-number-country">
+                    <span id="countryCode" class="countryCode">DE</span> <span class="separator">|</span> <span id="dialCode" class="dialCode">+49</span>
+                  </div>
+                  <input class='number' id='phone-number-value' name='phone-number-value' />
                 </div>
               </div>
             </div>
-            <label for='phone-number-value'>{{phoneNumber}}</label>
+            <label for='phone-number-value' class="labelPhone">{{phoneNumber}}</label>
             <a class='button' id='request-verify-call'>{{callPhone}}</a>
             <div class='action-link'><a id='request-verify-sms'>{{sendSMSInstead}}</a></div>
             <div>
@@ -591,10 +594,10 @@
           <div class='content-holder card'>
             <div class='card-header'>
               <div class='title'>{{PhonesTitle}}</div>
-              <input id="search-phones" type="text" placeholder="Search..">
+              <input id="search-phones" type="text" class="search-input" placeholder="Search..">
             </div>
             <div class='card-body-branchen' id = 'phone-list'>
-                <p>Australian +61</p>
+                
             </div>
           </div>
         </div>
@@ -644,7 +647,7 @@
           <div class='content-holder card'>
             <div class='card-header'>
               <div class='title'>{{BranchenTitle}}</div>
-              <input id="search-branch" type="text" placeholder="Search..">
+              <input id="search-branch" type="text" class="search-input" placeholder="Search..">
             </div>
             <div class='card-body-branchen' id = 'branch-list'>
               <p>{{BranchOption1}}</p>
