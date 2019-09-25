@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 // ===
 
-const API_URL =
-  'https://luydm9sd26.execute-api.eu-central-1.amazonaws.com/latest/';
+const API_URL = 'https://luydm9sd26.execute-api.eu-central-1.amazonaws.com/latest/';
+// const API_URL = 'http://127.0.0.1:4000/';
 
 // XXX: Queue for sent messages, sent/received/seen indicators, error handling!
 
@@ -69,7 +69,7 @@ async function sendCompanyMessage(
 
 async function inboxMessage(messageInfo) {
   console.log('inboxMessage -- MessageInfo:', messageInfo);
-  const response = await apiRequest('api/inbox/v2', messageInfo);
+  const response = await apiRequest('api/v2/inbox', messageInfo);
   console.log('inboxMessage -- response:', response);
 
   if (response && response.success && response.text) {
@@ -262,29 +262,29 @@ const apiRequest = async (call, data = undefined) => {
 };
 
 const createCompany = async info => {
-  const res = await apiRequest('api/companies/registercompany', info);
+  const res = await apiRequest('api/v1/companies/register', info);
   console.log('CreateCompany', info, res);
   return res;
 };
 
-const getAllCompanies = async () => {
-  return (await apiRequest('api/companies/getcompanyinfo')).companies;
-};
+// const getAllCompanies = async () => {
+//   return (await apiRequest('api/v1/companies/getcompanyinfo')).companies;
+// };
 
 const getCompany = async number => {
-  return (await apiRequest('api/companies/getcompanyinfo/' + number)).company;
+  return (await apiRequest('api/v1/companies/' + number)).company;
 };
 
-const getUnclaimedCompanyTickets = async companyid => {
-  return (await apiRequest('api/ticket/list/' + companyid)).tickets;
+const getUnclaimedCompanyTickets = async company_id => {
+  return (await apiRequest('api/v1/admin/' + company_id + '/tickets/list')).tickets;
 };
 
-const getTicketDetails = async ticket_uuid => {
-  return (await apiRequest('api/ticket/details/' + ticket_uuid)).details;
+const getTicketDetails = async (company_id, ticket_uuid) => {
+  return (await apiRequest('api/v1/admin/' + company_id + '/tickets/details/' + ticket_uuid)).details;
 };
 
-const claimTicket = async ticket_uuid => {
-  return (await apiRequest('api/ticket/claim/' + ticket_uuid)).phone_number;
+const claimTicket = async (company_id, ticket_uuid) => {
+  return (await apiRequest('api/v1/admin/' + company_id + '/tickets/claim/' + ticket_uuid)).phone_number;
 };
 
 const exampleInfo = {
@@ -371,7 +371,7 @@ const createDeveloperInterface = () => {
           infoBtn.innerText = 'Info';
           infoBtn.addEventListener('click', async () => {
             detailsList.innerText = '';
-            const details = await getTicketDetails(ticket.uuid);
+            const details = await getTicketDetails(companyID, ticket.uuid);
             // console.log(details);
             for (let x = 0; x < details.events.length; x++) {
               // console.log(x)
@@ -383,7 +383,7 @@ const createDeveloperInterface = () => {
             }
           });
           claimBtn.addEventListener('click', async () => {
-            const phone_number = await claimTicket(ticket.uuid);
+            const phone_number = await claimTicket(companyID, ticket.uuid);
             console.log(phone_number);
             await ensureConversation(phone_number);
             getCompanyTicketsBtn.click();
