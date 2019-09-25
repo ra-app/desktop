@@ -2041,5 +2041,90 @@
   "contactImportTitle":{
       "message": "Kontakte synchronisieren",
       "description": "Text for contact import"
+  },
+  "BranchOption1":{
+    "message": "Administration / Verwaltung / Bürowesen",
+      "description": "Branch option 1"
+  },
+  "BranchOption2":{
+    "message": "Automobil / Automobilzulieferer",
+      "description": "Branch option 1"
+  },
+  "BranchOption3":{
+    "message": "Banken",
+      "description": "Branch option 1"
+  },
+  "BranchOption4":{
+    "message": "Baugewerbe / Architektur",
+      "description": "Branch option 1"
+  },
+  "BranchOption5":{
+    "message": "Beratung / Consulting",
+      "description": "Branch option 1"
+  },
+  "BranchOption6":{
+    "message": "Bildung / Universität / FH / Schulen",
+      "description": "Branch option 1"
+  },
+  "BranchOption7":{
+    "message": "Chemie",
+      "description": "Branch option 1"
+  },
+  "BranchOption8":{
+    "message": "Dienstleistung",
+      "description": "Branch option 1"
+  },
+  "BranchOption9":{
+    "message": "Druck / Papier / Verpackung",
+      "description": "Branch option 1"
+  },
+  "BranchOption10":{
+    "message": "EDV / IT",
+      "description": "Branch option 1"
+  },
+  "BranchOption11":{
+    "message": "Einkauf / Beschaffung",
+      "description": "Branch option 1"
+  },
+  "BranchOption12":{
+    "message": "Elektro / Elektronikn",
+      "description": "Branch option 1"
+  },
+  "BranchOption13":{
+    "message": "Energiewirtschaft",
+      "description": "Branch option 1"
+  },
+  "BranchOption14":{
+    "message": "Finanzen",
+      "description": "Branch option 1"
+  },
+  "BranchOption15":{
+    "message": "Forschung / Entwicklung / Wissenschaft",
+      "description": "Branch option 1"
+  },
+  "BranchOption16":{
+    "message": "Gesundheitswesen / Soziales / Pflege",
+      "description": "Branch option 1"
+  },
+  "BranchOption17":{
+    "message": "Handel / Konsum",
+      "description": "Branch option 1"
+  },
+  "BranchOption18":{
+    "message": "Handwerk",
+      "description": "Branch option 1"
+  },
+  "BranchOption19":{
+    "message": "Immobilien / Facility Management",
+      "description": "Branch option 1"
+  },
+  "BranchOption20":{
+    "message": "Industrie",
+      "description": "Branch option 1"
+  },
+  "BranchOption21":{
+    "message": "Internet / Multimedia",
+      "description": "Branch option 1"
   }
+  
 }

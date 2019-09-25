@@ -622,6 +622,7 @@ $loading-height: 16px;
         )
         0% 0% no-repeat padding-box;
       opacity: 0.5;
+      pointer-events: none;
     }
     &.neutral {
       color: black;
