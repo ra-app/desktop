@@ -11,6 +11,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   setInterval(() => {
     createDeveloperInterface();
   }, 1000);
+
+  // const server = getServer();
+  // await server.setProfile(await encryptProfileName("HAHAHAHAHAHAHA"));
+
+  // const enc = await encryptProfileName("TEST");
+  // console.log("ENCRYPT", enc);
+  // const dec = await decryptProfileName(enc);
+  // console.log("DECRYPT", dec);
 });
 
 // ===
@@ -411,34 +419,75 @@ const createDeveloperInterface = () => {
 
 
 // PROFILE STUFF START
+
+
 function getServer() {
-  const username = textsecure.storage.get('number_id');
-  const password = textsecure.storage.get('password');
+  const username = window.storage.get('number_id');
+  const password = window.storage.get('password');
   const server = WebAPI.connect({ username, password });
   return server;
 }
 
-async function encryptWithProfileKey(message) {
-  const plaintext = dcodeIO.ByteBuffer.wrap(
-    message,
-    'binary'
-  ).toArrayBuffer();
-  const key = textsecure.storage.get('profileKey');
-  const encrypted = await Signal.Crypto.encryptSymmetric(key, plaintext);
-  const encoded = Signal.Crypto.stringFromBytes(encrypted)
-  return encoded;
+async function encryptProfileName(name) {
+  const key = window.storage.get('profileKey');
+  const keyBuffer = window.Signal.Crypto.base64ToArrayBuffer(key);
+  const data = window.Signal.Crypto.bytesFromString(name);
+
+  // encrypt
+  const encrypted = await textsecure.crypto.encryptProfileName(
+    data,
+    keyBuffer
+  );
+
+  // encode
+  const encryptedName = window.Signal.Crypto.arrayBufferToBase64(encrypted);
+  return encryptedName;
 }
 
-async function decryptWithProfileKey(message) {
-  const plaintext = Signal.Crypto.bytesFromString(message);
-  const key = textsecure.storage.get('profileKey');
-  const decrypted = await Signal.Crypto.decryptSymmetric(key, plaintext);
-  const result = dcodeIO.ByteBuffer.wrap(
-    decrypted,
-    'binary'
-  ).toString();
-  return result;
+async function decryptProfileName(encryptedName) {
+  const key = window.storage.get('profileKey');
+  const keyBuffer = window.Signal.Crypto.base64ToArrayBuffer(key);
+  const data = window.Signal.Crypto.base64ToArrayBuffer(encryptedName);
+
+  // decrypt
+  const decrypted = await textsecure.crypto.decryptProfileName(
+    data,
+    keyBuffer
+  );
+
+  // encode
+  const profileName = window.Signal.Crypto.stringFromBytes(decrypted);
+  return profileName;
 }
+
+// async function encryptWithProfileKey(message) {
+//   const plaintext = dcodeIO.ByteBuffer.wrap(
+//     message,
+//     'binary'
+//   ).toArrayBuffer();
+//   const key = dcodeIO.ByteBuffer.wrap(
+//     textsecure.storage.get('profileKey'),
+//     'binary'
+//   ).toArrayBuffer();
+//   const encrypted = await Signal.Crypto.encryptSymmetric(key, plaintext);
+//   console.log(encrypted);
+//   const encoded = btoa(encrypted)
+//   return encoded;
+// }
+
+// async function decryptWithProfileKey(message) {
+//   const plaintext = dcodeIO.ByteBuffer.wrap(
+//     atob(message),
+//     'binary'
+//   ).toArrayBuffer();
+//   const key = dcodeIO.ByteBuffer.wrap(
+//     textsecure.storage.get('profileKey'),
+//     'binary'
+//   ).toArrayBuffer();
+//   const decrypted = await Signal.Crypto.decryptSymmetric(key, plaintext);
+//   const result = Signal.Crypto.bytesFromString(decrypted);
+//   return result;
+// }
 
 // String ciphertextName = Base64.encodeBytesWithoutPadding(new ProfileCipher(key).encryptName(name.getBytes("UTF-8"), ProfileCipher.NAME_PADDED_LENGTH));
 
