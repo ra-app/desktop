@@ -52,6 +52,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       'click #verify-phone-code': 'onVerifyPhone',
       'click #company-profile-done': 'onCompanyProfileDone',
       'click #branch-select': 'onOpenSelectBranch',
+      'keyup #search-branch': 'searchBranch',
       'click #branch-list > p': 'onSelectBranch',
       'keyup #company-name-input, #tax-number-input, #tax-id-input, #company-register-id-input, #imprint-input' : 'activateButtonCompanyInfo',
       'keyup #user-name-input' : 'activateButtonProfileDetails',
@@ -354,9 +355,13 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     onSelectBranch (e) {
       this.selectStep(Steps.SETUP_COMPANY_PROFILE);
       this.$('#branch-select').val(e.target.textContent)
-
     },
-
+    searchBranch(e){
+      var value = e.target.value;
+      $("#branch-list p").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    },
     render_attributes() {
       return {
         appTagLine: i18n('appTagLine'),
@@ -403,6 +408,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         acceptEula: i18n('acceptEula'),
         uploadAvatarText: i18n('uploadAvatarText'),
         contactImportTitle: i18n('contactImportTitle'),
+        BranchenTitle: i18n('BranchenTitle'),
         BranchOption1: i18n('BranchOption1'),
         BranchOption2: i18n('BranchOption2'),
         BranchOption3: i18n('BranchOption3'),
@@ -444,7 +450,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         BranchOption39: i18n('BranchOption39'),
         BranchOption40: i18n('BranchOption40'),
         BranchOption41: i18n('BranchOption41'),
-        BranchOption42: i18n('BranchOption42')
+        BranchOption42: i18n('BranchOption42'),
       };
     },
   });
