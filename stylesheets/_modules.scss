@@ -1490,17 +1490,16 @@
 // Module: Conversation Header
 
 .module-conversation-header {
-  // padding-left: 16px;
-  // padding-right: 16px;
-  // display: flex;
-  // flex-direction: row;
-  // align-items: center;
+  padding-left: 16px;
+  padding-right: 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
-  // height: 70px;
-  // color: #ffffff;
-  // @include backgroundGradient;
-  // // background-color: $color-white;
-  // border-bottom: 1px solid $color-black-02;
+  height: $header-height;
+  color: #ffffff;
+  @include backgroudGradient;
+  border-bottom: 1px solid $color-black-02;
 }
 
 .module-conversation-header__back-icon {
