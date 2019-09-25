@@ -779,7 +779,10 @@ $debug: 0;
       margin-left: 0px
     }
   }
-
+  .card-body-branchen{
+    overflow: auto;
+    height:500px;
+  }
   .content-code{
     @media (max-width: 1755px) {
       width: calc(100% / 2);

@@ -2125,6 +2125,90 @@
   "BranchOption21":{
     "message": "Internet / Multimedia",
       "description": "Branch option 1"
+  },
+  "BranchOption22":{
+    "message": "Kunst / Kultur / Unterhaltung",
+      "description": "Branch option 1"
+  },
+  "BranchOption23":{
+    "message": "Marketing / Werbung / PR",
+      "description": "Branch option 1"
+  },
+  "BranchOption24":{
+    "message": "Marktforschunga",
+      "description": "Branch option 1"
+  },
+  "BranchOption25":{
+    "message": "Maschinen / Anlagenbau",
+      "description": "Branch option 1"
+  },
+  "BranchOption26":{
+    "message": "Medien",
+      "description": "Branch option 1"
+  },
+  "BranchOption27":{
+    "message": "Medizin / Pharma",
+      "description": "Branch option 1"
+  },
+  "BranchOption28":{
+    "message": "Medizintechnik",
+      "description": "Branch option 1"
+  },
+  "BranchOption29":{
+    "message": "Nahrungsmittel / Land / Forstwirtschaft",
+      "description": "Branch option 1"
+  },
+  "BranchOption30":{
+    "message": "Personalwesen / Personalbeschaffung",
+      "description": "Branch option 1"
+  },
+  "BranchOption31":{
+    "message": "Rechtsberatung",
+      "description": "Branch option 1"
+  },
+  "BranchOption32":{
+    "message": "Seminar / Messeanbieter",
+      "description": "Branch option 1"
+  },
+  "BranchOption33":{
+    "message": "Sonstige Branchen",
+      "description": "Branch option 1"
+  },
+  "BranchOption34":{
+    "message": "Sport / Fitness / Beauty",
+      "description": "Branch option 1"
+  },
+  "BranchOption35":{
+    "message": "Steuerberatung / Wirtschaftsprüfung",
+      "description": "Branch option 1"
+  },
+  "BranchOption36":{
+    "message": "Telekommunikation",
+      "description": "Branch option 1"
+  },
+  "BranchOption37":{
+    "message": "Textilbranche",
+      "description": "Branch option 1"
+  },
+  "BranchOption38":{
+    "message": "Tourismus / Hotel / Gastronomie",
+      "description": "Branch option 1"
+  },
+  "BranchOption39":{
+    "message": "Vereine",
+      "description": "Branch option 1"
+  },
+  "BranchOption40":{
+    "message": "Verkehr / Transport / Logistik",
+      "description": "Branch option 1"
+  },
+  "BranchOption41":{
+    "message": "Versicherung",
+      "description": "Branch option 1"
+  },
+  "BranchOption42":{
+    "message": "Öffentliche Verwaltung",
+      "description": "Branch option 1"
   }
-  
+
 }
