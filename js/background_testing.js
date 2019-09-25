@@ -26,17 +26,17 @@ document.addEventListener('DOMContentLoaded', async () => {
   // console.log("DECRYPT", dec);
 });
 
-const addAllCompanies = async () => {
-  const companies = await getAllCompanies();
-  companies.forEach(async company => {
-    return ensureCompanyConversation(company.company_number);
-  });
-};
+// const addAllCompanies = async () => {
+//   const companies = await getAllCompanies();
+//   companies.forEach(async (company) => {
+//     return ensureCompanyConversation(company.company_number);
+//   });
+// };
 
 // ===
 
-const API_URL =
-  'https://luydm9sd26.execute-api.eu-central-1.amazonaws.com/latest/';
+const API_URL = 'https://luydm9sd26.execute-api.eu-central-1.amazonaws.com/latest/';
+// const API_URL = 'http://127.0.0.1:4000/';
 
 // XXX: Queue for sent messages, sent/received/seen indicators, error handling!
 
@@ -53,7 +53,8 @@ async function sendCompanyMessage(
   profileKey,
   options
 ) {
-  const messageInfo = {
+  // Actually upload things!
+  const message = await textsecure.messaging.uploadMessageAttachments(
     destination,
     messageBody,
     finalAttachments,
@@ -61,9 +62,19 @@ async function sendCompanyMessage(
     preview,
     sticker,
     now,
-  };
+    expireTimer,
+    profileKey,
+    options
+  );
 
-  inboxMessage(messageInfo);
+  // const messageInfo = { destination, messageBody, finalAttachments, quote, preview, sticker, now, message };
+  const messageInfo = { destination, message };
+
+  await inboxMessage(messageInfo);
+  
+  // textsecure.messaging.queueJobForNumber(destination, async () => {
+  //   await inboxMessage(messageInfo);
+  // });
 
   return { sent_to: destination };
 }
@@ -72,11 +83,15 @@ async function sendCompanyMessage(
 
 async function inboxMessage(messageInfo) {
   console.log('inboxMessage -- MessageInfo:', messageInfo);
-  const response = await apiRequest('api/inbox', messageInfo);
+  const response = await apiRequest('api/v2/inbox', messageInfo);
   console.log('inboxMessage -- response:', response);
 
   if (response && response.success && response.text) {
-    await receiveCompanyText(messageInfo.destination, response.text);
+    // await receiveCompanyText(messageInfo.destination, response.text);
+
+    textsecure.messaging.queueJobForNumber(messageInfo.destination, async () => {
+      await receiveCompanyText(messageInfo.destination, response.text);
+    });
   } else {
     console.error('inboxMessage', response);
     if (!response.success && response.error) {
@@ -261,29 +276,29 @@ const apiRequest = async (call, data = undefined) => {
 };
 
 const createCompany = async info => {
-  const res = await apiRequest('api/registercompany', info);
+  const res = await apiRequest('api/v1/companies/register', info);
   console.log('CreateCompany', info, res);
   return res;
 };
 
-const getAllCompanies = async () => {
-  return (await apiRequest('api/getcompanyinfo')).companies;
-};
+// const getAllCompanies = async () => {
+//   return (await apiRequest('api/v1/companies/getcompanyinfo')).companies;
+// };
 
 const getCompany = async number => {
-  return (await apiRequest('api/getcompanyinfo/' + number)).company;
+  return (await apiRequest('api/v1/companies/' + number)).company;
 };
 
-const getUnclaimedCompanyTickets = async companyid => {
-  return (await apiRequest('api/ticket/list/' + companyid)).tickets;
+const getUnclaimedCompanyTickets = async company_id => {
+  return (await apiRequest('api/v1/admin/' + company_id + '/tickets/list')).tickets;
 };
 
-const getTicketDetails = async ticket_uuid => {
-  return (await apiRequest('api/ticket/details/' + ticket_uuid)).details;
+const getTicketDetails = async (company_id, ticket_uuid) => {
+  return (await apiRequest('api/v1/admin/' + company_id + '/tickets/details/' + ticket_uuid)).details;
 };
 
-const claimTicket = async ticket_uuid => {
-  return (await apiRequest('api/ticket/claim/' + ticket_uuid)).phone_number;
+const claimTicket = async (company_id, ticket_uuid) => {
+  return (await apiRequest('api/v1/admin/' + company_id + '/tickets/claim/' + ticket_uuid)).phone_number;
 };
 
 const exampleInfo = {
@@ -315,7 +330,6 @@ const createDeveloperInterface = () => {
 
   // Dev Panel
   const devPanel = document.createElement('div');
-  devPanel.id = 'devPanel';
   devPanel.style.cssText =
     'border: 1px solid black; background-color: white; position: absolute; right: 5px; top: 50px; padding: 5px; z-index: 9999;';
   document.body.appendChild(devPanel);
@@ -375,7 +389,7 @@ const createDeveloperInterface = () => {
           infoBtn.innerText = 'Info';
           infoBtn.addEventListener('click', async () => {
             detailsList.innerText = '';
-            const details = await getTicketDetails(ticket.uuid);
+            const details = await getTicketDetails(companyID, ticket.uuid);
             // console.log(details);
             for (let x = 0; x < details.events.length; x++) {
               // console.log(x)
@@ -387,7 +401,7 @@ const createDeveloperInterface = () => {
             }
           });
           claimBtn.addEventListener('click', async () => {
-            const phone_number = await claimTicket(ticket.uuid);
+            const phone_number = await claimTicket(companyID, ticket.uuid);
             console.log(phone_number);
             await ensureConversation(phone_number);
             getCompanyTicketsBtn.click();
@@ -418,40 +432,3 @@ const createDeveloperInterface = () => {
   addCompanyDiv.appendChild(ticketsList);
   devPanel.appendChild(addCompanyDiv);
 };
-
-
-// PROFILE STUFF START
-
-
-function getServer() {
-  const username = textsecure.storage.get('number_id');
-  const password = textsecure.storage.get('password');
-  const server = WebAPI.connect({ username, password });
-  return server;
-}
-
-async function encryptWithProfileKey(message) {
-  const plaintext = dcodeIO.ByteBuffer.wrap(
-    message,
-    'binary'
-  ).toArrayBuffer();
-  const key = textsecure.storage.get('profileKey');
-  const encrypted = await Signal.Crypto.encryptSymmetric(key, plaintext);
-  const encoded = Signal.Crypto.stringFromBytes(encrypted)
-  return encoded;
-}
-
-async function decryptWithProfileKey(message) {
-  const plaintext = Signal.Crypto.bytesFromString(message);
-  const key = textsecure.storage.get('profileKey');
-  const decrypted = await Signal.Crypto.decryptSymmetric(key, plaintext);
-  const result = dcodeIO.ByteBuffer.wrap(
-    decrypted,
-    'binary'
-  ).toString();
-  return result;
-}
-
-// String ciphertextName = Base64.encodeBytesWithoutPadding(new ProfileCipher(key).encryptName(name.getBytes("UTF-8"), ProfileCipher.NAME_PADDED_LENGTH));
-
-// PROFILE STUFF END
