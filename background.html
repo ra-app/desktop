@@ -607,7 +607,7 @@
             <input type='text' id='imprint-input' class="inputsRegister" />
             <label for='imprint-input' class="label-text labelsInput">{{imprint}}</label>
 
-            <select id='branch-select' class="inputsRegister">
+            <!-- <select id='branch-select' class="inputsRegister">
               <option value={{BranchOption1}}>{{BranchOption1}}</option>
               <option value={{BranchOption2}}>{{BranchOption2}}</option>
               <option value={{BranchOption3}}>{{BranchOption3}}</option>
@@ -650,7 +650,8 @@
               <option value={{BranchOption40}}>{{BranchOption40}}</option>
               <option value={{BranchOption41}}>{{BranchOption41}}</option>
               <option value={{BranchOption42}}>{{BranchOption42}}</option>
-            </select>
+            </select> -->
+            <input type='text' id='branch-select' class="inputsRegister" />
             <label for='branch-select' class="label-text labelsInput">{{branch}}</label>
 
             <div class="upload-div">
@@ -668,6 +669,61 @@
         </div>
       </div>
       {{/isStepSetupCompanyProfile}}
+      {{#isStepSetupBranchen}}
+      <div class='content-row'>
+        <div class='content-center'>
+          <div class='content-holder card'>
+            <div class='card-header'>
+              <div class='title'>{{companyDetails}}</div>
+            </div>
+            <div class='card-body-branchen' id = 'branch-list'>
+              <p>{{BranchOption1}}</p>
+              <p>{{BranchOption2}}</p>
+              <p>{{BranchOption3}}</p>
+              <p>{{BranchOption4}}</p>
+              <p>{{BranchOption5}}</p>
+              <p>{{BranchOption6}}</p>
+              <p>{{BranchOption7}}</p>
+              <p>{{BranchOption8}}</p>
+              <p>{{BranchOption9}}</p>
+              <p>{{BranchOption10}}</p>
+              <p>{{BranchOption11}}</p>
+              <p>{{BranchOption12}}</p>
+              <p>{{BranchOption13}}</p>
+              <p>{{BranchOption14}}</p>
+              <p>{{BranchOption15}}</p>
+              <p>{{BranchOption16}}</p>
+              <p>{{BranchOption17}}</p>
+              <p>{{BranchOption18}}</p>
+              <p>{{BranchOption19}}</p>
+              <p>{{BranchOption20}}</p>
+              <p>{{BranchOption21}}</p>
+              <p>{{BranchOption22}}</p>
+              <p>{{BranchOption23}}</p>
+              <p>{{BranchOption24}}</p>
+              <p>{{BranchOption25}}</p>
+              <p>{{BranchOption26}}</p>
+              <p>{{BranchOption27}}</p>
+              <p>{{BranchOption28}}</p>
+              <p>{{BranchOption29}}</p>
+              <p>{{BranchOption30}}</p>
+              <p>{{BranchOption31}}</p>
+              <p>{{BranchOption32}}</p>
+              <p>{{BranchOption33}}</p>
+              <p>{{BranchOption34}}</p>
+              <p>{{BranchOption35}}</p>
+              <p>{{BranchOption36}}</p>
+              <p>{{BranchOption37}}</p>
+              <p>{{BranchOption38}}</p>
+              <p>{{BranchOption39}}</p>
+              <p>{{BranchOption40}}</p>
+              <p>{{BranchOption41}}</p>
+              <p>{{BranchOption42}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{/isStepSetupBranchen}}
       {{#isStepSetupUserProfile}}
       <div class='content-row'>
         <div class='content-center'>

@@ -34,6 +34,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     SETUP_COMPANY_BANK: 5,
     SETUP_USER_PROFILE: 6,
     SETUP_CONTACT_IMPORT: 7,
+    SETUP_BRANCHEN: 8
   };
 
   Whisper.InstallView = Whisper.View.extend({
@@ -50,6 +51,8 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       // 'change #phone-verification-code': 'onChangeVerifyCode',
       'click #verify-phone-code': 'onVerifyPhone',
       'click #company-profile-done': 'onCompanyProfileDone',
+      'click #branch-select': 'onOpenSelectBranch',
+      'click #branch-list > p': 'onSelectBranch',
       'keyup #company-name-input, #tax-number-input, #tax-id-input, #company-register-id-input, #imprint-input' : 'activateButtonCompanyInfo',
       'keyup #user-name-input' : 'activateButtonProfileDetails',
       'keyup #bank-iban-input, #bank-bic-input' : 'activateButtonBankDetails',
@@ -345,7 +348,14 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         button.addClass('disabled');
       }
     },
+    onOpenSelectBranch () {
+      this.selectStep(Steps.SETUP_BRANCHEN);
+    },
+    onSelectBranch (e) {
+      this.selectStep(Steps.SETUP_COMPANY_PROFILE);
+      this.$('#branch-select').val(e.target.textContent)
 
+    },
 
     render_attributes() {
       return {
@@ -385,6 +395,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         isStepSetupCompanyBank: this.step === Steps.SETUP_COMPANY_BANK,
         isStepSetupUserProfile: this.step === Steps.SETUP_USER_PROFILE,
         isStepSetupContactImport: this.step === Steps.SETUP_CONTACT_IMPORT,
+        isStepSetupBranchen: this.step === Steps.SETUP_BRANCHEN,
 
         eulatitle: i18n('eulatitle'),
         eulaSubTitle: i18n('eulaSubTitle'),
