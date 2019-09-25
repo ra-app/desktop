@@ -794,7 +794,7 @@ $debug: 0;
     overflow: auto;
     height:500px;
     padding: 0px 30px;
-    .pCountry{
+    .pCountry, &#branch-list > p{
       border-bottom: 1px solid $border-color;
       margin-top: 0px;
       margin-bottom: 20px;
@@ -967,6 +967,9 @@ $debug: 0;
     width: 450px;
     max-height: calc(100% - 30px);
     max-width: 450px;
+    #branch-select{
+      cursor: pointer;
+    }
     &.content-import-contacts{
       width: 600px;
       max-width: 600px;
@@ -991,6 +994,7 @@ $debug: 0;
       // padding: 30px 10px;
       padding: 30px 10px 10px 10px;
       // padding-top: 30px;
+      position: relative;
       text-align: center;
       color: #fff;
       // background: rgb(0, 90, 245);
@@ -1016,6 +1020,13 @@ $debug: 0;
       flex-direction: column;
       justify-content: center;
       min-height: 70px;
+      .clear-searchbox{
+        height: 20px;
+        position: absolute;
+        left: 65px;
+        bottom: 23px;
+        cursor: pointer;
+      }
       .title{
         font-size: 20px;
         font-family: $poppins-bold;

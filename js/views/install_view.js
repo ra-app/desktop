@@ -74,6 +74,8 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       'change #inputAvatar': 'onChoseAvatar',
       'click #uploadDocuments': 'onuploadDocuments',
       'change #inputDocument': 'onChoseDocument',
+      'click #clear-country': 'onClearCountry',
+      'click #clear-branchen': 'onClearBranchen',
       
     },
     initialize(options = {}) {
@@ -227,6 +229,24 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     async onBankDetailsSkip() {
       await textsecure.storage.remove('bankSetupInfo');
       this.selectStep(Steps.SETUP_CONTACT_IMPORT);
+    },
+    onClearCountry(){
+      this.$('#search-phones').val('');
+      const countries = this.$('.pCountry');
+      for(let i = 0; i < countries.length; i++){
+        if ( countries[i].style.display === 'none'){
+          countries[i].style.display = 'block';
+        }
+      }
+    },
+    onClearBranchen(){
+      this.$('#search-branch').val('');
+      const branches = this.$("#branch-list p");
+      for(let i = 0; i < branches.length; i++){
+        if ( branches[i].style.display === 'none'){
+          branches[i].style.display = 'block';
+        }
+      }
     },
     validateNumber() {
       const input = this.$('input.number');
