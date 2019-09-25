@@ -345,6 +345,8 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         button.addClass('disabled');
       }
     },
+
+
     render_attributes() {
       return {
         appTagLine: i18n('appTagLine'),
@@ -390,8 +392,48 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         acceptEula: i18n('acceptEula'),
         uploadAvatarText: i18n('uploadAvatarText'),
         contactImportTitle: i18n('contactImportTitle'),
-        
-
+        BranchOption1: i18n('BranchOption1'),
+        BranchOption2: i18n('BranchOption2'),
+        BranchOption3: i18n('BranchOption3'),
+        BranchOption4: i18n('BranchOption4'),
+        BranchOption5: i18n('BranchOption5'),
+        BranchOption6: i18n('BranchOption6'),
+        BranchOption7: i18n('BranchOption7'),
+        BranchOption8: i18n('BranchOption8'),
+        BranchOption9: i18n('BranchOption9'),
+        BranchOption10: i18n('BranchOption10'),
+        BranchOption11: i18n('BranchOption11'),
+        BranchOption12: i18n('BranchOption12'),
+        BranchOption13: i18n('BranchOption13'),
+        BranchOption14: i18n('BranchOption14'),
+        BranchOption15: i18n('BranchOption15'),
+        BranchOption16: i18n('BranchOption16'),
+        BranchOption17: i18n('BranchOption17'),
+        BranchOption18: i18n('BranchOption18'),
+        BranchOption19: i18n('BranchOption19'),
+        BranchOption20: i18n('BranchOption20'),
+        BranchOption21: i18n('BranchOption21'),
+        BranchOption22: i18n('BranchOption22'),
+        BranchOption23: i18n('BranchOption23'),
+        BranchOption24: i18n('BranchOption24'),
+        BranchOption25: i18n('BranchOption25'),
+        BranchOption26: i18n('BranchOption26'),
+        BranchOption27: i18n('BranchOption27'),
+        BranchOption28: i18n('BranchOption28'),
+        BranchOption29: i18n('BranchOption29'),
+        BranchOption30: i18n('BranchOption30'),
+        BranchOption31: i18n('BranchOption31'),
+        BranchOption32: i18n('BranchOption32'),
+        BranchOption33: i18n('BranchOption33'),
+        BranchOption34: i18n('BranchOption34'),
+        BranchOption35: i18n('BranchOption35'),
+        BranchOption36: i18n('BranchOption36'),
+        BranchOption37: i18n('BranchOption37'),
+        BranchOption38: i18n('BranchOption38'),
+        BranchOption39: i18n('BranchOption39'),
+        BranchOption40: i18n('BranchOption40'),
+        BranchOption41: i18n('BranchOption41'),
+        BranchOption42: i18n('BranchOption42')
       };
     },
   });
