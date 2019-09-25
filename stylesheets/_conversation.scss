@@ -16,14 +16,18 @@
   background-color: $color-white;
   height: 100%;
   position: relative;
-
+  .title-wrapper{
+    height: 70px;
+    @include backgroundGradient;
+  }
+  
   .panel {
     height: calc(100% - #{$header-height});
     overflow-y: scroll;
     z-index: 1;
     position: absolute;
     left: 0;
-    top: 48px;
+    top: 70px;
     width: 100%;
     height: calc(100% - 48px);
 
