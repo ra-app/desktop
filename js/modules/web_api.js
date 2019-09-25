@@ -399,7 +399,7 @@ const URL_CALLS = {
   profile: 'v1/profile',
   signed: 'v2/keys/signed',
   setProfile: 'v1/profile/name',
-  getAvatarUploadForm: 'v1/profile/avatar',
+  getAvatarUploadForm: 'v1/profile/form/avatar',
 };
 
 module.exports = {
@@ -470,6 +470,7 @@ function initialize({
       sendMessagesUnauth,
       setSignedPreKey,
       updateDeviceName,
+      putToCDN,
     };
 
     function _ajax(param) {
@@ -548,7 +549,7 @@ function initialize({
       });
     }
 
-    function getAvatarUploadForm(name) {
+    function getAvatarUploadForm() {
       return _ajax({
         call: 'getAvatarUploadForm',
         httpType: 'GET',
@@ -560,7 +561,7 @@ function initialize({
       return _ajax({
         call: 'setProfile',
         httpType: 'PUT',
-        urlParameters: `/${name}`,
+        urlParameters: `/${encodeURIComponent(name)}`,
         responseType: 'json',
       });
     }
@@ -895,6 +896,73 @@ function initialize({
         timeout: 0,
         type: 'GET',
       });
+    }
+
+    async function putToCDN(response, encryptedBin, path='') {
+      const {
+        key,
+        credential,
+        acl,
+        algorithm,
+        date,
+        policy,
+        signature,
+        attachmentIdString,
+      } = response;
+
+      // Note: when using the boundary string in the POST body, it needs to be prefixed by
+      //   an extra --, and the final boundary string at the end gets a -- prefix and a --
+      //   suffix.
+      const boundaryString = `----------------${getGuid().replace(/-/g, '')}`;
+      const CRLF = '\r\n';
+      const getSection = (name, value) =>
+        [
+          `--${boundaryString}`,
+          `Content-Disposition: form-data; name="${name}"${CRLF}`,
+          value,
+        ].join(CRLF);
+
+      const start = [
+        getSection('key', key),
+        getSection('x-amz-credential', credential),
+        getSection('acl', acl),
+        getSection('x-amz-algorithm', algorithm),
+        getSection('x-amz-date', date),
+        getSection('policy', policy),
+        getSection('x-amz-signature', signature),
+        getSection('Content-Type', 'application/octet-stream'),
+        `--${boundaryString}`,
+        'Content-Disposition: form-data; name="file"',
+        `Content-Type: application/octet-stream${CRLF}${CRLF}`,
+      ].join(CRLF);
+      const end = `${CRLF}--${boundaryString}--${CRLF}`;
+
+      const startBuffer = Buffer.from(start, 'utf8');
+      const attachmentBuffer = Buffer.from(encryptedBin);
+      const endBuffer = Buffer.from(end, 'utf8');
+
+      const contentLength =
+        startBuffer.length + attachmentBuffer.length + endBuffer.length;
+      const data = Buffer.concat(
+        [startBuffer, attachmentBuffer, endBuffer],
+        contentLength
+      );
+
+      // This is going to the CDN, not the service, so we use _outerAjax
+      await _outerAjax(`${cdnUrl}/${path}` , {
+        certificateAuthority,
+        contentType: `multipart/form-data; boundary=${boundaryString}`,
+        data,
+        proxyUrl,
+        timeout: 0,
+        type: 'POST',
+        headers: {
+          'Content-Length': contentLength,
+        },
+        processData: false,
+      });
+
+      return attachmentIdString;
     }
 
     async function putAttachment(encryptedBin) {
