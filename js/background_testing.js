@@ -16,7 +16,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   // await server.setProfile(await encryptProfileName("HAHAHAHAHAHAHA"));
 
   // const profilePic = await server.getAvatarUploadForm();
-  // console.log('lol', profilePic)
+  // console.log('getAvatarUploadForm', profilePic);
+  // const r = await server.putToCDN(profilePic, '/', "lololololololo");
+  // console.log('putToCDN', r);
 
   // const enc = await encryptProfileName("TEST");
   // console.log("ENCRYPT", enc);
