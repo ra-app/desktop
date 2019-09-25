@@ -561,7 +561,7 @@ function initialize({
       return _ajax({
         call: 'setProfile',
         httpType: 'PUT',
-        urlParameters: `/${name}`,
+        urlParameters: `/${encodeURIComponent(name)}`,
         responseType: 'json',
       });
     }
@@ -898,7 +898,7 @@ function initialize({
       });
     }
 
-    async function putToCDN(response, path, encryptedBin) {
+    async function putToCDN(response, encryptedBin, path='') {
       const {
         key,
         credential,
