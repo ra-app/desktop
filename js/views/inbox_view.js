@@ -22,7 +22,8 @@
   Whisper.ConversationStack = Whisper.View.extend({
     className: 'conversation-stack',
     lastConversation: null,
-    open(conversation) {
+    open(conversation, isTicket) {
+      if(!isTicket){
       const id = `conversation-${conversation.cid}`;
       if (id !== this.el.firstChild.id) {
         this.$el
@@ -49,7 +50,28 @@
       this.lastConversation = conversation;
       // Make sure poppers are positioned properly
       window.dispatchEvent(new Event('resize'));
-    },
+    }else {
+      console.log("555555555555555555555555555", conversation)
+      const id = `conversation-${conversation.cid}`;
+      if (id !== this.el.firstChild.id) {
+        this.$el
+          .first()
+          .find('video, audio')
+          .each(function pauseMedia() {
+            this.pause();
+          });
+        let $el = this.$(`#${id}`);
+        if ($el === null || $el.length === 0) {
+          const view = new Whisper.TicketScreen();
+          // eslint-disable-next-line prefer-destructuring
+          $el = view.$el;
+        }
+        $el.prependTo(this.el);
+        console.log($el, "$ellllllll")
+      }
+      window.dispatchEvent(new Event('resize'));
+    }
+  }
   });
 
   Whisper.AppLoadingScreen = Whisper.View.extend({
@@ -65,6 +87,14 @@
       message: i18n('loading'),
     },
   });
+  Whisper.TicketScreen = Whisper.View.extend({
+    templateName: 'tickets-view',
+    className: 'tickets-view',
+    render_attributes: {
+      message: i18n('loading'),
+    },
+  });
+
 
   Whisper.InboxView = Whisper.View.extend({
     templateName: 'two-column',
@@ -212,9 +242,9 @@
       // if (openConversationExternal) {
       //   openConversationExternal(id, messageId);
       // }
-
-      // this.conversation_stack.open(conversation);
-      // this.focusConversation();
+      const isTicket = true;
+      this.conversation_stack.open(conversation, isTicket);
+      this.focusConversation();
     },
     closeRecording(e) {
       if (e && this.$(e.target).closest('.capture-audio').length > 0) {
