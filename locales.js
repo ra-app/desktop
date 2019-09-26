@@ -35,7 +35,8 @@ const writeJson = (file, json) =>
     });
   });
 
-let currentLocale = 'en';
+const defaultLocale = 'en';
+let currentLocale = 'de'; // defaultLocale;
 let locales = null;
 const loadLocales = async () => {
   const dirs = await readdir('./_locales');
@@ -67,22 +68,34 @@ const get_line = message =>
 
 const add = async () => {
   const key = await get_line('Enter translation key');
-  if (locales[currentLocale][key]) throw new Error(`${key} already exists`);
-  const message = await get_line('Enter translation text');
+  if (locales[defaultLocale][key]) throw new Error(`${key} already exists`);
   const description = await get_line('Enter text description');
+  const message = await get_line(`Enter ${defaultLocale} translation text`);
   Object.keys(locales).forEach(locale => {
     locales[locale][key] = { message, description };
   });
-  console.log(`Added translation for ${key} => ${message}`);
+  if (currentLocale !== defaultLocale) {
+    locales[currentLocale][key].message = await get_line(`Enter ${currentLocale} translation text`);
+  }
+  console.log(`Added translation for ${key}`);
 };
 
 const del = async () => {
   const key = await get_line('Enter translation key');
-  if (!locales[currentLocale][key]) throw new Error(`${key} doesn't exist`);
+  if (!locales[defaultLocale][key]) throw new Error(`${key} doesn't exist`);
   Object.keys(locales).forEach(locale => {
     delete locales[locale][key];
   });
+  console.log(`Deleted translation for ${key}`);
 };
+
+const edit = async () => {
+  const key = await get_line('Enter translation key');
+  if (!locales[defaultLocale][key]) throw new Error(`${key} doesn't exist`);
+  console.log(`Current ${currentLocale} translation text:`, locales[currentLocale][key].message);
+  locales[currentLocale][key].message = await get_line(`Enter ${currentLocale} translation text`);
+  console.log(`Edited translations for ${key}`);
+}
 
 const replace = async () => {
   const text = await get_line('Enter text to replace');
@@ -105,8 +118,13 @@ const replace = async () => {
 const actions = {
   add,
   del,
+  edit,
   replace,
   save: saveLocales,
+  async set_locale() {
+    const locale = await get_line("Enter locale to use");
+    currentLocale = locale;
+  },
   quit() {
     process.exit();
   },
@@ -116,7 +134,7 @@ const main_loop = async () => {
   await loadLocales();
   while (true) {
     const action = await get_line(
-      `Enter action [${Object.keys(actions).join('|')}]`
+      `Enter action [${Object.keys(actions).join('|')}] (${currentLocale})`
     );
     try {
       if (actions[action]) {
