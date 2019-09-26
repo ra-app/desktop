@@ -175,8 +175,8 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
             iban: bank ? bank.iban : null,
             bic: bank ? bank.bic : null,
           });
-          if (!result.success) throw new Error(result);
           textsecure.storage.put('companyNumber', result.info.company_number);
+          await updateAdmin(result.info.company_number, userSetupInfo.name || '');
           await ensureCompanyConversation(result.info.company_number);
         }
         await Promise.all([
@@ -212,7 +212,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     async onUserProfileDone() {
       const profile = {
         name: this.$('#user-name-input').val(),
-        companyName: this.$('#company-name-input').val()
+        companyName: this.$('#company-name-input').val(),
       };
       await textsecure.storage.put('userSetupInfo', profile);
       this.selectStep(
@@ -244,7 +244,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     },
     onClearBranchen(){
       this.$('#search-branch').val('');
-      const branches = this.$("#branch-list p");
+      const branches = this.$('#branch-list p');
       for(let i = 0; i < branches.length; i++){
         if ( branches[i].style.display === 'none'){
           branches[i].style.display = 'block';
@@ -255,7 +255,6 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       const input = this.$('input.number');
       const dialCode = this.$('#dialCode').text();
       const number = dialCode + input.val();
-     
       const regionCode = this.$('#countryCode').text().toLowerCase();
 
       const parsedNumber = libphonenumber.util.parseNumber(number, regionCode);
@@ -348,29 +347,29 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         this.selectStep(Steps.SETUP_TYPE);
       });
     },
-    //Functions for upload User Avatar
+    // Functions for upload User Avatar
     onUploadAvatar(){
       this.$('#inputAvatar').click();
     },
-    //TODO HOOK API for upload avatar
+    // TODO HOOK API for upload avatar
     async onChoseAvatar() {
       const fileField = this.$('#inputAvatar');
       const file = fileField.prop('files');
     },
-        //Functions for upload Company Avatar
+        // Functions for upload Company Avatar
         onUploadCompanyAvatar(){
           this.$('#inputCompanyAvatar').click();
         },
-        //TODO HOOK API for upload avatar
+        // TODO HOOK API for upload avatar
         async onChoseCompanyAvatar() {
           const fileField = this.$('#inputCompanyAvatar');
           const file = fileField.prop('files');
         },
-    //Functions for upload documents
+    // Functions for upload documents
     onuploadDocuments(){
       this.$('#inputDocument').click();
     },
-    //TODO HOOK API for upload avatar
+    // TODO HOOK API for upload avatar
     async onChoseDocument() {
       const fileField = this.$('#inputDocument');
       const file = fileField.prop('files');
@@ -428,19 +427,19 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       this.resetTMP();
     },
     searchBranch(e){
-      var value = e.target.value;
-      $("#branch-list p").filter(function() {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      const value = e.target.value;
+      $('#branch-list p').filter(() => {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
       });
     },
     loadCountries(){
       const thisElement = this;
       $.ajax({
-        type: "GET",
-        url: "config/countries.json", // Using our resources.json file to serve results
-        success: function(result) {
+        type: 'GET',
+        url: 'config/countries.json', // Using our resources.json file to serve results
+        success: (result) => {
           const countries = JSON.parse(result);
-          countries.sort(function(a, b) {
+          countries.sort((a, b) => {
             return (a['name'] > b['name']) ? 1 : ((a['name'] < b['name']) ? -1 : 0);
         });
         for( let i = 0; i < countries.length; i++){
@@ -448,7 +447,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
           thisElement.$('#phone-list').append(pItem)
         }
         },
-        error: function(e){
+        error: (e) => {
           console.log('Error getting countries', e)
         }
       });

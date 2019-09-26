@@ -34,10 +34,24 @@ module.exports = {
     'no-underscore-dangle': 'off',
 
     // though we have a logger, we still remap console to log to disk
-    'no-console': 'error',
+    'no-console': 'off',
 
     // consistently place operators at end of line except ternaries
     'operator-linebreak': 'error',
+
+    'no-unused-vars': 'off',
+
+    'prefer-template': 'off',
+
+    'camelcase': 'off',
+
+    'arrow-body-style': 'off',
+
+    'no-plusplus': 'off',
+
+    'linebreak-style': 'off',
+
+    'no-undef': 'off',
 
     quotes: [
       'error',
@@ -54,9 +68,9 @@ module.exports = {
         // Prettier generally limits line length to 80 but sometimes goes over.
         // The `max-len` plugin doesn’t let us omit `code` so we set it to a
         // high value as a buffer to let Prettier control the line length:
-        code: 999,
+        code: 9999,
         // We still want to limit comments as before:
-        comments: 90,
+        comments: 9999,
         ignoreUrls: true,
       },
     ],

@@ -1,5 +1,5 @@
 {
-  "defaultSeverity": "error",
+  "defaultSeverity": "warning",
   "extends": ["tslint:recommended", "tslint-react", "tslint-microsoft-contrib"],
   "jsRules": {},
   "rules": {
@@ -23,7 +23,9 @@
     "jsx-no-lambda": false,
     "react-this-binding-issue": false,
 
-    "linebreak-style": [true, "LF"],
+    "linebreak-style": false,
+
+    "max-len": ["error", { "code": 1000, "comments": 1000, "ignoreComments": true }],
 
     // Prettier handles this for us
     "max-line-length": false,
