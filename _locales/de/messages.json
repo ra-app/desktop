@@ -1532,23 +1532,23 @@
         "description": "Shown in the about box for the link to https://signal.org/legal"
     },
     "appTagLine": {
-        "message": "Modern secure communications... TODO",
+        "message": "Moderne Kommunikationswelt für jede Firma im sicheren Datenraum",
         "description": "Tagline of the OfficeApp application"
     },
     "registerCompany": {
-        "message": "Company registration",
+        "message": "Unternehmensregistrierung",
         "description": "Header for company registration"
     },
     "registerAdmin": {
-        "message": "Admin registration",
+        "message": "Adminsregistrierung",
         "description": "Header for admin registration"
     },
     "welcomeCompany": {
-        "message": "Welcome to the OfficeApp. Please register your company here.",
+        "message": "Willkommen in der OfficeApp. Bitte registrieren Sie hier Ihr Unternehmen.",
         "description": "Description for registering company"
     },
     "welcomeAdmin": {
-        "message": "Welcome to the OfficeApp. Please enter your code here.",
+        "message": "Willkommen in der OfficeApp. Bitte fügen Sie hier Ihren Code ein.",
         "description": "Description for registering admin"
     },
     "continueButton": {
@@ -1564,7 +1564,7 @@
         "description": "Title for phone setup container"
     },
     "phoneSetupSubtitle": {
-        "message": "Bitte geben Sie Ihre Bürotelefonnummer ein. Sie werden angerufen und erhalten einen Verifikationscode. Dabei können Gebühren anfallen.",
+        "message": "Bitte geben Sie Ihre Bürotelefonnummer ein.\nSie werden angerufen und erhalten einen Verifikationscode.\nDabei können Gebühren anfallen.",
         "description": "Phone setup container subtitle"
     },
     "phoneNumber": {
@@ -1634,5 +1634,17 @@
     "notNow": {
         "message": "Not now",
         "description": "Text for skipping actions for now"
+    },
+    "acceptEula": {
+        "message": "Ich akzeptiere die AGB.",
+        "description": "Text for Accept EULA checkbox"
+    },
+    "eulaTitle": {
+        "message": "Allgemeine Geschäftsbedingungen",
+        "description": "Title for EULA"
+    },
+    "eulaSubTitle": {
+        "message": "Um fortzufahren, lesen und akzeptieren Sie die AGB.",
+        "description": "Subtitle for EULA"
     }
 }

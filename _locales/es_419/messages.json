@@ -1420,19 +1420,19 @@
         "description": "Label for signup code input"
     },
     "phoneSetupTitle": {
-        "message": "Telefonnummer",
+        "message": "Phone number setup",
         "description": "Title for phone setup container"
     },
     "phoneSetupSubtitle": {
-        "message": "Bitte geben Sie Ihre Bürotelefonnummer ein. Sie werden angerufen und erhalten einen Verifikationscode. Dabei können Gebühren anfallen.",
+        "message": "Please add your office phone number. You will be called and will receive a verification code. This may incur fees.",
         "description": "Phone setup container subtitle"
     },
     "phoneNumber": {
-        "message": "IHRe Bürotelefonnummer",
+        "message": "Phone number",
         "description": "Title for phone number input"
     },
     "verifyCode": {
-        "message": "Verifikationscode",
+        "message": "Verification code",
         "description": "Title for verification code input"
     },
     "countryCode": {
@@ -1440,15 +1440,15 @@
         "description": "Title for country code input"
     },
     "verifyPhone": {
-        "message": "Starten",
+        "message": "Verify",
         "description": "Label for phone verify button"
     },
     "callPhone": {
-        "message": "Anrufen",
+        "message": "Call",
         "description": "Label for phone verify call phone"
     },
     "sendSMSInstead": {
-        "message": "Mir Stattdessen eine SMS senden",
+        "message": "Send an SMS message instead.",
         "description": "Text for requesting SMS instead of call"
     },
     "companyDetails": {
@@ -1494,5 +1494,17 @@
     "notNow": {
         "message": "Not now",
         "description": "Text for skipping actions for now"
+    },
+    "acceptEula": {
+        "message": "Accept EULA",
+        "description": "Text for Accept EULA checkbox"
+    },
+    "eulaTitle": {
+        "message": "End-User License Agreement",
+        "description": "Title for EULA"
+    },
+    "eulaSubTitle": {
+        "message": "To continue, read and accept the terms and conditions",
+        "description": "Subtitle for EULA"
     }
 }
