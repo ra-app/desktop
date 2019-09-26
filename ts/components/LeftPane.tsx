@@ -68,7 +68,7 @@ export class LeftPane extends React.Component<Props> {
     const conversation = showArchived
       ? archivedConversations[index]
       : conversations[index];
-
+    console.log('PROPS !!!!!!!!', this.props);
     return (
       <div
         key={key}
