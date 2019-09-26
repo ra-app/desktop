@@ -1979,27 +1979,27 @@
     "description": "Title for company details entry"
   },
   "taxNumber": {
-    "message": "Tax Number",
+    "message": "STEUERNUMMER",
     "description": "Label for tax number input"
   },
   "taxID": {
-    "message": "Tax ID",
+    "message": "UMSATZSTEUER ID",
     "description": "Label for tax id input"
   },
   "companyRegistrationID": {
-    "message": "Commercial Register ID",
+    "message": "HANDELSREGISTER",
     "description": "Label for commercial register id input"
   },
   "imprint": {
-    "message": "Imprint",
+    "message": "IMPRESSUM",
     "description": "Label for imprint input"
   },
   "branch": {
-    "message": "Branch",
+    "message": "BRANCHEN",
     "description": "Label for company branch input"
   },
   "companyName": {
-    "message": "Company Name",
+    "message": "Name des Unternehmens ",
     "description": "Label for company name input"
   },
   "userProfile": {
@@ -2037,6 +2037,10 @@
   "uploadAvatarText":{
     "message":"Bitte Fügen SIE EIN Profilbild HINZU",
     "description":"Text for  upload avatar"
+  },
+  "uploadCompanyAvatarText":{
+    "message":"  Bitte Fügen SIE EIN ProfilbildFür das unternehmen HINZU",
+    "description":"Text for  upload company avatar"
   },
   "contactImportTitle":{
       "message": "Kontakte synchronisieren",

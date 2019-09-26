@@ -62,8 +62,8 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       'click #branch-select': 'onOpenSelectBranch',
       'keyup #search-branch': 'searchBranch',
       'click #branch-list > p': 'onSelectBranch',
-      'keyup #company-name-input, #tax-number-input, #tax-id-input, #company-register-id-input, #imprint-input, #branch-select': 'activateButtonCompanyInfo',
-      'keyup #user-name-input' : 'activateButtonProfileDetails',
+      'keyup  #tax-number-input, #tax-id-input, #company-register-id-input, #imprint-input, #branch-select': 'activateButtonCompanyInfo',
+      'keyup #user-name-input, #company-name-input' : 'activateButtonProfileDetails',
       'keyup #bank-iban-input, #bank-bic-input' : 'activateButtonBankDetails',
       'click #user-profile-done': 'onUserProfileDone',
       'click #bank-details-done': 'onBankDetailsDone',
@@ -72,6 +72,8 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       'click #contact-import-skip': 'onContactImportSkip',
       'click #uploadAvatar': 'onUploadAvatar',
       'change #inputAvatar': 'onChoseAvatar',
+      'click #uploadCompanyAvatar': 'onUploadCompanyAvatar',
+      'change #inputCompanyAvatar': 'onChoseCompanyAvatar',
       'click #uploadDocuments': 'onuploadDocuments',
       'change #inputDocument': 'onChoseDocument',
       'click #clear-country': 'onClearCountry',
@@ -109,7 +111,6 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       if (this.step === Steps.SETUP_COMPANY_PROFILE) {
         const info = textsecure.storage.get('companySetupInfo', null);
         if (info) {
-          this.$('#company-name-input').val(info.name);
           this.$('#tax-number-input').val(info.taxNumber);
           this.$('#tax-id-input').val(info.taxID);
           this.$('#company-register-id-input').val(info.registerID);
@@ -123,6 +124,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         const info = textsecure.storage.get('userSetupInfo', null);
         if (info) {
           this.$('#user-name-input').val(info.name);
+          this.$('#company-name-input').val(info.companyName);
         }
         this.activateButtonProfileDetails();
       }
@@ -162,9 +164,10 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
 
         if (this.setupType === 'company') {
           const company = textsecure.storage.get('companySetupInfo', null);
+          const userSetupInfo = textsecure.storage.get('userSetupInfo', null);
           const bank = textsecure.storage.get('bankSetupInfo', null);
           const result = await createCompany({
-            name: company.name,
+            name: userSetupInfo.companyName,
             business: company.branch,
             tax_number: company.taxNumber,
             tax_id: company.taxID,
@@ -197,7 +200,6 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     },
     async onCompanyProfileDone() {
       const company = {
-        name: this.$('#company-name-input').val(),
         taxNumber: this.$('#tax-number-input').val(),
         taxID: this.$('#tax-id-input').val(),
         registerID: this.$('#company-register-id-input').val(),
@@ -210,6 +212,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     async onUserProfileDone() {
       const profile = {
         name: this.$('#user-name-input').val(),
+        companyName: this.$('#company-name-input').val()
       };
       await textsecure.storage.put('userSetupInfo', profile);
       this.selectStep(
@@ -354,6 +357,15 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       const fileField = this.$('#inputAvatar');
       const file = fileField.prop('files');
     },
+        //Functions for upload Company Avatar
+        onUploadCompanyAvatar(){
+          this.$('#inputCompanyAvatar').click();
+        },
+        //TODO HOOK API for upload avatar
+        async onChoseCompanyAvatar() {
+          const fileField = this.$('#inputCompanyAvatar');
+          const file = fileField.prop('files');
+        },
     //Functions for upload documents
     onuploadDocuments(){
       this.$('#inputDocument').click();
@@ -364,14 +376,13 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       const file = fileField.prop('files');
     },
     activateButtonCompanyInfo(){
-      const companyompanyName = this.$el.find('#company-name-input')[0].value.length;
       const taxNumber = this.$el.find('#tax-number-input')[0].value.length;
       const taxID = this.$el.find('#tax-id-input')[0].value.length;
       const comercialRegisterId = this.$el.find('#company-register-id-input')[0].value.length;
       const imprint = this.$el.find('#imprint-input')[0].value.length;
       const branch = this.$el.find('#branch-select')[0].value.length;
       const button = this.$el.find('#company-profile-done');
-      if(companyompanyName > 0 && taxNumber > 0 && taxID >0 && comercialRegisterId > 0 && imprint > 0 && branch > 0) {
+      if( taxNumber > 0 && taxID >0 && comercialRegisterId > 0 && imprint > 0 && branch > 0) {
         button.removeClass('disabled');
       }else {
         button.addClass('disabled');
@@ -379,8 +390,9 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     },
     activateButtonProfileDetails(){
       const username = this.$el.find('#user-name-input')[0].value.length;
+      const companyName = this.$el.find('#company-name-input')[0].value.length;
       const button = this.$el.find('#user-profile-done');
-      if(username > 0){ 
+      if(username > 0 && companyName > 0){ 
         button.removeClass('disabled');
       }else {
         button.addClass('disabled');
@@ -398,7 +410,6 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     },
     onOpenSelectBranch () {
       Tmp = {
-         companyompanyName: this.$el.find('#company-name-input')[0].value,
          taxNumber: this.$el.find('#tax-number-input')[0].value,
          taxID: this.$el.find('#tax-id-input')[0].value,
          comercialRegisterId: this.$el.find('#company-register-id-input')[0].value,
@@ -408,12 +419,12 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     },
     onSelectBranch (e) {
       this.selectStep(Steps.SETUP_COMPANY_PROFILE);
-      this.$('#company-name-input').val(Tmp.companyompanyName);
       this.$('#tax-number-input').val(Tmp.taxNumber);
       this.$('#tax-id-input').val(Tmp.taxID);
       this.$('#company-register-id-input').val(Tmp.comercialRegisterId);
       this.$('#imprint-input').val(Tmp.imprint);
       this.$('#branch-select').val(e.target.textContent);
+      this.activateButtonCompanyInfo();
       this.resetTMP();
     },
     searchBranch(e){
@@ -454,6 +465,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       this.$('#countryCode').text(`${e.target.getAttribute('data-country-code')}`);
       this.$('#dialCode').text(` ${e.target.getAttribute('data-dial-code')}`);
       this.$('#phone-number-value').val(Tmp.phoneNumber);
+      this.activateButtonVerifyCall();
       this.resetTMP();
     },
     searchPhones(e){
@@ -515,6 +527,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         bankDetails: i18n('bankDetails'),
         notNow: i18n('notNow'),
         uploadCard: i18n('uploadCard'),
+        uploadCompanyAvatarText:i18n('uploadCompanyAvatarText'),
 
         isStepEula: this.step === Steps.ACCEPT_EULA,
         isStepSetupType: this.step === Steps.SETUP_TYPE,
