@@ -658,8 +658,19 @@
       <div class='content-row'>
         <div class='content-center'>
           <div class='content-holder card'>
-            CONTACT IMPORT TODO
-            <a class='button' id='contact-import-done'>{{continueButton}}</a>
+            <div class='div-title-register'>{{contactImportTitle}}</div>
+            <div class='send file-input' id='contact-import-file-select'>
+              <div>
+                <div>{{selectFileToUpload}}</div>
+                <div class='file-name' id='contact-import-file-name'>{{noFileChosen}}</div>
+              </div>
+              <div class='choose-file'>
+                <button class='paperclip thumbnail'></button>
+                <input type='file' id='contact-import-file-input' accept='.xml'>
+              </div>
+            </div>
+            <div class='error' id='contact-import-file-error'></div>
+            <a class='button disabled' id='contact-import-done'>{{continueButton}}</a>
             <div class='action-link'><a id='contact-import-skip'>{{notNow}}</a></div>
           </div>
         </div>

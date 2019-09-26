@@ -1646,5 +1646,21 @@
     "eulaSubTitle": {
         "message": "Um fortzufahren, lesen und akzeptieren Sie die AGB.",
         "description": "Subtitle for EULA"
+    },
+    "contactImportTitle": {
+        "message": "Kontakte synchronisieren",
+        "description": "Title for contacts import"
+    },
+    "selectFileToUpload": {
+        "message": "Datei zum Hochladen auswählen",
+        "description": "Text for file upload input"
+    },
+    "noFileChosen": {
+        "message": "Keine datei ausgewählt",
+        "description": "Text for no file chosen"
+    },
+    "invalidXML": {
+        "message": "Ungültige XML-datei",
+        "description": "Text for invalid XML file"
     }
 }

@@ -411,3 +411,27 @@ const createDeveloperInterface = () => {
   addCompanyDiv.appendChild(ticketsList);
   devPanel.appendChild(addCompanyDiv);
 };
+
+const readFileAsText = file => new Promise((resolve, reject) => {
+  const reader = new FileReader();
+  reader.readAsText(file);
+  reader.onload = () => resolve(reader.result);
+  reader.onerror = error => reject(error);
+});
+
+const checkValidXML = xml => {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(xml, 'text/xml');
+  const throwParserError = node => {
+    let depth = 0;
+    while (node && node.children && node.children.length && depth < 3) {
+      const first = node.children[0];
+      if (first && first.tagName.toLowerCase() === 'parsererror') {
+        throw new Error(first.children[1].innerText);
+      }
+      node = first;
+      depth += 1;
+    }
+  }
+  throwParserError(doc);
+}
