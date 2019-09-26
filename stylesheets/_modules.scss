@@ -171,37 +171,37 @@
 }
 
 .module-message__container--incoming-red {
-  background-color: $color-conversation-red;
+  background-color: #d9ecec;/*$color-conversation-red;*/
 }
 .module-message__container--incoming-deep_orange {
-  background-color: $color-conversation-deep_orange;
+  background-color: #d9ecec;/*$color-conversation-deep_orange;*/
 }
 .module-message__container--incoming-brown {
-  background-color: $color-conversation-brown;
+  background-color: #d9ecec;/*$color-conversation-brown;*/
 }
 .module-message__container--incoming-pink {
-  background-color: $color-conversation-pink;
+  background-color: #d9ecec;/*$color-conversation-pink;*/
 }
 .module-message__container--incoming-purple {
-  background-color: $color-conversation-purple;
+  background-color: #d9ecec;/*$color-conversation-purple;*/
 }
 .module-message__container--incoming-indigo {
-  background-color: $color-conversation-indigo;
+  background-color: #d9ecec;/*$color-conversation-indigo;*/
 }
 .module-message__container--incoming-blue {
-  background-color: $color-conversation-blue;
+  background-color: #d9ecec;/*$color-conversation-blue;*/
 }
 .module-message__container--incoming-teal {
-  background-color: $color-conversation-teal;
+  background-color: #d9ecec;/*$color-conversation-teal;*/
 }
 .module-message__container--incoming-green {
-  background-color: $color-conversation-green;
+  background-color: #d9ecec;/*$color-conversation-green;*/
 }
 .module-message__container--incoming-light_green {
-  background-color: $color-conversation-light_green;
+  background-color: #d9ecec;/*$color-conversation-light_green;*/
 }
 .module-message__container--incoming-blue_grey {
-  background-color: $color-conversation-blue_grey;
+  background-color: #d9ecec;/*$color-conversation-blue_grey;*/
 }
 
 .module-message__container--with-tap-to-view {
@@ -642,10 +642,10 @@
 }
 
 .module-message__text--incoming {
-  color: $color-white;
+  color: $color-raapp-text;/*$color-white;*/
   a {
     text-decoration: underline;
-    color: $color-white;
+    color: $color-raapp-text; /*$color-white;*/
   }
 }
 
@@ -681,13 +681,13 @@
   text-transform: uppercase;
 }
 .module-message__metadata__date--incoming {
-  color: $color-white-08;
+  color: $color-gray-60;
 }
 .module-message__metadata__date--with-image-no-caption {
   color: $color-white;
 }
 .module-message__metadata__date--incoming-with-tap-to-view-expired {
-  color: $color-gray-75;
+  color: $color-gray-60;
 }
 
 .module-message__metadata__spacer {
@@ -2262,7 +2262,9 @@
 }
 
 .module-avatar--no-image {
-  background-color: $color-conversation-grey;
+  // background-color: $color-conversation-grey;
+  background-color: transparent;
+
 }
 
 .module-avatar--signal-blue {

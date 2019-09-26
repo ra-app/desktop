@@ -57,7 +57,7 @@ export class TypingBubble extends React.Component<Props> {
           className={classNames(
             'module-message__container',
             'module-message__container--incoming',
-            `module-message__container--incoming-${color}`
+            'module-message__container--incoming'
           )}
         >
           <div className="module-message__typing-container">

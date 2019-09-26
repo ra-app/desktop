@@ -88,7 +88,7 @@ export class Avatar extends React.Component<Props, State> {
             `module-avatar__label--${size}`
           )}
         >
-          {initials}
+          {/* {initials} */}MMMM
         </div>
       );
     }
@@ -119,11 +119,11 @@ export class Avatar extends React.Component<Props, State> {
         className={classNames(
           'module-avatar',
           `module-avatar--${size}`,
-          hasImage ? 'module-avatar--with-image' : 'module-avatar--no-image',
-          !hasImage ? `module-avatar--${color}` : null
+          hasImage ? 'module-avatar--with-image' : 'module-avatar--no-image'
+          // !hasImage ? `module-avatar--${color}` : null
         )}
       >
-        {hasImage ? this.renderImage() : this.renderNoImage()}
+        {hasImage ? this.renderImage() : <img src="images/header-chat.png" alt="Default img" />}
       </div>
     );
   }
