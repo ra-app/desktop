@@ -25,6 +25,7 @@ export interface Props {
     options: { regionCode: string }
   ) => void;
   openConversationInternal: (id: string, messageId?: string) => void;
+  openTicket: (id: string) => void;
   showArchivedConversations: () => void;
   showInbox: () => void;
 
@@ -75,11 +76,16 @@ export class LeftPane extends React.Component<Props> {
         className="module-left-pane__conversation-container"
         style={style}
       >
-        <ConversationListItem
+        {/* <ConversationListItem
           {...conversation}
           onClick={openConversationInternal}
           i18n={i18n}
-        />
+        /> */}
+           <ConversationListItem
+            {...conversation}
+            onClick={openTicket}
+            i18n={i18n}
+          />
       </div>
     );
   };
@@ -125,6 +131,7 @@ export class LeftPane extends React.Component<Props> {
       i18n,
       conversations,
       openConversationInternal,
+      openTicket,
       startNewConversation,
       searchResults,
       showArchived,
@@ -135,6 +142,7 @@ export class LeftPane extends React.Component<Props> {
         <SearchResults
           {...searchResults}
           openConversation={openConversationInternal}
+          openTicket={openTicket}
           startNewConversation={startNewConversation}
           i18n={i18n}
         />

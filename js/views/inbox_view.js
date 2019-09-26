@@ -184,6 +184,7 @@
       window.location.reload();
     },
     async openConversation(id, messageId) {
+
       const conversation = await ConversationController.getOrCreateAndWait(
         id,
         'private'
@@ -196,6 +197,24 @@
 
       this.conversation_stack.open(conversation);
       this.focusConversation();
+    },
+    async openTicket(id) {
+      const conversation= await getUnclaimedCompanyTickets(id)
+      console.log(conversation, "11111111111111111111111111")
+        
+      // };
+      // const conversation = await ConversationController.getOrCreateAndWait(
+      //   id,
+      //   'private'
+      // );
+
+      // const { openConversationExternal } = window.reduxActions.conversations;
+      // if (openConversationExternal) {
+      //   openConversationExternal(id, messageId);
+      // }
+
+      // this.conversation_stack.open(conversation);
+      // this.focusConversation();
     },
     closeRecording(e) {
       if (e && this.$(e.target).closest('.capture-audio').length > 0) {
