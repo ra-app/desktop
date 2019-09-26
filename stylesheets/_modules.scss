@@ -1500,6 +1500,12 @@
   color: #ffffff;
   @include backgroudGradient;
   border-bottom: 1px solid $color-black-02;
+  & .react-contextmenu-wrapper{
+    & .chat_menu{
+      height: 20px;
+      cursor: pointer;
+    }
+  }
 }
 
 .module-conversation-header__back-icon {
@@ -1556,8 +1562,9 @@
   font-size: 16px;
   line-height: 24px;
   font-weight: 300;
-  color: $color-gray-90;
-
+  color: '#ffffff';
+  font-family: $poppins-regular;
+  font-size: 17px;
   // width of avatar (28px) and our 6px left margin
   max-width: calc(100% - 34px);
   white-space: nowrap;
@@ -2322,6 +2329,13 @@
     float: left;
     margin-top: -10px;
     vertical-align: middle;
+    &.chat_menu{
+      float: right;
+      height: 25px;
+      margin-top: 2px;
+      width: auto;
+      cursor: pointer;
+    }
   }
   span{
     vertical-align: middle;

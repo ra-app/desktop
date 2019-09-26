@@ -792,7 +792,8 @@ $debug: 0;
   }
   .card-body-branchen{
     overflow: auto;
-    height:500px;
+    height: 450px;
+    max-height: 420px;
     padding: 0px 30px;
     .pCountry, &#branch-list > p{
       border-bottom: 1px solid $border-color;
