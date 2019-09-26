@@ -611,8 +611,8 @@
             <div class='card-header'>
               <div class='title'>{{companyDetails}}</div>
             </div>
-            <input type='text' id='company-name-input' class="inputsRegister" />
-            <label for='company-name-input' class="label-text labelsInput">{{companyName}}</label>
+            <!-- <input type='text' id='company-name-input' class="inputsRegister" />
+            <label for='company-name-input' class="label-text labelsInput">{{companyName}}</label> -->
 
             <input type='text' id='tax-number-input' class="inputsRegister" />
             <label for='tax-number-input' class="label-text labelsInput">{{taxNumber}}</label>
@@ -705,6 +705,17 @@
           <div class='content-holder card'>
             <div class='card-header'>
                 <div class='title'>{{userProfile}}</div>
+            </div>
+            <input type='text' id='company-name-input' class="inputsRegister" />
+            <label for='company-name-input' class="label-text labelsInput">{{companyName}}</label>
+            <div class='upload-avatar-company'>
+              <div class='select-avatar' id='uploadCompanyAvatar'>
+                <img src='images/icons/icon-picture-add-firma.svg' />
+              </div>
+              <input type='file' class='file-input-company-avatar' id='inputCompanyAvatar' />
+              <div class='text-upload-avatar'>
+                <p>{{uploadCompanyAvatarText}}</p>
+              </div>
             </div>
             <input type='text' id='user-name-input' />
             <label for='user-name-input' class='label-text'>{{userName}}</label>
