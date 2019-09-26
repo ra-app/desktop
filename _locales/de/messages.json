@@ -1632,7 +1632,7 @@
         "description": "Title for company bank detail input"
     },
     "notNow": {
-        "message": "Not now",
+        "message": "Jetzt nicht",
         "description": "Text for skipping actions for now"
     },
     "acceptEula": {

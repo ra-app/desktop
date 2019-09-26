@@ -287,6 +287,9 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     render_attributes() {
       return {
         appTagLine: i18n('appTagLine'),
+        eulaTitle: i18n('eulaTitle'),
+        eulaSubTitle: i18n('eulaSubTitle'),
+        acceptEula:i18n('acceptEula'),
         registerCompany: i18n('registerCompany'),
         registerAdmin: i18n('registerAdmin'),
         welcomeCompany: i18n('welcomeCompany'),
@@ -322,10 +325,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         isStepSetupUserProfile: this.step === Steps.SETUP_USER_PROFILE,
         isStepSetupContactImport: this.step === Steps.SETUP_CONTACT_IMPORT,
 
-        eulatitle: i18n('eulatitle'),
-        eulaSubTitle: i18n('eulaSubTitle'),
         EULAText: EULA,
-        acceptEula:i18n('acceptEula')
       };
     },
   });
