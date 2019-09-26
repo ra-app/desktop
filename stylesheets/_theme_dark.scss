@@ -759,9 +759,9 @@ body.dark-theme {
   }
 
   .module-message__text--incoming {
-    color: $color-white;
+    color: $color-raapp-text; /*$color-white;*/
     a {
-      color: $color-white;
+      color: $color-raapp-text; /*$color-white;*/
     }
   }
 
@@ -769,7 +769,7 @@ body.dark-theme {
     color: $color-white-08;
   }
   .module-message__metadata__date--incoming {
-    color: $color-white-08;
+    color: $color-gray-60;
   }
   .module-message__metadata__date--with-image-no-caption {
     color: $color-white-08;
@@ -1335,7 +1335,9 @@ body.dark-theme {
   }
 
   .module-avatar--no-image {
-    background-color: $color-conversation-grey-shade;
+    // background-color: $color-conversation-grey-shade;
+    background-color: transparent;
+
   }
 
   .module-avatar--signal-blue {

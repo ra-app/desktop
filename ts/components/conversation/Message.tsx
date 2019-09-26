@@ -1251,7 +1251,7 @@ export class Message extends React.PureComponent<Props, State> {
               ? 'module-message__container--with-tap-to-view-expired'
               : null,
             !isSticker && direction === 'incoming'
-              ? `module-message__container--incoming-${authorColor}`
+              ? `module-message__container--incoming`
               : null,
             isTapToView && isAttachmentPending && !isTapToViewExpired
               ? 'module-message__container--with-tap-to-view-pending'

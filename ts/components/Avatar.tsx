@@ -88,7 +88,7 @@ export class Avatar extends React.Component<Props, State> {
             `module-avatar__label--${size}`
           )}
         >
-          {initials}
+          {/* {initials} */}MMMM
         </div>
       );
     }
@@ -105,7 +105,7 @@ export class Avatar extends React.Component<Props, State> {
   }
 
   public render() {
-    const { avatarPath, color, size, noteToSelf } = this.props;
+    const { avatarPath, size, noteToSelf } = this.props;
     const { imageBroken } = this.state;
 
     const hasImage = !noteToSelf && avatarPath && !imageBroken;
@@ -119,11 +119,11 @@ export class Avatar extends React.Component<Props, State> {
         className={classNames(
           'module-avatar',
           `module-avatar--${size}`,
-          hasImage ? 'module-avatar--with-image' : 'module-avatar--no-image',
-          !hasImage ? `module-avatar--${color}` : null
+          hasImage ? 'module-avatar--with-image' : 'module-avatar--no-image'
+          // !hasImage ? `module-avatar--${color}` : null
         )}
       >
-        {hasImage ? this.renderImage() : this.renderNoImage()}
+        {hasImage ? this.renderImage() : <img src="images/header-chat.png" alt="Default img" />}
       </div>
     );
   }

@@ -134,6 +134,7 @@ export class MainHeader extends React.Component<Props> {
         <div className="module-main-header__info">
           <img src="images/header-chat.png" alt="header chat" />
           <span>Kommunikation</span>
+          <img src="images/icons/menu_over_blue_24x24.svg" className="chat_menu" alt="Cbat menu"/>
         </div>
       <div className="module-main-header">
         {/* <Avatar

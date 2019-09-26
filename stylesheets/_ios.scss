@@ -233,10 +233,10 @@
     }
 
     .module-message__text--incoming {
-      color: $color-gray-05;
+      color: $color-raapp-text; /*$color-gray-05;*/
       a {
         text-decoration: underline;
-        color: $color-gray-05;
+        color: $color-raapp-text; /*$color-gray-05;*/
       }
     }
 
@@ -258,7 +258,7 @@
       color: $color-white-08;
     }
     .module-message__metadata__date--incoming {
-      color: $color-gray-25;
+      color: $color-gray-60;
     }
 
     .module-message__generic-attachment__file-name--incoming {

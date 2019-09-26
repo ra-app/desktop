@@ -89,7 +89,7 @@ export class ConversationHeader extends React.Component<Props> {
       i18n,
       isMe,
       profileName,
-      isVerified,
+      // isVerified,
     } = this.props;
 
     if (isMe) {
@@ -110,13 +110,13 @@ export class ConversationHeader extends React.Component<Props> {
             ~<Emojify text={profileName} />
           </span>
         ) : null}
-        {isVerified ? ' · ' : null}
+        {/* {isVerified ? ' · ' : null}
         {isVerified ? (
           <span>
             <span className="module-conversation-header__title__verified-icon" />
             {i18n('verified')}
           </span>
-        ) : null}
+        ) : null} */}
       </div>
     );
   }
@@ -170,11 +170,11 @@ export class ConversationHeader extends React.Component<Props> {
   }
 
   public renderGear(triggerId: string) {
-    const { showBackButton } = this.props;
+    // const { showBackButton } = this.props;
 
     return (
       <ContextMenuTrigger id={triggerId} ref={this.menuTriggerRef}>
-        <button
+        {/* <button
           onClick={this.showMenuBound}
           className={classNames(
             'module-conversation-header__gear-icon',
@@ -183,7 +183,8 @@ export class ConversationHeader extends React.Component<Props> {
               : 'module-conversation-header__gear-icon--show'
           )}
           disabled={showBackButton}
-        />
+        /> */}
+        {/* <img src="images/icons/menu_over_blue_24x24.svg" className="chat_menu" alt="Chat menu" /> */}
       </ContextMenuTrigger>
     );
   }

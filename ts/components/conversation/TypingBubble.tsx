@@ -49,7 +49,7 @@ export class TypingBubble extends React.Component<Props> {
   }
 
   public render() {
-    const { i18n, color } = this.props;
+    const { i18n } = this.props;
 
     return (
       <div className={classNames('module-message', 'module-message--incoming')}>
@@ -57,7 +57,7 @@ export class TypingBubble extends React.Component<Props> {
           className={classNames(
             'module-message__container',
             'module-message__container--incoming',
-            `module-message__container--incoming-${color}`
+            'module-message__container--incoming'
           )}
         >
           <div className="module-message__typing-container">
