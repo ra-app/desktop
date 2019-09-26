@@ -89,7 +89,7 @@ export class ConversationHeader extends React.Component<Props> {
       i18n,
       isMe,
       profileName,
-      isVerified,
+      // isVerified,
     } = this.props;
 
     if (isMe) {
@@ -170,7 +170,7 @@ export class ConversationHeader extends React.Component<Props> {
   }
 
   public renderGear(triggerId: string) {
-    const { showBackButton } = this.props;
+    // const { showBackButton } = this.props;
 
     return (
       <ContextMenuTrigger id={triggerId} ref={this.menuTriggerRef}>

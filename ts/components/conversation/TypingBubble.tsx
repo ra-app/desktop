@@ -49,7 +49,7 @@ export class TypingBubble extends React.Component<Props> {
   }
 
   public render() {
-    const { i18n, color } = this.props;
+    const { i18n } = this.props;
 
     return (
       <div className={classNames('module-message', 'module-message--incoming')}>

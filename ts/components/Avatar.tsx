@@ -105,7 +105,7 @@ export class Avatar extends React.Component<Props, State> {
   }
 
   public render() {
-    const { avatarPath, color, size, noteToSelf } = this.props;
+    const { avatarPath, size, noteToSelf } = this.props;
     const { imageBroken } = this.state;
 
     const hasImage = !noteToSelf && avatarPath && !imageBroken;
