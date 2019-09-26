@@ -353,6 +353,19 @@ MessageSender.prototype = {
     });
   },
 
+  async uploadMessageAttachmentsImpl(attrs, options) {
+    const message = new Message(attrs);
+
+    await Promise.all([
+      this.uploadAttachments(message),
+      this.uploadThumbnails(message),
+      this.uploadLinkPreviews(message),
+      this.uploadSticker(message),
+    ]);
+
+    return message;
+  },
+
   sendMessage(attrs, options) {
     const message = new Message(attrs);
     const silent = false;
@@ -966,6 +979,34 @@ MessageSender.prototype = {
     );
   },
 
+  uploadMessageAttachments(
+    number,
+    messageText,
+    attachments,
+    quote,
+    preview,
+    sticker,
+    timestamp,
+    expireTimer,
+    profileKey,
+    options
+  ) {
+    return this.uploadMessageAttachmentsImpl(
+      {
+        recipients: [number],
+        body: messageText,
+        timestamp,
+        attachments,
+        quote,
+        preview,
+        sticker,
+        expireTimer,
+        profileKey,
+      },
+      options
+    );
+  },
+
   resetSession(number, timestamp, options) {
     window.log.info('resetting secure session');
     const silent = false;
@@ -1261,6 +1302,8 @@ textsecure.MessageSender = function MessageSenderWrapper(username, password) {
   this.getStickerPackManifest = sender.getStickerPackManifest.bind(sender);
   this.sendStickerPackSync = sender.sendStickerPackSync.bind(sender);
   this.syncViewOnceOpen = sender.syncViewOnceOpen.bind(sender);
+  this.uploadMessageAttachments = sender.uploadMessageAttachments.bind(sender); // Added
+  this.queueJobForNumber = sender.queueJobForNumber.bind(sender); // Added
 };
 
 textsecure.MessageSender.prototype = {
