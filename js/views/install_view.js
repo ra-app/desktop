@@ -408,13 +408,13 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     },
     onSelectBranch (e) {
       this.selectStep(Steps.SETUP_COMPANY_PROFILE);
-      this.$('#company-name-input').val(Tmp.companyompanyName)
-      this.$('#tax-number-input').val(Tmp.taxNumber)
-      this.$('#tax-id-input').val(Tmp.taxID)
-      this.$('#company-register-id-input').val(Tmp.comercialRegisterId)
-      this.$('#imprint-input').val(Tmp.imprint)
-      this.$('#branch-select').val(e.target.textContent)
-      this.resetTMP()
+      this.$('#company-name-input').val(Tmp.companyompanyName);
+      this.$('#tax-number-input').val(Tmp.taxNumber);
+      this.$('#tax-id-input').val(Tmp.taxID);
+      this.$('#company-register-id-input').val(Tmp.comercialRegisterId);
+      this.$('#imprint-input').val(Tmp.imprint);
+      this.$('#branch-select').val(e.target.textContent);
+      this.resetTMP();
     },
     searchBranch(e){
       var value = e.target.value;
@@ -444,12 +444,17 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     },
     onOpenSelectPhoneList () {
       this.loadCountries();
+      Tmp = {
+        phoneNumber: this.$el.find('#phone-number-value')[0].value,
+     };
       this.selectStep(Steps.SETUP_PHONESLIST);
     },
     onSelectPhone (e) {
       this.selectStep(Steps.SETUP_PHONE);
       this.$('#countryCode').text(`${e.target.getAttribute('data-country-code')}`);
       this.$('#dialCode').text(` ${e.target.getAttribute('data-dial-code')}`);
+      this.$('#phone-number-value').val(Tmp.phoneNumber);
+      this.resetTMP();
     },
     searchPhones(e){
       var value = e.target.value;
