@@ -90,6 +90,7 @@
     initialize(options) {
       // this.$('tickets-view').append(this.view.el);
       this.render();
+      this.$('.container-ticket').empty()
       this.model.forEach(element => {
         const ticketBlock = `<div id="${element.uuid}" class="main-ticket-container">
                                 <div class="container-ticket-userinfo">
