@@ -322,6 +322,10 @@ const claimTicket = async (company_id, ticket_uuid) => {
   return (await apiRequest('api/v1/admin/' + company_id + '/tickets/claim/' + ticket_uuid)).phone_number;
 };
 
+const getClient = async (company_id, client_uuid) => {
+  return (await apiRequest('api/v1/admin/' + company_id + '/clients/get/' + client_uuid)).details;
+};
+
 const exampleInfo = {
   name: 'Mega Corporate',
   business: 'Corporationing',

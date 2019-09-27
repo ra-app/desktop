@@ -101,13 +101,14 @@
                                   <span class="ticket-date">${new Date(element.ts_created).toUTCString().split('GMT')[0]}</span>
                                 </div>
                                 <div class="container-ticket-actions">
-                                  <button class="button-claim-ticket ${element.state == 1 ? 'not-claimed' : element.state == 2 ? 'claimed' : element.state == 3 ? 'not-claimed' : ''}"> ${element.state == 1 || element.state == 2 ?'Übernehmen' : element.state == 3 ? 'wieder öffnen' : null} </button>
+                                  <button id = 'claim_${element.uuid}' class="button-claim-ticket ${element.state == 1 ? 'not-claimed' : element.state == 2 ? 'claimed' : element.state == 3 ? 'not-claimed' : ''}"> ${element.state == 1 || element.state == 2 ?'Übernehmen' : element.state == 3 ? 'wieder öffnen' : null} </button>
                                 </div>
                             </div>`;
         
         this.$('.container-ticket').append(ticketBlock);
         // this.$('.container-ticket').append('<p id='+element.client_uuid +'>'+element.client_uuid+'</p>');
         this.$('#'+element.uuid).click(()=> this.showInfoTicket(element));
+        this.$('#claim_'+element.uuid).click(()=> this.claimTicket(element.company_id, element.uuid));
       });
       
     },
@@ -129,6 +130,11 @@
       }catch (e){
         console.warn('Error getting ticket info', e)
       }
+    },
+    async claimTicket (company_id, uuid){
+
+      const claim = await claimTicket(company_id, uuid);
+      console.log(claim, "claimmmmmmmmmmmmmmmmmmmmm")
     },
     });
   
