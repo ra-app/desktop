@@ -125,7 +125,7 @@
             const mssgDiv = `<div class="received-message">
                               <p class="mssgUsername">${element.client_uuid}</p>
                               <p class="ticket-message">${JSON.parse(mssg.json).body}</p>
-                              <p class="ticket-time">${days[new Date(mssg.ts).getDay()]}
+                              <p class="ticket-time">${days[new Date(mssg.ts).getDay()]} ${new Date(mssg.ts).getHours() - 1}:${new Date(mssg.ts).getMinutes()}</p>
                             </div>`;
             this.$('#ticket_'+element.uuid).append(mssgDiv)
           })
