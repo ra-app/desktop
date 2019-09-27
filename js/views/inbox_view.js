@@ -11,6 +11,7 @@
 (function() {
   'use strict';
 
+  const ticketId = ''
   window.Whisper = window.Whisper || {};
 
   Whisper.StickerPackInstallFailedToast = Whisper.ToastView.extend({
@@ -70,7 +71,6 @@
           $el = view.$el;
         }
         $el.prependTo(this.el);
-        console.log($el, "$ellllllll")
       }
       window.dispatchEvent(new Event('resize'));
     }
@@ -232,12 +232,11 @@
     async openTicket(id) {
       const tickets= await getUnclaimedCompanyTickets(id);
       // let userInformation = []
-      console.log(tickets, "list tickets");
+    
       tickets.forEach(async element => {
         const client = await getClient(element.company_id, element.client_uuid);
-        console.log(client, "eeeeeeeeeeeeeeeeeee");
       });
-        
+
       // };
       // const conversation = await ConversationController.getOrCreateAndWait(
       //   id,
@@ -249,8 +248,11 @@
       //   openConversationExternal(id, messageId);
       // }
       const isTicket = true;
-      this.conversation_stack.open(tickets, isTicket);
-      this.focusConversation();
+      if(this.ticketId !== id){
+        this.conversation_stack.open(tickets, isTicket);
+        this.focusConversation();
+      }
+      this.ticketId = id;
     },
     closeRecording(e) {
       if (e && this.$(e.target).closest('.capture-audio').length > 0) {
