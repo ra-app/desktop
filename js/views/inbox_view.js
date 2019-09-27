@@ -11,7 +11,7 @@
 (function() {
   'use strict';
 
-  const ticketId = ''
+  const tmpticketId = ''
   window.Whisper = window.Whisper || {};
 
   Whisper.StickerPackInstallFailedToast = Whisper.ToastView.extend({
@@ -248,11 +248,11 @@
       //   openConversationExternal(id, messageId);
       // }
       const isTicket = true;
-      if(this.ticketId !== id){
+      if(this.tmpticketId !== id){
         this.conversation_stack.open(tickets, isTicket);
         this.focusConversation();
       }
-      this.ticketId = id;
+      this.tmpticketId = id;
     },
     closeRecording(e) {
       if (e && this.$(e.target).closest('.capture-audio').length > 0) {
