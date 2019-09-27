@@ -101,7 +101,7 @@
                                   <span class="ticket-date">${new Date(element.ts_created).toUTCString().split('GMT')[0]}</span>
                                 </div>
                                 <div class="container-ticket-actions">
-                                  <button class="button-claim-ticket disabled="${element.state === 1 || element.state === 3 ? true : false}" ${element.state === 1 ? 'not-claimed' : element.state === 2 ? 'claimed' : element.state === 3 ? 'not-claimed' : ''}"> ${element.state == 1 || element.state == 2 ?'Übernehmen' : element.state == 3 ? 'wieder öffnen' : null} </button>
+                                  <button class="button-claim-ticket ${element.state == 1 ? 'not-claimed' : element.state == 2 ? 'claimed' : element.state == 3 ? 'not-claimed' : ''}"> ${element.state == 1 || element.state == 2 ?'Übernehmen' : element.state == 3 ? 'wieder öffnen' : null} </button>
                                 </div>
                             </div>`;
         
