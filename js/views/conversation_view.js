@@ -114,50 +114,49 @@
         
         this.$('.container-ticket').append(ticketBlock);
         // this.$('.container-ticket').append('<p id='+element.client_uuid +'>'+element.client_uuid+'</p>');
-        this.$('#'+element.uuid).click(()=> this.showInfoTicket(element, clients[index].clients));
+        this.$('#'+element.uuid).click((evt)=> this.showInfoTicket(evt, element, clients[index].clients));
         this.$('#claim_'+element.uuid).click(()=> this.claimTicket(element.company_id, element.uuid));
       });
       
     },
-    async showInfoTicket(element, client){
-      console.log(this.uuidtmp, "shooooooooooooooooo")
-      if(this.uuidtmp!== element.uuid){
-        try{
-          const ticketDETAIL = await getTicketDetails(element.company_id, element.uuid);
-          const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-          if ( ticketDETAIL ){
+    async showInfoTicket(evt, element, client){
+      if ( evt.target.className.indexOf('button-claim-ticket') === -1 ){
+        if(this.uuidtmp!== element.uuid){
+          try{
+            const ticketDETAIL = await getTicketDetails(element.company_id, element.uuid);
+            const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+            if ( ticketDETAIL ){
+              if(this.$('#ticket_'+ this.uuidtmp) ){
+                this.$('#ticket_'+ this.uuidtmp).remove()
+              }
 
-            if(this.$('#ticket_'+ this.uuidtmp) ){
-              this.$('#ticket_'+ this.uuidtmp).remove()
+              const mainMssgDiv = `<div id="ticket_${element.uuid}" class="mainMssgDiv"></div>`;
+              this.$('#'+element.uuid).append(mainMssgDiv)
+              ticketDETAIL.events.forEach(mssg => {
+                const mssgDiv = `<div class="received-message">
+                                  <p class="mssgUsername">${client.name ? client.name : 'username'}</p>
+                                  <p class="ticket-message">${JSON.parse(mssg.json).body}</p>
+                                  <p class="ticket-time">${days[new Date(mssg.ts).getDay()]} ${new Date(mssg.ts).getHours() - 1}:${new Date(mssg.ts).getMinutes()}</p>
+                                </div>`;
+                this.$('#ticket_'+element.uuid).append(mssgDiv)
+              })
             }
-
-            const mainMssgDiv = `<div id="ticket_${element.uuid}" class="mainMssgDiv"></div>`;
-            this.$('#'+element.uuid).append(mainMssgDiv)
-            ticketDETAIL.events.forEach(mssg => {
-              console.log('MSSG!!!!', JSON.parse(mssg.json).body)
-              const mssgDiv = `<div class="received-message">
-                                <p class="mssgUsername">${client.name ? client.name : 'username'}</p>
-                                <p class="ticket-message">${JSON.parse(mssg.json).body}</p>
-                                <p class="ticket-time">${days[new Date(mssg.ts).getDay()]} ${new Date(mssg.ts).getHours() - 1}:${new Date(mssg.ts).getMinutes()}</p>
-                              </div>`;
-              this.$('#ticket_'+element.uuid).append(mssgDiv)
-            })
+          }catch (e){
+            console.warn('Error getting ticket info', e)
           }
-        }catch (e){
-          console.warn('Error getting ticket info', e)
-        }
-      }else {
-        console.log('HERE !!!!! ')
-        if( this.$('#ticket_'+element.uuid).hasClass('hide') ){
-          this.$('#ticket_'+element.uuid).remove()
+        }else {
+          console.log('HERE !!!!! ')
+          if( this.$('#ticket_'+element.uuid).hasClass('hide') ){
+            this.$('#ticket_'+element.uuid).remove()
+          }
         }
       }
       this.uuidtmp = element.uuid
     },
     async claimTicket (company_id, uuid){
-
       const claim = await claimTicket(company_id, uuid);
-      console.log(claim, "claimmmmmmmmmmmmmmmmmmmmm")
+      await ensureConversation(claim);
+      this.$('#claim_'+uuid).removeClass('not-claimed').addClass('claimed');
     },
     });
   
