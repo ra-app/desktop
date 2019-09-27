@@ -1532,23 +1532,23 @@
         "description": "Shown in the about box for the link to https://signal.org/legal"
     },
     "appTagLine": {
-        "message": "Moderne Kommunikationswelt für jede Firma im sicheren Datenraum",
+        "message": "Modern secure communications... TODO",
         "description": "Tagline of the OfficeApp application"
     },
     "registerCompany": {
-        "message": "Unternehmensregistrierung",
+        "message": "Company registration",
         "description": "Header for company registration"
     },
     "registerAdmin": {
-        "message": "Adminsregistrierung",
+        "message": "Admin registration",
         "description": "Header for admin registration"
     },
     "welcomeCompany": {
-        "message": "Willkommen in der OfficeApp. Bitte registrieren Sie hier Ihr Unternehmen.",
+        "message": "Welcome to the OfficeApp. Please register your company here.",
         "description": "Description for registering company"
     },
     "welcomeAdmin": {
-        "message": "Willkommen in der OfficeApp. Bitte fügen Sie hier Ihren Code ein.",
+        "message": "Welcome to the OfficeApp. Please enter your code here.",
         "description": "Description for registering admin"
     },
     "continueButton": {
@@ -1564,7 +1564,7 @@
         "description": "Title for phone setup container"
     },
     "phoneSetupSubtitle": {
-        "message": "Bitte geben Sie Ihre Bürotelefonnummer ein.\nSie werden angerufen und erhalten einen Verifikationscode.\nDabei können Gebühren anfallen.",
+        "message": "Bitte geben Sie Ihre Bürotelefonnummer ein. Sie werden angerufen und erhalten einen Verifikationscode. Dabei können Gebühren anfallen.",
         "description": "Phone setup container subtitle"
     },
     "phoneNumber": {

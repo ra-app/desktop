@@ -680,7 +680,7 @@ app.on('ready', async () => {
   logger.info(`starting version ${packageJson.version}`);
 
   if (!locale) {
-    const appLocale = 'de'; // process.env.NODE_ENV === 'test' ? 'en' : app.getLocale();
+    const appLocale = process.env.NODE_ENV === 'test' ? 'en' : app.getLocale();
     locale = loadLocale({ appLocale, logger });
   }
 
