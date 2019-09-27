@@ -92,14 +92,15 @@
       this.render();
       this.model.forEach(element => {
         this.$('.container-ticket').append('<p id='+element.client_uuid +'>'+element.client_uuid+'</p>');
+        this.$('#'+element.client_uuid).click(this.showInfoTicket.bind(this));
       });
-    
-
-
-    }
-  });
+      
+    },
+    showInfoTicket(elemt){
+      console.log("111111111111111111", elemt)
+    },
+    });
   
-
   Whisper.ConversationView = Whisper.View.extend({
     className() {
       return ['conversation', this.model.get('type')].join(' ');
