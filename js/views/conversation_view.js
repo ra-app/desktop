@@ -97,11 +97,11 @@
                                   <span class="ticket-user-name"> ${element.client_uuid} </span>
                                 </div>
                                 <div class="container-ticket-info">
-                                  <span class="ticket-id">${element.id}</span>
-                                  <span class="ticket-date">${new Date(element.ts_created)}</span>
+                                  <span class="ticket-id">Ticket ${element.id}</span>
+                                  <span class="ticket-date">${new Date(element.ts_created).toUTCString().split('GMT')[0]}</span>
                                 </div>
                                 <div class="container-ticket-actions">
-                                  <button class="button-claim-ticket"> Übernehmen </button>
+                                  <button class="button-claim-ticket ${element.state == 1 ? 'not-claimed' : element.state == 2 ? 'claimed' : element.state == 3 ? 'not-claimed' : ''}"> ${element.state == 1 || element.state == 2 ?'Übernehmen' : element.state == 3 ? 'wieder öffnen' : null} </button>
                                 </div>
                             </div>`;
         
