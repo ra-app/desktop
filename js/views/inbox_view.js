@@ -23,7 +23,7 @@
   Whisper.ConversationStack = Whisper.View.extend({
     className: 'conversation-stack',
     lastConversation: null,
-    open(conversation, isTicket) {
+    open(conversation, isTicket, clientDetails ) {
       if(!isTicket){
       const id = `conversation-${conversation.cid}`;
       if (id !== this.el.firstChild.id) {
@@ -52,7 +52,7 @@
       // Make sure poppers are positioned properly
       window.dispatchEvent(new Event('resize'));
     }else {
-      console.log("555555555555555555555555555", conversation)
+      console.log("555555555555555555555555555", clientDetails)
       const id = `conversation-${conversation.cid}`;
       if (id !== this.el.firstChild.id) {
         this.$el
@@ -65,6 +65,7 @@
         if ($el === null || $el.length === 0) {
           const view = new Whisper.TicketScreen({  
             model: conversation,
+            clients: clientDetails,
             window: this.model.window,
           });
           // eslint-disable-next-line prefer-destructuring
@@ -232,10 +233,12 @@
     async openTicket(id) {
       const tickets= await getUnclaimedCompanyTickets(id);
       // let userInformation = []
-    
-      tickets.forEach(async element => {
-        const client = await getClient(element.company_id, element.client_uuid);
+      let clientPromises = [];
+      tickets.forEach(element => {
+        clientPromises.push(getClientDetails(element.company_id, element.client_uuid));
       });
+      let clientDetails = await Promise.all(clientPromises);
+      console.log(clientDetails, "clien details")
 
       // };
       // const conversation = await ConversationController.getOrCreateAndWait(
@@ -249,7 +252,7 @@
       // }
       const isTicket = true;
       if(this.tmpticketId !== id){
-        this.conversation_stack.open(tickets, isTicket);
+        this.conversation_stack.open(tickets, isTicket, clientDetails);
         this.focusConversation();
       }
       this.tmpticketId = id;
