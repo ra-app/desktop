@@ -18,7 +18,7 @@
   cursor: pointer;
 }
 .main-ticket-container {
-  min-height: 80px;
+  min-height: 65px;
   background: #ffffff;
   margin-bottom: 10px;
   padding: 10px;
@@ -26,31 +26,33 @@
 }
 .container-ticket-userinfo {
   background: #b1c6de54;
-  max-width: 330px;
+  max-width: 30%;
+  min-width: 30%;
   display: flex;
   float: left;
-  margin-right: 20px;
+  margin-right: 0px;
+  padding-top: 3px;
 }
 
 span.ticket-user-name {
-  margin-top: 10px;
+  margin-top: 8px;
   font-size: 16px;
   color: #476077;
 }
 img.ticket-user-image {
   height: 42px;
   width: 42px;
-  margin-top: 10px;
+  margin-top: 0px;
   margin-left: 10px;
 }
 .container-ticket-info {
-  margin-left: 20px;
-  padding: 20px 10px 10px 10px;
+  padding: 13px 10px 10px 10px;
+  float: left;
 }
 .container-ticket-actions{
-  position: absolute;
   right: 10px;
   top: 20px;
+  float: right;
 }
 .button-claim-ticket{
   height: 40px;
@@ -70,7 +72,7 @@ img.ticket-user-image {
 }
 
 .mainMssgDiv{
-  margin-top: 10px;
+  margin-top: 55px;
   background: #F5F5F5;
   padding: 22px;
 }

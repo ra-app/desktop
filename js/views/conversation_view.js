@@ -90,12 +90,14 @@
     initialize(options) {
       // this.$('tickets-view').append(this.view.el);
       this.render();
-      console.log(options, "my clientessssssssssssssssss")
-      this.model.forEach(element => {
+      const clients = options.clients;
+      this.model.forEach((element, index) => {
+        console.log(index, '<===== index !!! ')        
+        console.log(clients[index].clients.active)
         const ticketBlock = `<div id="${element.uuid}" class="main-ticket-container">
                                 <div class="container-ticket-userinfo">
                                   <img src="images/header-chat.png" class="ticket-user-image" />
-                                  <span class="ticket-user-name"> ${element.client_uuid} </span>
+                                  <span class="ticket-user-name"> ${clients[index].clients.name ? clients[index].clients.name : 'username' } </span>
                                 </div>
                                 <div class="container-ticket-info">
                                   <span class="ticket-id">Ticket ${element.id}</span>
@@ -108,12 +110,12 @@
         
         this.$('.container-ticket').append(ticketBlock);
         // this.$('.container-ticket').append('<p id='+element.client_uuid +'>'+element.client_uuid+'</p>');
-        this.$('#'+element.uuid).click(()=> this.showInfoTicket(element));
+        this.$('#'+element.uuid).click(()=> this.showInfoTicket(element, clients[index].clients));
         this.$('#claim_'+element.uuid).click(()=> this.claimTicket(element.company_id, element.uuid));
       });
       
     },
-    async showInfoTicket(element){
+    async showInfoTicket(element, client){
       try{
         const ticketDETAIL = await getTicketDetails(element.company_id, element.uuid);
         const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
@@ -123,7 +125,7 @@
           ticketDETAIL.events.forEach(mssg => {
             console.log('MSSG!!!!', JSON.parse(mssg.json).body)
             const mssgDiv = `<div class="received-message">
-                              <p class="mssgUsername">${element.client_uuid}</p>
+                              <p class="mssgUsername">${client.name ? client.name : 'username'}</p>
                               <p class="ticket-message">${JSON.parse(mssg.json).body}</p>
                               <p class="ticket-time">${days[new Date(mssg.ts).getDay()]} ${new Date(mssg.ts).getHours() - 1}:${new Date(mssg.ts).getMinutes()}</p>
                             </div>`;
