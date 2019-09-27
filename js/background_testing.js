@@ -9,15 +9,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const number = textsecure.storage.get('companyNumber', null);
   if (number) await ensureCompanyConversation(number);
 
-  // await ensureConversation('+34000000000')
-  // await ensureConversation('+34000000001')
-  // await ensureConversation('+34000000002')
-  // await ensureConversation('+34000000003')
-  // await ensureConversation('+34000000004')
-
-  // await ensureConversation('+34664666666')
-  // await ensureConversation('+34664666667')
-  // await ensureConversation('+34664666668')
+  // await addAllCompanies();
 
   setInterval(() => {
     createDeveloperInterface();
@@ -353,12 +345,13 @@ const devToaster = msg => {
 };
 
 const createDeveloperInterface = () => {
-  const existing = document.getElementById('dev-panel');
-  if (existing) return;
+  const existingPanel = document.getElementById('devPanel');
+  if (existingPanel) return;
+  console.log('createDeveloperInterface');
 
   // Dev Panel
   const devPanel = document.createElement('div');
-  devPanel.id = 'dev-panel';
+  devPanel.id = 'devPanel';
   devPanel.style.cssText =
     'border: 1px solid black; background-color: white; position: absolute; right: 5px; top: 50px; padding: 5px; z-index: 9999;';
   document.body.appendChild(devPanel);
@@ -462,6 +455,29 @@ const createDeveloperInterface = () => {
   devPanel.appendChild(addCompanyDiv);
 };
 
+const readFileAsText = file => new Promise((resolve, reject) => {
+  const reader = new FileReader();
+  reader.readAsText(file);
+  reader.onload = () => resolve(reader.result);
+  reader.onerror = error => reject(error);
+});
+
+const checkValidXML = xml => {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(xml, 'text/xml');
+  const throwParserError = node => {
+    let depth = 0;
+    while (node && node.children && node.children.length && depth < 3) {
+      const first = node.children[0];
+      if (first && first.tagName.toLowerCase() === 'parsererror') {
+        throw new Error(first.children[1].innerText);
+      }
+      node = first;
+      depth += 1;
+    }
+  }
+  throwParserError(doc);
+}
 
 // PROFILE STUFF START
 

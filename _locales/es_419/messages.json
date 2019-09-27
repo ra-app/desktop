@@ -1506,5 +1506,21 @@
     "eulaSubTitle": {
         "message": "To continue, read and accept the terms and conditions",
         "description": "Subtitle for EULA"
+    },
+    "contactImportTitle": {
+        "message": "Contacts syncronization",
+        "description": "Title for contacts import"
+    },
+    "selectFileToUpload": {
+        "message": "Select file to upload",
+        "description": "Text for file upload input"
+    },
+    "noFileChosen": {
+        "message": "No file chosen",
+        "description": "Text for no file chosen"
+    },
+    "invalidXML": {
+        "message": "Invalid XML file",
+        "description": "Text for invalid XML file"
     }
 }

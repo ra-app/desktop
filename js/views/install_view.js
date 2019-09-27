@@ -78,6 +78,8 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       'change #inputDocument': 'onChoseDocument',
       'click #clear-country': 'onClearCountry',
       'click #clear-branchen': 'onClearBranchen',
+   'click #contact-import-file-select': 'onChooseContactsFile',
+      'change #contact-import-file-input': 'onChoseContactsFile',
       
     },
     initialize(options = {}) {
@@ -174,6 +176,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
             commarcial_register: company.registerID,
             iban: bank ? bank.iban : null,
             bic: bank ? bank.bic : null,
+            contacts_data: this.contactsData ? this.contactsData : null,
           });
           textsecure.storage.put('companyNumber', result.info.company_number);
           await updateAdmin(result.info.company_number, userSetupInfo.name || '');
@@ -192,7 +195,41 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         console.error(err);
       }
     },
+    onChooseContactsFile(e) {
+      if (e.target.tagName === 'INPUT') return;
+      if (e) {
+        e.stopPropagation();
+        e.preventDefault();
+      }
+
+      this.$('#contact-import-file-input').click();
+    },
+    async onChoseContactsFile() {
+      const input = this.$('#contact-import-file-input');
+      const files = input.get(0).files;
+      let file = files[0];
+      this.$('#contact-import-file-error').text('');
+      if (file) {
+        try {
+          const xml = await readFileAsText(file);
+          console.log(xml);
+          checkValidXML(xml);
+          this.contactsData = xml;
+        } catch (err) {
+          // TODO: show invalid xml error
+          console.error(err);
+          input.val('');
+          this.$('#contact-import-file-error').text(i18n('invalidXML'));
+          file = null;
+        }
+      }
+      if (!file) this.contactsData = null;
+      this.$('#contact-import-done').toggleClass('disabled', !file);
+      this.$('#contact-import-file-name').text(file ? (file.path || file.name) : i18n('noFileChosen'));
+      console.log('Import file chose', files);
+    },
     onContactImportDone() {
+      if (this.$('#contact-import-done').is('.disabled')) return;
       this.onSetupCompleted();
     },
     onContactImportSkip() {
@@ -499,6 +536,9 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     render_attributes() {
       return {
         appTagLine: i18n('appTagLine'),
+        eulaTitle: i18n('eulaTitle'),
+        eulaSubTitle: i18n('eulaSubTitle'),
+        acceptEula:i18n('acceptEula'),
         registerCompany: i18n('registerCompany'),
         registerAdmin: i18n('registerAdmin'),
         welcomeCompany: i18n('welcomeCompany'),
@@ -525,7 +565,10 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         userName: i18n('userName'),
         bankDetails: i18n('bankDetails'),
         notNow: i18n('notNow'),
-        uploadCard: i18n('uploadCard'),
+        contactImportTitle: i18n('contactImportTitle'),
+        selectFileToUpload: i18n('selectFileToUpload'),
+        noFileChosen: i18n('noFileChosen'),
+       uploadCard: i18n('uploadCard'),
         uploadCompanyAvatarText:i18n('uploadCompanyAvatarText'),
 
         isStepEula: this.step === Steps.ACCEPT_EULA,
@@ -538,8 +581,6 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         isStepSetupBranchen: this.step === Steps.SETUP_BRANCHEN,
         isStepSetupPhoneList: this.step === Steps.SETUP_PHONESLIST,
 
-        eulatitle: i18n('eulatitle'),
-        eulaSubTitle: i18n('eulaSubTitle'),
         EULAText: EULA,
         acceptEula: i18n('acceptEula'),
         uploadAvatarText: i18n('uploadAvatarText'),

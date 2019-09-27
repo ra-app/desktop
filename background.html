@@ -494,7 +494,7 @@
         <div class='content-center'>
           <div class='content-holder card eula-text'>
             <div class ='eula-title'> 
-                {{eulatitle}}
+                {{eulaTitle}}
             </div>
             <div class ='eula-Subtitle'> 
                 {{eulaSubTitle}}
@@ -776,13 +776,20 @@
       {{#isStepSetupContactImport}}
       <div class='content-row'>
         <div class='content-center'>
-          <div class='content-holder card content-import-contacts'>
-            <!-- CONTACT IMPORT TODO -->
-            <span class="title-contact">{{contactImportTitle}}</span>
-            <p class="import-contact-text">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus iaculis, turpis a gravida varius, mi massa fermentum velit, vitae euismod ante odio nec arcu.
-            </p>
-            <a class='button' id='contact-import-done'>{{continueButton}}</a>
+          <div class='content-holder card'>
+            <div class='div-title-register'>{{contactImportTitle}}</div>
+            <div class='send file-input' id='contact-import-file-select'>
+              <div>
+                <div>{{selectFileToUpload}}</div>
+                <div class='file-name' id='contact-import-file-name'>{{noFileChosen}}</div>
+              </div>
+              <div class='choose-file'>
+                <button class='paperclip thumbnail'></button>
+                <input type='file' id='contact-import-file-input' accept='.xml'>
+              </div>
+            </div>
+            <div class='error' id='contact-import-file-error'></div>
+            <a class='button disabled' id='contact-import-done'>{{continueButton}}</a>
             <div class='action-link'><a id='contact-import-skip'>{{notNow}}</a></div>
           </div>
         </div>
