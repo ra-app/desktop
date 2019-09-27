@@ -107,12 +107,13 @@
         
         this.$('.container-ticket').append(ticketBlock);
         // this.$('.container-ticket').append('<p id='+element.client_uuid +'>'+element.client_uuid+'</p>');
-        this.$('#'+element.client_uuid).click(this.showInfoTicket.bind(this));
+        this.$('#'+element.client_uuid).click(()=> this.showInfoTicket(element));
       });
       
     },
-    showInfoTicket(elemt){
-      console.log("111111111111111111", elemt)
+    async showInfoTicket(element){
+      const ticketDETAIL = await getTicketDetails(element.company_id, element.uuid);
+      console.log(ticketDETAIL, "ticket details")
     },
     });
   

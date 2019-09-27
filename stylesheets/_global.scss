@@ -1418,4 +1418,16 @@ $debug: 0;
       opacity: 1;
     }
   }
+  .file-input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    .file-name {
+      font-size: 10px;
+    }
+  }
+  .error {
+    color: red;
+  }
 }
