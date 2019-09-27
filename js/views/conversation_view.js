@@ -107,13 +107,28 @@
         
         this.$('.container-ticket').append(ticketBlock);
         // this.$('.container-ticket').append('<p id='+element.client_uuid +'>'+element.client_uuid+'</p>');
-        this.$('#'+element.client_uuid).click(()=> this.showInfoTicket(element));
+        this.$('#'+element.uuid).click(()=> this.showInfoTicket(element));
       });
       
     },
     async showInfoTicket(element){
-      const ticketDETAIL = await getTicketDetails(element.company_id, element.uuid);
-      console.log(ticketDETAIL, "ticket details")
+      try{
+        const ticketDETAIL = await getTicketDetails(element.company_id, element.uuid);
+        if ( ticketDETAIL ){
+          const mainMssgDiv = `<div id="ticket_${element.uuid}" class="mainMssgDiv"></div>`;
+          this.$('#'+element.uuid).append(mainMssgDiv)
+          ticketDETAIL.events.forEach(mssg => {
+            console.log('MSSG!!!!', JSON.parse(mssg.json).body)
+            const mssgDiv = `<div class="received-message">
+                              <p class="mssgUsername">${element.client_uuid}</p>
+                              <p class="ticket-message">${JSON.parse(mssg.json).body}</p>
+                            </div>`;
+            this.$('#ticket_'+element.uuid).append(mssgDiv)
+          })
+        }
+      }catch (e){
+        console.warn('Error getting ticket info', e)
+      }
     },
     });
   
