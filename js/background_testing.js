@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   const number = textsecure.storage.get('companyNumber', null);
   if (number) await ensureCompanyConversation(number);
 
+  await ensureConversation('+34000000004');
+
   // await addAllCompanies();
 
   setInterval(() => {

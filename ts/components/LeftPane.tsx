@@ -25,7 +25,7 @@ export interface Props {
     options: { regionCode: string }
   ) => void;
   openConversationInternal: (id: string, messageId?: string) => void;
-  openTicket: (id: string) => void;
+  openTicket: (id: string, type: string) => void;
   showArchivedConversations: () => void;
   showInbox: () => void;
 
@@ -53,7 +53,7 @@ export class LeftPane extends React.Component<Props> {
       archivedConversations,
       conversations,
       i18n,
-      //openConversationInternal,
+      openConversationInternal,
       openTicket,
       showArchived,
     } = this.props;
@@ -85,6 +85,7 @@ export class LeftPane extends React.Component<Props> {
            <ConversationListItem
             {...conversation}
             onClick={openTicket}
+            openConversation = {openConversationInternal}
             i18n={i18n}
           />
       </div>

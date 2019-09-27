@@ -44,6 +44,7 @@
     "ready": "yarn clean-transpile && yarn grunt && yarn lint && yarn test-node && yarn test-electron && yarn lint-deps",
     "regen": "yarn clean-transpile && yarn grunt",
     "just-build": "yarn install && yarn ready && SIGNAL_ENV=production yarn build",
+    "just-build-win": "yarn install && yarn clean-transpile && yarn grunt && set SIGNAL_ENV=production && yarn build",
     "dev": "yarn regen && yarn start"
   },
   "dependencies": {

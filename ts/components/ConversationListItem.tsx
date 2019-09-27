@@ -15,7 +15,7 @@ export type PropsData = {
   color?: string;
   profileName?: string;
   name?: string;
-  type: 'group' | 'direct';
+  type: 'group' | 'direct' | 'company';
   avatarPath?: string;
   isMe: boolean;
 
@@ -34,6 +34,7 @@ type PropsHousekeeping = {
   i18n: LocalizerType;
   style?: Object;
   onClick?: (id: string) => void;
+  openConversation?:(id:String) => void;
 };
 
 type Props = PropsData & PropsHousekeeping;
@@ -176,14 +177,18 @@ export class ConversationListItem extends React.PureComponent<Props> {
   }
 
   public render() {
-    const { unreadCount, onClick, id, isSelected, style } = this.props;
+    const { unreadCount, onClick, id, isSelected, openConversation, style, type } = this.props;
+    console.log(this.props, "rrrrrrrrrrrrrrrrrrrrrrrr")
 
     return (
       <div
         role="button"
         onClick={() => {
-          if (onClick) {
+          if (this.props.type == 'company' && onClick) {
             onClick(id);
+          }
+          if(this.props.type == 'direct' && onClick){
+            openConversation(id)
           }
         }}
         style={style}
