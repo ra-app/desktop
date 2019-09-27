@@ -24,6 +24,10 @@
     deleteTempFile,
   } = window.Signal.Migrations;
 
+  let uuidtmp = '';
+
+
+
   Whisper.ExpiredToast = Whisper.ToastView.extend({
     render_attributes() {
       return { toastMessage: i18n('expiredWarning') };
@@ -116,25 +120,35 @@
       
     },
     async showInfoTicket(element, client){
-      try{
-        const ticketDETAIL = await getTicketDetails(element.company_id, element.uuid);
-        const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-        if ( ticketDETAIL ){
-          const mainMssgDiv = `<div id="ticket_${element.uuid}" class="mainMssgDiv"></div>`;
-          this.$('#'+element.uuid).append(mainMssgDiv)
-          ticketDETAIL.events.forEach(mssg => {
-            console.log('MSSG!!!!', JSON.parse(mssg.json).body)
-            const mssgDiv = `<div class="received-message">
-                              <p class="mssgUsername">${client.name ? client.name : 'username'}</p>
-                              <p class="ticket-message">${JSON.parse(mssg.json).body}</p>
-                              <p class="ticket-time">${days[new Date(mssg.ts).getDay()]} ${new Date(mssg.ts).getHours() - 1}:${new Date(mssg.ts).getMinutes()}</p>
-                            </div>`;
-            this.$('#ticket_'+element.uuid).append(mssgDiv)
-          })
+      console.log(uuidtmp, "shooooooooooooooooo")
+      if(this.uuidtmp!== element.uuid){
+        try{
+          const ticketDETAIL = await getTicketDetails(element.company_id, element.uuid);
+          const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+          if ( ticketDETAIL ){
+            const mainMssgDiv = `<div id="ticket_${element.uuid}" class="mainMssgDiv"></div>`;
+            this.$('#'+element.uuid).append(mainMssgDiv)
+            ticketDETAIL.events.forEach(mssg => {
+              console.log('MSSG!!!!', JSON.parse(mssg.json).body)
+              const mssgDiv = `<div class="received-message">
+                                <p class="mssgUsername">${client.name ? client.name : 'username'}</p>
+                                <p class="ticket-message">${JSON.parse(mssg.json).body}</p>
+                                <p class="ticket-time">${days[new Date(mssg.ts).getDay()]} ${new Date(mssg.ts).getHours() - 1}:${new Date(mssg.ts).getMinutes()}</p>
+                              </div>`;
+              this.$('#ticket_'+element.uuid).append(mssgDiv)
+            })
+          }
+        }catch (e){
+          console.warn('Error getting ticket info', e)
         }
-      }catch (e){
-        console.warn('Error getting ticket info', e)
+      }else {
+        if(this.$('#ticket_'+element.uuid).hasClass('hide')){
+          this.$('#ticket_'+element.uuid).removeClass('hide')
+        }else {
+          this.$('#ticket_'+element.uuid).addClass('hide')
+        }
       }
+      this.uuidtmp = element.uuid
     },
     async claimTicket (company_id, uuid){
 
