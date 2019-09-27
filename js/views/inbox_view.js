@@ -24,6 +24,7 @@
     className: 'conversation-stack',
     lastConversation: null,
     open(conversation, isTicket, clientDetails ) {
+      // isTicket = false;
       if(!isTicket){
       const id = `conversation-${conversation.cid}`;
       if (id !== this.el.firstChild.id) {
@@ -52,7 +53,6 @@
       // Make sure poppers are positioned properly
       window.dispatchEvent(new Event('resize'));
     }else {
-      console.log("555555555555555555555555555", clientDetails)
       const id = `conversation-${conversation.cid}`;
       if (id !== this.el.firstChild.id) {
         this.$el
