@@ -77,6 +77,13 @@
     className: 'conversation-loading-screen',
   });
 
+  Whisper.TicketScreen = Whisper.View.extend({
+    templateName: 'tickets-view',
+    className: 'tickets-view',
+    template: $('#tickets-view').html(),
+  });
+  
+
   Whisper.ConversationView = Whisper.View.extend({
     className() {
       return ['conversation', this.model.get('type')].join(' ');

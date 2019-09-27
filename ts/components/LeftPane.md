@@ -135,6 +135,10 @@ window.searchResults.messages = [
     openConversationInternal={(id, messageId) =>
       console.log('openConversation', id, messageId)
     }
+    openTicket={(id) =>
+      console.log('openConversation', id)
+    }
+    
     showArchivedConversations={() => console.log('showArchivedConversations')}
     showInbox={() => console.log('showInbox')}
     renderMainHeader={() => (
@@ -163,6 +167,9 @@ window.searchResults.messages = [
     }
     openConversationInternal={(id, messageId) =>
       console.log('openConversation', id, messageId)
+    }
+     openTicket={(id) =>
+      console.log('openConversation', id)
     }
     showArchivedConversations={() => console.log('showArchivedConversations')}
     showInbox={() => console.log('showInbox')}
@@ -193,6 +200,9 @@ window.searchResults.messages = [
     openConversationInternal={(id, messageId) =>
       console.log('openConversation', id, messageId)
     }
+     openTicket={(id) =>
+      console.log('openConversation', id)
+    }
     showArchivedConversations={() => console.log('showArchivedConversations')}
     showInbox={() => console.log('showInbox')}
     renderMainHeader={() => (
@@ -221,7 +231,10 @@ window.searchResults.messages = [
       console.log('startNewConversation', query, options)
     }
     openConversationInternal={(id, messageId) =>
-      console.log('openConversation', id, messageId)
+      console.log('openConversation', id, messageId);
+    }
+     openTicket={(id) =>
+      console.log('openConversation', id)
     }
     showArchivedConversations={() => console.log('showArchivedConversations')}
     showInbox={() => console.log('showInbox')}

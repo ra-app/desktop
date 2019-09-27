@@ -1452,7 +1452,7 @@
         "description": "Text for requesting SMS instead of call"
     },
     "companyDetails": {
-        "message": "Firmendetails",
+        "message": "Company details",
         "description": "Title for company details entry"
     },
     "taxNumber": {
@@ -1488,35 +1488,23 @@
         "description": "Label for user name input"
     },
     "bankDetails": {
-        "message": "Zahlungsdaten",
+        "message": "Bank details",
         "description": "Title for company bank detail input"
     },
     "notNow": {
-        "message": "Jetzt nicht",
+        "message": "Not now",
         "description": "Text for skipping actions for now"
     },
-    "uploadCard": {
-        "message": "Handelsregistereinträge bei Marken oder Ausweisdokumente bei Unternehmen hochladen.",
-        "description": "Text for upload card on company register"
+    "acceptEula": {
+        "message": "Accept EULA",
+        "description": "Text for Accept EULA checkbox"
     },
-    "acceptEula":{
-      "message":"Ich akzeptiere die AGB.",
-      "description":"Text for accept eula"
+    "eulaTitle": {
+        "message": "End-User License Agreement",
+        "description": "Title for EULA"
     },
-    "eulatitle":{
-      "message":"Allgemeine Geschäftsbedingungen",
-      "description":"Text for eula"
-    },
-    "eulaSubTitle":{
-      "message":"Um fortzufahren, lesen und akzeptieren Sie die AGB.",
-      "description":"Text for  eula"
-    },
-    "uploadAvatarText":{
-      "message":"Bitte Fügen SIE EIN Profilbild HINZU",
-      "description":"Text for  upload avatar"
-    },
-    "contactImportTitle":{
-        "message": "Kontakte synchronisieren",
-        "description": "Text for contact import"
+    "eulaSubTitle": {
+        "message": "To continue, read and accept the terms and conditions",
+        "description": "Subtitle for EULA"
     }
 }

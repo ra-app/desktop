@@ -152,6 +152,7 @@ export const actions = {
   openConversationExternal,
   showInbox,
   showArchivedConversations,
+  openTicket,
 };
 
 function conversationAdded(
@@ -205,7 +206,6 @@ function messageExpired(
     },
   };
 }
-
 // Note: we need two actions here to simplify. Operations outside of the left pane can
 //   trigger an 'openConversation' so we go through Whisper.events for all conversation
 //   selection.
@@ -214,6 +214,16 @@ function openConversationInternal(
   messageId?: string
 ): NoopActionType {
   trigger('showConversation', id, messageId);
+
+  return {
+    type: 'NOOP',
+    payload: null,
+  };
+}
+function openTicket(
+  id: string,
+): NoopActionType {
+  trigger('showOpenTicket', id);
 
   return {
     type: 'NOOP',
