@@ -53,7 +53,8 @@ export class LeftPane extends React.Component<Props> {
       archivedConversations,
       conversations,
       i18n,
-      openConversationInternal,
+      //openConversationInternal,
+      openTicket,
       showArchived,
     } = this.props;
     if (!conversations || !archivedConversations) {
@@ -130,8 +131,8 @@ export class LeftPane extends React.Component<Props> {
       archivedConversations,
       i18n,
       conversations,
-      openConversationInternal,
-      openTicket,
+       openConversationInternal,
+      // openTicket,
       startNewConversation,
       searchResults,
       showArchived,
@@ -142,7 +143,7 @@ export class LeftPane extends React.Component<Props> {
         <SearchResults
           {...searchResults}
           openConversation={openConversationInternal}
-          openTicket={openTicket}
+          // openTicket={openTicket}
           startNewConversation={startNewConversation}
           i18n={i18n}
         />
