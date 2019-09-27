@@ -2318,6 +2318,16 @@
 
   border-bottom: 1px solid $color-gray-15;
 }
+.content{
+  .module-main-header__info {
+    img{
+      float: unset;
+    }
+    span{
+      top: -6px;
+    }
+  }
+}
 .module-main-header__info {
   min-height: 70px;
   text-align: center;
