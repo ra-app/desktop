@@ -230,8 +230,13 @@
       this.focusConversation();
     },
     async openTicket(id) {
-      const conversation= await getUnclaimedCompanyTickets(id)
-      console.log(conversation, "11111111111111111111111111")
+      const tickets= await getUnclaimedCompanyTickets(id);
+      // let userInformation = []
+      console.log(tickets, "list tickets");
+      tickets.forEach(async element => {
+        const client = await getClient(element.company_id, element.client_uuid);
+        console.log(client, "eeeeeeeeeeeeeeeeeee");
+      });
         
       // };
       // const conversation = await ConversationController.getOrCreateAndWait(
@@ -244,7 +249,7 @@
       //   openConversationExternal(id, messageId);
       // }
       const isTicket = true;
-      this.conversation_stack.open(conversation, isTicket);
+      this.conversation_stack.open(tickets, isTicket);
       this.focusConversation();
     },
     closeRecording(e) {

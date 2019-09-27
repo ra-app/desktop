@@ -107,7 +107,7 @@
         
         this.$('.container-ticket').append(ticketBlock);
         // this.$('.container-ticket').append('<p id='+element.client_uuid +'>'+element.client_uuid+'</p>');
-        this.$('#'+element.client_uuid).click(()=> this.showInfoTicket(element));
+        this.$('#'+element.uuid).click(()=> this.showInfoTicket(element));
       });
       
     },
