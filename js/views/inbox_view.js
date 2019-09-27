@@ -62,7 +62,10 @@
           });
         let $el = this.$(`#${id}`);
         if ($el === null || $el.length === 0) {
-          const view = new Whisper.TicketScreen();
+          const view = new Whisper.TicketScreen({  
+            model: conversation,
+            window: this.model.window,
+          });
           // eslint-disable-next-line prefer-destructuring
           $el = view.$el;
         }
@@ -87,13 +90,11 @@
       message: i18n('loading'),
     },
   });
-  Whisper.TicketScreen = Whisper.View.extend({
-    templateName: 'tickets-view',
-    className: 'tickets-view',
-    render_attributes: {
-      message: i18n('loading'),
-    },
-  });
+  // Whisper.TicketScreen = Whisper.View.extend({
+  //   templateName: 'tickets-view',
+  //   className: 'tickets-view',
+
+  // });
 
 
   Whisper.InboxView = Whisper.View.extend({

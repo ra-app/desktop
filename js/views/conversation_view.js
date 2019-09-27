@@ -81,6 +81,22 @@
     templateName: 'tickets-view',
     className: 'tickets-view',
     template: $('#tickets-view').html(),
+    render_attributes() {
+      return {
+        'send-message': i18n('sendMessage'),
+      };
+    },
+    
+    initialize(options) {
+      // this.$('tickets-view').append(this.view.el);
+      this.render();
+      this.model.forEach(element => {
+        this.$('.container-ticket').append('<p id='+element.client_uuid +'>'+element.client_uuid+'</p>');
+      });
+    
+
+
+    }
   });
   
 
