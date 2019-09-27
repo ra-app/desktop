@@ -91,7 +91,22 @@
       // this.$('tickets-view').append(this.view.el);
       this.render();
       this.model.forEach(element => {
-        this.$('.container-ticket').append('<p id='+element.client_uuid +'>'+element.client_uuid+'</p>');
+        const ticketBlock = `<div id="${element.uuid}" class="main-ticket-container">
+                                <div class="container-ticket-userinfo">
+                                  <img src="images/header-chat.png" class="ticket-user-image" />
+                                  <span class="ticket-user-name"> ${element.client_uuid} </span>
+                                </div>
+                                <div class="container-ticket-info">
+                                  <span class="ticket-id">${element.id}</span>
+                                  <span class="ticket-date">${new Date(element.ts_created)}</span>
+                                </div>
+                                <div class="container-ticket-actions">
+                                  <button class="button-claim-ticket"> Übernehmen </button>
+                                </div>
+                            </div>`;
+        
+        this.$('.container-ticket').append(ticketBlock);
+        // this.$('.container-ticket').append('<p id='+element.client_uuid +'>'+element.client_uuid+'</p>');
         this.$('#'+element.client_uuid).click(this.showInfoTicket.bind(this));
       });
       

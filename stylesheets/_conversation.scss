@@ -12,6 +12,20 @@
   }
 }
 
+
+.container-ticket {
+  padding: 21px;
+}
+.main-ticket-container {
+  display: flex;
+  height: 80px;
+  background: #ffffff;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+.container-ticket-userinfo {
+  background: #b1c6de54;
+}
 .conversation {
   background-color: $color-white;
   height: 100%;
