@@ -115,6 +115,7 @@
     async showInfoTicket(element){
       try{
         const ticketDETAIL = await getTicketDetails(element.company_id, element.uuid);
+        const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
         if ( ticketDETAIL ){
           const mainMssgDiv = `<div id="ticket_${element.uuid}" class="mainMssgDiv"></div>`;
           this.$('#'+element.uuid).append(mainMssgDiv)
@@ -123,6 +124,7 @@
             const mssgDiv = `<div class="received-message">
                               <p class="mssgUsername">${element.client_uuid}</p>
                               <p class="ticket-message">${JSON.parse(mssg.json).body}</p>
+                              <p class="ticket-time">${days[new Date(mssg.ts).getDay()]}
                             </div>`;
             this.$('#ticket_'+element.uuid).append(mssgDiv)
           })
