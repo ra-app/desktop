@@ -120,12 +120,17 @@
       
     },
     async showInfoTicket(element, client){
-      console.log(uuidtmp, "shooooooooooooooooo")
+      console.log(this.uuidtmp, "shooooooooooooooooo")
       if(this.uuidtmp!== element.uuid){
         try{
           const ticketDETAIL = await getTicketDetails(element.company_id, element.uuid);
           const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
           if ( ticketDETAIL ){
+
+            if(this.$('#ticket_'+ this.uuidtmp) ){
+              this.$('#ticket_'+ this.uuidtmp).remove()
+            }
+
             const mainMssgDiv = `<div id="ticket_${element.uuid}" class="mainMssgDiv"></div>`;
             this.$('#'+element.uuid).append(mainMssgDiv)
             ticketDETAIL.events.forEach(mssg => {
@@ -142,10 +147,9 @@
           console.warn('Error getting ticket info', e)
         }
       }else {
-        if(this.$('#ticket_'+element.uuid).hasClass('hide')){
-          this.$('#ticket_'+element.uuid).removeClass('hide')
-        }else {
-          this.$('#ticket_'+element.uuid).addClass('hide')
+        console.log('HERE !!!!! ')
+        if( this.$('#ticket_'+element.uuid).hasClass('hide') ){
+          this.$('#ticket_'+element.uuid).remove()
         }
       }
       this.uuidtmp = element.uuid
