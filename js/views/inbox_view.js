@@ -73,11 +73,10 @@
         }
         $el.prependTo(this.el);
       }
+      
       window.dispatchEvent(new Event('resize'));
+
     }
-    // if ( this.$('.conversation.private').length >= 0 ){
-    //   $('.conversation.private').remove();
-    // }
   }
   });
 
