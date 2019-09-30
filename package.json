@@ -259,7 +259,7 @@
       "package.json",
       "config/default.json",
       "config/${env.SIGNAL_ENV}.json",
-      "config/local-${env.SIGNAL_ENV}.json",
+      "config/*.json",
       "background.html",
       "about.html",
       "settings.html",
