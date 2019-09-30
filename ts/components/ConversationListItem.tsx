@@ -34,7 +34,7 @@ type PropsHousekeeping = {
   i18n: LocalizerType;
   style?: Object;
   onClick?: (id: string) => void;
-  openConversation?:(id:String) => void;
+  openConversation?: (id: string) => void;
 };
 
 type Props = PropsData & PropsHousekeeping;
@@ -178,7 +178,6 @@ export class ConversationListItem extends React.PureComponent<Props> {
 
   public render() {
     const { unreadCount, onClick, id, isSelected, openConversation, style, type } = this.props;
-    console.log(this.props, "rrrrrrrrrrrrrrrrrrrrrrrr")
 
     return (
       <div
@@ -187,7 +186,7 @@ export class ConversationListItem extends React.PureComponent<Props> {
           if (this.props.type == 'company' && onClick) {
             onClick(id);
           }
-          if(this.props.type == 'direct' && onClick){
+          if (this.props.type == 'direct' && onClick) {
             openConversation(id)
           }
         }}

@@ -7,7 +7,7 @@ import { LocalizerType } from '../types/Util';
 interface Props {
   avatarPath?: string;
   color?: string;
-  conversationType: 'group' | 'direct';
+  conversationType: 'group' | 'direct' | 'company';
   i18n: LocalizerType;
   noteToSelf?: boolean;
   name?: string;
