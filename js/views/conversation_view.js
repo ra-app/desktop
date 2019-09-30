@@ -117,7 +117,6 @@
         this.$('#'+element.uuid).click((evt)=> this.showInfoTicket(evt, element, clients[index].clients));
         this.$('#claim_'+element.uuid).click(()=> this.claimTicket(element.company_id, element.uuid));
       });
-      
     },
     async showInfoTicket(evt, element, client){
       if ( evt.target.className.indexOf('button-claim-ticket') === -1 ){
