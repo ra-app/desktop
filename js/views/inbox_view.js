@@ -45,6 +45,9 @@
         }
         $el.prependTo(this.el);
       }
+      if(this.$('.tickets-view')){
+        this.$('.tickets-view').remove()
+      }
       conversation.trigger('opened');
       if (this.lastConversation) {
         this.lastConversation.trigger('backgrounded');
@@ -63,6 +66,9 @@
           });
         let $el = this.$(`#${id}`);
         if ($el === null || $el.length === 0) {
+          if(this.$('.tickets-view')){
+            this.$('.tickets-view').remove()
+          }
           const view = new Whisper.TicketScreen({  
             model: conversation,
             clients: clientDetails,
@@ -253,10 +259,10 @@
       //   openConversationExternal(id, messageId);
       // }
       const isTicket = true;
-      if(this.tmpticketId !== id){
+      // if(this.tmpticketId !== id){
         this.conversation_stack.open(tickets, isTicket, clientDetails);
         this.focusConversation();
-      }
+      // }
       this.tmpticketId = id;
     },
     closeRecording(e) {

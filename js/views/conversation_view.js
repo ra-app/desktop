@@ -96,8 +96,6 @@
       this.render();
       const clients = options.clients;
       this.model.forEach((element, index) => {
-        console.log(index, '<===== index !!! ')        
-        console.log(clients[index].clients.active)
         const ticketBlock = `<div id="${element.uuid}" class="main-ticket-container">
                                 <div class="container-ticket-userinfo">
                                   <img src="images/header-chat.png" class="ticket-user-image" />
@@ -117,6 +115,7 @@
         this.$('#'+element.uuid).click((evt)=> this.showInfoTicket(evt, element, clients[index].clients));
         this.$('#claim_'+element.uuid).click(()=> this.claimTicket(element.company_id, element.uuid));
       });
+      
     },
     async showInfoTicket(evt, element, client){
       if ( evt.target.className.indexOf('button-claim-ticket') === -1 ){

@@ -88,9 +88,15 @@
 .conversation-stack {
   .conversation {
     display: none;
+    ~.ticket-view{
+      display: block;
+    }
   }
   .conversation:first-child {
     display: block;
+    ~.ticket-view{
+      display: none;
+    }
   }
 }
 
