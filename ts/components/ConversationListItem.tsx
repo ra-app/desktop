@@ -186,7 +186,7 @@ export class ConversationListItem extends React.PureComponent<Props> {
           if (this.props.type == 'company' && onClick) {
             onClick(id);
           }
-          if (this.props.type == 'direct' && onClick) {
+          if (this.props.type == 'direct' && openConversation) {
             openConversation(id)
           }
         }}
