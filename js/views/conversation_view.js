@@ -136,12 +136,20 @@
       this.uuidtmp = element.uuid
     },
     async claimTicket (company_id, uuid){
-      const claim = await claimTicket(company_id, uuid);
-      await ensureConversation(claim);
+      const phone_number = await claimTicket(company_id, uuid);
+      const conversation = await ensureConversation(phone_number);
+      // send event ticket 
+      const ticketDETAIL = await getTicketDetails(company_id, uuid);
+      ticketDETAIL.events.forEach(mssg => { 
+        const message = JSON.parse(mssg.json).body
+        conversation.sendMessage(message);
+        
+      })
+      // change button style
       this.$('#claim_'+uuid).removeClass('not-claimed').addClass('claimed');
     },
-    });
-  
+  });
+
   Whisper.ConversationView = Whisper.View.extend({
     className() {
       return ['conversation', this.model.get('type')].join(' ');
