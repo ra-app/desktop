@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const number = textsecure.storage.get('companyNumber', null);
   if (number) await ensureCompanyConversation(number);
 
-  // await ensureConversation('+34000000004');
+  // await ensureConversation('+34000000003');
 
   // await addAllCompanies();
 
@@ -326,6 +326,9 @@ const claimTicket = async (company_id, ticket_uuid) => {
 
 const getClientDetails = async (company_id, client_uuid) => {
   return (await apiRequest('api/v1/admin/' + company_id + '/clients/details/' + client_uuid)).details;
+};
+const getTicketsList = async (company_id, data) => {
+  return (await apiRequest('api/v1/admin/' + company_id + '/tickets/get', data)).tickets;
 };
 
 const exampleInfo = {

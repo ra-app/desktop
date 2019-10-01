@@ -58,9 +58,43 @@
     <div class='content'>
       <div class="module-main-header__info">
         <img src="images/header-chat.png" alt="header chat" />
-        <span id="span-chat-name">Kommunikation</span>
+        <span id="span-chat-name">Comunication</span>
       </div>
-      <div class='container-ticket'></div>
+      <div class='container-ticket'>
+        <!-- EACH -->
+        {{#model}}
+          <div id={{uuid}} class="main-ticket-container" >
+            <div class="container-ticket-userinfo">
+              <img src="images/header-chat.png" class="ticket-user-image" />
+              {{#name}}
+                <span class="ticket-user-name">{{name}}</span>
+              {{/name}}
+              {{^name}}
+                <span class="ticket-user-name">username</span>
+              {{/name}}
+            </div>
+            <div class="container-ticket-info">
+              <span class="ticket-id">Ticket {{id}}</span>
+              <span class="ticket-date">{{date}}</span>
+            </div>
+            <div class="container-ticket-actions">
+              {{#isUnknown}}
+                <button id = 'claim_{{uuid}}' class="button-claim-ticket not-claimed">{{status}}</button> 
+              {{/isUnknown}}
+              {{#isUnclaimed}}
+                <button id = 'claim_{{uuid}}' class="button-claim-ticket not-claimed">{{status}}</button> 
+              {{/isUnclaimed}}
+              {{#isClaimed}}
+                <button id = 'claim_{{uuid}}' class="button-claim-ticket claimed">{{status}}</button> 
+              {{/isClaimed}}
+              {{#isClosed}}
+                <button id = 'claim_{{uuid}}' class="button-claim-ticket not-claimed">{{status}}</button> 
+              {{/isClosed}}
+            </div>
+          </div>
+          {{/model}}
+        <!-- FIN EACH  -->
+      </div>
       
     </div>
   </script>

@@ -23,7 +23,7 @@
   Whisper.ConversationStack = Whisper.View.extend({
     className: 'conversation-stack',
     lastConversation: null,
-    open(conversation, isTicket, clientDetails ) {
+    open(conversation, isTicket ) {
       // isTicket = false;
       if(!isTicket){
       const id = `conversation-${conversation.cid}`;
@@ -71,7 +71,6 @@
           }
           const view = new Whisper.TicketScreen({  
             model: conversation,
-            clients: clientDetails,
             window: this.model.window,
           });
           // eslint-disable-next-line prefer-destructuring
@@ -239,14 +238,20 @@
       this.focusConversation();
     },
     async openTicket(id) {
-      const tickets= await getUnclaimedCompanyTickets(id);
+      const limit = 10;
+      const offset = 0;
+      const data= {
+        'limit' : 10,
+        'offset': 0,
+      }
+      const tickets= await getTicketsList(id, data);
       // let userInformation = []
-      let clientPromises = [];
-      tickets.forEach(element => {
-        clientPromises.push(getClientDetails(element.company_id, element.client_uuid));
-      });
-      let clientDetails = await Promise.all(clientPromises);
-      console.log(clientDetails, "clien details")
+      // let clientPromises = [];
+      // tickets.forEach(element => {
+      //   clientPromises.push(getClientDetails(element.company_id, element.client_uuid));
+      // });
+      // let clientDetails = await Promise.all(clientPromises);
+      // console.log(clientDetails, "clien details")
 
       // };
       // const conversation = await ConversationController.getOrCreateAndWait(
@@ -260,7 +265,44 @@
       // }
       const isTicket = true;
       // if(this.tmpticketId !== id){
-        this.conversation_stack.open(tickets, isTicket, clientDetails);
+        // this.conversation_stack.open(tickets, isTicket, clientDetails);
+        tickets.forEach((element, index) => {
+          tickets[index].date = new Date(element.ts_created).toUTCString().split('GMT')[0];
+          switch (element.state) {
+            case 0:
+              tickets[index].status =  i18n('Unknown')
+              tickets[index].isUnknown =  true
+              tickets[index].isUnclaimed =  false
+              tickets[index].isClaimed =  false
+              tickets[index].isClosed =  false
+              break;
+            case 1:
+              tickets[index].status =  i18n('Unclaimed')
+              tickets[index].isUnknown =  false
+              tickets[index].isUnclaimed =  true
+              tickets[index].isClaimed =  false
+              tickets[index].isClosed =  false
+              break;
+            case 2:
+              tickets[index].status =  i18n('Claimmed')
+              tickets[index].isUnknown =  false
+              tickets[index].isUnclaimed =  false
+              tickets[index].isClaimed =  true
+              tickets[index].isClosed =  false
+              break;
+            case 3:
+              tickets[index].status =  i18n('Closed')
+              tickets[index].isUnknown =  false
+              tickets[index].isUnclaimed =  false
+              tickets[index].isClaimed =  false
+              tickets[index].isClosed =  true
+              break;
+            default:
+              break;
+          }
+          
+        });
+        this.conversation_stack.open(tickets, isTicket);
         this.focusConversation();
       // }
       this.tmpticketId = id;

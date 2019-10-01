@@ -88,36 +88,19 @@
     render_attributes() {
       return {
         'send-message': i18n('sendMessage'),
+        'model': this.model,
       };
     },
     
     initialize(options) {
-      // this.$('tickets-view').append(this.view.el);
       this.render();
-      const clients = options.clients;
       this.model.forEach((element, index) => {
-        const ticketBlock = `<div id="${element.uuid}" class="main-ticket-container">
-                                <div class="container-ticket-userinfo">
-                                  <img src="images/header-chat.png" class="ticket-user-image" />
-                                  <span class="ticket-user-name"> ${clients[index].clients.name ? clients[index].clients.name : 'username' } </span>
-                                </div>
-                                <div class="container-ticket-info">
-                                  <span class="ticket-id">Ticket ${element.id}</span>
-                                  <span class="ticket-date">${new Date(element.ts_created).toUTCString().split('GMT')[0]}</span>
-                                </div>
-                                <div class="container-ticket-actions">
-                                  <button id = 'claim_${element.uuid}' class="button-claim-ticket ${element.state == 1 ? 'not-claimed' : element.state == 2 ? 'claimed' : element.state == 3 ? 'not-claimed' : ''}"> ${element.state == 1 || element.state == 2 ?'Übernehmen' : element.state == 3 ? 'wieder öffnen' : null} </button>
-                                </div>
-                            </div>`;
-        
-        this.$('.container-ticket').append(ticketBlock);
-        // this.$('.container-ticket').append('<p id='+element.client_uuid +'>'+element.client_uuid+'</p>');
-        this.$('#'+element.uuid).click((evt)=> this.showInfoTicket(evt, element, clients[index].clients));
+        this.$('#'+element.uuid).click((evt)=> this.showInfoTicket(evt, element));
         this.$('#claim_'+element.uuid).click(()=> this.claimTicket(element.company_id, element.uuid));
       });
-      
     },
-    async showInfoTicket(evt, element, client){
+
+    async showInfoTicket(evt, element){
       if ( evt.target.className.indexOf('button-claim-ticket') === -1 ){
         if(this.uuidtmp!== element.uuid){
           try{
@@ -132,7 +115,7 @@
               this.$('#'+element.uuid).append(mainMssgDiv)
               ticketDETAIL.events.forEach(mssg => {
                 const mssgDiv = `<div class="received-message">
-                                  <p class="mssgUsername">${client.name ? client.name : 'username'}</p>
+                                  <p class="mssgUsername">${element.name ? element.name : 'username'}</p>
                                   <p class="ticket-message">${JSON.parse(mssg.json).body}</p>
                                   <p class="ticket-time">${days[new Date(mssg.ts).getDay()]} ${new Date(mssg.ts).getHours() - 1}:${new Date(mssg.ts).getMinutes()}</p>
                                 </div>`;

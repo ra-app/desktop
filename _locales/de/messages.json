@@ -1838,5 +1838,21 @@
       "PhonesTitle":{
         "message": "Landesvorwahl",
           "description": "Landesvorwahl title"
+      },
+      "Claimed":{
+        "message": "Übernommen",
+        "description": "übernommen ticket"
+      },
+      "Unknown":{
+        "message": "Unbekannt",
+        "description": "unbekannt ticket"
+      },
+      "Unclaimed":{
+        "message": "Offen",
+        "description": "offen ticket"
+      },
+      "Closed":{
+        "message": "Geschlossen",
+        "description": "closed ticket"
       }
 }

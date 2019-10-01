@@ -1965,5 +1965,21 @@
     "PhonesTitle":{
       "message": "Landesvorwahl",
         "description": "Landesvorwahl title"
+    },
+    "Claimmed":{
+      "message": "Claimed",
+      "description": "Claimed ticket"
+    },
+    "Unknown":{
+      "message": "Unknown",
+      "description": "Unknown ticket"
+    },
+    "Unclaimed":{
+      "message": "Unclaimed",
+      "description": "Unclaimed ticket"
+    },
+    "Closed":{
+      "message": "Closed",
+      "description": "closed ticket"
     }
 }
