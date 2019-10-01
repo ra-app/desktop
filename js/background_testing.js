@@ -189,13 +189,13 @@ const ensureCompanyConversation = async company_id => {
   await receiveCompanyText(company_id, welcomeText);
 };
 
-const ensureConversation = async phone_number => {
+const ensureConversation = async (phone_number) => {
   await waitForConversationController();
   console.log('ensureConversation', phone_number);
   let conversation = await ConversationController.get(phone_number, 'private');
   if (conversation && conversation.get('active_at')) {
     console.log('ensureConversation existing', conversation);
-    return;
+    return conversation;
   }
 
   conversation = await ConversationController.getOrCreateAndWait(
@@ -212,6 +212,8 @@ const ensureConversation = async phone_number => {
       Conversation: Whisper.Conversation,
     }
   );
+
+  return conversation;
 };
 
 // Crutch to ensure conversations controller is ready.
@@ -433,8 +435,10 @@ const createDeveloperInterface = () => {
           });
           claimBtn.addEventListener('click', async () => {
             const phone_number = await claimTicket(companyID, ticket.uuid);
-            console.log(phone_number);
-            await ensureConversation(phone_number);
+            // console.log('claimBtn phone_number', phone_number);
+            const conversation = await ensureConversation(phone_number);
+            // conversation.sendMessage("lolololol");
+            // console.log('claimBtn conversation', conversation);
             getCompanyTicketsBtn.click();
           });
         }
