@@ -89,6 +89,7 @@
       return {
         'send-message': i18n('sendMessage'),
         'model': this.model,
+        'title': this.model[0].company_name,
       };
     },
     
