@@ -67,6 +67,8 @@ export class LeftPane extends React.Component<Props> {
       return this.renderArchivedButton({ key, style });
     }
 
+    const isAdmin = true;
+
     const conversation = showArchived
       ? archivedConversations[index]
       : conversations[index];
@@ -77,17 +79,20 @@ export class LeftPane extends React.Component<Props> {
         className="module-left-pane__conversation-container"
         style={style}
       >
-        {/* <ConversationListItem
+      {!isAdmin ?
+        <ConversationListItem
           {...conversation}
           onClick={openConversationInternal}
           i18n={i18n}
-        /> */}
-           <ConversationListItem
-            {...conversation}
-            onClick = {openTicket}
-            openConversation ={openConversationInternal}
-            i18n={i18n}
-          />
+        />
+        :
+        <ConversationListItem
+          {...conversation}
+          onClick = {openTicket}
+          openConversation={openConversationInternal}
+          i18n={i18n}
+        />
+      }
       </div>
     );
   };

@@ -244,50 +244,55 @@
         'limit' : 10,
         'offset': 0,
       }
-      const tickets= await getTicketsList(id, data);
-      const isTicket = true;
-      // if(this.tmpticketId !== id){
-        // this.conversation_stack.open(tickets, isTicket, clientDetails);
-        tickets.forEach((element, index) => {
-          tickets[index].date = new Date(element.ts_created).toUTCString().split('GMT')[0];
-          switch (element.state) {
-            case 0:
-              tickets[index].status =  i18n('Unknown')
-              tickets[index].isUnknown =  true
-              tickets[index].isUnclaimed =  false
-              tickets[index].isClaimed =  false
-              tickets[index].isClosed =  false
-              break;
-            case 1:
-              tickets[index].status =  i18n('Unclaimed')
-              tickets[index].isUnknown =  false
-              tickets[index].isUnclaimed =  true
-              tickets[index].isClaimed =  false
-              tickets[index].isClosed =  false
-              break;
-            case 2:
-              tickets[index].status =  i18n('Claimmed')
-              tickets[index].isUnknown =  false
-              tickets[index].isUnclaimed =  false
-              tickets[index].isClaimed =  true
-              tickets[index].isClosed =  false
-              break;
-            case 3:
-              tickets[index].status =  i18n('Closed')
-              tickets[index].isUnknown =  false
-              tickets[index].isUnclaimed =  false
-              tickets[index].isClaimed =  false
-              tickets[index].isClosed =  true
-              break;
-            default:
-              break;
-          }
-          
-        });
-        this.conversation_stack.open(tickets, isTicket);
-        this.focusConversation();
-      // }
-      this.tmpticketId = id;
+      try {
+        const tickets= await getTicketsList(id, data);
+        const isTicket = true;
+        // if(this.tmpticketId !== id){
+          // this.conversation_stack.open(tickets, isTicket, clientDetails);
+          tickets.forEach((element, index) => {
+            tickets[index].date = new Date(element.ts_created).toUTCString().split('GMT')[0];
+            switch (element.state) {
+              case 0:
+                tickets[index].status =  i18n('Unknown')
+                tickets[index].isUnknown =  true
+                tickets[index].isUnclaimed =  false
+                tickets[index].isClaimed =  false
+                tickets[index].isClosed =  false
+                break;
+              case 1:
+                tickets[index].status =  i18n('Unclaimed')
+                tickets[index].isUnknown =  false
+                tickets[index].isUnclaimed =  true
+                tickets[index].isClaimed =  false
+                tickets[index].isClosed =  false
+                break;
+              case 2:
+                tickets[index].status =  i18n('Claimmed')
+                tickets[index].isUnknown =  false
+                tickets[index].isUnclaimed =  false
+                tickets[index].isClaimed =  true
+                tickets[index].isClosed =  false
+                break;
+              case 3:
+                tickets[index].status =  i18n('Closed')
+                tickets[index].isUnknown =  false
+                tickets[index].isUnclaimed =  false
+                tickets[index].isClaimed =  false
+                tickets[index].isClosed =  true
+                break;
+              default:
+                break;
+            }
+            
+          });
+          this.conversation_stack.open(tickets, isTicket);
+          this.focusConversation();
+        // }
+        this.tmpticketId = id;
+      } catch (err) {
+        console.warn('openTicker error', err);
+        this.openConversation(id, messageId);
+      }
     },
     closeRecording(e) {
       if (e && this.$(e.target).closest('.capture-audio').length > 0) {
