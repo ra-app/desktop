@@ -178,7 +178,7 @@ export class ConversationListItem extends React.PureComponent<Props> {
 
   public render() {
     const { unreadCount, onClick, id, isSelected, openConversation, style } = this.props;
-
+    console.log('CONVERSATION LIST ITEM RENDER !!!! ', this.props)
     return (
       <div
         role="button"

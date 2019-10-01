@@ -222,12 +222,16 @@ function openConversationInternal(
 }
 function openTicket(
   id: string,
-): NoopActionType {
+  messageId?: string
+): SelectedConversationChangedActionType {
   trigger('showOpenTicket', id);
 
   return {
-    type: 'NOOP',
-    payload: null,
+    type: 'SELECTED_CONVERSATION_CHANGED',
+    payload: {
+      id,
+      messageId,
+    },
   };
 }
 function openConversationExternal(

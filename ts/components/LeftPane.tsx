@@ -25,7 +25,7 @@ export interface Props {
     options: { regionCode: string }
   ) => void;
   openConversationInternal: (id: string, messageId?: string) => void;
-  openTicket: (id: string, type?: string) => void;
+  openTicket: (id: string, type?: string, messageId?: string) => void;
   showArchivedConversations: () => void;
   showInbox: () => void;
 

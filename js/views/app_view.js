@@ -193,7 +193,7 @@
     openTicket(id, messageId) {
       if (id) {
         this.openInbox().then(() => {
-          this.inboxView.openTicket(id);
+          this.inboxView.openTicket(id, messageId);
         });
       }
     },

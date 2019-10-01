@@ -135,7 +135,7 @@ window.searchResults.messages = [
     openConversationInternal={(id, messageId) =>
       console.log('openConversation', id, messageId)
     }
-    openTicket={(id) =>
+    openTicket={(id, messageId) =>
       console.log('openConversation', id)
     }
     
@@ -168,7 +168,7 @@ window.searchResults.messages = [
     openConversationInternal={(id, messageId) =>
       console.log('openConversation', id, messageId)
     }
-     openTicket={(id) =>
+     openTicket={(id, messageId) =>
       console.log('openConversation', id)
     }
     showArchivedConversations={() => console.log('showArchivedConversations')}
@@ -200,7 +200,7 @@ window.searchResults.messages = [
     openConversationInternal={(id, messageId) =>
       console.log('openConversation', id, messageId)
     }
-     openTicket={(id) =>
+     openTicket={(id, messageId) =>
       console.log('openConversation', id)
     }
     showArchivedConversations={() => console.log('showArchivedConversations')}
@@ -233,7 +233,7 @@ window.searchResults.messages = [
     openConversationInternal={(id, messageId) =>
       console.log('openConversation', id, messageId);
     }
-     openTicket={(id) =>
+     openTicket={(id, messageId) =>
       console.log('openConversation', id)
     }
     showArchivedConversations={() => console.log('showArchivedConversations')}

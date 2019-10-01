@@ -710,11 +710,11 @@
       }
     });
     
-    Whisper.events.on('showOpenTicket', (id) => {
+    Whisper.events.on('showOpenTicket', (id, messageId) => {
       console.log(id, appView,"iddddddddddddddddd")
       if (appView) {
 
-        appView.openTicket(id);
+        appView.openTicket(id, messageId);
       }
     });
     

@@ -237,7 +237,7 @@
       this.conversation_stack.open(conversation);
       this.focusConversation();
     },
-    async openTicket(id) {
+    async openTicket(id, messageId) {
       const limit = 10;
       const offset = 0;
       const data= {
@@ -245,24 +245,6 @@
         'offset': 0,
       }
       const tickets= await getTicketsList(id, data);
-      // let userInformation = []
-      // let clientPromises = [];
-      // tickets.forEach(element => {
-      //   clientPromises.push(getClientDetails(element.company_id, element.client_uuid));
-      // });
-      // let clientDetails = await Promise.all(clientPromises);
-      // console.log(clientDetails, "clien details")
-
-      // };
-      // const conversation = await ConversationController.getOrCreateAndWait(
-      //   id,
-      //   'private'
-      // );
-
-      // const { openConversationExternal } = window.reduxActions.conversations;
-      // if (openConversationExternal) {
-      //   openConversationExternal(id, messageId);
-      // }
       const isTicket = true;
       // if(this.tmpticketId !== id){
         // this.conversation_stack.open(tickets, isTicket, clientDetails);
