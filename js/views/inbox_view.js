@@ -341,8 +341,10 @@
         if (ticketList.tickets) {
           ticketList.tickets = this.changeListTicket(ticketList.tickets)
         }else {
+          console.log(ticketList, "ticketlisttttt")
           ticketList.tickets = [{
             'hasTicket': false,
+            'company_name': ticketList.company_name,
           }]
         }
         this.conversation_stack.open(ticketList.tickets, isTicket);
