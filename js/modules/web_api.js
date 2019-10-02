@@ -898,7 +898,7 @@ function initialize({
       });
     }
 
-    async function putToCDN(response, encryptedBin, path = '') {
+    async function putToCDN(response, encryptedBin, path='') {
       const {
         key,
         credential,
@@ -949,7 +949,7 @@ function initialize({
       );
 
       // This is going to the CDN, not the service, so we use _outerAjax
-      await _outerAjax(`${cdnUrl}/${path}`, {
+      await _outerAjax(`${cdnUrl}/${path}` , {
         certificateAuthority,
         contentType: `multipart/form-data; boundary=${boundaryString}`,
         data,
