@@ -375,8 +375,6 @@ const createDeveloperInterface = () => {
   // Dev Panel
   const devPanel = document.createElement('div');
   devPanel.id = 'devPanel';
-  devPanel.style.cssText =
-    'border: 1px solid black; background-color: white; position: absolute; right: 5px; top: 50px; padding: 5px; z-index: 9999;';
   document.body.appendChild(devPanel);
 
   // Company Input
@@ -524,15 +522,22 @@ const createDeveloperInterface = () => {
 
   // Div for company input + btns
   const addCompanyDiv = document.createElement('div');
+  addCompanyDiv.classList = 'addCompanyDivDev';
+  const phoneNumberDiv = document.createElement('div');
+  phoneNumberDiv.classList = 'phoneNumberDivDev';
+  const h3Title = document.createElement('h3');
+  h3Title.innerText = 'Dev Panel';
   addCompanyDiv.appendChild(addCompanyInput);
   addCompanyDiv.appendChild(addCompanyBtn);
   addCompanyDiv.appendChild(getCompanyTicketsBtn);
-  addCompanyDiv.appendChild(addAdminInput)
-  addCompanyDiv.appendChild(addAdminBtn)
-  addCompanyDiv.appendChild(removeAdminBtn)
+  phoneNumberDiv.appendChild(addAdminInput)
+  phoneNumberDiv.appendChild(addAdminBtn)
+  phoneNumberDiv.appendChild(removeAdminBtn)
   addCompanyDiv.appendChild(createTicket)
   addCompanyDiv.appendChild(ticketsList);
+  devPanel.appendChild(h3Title);
   devPanel.appendChild(addCompanyDiv);
+  devPanel.appendChild(phoneNumberDiv);
 };
 
 const readFileAsText = file => new Promise((resolve, reject) => {

@@ -2320,6 +2320,9 @@
 }
 .content{
   .module-main-header__info {
+    position: fixed;
+    width: calc(100% - 300px);
+    z-index: 9;
     img{
       float: unset;
     }
