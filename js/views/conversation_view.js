@@ -101,20 +101,6 @@
         this.$('#claim_'+element.uuid).click(()=> this.claimTicket(element.company_id, element.uuid));
       });
     },
-    events: {
-      click: 'onClick',
-      'click #unclaimed': 'getTickets',
-      'click #claimed': 'getTickets',
-      'click #closed': 'getTickets',
-    },
-
-    getTickets(event){
-      this.$('.ticket-nav').removeClass('active');
-      event.currentTarget.classList.add('active');
-      const ticketType = event.currentTarget.id;
-      console.log('GET TICKETS TYPE ===>  ', ticketType);
-    },
-
     async showInfoTicket(evt, element){
       if ( evt.target.className.indexOf('button-claim-ticket') === -1 ){
         if(this.uuidtmp!== element.uuid){

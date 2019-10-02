@@ -14,7 +14,8 @@
 let limitTicket = 12;
 let offsetTicet = 0; 
 let  ticketList = [];
-let  tmpticketId = ''
+let  tmpticketId = '';
+let ticketState = 1;
   window.Whisper = window.Whisper || {};
 
   Whisper.StickerPackInstallFailedToast = Whisper.ToastView.extend({
@@ -161,6 +162,7 @@ let  tmpticketId = ''
     },
     events: {
       click: 'onClick',
+      'click #unclaimed, #claimed, #closed': 'getTickets',
     },
     setupLeftPane() {
       this.leftPaneView = new Whisper.ReactWrapperView({
@@ -240,6 +242,33 @@ let  tmpticketId = ''
       this.conversation_stack.open(conversation);
       this.focusConversation();
     },
+
+    getTickets(event){
+      this.$('.ticket-nav').removeClass('active');
+      event.currentTarget.classList.add('active');
+      const ticketType = event.currentTarget.id;
+      let tmpTicketType = 1;
+      switch (ticketType){
+        case 'unclaimed': 
+        tmpTicketType = 1;
+        break;
+        case 'claimed': 
+        tmpTicketType = 2;
+        break;
+        case 'closed': 
+        tmpTicketType = 3;
+        break;
+        default:
+        tmpTicketType = 1;
+        break;
+      }
+      if ( tmpTicketType !== ticketState ){
+        ticketState = tmpTicketType;
+        limitTicket = 12;
+        this.openTicket(this.tmpticketId)
+      }
+    },
+
     onTicketScroll(evt) {
       const ticket = this.$el.find('.conversation-stack').get(0);
       const atBottom = ticket.scrollHeight - ticket.scrollTop === ticket.clientHeight;
@@ -251,15 +280,16 @@ let  tmpticketId = ''
       console.log(ticket.scrollHeight, ticket.scrollTop, ticket.clientHeight);
       console.log('tickets scroll', atBottom, this.tmpticketId);
     },
-    async openTicket(id, messageId) {
+    async openTicket(id, messageId = null) {
       this.$('.conversation-stack').on(
         'scroll',
         _.debounce(this.onTicketScroll.bind(this), 100)
       );
-      console.log(limitTicket, "555555555555555555555555555555")
+      console.log(id, "555555555555555555555555555555")
       const data= {
         'limit' : limitTicket,
         'offset': offsetTicet,
+        'state' : ticketState,
       }
       try {
         ticketList= await getTicketsList(id, data);
@@ -313,10 +343,10 @@ let  tmpticketId = ''
     async loadMoreTickets(){
       const data= {
         'limit' : limitTicket,
-        'offset': offsetTicet+limitTicket,
+        'offset': offsetTicet + limitTicket,
       }
       try {
-        const moreTicketList= await getTicketsList(this.tmpticketId, data);
+        const moreTicketList= await getTicketsList(this.tmpticketId, data, ticketState);
         console.log(moreTicketList.length, "length")
         // const isTicket = true;
         // // if(this.tmpticketId !== id){
