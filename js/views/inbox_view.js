@@ -8,9 +8,9 @@
 */
 
 // eslint-disable-next-line func-names
-(function () {
+(function() {
   'use strict';
-  // variables 
+  // variables
   let limitTicket = 12;
   let offsetTicket = 0;
   let ticketList = [];
@@ -50,7 +50,7 @@
           $el.prependTo(this.el);
         }
         if (this.$('.tickets-view')) {
-          this.$('.tickets-view').remove()
+          this.$('.tickets-view').remove();
         }
         conversation.trigger('opened');
         if (this.lastConversation) {
@@ -71,7 +71,7 @@
           let $el = this.$(`#${id}`);
           if ($el === null || $el.length === 0) {
             if (this.$('.tickets-view')) {
-              this.$('.tickets-view').remove()
+              this.$('.tickets-view').remove();
             }
             const view = new Whisper.TicketScreen({
               model: conversation,
@@ -84,9 +84,8 @@
         }
 
         window.dispatchEvent(new Event('resize'));
-
       }
-    }
+    },
   });
 
   Whisper.AppLoadingScreen = Whisper.View.extend({
@@ -107,7 +106,6 @@
   //   className: 'tickets-view',
 
   // });
-
 
   Whisper.InboxView = Whisper.View.extend({
     templateName: 'two-column',
@@ -228,7 +226,6 @@
       window.location.reload();
     },
     async openConversation(id, messageId) {
-
       const conversation = await ConversationController.getOrCreateAndWait(
         id,
         'private'
@@ -269,38 +266,40 @@
       }
     },
     changeListTicket(list) {
-      const arrayList = list
+      const arrayList = list;
       list.forEach((element, index) => {
-        arrayList[index].date = new Date(element.ts_created).toUTCString().split('GMT')[0];
+        arrayList[index].date = new Date(element.ts_created)
+          .toUTCString()
+          .split('GMT')[0];
         arrayList[index].hasTicket = true;
         switch (element.state) {
           case 0:
-            arrayList[index].status = i18n('Unknown')
-            arrayList[index].isUnknown = true
-            arrayList[index].isUnclaimed = false
-            arrayList[index].isClaimed = false
-            arrayList[index].isClosed = false
+            arrayList[index].status = i18n('Unknown');
+            arrayList[index].isUnknown = true;
+            arrayList[index].isUnclaimed = false;
+            arrayList[index].isClaimed = false;
+            arrayList[index].isClosed = false;
             break;
           case 1:
-            arrayList[index].status = i18n('Unclaimed')
-            arrayList[index].isUnknown = false
-            arrayList[index].isUnclaimed = true
-            arrayList[index].isClaimed = false
-            arrayList[index].isClosed = false
+            arrayList[index].status = i18n('Unclaimed');
+            arrayList[index].isUnknown = false;
+            arrayList[index].isUnclaimed = true;
+            arrayList[index].isClaimed = false;
+            arrayList[index].isClosed = false;
             break;
           case 2:
-            arrayList[index].status = i18n('Claimmed')
-            arrayList[index].isUnknown = false
-            arrayList[index].isUnclaimed = false
-            arrayList[index].isClaimed = true
-            arrayList[index].isClosed = false
+            arrayList[index].status = i18n('Claimmed');
+            arrayList[index].isUnknown = false;
+            arrayList[index].isUnclaimed = false;
+            arrayList[index].isClaimed = true;
+            arrayList[index].isClosed = false;
             break;
           case 3:
-            arrayList[index].status = i18n('Closed')
-            arrayList[index].isUnknown = false
-            arrayList[index].isUnclaimed = false
-            arrayList[index].isClaimed = false
-            arrayList[index].isClosed = true
+            arrayList[index].status = i18n('Closed');
+            arrayList[index].isUnknown = false;
+            arrayList[index].isUnclaimed = false;
+            arrayList[index].isClaimed = false;
+            arrayList[index].isClosed = true;
             break;
           default:
             break;
@@ -311,13 +310,14 @@
     },
     onTicketScroll(evt) {
       const ticket = this.$el.find('.conversation-stack').get(0);
-      const atBottom = ticket.scrollHeight - ticket.scrollTop === ticket.clientHeight;
+      const atBottom =
+        ticket.scrollHeight - ticket.scrollTop === ticket.clientHeight;
       // this.model.set('eula_read', atBottom);
 
       if (atBottom) {
         // offsetTicket = limitTicket + offsetTicket;
-        if ((parseInt(ticketList.ticket_count, 10)) > offsetTicket) {
-          this.loadMoreTickets()
+        if (parseInt(ticketList.ticket_count, 10) > offsetTicket) {
+          this.loadMoreTickets();
         }
       }
     },
@@ -327,10 +327,10 @@
         _.debounce(this.onTicketScroll.bind(this), 100)
       );
       const data = {
-        'limit': limitTicket,
-        'offset': offsetTicket,
-        'state': ticketState,
-      }
+        limit: limitTicket,
+        offset: offsetTicket,
+        state: ticketState,
+      };
 
       offsetTicket = limitTicket + offsetTicket;
       try {
@@ -339,13 +339,15 @@
         // if(this.tmpticketId !== id){
         // this.conversation_stack.open(tickets, isTicket, clientDetails);
         if (ticketList.tickets) {
-          ticketList.tickets = this.changeListTicket(ticketList.tickets)
-        }else {
-          console.log(ticketList, "ticketlisttttt")
-          ticketList.tickets = [{
-            'hasTicket': false,
-            'company_name': ticketList.company_name,
-          }]
+          ticketList.tickets = this.changeListTicket(ticketList.tickets);
+        } else {
+          console.log(ticketList, 'ticketlisttttt');
+          ticketList.tickets = [
+            {
+              hasTicket: false,
+              company_name: ticketList.company_name,
+            },
+          ];
         }
         this.conversation_stack.open(ticketList.tickets, isTicket);
         this.focusConversation();
@@ -358,17 +360,21 @@
     },
     async loadMoreTickets() {
       const data = {
-        'limit': limitTicket,
-        'offset': offsetTicket,
-        'state': ticketState,
-      }
+        limit: limitTicket,
+        offset: offsetTicket,
+        state: ticketState,
+      };
       offsetTicket = limitTicket + offsetTicket;
       try {
-        let moreTicketList = await getTicketsList(this.tmpticketId, data, ticketState);
+        let moreTicketList = await getTicketsList(
+          this.tmpticketId,
+          data,
+          ticketState
+        );
         // if(moreTicketList.length == limitTicket){
         let moreTicketList1 = this.changeListTicket(moreTicketList.tickets);
         moreTicketList1.forEach(element => {
-          ticketList.tickets.push(element)
+          ticketList.tickets.push(element);
         });
         const isTicket = true;
         this.conversation_stack.open(ticketList.tickets, isTicket);

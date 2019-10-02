@@ -55,27 +55,27 @@ $roboto-light: Roboto-Light, 'Helvetica Neue', 'Source Sans Pro Light',
   font-weight: 800;
 }
 
-$poppins: Poppins,Roboto, 'Helvetica Neue', 'Source Sans Pro', 'Source Han Sans SC',
-  'Source Han Sans CN', 'Hiragino Sans GB', 'Hiragino Kaku Gothic',
-  'Microsoft Yahei UI', Helvetica, Arial, sans-serif;
-$poppins-light: Poppins-Light,Roboto, 'Helvetica Neue', 'Source Sans Pro Light',
+$poppins: Poppins, Roboto, 'Helvetica Neue', 'Source Sans Pro',
+  'Source Han Sans SC', 'Source Han Sans CN', 'Hiragino Sans GB',
+  'Hiragino Kaku Gothic', 'Microsoft Yahei UI', Helvetica, Arial, sans-serif;
+$poppins-light: Poppins-Light, Roboto, 'Helvetica Neue', 'Source Sans Pro Light',
   'Source Han Sans SC Light', 'Source Han Sans CN Light',
   'Hiragino Sans GB Light', 'Hiragino Kaku Gothic Light',
   'Microsoft Yahei UI Light', Helvetica, Arial, sans-serif;
-$poppins-bold: Poppins-Bold, 'Helvetica Neue', 'Source Sans Pro', 'Source Han Sans SC',
-  'Source Han Sans CN', 'Hiragino Sans GB', 'Hiragino Kaku Gothic',
-  'Microsoft Yahei UI', Helvetica, Arial, sans-serif;
-$poppins-regular: Poppins-Regular, 'Helvetica Neue', 'Source Sans Pro', 'Source Han Sans SC',
-  'Source Han Sans CN', 'Hiragino Sans GB', 'Hiragino Kaku Gothic',
-  'Microsoft Yahei UI', Helvetica, Arial, sans-serif;
-$poppins-medium: Poppins-Medium, 'Helvetica Neue', 'Source Sans Pro', 'Source Han Sans SC',
-  'Source Han Sans CN', 'Hiragino Sans GB', 'Hiragino Kaku Gothic',
-  'Microsoft Yahei UI', Helvetica, Arial, sans-serif;
-$poppins-semibold: Poppins-SemiBold, 'Helvetica Neue', 'Source Sans Pro', 'Source Han Sans SC',
-  'Source Han Sans CN', 'Hiragino Sans GB', 'Hiragino Kaku Gothic',
-  'Microsoft Yahei UI', Helvetica, Arial, sans-serif;
-  // OPEN SANS
-  //Poppins fonts
+$poppins-bold: Poppins-Bold, 'Helvetica Neue', 'Source Sans Pro',
+  'Source Han Sans SC', 'Source Han Sans CN', 'Hiragino Sans GB',
+  'Hiragino Kaku Gothic', 'Microsoft Yahei UI', Helvetica, Arial, sans-serif;
+$poppins-regular: Poppins-Regular, 'Helvetica Neue', 'Source Sans Pro',
+  'Source Han Sans SC', 'Source Han Sans CN', 'Hiragino Sans GB',
+  'Hiragino Kaku Gothic', 'Microsoft Yahei UI', Helvetica, Arial, sans-serif;
+$poppins-medium: Poppins-Medium, 'Helvetica Neue', 'Source Sans Pro',
+  'Source Han Sans SC', 'Source Han Sans CN', 'Hiragino Sans GB',
+  'Hiragino Kaku Gothic', 'Microsoft Yahei UI', Helvetica, Arial, sans-serif;
+$poppins-semibold: Poppins-SemiBold, 'Helvetica Neue', 'Source Sans Pro',
+  'Source Han Sans SC', 'Source Han Sans CN', 'Hiragino Sans GB',
+  'Hiragino Kaku Gothic', 'Microsoft Yahei UI', Helvetica, Arial, sans-serif;
+// OPEN SANS
+//Poppins fonts
 @font-face {
   font-family: 'OpenSans-Light';
   src: url('../fonts/OpenSans-Light.ttf') format('truetype');
@@ -90,30 +90,30 @@ $poppins-semibold: Poppins-SemiBold, 'Helvetica Neue', 'Source Sans Pro', 'Sourc
   src: url('../fonts/OpenSans-Bold.ttf') format('truetype');
   font-weight: bold;
 }
-$opensans-light: OpenSans-Light, 'Helvetica Neue', 'Source Sans Pro', 'Source Han Sans SC',
-  'Source Han Sans CN', 'Hiragino Sans GB', 'Hiragino Kaku Gothic',
-  'Microsoft Yahei UI', Helvetica, Arial, sans-serif;
-$opensans-regular: OpenSans-Regular, 'Helvetica Neue', 'Source Sans Pro', 'Source Han Sans SC',
-  'Source Han Sans CN', 'Hiragino Sans GB', 'Hiragino Kaku Gothic',
-  'Microsoft Yahei UI', Helvetica, Arial, sans-serif;
-$opensans-bold: OpenSans-Bold, 'Helvetica Neue', 'Source Sans Pro', 'Source Han Sans SC',
-  'Source Han Sans CN', 'Hiragino Sans GB', 'Hiragino Kaku Gothic',
-  'Microsoft Yahei UI', Helvetica, Arial, sans-serif;
+$opensans-light: OpenSans-Light, 'Helvetica Neue', 'Source Sans Pro',
+  'Source Han Sans SC', 'Source Han Sans CN', 'Hiragino Sans GB',
+  'Hiragino Kaku Gothic', 'Microsoft Yahei UI', Helvetica, Arial, sans-serif;
+$opensans-regular: OpenSans-Regular, 'Helvetica Neue', 'Source Sans Pro',
+  'Source Han Sans SC', 'Source Han Sans CN', 'Hiragino Sans GB',
+  'Hiragino Kaku Gothic', 'Microsoft Yahei UI', Helvetica, Arial, sans-serif;
+$opensans-bold: OpenSans-Bold, 'Helvetica Neue', 'Source Sans Pro',
+  'Source Han Sans SC', 'Source Han Sans CN', 'Hiragino Sans GB',
+  'Hiragino Kaku Gothic', 'Microsoft Yahei UI', Helvetica, Arial, sans-serif;
 // New colors
-$border-color: #ADB3BC;
-$placeholder-color: #B1BBC0;
+$border-color: #adb3bc;
+$placeholder-color: #b1bbc0;
 $color-signal-blue: #2090ea;
 $color-core-green: #4caf50;
 $color-core-red: #f44336;
 $color-deep-red: #ff261f;
-$color-input-chat: #B1C6DE;
+$color-input-chat: #b1c6de;
 
 $color-signal-blue-025: rgba($color-signal-blue, 0.25);
 $color-signal-blue-050: rgba($color-signal-blue, 0.5);
 
 $color-raapp-bg: #f5f5f5;
 $color-raapp-text: #476077;
-$link-color: #005AF5;
+$link-color: #005af5;
 $footer-text-color: #747474;
 
 $color-white: #ffffff;

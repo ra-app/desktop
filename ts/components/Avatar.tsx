@@ -123,7 +123,11 @@ export class Avatar extends React.Component<Props, State> {
           // !hasImage ? `module-avatar--${color}` : null
         )}
       >
-        {hasImage ? this.renderImage() : <img src="images/header-chat.png" alt="Default img" />}
+        {hasImage ? (
+          this.renderImage()
+        ) : (
+          <img src="images/header-chat.png" alt="Default img" />
+        )}
       </div>
     );
   }

@@ -328,7 +328,11 @@
         activeAt: this.get('active_at'),
         avatarPath: this.getAvatarPath(),
         color,
-        type: this.isCompany() ? 'company' : (!this.isGroup() ? 'direct' : 'group'),
+        type: this.isCompany()
+          ? 'company'
+          : !this.isGroup()
+            ? 'direct'
+            : 'group',
         isMe: this.isMe(),
         isTyping: typingKeys.length > 0,
         lastUpdated: this.get('timestamp'),

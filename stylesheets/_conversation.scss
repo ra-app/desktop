@@ -12,7 +12,6 @@
   }
 }
 
-
 .container-ticket {
   padding: 150px 21px;
   cursor: pointer;
@@ -49,47 +48,63 @@ img.ticket-user-image {
   padding: 13px 10px 10px 10px;
   float: left;
 }
-.container-ticket-actions{
+.container-ticket-actions {
   right: 10px;
   top: 20px;
   float: right;
 }
-.button-claim-ticket{
+.button-claim-ticket {
   height: 40px;
   border-radius: 20px;
   padding-left: 20px;
   padding-right: 20px;
   border: none;
-  &.not-claimed{
-    background: transparent linear-gradient(90deg, #005AF5 0%, #015DF2 18%, #0567EB 32%, #0C78DE 46%, #1690CC 56%, #23AFB5 66%, #33D49B 85%, #34D49A 90%, #3BD696 93%, #47DA91 95%, #58DE89 97%, #6EE57F 98%, #99F26B 100%) 0% 0% no-repeat padding-box;
+  &.not-claimed {
+    background: transparent
+      linear-gradient(
+        90deg,
+        #005af5 0%,
+        #015df2 18%,
+        #0567eb 32%,
+        #0c78de 46%,
+        #1690cc 56%,
+        #23afb5 66%,
+        #33d49b 85%,
+        #34d49a 90%,
+        #3bd696 93%,
+        #47da91 95%,
+        #58de89 97%,
+        #6ee57f 98%,
+        #99f26b 100%
+      )
+      0% 0% no-repeat padding-box;
     color: white;
   }
-  &.claimed{
-    background: #B1C6DE 0% 0% no-repeat padding-box;
+  &.claimed {
+    background: #b1c6de 0% 0% no-repeat padding-box;
     color: white;
     cursor: default;
   }
 }
-
-.mainMssgDiv{
+.mainMssgDiv {
   margin-top: 55px;
-  background: #F5F5F5;
+  background: #f5f5f5;
   padding: 22px;
 }
-.received-message{
-  background: #D9ECEC;
+.received-message {
+  background: #d9ecec;
   max-width: calc(100% / 3);
   padding: 10px;
   border-radius: 10px;
   position: relative;
   margin-bottom: 10px;
 }
-.mssgUsername{
+.mssgUsername {
   font-size: 12px;
-  color:$link-color;
+  color: $link-color;
   margin: 0px;
 }
-.ticket-message{
+.ticket-message {
   margin-top: 5px !important;
   margin-bottom: 20px !important;
   word-break: break-word;
@@ -105,11 +120,10 @@ p.ticket-time {
   background-color: $color-white;
   height: 100%;
   position: relative;
-  .title-wrapper{
+  .title-wrapper {
     height: 70px;
     @include backgroudGradient;
   }
-  
   .panel {
     height: calc(100% - #{$header-height});
     overflow-y: scroll;
@@ -119,31 +133,25 @@ p.ticket-time {
     top: 70px;
     width: 100%;
     height: calc(100% - 70px);
-
     @include light-theme() {
       background-color: $color-white;
     }
-
     @include dark-theme() {
       background-color: $color-black;
     }
   }
-
   .panel {
     &:not(.main) {
       animation: panel--in 250ms ease-out;
     }
-
     &--static {
       animation: none;
     }
-
     &--remove {
       transform: translateX(500px);
       opacity: 0;
       transition: all 250ms ease-out;
     }
-
     .container {
       padding-top: 20px;
       max-width: 750px;
@@ -151,24 +159,20 @@ p.ticket-time {
       padding: 20px;
     }
   }
-
   .main.panel {
     display: flex;
     flex-direction: column;
     overflow: initial;
   }
-
   .main.panel {
     .discussion-container {
       flex-grow: 1;
       position: relative;
       max-width: 100%;
       margin: 0;
-
       .bar-container {
         height: 5px;
       }
-
       .message-list {
         -webkit-padding-start: 0px;
         position: absolute;
@@ -183,18 +187,15 @@ p.ticket-time {
     }
   }
 }
-
 // Make sure the main panel is hidden when other panels are in the dom
 .panel + .main.panel {
   display: none;
 }
-
 .message-detail-wrapper {
   height: calc(100% - 48px);
   width: 100%;
   overflow-y: auto;
 }
-
 .discussion-container {
   background-color: $color-white;
 }
@@ -202,16 +203,15 @@ p.ticket-time {
 .key-verification {
   label {
     display: block;
+
     margin: 10px 0;
     font-size: $font-size-small;
   }
-
   .icon {
     height: 1.25em;
     width: 1.25em;
     vertical-align: text-bottom;
     display: inline-block;
-
     &.verified {
       @include color-svg('../images/verified-check.svg', $color-light-90);
     }
@@ -219,7 +219,6 @@ p.ticket-time {
       @include color-svg('../images/shield.svg', $color-light-90);
     }
   }
-
   .key,
   .placeholder {
     padding: 0 1em;
@@ -234,6 +233,7 @@ p.ticket-time {
     border: solid 1px $grey_l2;
     border-radius: $border-radius;
   }
+
   .placeholder {
     font-weight: bold;
   }
@@ -253,12 +253,10 @@ p.ticket-time {
       max-width: 100%;
     }
   }
-
   .summary {
     margin: 30px 0 10px;
     text-align: center;
   }
-
   div.verify {
     text-align: center;
   }
@@ -269,30 +267,26 @@ p.ticket-time {
     margin: 0;
   }
 }
-
 .message-container,
 .message-list {
   list-style: none;
-
   .message-wrapper {
     margin-left: 16px;
     margin-right: 16px;
   }
-
   li {
     margin-bottom: 10px;
-
     &::after {
       visibility: hidden;
       display: block;
       font-size: 0;
       content: ' ';
       clear: both;
+
       height: 0;
     }
   }
 }
-
 .group {
   .message-container,
   .message-list {
@@ -301,85 +295,69 @@ p.ticket-time {
     }
   }
 }
-
 .typing-bubble-wrapper {
   margin-bottom: 20px;
 }
-
 .contact-detail-pane {
   overflow-y: scroll;
   padding-top: 40px;
   padding-bottom: 40px;
 }
-
 .bottom-bar .module-quote {
   margin: 0;
-
   border-left-style: none;
 }
-
 // We need to use the wrapper because the conversation view calculates the height of all
-//   things in the composition area. A margin on an inner div won't be included in that
-//   height calculation.
+// things in the composition area. A margin on an inner div won't be included in that
+// height calculation.
 .bottom-bar .quote-wrapper {
   margin-left: 37px;
   margin-right: 73px;
   margin-top: 3px;
   margin-bottom: -5px;
 }
-
 .bottom-bar .preview-wrapper {
   margin-top: 3px;
   margin-left: 37px;
   margin-right: 73px;
   margin-bottom: 2px;
 }
-
 .bottom-bar {
   box-sizing: content-box;
   $button-width: 36px;
-
   form.active {
     textarea {
       border: solid 1px $blue;
     }
   }
-
   form.send {
     margin-bottom: 0px;
     background: $color-white;
-
     &.video-attachment {
       .image-container {
         position: relative;
       }
-
       .outer {
         position: absolute;
         top: 0;
         right: 0;
         bottom: 0;
         left: 0;
-
         text-align: center;
         display: flex;
         align-items: center;
         justify-content: center;
-
         .play.icon {
           height: 30px;
           width: 30px;
-
           @include color-svg('../images/play.svg', white);
         }
       }
     }
   }
-
   .attachment-previews {
     padding: 0 36px;
     margin-bottom: 3px;
-
     .attachment-preview {
       padding: 13px 10px 0;
     }
@@ -388,7 +366,6 @@ p.ticket-time {
       border-radius: $border-radius;
       max-height: 100px;
     }
-
     .close {
       position: absolute;
       top: 5px;
@@ -400,16 +377,13 @@ p.ticket-time {
       }
     }
   }
-
   .flex {
     display: flex;
     flex-direction: row;
-
     .send-message {
       flex-grow: 1;
     }
   }
-
   .choose-file {
     float: left;
     height: 36px;
@@ -428,7 +402,6 @@ p.ticket-time {
     resize: none;
     font-size: 1em;
     font-family: inherit;
-
     &[disabled='disabled'] {
       background: transparent;
     }
@@ -442,13 +415,11 @@ p.ticket-time {
     max-width: 150px;
   }
 }
-
 .toast {
   position: absolute;
   left: 50%;
   transform: translate(-50%, 0);
   bottom: 62px;
-
   text-align: center;
   padding-left: 16px;
   padding-right: 16px;
@@ -456,16 +427,13 @@ p.ticket-time {
   padding-bottom: 8px;
   border-radius: 4px;
   z-index: 100;
-
   font-size: 13px;
   line-height: 18px;
   letter-spacing: 0;
-
   background-color: $color-gray-75;
   color: $color-white;
   box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.12), 0 0 0 0.5px rgba(0, 0, 0, 0.08);
 }
-
 .confirmation-dialog {
   .content {
     max-width: 350px;
@@ -475,10 +443,8 @@ p.ticket-time {
     border-radius: $border-radius;
     overflow: auto;
     box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.3);
-
     .buttons {
       margin-top: 10px;
-
       button {
         float: right;
         margin-left: 10px;
@@ -486,7 +452,6 @@ p.ticket-time {
         border-radius: $border-radius;
         padding: 5px 8px;
         border: 1px solid $grey_l2;
-
         &:hover {
           background-color: $grey_l2;
           border-color: $grey_l3;
@@ -495,14 +460,12 @@ p.ticket-time {
     }
   }
 }
-
 .permissions-popup,
 .debug-log-window {
   .modal {
     background-color: transparent;
     padding: 0;
   }
-
   .confirmation-dialog .content {
     box-shadow: 0px 0px 0px 0px;
     max-width: 1000px;
@@ -512,10 +475,10 @@ p.ticket-time {
     margin-top: 15px;
   }
 }
-
 .conversation-loading-screen {
   z-index: 99;
   position: absolute;
+
   left: 0;
   right: 0;
   top: 0;
@@ -523,21 +486,18 @@ p.ticket-time {
   display: flex;
   align-items: center;
   background-color: $color-white;
-
   .content {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
   }
-
   .container {
     position: absolute;
     left: 50%;
     width: 120px;
     transform: translate(-50%, 0);
   }
-
   .dot {
     width: 14px;
     height: 14px;
@@ -546,7 +506,6 @@ p.ticket-time {
     float: left;
     margin: 0 6px;
     transform: scale(0);
-
     animation: loading 1500ms ease infinite 0ms;
     &:nth-child(2) {
       animation: loading 1500ms ease infinite 333ms;
@@ -556,38 +515,32 @@ p.ticket-time {
     }
   }
 }
-
 .module-last-seen-indicator {
   padding-top: 25px;
   padding-bottom: 35px;
   margin-left: 28px;
   margin-right: 28px;
 }
-
 .module-last-seen-indicator__bar {
   background-color: $color-light-60;
   width: 100%;
   height: 4px;
 }
-
 .module-last-seen-indicator__text {
   margin-top: 3px;
   font-size: 11px;
   line-height: 16px;
   letter-spacing: 0.3px;
   text-transform: uppercase;
-
   text-align: center;
   color: $color-light-90;
 }
-
 .module-scroll-down {
   z-index: 100;
   position: absolute;
   right: 20px;
   bottom: 10px;
 }
-
 .module-scroll-down__button {
   height: 44px;
   width: 44px;
@@ -597,7 +550,6 @@ p.ticket-time {
   border: none;
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.2);
   outline: none;
-
   &:hover {
     background-color: $color-light-45;
   }
@@ -605,12 +557,10 @@ p.ticket-time {
 
 .module-scroll-down__button--new-messages {
   background-color: $color-signal-blue;
-
   &:hover {
     background-color: #1472bd;
   }
 }
-
 .module-scroll-down__icon {
   @include color-svg('../images/down.svg', $color-white);
   height: 100%;

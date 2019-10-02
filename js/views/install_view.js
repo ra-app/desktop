@@ -35,7 +35,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     SETUP_USER_PROFILE: 6,
     SETUP_CONTACT_IMPORT: 7,
     SETUP_BRANCHEN: 8,
-    SETUP_PHONESLIST: 9
+    SETUP_PHONESLIST: 9,
   };
 
   let Tmp = {};
@@ -62,9 +62,11 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       'click #branch-select': 'onOpenSelectBranch',
       'keyup #search-branch': 'searchBranch',
       'click #branch-list > p': 'onSelectBranch',
-      'keyup  #tax-number-input, #tax-id-input, #company-register-id-input, #imprint-input, #branch-select': 'activateButtonCompanyInfo',
-      'keyup #user-name-input, #company-name-input' : 'activateButtonProfileDetails',
-      'keyup #bank-iban-input, #bank-bic-input' : 'activateButtonBankDetails',
+      'keyup  #tax-number-input, #tax-id-input, #company-register-id-input, #imprint-input, #branch-select':
+        'activateButtonCompanyInfo',
+      'keyup #user-name-input, #company-name-input':
+        'activateButtonProfileDetails',
+      'keyup #bank-iban-input, #bank-bic-input': 'activateButtonBankDetails',
       'click #user-profile-done': 'onUserProfileDone',
       'click #bank-details-done': 'onBankDetailsDone',
       'click #bank-details-skip': 'onBankDetailsSkip',
@@ -78,9 +80,8 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       'change #inputDocument': 'onChoseDocument',
       'click #clear-country': 'onClearCountry',
       'click #clear-branchen': 'onClearBranchen',
-   'click #contact-import-file-select': 'onChooseContactsFile',
+      'click #contact-import-file-select': 'onChooseContactsFile',
       'change #contact-import-file-input': 'onChoseContactsFile',
-      
     },
     initialize(options = {}) {
       this.accountManager = getAccountManager();
@@ -179,7 +180,10 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
             contacts_data: this.contactsData ? this.contactsData : null,
           });
           textsecure.storage.put('companyNumber', result.info.company_number);
-          await updateAdmin(result.info.company_number, userSetupInfo.name || '');
+          await updateAdmin(
+            result.info.company_number,
+            userSetupInfo.name || ''
+          );
           await ensureCompanyConversation(result.info.company_number);
         }
         await Promise.all([
@@ -225,7 +229,9 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       }
       if (!file) this.contactsData = null;
       this.$('#contact-import-done').toggleClass('disabled', !file);
-      this.$('#contact-import-file-name').text(file ? (file.path || file.name) : i18n('noFileChosen'));
+      this.$('#contact-import-file-name').text(
+        file ? file.path || file.name : i18n('noFileChosen')
+      );
       console.log('Import file chose', files);
     },
     onContactImportDone() {
@@ -270,20 +276,20 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       await textsecure.storage.remove('bankSetupInfo');
       this.selectStep(Steps.SETUP_CONTACT_IMPORT);
     },
-    onClearCountry(){
+    onClearCountry() {
       this.$('#search-phones').val('');
       const countries = this.$('.pCountry');
-      for(let i = 0; i < countries.length; i++){
-        if ( countries[i].style.display === 'none'){
+      for (let i = 0; i < countries.length; i++) {
+        if (countries[i].style.display === 'none') {
           countries[i].style.display = 'block';
         }
       }
     },
-    onClearBranchen(){
+    onClearBranchen() {
       this.$('#search-branch').val('');
       const branches = this.$('#branch-list p');
-      for(let i = 0; i < branches.length; i++){
-        if ( branches[i].style.display === 'none'){
+      for (let i = 0; i < branches.length; i++) {
+        if (branches[i].style.display === 'none') {
           branches[i].style.display = 'block';
         }
       }
@@ -292,7 +298,9 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       const input = this.$('input.number');
       const dialCode = this.$('#dialCode').text();
       const number = dialCode + input.val();
-      const regionCode = this.$('#countryCode').text().toLowerCase();
+      const regionCode = this.$('#countryCode')
+        .text()
+        .toLowerCase();
 
       const parsedNumber = libphonenumber.util.parseNumber(number, regionCode);
       if (parsedNumber.isValidNumber) {
@@ -385,7 +393,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       });
     },
     // Functions for upload User Avatar
-    onUploadAvatar(){
+    onUploadAvatar() {
       this.$('#inputAvatar').click();
     },
     // TODO HOOK API for upload avatar
@@ -393,17 +401,17 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       const fileField = this.$('#inputAvatar');
       const file = fileField.prop('files');
     },
-        // Functions for upload Company Avatar
-        onUploadCompanyAvatar(){
-          this.$('#inputCompanyAvatar').click();
-        },
-        // TODO HOOK API for upload avatar
-        async onChoseCompanyAvatar() {
-          const fileField = this.$('#inputCompanyAvatar');
-          const file = fileField.prop('files');
-        },
+    // Functions for upload Company Avatar
+    onUploadCompanyAvatar() {
+      this.$('#inputCompanyAvatar').click();
+    },
+    // TODO HOOK API for upload avatar
+    async onChoseCompanyAvatar() {
+      const fileField = this.$('#inputCompanyAvatar');
+      const file = fileField.prop('files');
+    },
     // Functions for upload documents
-    onuploadDocuments(){
+    onuploadDocuments() {
       this.$('#inputDocument').click();
     },
     // TODO HOOK API for upload avatar
@@ -411,49 +419,57 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       const fileField = this.$('#inputDocument');
       const file = fileField.prop('files');
     },
-    activateButtonCompanyInfo(){
+    activateButtonCompanyInfo() {
       const taxNumber = this.$el.find('#tax-number-input')[0].value.length;
       const taxID = this.$el.find('#tax-id-input')[0].value.length;
-      const comercialRegisterId = this.$el.find('#company-register-id-input')[0].value.length;
+      const comercialRegisterId = this.$el.find('#company-register-id-input')[0]
+        .value.length;
       const imprint = this.$el.find('#imprint-input')[0].value.length;
       const branch = this.$el.find('#branch-select')[0].value.length;
       const button = this.$el.find('#company-profile-done');
-      if( taxNumber > 0 && taxID >0 && comercialRegisterId > 0 && imprint > 0 && branch > 0) {
+      if (
+        taxNumber > 0 &&
+        taxID > 0 &&
+        comercialRegisterId > 0 &&
+        imprint > 0 &&
+        branch > 0
+      ) {
         button.removeClass('disabled');
-      }else {
+      } else {
         button.addClass('disabled');
       }
     },
-    activateButtonProfileDetails(){
+    activateButtonProfileDetails() {
       const username = this.$el.find('#user-name-input')[0].value.length;
       const companyName = this.$el.find('#company-name-input')[0].value.length;
       const button = this.$el.find('#user-profile-done');
-      if(username > 0 && companyName > 0){ 
+      if (username > 0 && companyName > 0) {
         button.removeClass('disabled');
-      }else {
+      } else {
         button.addClass('disabled');
       }
     },
-    activateButtonBankDetails(){
+    activateButtonBankDetails() {
       const bankIBAN = this.$el.find('#bank-iban-input')[0].value.length;
       const bankBIC = this.$el.find('#bank-bic-input')[0].value.length;
       const button = this.$el.find('#bank-details-done');
-      if(bankIBAN > 0 && bankBIC > 0){ 
+      if (bankIBAN > 0 && bankBIC > 0) {
         button.removeClass('disabled');
-      }else {
+      } else {
         button.addClass('disabled');
       }
     },
-    onOpenSelectBranch () {
+    onOpenSelectBranch() {
       Tmp = {
-         taxNumber: this.$el.find('#tax-number-input')[0].value,
-         taxID: this.$el.find('#tax-id-input')[0].value,
-         comercialRegisterId: this.$el.find('#company-register-id-input')[0].value,
+        taxNumber: this.$el.find('#tax-number-input')[0].value,
+        taxID: this.$el.find('#tax-id-input')[0].value,
+        comercialRegisterId: this.$el.find('#company-register-id-input')[0]
+          .value,
         imprint: this.$el.find('#imprint-input')[0].value,
       };
       this.selectStep(Steps.SETUP_BRANCHEN);
     },
-    onSelectBranch (e) {
+    onSelectBranch(e) {
       this.selectStep(Steps.SETUP_COMPANY_PROFILE);
       this.$('#tax-number-input').val(Tmp.taxNumber);
       this.$('#tax-id-input').val(Tmp.taxID);
@@ -463,82 +479,96 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       this.activateButtonCompanyInfo();
       this.resetTMP();
     },
-    searchBranch(e){
+    searchBranch(e) {
       const value = e.target.value;
       $('#branch-list p').filter(() => {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+        $(this).toggle(
+          $(this)
+            .text()
+            .toLowerCase()
+            .indexOf(value) > -1
+        );
       });
     },
-    loadCountries(){
+    loadCountries() {
       const thisElement = this;
       $.ajax({
         type: 'GET',
         url: 'config/countries.json', // Using our resources.json file to serve results
-        success: (result) => {
+        success: result => {
           const countries = JSON.parse(result);
           countries.sort((a, b) => {
-            return (a['name'] > b['name']) ? 1 : ((a['name'] < b['name']) ? -1 : 0);
-        });
-        for( let i = 0; i < countries.length; i++){
-          const pItem = `<p class="pCountry" data-country-code="${countries[i].code}" data-dial-code="${countries[i].dial_code}">${countries[i].name} <span class="spanDialCode">${countries[i].dial_code}</span></p>`
-          thisElement.$('#phone-list').append(pItem)
-        }
+            return a['name'] > b['name'] ? 1 : a['name'] < b['name'] ? -1 : 0;
+          });
+          for (let i = 0; i < countries.length; i++) {
+            const pItem = `<p class="pCountry" data-country-code="${
+              countries[i].code
+            }" data-dial-code="${countries[i].dial_code}">${
+              countries[i].name
+            } <span class="spanDialCode">${countries[i].dial_code}</span></p>`;
+            thisElement.$('#phone-list').append(pItem);
+          }
         },
-        error: (e) => {
-          console.log('Error getting countries', e)
-        }
+        error: e => {
+          console.log('Error getting countries', e);
+        },
       });
     },
-    onOpenSelectPhoneList () {
+    onOpenSelectPhoneList() {
       this.loadCountries();
       Tmp = {
         phoneNumber: this.$el.find('#phone-number-value')[0].value,
-     };
+      };
       this.selectStep(Steps.SETUP_PHONESLIST);
     },
-    onSelectPhone (e) {
+    onSelectPhone(e) {
       this.selectStep(Steps.SETUP_PHONE);
-      this.$('#countryCode').text(`${e.target.getAttribute('data-country-code')}`);
+      this.$('#countryCode').text(
+        `${e.target.getAttribute('data-country-code')}`
+      );
       this.$('#dialCode').text(` ${e.target.getAttribute('data-dial-code')}`);
       this.$('#phone-number-value').val(Tmp.phoneNumber);
       this.activateButtonVerifyCall();
       this.resetTMP();
     },
-    searchPhones(e){
+    searchPhones(e) {
       var value = e.target.value;
-      $("#phone-list p").filter(function() {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      $('#phone-list p').filter(function() {
+        $(this).toggle(
+          $(this)
+            .text()
+            .toLowerCase()
+            .indexOf(value) > -1
+        );
       });
     },
-    activateButtonVerifyCall(){
+    activateButtonVerifyCall() {
       const number = this.$el.find('#phone-number-value')[0].value.length;
       const button = this.$el.find('#request-verify-call');
-      if(number > 0){ 
+      if (number > 0) {
         button.removeClass('disabled');
-      }else {
+      } else {
         button.addClass('disabled');
       }
-
     },
-    activateButtonVerifyCode(){
+    activateButtonVerifyCode() {
       const code = this.$el.find('#phone-verification-code')[0].value.length;
       const button = this.$el.find('#verify-phone-code');
-      if(code > 0){ 
+      if (code > 0) {
         button.removeClass('disabled');
-      }else {
+      } else {
         button.addClass('disabled');
       }
-
     },
-    resetTMP () {
-      Tmp = {}
+    resetTMP() {
+      Tmp = {};
     },
     render_attributes() {
       return {
         appTagLine: i18n('appTagLine'),
         eulaTitle: i18n('eulaTitle'),
         eulaSubTitle: i18n('eulaSubTitle'),
-        acceptEula:i18n('acceptEula'),
+        acceptEula: i18n('acceptEula'),
         registerCompany: i18n('registerCompany'),
         registerAdmin: i18n('registerAdmin'),
         welcomeCompany: i18n('welcomeCompany'),
@@ -568,8 +598,8 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         contactImportTitle: i18n('contactImportTitle'),
         selectFileToUpload: i18n('selectFileToUpload'),
         noFileChosen: i18n('noFileChosen'),
-       uploadCard: i18n('uploadCard'),
-        uploadCompanyAvatarText:i18n('uploadCompanyAvatarText'),
+        uploadCard: i18n('uploadCard'),
+        uploadCompanyAvatarText: i18n('uploadCompanyAvatarText'),
 
         isStepEula: this.step === Steps.ACCEPT_EULA,
         isStepSetupType: this.step === Steps.SETUP_TYPE,

@@ -709,15 +709,14 @@
         appView.openConversation(id, messageId);
       }
     });
-    
-    Whisper.events.on('showOpenTicket', (id, messageId) => {
-      console.log(id, appView,"iddddddddddddddddd")
-      if (appView) {
 
+    Whisper.events.on('showOpenTicket', (id, messageId) => {
+      console.log(id, appView, 'iddddddddddddddddd');
+      if (appView) {
         appView.openTicket(id, messageId);
       }
     });
-    
+
     Whisper.Notifications.on('click', (id, messageId) => {
       window.showWindow();
       if (id) {
