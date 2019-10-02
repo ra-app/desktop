@@ -732,6 +732,7 @@ const draggableHelper = (
 
   function down(event) {
     if (event.which !== 1) return false; // Stops all non-left-clicks
+    if (event.target !== element) return;
     event.preventDefault();
     event.stopPropagation();
     element.dragStartX = event.offsetX;
