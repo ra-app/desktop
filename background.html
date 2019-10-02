@@ -60,6 +60,12 @@
         <img src="images/header-chat.png" alt="header chat" />
         <span id="span-chat-name">{{title}}</span>
       </div>
+      <!-- Navigation tabs -->
+      <ul class="ulNavigationTickets">
+        <li id="unclaimed" class="ticket-nav active">unzugewiesen</li>
+        <li id="claimed" class="ticket-nav">zugewiesen</li>
+        <li id="closed" class="ticket-nav">geschlossen</li>
+      </ul>
       <div class='container-ticket'>
         <!-- EACH -->
         {{#model}}
