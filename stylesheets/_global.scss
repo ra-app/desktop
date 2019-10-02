@@ -1441,15 +1441,16 @@ $debug: 0;
   top: 50px; 
   padding: 5px; 
   z-index: 9999;
-}
-
-.addCompanyDivDev, .phoneNumberDivDev{
-  display: flex;
   h3{
     text-align: center;
     margin: 5px 0px 5px 0px;
     font-size: 1em;
   }
+}
+
+.addCompanyDivDev, .phoneNumberDivDev{
+  display: flex;
+ 
   input{
     margin-right: 10px;
     height: 25px;
