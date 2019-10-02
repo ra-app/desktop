@@ -272,6 +272,7 @@
       const arrayList = list
       list.forEach((element, index) => {
         arrayList[index].date = new Date(element.ts_created).toUTCString().split('GMT')[0];
+        arrayList[index].hasTicket = true;
         switch (element.state) {
           case 0:
             arrayList[index].status = i18n('Unknown')
@@ -315,7 +316,7 @@
 
       if (atBottom) {
         // offsetTicket = limitTicket + offsetTicket;
-        if ((parseInt(ticketList.ticket_count,10) ) > offsetTicket) {
+        if ((parseInt(ticketList.ticket_count, 10)) > offsetTicket) {
           this.loadMoreTickets()
         }
       }
@@ -330,8 +331,8 @@
         'offset': offsetTicket,
         'state': ticketState,
       }
-      
-        offsetTicket = limitTicket + offsetTicket;
+
+      offsetTicket = limitTicket + offsetTicket;
       try {
         ticketList = await getTicketsList(id, data);
         const isTicket = true;
@@ -339,6 +340,10 @@
         // this.conversation_stack.open(tickets, isTicket, clientDetails);
         if (ticketList.tickets) {
           ticketList.tickets = this.changeListTicket(ticketList.tickets)
+        }else {
+          ticketList.tickets = [{
+            'hasTicket': false,
+          }]
         }
         this.conversation_stack.open(ticketList.tickets, isTicket);
         this.focusConversation();
@@ -350,13 +355,11 @@
       }
     },
     async loadMoreTickets() {
-      // offsetTicket = limitTicket + offsetTicket;
       const data = {
         'limit': limitTicket,
         'offset': offsetTicket,
         'state': ticketState,
       }
-      
       offsetTicket = limitTicket + offsetTicket;
       try {
         let moreTicketList = await getTicketsList(this.tmpticketId, data, ticketState);
@@ -367,49 +370,6 @@
         });
         const isTicket = true;
         this.conversation_stack.open(ticketList.tickets, isTicket);
-        // }
-        // const isTicket = true;
-        // // if(this.tmpticketId !== id){
-        //   // this.conversation_stack.open(tickets, isTicket, clientDetails);
-        //   ticketList.forEach((element, index) => {
-        //     ticketList[index].date = new Date(element.ts_created).toUTCString().split('GMT')[0];
-        //     switch (element.state) {
-        //       case 0:
-        //         ticketList[index].status =  i18n('Unknown')
-        //         ticketList[index].isUnknown =  true
-        //         ticketList[index].isUnclaimed =  false
-        //         ticketList[index].isClaimed =  false
-        //         ticketList[index].isClosed =  false
-        //         break;
-        //       case 1:
-        //         ticketList[index].status =  i18n('Unclaimed')
-        //         ticketList[index].isUnknown =  false
-        //         ticketList[index].isUnclaimed =  true
-        //         ticketList[index].isClaimed =  false
-        //         ticketList[index].isClosed =  false
-        //         break;
-        //       case 2:
-        //         ticketList[index].status =  i18n('Claimmed')
-        //         ticketList[index].isUnknown =  false
-        //         ticketList[index].isUnclaimed =  false
-        //         ticketList[index].isClaimed =  true
-        //         ticketList[index].isClosed =  false
-        //         break;
-        //       case 3:
-        //         ticketList[index].status =  i18n('Closed')
-        //         ticketList[index].isUnknown =  false
-        //         ticketList[index].isUnclaimed =  false
-        //         ticketList[index].isClaimed =  false
-        //         ticketList[index].isClosed =  true
-        //         break;
-        //       default:
-        //         break;
-        //     }
-        //   });
-        //   this.conversation_stack.open(ticketList, isTicket);
-        //   this.focusConversation();
-        // // }
-        // // this.tmpticketId = id;
       } catch (err) {
         console.warn('openTicker error', err);
         const messageId = null;
