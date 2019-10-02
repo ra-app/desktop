@@ -330,7 +330,7 @@ const getClientDetails = async (company_id, client_uuid) => {
   return (await apiRequest('api/v1/admin/' + company_id + '/clients/details/' + client_uuid)).details;
 };
 const getTicketsList = async (company_id, data) => {
-  return (await apiRequest('api/v1/admin/' + company_id + '/tickets/get', data)).tickets;
+  return (await apiRequest('api/v1/admin/' + company_id + '/tickets/get', data));
 };
 
 // dev

@@ -8,14 +8,14 @@
 */
 
 // eslint-disable-next-line func-names
-(function() {
+(function () {
   'use strict';
-// variables 
-let limitTicket = 12;
-let offsetTicet = 0; 
-let  ticketList = [];
-let  tmpticketId = '';
-let ticketState = 1;
+  // variables 
+  let limitTicket = 12;
+  let offsetTicket = 0;
+  let ticketList = [];
+  let tmpticketId = '';
+  let ticketState = 1;
   window.Whisper = window.Whisper || {};
 
   Whisper.StickerPackInstallFailedToast = Whisper.ToastView.extend({
@@ -27,66 +27,66 @@ let ticketState = 1;
   Whisper.ConversationStack = Whisper.View.extend({
     className: 'conversation-stack',
     lastConversation: null,
-    open(conversation, isTicket ) {
+    open(conversation, isTicket) {
       // isTicket = false;
-      if(!isTicket){
-      const id = `conversation-${conversation.cid}`;
-      if (id !== this.el.firstChild.id) {
-        this.$el
-          .first()
-          .find('video, audio')
-          .each(function pauseMedia() {
-            this.pause();
-          });
-        let $el = this.$(`#${id}`);
-        if ($el === null || $el.length === 0) {
-          const view = new Whisper.ConversationView({
-            model: conversation,
-            window: this.model.window,
-          });
-          // eslint-disable-next-line prefer-destructuring
-          $el = view.$el;
-        }
-        $el.prependTo(this.el);
-      }
-      if(this.$('.tickets-view')){
-        this.$('.tickets-view').remove()
-      }
-      conversation.trigger('opened');
-      if (this.lastConversation) {
-        this.lastConversation.trigger('backgrounded');
-      }
-      this.lastConversation = conversation;
-      // Make sure poppers are positioned properly
-      window.dispatchEvent(new Event('resize'));
-    }else {
-      const id = `conversation-${conversation.cid}`;
-      if (id !== this.el.firstChild.id) {
-        this.$el
-          .first()
-          .find('video, audio')
-          .each(function pauseMedia() {
-            this.pause();
-          });
-        let $el = this.$(`#${id}`);
-        if ($el === null || $el.length === 0) {
-          if(this.$('.tickets-view')){
-            this.$('.tickets-view').remove()
+      if (!isTicket) {
+        const id = `conversation-${conversation.cid}`;
+        if (id !== this.el.firstChild.id) {
+          this.$el
+            .first()
+            .find('video, audio')
+            .each(function pauseMedia() {
+              this.pause();
+            });
+          let $el = this.$(`#${id}`);
+          if ($el === null || $el.length === 0) {
+            const view = new Whisper.ConversationView({
+              model: conversation,
+              window: this.model.window,
+            });
+            // eslint-disable-next-line prefer-destructuring
+            $el = view.$el;
           }
-          const view = new Whisper.TicketScreen({  
-            model: conversation,
-            window: this.model.window,
-          });
-          // eslint-disable-next-line prefer-destructuring
-          $el = view.$el;
+          $el.prependTo(this.el);
         }
-        $el.prependTo(this.el);
-      }
-      
-      window.dispatchEvent(new Event('resize'));
+        if (this.$('.tickets-view')) {
+          this.$('.tickets-view').remove()
+        }
+        conversation.trigger('opened');
+        if (this.lastConversation) {
+          this.lastConversation.trigger('backgrounded');
+        }
+        this.lastConversation = conversation;
+        // Make sure poppers are positioned properly
+        window.dispatchEvent(new Event('resize'));
+      } else {
+        const id = `conversation-${conversation.cid}`;
+        if (id !== this.el.firstChild.id) {
+          this.$el
+            .first()
+            .find('video, audio')
+            .each(function pauseMedia() {
+              this.pause();
+            });
+          let $el = this.$(`#${id}`);
+          if ($el === null || $el.length === 0) {
+            if (this.$('.tickets-view')) {
+              this.$('.tickets-view').remove()
+            }
+            const view = new Whisper.TicketScreen({
+              model: conversation,
+              window: this.model.window,
+            });
+            // eslint-disable-next-line prefer-destructuring
+            $el = view.$el;
+          }
+          $el.prependTo(this.el);
+        }
 
+        window.dispatchEvent(new Event('resize'));
+
+      }
     }
-  }
   });
 
   Whisper.AppLoadingScreen = Whisper.View.extend({
@@ -242,137 +242,106 @@ let ticketState = 1;
       this.conversation_stack.open(conversation);
       this.focusConversation();
     },
-   async getTickets(event){
+    async getTickets(event) {
       const ticketType = event.currentTarget.id;
       let tmpTicketType = 1;
-      switch (ticketType){
-        case 'unclaimed': 
-        tmpTicketType = 1;
-        break;
-        case 'claimed': 
-        tmpTicketType = 2;
-        break;
-        case 'closed': 
-        tmpTicketType = 3;
-        break;
+      switch (ticketType) {
+        case 'unclaimed':
+          tmpTicketType = 1;
+          break;
+        case 'claimed':
+          tmpTicketType = 2;
+          break;
+        case 'closed':
+          tmpTicketType = 3;
+          break;
         default:
-        tmpTicketType = 1;
-        break;
+          tmpTicketType = 1;
+          break;
       }
-      if ( tmpTicketType !== ticketState ){
+      if (tmpTicketType !== ticketState) {
         ticketState = tmpTicketType;
         limitTicket = 12;
+        offsetTicket = 0;
         await this.openTicket(this.tmpticketId);
         this.$('.ticket-nav').removeClass('active');
         event.currentTarget.classList.add('active');
       }
-    },changeListTicket(list){
+    },
+    changeListTicket(list) {
       const arrayList = list
       list.forEach((element, index) => {
         arrayList[index].date = new Date(element.ts_created).toUTCString().split('GMT')[0];
         switch (element.state) {
           case 0:
-            arrayList[index].status =  i18n('Unknown')
-            arrayList[index].isUnknown =  true
-            arrayList[index].isUnclaimed =  false
-            arrayList[index].isClaimed =  false
-            arrayList[index].isClosed =  false
+            arrayList[index].status = i18n('Unknown')
+            arrayList[index].isUnknown = true
+            arrayList[index].isUnclaimed = false
+            arrayList[index].isClaimed = false
+            arrayList[index].isClosed = false
             break;
           case 1:
-            arrayList[index].status =  i18n('Unclaimed')
-            arrayList[index].isUnknown =  false
-            arrayList[index].isUnclaimed =  true
-            arrayList[index].isClaimed =  false
-            arrayList[index].isClosed =  false
+            arrayList[index].status = i18n('Unclaimed')
+            arrayList[index].isUnknown = false
+            arrayList[index].isUnclaimed = true
+            arrayList[index].isClaimed = false
+            arrayList[index].isClosed = false
             break;
           case 2:
-            arrayList[index].status =  i18n('Claimmed')
-            arrayList[index].isUnknown =  false
-            arrayList[index].isUnclaimed =  false
-            arrayList[index].isClaimed =  true
-            arrayList[index].isClosed =  false
+            arrayList[index].status = i18n('Claimmed')
+            arrayList[index].isUnknown = false
+            arrayList[index].isUnclaimed = false
+            arrayList[index].isClaimed = true
+            arrayList[index].isClosed = false
             break;
           case 3:
-            arrayList[index].status =  i18n('Closed')
-            arrayList[index].isUnknown =  false
-            arrayList[index].isUnclaimed =  false
-            arrayList[index].isClaimed =  false
-            arrayList[index].isClosed =  true
+            arrayList[index].status = i18n('Closed')
+            arrayList[index].isUnknown = false
+            arrayList[index].isUnclaimed = false
+            arrayList[index].isClaimed = false
+            arrayList[index].isClosed = true
             break;
           default:
             break;
         }
       });
+
       return arrayList;
-    },    
-onTicketScroll(evt) {
+    },
+    onTicketScroll(evt) {
       const ticket = this.$el.find('.conversation-stack').get(0);
       const atBottom = ticket.scrollHeight - ticket.scrollTop === ticket.clientHeight;
       // this.model.set('eula_read', atBottom);
 
       if (atBottom) {
-        this.loadMoreTickets()
+        // offsetTicket = limitTicket + offsetTicket;
+        if ((parseInt(ticketList.ticket_count,10) ) > offsetTicket) {
+          this.loadMoreTickets()
+        }
       }
-      console.log(ticket.scrollHeight, ticket.scrollTop, ticket.clientHeight);
-      console.log('tickets scroll', atBottom, this.tmpticketId);
     },
     async openTicket(id, messageId = null) {
       this.$('.conversation-stack').on(
         'scroll',
         _.debounce(this.onTicketScroll.bind(this), 100)
       );
-      console.log(id, "555555555555555555555555555555")
-      const data= {
-        'limit' : limitTicket,
-        'offset': offsetTicet,
-        'state' : ticketState,
+      const data = {
+        'limit': limitTicket,
+        'offset': offsetTicket,
+        'state': ticketState,
       }
+      
+        offsetTicket = limitTicket + offsetTicket;
       try {
-        ticketList= await getTicketsList(id, data);
+        ticketList = await getTicketsList(id, data);
         const isTicket = true;
         // if(this.tmpticketId !== id){
-          // this.conversation_stack.open(tickets, isTicket, clientDetails);
-    ticketList = this.changeListTicket(ticketList)
-          if ( ticketList ){
-            ticketList.forEach((element, index) => {
-              ticketList[index].date = new Date(element.ts_created).toUTCString().split('GMT')[0];
-              switch (element.state) {
-                case 0:
-                  ticketList[index].status =  i18n('Unknown')
-                  ticketList[index].isUnknown =  true
-                  ticketList[index].isUnclaimed =  false
-                  ticketList[index].isClaimed =  false
-                  ticketList[index].isClosed =  false
-                  break;
-                case 1:
-                  ticketList[index].status =  i18n('Unclaimed')
-                  ticketList[index].isUnknown =  false
-                  ticketList[index].isUnclaimed =  true
-                  ticketList[index].isClaimed =  false
-                  ticketList[index].isClosed =  false
-                  break;
-                case 2:
-                  ticketList[index].status =  i18n('Claimmed')
-                  ticketList[index].isUnknown =  false
-                  ticketList[index].isUnclaimed =  false
-                  ticketList[index].isClaimed =  true
-                  ticketList[index].isClosed =  false
-                  break;
-                case 3:
-                  ticketList[index].status =  i18n('Closed')
-                  ticketList[index].isUnknown =  false
-                  ticketList[index].isUnclaimed =  false
-                  ticketList[index].isClaimed =  false
-                  ticketList[index].isClosed =  true
-                  break;
-                default:
-                  break;
-              }
-            });
-            
-          }
-          this.conversation_stack.open(ticketList, isTicket);
-          this.focusConversation();
+        // this.conversation_stack.open(tickets, isTicket, clientDetails);
+        if (ticketList.tickets) {
+          ticketList.tickets = this.changeListTicket(ticketList.tickets)
+        }
+        this.conversation_stack.open(ticketList.tickets, isTicket);
+        this.focusConversation();
         // }
         this.tmpticketId = id;
       } catch (err) {
@@ -380,20 +349,24 @@ onTicketScroll(evt) {
         this.openConversation(id, messageId);
       }
     },
-    async loadMoreTickets(){
-      const data= {
-        'limit' : limitTicket,
-        'offset': offsetTicet+limitTicket,
+    async loadMoreTickets() {
+      // offsetTicket = limitTicket + offsetTicket;
+      const data = {
+        'limit': limitTicket,
+        'offset': offsetTicket,
+        'state': ticketState,
       }
+      
+      offsetTicket = limitTicket + offsetTicket;
       try {
-        const moreTicketList= await getTicketsList(this.tmpticketId, data, ticketState);
-        console.log(moreTicketList.length, limitTicket,  "length")
+        let moreTicketList = await getTicketsList(this.tmpticketId, data, ticketState);
         // if(moreTicketList.length == limitTicket){
-          moreTicketList =  this.changeListTicket(moreTicketList);
-
-          ticketList.push(moreTicketList)
-          const isTicket = true;
-          this.conversation_stack.open(ticketList, isTicket);
+        let moreTicketList1 = this.changeListTicket(moreTicketList.tickets);
+        moreTicketList1.forEach(element => {
+          ticketList.tickets.push(element)
+        });
+        const isTicket = true;
+        this.conversation_stack.open(ticketList.tickets, isTicket);
         // }
         // const isTicket = true;
         // // if(this.tmpticketId !== id){
