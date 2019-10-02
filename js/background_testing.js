@@ -503,9 +503,12 @@ const createDeveloperInterface = () => {
             getCompanyTicketsBtn.click();
           });
         }
+        document.getElementById('divTicketsDev').classList.remove('hidden')
       } catch (err) {
         devToaster('getCompanyTickets Error: "' + err.message + '"');
       }
+    }else{
+      document.getElementById('divTicketsDev').classList.add('hidden')
     }
   });
 
@@ -527,6 +530,9 @@ const createDeveloperInterface = () => {
   phoneNumberDiv.classList = 'phoneNumberDivDev';
   const h3Title = document.createElement('h3');
   h3Title.innerText = 'Dev Panel';
+  const divTicketsDev = document.createElement('div');
+  divTicketsDev.id = 'divTicketsDev';
+  divTicketsDev.classList = 'divTicketsDev hidden';
   addCompanyDiv.appendChild(addCompanyInput);
   addCompanyDiv.appendChild(addCompanyBtn);
   addCompanyDiv.appendChild(getCompanyTicketsBtn);
@@ -534,10 +540,11 @@ const createDeveloperInterface = () => {
   phoneNumberDiv.appendChild(addAdminBtn)
   phoneNumberDiv.appendChild(removeAdminBtn)
   addCompanyDiv.appendChild(createTicket)
-  addCompanyDiv.appendChild(ticketsList);
+  divTicketsDev.appendChild(ticketsList);
   devPanel.appendChild(h3Title);
   devPanel.appendChild(addCompanyDiv);
   devPanel.appendChild(phoneNumberDiv);
+  devPanel.appendChild(divTicketsDev);
 };
 
 const readFileAsText = file => new Promise((resolve, reject) => {
