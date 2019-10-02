@@ -243,9 +243,7 @@ let ticketState = 1;
       this.focusConversation();
     },
 
-    getTickets(event){
-      this.$('.ticket-nav').removeClass('active');
-      event.currentTarget.classList.add('active');
+    async getTickets(event){
       const ticketType = event.currentTarget.id;
       let tmpTicketType = 1;
       switch (ticketType){
@@ -265,7 +263,9 @@ let ticketState = 1;
       if ( tmpTicketType !== ticketState ){
         ticketState = tmpTicketType;
         limitTicket = 12;
-        this.openTicket(this.tmpticketId)
+        await this.openTicket(this.tmpticketId);
+        this.$('.ticket-nav').removeClass('active');
+        event.currentTarget.classList.add('active');
       }
     },
 
@@ -296,43 +296,46 @@ let ticketState = 1;
         const isTicket = true;
         // if(this.tmpticketId !== id){
           // this.conversation_stack.open(tickets, isTicket, clientDetails);
-          ticketList.forEach((element, index) => {
-            ticketList[index].date = new Date(element.ts_created).toUTCString().split('GMT')[0];
-            switch (element.state) {
-              case 0:
-                ticketList[index].status =  i18n('Unknown')
-                ticketList[index].isUnknown =  true
-                ticketList[index].isUnclaimed =  false
-                ticketList[index].isClaimed =  false
-                ticketList[index].isClosed =  false
-                break;
-              case 1:
-                ticketList[index].status =  i18n('Unclaimed')
-                ticketList[index].isUnknown =  false
-                ticketList[index].isUnclaimed =  true
-                ticketList[index].isClaimed =  false
-                ticketList[index].isClosed =  false
-                break;
-              case 2:
-                ticketList[index].status =  i18n('Claimmed')
-                ticketList[index].isUnknown =  false
-                ticketList[index].isUnclaimed =  false
-                ticketList[index].isClaimed =  true
-                ticketList[index].isClosed =  false
-                break;
-              case 3:
-                ticketList[index].status =  i18n('Closed')
-                ticketList[index].isUnknown =  false
-                ticketList[index].isUnclaimed =  false
-                ticketList[index].isClaimed =  false
-                ticketList[index].isClosed =  true
-                break;
-              default:
-                break;
-            }
-          });
-          this.conversation_stack.open(ticketList, isTicket);
-          this.focusConversation();
+          if ( ticketList ){
+            ticketList.forEach((element, index) => {
+              ticketList[index].date = new Date(element.ts_created).toUTCString().split('GMT')[0];
+              switch (element.state) {
+                case 0:
+                  ticketList[index].status =  i18n('Unknown')
+                  ticketList[index].isUnknown =  true
+                  ticketList[index].isUnclaimed =  false
+                  ticketList[index].isClaimed =  false
+                  ticketList[index].isClosed =  false
+                  break;
+                case 1:
+                  ticketList[index].status =  i18n('Unclaimed')
+                  ticketList[index].isUnknown =  false
+                  ticketList[index].isUnclaimed =  true
+                  ticketList[index].isClaimed =  false
+                  ticketList[index].isClosed =  false
+                  break;
+                case 2:
+                  ticketList[index].status =  i18n('Claimmed')
+                  ticketList[index].isUnknown =  false
+                  ticketList[index].isUnclaimed =  false
+                  ticketList[index].isClaimed =  true
+                  ticketList[index].isClosed =  false
+                  break;
+                case 3:
+                  ticketList[index].status =  i18n('Closed')
+                  ticketList[index].isUnknown =  false
+                  ticketList[index].isUnclaimed =  false
+                  ticketList[index].isClaimed =  false
+                  ticketList[index].isClosed =  true
+                  break;
+                default:
+                  break;
+              }
+            });
+            this.conversation_stack.open(ticketList, isTicket);
+            this.focusConversation();
+          }
+         
         // }
         this.tmpticketId = id;
       } catch (err) {

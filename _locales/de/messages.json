@@ -1848,11 +1848,11 @@
         "description": "unbekannt ticket"
       },
       "Unclaimed":{
-        "message": "Offen",
+        "message": "Übernehmen",
         "description": "offen ticket"
       },
       "Closed":{
-        "message": "Geschlossen",
+        "message": "wieder öffnen",
         "description": "closed ticket"
       }
 }
