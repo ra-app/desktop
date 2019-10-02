@@ -705,9 +705,9 @@ async function decryptProfileName(encryptedName) {
 // https://gomakethings.com/debouncing-events-with-requestanimationframe-for-better-performance/
 const animFrameDebounce = (fn) => {
   let timeout;
-  return () => {
+  return (...args) => {
     const context = this;
-    const args = arguments;
+    // const args = arguments;
     if (timeout) window.cancelAnimationFrame(timeout);
     timeout = window.requestAnimationFrame(() => {
       timeout = undefined;
