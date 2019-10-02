@@ -67,6 +67,7 @@
         <li id="closed" class="ticket-nav {{closed}}">geschlossen</li>
       </ul>
       <div class='container-ticket'>
+          {{#hasTicket}}
         <!-- EACH -->
         {{#model}}
           <div id={{uuid}} class="main-ticket-container" >
@@ -103,6 +104,10 @@
         <div id="noLoadMore" class="hidden">
             No more to load
         </div>
+        {{/hasTicket}}
+        {{^hasTicket}}
+        <span>Empty list</span>
+        {{/hasTicket}}
       </div>
       
     </div>
