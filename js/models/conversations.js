@@ -2060,6 +2060,7 @@
         ? this.get('profileAvatar') || this.get('avatar')
         : this.get('avatar') || this.get('profileAvatar');
 
+      console.log('getAvatarPath', avatar);
       if (avatar && avatar.path) {
         return getAbsoluteAttachmentPath(avatar.path);
       }
@@ -2070,6 +2071,8 @@
       const title = this.get('name');
       const color = this.getColor();
       const avatar = this.get('avatar') || this.get('profileAvatar');
+
+      console.log('getAvatar', title, color, avatar);
 
       if (avatar && avatar.path) {
         return { url: getAbsoluteAttachmentPath(avatar.path), color };
