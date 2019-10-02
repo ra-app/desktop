@@ -90,6 +90,10 @@
         'send-message': i18n('sendMessage'),
         'model': this.model,
         'title': this.model[0].company_name,
+        'claimed': this.model[0].isClaimed,
+        'unclaimed': this.model[0].isUnclaimed,
+        'closed': this.model[0].isClosed,
+
       };
     },
     
@@ -101,20 +105,6 @@
         this.$('#claim_'+element.uuid).click(()=> this.claimTicket(element.company_id, element.uuid));
       });
     },
-    events: {
-      click: 'onClick',
-      'click #unclaimed': 'getTickets',
-      'click #claimed': 'getTickets',
-      'click #closed': 'getTickets',
-    },
-
-    getTickets(event){
-      this.$('.ticket-nav').removeClass('active');
-      event.currentTarget.classList.add('active');
-      const ticketType = event.currentTarget.id;
-      console.log('GET TICKETS TYPE ===>  ', ticketType);
-    },
-
     async showInfoTicket(evt, element){
       if ( evt.target.className.indexOf('button-claim-ticket') === -1 ){
         if(this.uuidtmp!== element.uuid){
