@@ -10,8 +10,11 @@
 // eslint-disable-next-line func-names
 (function() {
   'use strict';
-
-  const tmpticketId = ''
+// variables 
+let limitTicket = 12;
+let offsetTicet = 0; 
+let  ticketList = [];
+let  tmpticketId = ''
   window.Whisper = window.Whisper || {};
 
   Whisper.StickerPackInstallFailedToast = Whisper.ToastView.extend({
@@ -237,61 +240,130 @@
       this.conversation_stack.open(conversation);
       this.focusConversation();
     },
+    onTicketScroll(evt) {
+      const ticket = this.$el.find('.conversation-stack').get(0);
+      const atBottom = ticket.scrollHeight - ticket.scrollTop === ticket.clientHeight;
+      // this.model.set('eula_read', atBottom);
+
+      if (atBottom) {
+        this.loadMoreTickets()
+      }
+      console.log(ticket.scrollHeight, ticket.scrollTop, ticket.clientHeight);
+      console.log('tickets scroll', atBottom, this.tmpticketId);
+    },
     async openTicket(id, messageId) {
-      const limit = 10;
-      const offset = 0;
+      this.$('.conversation-stack').on(
+        'scroll',
+        _.debounce(this.onTicketScroll.bind(this), 100)
+      );
+      console.log(limitTicket, "555555555555555555555555555555")
       const data= {
-        'limit' : 10,
-        'offset': 0,
+        'limit' : limitTicket,
+        'offset': offsetTicet,
       }
       try {
-        const tickets= await getTicketsList(id, data);
+        ticketList= await getTicketsList(id, data);
         const isTicket = true;
         // if(this.tmpticketId !== id){
           // this.conversation_stack.open(tickets, isTicket, clientDetails);
-          tickets.forEach((element, index) => {
-            tickets[index].date = new Date(element.ts_created).toUTCString().split('GMT')[0];
+          ticketList.forEach((element, index) => {
+            ticketList[index].date = new Date(element.ts_created).toUTCString().split('GMT')[0];
             switch (element.state) {
               case 0:
-                tickets[index].status =  i18n('Unknown')
-                tickets[index].isUnknown =  true
-                tickets[index].isUnclaimed =  false
-                tickets[index].isClaimed =  false
-                tickets[index].isClosed =  false
+                ticketList[index].status =  i18n('Unknown')
+                ticketList[index].isUnknown =  true
+                ticketList[index].isUnclaimed =  false
+                ticketList[index].isClaimed =  false
+                ticketList[index].isClosed =  false
                 break;
               case 1:
-                tickets[index].status =  i18n('Unclaimed')
-                tickets[index].isUnknown =  false
-                tickets[index].isUnclaimed =  true
-                tickets[index].isClaimed =  false
-                tickets[index].isClosed =  false
+                ticketList[index].status =  i18n('Unclaimed')
+                ticketList[index].isUnknown =  false
+                ticketList[index].isUnclaimed =  true
+                ticketList[index].isClaimed =  false
+                ticketList[index].isClosed =  false
                 break;
               case 2:
-                tickets[index].status =  i18n('Claimmed')
-                tickets[index].isUnknown =  false
-                tickets[index].isUnclaimed =  false
-                tickets[index].isClaimed =  true
-                tickets[index].isClosed =  false
+                ticketList[index].status =  i18n('Claimmed')
+                ticketList[index].isUnknown =  false
+                ticketList[index].isUnclaimed =  false
+                ticketList[index].isClaimed =  true
+                ticketList[index].isClosed =  false
                 break;
               case 3:
-                tickets[index].status =  i18n('Closed')
-                tickets[index].isUnknown =  false
-                tickets[index].isUnclaimed =  false
-                tickets[index].isClaimed =  false
-                tickets[index].isClosed =  true
+                ticketList[index].status =  i18n('Closed')
+                ticketList[index].isUnknown =  false
+                ticketList[index].isUnclaimed =  false
+                ticketList[index].isClaimed =  false
+                ticketList[index].isClosed =  true
                 break;
               default:
                 break;
             }
-            
           });
-          this.conversation_stack.open(tickets, isTicket);
+          this.conversation_stack.open(ticketList, isTicket);
           this.focusConversation();
         // }
         this.tmpticketId = id;
       } catch (err) {
         console.warn('openTicker error', err);
         this.openConversation(id, messageId);
+      }
+    },
+    async loadMoreTickets(){
+      const data= {
+        'limit' : limitTicket,
+        'offset': offsetTicet+limitTicket,
+      }
+      try {
+        const moreTicketList= await getTicketsList(this.tmpticketId, data);
+        console.log(moreTicketList.length, "length")
+        // const isTicket = true;
+        // // if(this.tmpticketId !== id){
+        //   // this.conversation_stack.open(tickets, isTicket, clientDetails);
+        //   ticketList.forEach((element, index) => {
+        //     ticketList[index].date = new Date(element.ts_created).toUTCString().split('GMT')[0];
+        //     switch (element.state) {
+        //       case 0:
+        //         ticketList[index].status =  i18n('Unknown')
+        //         ticketList[index].isUnknown =  true
+        //         ticketList[index].isUnclaimed =  false
+        //         ticketList[index].isClaimed =  false
+        //         ticketList[index].isClosed =  false
+        //         break;
+        //       case 1:
+        //         ticketList[index].status =  i18n('Unclaimed')
+        //         ticketList[index].isUnknown =  false
+        //         ticketList[index].isUnclaimed =  true
+        //         ticketList[index].isClaimed =  false
+        //         ticketList[index].isClosed =  false
+        //         break;
+        //       case 2:
+        //         ticketList[index].status =  i18n('Claimmed')
+        //         ticketList[index].isUnknown =  false
+        //         ticketList[index].isUnclaimed =  false
+        //         ticketList[index].isClaimed =  true
+        //         ticketList[index].isClosed =  false
+        //         break;
+        //       case 3:
+        //         ticketList[index].status =  i18n('Closed')
+        //         ticketList[index].isUnknown =  false
+        //         ticketList[index].isUnclaimed =  false
+        //         ticketList[index].isClaimed =  false
+        //         ticketList[index].isClosed =  true
+        //         break;
+        //       default:
+        //         break;
+        //     }
+        //   });
+        //   this.conversation_stack.open(ticketList, isTicket);
+        //   this.focusConversation();
+        // // }
+        // // this.tmpticketId = id;
+      } catch (err) {
+        console.warn('openTicker error', err);
+        const messageId = null;
+        this.openConversation(this.tmpticketId, messageId);
       }
     },
     closeRecording(e) {

@@ -88,7 +88,7 @@ export class LeftPane extends React.Component<Props> {
         :
         <ConversationListItem
           {...conversation}
-          onClick = {openTicket}
+          onClick={openTicket}
           openConversation={openConversationInternal}
           i18n={i18n}
         />
