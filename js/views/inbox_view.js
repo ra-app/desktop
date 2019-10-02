@@ -266,12 +266,11 @@
       }
     },
     changeListTicket(list) {
-      const arrayList = list;
-      list.forEach((element, index) => {
-        arrayList[index].date = new Date(element.ts_created)
-          .toUTCString()
-          .split('GMT')[0];
+      const arrayList = list.tickets;
+      list.tickets.forEach((element, index) => {
+        arrayList[index].date = new Date(element.ts_created).toUTCString().split('GMT')[0];
         arrayList[index].hasTicket = true;
+        arrayList[index].company_name = list.company_name;
         switch (element.state) {
           case 0:
             arrayList[index].status = i18n('Unknown');
@@ -339,7 +338,7 @@
         // if(this.tmpticketId !== id){
         // this.conversation_stack.open(tickets, isTicket, clientDetails);
         if (ticketList.tickets) {
-          ticketList.tickets = this.changeListTicket(ticketList.tickets);
+          ticketList.tickets = this.changeListTicket(ticketList);
         } else {
           console.log(ticketList, 'ticketlisttttt');
           ticketList.tickets = [
@@ -372,7 +371,7 @@
           ticketState
         );
         // if(moreTicketList.length == limitTicket){
-        let moreTicketList1 = this.changeListTicket(moreTicketList.tickets);
+        let moreTicketList1 = this.changeListTicket(moreTicketList);
         moreTicketList1.forEach(element => {
           ticketList.tickets.push(element);
         });

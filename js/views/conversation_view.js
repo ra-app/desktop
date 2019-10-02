@@ -84,7 +84,7 @@
     className: 'tickets-view',
     template: $('#tickets-view').html(),
     render_attributes() {
-      if (this.model[0].company_name) {
+      if (this.model[0].hasTicket) {
         return {
           'send-message': i18n('sendMessage'),
           model: this.model,

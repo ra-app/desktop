@@ -358,12 +358,10 @@ const getTicketsList = async (company_id, data) => {
 
 // dev
 const addAdminCompany = async (company_id, data) => {
-  return (await apiRequest('api/v2/dev/admin/' + company_id + '/add', data))
-    .details;
+  return apiRequest('api/v2/dev/admin/' + company_id + '/add', data);
 };
 const removeAdminCompany = async (company_id, data) => {
-  return (await apiRequest('api/v2/dev/admin/' + company_id + '/remove', data))
-    .details;
+  return apiRequest('api/v2/dev/admin/' + company_id + '/remove', data);
 };
 const spamTickets = async company_id => {
   return (await apiRequest('api/v2/dev/spamTickets/' + company_id)).details;
@@ -400,7 +398,7 @@ const createDeveloperInterface = () => {
   const devPanel = document.createElement('div');
   devPanel.id = 'devPanel';
   devPanel.style.cssText =
-    'border: 1px solid black; background-color: white; padding: 5px; z-index: 9999; position: fixed; right: 5px; top: 50px;';
+    'border: 1px solid black; background-color: white; padding: 5px; padding-top: 15px; z-index: 9999; position: fixed; right: 5px; top: 50px;';
   document.body.appendChild(devPanel);
 
   draggableHelper(
@@ -866,6 +864,7 @@ const draggableHelper = (
 
   function down(event) {
     if (event.which !== 1) return false; // Stops all non-left-clicks
+    if (event.target !== element) return;
     event.preventDefault();
     event.stopPropagation();
     element.dragStartX = event.offsetX;
