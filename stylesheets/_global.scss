@@ -1447,9 +1447,6 @@ $debug: 0;
     font-size: 1em;
   }
   .divTicketsDev{
-    &.hidden{
-      display: none;
-    }
     display: block;
     ul{
       list-style: none;
@@ -1514,4 +1511,8 @@ $debug: 0;
       cursor: default;
     }
   }
+}
+
+.hidden{
+  display: none;
 }

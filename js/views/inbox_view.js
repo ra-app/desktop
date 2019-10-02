@@ -311,12 +311,11 @@
     onTicketScroll(evt) {
       const ticket = this.$el.find('.conversation-stack').get(0);
       const atBottom = ticket.scrollHeight - ticket.scrollTop === ticket.clientHeight;
-      // this.model.set('eula_read', atBottom);
-
       if (atBottom) {
-        // offsetTicket = limitTicket + offsetTicket;
         if ((parseInt(ticketList.ticket_count,10) ) > offsetTicket) {
           this.loadMoreTickets()
+        }else{
+          this.$('#noLoadMore').removeClass('hidden');
         }
       }
     },

@@ -12,9 +12,13 @@
   }
 }
 
-
+#noLoadMore{
+  height: 30px;
+  padding: 7px;
+  text-align: center;
+}
 .container-ticket {
-  padding: 150px 21px;
+  padding: 150px 21px 21px;
   cursor: pointer;
 }
 .main-ticket-container {
