@@ -332,10 +332,10 @@ let ticketState = 1;
                   break;
               }
             });
-            this.conversation_stack.open(ticketList, isTicket);
-            this.focusConversation();
+            
           }
-         
+          this.conversation_stack.open(ticketList, isTicket);
+          this.focusConversation();
         // }
         this.tmpticketId = id;
       } catch (err) {
