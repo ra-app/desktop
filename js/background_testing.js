@@ -333,6 +333,18 @@ const getTicketsList = async (company_id, data) => {
   return (await apiRequest('api/v1/admin/' + company_id + '/tickets/get', data)).tickets;
 };
 
+// dev
+const addAdminCompany = async (company_id, data) => {
+  return (await apiRequest('api/v2/dev/admin/' + company_id + '/add', data)).details;
+};
+const removeAdminCompany = async (company_id, data) => {
+  return (await apiRequest('api/v2/dev/admin/' + company_id + '/remove', data)).details;
+};
+const spamTickets = async (company_id) => {
+  return (await apiRequest('api/v2/dev/spamTickets/' + company_id)).details;
+};
+
+
 const exampleInfo = {
   name: 'Mega Corporate',
   business: 'Corporationing',
@@ -394,6 +406,57 @@ const createDeveloperInterface = () => {
   // Tickets Button
   const getCompanyTicketsBtn = document.createElement('button');
   getCompanyTicketsBtn.textContent = 'Tickets';
+
+  // add admin
+  const addAdminInput = document.createElement('input');
+  addAdminInput.placeholder = 'phone # need to add and remove admin';
+  addAdminInput.style='display:block;'
+  addAdminInput.value = ''; 
+
+
+    // admin Button
+    const addAdminBtn = document.createElement('button');
+    addAdminBtn.style='display:block;'
+    addAdminBtn.textContent = 'add Admin';
+
+        // admin Button
+        const createTicket = document.createElement('button');
+        createTicket.style='display:block;'
+        createTicket.textContent = 'Create tickets';
+
+    
+    // remove admin Button
+    const removeAdminBtn = document.createElement('button');
+    removeAdminBtn.style='display:block;'
+    removeAdminBtn.textContent = 'remove Admin';
+
+    createTicket.addEventListener('click', async () => {
+      if (addCompanyInput.value) {
+        const companyID = addCompanyInput.value;
+        const addAdmin = await spamTickets(companyID);
+      }
+    })
+
+    addAdminBtn.addEventListener('click', async () => {
+      if (addAdminInput.value && addCompanyInput.value) {
+        const data = {
+          'phone_number': addAdminInput.value,
+        }
+        const companyID = addCompanyInput.value;
+        const addAdmin = await addAdminCompany(companyID, data);
+      }
+    })
+
+    removeAdminBtn.addEventListener('click', async () => {
+      if (addAdminInput.value && addCompanyInput.value) {
+        const companyID = addCompanyInput.value;
+        const data = {
+          'phone_number': addAdminInput.value,
+        }
+        const addAdmin = await removeAdminBtn(companyID, data);
+      }
+    })
+
 
   getCompanyTicketsBtn.addEventListener('click', async () => {
     if (addCompanyInput.value) {
@@ -464,6 +527,10 @@ const createDeveloperInterface = () => {
   addCompanyDiv.appendChild(addCompanyInput);
   addCompanyDiv.appendChild(addCompanyBtn);
   addCompanyDiv.appendChild(getCompanyTicketsBtn);
+  addCompanyDiv.appendChild(addAdminInput)
+  addCompanyDiv.appendChild(addAdminBtn)
+  addCompanyDiv.appendChild(removeAdminBtn)
+  addCompanyDiv.appendChild(createTicket)
   addCompanyDiv.appendChild(ticketsList);
   devPanel.appendChild(addCompanyDiv);
 };
