@@ -355,6 +355,9 @@ const getClientDetails = async (company_id, client_uuid) => {
 const getTicketsList = async (company_id, data) => {
   return apiRequest('api/v1/admin/' + company_id + '/tickets/get', data);
 };
+const getContactXml = async (company_id) => {
+  return (await apiRequest('api/v1/admin/' + company_id + '/contacts/get')).contacts;
+};
 
 // dev
 const addAdminCompany = async (company_id, data) => {

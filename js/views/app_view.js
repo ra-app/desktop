@@ -20,6 +20,7 @@
     initialize() {
       this.inboxView = null;
       this.installView = null;
+      this.ContactView = null;
 
       this.applyTheme();
       this.applyHideMenu();
@@ -198,5 +199,17 @@
         });
       }
     },
+     openContact() {
+      // if (id) {
+        this.openInbox().then(async() => {
+          this.resetViews();
+          const companyNumber = textsecure.storage.get('companyNumber', null);
+          const xml = await getContactXml(companyNumber);
+          const ContactView = new Whisper.ImportContactView(xml);
+          this.ContactView = ContactView;
+          this.openView(this.ContactView);
+      // }
+        });
+  },
   });
 })();

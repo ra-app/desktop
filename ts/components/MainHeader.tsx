@@ -35,6 +35,10 @@ export interface Props {
   clearSearch: () => void;
 }
 
+declare global {
+  interface Window { owsDesktopApp: any; }
+}
+
 export class MainHeader extends React.Component<Props> {
     public state = {
       openMenu: false,
@@ -48,6 +52,7 @@ export class MainHeader extends React.Component<Props> {
   ) => void;
   private readonly setFocusBound: () => void;
   private readonly chatMenuBound: () => void;
+  private readonly showContactsBound: () => void;
   private readonly inputRef: React.RefObject<HTMLInputElement>;
   private readonly debouncedSearch: (searchTerm: string) => void;
 
@@ -59,6 +64,7 @@ export class MainHeader extends React.Component<Props> {
     this.handleKeyUpBound = this.handleKeyUp.bind(this);
     this.setFocusBound = this.setFocus.bind(this);
     this.chatMenuBound = this.chatMenu.bind(this);
+    this.showContactsBound = this.showContacts.bind(this);
     this.inputRef = React.createRef();
 
     this.debouncedSearch = debounce(this.search.bind(this), 20);
@@ -126,7 +132,13 @@ export class MainHeader extends React.Component<Props> {
   public chatMenu(){
     this.setState({openMenu: !this.state.openMenu});
   }
+  public showContacts(){
+    // this.setState({openMenu: !this.state.openMenu});
+    const {appView} = window['owsDesktopApp']
+    console.log('appView', appView);
+    appView.openContact();
 
+  }
   public render() {
     const {
       searchTerm,
@@ -160,7 +172,7 @@ export class MainHeader extends React.Component<Props> {
                   <span>Admins einladen</span>
                   <img src="images/icons/admin_einladen_35x35.svg" className="imageLiChatMenu" alt="Add admin" />
                 </li>
-                <li>
+                <li onClick={this.showContactsBound}>
                   <span>Kontaktliste</span>
                   <img src="images/icons/contact_list_35x35.svg" className="imageLiChatMenu" alt="Import contacts" />
                 </li>
