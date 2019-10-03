@@ -36,6 +36,9 @@ export interface Props {
 }
 
 export class MainHeader extends React.Component<Props> {
+    public state = {
+      openMenu: false,
+      };
   private readonly updateSearchBound: (
     event: React.FormEvent<HTMLInputElement>
   ) => void;
@@ -44,6 +47,7 @@ export class MainHeader extends React.Component<Props> {
     event: React.KeyboardEvent<HTMLInputElement>
   ) => void;
   private readonly setFocusBound: () => void;
+  private readonly chatMenuBound: () => void;
   private readonly inputRef: React.RefObject<HTMLInputElement>;
   private readonly debouncedSearch: (searchTerm: string) => void;
 
@@ -54,6 +58,7 @@ export class MainHeader extends React.Component<Props> {
     this.clearSearchBound = this.clearSearch.bind(this);
     this.handleKeyUpBound = this.handleKeyUp.bind(this);
     this.setFocusBound = this.setFocus.bind(this);
+    this.chatMenuBound = this.chatMenu.bind(this);
     this.inputRef = React.createRef();
 
     this.debouncedSearch = debounce(this.search.bind(this), 20);
@@ -118,6 +123,10 @@ export class MainHeader extends React.Component<Props> {
     }
   }
 
+  public chatMenu(){
+    this.setState({openMenu: !this.state.openMenu});
+  }
+
   public render() {
     const {
       searchTerm,
@@ -128,13 +137,19 @@ export class MainHeader extends React.Component<Props> {
       // phoneNumber,
       // profileName,
     } = this.props;
+    const {openMenu} = this.state;
 
     return (
       <div>
         <div className="module-main-header__info">
           <img src="images/header-chat.png" alt="header chat" />
           <span>Kommunikation</span>
-          <img src="images/icons/menu_over_blue_24x24.svg" className="chat_menu" alt="Cbat menu"/>
+          <img src="images/icons/menu_over_blue_24x24.svg" className="chat_menu" alt="Cbat menu"  onClick={this.chatMenuBound}/>
+          {openMenu &&
+            <div className="menuChat">
+              <span>Menuuuuu</span>
+            </div>
+          }
         </div>
       <div className="module-main-header">
         {/* <Avatar
@@ -147,7 +162,6 @@ export class MainHeader extends React.Component<Props> {
           profileName={profileName}
           size={28}
         /> */}
-        
         <div className="module-main-header__search">
           <div
             role="button"
