@@ -21,9 +21,12 @@
     },
 
     initialize(options) {
-      console.log(options, "optionssssssssss")
       this.render();
-   
+      if (options){
+        const parser = new DOMParser();
+        const xmlRes = parser.parseFromString(options.contact_data, "text/xml");
+        console.log(xmlRes, "xmlresponsee");
+      }
     },
   });
 
