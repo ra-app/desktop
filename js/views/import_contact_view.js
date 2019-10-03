@@ -25,9 +25,6 @@
       this.render();
    
     },
-    getXml (){
-      console.log("getttttttttttttttttttttttttttt")
-    }
   });
 
 
