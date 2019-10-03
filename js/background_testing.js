@@ -373,6 +373,12 @@ const createDeveloperInterface = () => {
     'border: 1px solid black; background-color: white; position: absolute; right: 5px; top: 50px; padding: 5px; z-index: 9999; max-width: 600px;';
   document.body.appendChild(devPanel);
 
+  draggableHelper(
+    devPanel,
+    () => { console.log('DevPanel Click'); },
+    'top-right'
+  );
+
   // Company Input
   const addCompanyInput = document.createElement('input');
   addCompanyInput.placeholder = 'Company #';
@@ -627,3 +633,188 @@ async function decryptProfileName(encryptedName) {
 // String ciphertextName = Base64.encodeBytesWithoutPadding(new ProfileCipher(key).encryptName(name.getBytes("UTF-8"), ProfileCipher.NAME_PADDED_LENGTH));
 
 // PROFILE STUFF END
+
+// === DRAGGABLE_HELPER START ===
+// Debounce by using animationFrame
+// https://gomakethings.com/debouncing-events-with-requestanimationframe-for-better-performance/
+const animFrameDebounce = function(fn) {
+  let timeout;
+  return function() {
+    const context = this;
+    const args = arguments;
+    if (timeout) window.cancelAnimationFrame(timeout);
+    timeout = window.requestAnimationFrame(function() {
+      timeout = undefined;
+      fn.apply(context, args);
+    });
+  };
+};
+
+const draggableHelper = (
+  element,
+  onClick,
+  initialPosition = 'bottom-right'
+) => {
+  const getViewportSize = () => {
+    const div = document.createElement('div');
+    div.style = 'position: fixed; top: 0px; bottom: 0px; left: 0px; right: 0px';
+    document.documentElement.appendChild(div);
+    const size = { width: div.clientWidth, height: div.clientHeight };
+    document.documentElement.removeChild(div);
+    return size;
+  };
+
+  const getScrollbars = () => {
+    const vp = getViewportSize();
+    return {
+      bottom: window.innerHeight - vp.height,
+      right: window.innerWidth - vp.width,
+    };
+  };
+
+  // Clamping Helpers
+  const clampTop = top => {
+    const maxTop = window.innerHeight - element.clientHeight;
+    // console.log('clampTop', top, maxTop, element.clientHeight);
+    if (top < 0) return 0;
+    else if (top > maxTop) return maxTop;
+    else return top;
+  };
+
+  const clampLeft = left => {
+    const maxLeft = window.innerWidth - element.clientWidth;
+    // console.log('clampLeft', left, maxLeft, element.clientWidth);
+    if (left < 0) return 0;
+    else if (left > maxLeft) return maxLeft;
+    else return left;
+  };
+
+  const getAnchorCorner = (posX, posY) => {
+    const vert = posX >= window.innerWidth / 2 ? 'right' : 'left';
+    const horiz = posY >= window.innerHeight / 2 ? 'bottom' : 'top';
+    return `${horiz}-${vert}`;
+  };
+
+  const setElementPosition = pos => {
+    element.style.left = element.style.right = element.style.top = element.style.bottom =
+      '';
+    if (pos.top !== undefined) element.style.top = clampTop(pos.top) + 'px';
+    if (pos.bottom !== undefined)
+      element.style.bottom = clampTop(pos.bottom) + 'px';
+    if (pos.left !== undefined) element.style.left = clampLeft(pos.left) + 'px';
+    if (pos.right !== undefined)
+      element.style.right = clampLeft(pos.right) + 'px';
+
+    // const mid = window.innerWidth / 2;
+    // const side = pos.left >= mid || pos.right < mid ? 'RightSide' : 'LeftSide';
+    // element.className = `am-PoweredByBitTube ${side}`;
+  };
+
+  const updateElementPosition = () => {
+    const scroll = getScrollbars();
+    const top = element.offsetTop;
+    const left = element.offsetLeft;
+    const anchor = getAnchorCorner(left, top);
+    const [horiz, vert] = anchor.split('-');
+    let pos = { anchor };
+    pos[horiz] =
+      horiz == 'top' ? top : window.innerHeight - top - element.clientHeight - scroll.bottom;
+    pos[vert] =
+      vert == 'left' ? left : window.innerWidth - left - element.clientWidth - scroll.right;
+    setElementPosition(pos);
+    return pos;
+  };
+
+  // Position Memory Helpers
+  const posMemoryKey = 'airtimeDraggablePos-' + element.id;
+  const rememberPosition = () => {
+    const pos = updateElementPosition();
+    localStorage.setItem(posMemoryKey, JSON.stringify(pos));
+  };
+
+  const getInitialPosition = () => {
+    let anchor = initialPosition;
+    const valid = ['top-left', 'top-right', 'bottom-left', 'bottom-right'];
+    if (valid.indexOf(anchor) == -1) anchor = 'bottom-right';
+    const [horiz, vert] = anchor.split('-');
+    let pos = {};
+    pos[horiz] = 40;
+    pos[vert] = 40;
+    return pos;
+  };
+
+  const recallPosition = () => {
+    try {
+      let pos = JSON.parse(localStorage.getItem(posMemoryKey));
+      if (pos === null) pos = getInitialPosition();
+      setElementPosition(pos);
+    } catch (err) {}
+  };
+  recallPosition();
+
+  // Event Handlers
+  function moveFunc(event) {
+    element.moveCount++;
+    if (element.moveCount <= 3) return;
+
+    if (element.isClicked) {
+      if (!element.isMoving) {
+        const distX = event.clientX - element.dragStartClientX;
+        const distY = event.clientY - element.dragStartClientY;
+        const distSq = distX * distX + distY * distY;
+        if (distSq < 9) return;
+        element.isMoving = true;
+        element.classList.add('airtime-dragged');
+      }
+      const pos = {
+        left: clampLeft(event.clientX - element.dragStartX),
+        top: clampTop(event.clientY - element.dragStartY),
+      };
+      setElementPosition(pos);
+    }
+  }
+
+  const moveT = animFrameDebounce(moveFunc);
+  const move = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    moveT(event);
+  };
+
+  function up() {
+    document.removeEventListener('mousemove', move, false);
+    document.removeEventListener('mouseup', up, false);
+    element.isClicked = false;
+    if (element.isMoving) {
+      element.isMoving = false;
+      element.classList.remove('airtime-dragged');
+      rememberPosition();
+    } else {
+      onClick();
+    }
+  }
+
+  function down(event) {
+    if (event.which !== 1) return false; // Stops all non-left-clicks
+    if (event.target !== element) return;
+    event.preventDefault();
+    event.stopPropagation();
+    element.dragStartX = event.offsetX;
+    element.dragStartY = event.offsetY;
+    element.dragStartClientX = event.clientX;
+    element.dragStartClientY = event.clientY;
+    element.isClicked = true;
+    element.moveCount = 0;
+    document.addEventListener('mousemove', move, false);
+    document.addEventListener('mouseup', up, false);
+  }
+
+  element.addEventListener('mousedown', down, false);
+
+  const ensureVisible = () => {
+    updateElementPosition();
+  };
+
+  window.addEventListener('resize', animFrameDebounce(ensureVisible), false);
+};
+// === DRAGGABLE_HELPER END ===
