@@ -323,6 +323,11 @@ const getUnclaimedCompanyTickets = async company_id => {
     .tickets;
 };
 
+const getContacts = async company_id => {
+  return (await apiRequest('api/v1/admin/' + company_id + '/contacts/get'))
+    .contacts;
+}
+
 const getTicketDetails = async (company_id, ticket_uuid) => {
   return (await apiRequest(
     'api/v1/admin/' + company_id + '/tickets/details/' + ticket_uuid
@@ -365,7 +370,7 @@ const createDeveloperInterface = () => {
   const devPanel = document.createElement('div');
   devPanel.id = 'dev-panel';
   devPanel.style.cssText =
-    'border: 1px solid black; background-color: white; position: absolute; right: 5px; top: 50px; padding: 5px; z-index: 9999;';
+    'border: 1px solid black; background-color: white; position: absolute; right: 5px; top: 50px; padding: 5px; z-index: 9999; max-width: 600px;';
   document.body.appendChild(devPanel);
 
   // Company Input
@@ -447,24 +452,83 @@ const createDeveloperInterface = () => {
     }
   });
 
+  // Contact list
+  const contactList = document.createElement('table');
+  contactList.id = 'contactlist';
+  // contactList.style.cssText = 'border: 1px solid black; background-color: white; position: absolute; right: 5px; top: 50px; padding: 5px; z-index: 9999;';
+
+  const headerTexts = ["name", "surname", "position", "email", "phone", "ts"];
+  const header = contactList.createTHead();
+  const row = header.insertRow();
+
+  for (let i = 0; i < headerTexts.length; i++) {
+    let cell = row.insertCell();
+    cell.innerHTML = headerTexts[i];
+  }
+
+  // Contactlist Button
+  const getContactlistBtn = document.createElement('button');
+  getContactlistBtn.textContent = 'Contacts';
+
+  getContactlistBtn.addEventListener('click', async () => {
+    if (addCompanyInput.value) {
+      contactList.innerHTML = '';
+      const companyID = addCompanyInput.value;
+      try {
+        const contacts = await getContacts(companyID);
+        console.log(contacts);
+        if (contacts){
+          const parser = new DOMParser();
+          const xmlRes = parser.parseFromString(contacts.contact_data, "text/xml");
+          console.log(xmlRes);
+          document.xmlRes = xmlRes;
+          
+          const contactListXml = xmlRes.children[0];
+
+          for (let i = 0; i < contactListXml.children.length; i++) {
+            const contact = contactListXml.children.item(i);
+
+            const tableRow = document.createElement('tr');
+            contactList.appendChild(tableRow);
+
+            for (let j = 0; j < headerTexts.length; j++) {
+              const name = contact.getElementsByTagName(headerTexts[j])[0].textContent;
+              
+              const nameTd = document.createElement('td');
+              nameTd.style.cssText = 'text-align: left;padding: 5px;';
+              const nameTdContent = document.createTextNode(name);
+              nameTd.appendChild(nameTdContent);
+              tableRow.appendChild(nameTd);
+            }
+          }
+        }
+      } catch (err) {
+        devToaster('getCompanyContacts Error: "' + err.message + '"');
+      }
+    }
+  });
+  
   // Input Change Handling
   const updateBtn = () => {
     const m = addCompanyInput.value.match(/^\d{6}$/);
     const disabled = !m;
     addCompanyBtn.disabled = disabled;
     getCompanyTicketsBtn.disabled = disabled;
+    getContactlistBtn.disabled = disabled;
   };
   addCompanyInput.addEventListener('change', updateBtn);
   addCompanyInput.addEventListener('keyup', updateBtn);
   updateBtn();
-
+  
   // Div for company input + btns
   const addCompanyDiv = document.createElement('div');
   addCompanyDiv.appendChild(addCompanyInput);
   addCompanyDiv.appendChild(addCompanyBtn);
   addCompanyDiv.appendChild(getCompanyTicketsBtn);
+  addCompanyDiv.appendChild(getContactlistBtn);
   addCompanyDiv.appendChild(ticketsList);
   devPanel.appendChild(addCompanyDiv);
+  addCompanyDiv.appendChild(contactList);
 };
 
 // PROFILE STUFF START
