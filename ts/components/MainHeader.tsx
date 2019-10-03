@@ -147,7 +147,24 @@ export class MainHeader extends React.Component<Props> {
           <img src="images/icons/menu_over_blue_24x24.svg" className="chat_menu" alt="Cbat menu"  onClick={this.chatMenuBound}/>
           {openMenu &&
             <div className="menuChat">
-              <span>Menuuuuu</span>
+              <ul className="ulMenuChat">
+                <li>
+                  <span>Broadcast erstellen</span>
+                  <img src="images/icons/broadcast_einladen_35x35.svg" className="imageLiChatMenu" alt="Create broadcast" />
+                </li>
+                <li>
+                  <span>Users einladen</span>
+                  <img src="images/icons/user_einladen_35x35.svg" className="imageLiChatMenu" alt="Add user" />
+                </li>
+                <li>
+                  <span>Admins einladen</span>
+                  <img src="images/icons/admin_einladen_35x35.svg" className="imageLiChatMenu" alt="Add admin" />
+                </li>
+                <li>
+                  <span>Kontaktliste</span>
+                  <img src="images/icons/contact_list_35x35.svg" className="imageLiChatMenu" alt="Import contacts" />
+                </li>
+              </ul>
             </div>
           }
         </div>
