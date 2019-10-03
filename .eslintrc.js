@@ -43,7 +43,7 @@ module.exports = {
 
     'prefer-template': 'off',
 
-    'camelcase': 'off',
+    camelcase: 'off',
 
     'arrow-body-style': 'off',
 

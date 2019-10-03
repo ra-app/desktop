@@ -171,37 +171,37 @@
 }
 
 .module-message__container--incoming-red {
-  background-color: #d9ecec;/*$color-conversation-red;*/
+  background-color: #d9ecec; /*$color-conversation-red;*/
 }
 .module-message__container--incoming-deep_orange {
-  background-color: #d9ecec;/*$color-conversation-deep_orange;*/
+  background-color: #d9ecec; /*$color-conversation-deep_orange;*/
 }
 .module-message__container--incoming-brown {
-  background-color: #d9ecec;/*$color-conversation-brown;*/
+  background-color: #d9ecec; /*$color-conversation-brown;*/
 }
 .module-message__container--incoming-pink {
-  background-color: #d9ecec;/*$color-conversation-pink;*/
+  background-color: #d9ecec; /*$color-conversation-pink;*/
 }
 .module-message__container--incoming-purple {
-  background-color: #d9ecec;/*$color-conversation-purple;*/
+  background-color: #d9ecec; /*$color-conversation-purple;*/
 }
 .module-message__container--incoming-indigo {
-  background-color: #d9ecec;/*$color-conversation-indigo;*/
+  background-color: #d9ecec; /*$color-conversation-indigo;*/
 }
 .module-message__container--incoming-blue {
-  background-color: #d9ecec;/*$color-conversation-blue;*/
+  background-color: #d9ecec; /*$color-conversation-blue;*/
 }
 .module-message__container--incoming-teal {
-  background-color: #d9ecec;/*$color-conversation-teal;*/
+  background-color: #d9ecec; /*$color-conversation-teal;*/
 }
 .module-message__container--incoming-green {
-  background-color: #d9ecec;/*$color-conversation-green;*/
+  background-color: #d9ecec; /*$color-conversation-green;*/
 }
 .module-message__container--incoming-light_green {
-  background-color: #d9ecec;/*$color-conversation-light_green;*/
+  background-color: #d9ecec; /*$color-conversation-light_green;*/
 }
 .module-message__container--incoming-blue_grey {
-  background-color: #d9ecec;/*$color-conversation-blue_grey;*/
+  background-color: #d9ecec; /*$color-conversation-blue_grey;*/
 }
 
 .module-message__container--with-tap-to-view {
@@ -642,7 +642,7 @@
 }
 
 .module-message__text--incoming {
-  color: $color-raapp-text;/*$color-white;*/
+  color: $color-raapp-text; /*$color-white;*/
   a {
     text-decoration: underline;
     color: $color-raapp-text; /*$color-white;*/
@@ -1500,8 +1500,8 @@
   color: #ffffff;
   @include backgroudGradient;
   border-bottom: 1px solid $color-black-02;
-  & .react-contextmenu-wrapper{
-    & .chat_menu{
+  & .react-contextmenu-wrapper {
+    & .chat_menu {
       height: 20px;
       cursor: pointer;
     }
@@ -2264,7 +2264,6 @@
 .module-avatar--no-image {
   // background-color: $color-conversation-grey;
   background-color: transparent;
-
 }
 
 .module-avatar--signal-blue {
@@ -2318,15 +2317,15 @@
 
   border-bottom: 1px solid $color-gray-15;
 }
-.content{
+.content {
   .module-main-header__info {
     position: fixed;
     width: calc(100% - 300px);
     z-index: 9;
-    img{
+    img {
       float: unset;
     }
-    span{
+    span {
       top: -6px;
     }
   }
@@ -2338,13 +2337,13 @@
   color: white;
   padding: 23px 10px 23px 10px;
   max-height: 70px;
-  img{
+  img {
     height: 52px;
     width: 52px;
     float: left;
     margin-top: -10px;
     vertical-align: middle;
-    &.chat_menu{
+    &.chat_menu {
       float: right;
       height: 25px;
       margin-top: 2px;
@@ -2352,7 +2351,7 @@
       cursor: pointer;
     }
   }
-  span{
+  span {
     vertical-align: middle;
     font-size: 17px;
     top: 5px;
@@ -2400,7 +2399,7 @@
   width: 16px;
 
   cursor: text;
-  @include color-svg('../images/search.svg', #B1C6DE);
+  @include color-svg('../images/search.svg', #b1c6de);
 }
 
 .module-main-header__search__cancel-icon {

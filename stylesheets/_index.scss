@@ -1,4 +1,4 @@
-.conversation-stack{
+.conversation-stack {
   overflow: auto !important;
 }
 
@@ -88,13 +88,13 @@
 .conversation-stack {
   .conversation {
     display: none;
-    ~.ticket-view{
+    ~ .ticket-view {
       display: block;
     }
   }
   .conversation:first-child {
     display: block;
-    ~.ticket-view{
+    ~ .ticket-view {
       display: none;
     }
   }

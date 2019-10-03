@@ -25,7 +25,10 @@
 
     "linebreak-style": false,
 
-    "max-len": ["error", { "code": 1000, "comments": 1000, "ignoreComments": true }],
+    "max-len": [
+      "error",
+      { "code": 1000, "comments": 1000, "ignoreComments": true }
+    ],
 
     // Prettier handles this for us
     "max-line-length": false,

@@ -26,8 +26,6 @@
 
   let uuidtmp = '';
 
-
-
   Whisper.ExpiredToast = Whisper.ToastView.extend({
     render_attributes() {
       return { toastMessage: i18n('expiredWarning') };
@@ -86,77 +84,94 @@
     className: 'tickets-view',
     template: $('#tickets-view').html(),
     render_attributes() {
-      if(this.model[0].company_name){
+      if (this.model[0].hasTicket) {
         return {
           'send-message': i18n('sendMessage'),
-          'model': this.model,
-          'title': this.model[0].company_name,
-          'hasTicket': this.model[0].hasTicket,
-          'claimed': this.model[0].isClaimed,
-          'unclaimed': this.model[0].isUnclaimed,
-          'closed': this.model[0].isClosed,
-  
+          model: this.model,
+          title: this.model[0].company_name,
+          hasTicket: this.model[0].hasTicket,
+          claimed: this.model[0].isClaimed,
+          unclaimed: this.model[0].isUnclaimed,
+          closed: this.model[0].isClosed,
         };
       }
       return {
         'send-message': i18n('sendMessage'),
-        'model': this.model,
-
+        model: this.model,
       };
     },
-    
+
     initialize(options) {
       this.render();
       this.model.forEach((element, index) => {
-        this.$('#'+element.uuid).click((evt)=> this.showInfoTicket(evt, element));
-        this.$('#claim_'+element.uuid).click(()=> this.claimTicket(element.company_id, element.uuid));
+        console.log('Element !!!!!! ', element);
+        this.$('#' + element.uuid).click(evt =>
+          this.showInfoTicket(evt, element)
+        );
+        this.$('#claim_' + element.uuid).click(() =>
+          this.claimTicket(element.company_id, element.uuid)
+        );
       });
     },
-    async showInfoTicket(evt, element){
-      if ( evt.target.className.indexOf('button-claim-ticket') === -1 ){
-        if(this.uuidtmp!== element.uuid){
-          try{
-            const ticketDETAIL = await getTicketDetails(element.company_id, element.uuid);
+    async showInfoTicket(evt, element) {
+      if (evt.target.className.indexOf('button-claim-ticket') === -1) {
+        if (this.uuidtmp !== element.uuid) {
+          try {
+            const ticketDETAIL = await getTicketDetails(
+              element.company_id,
+              element.uuid
+            );
             const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-            if ( ticketDETAIL ){
-              if(this.$('#ticket_'+ this.uuidtmp) ){
-                this.$('#ticket_'+ this.uuidtmp).remove()
+            if (ticketDETAIL) {
+              if (this.$('#ticket_' + this.uuidtmp)) {
+                this.$('#ticket_' + this.uuidtmp).remove();
               }
 
-              const mainMssgDiv = `<div id="ticket_${element.uuid}" class="mainMssgDiv"></div>`;
-              this.$('#'+element.uuid).append(mainMssgDiv)
+              const mainMssgDiv = `<div id="ticket_${
+                element.uuid
+              }" class="mainMssgDiv"></div>`;
+              this.$('#' + element.uuid).append(mainMssgDiv);
               ticketDETAIL.events.forEach(mssg => {
                 const mssgDiv = `<div class="received-message">
-                                  <p class="mssgUsername">${element.name ? element.name : 'username'}</p>
-                                  <p class="ticket-message">${JSON.parse(mssg.json).body}</p>
-                                  <p class="ticket-time">${days[new Date(mssg.ts).getDay()]} ${new Date(mssg.ts).getHours() - 1}:${new Date(mssg.ts).getMinutes()}</p>
+                                  <p class="mssgUsername">${
+                                    element.name ? element.name : 'username'
+                                  }</p>
+                                  <p class="ticket-message">${
+                                    JSON.parse(mssg.json).body
+                                  }</p>
+                                  <p class="ticket-time">${
+                                    days[new Date(mssg.ts).getDay()]
+                                  } ${new Date(mssg.ts).getHours() -
+                  1}:${new Date(mssg.ts).getMinutes()}</p>
                                 </div>`;
-                this.$('#ticket_'+element.uuid).append(mssgDiv)
-              })
+                this.$('#ticket_' + element.uuid).append(mssgDiv);
+              });
             }
-          }catch (e){
-            console.warn('Error getting ticket info', e)
+          } catch (e) {
+            console.warn('Error getting ticket info', e);
           }
-        }else {
-          if( this.$('#ticket_'+element.uuid).hasClass('hide') ){
-            this.$('#ticket_'+element.uuid).remove()
+        } else {
+          console.log('HERE !!!!! ');
+          if (this.$('#ticket_' + element.uuid).hasClass('hide')) {
+            this.$('#ticket_' + element.uuid).remove();
           }
         }
       }
-      this.uuidtmp = element.uuid
+      this.uuidtmp = element.uuid;
     },
-    async claimTicket (company_id, uuid){
+    async claimTicket(company_id, uuid) {
       const phone_number = await claimTicket(company_id, uuid);
       const conversation = await ensureConversation(phone_number);
-      // send event ticket 
+      // send event ticket
       const ticketDETAIL = await getTicketDetails(company_id, uuid);
-      ticketDETAIL.events.forEach(mssg => { 
-        const message = JSON.parse(mssg.json).body
+      ticketDETAIL.events.forEach(mssg => {
+        const message = JSON.parse(mssg.json).body;
         conversation.sendMessage(message);
-        
-      })
+      });
       // change button style
-      this.$('#claim_'+uuid).removeClass('not-claimed').addClass('claimed');
+      this.$('#claim_' + uuid)
+        .removeClass('not-claimed')
+        .addClass('claimed');
     },
   });
 
