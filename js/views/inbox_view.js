@@ -320,18 +320,20 @@
         }
       }
     },
-    async openTicket(id, messageId = null) {
+    async openTicket(id, messageId = null, resetCall = null) {
       this.$('.conversation-stack').on(
         'scroll',
         _.debounce(this.onTicketScroll.bind(this), 100)
       );
+      if(resetCall){
+        offsetTicket = 0;
+      }
       const data = {
         limit: limitTicket,
         offset: offsetTicket,
         state: ticketState,
       };
-
-      offsetTicket = limitTicket + offsetTicket;
+        offsetTicket = limitTicket + offsetTicket;
       try {
         ticketList = await getTicketsList(id, data);
         const isTicket = true;
