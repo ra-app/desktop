@@ -16,6 +16,7 @@
   let ticketList = [];
   let tmpticketId = '';
   let ticketState = 1;
+  let scrolling = false;
   window.Whisper = window.Whisper || {};
 
   Whisper.StickerPackInstallFailedToast = Whisper.ToastView.extend({
@@ -240,30 +241,33 @@
       this.focusConversation();
     },
     async getTickets(event) {
-      const ticketType = event.currentTarget.id;
-      let tmpTicketType = 1;
-      switch (ticketType) {
-        case 'unclaimed':
-          tmpTicketType = 1;
-          break;
-        case 'claimed':
-          tmpTicketType = 2;
-          break;
-        case 'closed':
-          tmpTicketType = 3;
-          break;
-        default:
-          tmpTicketType = 1;
-          break;
+      if ( !scrolling ){
+        const ticketType = event.currentTarget.id;
+        let tmpTicketType = 1;
+        switch (ticketType) {
+          case 'unclaimed':
+            tmpTicketType = 1;
+            break;
+          case 'claimed':
+            tmpTicketType = 2;
+            break;
+          case 'closed':
+            tmpTicketType = 3;
+            break;
+          default:
+            tmpTicketType = 1;
+            break;
+        }
+        if (tmpTicketType !== ticketState) {
+          ticketState = tmpTicketType;
+          limitTicket = 12;
+          offsetTicket = 0;
+          await this.openTicket(this.tmpticketId);
+          this.$('.ticket-nav').removeClass('active');
+          event.currentTarget.classList.add('active');
+        }
       }
-      if (tmpTicketType !== ticketState) {
-        ticketState = tmpTicketType;
-        limitTicket = 12;
-        offsetTicket = 0;
-        await this.openTicket(this.tmpticketId);
-        this.$('.ticket-nav').removeClass('active');
-        event.currentTarget.classList.add('active');
-      }
+      
     },
     changeListTicket(list) {
       const arrayList = list.tickets;
@@ -308,14 +312,15 @@
       return arrayList;
     },
     onTicketScroll(evt) {
+      scrolling = true;
       const ticket = this.$el.find('.conversation-stack').get(0);
       const atBottom = ticket.scrollHeight - ticket.scrollTop === ticket.clientHeight;
       if (atBottom) {
-        // offsetTicket = limitTicket + offsetTicket;
         if ((parseInt(ticketList.ticket_count, 10)) > offsetTicket) {
           this.loadMoreTickets()
         }else{
           this.$('#noLoadMore').removeClass('hidden');
+          scrolling = false;
         }
       }
     },
@@ -378,6 +383,7 @@
         });
         const isTicket = true;
         this.conversation_stack.open(ticketList.tickets, isTicket);
+        scrolling = false;
       } catch (err) {
         console.warn('openTicker error', err);
         const messageId = null;
