@@ -494,17 +494,16 @@ const createDeveloperInterface = () => {
           for (let i = 0; i < contactListXml.children.length; i++) {
             const contact = contactListXml.children.item(i);
 
-            const tableRow = document.createElement('tr');
+            const tableRow = contactList.insertRow();
             contactList.appendChild(tableRow);
 
             for (let j = 0; j < headerTexts.length; j++) {
-              const name = contact.getElementsByTagName(headerTexts[j])[0].textContent;
+              const content = contact.getElementsByTagName(headerTexts[j])[0].textContent;
               
-              const nameTd = document.createElement('td');
-              nameTd.style.cssText = 'text-align: left;padding: 5px;';
-              const nameTdContent = document.createTextNode(name);
-              nameTd.appendChild(nameTdContent);
-              tableRow.appendChild(nameTd);
+              const contentTd = tableRow.insertCell();
+              contentTd.style.cssText = 'text-align: left;padding: 5px;';
+              contentTd.innerHTML = content;
+              tableRow.appendChild(contentTd);
             }
           }
         }
