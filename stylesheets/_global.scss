@@ -1482,15 +1482,15 @@ $debug: 0;
   background: white;
   position: fixed;
   top: 70px;
-  height: 70px;
+  height: 50px;
   z-index: 9;
   width: calc(100% - 300px);
   li {
     width: 200px;
     text-align: center;
     border-right: 1px solid #d5d6d6;
-    padding: 25px;
-    font-size: 17px;
+    padding: 15px;
+    font-size: 14px;
     font-family: $poppins-regular;
     cursor: pointer;
     text-transform: capitalize;
