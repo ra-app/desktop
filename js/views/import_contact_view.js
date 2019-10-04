@@ -31,11 +31,22 @@
       }
     },
     createTable (contactListXml){
+      const table = document.createElement('table');
       const headerTexts = ["name", "surname", "position", "email", "kunde/admin", "invitation status", "profile"];
+      if(table){
+        const header = table.createTHead();
+        const row = header.insertRow();
+        headerTexts.forEach(element => {
+          const cell = row.insertCell();
+          cell.innerHTML = element;
+        });
+      }
       const list =  contactListXml.children;
       for (let i = 0; i < contactListXml.children.length; i++) {
         console.log(contactListXml.children.item(i), "77777777777777")
       }
+      //Append content
+      this.$('#contactTable').append(table);
     },
   });
 
