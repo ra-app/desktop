@@ -38,18 +38,21 @@
     },
     events: {
       'keyup #search-table': 'searchTable',
-      'click #ferting-button': "closeContact"
+      'click #ferting-button': 'closeContact',
     },
     createTable (contactListXml){
       const table = document.createElement('table');
+      table.className = "sortable";
 
-      const headerTexts = ['name', 'surname', 'position', 'email', 'kunde/admin', 'invitation status', 'profile'];
+      const headerTexts = ['#','name', 'surname', 'position', 'email', 'kunde/admin', 'invitation status', 'profile', 'actions'];
       if(table){
         const header = table.createTHead();
         const row = header.insertRow();
+        console.log('AQUIII', row)
         headerTexts.forEach(element => {
-          const cell = row.insertCell();
+          const cell = document.createElement('th');
           cell.innerHTML = element;
+          row.appendChild(cell)
         });
       }
       const list =  contactListXml.children;
@@ -68,6 +71,9 @@
             const cellTdContent = document.createTextNode(cell);
             // cellTd.style.cssText = 'text-align: left;padding: 5px;';
             cellTd.appendChild(cellTdContent);
+          }else {
+            this.appendElemtns(j, cellTd)
+
           }
           tableRow.appendChild(cellTd);
         }
@@ -76,7 +82,7 @@
       table.appendChild(tbody)
       this.$('#contactTable').append(table);
 
-
+      this.$('table').tablesort();
     },
     searchTable(e){
       console.log(e.target.value, "evtt")
@@ -91,8 +97,59 @@
       });
     },
     closeContact(){
-      console.log("closeeeeeeeeeeeeee")
       this.$el.trigger('openInbox');
+    },
+    appendElemtns(j, cellTd){
+      switch (j) {
+        case 0: {
+          const checkbox = document.createElement('input'); 
+          checkbox.type = 'checkbox'; 
+          checkbox.name = '#'; 
+          checkbox.value = '#'; 
+          checkbox.id = '#'; 
+          cellTd.appendChild(checkbox)
+          break;
+        }
+        // eslint-disable-next-line no-case-declarations
+        case 5:
+          const checkboxKunde = document.createElement('input'); 
+          checkboxKunde.type = 'radio'; 
+          checkboxKunde.name = 'kunde'; 
+          checkboxKunde.value = 'kunde'; 
+          checkboxKunde.id = 'kunde'; 
+          const checkboxAdmin = document.createElement('input'); 
+          checkboxAdmin.type = 'radio'; 
+          checkboxAdmin.name = 'kunde'; 
+          checkboxAdmin.value = 'kunde'; 
+          checkboxAdmin.id = 'kunde'; 
+          const labelKunde = document.createElement('label'); 
+          labelKunde.appendChild(document.createTextNode('kunde')); 
+          const labelAdmin = document.createElement('label'); 
+          labelAdmin.appendChild(document.createTextNode('admin')); 
+          cellTd.appendChild(checkboxKunde);
+          cellTd.appendChild(labelKunde);
+          cellTd.appendChild(checkboxAdmin);
+          cellTd.appendChild(labelAdmin);
+          break;
+        // eslint-disable-next-line no-case-declarations
+        case 6:
+          const button = document.createElement('button');
+          button.innerHTML = 'invitation status';  
+          cellTd.appendChild(button);
+          break;
+        // eslint-disable-next-line no-case-declarations
+        case 8:
+          // eslint-disable-next-line no-case-declarations
+          const buttonEdit = document.createElement('button');
+          buttonEdit.innerHTML = 'Edit';  
+          const buttonRemove = document.createElement('button');
+          buttonRemove.innerHTML = 'Remove';  
+          cellTd.appendChild(buttonEdit);
+          cellTd.appendChild(buttonRemove);
+          break;
+        default:
+          break;
+      }
     },
   });
 
