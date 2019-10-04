@@ -136,6 +136,7 @@ export class MainHeader extends React.Component<Props> {
     // this.setState({openMenu: !this.state.openMenu});
     const {appView} = window['owsDesktopApp']
     console.log('appView', appView);
+    this.setState({openMenu: !this.state.openMenu})
     appView.openContact();
 
   }
