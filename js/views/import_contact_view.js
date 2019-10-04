@@ -24,8 +24,17 @@
       this.render();
       if (options){
         const parser = new DOMParser();
-        const xmlRes = parser.parseFromString(options.contact_data, "text/xml");
-        console.log(xmlRes, "xmlresponsee");
+        const xmlRes = parser.parseFromString(options.contact_data, 'text/xml');
+        document.xmlRes = xmlRes;
+        const contactListXml = xmlRes.children[0];
+        this.createTable(contactListXml)
+      }
+    },
+    createTable (contactListXml){
+      const headerTexts = ["name", "surname", "position", "email", "kunde/admin", "invitation status", "profile"];
+      const list =  contactListXml.children;
+      for (let i = 0; i < contactListXml.children.length; i++) {
+        console.log(contactListXml.children.item(i), "77777777777777")
       }
     },
   });
