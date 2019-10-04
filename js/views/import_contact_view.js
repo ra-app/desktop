@@ -36,8 +36,13 @@
         this.createTable(contactListXml)
       }
     },
+    events: {
+      'keyup #search-table': 'searchTable',
+      'click #ferting-button': "closeContact"
+    },
     createTable (contactListXml){
       const table = document.createElement('table');
+
       const headerTexts = ['name', 'surname', 'position', 'email', 'kunde/admin', 'invitation status', 'profile'];
       if(table){
         const header = table.createTHead();
@@ -48,11 +53,13 @@
         });
       }
       const list =  contactListXml.children;
+      const tbody = document.createElement('tbody');
+      tbody.setAttribute("id", "myTable");
       for (let i = 0; i < contactListXml.children.length; i++) {
         const contact = contactListXml.children.item(i);
-        console.log(contact, '77777777777777')
+        // console.log(contact, '77777777777777')
         const tableRow = document.createElement('tr');
-        table.appendChild(tableRow);
+        tbody.appendChild(tableRow);
         for (let j = 0; j < headerTexts.length; j++) {
           const cellTd = document.createElement('td');
           if(contact.getElementsByTagName(headerTexts[j])[0]){
@@ -63,11 +70,28 @@
             cellTd.appendChild(cellTdContent);
           }
           tableRow.appendChild(cellTd);
-
         }
       }
       //Append content
+      table.appendChild(tbody)
       this.$('#contactTable').append(table);
+
+
+    },
+    searchTable(e){
+      console.log(e.target.value, "evtt")
+      var value = e.target.value;
+      $('#myTable tr').filter(function() {
+        $(this).toggle(
+          $(this)
+            .text()
+            .toLowerCase()
+            .indexOf(value) > -1
+        );
+      });
+    },
+    closeContact(){
+      console.log("closeeeeeeeeeeeeee")
     },
   });
 
