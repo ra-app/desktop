@@ -92,6 +92,7 @@
     },
     closeContact(){
       console.log("closeeeeeeeeeeeeee")
+      this.$el.trigger('openInbox');
     },
   });
 
