@@ -49,8 +49,12 @@
         const header = table.createTHead();
         const row = header.insertRow();
         console.log('AQUIII', row)
-        headerTexts.forEach(element => {
+        headerTexts.forEach((element, index) => {
+          console.log(index, "indexxxxxxxxxxx")
           const cell = document.createElement('th');
+          if(index === 0 || index === 5 || index === 6 || index === 7|| index === 8){
+            cell.className = 'no-sort';
+          }
           cell.innerHTML = element;
           row.appendChild(cell)
         });
@@ -60,16 +64,13 @@
       tbody.setAttribute("id", "myTable");
       for (let i = 0; i < contactListXml.children.length; i++) {
         const contact = contactListXml.children.item(i);
-        // console.log(contact, '77777777777777')
         const tableRow = document.createElement('tr');
         tbody.appendChild(tableRow);
         for (let j = 0; j < headerTexts.length; j++) {
           const cellTd = document.createElement('td');
           if(contact.getElementsByTagName(headerTexts[j])[0]){
             const cell = contact.getElementsByTagName(headerTexts[j])[0].textContent;
-            // const cellTd = document.createElement('td');
             const cellTdContent = document.createTextNode(cell);
-            // cellTd.style.cssText = 'text-align: left;padding: 5px;';
             cellTd.appendChild(cellTdContent);
           }else {
             this.appendElemtns(j, cellTd)
