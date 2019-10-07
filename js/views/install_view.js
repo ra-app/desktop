@@ -610,11 +610,8 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         isStepSetupContactImport: this.step === Steps.SETUP_CONTACT_IMPORT,
         isStepSetupBranchen: this.step === Steps.SETUP_BRANCHEN,
         isStepSetupPhoneList: this.step === Steps.SETUP_PHONESLIST,
-
         EULAText: EULA,
-        acceptEula: i18n('acceptEula'),
         uploadAvatarText: i18n('uploadAvatarText'),
-        contactImportTitle: i18n('contactImportTitle'),
         BranchenTitle: i18n('BranchenTitle'),
         BranchOption1: i18n('BranchOption1'),
         BranchOption2: i18n('BranchOption2'),

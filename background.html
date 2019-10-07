@@ -115,8 +115,15 @@
   <script type='text/x-tmpl-mustache' id='import-contact-table'>
     <div>
       <div id= "headerContactTable">
-          <input id="search-table" type="text" placeholder="Search..">
-          <button id = 'ferting-button'>Ferting</button>
+          <div class="divPaginationContact">
+            <span>Kontakte</span>
+            <p>Der Kunde / Admin wird vom Eigentümer vor der Aktivierung überprüft</p>
+          </div>
+          <div class="divSearchContact">
+            <input id="search-table" type="text" placeholder="Search..">
+            <button id='' class="buttonsSearchSection">Einladungen Senden</button>
+            <button id='ferting-button' class="buttonsSearchSection">Fertig</button>
+          </div>
       </div>
       <div id="contactTable">
       </div>
