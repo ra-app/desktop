@@ -2237,5 +2237,28 @@
   "Closed": {
     "message": "Closed",
     "description": "closed ticket"
+  },
+  "sendAnInvitation":{
+    "message":"Send an Invitation",
+    "description":"send an invitation button on import contact"
+  }
+  ,
+  "sendAgainInvitation":{
+    "message":"Sent (send again)",
+    "description":"send again an invitation button on import contact"
+  }
+  ,
+  "aceptedInvitation":{
+    "message":"Accept",
+    "description":"Accept invitation button on import contact"
+  },
+  "clientButton":{
+    "message":"Client",
+    "description":"Client button on import contact"
+  }
+  ,
+  "adminButton":{
+    "message":"Admin",
+    "description":"Admin button on import contact"
   }
 }

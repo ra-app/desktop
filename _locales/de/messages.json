@@ -1854,5 +1854,28 @@
       "Closed":{
         "message": "wieder öffnen",
         "description": "closed ticket"
+      },
+      "sendAnInvitation":{
+        "message":"Einladung senden",
+        "description":"Senden Sie eine Einladungsschaltfläche beim Importieren des Kontakts"
+      }
+      ,
+      "sendAgainInvitation":{
+        "message":"Gesendet (neu senden)",
+        "description":"Senden Sie erneut eine Einladungsschaltfläche zum Importieren des Kontakts"
+      }
+      ,
+      "aceptedInvitation":{
+        "message":"Akzeptiert",
+        "description":"Akzeptieren Sie die Einladungsschaltfläche beim Importieren des Kontakts"
+      },
+      "clientButton":{
+        "message":"Kunde",
+        "description":"Client button on import contact"
+      }
+      ,
+      "adminButton":{
+        "message":"Admin",
+        "description":"Admin button on import contact"
       }
 }

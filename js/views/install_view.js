@@ -177,13 +177,15 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
             commarcial_register: company.registerID,
             iban: bank ? bank.iban : null,
             bic: bank ? bank.bic : null,
-            contacts_data: this.contactsData ? this.contactsData : null,
           });
           textsecure.storage.put('companyNumber', result.info.company_number);
           await updateAdmin(
             result.info.company_number,
             userSetupInfo.name || ''
           );
+          if(this.contactsData){
+            await updateContact(result.info.company_number, this.contactsData);
+          }
           await ensureCompanyConversation(result.info.company_number);
         }
         await Promise.all([
@@ -219,6 +221,9 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
           console.log(xml);
           checkValidXML(xml);
           this.contactsData = xml;
+          this.contactsData = {
+            'contact_data': this.contactsData.toString().replace('\n', ''),
+          }
         } catch (err) {
           // TODO: show invalid xml error
           console.error(err);

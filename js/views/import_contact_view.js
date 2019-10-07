@@ -42,17 +42,15 @@
     },
     createTable (contactListXml){
       const table = document.createElement('table');
-      table.className = "sortable";
+      table.className = 'sortable';
 
       const headerTexts = ['#','name', 'surname', 'position', 'email', 'kunde/admin', 'invitation status', 'profile', 'actions'];
       if(table){
         const header = table.createTHead();
         const row = header.insertRow();
-        console.log('AQUIII', row)
         headerTexts.forEach((element, index) => {
-          console.log(index, "indexxxxxxxxxxx")
           const cell = document.createElement('th');
-          if(index === 0 || index === 5 || index === 6 || index === 7|| index === 8){
+          if(index === 0 || index === 5 ||  index === 7|| index === 8){
             cell.className = 'no-sort';
           }
           cell.innerHTML = element;
@@ -61,7 +59,7 @@
       }
       const list =  contactListXml.children;
       const tbody = document.createElement('tbody');
-      tbody.setAttribute("id", "myTable");
+      tbody.setAttribute('id', 'myTable');
       for (let i = 0; i < contactListXml.children.length; i++) {
         const contact = contactListXml.children.item(i);
         const tableRow = document.createElement('tr');
@@ -72,6 +70,7 @@
             const cell = contact.getElementsByTagName(headerTexts[j])[0].textContent;
             const cellTdContent = document.createTextNode(cell);
             cellTd.appendChild(cellTdContent);
+            console.log(contact.getElementsByTagName(headerTexts[j])[0].textContent, "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
           }else {
             this.appendElemtns(j, cellTd)
 
@@ -86,8 +85,7 @@
       this.$('table').tablesort();
     },
     searchTable(e){
-      console.log(e.target.value, "evtt")
-      var value = e.target.value;
+      let value = e.target.value;
       $('#myTable tr').filter(function() {
         $(this).toggle(
           $(this)
@@ -115,18 +113,18 @@
         case 5:
           const checkboxKunde = document.createElement('input'); 
           checkboxKunde.type = 'radio'; 
-          checkboxKunde.name = 'kunde'; 
-          checkboxKunde.value = 'kunde'; 
-          checkboxKunde.id = 'kunde'; 
+          checkboxKunde.name = 'client'; 
+          checkboxKunde.value = 'client'; 
+          checkboxKunde.id = 'client'; 
           const checkboxAdmin = document.createElement('input'); 
           checkboxAdmin.type = 'radio'; 
-          checkboxAdmin.name = 'kunde'; 
-          checkboxAdmin.value = 'kunde'; 
-          checkboxAdmin.id = 'kunde'; 
+          checkboxAdmin.name = 'admin'; 
+          checkboxAdmin.value = 'admin'; 
+          checkboxAdmin.id = 'admin'; 
           const labelKunde = document.createElement('label'); 
-          labelKunde.appendChild(document.createTextNode('kunde')); 
+          labelKunde.appendChild(document.createTextNode(i18n('clientButton'))); 
           const labelAdmin = document.createElement('label'); 
-          labelAdmin.appendChild(document.createTextNode('admin')); 
+          labelAdmin.appendChild(document.createTextNode(i18n('adminButton'))); 
           cellTd.appendChild(checkboxKunde);
           cellTd.appendChild(labelKunde);
           cellTd.appendChild(checkboxAdmin);
@@ -135,7 +133,10 @@
         // eslint-disable-next-line no-case-declarations
         case 6:
           const button = document.createElement('button');
-          button.innerHTML = 'invitation status';  
+          button.innerHTML = i18n('sendAnInvitation');
+          button.onclick = () => {
+            this.sendInvitation('test')
+          }
           cellTd.appendChild(button);
           break;
         // eslint-disable-next-line no-case-declarations
@@ -151,6 +152,9 @@
         default:
           break;
       }
+    },
+    sendInvitation(id){
+      console.log(id, "click function external");
     },
   });
 
