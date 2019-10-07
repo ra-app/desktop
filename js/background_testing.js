@@ -419,7 +419,7 @@ const createDeveloperInterface = () => {
   // Company Input
   const addCompanyInput = document.createElement('input');
   addCompanyInput.placeholder = 'Company #';
-  addCompanyInput.value = '675728'; // MegaCorporate V42
+  addCompanyInput.value = ''; // MegaCorporate V42
 
   // Add Company Conversation Button
   const addCompanyBtn = document.createElement('button');
