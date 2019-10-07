@@ -265,8 +265,6 @@
           await this.openTicket(this.tmpticketId,null, null, ticketType);
           this.$('.ticket-nav').removeClass('active');
           event.currentTarget.classList.add('active');
-
-          console.log( event, "current targettttttttttt");
         }
       }
       

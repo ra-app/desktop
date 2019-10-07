@@ -153,13 +153,15 @@
           } catch (e) {
             console.warn('Error getting ticket info', e);
           }
+          this.uuidtmp = element.uuid;
         } else {
-          if (this.$('#ticket_' + element.uuid).hasClass('hide')) {
+          if (this.$('#ticket_' + element.uuid)){
             this.$('#ticket_' + element.uuid).remove();
+            this.uuidtmp = '';
           }
         }
       }
-      this.uuidtmp = element.uuid;
+     
     },
     async claimTicket(company_id, uuid) {
       const phone_number = await claimTicket(company_id, uuid);
