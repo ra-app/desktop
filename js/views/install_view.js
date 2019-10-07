@@ -481,7 +481,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     },
     searchBranch(e) {
       const value = e.target.value;
-      $('#branch-list p').filter(() => {
+      $('#branch-list p').filter(function (){
         $(this).toggle(
           $(this)
             .text()
