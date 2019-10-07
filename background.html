@@ -92,7 +92,7 @@
                 <button id = 'claim_{{uuid}}' class="button-claim-ticket not-claimed">{{status}}</button> 
               {{/isUnclaimed}}
               {{#isClaimed}}
-                <button id = 'claim_{{uuid}}' class="button-claim-ticket claimed">{{status}}</button> 
+                <button id ='claim_{{uuid}}' class="button-claim-ticket claimed" disabled="disabled">{{status}}</button> 
               {{/isClaimed}}
               {{#isClosed}}
                 <button id = 'claim_{{uuid}}' class="button-claim-ticket not-claimed">{{status}}</button> 
@@ -115,8 +115,15 @@
   <script type='text/x-tmpl-mustache' id='import-contact-table'>
     <div>
       <div id= "headerContactTable">
-          <input id="search-table" type="text" placeholder="Search..">
-          <button id = 'ferting-button'>Ferting</button>
+          <div class="divPaginationContact">
+            <span>Kontakte</span>
+            <p>Der Kunde / Admin wird vom Eigentümer vor der Aktivierung überprüft</p>
+          </div>
+          <div class="divSearchContact">
+            <input id="search-table" type="text" placeholder="Search..">
+            <button id='' class="buttonsSearchSection">Einladungen Senden</button>
+            <button id='ferting-button' class="buttonsSearchSection">Fertig</button>
+          </div>
       </div>
       <div id="contactTable">
       </div>
@@ -644,7 +651,9 @@
               </div>
             </div>
             <label for='phone-number-value' class="labelPhone">{{phoneNumber}}</label>
-            <a class='button disabled' id='request-verify-call'>{{callPhone}}</a>
+            <a class='button disabled' id='request-verify-call'>
+                {{callPhone}}
+            </a>
             <div class='action-link'><a id='request-verify-sms'>{{sendSMSInstead}}</a></div>
             <div>
               <input type='text' class='number' name='phone-verification-code' id='phone-verification-code' />
@@ -784,7 +793,7 @@
                 <p>{{uploadCompanyAvatarText}}</p>
               </div>
             </div>
-            <input type='text' id='user-name-input' />
+            <input type='text' id='user-name-input' class="inputsRegister"/>
             <label for='user-name-input' class='label-text'>{{userName}}</label>
             <div class='upload-avatar'>
               <div class='select-avatar' id='uploadAvatar'>

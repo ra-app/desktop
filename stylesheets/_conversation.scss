@@ -571,3 +571,63 @@ p.ticket-time {
   height: 100%;
   width: 100%;
 }
+
+
+#contactTable{
+  .sortable{
+    th{
+      height: 30px;
+      font-weight: normal;
+      text-transform: capitalize;
+      text-align: center;
+      width: 1%;
+      text-transform: uppercase;
+      font-family: $poppins-regular;
+      font-size: 13px;
+    }
+  }
+}
+#headerContactTable{
+  display: flex;
+  flex-wrap: wrap;
+  .divPaginationContact{
+    width: 50%;
+    padding: 20px;
+    span{
+      color: $link-color;
+      font-family: $poppins-semibold;
+      font-size: 17px;
+    }
+    p{
+      margin: 0px;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+  }
+  .divSearchContact{
+    width: 50%;
+    padding: 20px;
+    input{
+      width: 300px;
+      height: 37px;
+      background: #FFFFFF 0% 0% no-repeat padding-box;
+      box-shadow: 0px 3px 6px #00000029;
+      border-radius: 19px;
+      opacity: 1;
+      border: none;
+      padding-left: 40px;
+    }
+    button{
+      @include backgroudGradient();
+      border-radius: 20px;
+      border: none;
+      padding: 9px;
+      color: white;
+      padding-left: 20px;
+      padding-right: 20px;
+      &:first-child{
+        margin-left: 10px;
+      }
+    }
+  }
+}
