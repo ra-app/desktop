@@ -275,6 +275,7 @@
         arrayList[index].date = new Date(element.ts_created).toUTCString().split('GMT')[0];
         arrayList[index].hasTicket = true;
         arrayList[index].company_name = list.company_name;
+        console.log('Element state !!!! ', element.state)
         switch (element.state) {
           case 0:
             arrayList[index].status = i18n('Unknown');

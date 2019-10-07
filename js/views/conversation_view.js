@@ -104,7 +104,6 @@
     initialize(options) {
       this.render();
       this.model.forEach((element, index) => {
-        console.log('Element !!!!!! ', element);
         this.$('#' + element.uuid).click(evt =>
           this.showInfoTicket(evt, element)
         );
@@ -151,7 +150,6 @@
             console.warn('Error getting ticket info', e);
           }
         } else {
-          console.log('HERE !!!!! ');
           if (this.$('#ticket_' + element.uuid).hasClass('hide')) {
             this.$('#ticket_' + element.uuid).remove();
           }
@@ -168,10 +166,7 @@
         const message = JSON.parse(mssg.json).body;
         conversation.sendMessage(message);
       });
-      // change button style
-      this.$('#claim_' + uuid)
-        .removeClass('not-claimed')
-        .addClass('claimed');
+      this.$(`#${uuid}`).remove()
     },
   });
 

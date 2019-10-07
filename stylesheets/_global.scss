@@ -1358,6 +1358,11 @@ $debug: 0;
   .inputsRegister {
     height: 30px;
     margin: 10px 0px 5px;
+
+    font-family: $poppins-medium;
+    font-size: 15px;
+    cursor: pointer;
+    color: $color-raapp-text;
   }
   .text-bankdetails {
     margin-top: 49px;

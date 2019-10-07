@@ -2264,5 +2264,13 @@
   "adminButton":{
     "message":"Admin",
     "description":"Admin button on import contact"
+  },
+  "uploadCompanyAvatarText":{
+    "message":"Bitte Fügen SIE EIN Profilbild Für das unternehmen HINZU",
+    "description":"Upload company avatar"
+  },
+  "uploadAvatarText":{
+    "message":"Bitte Fügen SIE EIN Profilbild HINZU",
+    "description":"Upload user avatar"
   }
 }

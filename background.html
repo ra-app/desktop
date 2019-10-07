@@ -92,7 +92,7 @@
                 <button id = 'claim_{{uuid}}' class="button-claim-ticket not-claimed">{{status}}</button> 
               {{/isUnclaimed}}
               {{#isClaimed}}
-                <button id = 'claim_{{uuid}}' class="button-claim-ticket claimed">{{status}}</button> 
+                <button id ='claim_{{uuid}}' class="button-claim-ticket claimed" disabled="disabled">{{status}}</button> 
               {{/isClaimed}}
               {{#isClosed}}
                 <button id = 'claim_{{uuid}}' class="button-claim-ticket not-claimed">{{status}}</button> 
@@ -793,7 +793,7 @@
                 <p>{{uploadCompanyAvatarText}}</p>
               </div>
             </div>
-            <input type='text' id='user-name-input' />
+            <input type='text' id='user-name-input' class="inputsRegister"/>
             <label for='user-name-input' class='label-text'>{{userName}}</label>
             <div class='upload-avatar'>
               <div class='select-avatar' id='uploadAvatar'>
