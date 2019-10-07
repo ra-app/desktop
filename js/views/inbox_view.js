@@ -262,9 +262,11 @@
           ticketState = tmpTicketType;
           limitTicket = 12;
           offsetTicket = 0;
-          await this.openTicket(this.tmpticketId);
+          await this.openTicket(this.tmpticketId,null, null, ticketType);
           this.$('.ticket-nav').removeClass('active');
           event.currentTarget.classList.add('active');
+
+          console.log( event, "current targettttttttttt");
         }
       }
       
@@ -325,7 +327,7 @@
         }
       }
     },
-    async openTicket(id, messageId = null, resetCall = null) {
+    async openTicket(id, messageId = null, resetCall = null, type ) {
       this.$('.conversation-stack').on(
         'scroll',
         _.debounce(this.onTicketScroll.bind(this), 100)
@@ -347,11 +349,38 @@
         if (ticketList.tickets) {
           ticketList.tickets = this.changeListTicket(ticketList);
         } else {
-          console.log(ticketList, 'ticketlisttttt');
+          let tmpisClaimed = false;
+          let tmpisUnclaimed = false;
+          let tmpisClosed = false;
+          if (type) {
+            switch (type) {
+              case 'claimed':
+                tmpisClaimed = true;
+                tmpisUnclaimed = false;
+                tmpisClosed = false;
+                break;
+              case 'unclaimed':
+                tmpisClaimed = false;
+                tmpisUnclaimed = true;
+                tmpisClosed = false;
+                break;
+              case 'closed':
+                tmpisClaimed = false;
+                tmpisUnclaimed = false;
+                tmpisClosed = true;
+                break;
+
+              default:
+                break;
+            }
+          }
           ticketList.tickets = [
             {
               hasTicket: false,
               company_name: ticketList.company_name,
+              isClaimed: tmpisClaimed,
+              isUnclaimed: tmpisUnclaimed,
+              isClosed: tmpisClosed,
             },
           ];
         }

@@ -98,6 +98,10 @@
       return {
         'send-message': i18n('sendMessage'),
         model: this.model,
+        title: this.model[0].company_name,
+        claimed: this.model[0].isClaimed,
+        unclaimed: this.model[0].isUnclaimed,
+        closed: this.model[0].isClosed,
       };
     },
 
