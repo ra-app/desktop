@@ -141,12 +141,12 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         this.activateButtonBankDetails();
       }
 
-      if (this.step === Steps.ACCEPT_EULA) {
-        this.$('.eula-text').on(
-          'scroll',
-          _.debounce(this.onEulaScroll.bind(this), 100)
-        );
-      }
+      // if (this.step === Steps.ACCEPT_EULA) {
+      //   this.$('.eula-text').on(
+      //     'scroll',
+      //     _.debounce(this.onEulaScroll.bind(this), 100)
+      //   );
+      // }
       if (this.step === Steps.SETUP_PHONE) {
         const number = textsecure.storage.user.getNumber();
         if (number) this.$('#phone-number-value').val(number);
@@ -375,20 +375,20 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         button.addClass('disabled');
       }
     },
-    onEulaScroll() {
-      const eula = this.$el.find('.eula-text').get(0);
-      const atBottom = eula.scrollHeight - eula.scrollTop === eula.clientHeight;
-      // this.model.set('eula_read', atBottom);
-      const check = this.$el.find('#accept-eula-check');
-      const button = this.$el.find('#continue-eula');
-      check.prop('disabled', !atBottom);
-      if (!atBottom) {
-        check.prop('checked', false);
-        button.addClass('disabled');
-      }
-      console.log(eula.scrollHeight, eula.scrollTop, eula.clientHeight);
-      console.log('Eula scroll', atBottom);
-    },
+    // onEulaScroll() {
+    //   const eula = this.$el.find('.eula-text').get(0);
+    //   const atBottom = eula.scrollHeight - eula.scrollTop === eula.clientHeight;
+    //   // this.model.set('eula_read', atBottom);
+    //   const check = this.$el.find('#accept-eula-check');
+    //   const button = this.$el.find('#continue-eula');
+    //   check.prop('disabled', !atBottom);
+    //   if (!atBottom) {
+    //     check.prop('checked', false);
+    //     button.addClass('disabled');
+    //   }
+    //   console.log(eula.scrollHeight, eula.scrollTop, eula.clientHeight);
+    //   console.log('Eula scroll', atBottom);
+    // },
     onContinueEula() {
       const button = this.$el.find('#continue-eula');
       if (button.is('.disabled')) return;
