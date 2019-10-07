@@ -1854,5 +1854,9 @@
       "Closed":{
         "message": "wieder öffnen",
         "description": "closed ticket"
+      },
+      "uploadCard": {
+        "message": "Handelsregistereinträge bei Marken oder Ausweisdokumente bei Unternehmen hochladen.",
+        "description": "Upload company card"
       }
 }

@@ -39,7 +39,6 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
   };
 
   let Tmp = {};
-
   Whisper.InstallView = Whisper.View.extend({
     templateName: 'install-flow-template',
     className: 'main full-screen-flow',
@@ -315,17 +314,33 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     },
     onRequestVerifyCall() {
       const number = this.validateNumber();
+        this.$('#request-verify-call').html(`<div class='container'>
+                                                <div class='dot'></div>
+                                                <div class='dot'></div>
+                                                <div class='dot'></div>
+                                              </div>`)
       if (number) {
-        this.accountManager.requestVoiceVerification(number).catch(err => {
+        this.accountManager.requestVoiceVerification(number).then(resp => {
+          this.$('#request-verify-call').html(i18n('callPhone'))
+        }).catch(err => {
           console.error('Error requesting Voice verification', err);
+          this.$('#request-verify-call').html(i18n('callPhone'))
         });
       }
     },
     onRequestVerifySMS() {
       const number = this.validateNumber();
+      this.$('#verify-phone-code').html(`<div class='container'>
+                                                <div class='dot'></div>
+                                                <div class='dot'></div>
+                                                <div class='dot'></div>
+                                              </div>`)
       if (number) {
-        this.accountManager.requestSMSVerification(number).catch(err => {
+        this.accountManager.requestSMSVerification(number).then(resp => {
+          this.$('#verify-phone-code').html(i18n('verifyPhone'));
+        }).catch(err => {
           console.error('Error requesting SMS verification', err);
+          this.$('#verify-phone-code').html(i18n('verifyPhone'))
         });
       }
     },

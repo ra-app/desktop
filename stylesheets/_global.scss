@@ -344,7 +344,6 @@ $loading-height: 16px;
     //   font-size: 30px;
     // }
   }
-
   .dot {
     width: 14px;
     height: 14px;
@@ -353,7 +352,7 @@ $loading-height: 16px;
     float: left;
     margin: 0 6px;
     transform: scale(0);
-
+  
     animation: loading 1500ms ease infinite 0ms;
     &:nth-child(2) {
       animation: loading 1500ms ease infinite 333ms;
@@ -362,7 +361,33 @@ $loading-height: 16px;
       animation: loading 1500ms ease infinite 666ms;
     }
   }
+ 
 }
+
+#request-verify-call, #verify-phone-code{
+  .container{
+    width: 100%;
+    float: left;
+    text-align: center;
+    .dot {
+      width: 14px;
+      height: 14px;
+      border: 3px solid white; // $color-white;
+      border-radius: 50%;
+      margin: 0 6px;
+      transform: scale(0);
+      display: inline-block;
+      animation: loading 1500ms ease infinite 0ms;
+      &:nth-child(2) {
+        animation: loading 1500ms ease infinite 333ms;
+      }
+      &:nth-child(3) {
+        animation: loading 1500ms ease infinite 666ms;
+      }
+    }
+  }
+}
+
 
 .full-screen-flow {
   position: absolute;
@@ -977,7 +1002,7 @@ $debug: 0;
     // width: 670px; // max-width:670px;
     padding: 30px 30px 0px;
     width: 450px;
-    max-height: calc(100% - 30px);
+    max-height: calc(100% - -30px);
     max-width: 450px;
     #branch-select {
       cursor: pointer;
@@ -1051,9 +1076,10 @@ $debug: 0;
         font-family: $poppins-bold;
       }
       .subtitle {
-        margin-top: 10px;
+        margin-top: 4px;
         font-weight: normal;
-        font-size: 15px;
+        font-size: 14px;
+        font-family: $poppins-regular;
       }
     }
     .button {
@@ -1180,14 +1206,20 @@ $debug: 0;
           width: 80%;
           padding-top: 8px;
           padding-bottom: 0px;
+          font-family: $poppins-medium;
+          font-size: 17px;
+          cursor: pointer;
+          color: $color-raapp-text;
         }
         #phone-verification-code {
+          font-family: $poppins-medium;
           font-size: 17px;
+          color: $color-raapp-text;
         }
       }
     }
     .labelPhone {
-      top: -66px !important;
+      top: -60px !important;
     }
   }
   .eula-text {
@@ -1415,7 +1447,7 @@ $debug: 0;
       height: 0px;
       width: 100%;
       font-weight: bold; // opacity: 0.7;
-      font-size: 15px;
+      font-size: 13px;
       &.code-label {
         // @media (max-width: 1755px) {
         //   top: -45px;

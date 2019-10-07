@@ -2237,5 +2237,9 @@
   "Closed": {
     "message": "Closed",
     "description": "closed ticket"
+  },
+  "uploadCard": {
+    "message": "Upload commercial register entries to brands or identity documents to companies.",
+    "description": "Upload company card"
   }
 }
