@@ -184,6 +184,7 @@
         const message = JSON.parse(mssg.json).body;
         conversation.sendMessage(message);
       });
+      window.Whisper.events.trigger('showConversation', phone_number);
       this.$(`#${uuid}`).remove()
     },
   });

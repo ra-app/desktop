@@ -323,6 +323,8 @@
           this.$('#noLoadMore').removeClass('hidden');
           scrolling = false;
         }
+      }else{
+        scrolling = false;
       }
     },
     async openTicket(id, messageId = null, resetCall = null, type ) {
