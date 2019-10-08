@@ -97,9 +97,10 @@
             const cell = contact.getElementsByTagName(headerTexts[j])[0].textContent;
             const cellTdContent = document.createTextNode(cell);
             cellTd.appendChild(cellTdContent);
-            console.log(contact.getElementsByTagName(headerTexts[j])[0].textContent, "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
           }else {
-            this.appendElemtns(j, cellTd)
+            const id = contact.getElementsByTagName(headerTexts[4])[0].textContent;
+            console.log(id, "idddddddddddddddddddddd")
+            this.appendElemtns(j, cellTd, id)
 
           }
           tableRow.appendChild(cellTd);
@@ -141,7 +142,7 @@
       const files = input.get(0).files;
       let file = files[0];
       this.$('#contact-import-file-error').text('');
-      this.$('#modalContact').removeClass('hidden');
+
 
       if (file) {
           this.openModal('import');
@@ -178,6 +179,7 @@
     },
     openModal(type){
       const modal = this.$('#modalContact');
+      modal.removeClass('hidden');
       modal.empty();
       if(type === 'import'){
          const aceptButton  = document.createElement('button'); 
@@ -190,6 +192,8 @@
           modal.append(cancelButton);
       }else if(type === 'edit'){
 
+      } else if(type === 'remove'){
+
       }else if(type === 'invite'){
 
       }
@@ -201,7 +205,7 @@
       this.prepareDataXml(this.contactsData.contact_data)
 
     },
-    appendElemtns(j, cellTd){
+    appendElemtns(j, cellTd, id){
       switch (j) {
         case 0: {
           const checkbox = document.createElement('input'); 
@@ -240,7 +244,7 @@
           const button = document.createElement('button');
           button.innerHTML = i18n('sendAnInvitation');
           button.onclick = () => {
-            this.sendInvitation('test')
+            this.sendInvitation(id)
           }
           cellTd.appendChild(button);
           break;
@@ -250,9 +254,15 @@
           const buttonEdit = document.createElement('img');
           buttonEdit.setAttribute('src', 'images/icons/edit-contact-list.svg')
           buttonEdit.classList = 'editIcon'
+          buttonEdit.onclick = () => {
+            this.editContact(id)
+          }
           const buttonRemove = document.createElement('img');
           buttonRemove.setAttribute('src', 'images/icons/x-contact-list.svg')
           buttonRemove.classList = 'editIcon';
+          buttonRemove.onclick = () => {
+            this.removeContact(id)
+          }
           cellTd.appendChild(buttonEdit);
           cellTd.appendChild(buttonRemove);
           break;
@@ -262,6 +272,15 @@
     },
     sendInvitation(id){
       console.log(id, "click function external");
+      this.openModal('invite');
+    },
+    editContact(id){
+      console.log(id, "edit contact");
+      this.openModal('edit');
+    },
+    removeContact(id){
+      console.log(id, "remove contact");
+      this.openModal('remove');
     },
   });
 
