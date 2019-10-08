@@ -330,6 +330,10 @@ const getCompany = async number => {
   return (await apiRequest('api/v1/companies/' + number)).company;
 };
 
+const getClientByPhone = async (company_id, number) => {
+  return (await apiRequest('/api/v1/admin/' + company_id + '/clients/getbyphone/'+ number)).client
+};
+
 const getUnclaimedCompanyTickets = async company_id => {
   return (await apiRequest('api/v1/admin/' + company_id + '/tickets/list'))
     .tickets;
