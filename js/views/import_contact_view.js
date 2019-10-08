@@ -140,21 +140,11 @@
       const input = this.$('#contact-import-file-input');
       const files = input.get(0).files;
       let file = files[0];
-      console.log(file, "fileeeeeeeeeeeeeeee")
       this.$('#contact-import-file-error').text('');
       this.$('#modalContact').removeClass('hidden');
 
       if (file) {
-        const modal = this.$('#modalContact');
-        modal.empty();
-         const aceptButton  = document.createElement('button'); 
-         aceptButton.innerHTML='Accept'
-         aceptButton.id = 'acept-import-contact'
-         const cancelButton  = document.createElement('button'); 
-         cancelButton.innerHTML='Cancel';
-         cancelButton.id = 'cancel-import-contact';
-          modal.append(aceptButton);
-          modal.append(cancelButton);
+          this.openModal('import');
           this.$('#acept-import-contact').click(()=>{
             this.acceptImportContact(file);
             this.$('#modalContact').addClass('hidden');
@@ -185,6 +175,25 @@
         file = null;
       }
       this.refreshTable() 
+    },
+    openModal(type){
+      const modal = this.$('#modalContact');
+      modal.empty();
+      if(type === 'import'){
+         const aceptButton  = document.createElement('button'); 
+         aceptButton.innerHTML='Accept'
+         aceptButton.id = 'acept-import-contact'
+         const cancelButton  = document.createElement('button'); 
+         cancelButton.innerHTML='Cancel';
+         cancelButton.id = 'cancel-import-contact';
+          modal.append(aceptButton);
+          modal.append(cancelButton);
+      }else if(type === 'edit'){
+
+      }else if(type === 'invite'){
+
+      }
+      
     },
     refreshTable(){
       console.log("refreshing table", this.contactsData)
