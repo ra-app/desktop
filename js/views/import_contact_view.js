@@ -140,27 +140,51 @@
       const input = this.$('#contact-import-file-input');
       const files = input.get(0).files;
       let file = files[0];
+      console.log(file, "fileeeeeeeeeeeeeeee")
       this.$('#contact-import-file-error').text('');
+      this.$('#modalContact').removeClass('hidden');
+
       if (file) {
-        try {
-          const xml = await readFileAsText(file);
-          // console.log(xml);
-          checkValidXML(xml);
-          this.contactsData = xml;
-          this.contactsData = {
-            'contact_data': this.contactsData.toString().replace('\n', ''),
-          }
-        } catch (err) {
-          // TODO: show invalid xml error
-          console.error(err);
-          input.val('');
-          this.$('#contact-import-file-error').text(i18n('invalidXML'));
-          file = null;
-        }
-        this.refreshTable() 
+        const modal = this.$('#modalContact');
+        modal.empty();
+         const aceptButton  = document.createElement('button'); 
+         aceptButton.innerHTML='Accept'
+         aceptButton.id = 'acept-import-contact'
+         const cancelButton  = document.createElement('button'); 
+         cancelButton.innerHTML='Cancel';
+         cancelButton.id = 'cancel-import-contact';
+          modal.append(aceptButton);
+          modal.append(cancelButton);
+          this.$('#acept-import-contact').click(()=>{
+            this.acceptImportContact(file);
+            this.$('#modalContact').addClass('hidden');
+          })
+          this.$('#cancel-import-contact').click(()=>{
+            this.$('#modalContact').addClass('hidden');
+            input.val('');
+            file = null;
+          })
       }
       if (!file) this.contactsData = null;
       console.log('Import file chose', files);
+    },
+    async acceptImportContact(file){
+      try {
+        const xml = await readFileAsText(file);
+        // console.log(xml);
+        checkValidXML(xml);
+        this.contactsData = xml;
+        this.contactsData = {
+          'contact_data': this.contactsData.toString().replace('\n', ''),
+        }
+      } catch (err) {
+        // TODO: show invalid xml error
+        console.error(err);
+        input.val('');
+        this.$('#contact-import-file-error').text(i18n('invalidXML'));
+        file = null;
+      }
+      this.refreshTable() 
     },
     refreshTable(){
       console.log("refreshing table", this.contactsData)
