@@ -13,7 +13,7 @@
     className: 'import-contact-table',
     template: $('#import-contact-table').html(),
     render_attributes() {
-
+      console.log('This model import contact view!!!! ', this.model)
       return {
         'send-message': i18n('sendMessage'),
         model: this.model,
@@ -34,11 +34,19 @@
         document.xmlRes = xmlRes;
         const contactListXml = xmlRes.children[0];
         this.createTable(contactListXml)
+      }else{
+        this.createEmptyMessage();
       }
     },
     events: {
       'keyup #search-table': 'searchTable',
       'click #ferting-button': 'closeContact',
+    },
+    createEmptyMessage () {
+      const divNoContacts = document.createElement('div');
+      divNoContacts.className = 'divNoContacts';
+      divNoContacts.innerText = 'You have not imported your contacts.'
+      this.$('#contactTable').append(divNoContacts)
     },
     createTable (contactListXml){
       const table = document.createElement('table');
