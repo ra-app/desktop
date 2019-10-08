@@ -24,7 +24,7 @@
     initialize(options) {
       this.render();
       if (options){
-        this.prepareDataXml(options.contact_data)
+        this.prepareDataXml(options.contact_data, true)
         // const parser = new DOMParser();
         // let  xmlRes;
         // try {
@@ -52,8 +52,7 @@
       divNoContacts.innerText = 'You have not imported your contacts.'
       this.$('#contactTable').append(divNoContacts)
     },
-    prepareDataXml(contact_data){
-      console.log(contact_data, "ttttttttttttttttttttttttttttttttttttt")
+    prepareDataXml(contact_data, createTable){
       const parser = new DOMParser();
       let  xmlRes;
       try {
@@ -64,10 +63,13 @@
       }
       document.xmlRes = xmlRes;
       const contactListXml = xmlRes.children[0];
-      this.createTable(contactListXml)
+      if(createTable){
+        this.createTable(contactListXml)
+      }else {
+        return contactListXml;
+      }
     },
     createTable (contactListXml){
-      console.log(contactListXml, "contactListXml")
       const table = document.createElement('table');
       table.className = 'sortable';
 
@@ -99,7 +101,6 @@
             cellTd.appendChild(cellTdContent);
           }else {
             const id = contact.getElementsByTagName(headerTexts[4])[0].textContent;
-            console.log(id, "idddddddddddddddddddddd")
             this.appendElemtns(j, cellTd, id)
 
           }
@@ -168,6 +169,8 @@
         this.contactsData = {
           'contact_data': this.contactsData.toString().replace('\n', ''),
         }
+        const companyNumber = textsecure.storage.get('companyNumber', null);
+        await updateContact(companyNumber, this.contactsData);
       } catch (err) {
         // TODO: show invalid xml error
         console.error(err);
@@ -199,11 +202,10 @@
       }
       
     },
-    refreshTable(){
+    async refreshTable(){
       console.log("refreshing table", this.contactsData)
       this.$('#contactTable').empty();
-      this.prepareDataXml(this.contactsData.contact_data)
-
+      this.prepareDataXml(this.contactsData.contact_data, true)
     },
     appendElemtns(j, cellTd, id){
       switch (j) {
@@ -274,14 +276,70 @@
       console.log(id, "click function external");
       this.openModal('invite');
     },
-    editContact(id){
+    async editContact(id){
       console.log(id, "edit contact");
       this.openModal('edit');
+      let xml = localStorage.getItem('ContactList')
+      if(!xml){
+        const companyNumber = textsecure.storage.get('companyNumber', null);
+         xml = await getContactXml(companyNumber);
+        localStorage.setItem('ContactList', JSON.stringify(xml));
+      }
+      const xmlData = this.prepareDataXml(xml, false)
+      const positionXML = this.findUserXml(id, xmlData)
+      const userInfo = xmlData.children.item(positionXML);
+      console.log(userInfo);
+      this.$('#modalContact').append(userInfo)      
     },
     removeContact(id){
       console.log(id, "remove contact");
       this.openModal('remove');
     },
+    findUserXml(id, xmlData){
+      for (let i = 0; i < xmlData.children.length; i++) {
+        const contact = xmlData.children.item(i);
+       const email =  contact.getElementsByTagName('email')[0].textContent
+       if(email === id){
+         return i;
+       }
+        // console.log(email, "contactt")
+        // console.log(contact, "contactttt")
+      }
+    },
+    // generateXmlFromTable (){
+    //   let  xml;
+    //   xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
+    //   xml += '<contactlist>\n';
+    //   // eslint-disable-next-line func-names
+    //   $('#contactTable tr').each(function() {
+    //     const cells = $('td', this);
+    //     if (cells.length > 0) {
+    //         xml += '<contact>\n';
+    //         for (var i = 1; i < cells.length; ++i) {
+    //             switch (i) {
+    //               case 1:
+    //                 xml += '\t<name>' + cells.eq(i).text() + '</name>\n';
+    //                 break;
+    //               case 2:
+    //                 xml += '\t<surname>' + cells.eq(i).text() + '</surname>\n';
+    //                 break;
+    //               case 3:
+    //                 xml += '\t<position>' + cells.eq(i).text() + '</position>\n';
+    //                 break;
+    //               case 4:
+    //                 xml += '\t<email>' + cells.eq(i).text() + '</email>\n';
+    //                 break;
+    //               default:
+    //                 break;
+    //             }
+    //             // xml += '\t<ts></ts>\n';
+    //         }
+    //         xml += '</contact>\n';
+    //     }
+    // });
+    // xml += '</contactlist>\n';
+    // console.log(xml, "new xmllllllllllllllllll")
+    // },
   });
 
 
