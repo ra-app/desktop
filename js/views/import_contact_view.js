@@ -195,8 +195,10 @@
           labelKunde.appendChild(document.createTextNode(i18n('clientButton'))); 
           const labelAdmin = document.createElement('label'); 
           labelAdmin.appendChild(document.createTextNode(i18n('adminButton'))); 
+          const breakLine = document.createElement('br')
           cellTd.appendChild(checkboxKunde);
           cellTd.appendChild(labelKunde);
+          cellTd.appendChild(breakLine);
           cellTd.appendChild(checkboxAdmin);
           cellTd.appendChild(labelAdmin);
           break;
@@ -212,10 +214,12 @@
         // eslint-disable-next-line no-case-declarations
         case 8:
           // eslint-disable-next-line no-case-declarations
-          const buttonEdit = document.createElement('button');
-          buttonEdit.innerHTML = 'Edit';  
-          const buttonRemove = document.createElement('button');
-          buttonRemove.innerHTML = 'Remove';  
+          const buttonEdit = document.createElement('img');
+          buttonEdit.setAttribute('src', 'images/icons/edit-contact-list.svg')
+          buttonEdit.classList = 'editIcon'
+          const buttonRemove = document.createElement('img');
+          buttonRemove.setAttribute('src', 'images/icons/x-contact-list.svg')
+          buttonRemove.classList = 'editIcon';
           cellTd.appendChild(buttonEdit);
           cellTd.appendChild(buttonRemove);
           break;
