@@ -637,6 +637,21 @@ p.ticket-time {
   }
 }
 
+tbody#myTable tr{
+  text-align: center;
+  background: white;
+  height: 55px;
+  font-size: 14px;
+  font-family: $poppins-semibold;
+  color: $color-raapp-text;
+  button{
+    @include backgroudGradient();
+    padding: 6px 10px;
+    color: white;
+    border: none;
+    border-radius: 20px;
+  }
+}
 .divNoContacts{
   padding: 23px;
   font-size: 17px;

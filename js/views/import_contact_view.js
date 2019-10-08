@@ -133,8 +133,10 @@
           labelKunde.appendChild(document.createTextNode(i18n('clientButton'))); 
           const labelAdmin = document.createElement('label'); 
           labelAdmin.appendChild(document.createTextNode(i18n('adminButton'))); 
+          const breakLine = document.createElement('br')
           cellTd.appendChild(checkboxKunde);
           cellTd.appendChild(labelKunde);
+          cellTd.appendChild(breakLine);
           cellTd.appendChild(checkboxAdmin);
           cellTd.appendChild(labelAdmin);
           break;
