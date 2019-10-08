@@ -7,6 +7,7 @@
 
   window.Whisper = window.Whisper || {};
 
+  const contactsData = null
 
   Whisper.ImportContactView = Whisper.View.extend({
     templateName: 'import-contact-table',
@@ -23,17 +24,18 @@
     initialize(options) {
       this.render();
       if (options){
-        const parser = new DOMParser();
-        let  xmlRes;
-        try {
-          // WebKit returns null on unsupported types
-          xmlRes = parser.parseFromString(options.contact_data, 'text/xml');
-        } catch (ex) {
-          console.log(ex)
-        }
-        document.xmlRes = xmlRes;
-        const contactListXml = xmlRes.children[0];
-        this.createTable(contactListXml)
+        this.prepareDataXml(options.contact_data)
+        // const parser = new DOMParser();
+        // let  xmlRes;
+        // try {
+        //   // WebKit returns null on unsupported types
+        //   xmlRes = parser.parseFromString(options.contact_data, 'text/xml');
+        // } catch (ex) {
+        //   console.log(ex)
+        // }
+        // document.xmlRes = xmlRes;
+        // const contactListXml = xmlRes.children[0];
+        // this.createTable(contactListXml)
       }else{
         this.createEmptyMessage();
       }
@@ -41,6 +43,8 @@
     events: {
       'keyup #search-table': 'searchTable',
       'click #ferting-button': 'closeContact',
+      'click #import-button': 'importContact',
+      'change #contact-import-file-input': 'onChoseContactsFile',
     },
     createEmptyMessage () {
       const divNoContacts = document.createElement('div');
@@ -48,7 +52,22 @@
       divNoContacts.innerText = 'You have not imported your contacts.'
       this.$('#contactTable').append(divNoContacts)
     },
+    prepareDataXml(contact_data){
+      console.log(contact_data, "ttttttttttttttttttttttttttttttttttttt")
+      const parser = new DOMParser();
+      let  xmlRes;
+      try {
+        // WebKit returns null on unsupported types
+        xmlRes = parser.parseFromString(contact_data, 'text/xml');
+      } catch (ex) {
+        console.log(ex)
+      }
+      document.xmlRes = xmlRes;
+      const contactListXml = xmlRes.children[0];
+      this.createTable(contactListXml)
+    },
     createTable (contactListXml){
+      console.log(contactListXml, "contactListXml")
       const table = document.createElement('table');
       table.className = 'sortable';
 
@@ -105,6 +124,49 @@
     },
     closeContact(){
       this.$el.trigger('openInbox');
+    },
+    importContact(e){
+      if (e.target.tagName === 'INPUT') return;
+      if (e) {
+        e.stopPropagation();
+        e.preventDefault();
+      }
+
+      console.log("import contact")
+      this.$('#contact-import-file-input').click()
+    },
+    async onChoseContactsFile() {
+      this.contactsData = null;
+      const input = this.$('#contact-import-file-input');
+      const files = input.get(0).files;
+      let file = files[0];
+      this.$('#contact-import-file-error').text('');
+      if (file) {
+        try {
+          const xml = await readFileAsText(file);
+          // console.log(xml);
+          checkValidXML(xml);
+          this.contactsData = xml;
+          this.contactsData = {
+            'contact_data': this.contactsData.toString().replace('\n', ''),
+          }
+        } catch (err) {
+          // TODO: show invalid xml error
+          console.error(err);
+          input.val('');
+          this.$('#contact-import-file-error').text(i18n('invalidXML'));
+          file = null;
+        }
+        this.refreshTable() 
+      }
+      if (!file) this.contactsData = null;
+      console.log('Import file chose', files);
+    },
+    refreshTable(){
+      console.log("refreshing table", this.contactsData)
+      this.$('#contactTable').empty();
+      this.prepareDataXml(this.contactsData.contact_data)
+
     },
     appendElemtns(j, cellTd){
       switch (j) {
