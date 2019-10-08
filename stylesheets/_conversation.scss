@@ -574,6 +574,8 @@ p.ticket-time {
 
 
 #contactTable{
+  max-height: calc(1080px - 85px);
+  overflow: auto;
   .sortable{
     th{
       height: 30px;
@@ -650,6 +652,14 @@ tbody#myTable tr{
     color: white;
     border: none;
     border-radius: 20px;
+  }
+  .editIcon{
+    width: 30px;
+    vertical-align: middle;
+    cursor: pointer;
+    &:first-child{
+      margin-right: 5px;
+    }
   }
 }
 .divNoContacts{
