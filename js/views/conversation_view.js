@@ -165,7 +165,19 @@
     },
     async claimTicket(company_id, uuid) {
       const phone_number = await claimTicket(company_id, uuid);
-      const conversation = await ensureConversation(phone_number);
+      const client =  await  getClientByPhone(company_id, phone_number)
+        const conversation = await ensureConversation(phone_number);
+        if(client.name){
+          if(client.name && client.surname){
+            conversation.set({ 'name': client.name + ' ' + client.surname });
+          }else {
+            conversation.set({ 'name': client.name });
+          }
+        }else if(client.email){
+          conversation.set({ 'name': client.email });
+        }else {
+          conversation.set({ 'name': 'User without data'});
+        }
       // send event ticket
       const ticketDETAIL = await getTicketDetails(company_id, uuid);
       ticketDETAIL.events.forEach(mssg => {
