@@ -158,10 +158,12 @@
       if(type === 'import'){
          const aceptButton  = document.createElement('button'); 
          aceptButton.innerHTML='Accept'
-         aceptButton.id = 'acept-import-contact'
+         aceptButton.id = 'acept-import-contact';
+         aceptButton.className = 'buttonsModal';
          const cancelButton  = document.createElement('button'); 
          cancelButton.innerHTML='Cancel';
          cancelButton.id = 'cancel-import-contact';
+         cancelButton.className = 'buttonsModal';
           modal.append(aceptButton);
           modal.append(cancelButton);
       }else if(type === 'edit'){
@@ -257,10 +259,94 @@
       const positionXML = this.findUserXml(id, xmlData)
       const userInfo = xmlData.children.item(positionXML);
       // const y = xmlData.getElementsByTagName("contact")[positionXML]
-      xmlData.getElementsByTagName("surname")[positionXML].childNodes[0].nodeValue = "new content" ; //// USE THAT FOR MODIFY ELEMENT
+      // xmlData.getElementsByTagName("surname")[positionXML].childNodes[0].nodeValue = "new content" ; //// USE THAT FOR MODIFY ELEMENT
       console.log(xmlData, "2222222222")
       const cln = userInfo.cloneNode(true);
-       this.$('#modalContact').append(cln)
+      this.createEditPanel(cln, xmlData, positionXML)
+      
+    },
+    createEditPanel(cln, xmlData, positionXML){
+      const divMainHeaderEdit = document.createElement('div');
+      divMainHeaderEdit.className = 'divModalHeader';
+      const pUserName = document.createElement('p');
+      pUserName.innerText = xmlData.getElementsByTagName('name')[positionXML].childNodes[0].nodeValue + ' ' + xmlData.getElementsByTagName('surname')[positionXML].childNodes[0].nodeValue
+      pUserName.className = 'titleHeaderEdit';
+      const pUserPhone = document.createElement('p');
+      pUserPhone.innerText = xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue
+      pUserPhone.className = 'titleHeaderEdit';
+
+
+      divMainHeaderEdit.appendChild(pUserName); 
+      divMainHeaderEdit.appendChild(pUserPhone); 
+
+      const divMainContentEdit = document.createElement('div');
+      divMainContentEdit.className = 'divMainContentEdit';
+
+      const divEditVorname = document.createElement('div');
+      divEditVorname.className = 'divEdit';
+      const labelField = document.createElement('span');
+      labelField.className = 'labelEdit';
+      labelField.innerText = 'Vorname';
+      const inputEdit = document.createElement('input');
+      inputEdit.type = 'text';
+      inputEdit.placeholder = xmlData.getElementsByTagName('name')[positionXML].childNodes[0].nodeValue;
+      divEditVorname.appendChild(labelField)
+      divEditVorname.appendChild(inputEdit)
+
+      const divEditNachname = document.createElement('div');
+      divEditNachname.className = 'divEdit';
+      const labelNachName = document.createElement('span');
+      labelNachName.className = 'labelEdit';
+      labelNachName.innerText = 'Nachname';
+      const inputNachName = document.createElement('input');
+      inputNachName.type = 'text';
+      inputNachName.placeholder = xmlData.getElementsByTagName('surname')[positionXML].childNodes[0].nodeValue;
+      divEditNachname.appendChild(labelNachName)
+      divEditNachname.appendChild(inputNachName)
+
+      const divEditPosition = document.createElement('div');
+      divEditPosition.className = 'divEdit';
+      const labelPosition = document.createElement('span');
+      labelPosition.className = 'labelEdit';
+      labelPosition.innerText = 'Position';
+      const inputPosition = document.createElement('input');
+      inputPosition.type = 'text';
+      inputPosition.placeholder = xmlData.getElementsByTagName('position')[positionXML].childNodes[0].nodeValue;
+      divEditPosition.appendChild(labelPosition)
+      divEditPosition.appendChild(inputPosition)
+
+      const divTelephone = document.createElement('div');
+      divTelephone.className = 'divEdit';
+      const labelTelephone = document.createElement('span');
+      labelTelephone.className = 'labelEdit';
+      labelTelephone.innerText = 'Telefonnummer';
+      const inputTelephone = document.createElement('input');
+      inputTelephone.type = 'text';
+      inputTelephone.placeholder = xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue;
+      divTelephone.appendChild(labelTelephone)
+      divTelephone.appendChild(inputTelephone)
+
+      const divEmail = document.createElement('div');
+      divEmail.className = 'divEdit';
+      const labelEmail = document.createElement('span');
+      labelEmail.className = 'labelEdit';
+      labelEmail.innerText = 'Email'
+      const inputEmail = document.createElement('input');
+      inputEmail.type = 'text';
+      inputEmail.placeholder = xmlData.getElementsByTagName('email')[positionXML].childNodes[0].nodeValue;
+      divEmail.appendChild(labelEmail)
+      divEmail.appendChild(inputEmail)
+
+      divMainContentEdit.appendChild(divEditVorname)
+      divMainContentEdit.appendChild(divEditNachname)
+      divMainContentEdit.appendChild(divEditPosition)
+      divMainContentEdit.appendChild(divTelephone)
+      divMainContentEdit.appendChild(divEmail)
+      
+
+      this.$('#modalContact').append(divMainHeaderEdit);
+      this.$('#modalContact').append(divMainContentEdit);
+      this.$('#modalContact').addClass('open');
     },
     findUserXml(id, xmlData){
       let position = null;

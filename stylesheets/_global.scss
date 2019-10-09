@@ -1585,11 +1585,70 @@ th.sorted.ascending:after {
 th.sorted.descending:after {
 	content: " \2193";
 }
+@keyframes panelRight {
+  from {
+      opacity: 0.4;
+      transform: translateX(-30%)
+  }
 
+  to {
+      opacity: 1;
+      transform: translateX(0)
+  }
+}
 .modalContact{
   position: absolute;
-    width: 250px;
-    background: #1f1e1e85;
-    top: 0;
-    height: 250px;
+  width: 33%;
+  background: #ffffff;
+  top: 0;
+  height: 100%;
+  box-shadow: 0px 3px 6px #00000029;
+  .divMainContentEdit{
+    padding: 15px;
+    .divEdit {
+      display: flex;
+      height: 30px;
+      border-bottom: 1px solid #C6C6C6;
+      margin-bottom: 20px;
+      span.labelEdit {
+        width: 40%;
+        font-family: $poppins-regular;
+        font-size: 14px;
+        color: $color-raapp-text;
+      }
+      input[type="text"] {
+        width: 60%;
+        border: none;
+        font-size: 14px;
+        font-family: $poppins-regular;
+        height: 30px;
+        margin-top: -8px;
+        outline: none;
+        color: $color-raapp-text;
+      }
+      input[type="text"]::placeholder{
+        color: #B1BBC0;
+      }
+    }
+  }
+  .divModalHeader{
+    height: 70px;
+    padding: 15px;
+    .titleHeaderEdit{
+      margin: 0px;
+      font-family: $poppins-semibold;
+      font-size: 15px;
+      color: $color-raapp-text;
+    }
+  }
+  &.open{
+    animation: panelRight 0.4 ease;
+  }
+  .buttonsModal{
+    @include backgroudGradient();
+    padding: 9px 15px;
+    color: #ffffff;
+    border: none;
+    border-radius: 20px;
+  }
 }
