@@ -259,8 +259,34 @@
       console.log(xmlData, "xmlllllllll")
       const dataToUpdate = this.prepareDataToUpdate(xmlData);
       console.log(dataToUpdate, "data to updateeeeeeeee")
-      //TODO CREATE FUNCTION TO CONVERT DATA AND UPDATE ON DB
+      this.panelRemoveContact(id)
     },
+
+    panelRemoveContact(id){
+      const divMainHeaderEdit = document.createElement('div');
+      divMainHeaderEdit.className = 'divModalHeader';
+      const imageClosePanel = document.createElement('img');
+      imageClosePanel.className = 'imageClosePanel';
+      imageClosePanel.src = 'images/icons/x-contact-list.svg'
+      imageClosePanel.onclick = () => {
+        this.$('#modalContact').addClass('hidden');
+      }
+      divMainHeaderEdit.appendChild(imageClosePanel); 
+      
+      const divMainContentEdit = document.createElement('div');
+      divMainContentEdit.className = 'divMainContentEdit divRemoveContact';
+      divMainContentEdit.innerHTML = 'Are you sure you want to remove this contact ? <br>'
+      const buttonRemoveContact = document.createElement('button');
+      buttonRemoveContact.classList = 'marginTop20 buttonsModal';
+      buttonRemoveContact.innerText = 'Accept';
+      buttonRemoveContact.onclick = () => {
+        //TODO CREATE FUNCTION TO CONVERT DATA AND UPDATE ON DB
+      }
+      divMainContentEdit.appendChild(buttonRemoveContact);
+      this.$('#modalContact').append(divMainHeaderEdit);
+      this.$('#modalContact').append(divMainContentEdit);
+    },
+
     async editContact(id){
       this.openModal('edit');
       const  xml =  await this.getXmlFile();

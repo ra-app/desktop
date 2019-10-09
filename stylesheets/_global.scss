@@ -1605,6 +1605,9 @@ th.sorted.descending:after {
   box-shadow: 0px 3px 6px #00000029;
   .divMainContentEdit{
     padding: 15px;
+    &.divRemoveContact{
+      text-align: center;
+    }
     .divEdit {
       display: flex;
       height: 40px;
@@ -1702,4 +1705,8 @@ th.sorted.descending:after {
 }
 button, input{
   outline: none;
+}
+
+.marginTop20{
+  margin-top: 20px;
 }
