@@ -25,17 +25,6 @@
       this.render();
       if (options){
         this.prepareDataXml(options.contact_data, true)
-        // const parser = new DOMParser();
-        // let  xmlRes;
-        // try {
-        //   // WebKit returns null on unsupported types
-        //   xmlRes = parser.parseFromString(options.contact_data, 'text/xml');
-        // } catch (ex) {
-        //   console.log(ex)
-        // }
-        // document.xmlRes = xmlRes;
-        // const contactListXml = xmlRes.children[0];
-        // this.createTable(contactListXml)
       }else{
         this.createEmptyMessage();
       }
@@ -51,23 +40,6 @@
       divNoContacts.className = 'divNoContacts';
       divNoContacts.innerText = 'You have not imported your contacts.'
       this.$('#contactTable').append(divNoContacts)
-    },
-    prepareDataXml(contact_data, createTable){
-      const parser = new DOMParser();
-      let  xmlRes;
-      try {
-        // WebKit returns null on unsupported types
-        xmlRes = parser.parseFromString(contact_data, 'text/xml');
-      } catch (ex) {
-        console.log(ex)
-      }
-      document.xmlRes = xmlRes;
-      const contactListXml = xmlRes.children[0];
-      if(createTable){
-        this.createTable(contactListXml)
-      }else {
-        return contactListXml;
-      }
     },
     createTable (contactListXml){
       const table = document.createElement('table');
@@ -134,13 +106,12 @@
         e.preventDefault();
       }
 
-      console.log("import contact")
       this.$('#contact-import-file-input').click()
     },
     async onChoseContactsFile() {
       this.contactsData = null;
       const input = this.$('#contact-import-file-input');
-      const files = input.get(0).files;
+      let files = input.get(0).files;
       let file = files[0];
       this.$('#contact-import-file-error').text('');
 
@@ -203,7 +174,6 @@
       
     },
     async refreshTable(){
-      console.log("refreshing table", this.contactsData)
       this.$('#contactTable').empty();
       this.prepareDataXml(this.contactsData.contact_data, true)
     },
@@ -276,70 +246,60 @@
       console.log(id, "click function external");
       this.openModal('invite');
     },
+    removeContact(id){
+      console.log(id, "remove contact");
+      this.openModal('remove');
+    },
     async editContact(id){
-      console.log(id, "edit contact");
       this.openModal('edit');
+      const  xml =  await this.getXmlFile();
+      const xmlData = this.prepareDataXml(xml, false)
+      const positionXML = this.findUserXml(id, xmlData)
+      const userInfo = xmlData.children.item(positionXML);
+      // const y = xmlData.getElementsByTagName("contact")[positionXML]
+      xmlData.getElementsByTagName("surname")[positionXML].childNodes[0].nodeValue = "new content" ; //// USE THAT FOR MODIFY ELEMENT
+      console.log(xmlData, "2222222222")
+      const cln = userInfo.cloneNode(true);
+       this.$('#modalContact').append(cln)
+    },
+    findUserXml(id, xmlData){
+      let position = null;
+      for (let i = 0; i < xmlData.children.length; i++) {
+        const contact = xmlData.children.item(i);
+       const email =  contact.getElementsByTagName('email')[0].textContent
+       if(email === id){
+         position = i
+         return position; // only first position TODO LIST OF POSITION FOR MULTI SELECT
+       }
+      }
+      return position;
+    },
+    async getXmlFile(){
       let xml = localStorage.getItem('ContactList')
       if(!xml){
         const companyNumber = textsecure.storage.get('companyNumber', null);
          xml = await getContactXml(companyNumber);
         localStorage.setItem('ContactList', JSON.stringify(xml));
       }
-      const xmlData = this.prepareDataXml(xml, false)
-      const positionXML = this.findUserXml(id, xmlData)
-      const userInfo = xmlData.children.item(positionXML);
-      console.log(userInfo);
-      this.$('#modalContact').append(userInfo)      
+      return xml
     },
-    removeContact(id){
-      console.log(id, "remove contact");
-      this.openModal('remove');
-    },
-    findUserXml(id, xmlData){
-      for (let i = 0; i < xmlData.children.length; i++) {
-        const contact = xmlData.children.item(i);
-       const email =  contact.getElementsByTagName('email')[0].textContent
-       if(email === id){
-         return i;
-       }
-        // console.log(email, "contactt")
-        // console.log(contact, "contactttt")
+    prepareDataXml(contact_data, createTable){
+      const parser = new DOMParser();
+      let  xmlRes;
+      try {
+        // WebKit returns null on unsupported types
+        xmlRes = parser.parseFromString(contact_data, 'text/xml');
+      } catch (ex) {
+        console.log(ex)
+      }
+      document.xmlRes = xmlRes;
+      const contactListXml = xmlRes.children[0];
+      if(createTable){
+        this.createTable(contactListXml)
+      }else {
+        return contactListXml;
       }
     },
-    // generateXmlFromTable (){
-    //   let  xml;
-    //   xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
-    //   xml += '<contactlist>\n';
-    //   // eslint-disable-next-line func-names
-    //   $('#contactTable tr').each(function() {
-    //     const cells = $('td', this);
-    //     if (cells.length > 0) {
-    //         xml += '<contact>\n';
-    //         for (var i = 1; i < cells.length; ++i) {
-    //             switch (i) {
-    //               case 1:
-    //                 xml += '\t<name>' + cells.eq(i).text() + '</name>\n';
-    //                 break;
-    //               case 2:
-    //                 xml += '\t<surname>' + cells.eq(i).text() + '</surname>\n';
-    //                 break;
-    //               case 3:
-    //                 xml += '\t<position>' + cells.eq(i).text() + '</position>\n';
-    //                 break;
-    //               case 4:
-    //                 xml += '\t<email>' + cells.eq(i).text() + '</email>\n';
-    //                 break;
-    //               default:
-    //                 break;
-    //             }
-    //             // xml += '\t<ts></ts>\n';
-    //         }
-    //         xml += '</contact>\n';
-    //     }
-    // });
-    // xml += '</contactlist>\n';
-    // console.log(xml, "new xmllllllllllllllllll")
-    // },
   });
 
 
