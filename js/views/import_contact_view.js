@@ -270,24 +270,17 @@
       console.log(id, "remove contact");
       this.openModal('remove');
       const  xml =  await this.getXmlFile();
-      const xmlData = this.prepareDataXml(xml, false)
-      const positionXML = this.findUserXml(id, xmlData)
-      const  y = xmlData.getElementsByTagName('contact')[positionXML];
-      xmlData.removeChild(y);
-      console.log(xmlData, "xmlllllllll")
-      const dataToUpdate = this.prepareDataToUpdate(xmlData);
-      console.log(dataToUpdate, "data to updateeeeeeeee")
-      this.panelRemoveContact(id)
+      this.panelRemoveContact(id, xml)
     },
 
-    panelRemoveContact(id){
+    panelRemoveContact(id, xml){
       const divMainHeaderEdit = document.createElement('div');
       divMainHeaderEdit.className = 'divModalHeader';
       const imageClosePanel = document.createElement('img');
       imageClosePanel.className = 'imageClosePanel';
       imageClosePanel.src = 'images/icons/x-contact-list.svg'
       imageClosePanel.onclick = () => {
-        this.$('#modalOverLay').addClass('hidden');
+        this.closeModal();
       }
       divMainHeaderEdit.appendChild(imageClosePanel); 
       
@@ -298,7 +291,16 @@
       buttonRemoveContact.classList = 'marginTop20 buttonsModal';
       buttonRemoveContact.innerText = 'Accept';
       buttonRemoveContact.onclick = () => {
-        //TODO CREATE FUNCTION TO CONVERT DATA AND UPDATE ON DB
+       
+        const xmlData = this.prepareDataXml(xml, false)
+        const positionXML = this.findUserXml(id, xmlData)
+        const  y = xmlData.getElementsByTagName('contact')[positionXML];
+        xmlData.removeChild(y);
+        const dataToUpdate = this.prepareDataToUpdate(xmlData);
+        this.contactsData = dataToUpdate;
+        this.updateXmlDB(dataToUpdate);
+        this.closeModal();
+        this.refreshTable();
       }
       divMainContentEdit.appendChild(buttonRemoveContact);
       this.$('#modalContact').append(divMainHeaderEdit);
