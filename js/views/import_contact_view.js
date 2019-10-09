@@ -183,6 +183,12 @@
       this.prepareDataXml(this.contactsData.contact_data, true)
     },
     appendElemtns(j, cellTd, id, contact){
+      let userType;
+          if ( contact.getElementsByTagName('type')[0] ){
+            userType = contact.getElementsByTagName('type')[0].textContent;
+          }else{
+            userType = 'none'
+          }
       switch (j) {
         case 0: {
           const checkbox = document.createElement('input'); 
@@ -195,34 +201,6 @@
         }
         // eslint-disable-next-line no-case-declarations
         case 5:
-          // const checkboxKunde = document.createElement('input'); 
-          // checkboxKunde.type = 'radio'; 
-          // checkboxKunde.name = 'client'; 
-          // checkboxKunde.value = 'client'; 
-          // checkboxKunde.id = 'client'; 
-          // const checkboxAdmin = document.createElement('input'); 
-          // checkboxAdmin.type = 'radio'; 
-          // checkboxAdmin.name = 'admin'; 
-          // checkboxAdmin.value = 'admin'; 
-          // checkboxAdmin.id = 'admin'; 
-          // const labelKunde = document.createElement('label'); 
-          // labelKunde.appendChild(document.createTextNode(i18n('clientButton'))); 
-          // const labelAdmin = document.createElement('label'); 
-          // labelAdmin.appendChild(document.createTextNode(i18n('adminButton'))); 
-          // const breakLine = document.createElement('br')
-          // cellTd.appendChild(checkboxKunde);
-          // cellTd.appendChild(labelKunde);
-          // cellTd.appendChild(breakLine);
-          // cellTd.appendChild(checkboxAdmin);
-          // cellTd.appendChild(labelAdmin);
-          let userType;
-          if ( contact.getElementsByTagName('type')[0] ){
-            userType = contact.getElementsByTagName('type')[0].textContent;
-          }else{
-            userType = 'none'
-          }
-
-          console.log('UserType !!!! ', userType)
           cellTd.innerHTML = `<span class="spanSwitch">Kunde</span>
                               <div class="switch-toggle switch-3 switch-candy">
                                 <input id="on-${id}" name="state-d-${id}" type="radio" ${userType === 'client' ? 'checked' : ''}/>
@@ -237,13 +215,15 @@
                                 <a></a>
                               </div>
                               <span class="spanSwitch admin">Admin</span>`
-
-          
           break;
         // eslint-disable-next-line no-case-declarations
         case 6:
           const button = document.createElement('button');
           button.innerHTML = i18n('sendAnInvitation');
+          if ( userType === 'none' ){
+            button.className = 'disabled';
+            button.disabled = true;
+          }
           button.onclick = () => {
             this.sendInvitation(id)
           }
@@ -409,43 +389,27 @@
 
       const divRadioButtons = document.createElement('div');
       divRadioButtons.className = 'divEdit';
-      // const radioKunde = document.createElement('input');
-      // radioKunde.type = 'radio';
-      // radioKunde.name = 'radioAdmin'
-      // const labelKunde = document.createElement('span');
-      // labelKunde.className = 'labelRadios';
-      // labelKunde.innerText = 'Kunde'
-      // const radioAdmin = document.createElement('input');
-      // radioAdmin.type = 'radio';
-      // radioAdmin.name = 'radioAdmin'
-      // const labelAdmin = document.createElement('span');
-      // labelAdmin.className = 'labelRadios';
-      // labelAdmin.innerText = 'Admin'
-      // divRadioButtons.appendChild(radioKunde);
-      // divRadioButtons.appendChild(labelKunde);
-      // divRadioButtons.appendChild(radioAdmin);
-      // divRadioButtons.appendChild(labelAdmin);
       let userType;
-          if ( xmlData.getElementsByTagName('type')[0] ){
-            userType = xmlData.getElementsByTagName('type')[0].textContent;
-          }else{
-            userType = 'none'
-          }
+      if ( xmlData.getElementsByTagName('type')[positionXML] ){
+        userType = xmlData.getElementsByTagName('type')[positionXML].childNodes[0].nodeValue
+      }else{
+        userType = 'none'
+      }
       divRadioButtons.innerHTML = `<span class="spanSwitch">Kunde</span>
                                   <div class="switch-toggle switch-3 switch-candy">
-                                    <input id="edit-user-position-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" name="edit-user-position-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" type="radio" ${userType === 'client' ? 'checked' : ''}/>
-                                    <label for="edit-user-position-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}">&nbsp;</label>
+                                    <input id="edit-user-kunde-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" name="edit-user-position-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" type="radio" ${userType === 'client' ? 'checked' : ''}/>
+                                    <label for="edit-user-kunde-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}">&nbsp;</label>
                                   
-                                    <input id="edit-user-position-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" name="edit-user-position-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" type="radio" ${userType === 'none' ? 'checked' : ''}/>
-                                    <label for="edit-user-position-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" class="disabled">&nbsp;</label>
+                                    <input id="edit-user-none-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" name="edit-user-position-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" type="radio" ${userType === 'none' ? 'checked' : ''}/>
+                                    <label for="edit-user-none-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" class="disabled">&nbsp;</label>
                                   
-                                    <input id="edit-user-position-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" name="edit-user-position-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" type="radio" ${userType === 'admin' ? 'checked' : ''}/>
-                                    <label for="edit-user-position-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}">&nbsp;</label>
+                                    <input id="edit-user-admin-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" name="edit-user-position-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" type="radio" ${userType === 'admin' ? 'checked' : ''}/>
+                                    <label for="edit-user-admin-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}">&nbsp;</label>
                                   
                                     <a></a>
                                   </div>
-                                  <span class="spanSwitch admin">Admin</span>`
-
+                                  <span class="spanSwitch admin">Admin</span>`;
+   
       const divStatus = document.createElement('div');
       divStatus.className = 'divEdit';
       const labelStatus = document.createElement('span');
@@ -476,23 +440,23 @@
         xmlData.getElementsByTagName('position')[positionXML].childNodes[0].nodeValue = inputPosition.value
         xmlData.getElementsByTagName('email')[positionXML].childNodes[0].nodeValue = inputEmail.value
         if(!xmlData.getElementsByTagName('type')[positionXML]){
-          if(radioKunde.checked){
+          if(this.$(`#edit-user-kunde-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}`).checked){
             const newElement=  document.createElementNS('', 'type');
             const newText = document.createTextNode('client');
             newElement.appendChild(newText);
             xmlData.getElementsByTagName('contact')[positionXML].appendChild(newElement)
           }
-          if(radioAdmin.checked){
+          if(this.$(`#edit-user-admin-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}`).checked){
             const newElement=  document.createElementNS('', 'type');
             const newText = document.createTextNode('admin');
             newElement.appendChild(newText);
             xmlData.getElementsByTagName('contact')[positionXML].appendChild(newElement)
           }
         }else {
-          if(radioKunde.checked){
+          if(this.$(`#edit-user-kunde-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}`).checked){
             xmlData.getElementsByTagName('type')[positionXML].childNodes[0].nodeValue = 'client'
           }
-          if(radioAdmin.checked){
+          if(this.$(`#edit-user-admin-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}`).checked){
             xmlData.getElementsByTagName('type')[positionXML].childNodes[0].nodeValue = 'admin'
           }
         }
@@ -519,7 +483,7 @@
 
       this.$('#modalContact').append(divMainHeaderEdit);
       this.$('#modalContact').append(divMainContentEdit);
-    },
+     },
     //  function for xml
     findUserXml(id, xmlData){
       let position = null;
