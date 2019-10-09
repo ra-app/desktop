@@ -1725,10 +1725,9 @@ button, input{
   padding: 0 !important;
   width: 70px;
   height: 20px;
-  top: 10px;
+  top: 0px;
   margin-left: 7px;
   float: left;
-  margin-right: 36px;
 }
 
 .switch-toggle.switch-candy, .switch-light.switch-candy > span {
@@ -1816,14 +1815,16 @@ button, input{
 }
 
 .spanSwitch{
-  top: 10px;
+  top: 0px;
   position: relative;
   left: 5px;
   float: left;
+  margin-left: 15px;
   &.admin{
-    top: -10px;
+    top: 0px;
     right: 2px;
     left: unset;
-    float: right;
+    float: left;
+    margin-left: 6px;
   }
 }

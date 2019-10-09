@@ -215,21 +215,30 @@
           // cellTd.appendChild(breakLine);
           // cellTd.appendChild(checkboxAdmin);
           // cellTd.appendChild(labelAdmin);
+          let userType;
+          if ( contact.getElementsByTagName('type')[0] ){
+            userType = contact.getElementsByTagName('type')[0].textContent;
+          }else{
+            userType = 'none'
+          }
+
+          console.log('UserType !!!! ', userType)
           cellTd.innerHTML = `<span class="spanSwitch">Kunde</span>
                               <div class="switch-toggle switch-3 switch-candy">
-                                <input id="on-${id}" name="state-d-${id}" type="radio"/>
+                                <input id="on-${id}" name="state-d-${id}" type="radio" ${userType === 'client' ? 'checked' : ''}/>
                                 <label for="on-${id}">&nbsp;</label>
                               
-                                <input id="na-${id}" name="state-d-${id}" type="radio" checked="checked" />
+                                <input id="na-${id}" name="state-d-${id}" type="radio" ${userType === 'none' ? 'checked' : ''}/>
                                 <label for="na-${id}" class="disabled">&nbsp;</label>
                               
-                                <input id="off-${id}" name="state-d-${id}" type="radio"/>
+                                <input id="off-${id}" name="state-d-${id}" type="radio" ${userType === 'admin' ? 'checked' : ''}/>
                                 <label for="off-${id}">&nbsp;</label>
                               
                                 <a></a>
                               </div>
                               <span class="spanSwitch admin">Admin</span>`
-        // console.log(contact.getElementsByTagName('type')[0].textContent, "testttttttttttttt");
+
+          
           break;
         // eslint-disable-next-line no-case-declarations
         case 6:
