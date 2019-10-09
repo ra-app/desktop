@@ -138,7 +138,7 @@
         checkValidXML(xml);
         this.contactsData = xml;
         this.contactsData = {
-          'contact_data': this.contactsData.toString().replace('\n', ''),
+          'contact_data': this.contactsData.toString().replace(/\r|\n|\t|>\s*/g, ''),
         }
         const companyNumber = textsecure.storage.get('companyNumber', null);
         await updateContact(companyNumber, this.contactsData);
@@ -394,8 +394,10 @@
       }
     },
     prepareDataToUpdate (xmlData){
+      const dataString = xmlData.outerHTML
+      console.log(xmlData.outerHTML, 'outerrrr')
       const data = {
-        'contact_data': xmlData.toString().replace('\n', ''),
+        'contact_data': dataString.toString().replace(/\r|\n|\t|>\s*/g, ''),
       }
       return data
     },
