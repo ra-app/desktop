@@ -229,6 +229,7 @@
                                 <a></a>
                               </div>
                               <span class="spanSwitch admin">Admin</span>`
+        // console.log(contact.getElementsByTagName('type')[0].textContent, "testttttttttttttt");
           break;
         // eslint-disable-next-line no-case-declarations
         case 6:
