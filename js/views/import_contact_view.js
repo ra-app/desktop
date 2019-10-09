@@ -284,6 +284,9 @@
       const imageClosePanel = document.createElement('img');
       imageClosePanel.className = 'imageClosePanel';
       imageClosePanel.src = 'images/icons/x-contact-list.svg'
+      imageClosePanel.onclick = () => {
+        this.$('#modalContact').addClass('hidden');
+      }
 
 
       divMainHeaderEdit.appendChild(pUserName); 
@@ -394,7 +397,6 @@
       buttonSaveChanges.classList = 'buttonSave buttonsModal';
       buttonSaveChanges.innerText = 'Save';
       buttonSaveChanges.onclick = () => {
-        this.$('#modalContact').addClass('hidden');
       }
         
 
