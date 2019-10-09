@@ -348,11 +348,13 @@
       divRadioButtons.className = 'divEdit';
       const radioKunde = document.createElement('input');
       radioKunde.type = 'radio';
+      radioKunde.name = 'radioAdmin'
       const labelKunde = document.createElement('span');
       labelKunde.className = 'labelRadios';
       labelKunde.innerText = 'Kunde'
       const radioAdmin = document.createElement('input');
       radioAdmin.type = 'radio';
+      radioAdmin.name = 'radioAdmin'
       const labelAdmin = document.createElement('span');
       labelAdmin.className = 'labelRadios';
       labelAdmin.innerText = 'Admin'
