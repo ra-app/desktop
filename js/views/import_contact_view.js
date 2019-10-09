@@ -174,6 +174,10 @@
       }
       
     },
+    closeModal(){
+
+      this.$('#modalOverLay').addClass('hidden');
+    },
     async refreshTable(){
       this.$('#contactTable').empty();
       this.prepareDataXml(this.contactsData.contact_data, true)
@@ -310,7 +314,7 @@
       imageClosePanel.className = 'imageClosePanel';
       imageClosePanel.src = 'images/icons/x-contact-list.svg'
       imageClosePanel.onclick = () => {
-        this.$('#modalOverLay').addClass('hidden');
+        this.closeModal();
       }
 
 
@@ -426,7 +430,13 @@
         xmlData.getElementsByTagName('position')[positionXML].childNodes[0].nodeValue = inputPosition.value
         xmlData.getElementsByTagName('email')[positionXML].childNodes[0].nodeValue = inputEmail.value
         const dataToUpdate = this.prepareDataToUpdate(xmlData);
-        console.log(dataToUpdate)
+        this.contactsData = dataToUpdate;
+        this.updateXmlDB(dataToUpdate);
+        this.closeModal();
+        this.refreshTable();
+
+        
+        // console.log(dataToUpdate)
       }
 
       divMainContentEdit.appendChild(divEditVorname);
@@ -489,6 +499,11 @@
         'contact_data':  aux.toString().replace(/>\s*/g, '>'),
       }
       return data
+    },
+    async updateXmlDB(data){
+      const companyNumber = textsecure.storage.get('companyNumber', null);
+      await updateContact(companyNumber, data);
+      localStorage.setItem('ContactList', data.contact_data);
     },
   });
 
