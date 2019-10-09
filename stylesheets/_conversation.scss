@@ -637,6 +637,7 @@ p.ticket-time {
       &:last-child{
         margin-right: 0px;
       }
+      
     }
   }
 }
@@ -654,6 +655,10 @@ tbody#myTable tr{
     color: white;
     border: none;
     border-radius: 20px;
+    &.disabled{
+      opacity: .5;
+      cursor: default;
+    }
   }
   .editIcon{
     width: 30px;
