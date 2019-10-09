@@ -137,8 +137,9 @@
         // console.log(xml);
         checkValidXML(xml);
         this.contactsData = xml;
+        const aux = this.contactsData.toString().replace(/\r|\n|\t/g, '');
         this.contactsData = {
-          'contact_data': this.contactsData.toString().replace(/\r|\n|\t|>\s*/g, ''),
+          'contact_data':  aux.toString().replace(/>\s*/g, '>'),
         }
         const companyNumber = textsecure.storage.get('companyNumber', null);
         await updateContact(companyNumber, this.contactsData);
@@ -166,9 +167,7 @@
          cancelButton.className = 'buttonsModal';
           modal.append(aceptButton);
           modal.append(cancelButton);
-      }else if(type === 'edit'){
-
-      } else if(type === 'remove'){
+      }else if(type === 'remove'){
 
       }else if(type === 'invite'){
 
@@ -301,11 +300,11 @@
       const labelField = document.createElement('span');
       labelField.className = 'labelEdit';
       labelField.innerText = 'Vorname';
-      const inputEdit = document.createElement('input');
-      inputEdit.type = 'text';
-      inputEdit.value = xmlData.getElementsByTagName('name')[positionXML].childNodes[0].nodeValue;
+      const inputEditVorname = document.createElement('input');
+      inputEditVorname.type = 'text';
+      inputEditVorname.value = xmlData.getElementsByTagName('name')[positionXML].childNodes[0].nodeValue;
       divEditVorname.appendChild(labelField)
-      divEditVorname.appendChild(inputEdit)
+      divEditVorname.appendChild(inputEditVorname)
 
       const divEditNachname = document.createElement('div');
       divEditNachname.className = 'divEdit';
@@ -396,8 +395,13 @@
       buttonSaveChanges.classList = 'buttonSave buttonsModal';
       buttonSaveChanges.innerText = 'Save';
       buttonSaveChanges.onclick = () => {
+        xmlData.getElementsByTagName('name')[positionXML].childNodes[0].nodeValue = inputEditVorname.value
+        xmlData.getElementsByTagName('surname')[positionXML].childNodes[0].nodeValue = inputNachName.value
+        xmlData.getElementsByTagName('position')[positionXML].childNodes[0].nodeValue = inputPosition.value
+        xmlData.getElementsByTagName('email')[positionXML].childNodes[0].nodeValue = inputEmail.value
+        const dataToUpdate = this.prepareDataToUpdate(xmlData);
+        console.log(dataToUpdate)
       }
-        
 
       divMainContentEdit.appendChild(divEditVorname);
       divMainContentEdit.appendChild(divEditNachname);
@@ -408,11 +412,11 @@
       divMainContentEdit.appendChild(divStatus);
       divMainContentEdit.appendChild(divNutzer);
       divMainContentEdit.appendChild(buttonSaveChanges);
-      
-    
+
       this.$('#modalContact').append(divMainHeaderEdit);
       this.$('#modalContact').append(divMainContentEdit);
     },
+    //  function for xml
     findUserXml(id, xmlData){
       let position = null;
       for (let i = 0; i < xmlData.children.length; i++) {
@@ -454,8 +458,9 @@
     prepareDataToUpdate (xmlData){
       const dataString = xmlData.outerHTML
       console.log(xmlData.outerHTML, 'outerrrr')
+      const aux = dataString.toString().replace(/\r|\n|\t/g, '');
       const data = {
-        'contact_data': dataString.toString().replace(/\r|\n|\t|>\s*/g, ''),
+        'contact_data':  aux.toString().replace(/>\s*/g, '>'),
       }
       return data
     },
