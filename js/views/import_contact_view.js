@@ -289,7 +289,7 @@
       labelField.innerText = 'Vorname';
       const inputEdit = document.createElement('input');
       inputEdit.type = 'text';
-      inputEdit.placeholder = xmlData.getElementsByTagName('name')[positionXML].childNodes[0].nodeValue;
+      inputEdit.value = xmlData.getElementsByTagName('name')[positionXML].childNodes[0].nodeValue;
       divEditVorname.appendChild(labelField)
       divEditVorname.appendChild(inputEdit)
 
@@ -300,7 +300,7 @@
       labelNachName.innerText = 'Nachname';
       const inputNachName = document.createElement('input');
       inputNachName.type = 'text';
-      inputNachName.placeholder = xmlData.getElementsByTagName('surname')[positionXML].childNodes[0].nodeValue;
+      inputNachName.value = xmlData.getElementsByTagName('surname')[positionXML].childNodes[0].nodeValue;
       divEditNachname.appendChild(labelNachName)
       divEditNachname.appendChild(inputNachName)
 
@@ -311,7 +311,7 @@
       labelPosition.innerText = 'Position';
       const inputPosition = document.createElement('input');
       inputPosition.type = 'text';
-      inputPosition.placeholder = xmlData.getElementsByTagName('position')[positionXML].childNodes[0].nodeValue;
+      inputPosition.value = xmlData.getElementsByTagName('position')[positionXML].childNodes[0].nodeValue;
       divEditPosition.appendChild(labelPosition)
       divEditPosition.appendChild(inputPosition)
 
@@ -322,7 +322,7 @@
       labelTelephone.innerText = 'Telefonnummer';
       const inputTelephone = document.createElement('input');
       inputTelephone.type = 'text';
-      inputTelephone.placeholder = xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue;
+      inputTelephone.value = xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue;
       divTelephone.appendChild(labelTelephone)
       divTelephone.appendChild(inputTelephone)
 
@@ -333,17 +333,58 @@
       labelEmail.innerText = 'Email'
       const inputEmail = document.createElement('input');
       inputEmail.type = 'text';
-      inputEmail.placeholder = xmlData.getElementsByTagName('email')[positionXML].childNodes[0].nodeValue;
+      inputEmail.value = xmlData.getElementsByTagName('email')[positionXML].childNodes[0].nodeValue;
       divEmail.appendChild(labelEmail)
       divEmail.appendChild(inputEmail)
 
-      divMainContentEdit.appendChild(divEditVorname)
-      divMainContentEdit.appendChild(divEditNachname)
-      divMainContentEdit.appendChild(divEditPosition)
-      divMainContentEdit.appendChild(divTelephone)
-      divMainContentEdit.appendChild(divEmail)
-      
+      const divRadioButtons = document.createElement('div');
+      divRadioButtons.className = 'divEdit';
+      const radioKunde = document.createElement('input');
+      radioKunde.type = 'radio';
+      const labelKunde = document.createElement('span');
+      labelKunde.className = 'labelRadios';
+      labelKunde.innerText = 'Kunde'
+      const radioAdmin = document.createElement('input');
+      radioAdmin.type = 'radio';
+      const labelAdmin = document.createElement('span');
+      labelAdmin.className = 'labelRadios';
+      labelAdmin.innerText = 'Admin'
+      divRadioButtons.appendChild(radioKunde);
+      divRadioButtons.appendChild(labelKunde);
+      divRadioButtons.appendChild(radioAdmin);
+      divRadioButtons.appendChild(labelAdmin);
 
+      const divStatus = document.createElement('div');
+      divStatus.className = 'divEdit';
+      const labelStatus = document.createElement('span');
+      labelStatus.className = 'labelEdit';
+      labelStatus.innerText = 'Einladungstatus'
+      const buttonStatus = document.createElement('button');
+      buttonStatus.innerText = 'Einladung Senden';
+      divStatus.appendChild(labelStatus)
+      divStatus.appendChild(buttonStatus)
+
+      const divNutzer = document.createElement('div');
+      divNutzer.className = 'divEdit';
+      const labelNutzer = document.createElement('span');
+      labelNutzer.className = 'labelEdit';
+      labelNutzer.innerText = 'Nutzer'
+      const divUserPrev = document.createElement('div');
+      divUserPrev.className = 'divUserPrev';
+      divUserPrev.innerHTML = '<img src="images/header-chat.png" /> <span> ' + xmlData.getElementsByTagName('name')[positionXML].childNodes[0].nodeValue + ' ' + xmlData.getElementsByTagName('surname')[positionXML].childNodes[0].nodeValue + '</span>';
+      divNutzer.appendChild(labelNutzer)
+      divNutzer.appendChild(divUserPrev)
+
+      divMainContentEdit.appendChild(divEditVorname);
+      divMainContentEdit.appendChild(divEditNachname);
+      divMainContentEdit.appendChild(divEditPosition);
+      divMainContentEdit.appendChild(divTelephone);
+      divMainContentEdit.appendChild(divEmail);
+      divMainContentEdit.appendChild(divRadioButtons);
+      divMainContentEdit.appendChild(divStatus);
+      divMainContentEdit.appendChild(divNutzer);
+      
+    
       this.$('#modalContact').append(divMainHeaderEdit);
       this.$('#modalContact').append(divMainContentEdit);
       this.$('#modalContact').addClass('open');

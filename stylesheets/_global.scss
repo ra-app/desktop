@@ -1607,9 +1607,34 @@ th.sorted.descending:after {
     padding: 15px;
     .divEdit {
       display: flex;
-      height: 30px;
+      height: 40px;
       border-bottom: 1px solid #C6C6C6;
       margin-bottom: 20px;
+      .divUserPrev{
+        margin-top: -13px;
+        height: 45px;
+        padding: 8px 15px;
+        background: #b1c6de52 0% 0% no-repeat padding-box;
+        img{
+          height: 30px;
+          width: 30px;
+          vertical-align: middle;
+        }
+        span{
+          font-family: $poppins-medium;
+          color: $color-raapp-text;
+        }
+      }
+      button{
+        @include backgroudGradient();
+        padding: 6px 20px;
+        color: white;
+        border: none;
+        height: 30px;
+        border-radius: 20px;
+        margin-top: -5px;
+        outline: none;
+      }
       span.labelEdit {
         width: 40%;
         font-family: $poppins-regular;
@@ -1625,6 +1650,17 @@ th.sorted.descending:after {
         margin-top: -8px;
         outline: none;
         color: $color-raapp-text;
+      }
+      input[type="radio"] {
+        margin-right: 10px;
+        vertical-align: middle;    
+      }
+      span.labelRadios{
+        font-family: $poppins-regular;
+        font-size: 14px;
+        color: $color-raapp-text;
+        vertical-align: middle;
+        margin-right: 10px;
       }
       input[type="text"]::placeholder{
         color: #B1BBC0;
