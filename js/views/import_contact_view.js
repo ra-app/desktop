@@ -248,9 +248,18 @@
       console.log(id, "click function external");
       this.openModal('invite');
     },
-    removeContact(id){
+    async removeContact(id){
       console.log(id, "remove contact");
       this.openModal('remove');
+      const  xml =  await this.getXmlFile();
+      const xmlData = this.prepareDataXml(xml, false)
+      const positionXML = this.findUserXml(id, xmlData)
+      const  y = xmlData.getElementsByTagName('contact')[positionXML];
+      xmlData.removeChild(y);
+      console.log(xmlData, "xmlllllllll")
+      const dataToUpdate = this.prepareDataToUpdate(xmlData);
+      console.log(dataToUpdate, "data to updateeeeeeeee")
+      //TODO CREATE FUNCTION TO CONVERT DATA AND UPDATE ON DB
     },
     async editContact(id){
       this.openModal('edit');
@@ -258,9 +267,7 @@
       const xmlData = this.prepareDataXml(xml, false)
       const positionXML = this.findUserXml(id, xmlData)
       const userInfo = xmlData.children.item(positionXML);
-      // const y = xmlData.getElementsByTagName("contact")[positionXML]
       // xmlData.getElementsByTagName("surname")[positionXML].childNodes[0].nodeValue = "new content" ; //// USE THAT FOR MODIFY ELEMENT
-      console.log(xmlData, "2222222222")
       const cln = userInfo.cloneNode(true);
       this.createEditPanel(cln, xmlData, positionXML)
       
@@ -393,7 +400,7 @@
       let position = null;
       for (let i = 0; i < xmlData.children.length; i++) {
         const contact = xmlData.children.item(i);
-       const email =  contact.getElementsByTagName('email')[0].textContent
+        const email =  contact.getElementsByTagName('email')[0].textContent
        if(email === id){
          position = i
          return position; // only first position TODO LIST OF POSITION FOR MULTI SELECT
@@ -426,6 +433,12 @@
       }else {
         return contactListXml;
       }
+    },
+    prepareDataToUpdate (xmlData){
+      const data = {
+        'contact_data': xmlData.toString().replace('\n', ''),
+      }
+      return data
     },
   });
 
