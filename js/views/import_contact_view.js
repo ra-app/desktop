@@ -281,10 +281,17 @@
       const pUserPhone = document.createElement('p');
       pUserPhone.innerText = xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue
       pUserPhone.className = 'titleHeaderEdit';
+      const imageClosePanel = document.createElement('img');
+      imageClosePanel.className = 'imageClosePanel';
+      imageClosePanel.src = 'images/icons/x-contact-list.svg'
+      imageClosePanel.onclick = () => {
+        this.$('#modalContact').addClass('hidden');
+      }
 
 
       divMainHeaderEdit.appendChild(pUserName); 
       divMainHeaderEdit.appendChild(pUserPhone); 
+      divMainHeaderEdit.appendChild(imageClosePanel); 
 
       const divMainContentEdit = document.createElement('div');
       divMainContentEdit.className = 'divMainContentEdit';
@@ -329,6 +336,7 @@
       labelTelephone.innerText = 'Telefonnummer';
       const inputTelephone = document.createElement('input');
       inputTelephone.type = 'text';
+      inputTelephone.readOnly = true;
       inputTelephone.value = xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue;
       divTelephone.appendChild(labelTelephone)
       divTelephone.appendChild(inputTelephone)
@@ -384,6 +392,13 @@
       divNutzer.appendChild(labelNutzer)
       divNutzer.appendChild(divUserPrev)
 
+      const buttonSaveChanges = document.createElement('button');
+      buttonSaveChanges.classList = 'buttonSave buttonsModal';
+      buttonSaveChanges.innerText = 'Save';
+      buttonSaveChanges.onclick = () => {
+      }
+        
+
       divMainContentEdit.appendChild(divEditVorname);
       divMainContentEdit.appendChild(divEditNachname);
       divMainContentEdit.appendChild(divEditPosition);
@@ -392,11 +407,11 @@
       divMainContentEdit.appendChild(divRadioButtons);
       divMainContentEdit.appendChild(divStatus);
       divMainContentEdit.appendChild(divNutzer);
+      divMainContentEdit.appendChild(buttonSaveChanges);
       
     
       this.$('#modalContact').append(divMainHeaderEdit);
       this.$('#modalContact').append(divMainContentEdit);
-      this.$('#modalContact').addClass('open');
     },
     findUserXml(id, xmlData){
       let position = null;
