@@ -120,10 +120,10 @@
           this.openModal('import');
           this.$('#acept-import-contact').click(()=>{
             this.acceptImportContact(file);
-            this.$('#modalContact').addClass('hidden');
+            this.$('#modalOverLay').addClass('hidden');
           })
           this.$('#cancel-import-contact').click(()=>{
-            this.$('#modalContact').addClass('hidden');
+            this.$('#modalOverLay').addClass('hidden');
             input.val('');
             file = null;
           })
@@ -153,8 +153,8 @@
     },
     openModal(type){
       const modal = this.$('#modalContact');
-      modal.removeClass('hidden');
       modal.empty();
+      this.$('#modalOverLay').removeClass('hidden');
       if(type === 'import'){
          const aceptButton  = document.createElement('button'); 
          aceptButton.innerHTML='Accept'
@@ -269,7 +269,7 @@
       imageClosePanel.className = 'imageClosePanel';
       imageClosePanel.src = 'images/icons/x-contact-list.svg'
       imageClosePanel.onclick = () => {
-        this.$('#modalContact').addClass('hidden');
+        this.$('#modalOverLay').addClass('hidden');
       }
       divMainHeaderEdit.appendChild(imageClosePanel); 
       
@@ -311,7 +311,7 @@
       imageClosePanel.className = 'imageClosePanel';
       imageClosePanel.src = 'images/icons/x-contact-list.svg'
       imageClosePanel.onclick = () => {
-        this.$('#modalContact').addClass('hidden');
+        this.$('#modalOverLay').addClass('hidden');
       }
 
 

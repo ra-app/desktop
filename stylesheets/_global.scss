@@ -1596,111 +1596,119 @@ th.sorted.descending:after {
       transform: translateX(0)
   }
 }
-.modalContact{
+
+.modalOverLay{
   position: absolute;
-  width: 33%;
-  background: #ffffff;
-  top: 0;
+  width: 100%;
   height: 100%;
-  box-shadow: 0px 3px 6px #00000029;
-  .divMainContentEdit{
-    padding: 15px;
-    &.divRemoveContact{
-      text-align: center;
-    }
-    .divEdit {
-      display: flex;
-      height: 40px;
-      border-bottom: 1px solid #C6C6C6;
-      margin-bottom: 20px;
-      .divUserPrev{
-        margin-top: -13px;
-        height: 45px;
-        padding: 8px 15px;
-        background: #b1c6de52 0% 0% no-repeat padding-box;
-        img{
-          height: 30px;
-          width: 30px;
-          vertical-align: middle;
+  top: 0;
+  background: #00000063;
+  .modalContact{
+    position: absolute;
+    width: 33%;
+    background: #ffffff;
+    top: 0;
+    height: 100%;
+    box-shadow: 0px 3px 6px #00000029;
+    .divMainContentEdit{
+      padding: 15px;
+      &.divRemoveContact{
+        text-align: center;
+      }
+      .divEdit {
+        display: flex;
+        height: 40px;
+        border-bottom: 1px solid #C6C6C6;
+        margin-bottom: 20px;
+        .divUserPrev{
+          margin-top: -13px;
+          height: 45px;
+          padding: 8px 15px;
+          background: #b1c6de52 0% 0% no-repeat padding-box;
+          img{
+            height: 30px;
+            width: 30px;
+            vertical-align: middle;
+          }
+          span{
+            font-family: $poppins-medium;
+            color: $color-raapp-text;
+          }
         }
-        span{
-          font-family: $poppins-medium;
+        button{
+          @include backgroudGradient();
+          padding: 6px 20px;
+          color: white;
+          border: none;
+          height: 30px;
+          border-radius: 20px;
+          margin-top: -5px;
+          outline: none;
+        }
+        span.labelEdit {
+          width: 40%;
+          font-family: $poppins-regular;
+          font-size: 14px;
           color: $color-raapp-text;
         }
-      }
-      button{
-        @include backgroudGradient();
-        padding: 6px 20px;
-        color: white;
-        border: none;
-        height: 30px;
-        border-radius: 20px;
-        margin-top: -5px;
-        outline: none;
-      }
-      span.labelEdit {
-        width: 40%;
-        font-family: $poppins-regular;
-        font-size: 14px;
-        color: $color-raapp-text;
-      }
-      input[type="text"] {
-        width: 60%;
-        border: none;
-        font-size: 14px;
-        font-family: $poppins-regular;
-        height: 30px;
-        margin-top: -8px;
-        outline: none;
-        color: $color-raapp-text;
-      }
-      input[type="radio"] {
-        margin-right: 10px;
-        vertical-align: middle;    
-      }
-      span.labelRadios{
-        font-family: $poppins-regular;
-        font-size: 14px;
-        color: $color-raapp-text;
-        vertical-align: middle;
-        margin-right: 10px;
-      }
-      input[type="text"]::placeholder{
-        color: #B1BBC0;
+        input[type="text"] {
+          width: 60%;
+          border: none;
+          font-size: 14px;
+          font-family: $poppins-regular;
+          height: 30px;
+          margin-top: -8px;
+          outline: none;
+          color: $color-raapp-text;
+        }
+        input[type="radio"] {
+          margin-right: 10px;
+          vertical-align: middle;    
+        }
+        span.labelRadios{
+          font-family: $poppins-regular;
+          font-size: 14px;
+          color: $color-raapp-text;
+          vertical-align: middle;
+          margin-right: 10px;
+        }
+        input[type="text"]::placeholder{
+          color: #B1BBC0;
+        }
       }
     }
-  }
-  .divModalHeader{
-    height: 70px;
-    padding: 15px;
-    position: relative;
-    .titleHeaderEdit{
-      margin: 0px;
-      font-family: $poppins-semibold;
-      font-size: 15px;
-      color: $color-raapp-text;
+    .divModalHeader{
+      height: 70px;
+      padding: 15px;
+      position: relative;
+      .titleHeaderEdit{
+        margin: 0px;
+        font-family: $poppins-semibold;
+        font-size: 15px;
+        color: $color-raapp-text;
+      }
+      .imageClosePanel{
+        height: 25px;
+        width: 25px;
+        cursor: pointer;
+        position: absolute;
+        right: 15px;
+        top: 10px;
+      }
     }
-    .imageClosePanel{
-      height: 25px;
-      width: 25px;
-      cursor: pointer;
-      position: absolute;
-      right: 15px;
-      top: 10px;
+    &.open{
+      animation: panelRight 0.4 ease;
     }
-  }
-  &.open{
-    animation: panelRight 0.4 ease;
-  }
-  .buttonSave{
-    float: right;
-  }
-  .buttonsModal{
-    @include backgroudGradient();
-    padding: 9px 15px;
-    color: #ffffff;
-    border: none;
-    border-radius: 20px;
+    .buttonSave{
+      float: right;
+    }
+    .buttonsModal{
+      @include backgroudGradient();
+      padding: 9px 15px;
+      color: #ffffff;
+      border: none;
+      border-radius: 20px;
+    }
   }
 }
 button, input{
