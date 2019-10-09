@@ -577,6 +577,8 @@ p.ticket-time {
   max-height: calc(1080px - 85px);
   overflow: auto;
   .sortable{
+    max-height: calc(1080px - 85px);
+    margin-bottom: 20%;
     th{
       height: 30px;
       font-weight: normal;
