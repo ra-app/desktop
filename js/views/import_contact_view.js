@@ -446,15 +446,15 @@
                                   </div>
                                   <span class="spanSwitch admin">Admin</span>`
 
-      const divStatus = document.createElement('div');
-      divStatus.className = 'divEdit';
-      const labelStatus = document.createElement('span');
-      labelStatus.className = 'labelEdit';
-      labelStatus.innerText = 'Einladungstatus'
-      const buttonStatus = document.createElement('button');
-      buttonStatus.innerText = 'Einladung Senden';
-      divStatus.appendChild(labelStatus)
-      divStatus.appendChild(buttonStatus)
+      // const divStatus = document.createElement('div');
+      // divStatus.className = 'divEdit';
+      // const labelStatus = document.createElement('span');
+      // labelStatus.className = 'labelEdit';
+      // labelStatus.innerText = 'Einladungstatus'
+      // const buttonStatus = document.createElement('button');
+      // buttonStatus.innerText = 'Einladung Senden';
+      // divStatus.appendChild(labelStatus)
+      // divStatus.appendChild(buttonStatus)
 
       const divNutzer = document.createElement('div');
       divNutzer.className = 'divEdit';
@@ -513,7 +513,7 @@
       divMainContentEdit.appendChild(divTelephone);
       divMainContentEdit.appendChild(divEmail);
       divMainContentEdit.appendChild(divRadioButtons);
-      divMainContentEdit.appendChild(divStatus);
+      // divMainContentEdit.appendChild(divStatus);
       divMainContentEdit.appendChild(divNutzer);
       divMainContentEdit.appendChild(buttonSaveChanges);
 
