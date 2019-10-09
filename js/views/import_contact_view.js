@@ -195,27 +195,40 @@
         }
         // eslint-disable-next-line no-case-declarations
         case 5:
-          const checkboxKunde = document.createElement('input'); 
-          checkboxKunde.type = 'radio'; 
-          checkboxKunde.name = 'client_' + id; 
-          checkboxKunde.value = 'client'; 
-          checkboxKunde.id = 'client'; 
-          const checkboxAdmin = document.createElement('input'); 
-          checkboxAdmin.type = 'radio'; 
-          checkboxAdmin.name = 'client_' + id; 
-          checkboxAdmin.value = 'admin'; 
-          checkboxAdmin.id = 'admin'; 
-          const labelKunde = document.createElement('label'); 
-          labelKunde.appendChild(document.createTextNode(i18n('clientButton'))); 
-          const labelAdmin = document.createElement('label'); 
-          labelAdmin.appendChild(document.createTextNode(i18n('adminButton'))); 
-          const breakLine = document.createElement('br')
-          cellTd.appendChild(checkboxKunde);
-          cellTd.appendChild(labelKunde);
-          cellTd.appendChild(breakLine);
-          cellTd.appendChild(checkboxAdmin);
-          cellTd.appendChild(labelAdmin);
-          // console.log(contact.getElementsByTagName('type')[0].textContent, "testttttttttttttt");
+          // const checkboxKunde = document.createElement('input'); 
+          // checkboxKunde.type = 'radio'; 
+          // checkboxKunde.name = 'client'; 
+          // checkboxKunde.value = 'client'; 
+          // checkboxKunde.id = 'client'; 
+          // const checkboxAdmin = document.createElement('input'); 
+          // checkboxAdmin.type = 'radio'; 
+          // checkboxAdmin.name = 'admin'; 
+          // checkboxAdmin.value = 'admin'; 
+          // checkboxAdmin.id = 'admin'; 
+          // const labelKunde = document.createElement('label'); 
+          // labelKunde.appendChild(document.createTextNode(i18n('clientButton'))); 
+          // const labelAdmin = document.createElement('label'); 
+          // labelAdmin.appendChild(document.createTextNode(i18n('adminButton'))); 
+          // const breakLine = document.createElement('br')
+          // cellTd.appendChild(checkboxKunde);
+          // cellTd.appendChild(labelKunde);
+          // cellTd.appendChild(breakLine);
+          // cellTd.appendChild(checkboxAdmin);
+          // cellTd.appendChild(labelAdmin);
+          cellTd.innerHTML = `<span class="spanSwitch">Kunde</span>
+                              <div class="switch-toggle switch-3 switch-candy">
+                                <input id="on-${id}" name="state-d-${id}" type="radio"/>
+                                <label for="on-${id}">&nbsp;</label>
+                              
+                                <input id="na-${id}" name="state-d-${id}" type="radio" checked="checked" />
+                                <label for="na-${id}" class="disabled">&nbsp;</label>
+                              
+                                <input id="off-${id}" name="state-d-${id}" type="radio"/>
+                                <label for="off-${id}">&nbsp;</label>
+                              
+                                <a></a>
+                              </div>
+                              <span class="spanSwitch admin">Admin</span>`
           break;
         // eslint-disable-next-line no-case-declarations
         case 6:

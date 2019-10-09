@@ -1718,3 +1718,112 @@ button, input{
 .marginTop20{
   margin-top: 20px;
 }
+
+.switch-toggle {
+  position: relative;
+  display: block;
+  padding: 0 !important;
+  width: 70px;
+  height: 20px;
+  top: 10px;
+  margin-left: 7px;
+  float: left;
+  margin-right: 36px;
+}
+
+.switch-toggle.switch-candy, .switch-light.switch-candy > span {
+  border-radius: 20px;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.2);
+  @include backgroudGradient();
+}
+
+.switch-toggle *, .switch-toggle *:before, .switch-toggle *:after {
+  box-sizing: border-box;
+}
+
+.switch-light.switch-candy span span, .switch-light.switch-candy input:checked ~ span span:first-child, .switch-toggle.switch-candy label {
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 1px 1px 1px #191b1e;
+}
+
+.switch-toggle input + label {
+  position: relative;
+  z-index: 2;
+  display: block;
+  float: left;
+  padding: 0 0.5em;
+  margin: 0;
+  text-align: center;
+}
+.switch-toggle label, .switch-toggle > span {
+  line-height: 2em;
+}
+.switch-toggle input {
+  position: absolute;
+  left: 0;
+  opacity: 0;
+}
+
+.switch-toggle label:nth-child(2):nth-last-child(6), .switch-toggle label:nth-child(2):nth-last-child(6) ~ label, .switch-toggle label:nth-child(2):nth-last-child(6) ~ a {
+  width: 33.33%;
+}
+.switch-toggle label:nth-child(2):nth-last-child(6) ~ input:checked:nth-child(5) + label ~ a {
+  left: 75.66%;
+}
+
+.switch-toggle label:nth-child(2):nth-last-child(6) ~ input:checked:nth-child(3) + label ~ a {
+  left: 40.33%;
+}
+// .switch-toggle label:nth-child(2):nth-last-child(6), .switch-toggle label:nth-child(2):nth-last-child(6) ~ label, .switch-toggle label:nth-child(2):nth-last-child(6) ~ a {
+//   width: 40.33%;
+// }
+
+.switch-candy a {
+  background-color: white;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.2), transparent);
+  border-radius: 50%;
+  height: 15px !important;
+  width: 15px !important;
+}
+
+.switch-toggle a {
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  padding: 0;
+  z-index: 1;
+}
+
+.switch-toggle a {
+  display: block;
+  transition: all 0.2s ease-out;
+}
+
+.switch-toggle *, .switch-toggle *:before, .switch-toggle *:after {
+  box-sizing: border-box;
+}
+
+.switch-light span span {
+  display: none;
+}
+
+.switch-toggle::after {
+  clear: both;
+  content: '';
+  display: table;
+}
+
+.spanSwitch{
+  top: 10px;
+  position: relative;
+  left: 5px;
+  float: left;
+  &.admin{
+    top: -10px;
+    right: 2px;
+    left: unset;
+    float: right;
+  }
+}
