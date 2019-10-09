@@ -72,7 +72,7 @@
             const cellTdContent = document.createTextNode(cell);
             cellTd.appendChild(cellTdContent);
           }else {
-            const id = contact.getElementsByTagName(headerTexts[4])[0].textContent;
+            const id = contact.getElementsByTagName('phone')[0].textContent;
             this.appendElemtns(j, cellTd, id)
 
           }
@@ -402,8 +402,8 @@
       let position = null;
       for (let i = 0; i < xmlData.children.length; i++) {
         const contact = xmlData.children.item(i);
-        const email =  contact.getElementsByTagName('email')[0].textContent
-       if(email === id){
+        const phone =  contact.getElementsByTagName('phone')[0].textContent
+       if(phone === id){
          position = i
          return position; // only first position TODO LIST OF POSITION FOR MULTI SELECT
        }
