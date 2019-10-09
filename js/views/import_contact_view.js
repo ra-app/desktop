@@ -73,7 +73,7 @@
             cellTd.appendChild(cellTdContent);
           }else {
             const id = contact.getElementsByTagName('phone')[0].textContent;
-            this.appendElemtns(j, cellTd, id)
+            this.appendElemtns(j, cellTd, id, contact)
 
           }
           tableRow.appendChild(cellTd);
@@ -182,7 +182,7 @@
       this.$('#contactTable').empty();
       this.prepareDataXml(this.contactsData.contact_data, true)
     },
-    appendElemtns(j, cellTd, id){
+    appendElemtns(j, cellTd, id, contact){
       switch (j) {
         case 0: {
           const checkbox = document.createElement('input'); 
@@ -197,12 +197,12 @@
         case 5:
           const checkboxKunde = document.createElement('input'); 
           checkboxKunde.type = 'radio'; 
-          checkboxKunde.name = 'client'; 
+          checkboxKunde.name = 'client_' + id; 
           checkboxKunde.value = 'client'; 
           checkboxKunde.id = 'client'; 
           const checkboxAdmin = document.createElement('input'); 
           checkboxAdmin.type = 'radio'; 
-          checkboxAdmin.name = 'admin'; 
+          checkboxAdmin.name = 'client_' + id; 
           checkboxAdmin.value = 'admin'; 
           checkboxAdmin.id = 'admin'; 
           const labelKunde = document.createElement('label'); 
@@ -215,6 +215,7 @@
           cellTd.appendChild(breakLine);
           cellTd.appendChild(checkboxAdmin);
           cellTd.appendChild(labelAdmin);
+          // console.log(contact.getElementsByTagName('type')[0].textContent, "testttttttttttttt");
           break;
         // eslint-disable-next-line no-case-declarations
         case 6:
@@ -429,8 +430,30 @@
         xmlData.getElementsByTagName('surname')[positionXML].childNodes[0].nodeValue = inputNachName.value
         xmlData.getElementsByTagName('position')[positionXML].childNodes[0].nodeValue = inputPosition.value
         xmlData.getElementsByTagName('email')[positionXML].childNodes[0].nodeValue = inputEmail.value
+        if(!xmlData.getElementsByTagName('type')[positionXML]){
+          if(radioKunde.checked){
+            const newElement=  document.createElementNS('', 'type');
+            const newText = document.createTextNode('client');
+            newElement.appendChild(newText);
+            xmlData.getElementsByTagName('contact')[positionXML].appendChild(newElement)
+          }
+          if(radioAdmin.checked){
+            const newElement=  document.createElementNS('', 'type');
+            const newText = document.createTextNode('admin');
+            newElement.appendChild(newText);
+            xmlData.getElementsByTagName('contact')[positionXML].appendChild(newElement)
+          }
+        }else {
+          if(radioKunde.checked){
+            xmlData.getElementsByTagName('type')[positionXML].childNodes[0].nodeValue = 'client'
+          }
+          if(radioAdmin.checked){
+            xmlData.getElementsByTagName('type')[positionXML].childNodes[0].nodeValue = 'admin'
+          }
+        }
         const dataToUpdate = this.prepareDataToUpdate(xmlData);
         this.contactsData = dataToUpdate;
+        console.log(this.contactsData, "dataaaaaaaaaaaaaaaa")
         this.updateXmlDB(dataToUpdate);
         this.closeModal();
         this.refreshTable();
