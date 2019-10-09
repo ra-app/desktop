@@ -407,22 +407,42 @@
 
       const divRadioButtons = document.createElement('div');
       divRadioButtons.className = 'divEdit';
-      const radioKunde = document.createElement('input');
-      radioKunde.type = 'radio';
-      radioKunde.name = 'radioAdmin'
-      const labelKunde = document.createElement('span');
-      labelKunde.className = 'labelRadios';
-      labelKunde.innerText = 'Kunde'
-      const radioAdmin = document.createElement('input');
-      radioAdmin.type = 'radio';
-      radioAdmin.name = 'radioAdmin'
-      const labelAdmin = document.createElement('span');
-      labelAdmin.className = 'labelRadios';
-      labelAdmin.innerText = 'Admin'
-      divRadioButtons.appendChild(radioKunde);
-      divRadioButtons.appendChild(labelKunde);
-      divRadioButtons.appendChild(radioAdmin);
-      divRadioButtons.appendChild(labelAdmin);
+      // const radioKunde = document.createElement('input');
+      // radioKunde.type = 'radio';
+      // radioKunde.name = 'radioAdmin'
+      // const labelKunde = document.createElement('span');
+      // labelKunde.className = 'labelRadios';
+      // labelKunde.innerText = 'Kunde'
+      // const radioAdmin = document.createElement('input');
+      // radioAdmin.type = 'radio';
+      // radioAdmin.name = 'radioAdmin'
+      // const labelAdmin = document.createElement('span');
+      // labelAdmin.className = 'labelRadios';
+      // labelAdmin.innerText = 'Admin'
+      // divRadioButtons.appendChild(radioKunde);
+      // divRadioButtons.appendChild(labelKunde);
+      // divRadioButtons.appendChild(radioAdmin);
+      // divRadioButtons.appendChild(labelAdmin);
+      let userType;
+          if ( xmlData.getElementsByTagName('type')[0] ){
+            userType = xmlData.getElementsByTagName('type')[0].textContent;
+          }else{
+            userType = 'none'
+          }
+      divRadioButtons.innerHTML = `<span class="spanSwitch">Kunde</span>
+                                  <div class="switch-toggle switch-3 switch-candy">
+                                    <input id="edit-user-position-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" name="edit-user-position-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" type="radio" ${userType === 'client' ? 'checked' : ''}/>
+                                    <label for="edit-user-position-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}">&nbsp;</label>
+                                  
+                                    <input id="edit-user-position-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" name="edit-user-position-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" type="radio" ${userType === 'none' ? 'checked' : ''}/>
+                                    <label for="edit-user-position-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" class="disabled">&nbsp;</label>
+                                  
+                                    <input id="edit-user-position-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" name="edit-user-position-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" type="radio" ${userType === 'admin' ? 'checked' : ''}/>
+                                    <label for="edit-user-position-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}">&nbsp;</label>
+                                  
+                                    <a></a>
+                                  </div>
+                                  <span class="spanSwitch admin">Admin</span>`
 
       const divStatus = document.createElement('div');
       divStatus.className = 'divEdit';

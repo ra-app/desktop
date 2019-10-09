@@ -1620,6 +1620,13 @@ th.sorted.descending:after {
         height: 40px;
         border-bottom: 1px solid #C6C6C6;
         margin-bottom: 20px;
+        .spanSwitch{
+          margin-left: 0px;
+          margin-right: 15px;
+          &.admin{
+            margin-left: 10px;
+          }
+        }
         .divUserPrev{
           margin-top: -13px;
           height: 45px;
