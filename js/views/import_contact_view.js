@@ -348,7 +348,6 @@
       labelEmail.innerText = 'Email'
       const inputEmail = document.createElement('input');
       inputEmail.type = 'text';
-      inputEmail.readOnly = true;
       inputEmail.value = xmlData.getElementsByTagName('email')[positionXML].childNodes[0].nodeValue;
       divEmail.appendChild(labelEmail)
       divEmail.appendChild(inputEmail)
