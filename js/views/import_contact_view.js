@@ -393,6 +393,10 @@
       const buttonSaveChanges = document.createElement('button');
       buttonSaveChanges.classList = 'buttonSave buttonsModal';
       buttonSaveChanges.innerText = 'Save';
+      buttonSaveChanges.onclick = () => {
+        this.$('#modalContact').addClass('hidden');
+      }
+        
 
       divMainContentEdit.appendChild(divEditVorname);
       divMainContentEdit.appendChild(divEditNachname);
@@ -407,7 +411,6 @@
     
       this.$('#modalContact').append(divMainHeaderEdit);
       this.$('#modalContact').append(divMainContentEdit);
-      this.$('#modalContact').addClass('open');
     },
     findUserXml(id, xmlData){
       let position = null;
