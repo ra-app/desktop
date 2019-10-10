@@ -453,11 +453,11 @@
 
       const divRadioButtons = document.createElement('div');
       divRadioButtons.className = 'divEdit';
-      let userType;
+      let userTypeEdit;
       if ( xmlData.getElementsByTagName('type')[positionXML] ){
-        userType = xmlData.getElementsByTagName('type')[positionXML].childNodes[0].nodeValue
+        userTypeEdit = xmlData.getElementsByTagName('type')[positionXML].childNodes[0].nodeValue
       }else{
-        userType = 'none'
+        userTypeEdit = 'none'
       }
 
       const spanSwitchKunde = document.createElement('span');
@@ -468,37 +468,37 @@
       const divSwitch = document.createElement('div');
       divSwitch.className = 'switch-toggle switch-3 switch-candy';
 
-      const inputKunde = document.createElement('input');
-      inputKunde.type = 'radio';
-      inputKunde.name = `state-d-${id}`
-      inputKunde.id = `edit-kunde-${id}`;
-      if ( userType === 'client' ){
-        inputKunde.checked = true;
-        inputKunde.setAttribute('checked', 'checked')
+      const inputKundeEdit = document.createElement('input');
+      inputKundeEdit.type = 'radio';
+      inputKundeEdit.name = `edit-state-d-${id}`
+      inputKundeEdit.id = `edit-kunde-${id}`;
+      if ( userTypeEdit === 'client' ){
+        inputKundeEdit.checked = true;
+        inputKundeEdit.setAttribute('checked', 'checked')
       }
       const labelKunde = document.createElement('label');
       labelKunde.setAttribute('for', `edit-kunde-${id}`);
       labelKunde.innerHTML = '&nbsp;';
 
-      const inputNone = document.createElement('input');
-      inputNone.type = 'radio';
-      inputNone.name = `state-d-${id}`
-      inputNone.id = `edit-none-${id}`;
-      if ( userType == 'none' ){
-        inputNone.checked = true;
-        inputNone.setAttribute('checked', 'checked')
+      const inputNoneEdit = document.createElement('input');
+      inputNoneEdit.type = 'radio';
+      inputNoneEdit.name = `edit-state-d-${id}`
+      inputNoneEdit.id = `edit-none-${id}`;
+      if ( userTypeEdit == 'none' ){
+        inputNoneEdit.checked = true;
+        inputNoneEdit.setAttribute('checked', 'checked')
       }
       const labelNone = document.createElement('label');
       labelNone.setAttribute('for', `edit-none-${id}`);
       labelNone.innerHTML = '&nbsp;';
 
-      const inputAdmin = document.createElement('input');
-      inputAdmin.type = 'radio';
-      inputAdmin.name = `state-d-${id}`
-      inputAdmin.id = `edit-admin-${id}`;
-      if ( userType == 'admin' ){
-        inputAdmin.checked = true;
-        inputAdmin.setAttribute('checked', 'checked')
+      const inputAdminEdit = document.createElement('input');
+      inputAdminEdit.type = 'radio';
+      inputAdminEdit.name = `edit-state-d-${id}`
+      inputAdminEdit.id = `edit-admin-${id}`;
+      if ( userTypeEdit == 'admin' ){
+        inputAdminEdit.checked = true;
+        inputAdminEdit.setAttribute('checked', 'checked')
       }
       const labelAdmin = document.createElement('label');
       labelAdmin.setAttribute('for', `edit-admin-${id}`);
@@ -511,11 +511,11 @@
       spanSwitchAdmin.innerText = 'Admin';
 
 
-      divSwitch.appendChild(inputKunde);
+      divSwitch.appendChild(inputKundeEdit);
       divSwitch.appendChild(labelKunde);
-      divSwitch.appendChild(inputNone);
+      divSwitch.appendChild(inputNoneEdit);
       divSwitch.appendChild(labelNone);
-      divSwitch.appendChild(inputAdmin);
+      divSwitch.appendChild(inputAdminEdit);
       divSwitch.appendChild(labelAdmin);
       divSwitch.appendChild(aLabel);
 
@@ -554,23 +554,23 @@
         xmlData.getElementsByTagName('position')[positionXML].childNodes[0].nodeValue = inputPosition.value
         xmlData.getElementsByTagName('email')[positionXML].childNodes[0].nodeValue = inputEmail.value
         if(!xmlData.getElementsByTagName('type')[positionXML]){
-          if(inputKunde.checked){
+          if(inputKundeEdit.checked){
             const newElement=  document.createElementNS('', 'type');
             const newText = document.createTextNode('client');
             newElement.appendChild(newText);
             xmlData.getElementsByTagName('contact')[positionXML].appendChild(newElement)
           }
-          if(inputAdmin.checked){
+          if(inputAdminEdit.checked){
             const newElement=  document.createElementNS('', 'type');
             const newText = document.createTextNode('admin');
             newElement.appendChild(newText);
             xmlData.getElementsByTagName('contact')[positionXML].appendChild(newElement)
           }
         }else {
-          if(inputKunde.checked){
+          if(inputKundeEdit.checked){
             xmlData.getElementsByTagName('type')[positionXML].childNodes[0].nodeValue = 'client'
           }
-          if(inputAdmin.checked){
+          if(inputAdminEdit.checked){
             xmlData.getElementsByTagName('type')[positionXML].childNodes[0].nodeValue = 'admin'
           }
         }
