@@ -192,7 +192,10 @@
           checkbox.type = 'checkbox'; 
           checkbox.name = '#'; 
           checkbox.value = '#'; 
-          checkbox.id = '#'; 
+          checkbox.id = `checkbox-${id}`; 
+          if ( userType === 'none' ){
+            checkbox.disabled = true;
+          }
           cellTd.appendChild(checkbox)
           break;
         }
@@ -217,6 +220,7 @@
           inputKunde.addEventListener('click', () => {
             if ( inputKunde.checked ){
               document.getElementById(`buttonSendInvitation-${id}`).disabled = false
+              document.getElementById(`checkbox-${id}`).disabled = false
               document.getElementById(`buttonSendInvitation-${id}`).className = ''
             }
           })
@@ -235,6 +239,7 @@
           inputNone.addEventListener('click', () => {
             if ( inputNone.checked ){
               document.getElementById(`buttonSendInvitation-${id}`).disabled = true
+              document.getElementById(`checkbox-${id}`).disabled = true
               document.getElementById(`buttonSendInvitation-${id}`).className = 'disabled'
             }
           })
@@ -248,6 +253,7 @@
           inputAdmin.id = `admin-${id}`;
           inputAdmin.addEventListener('click', () => {
             if ( inputAdmin.checked ){
+              document.getElementById(`checkbox-${id}`).disabled = false
               document.getElementById(`buttonSendInvitation-${id}`).disabled = false
               document.getElementById(`buttonSendInvitation-${id}`).className = ''
             }
@@ -684,26 +690,6 @@
       inputEmail.id = 'addEmailInput';
       divEmail.appendChild(labelEmail)
       divEmail.appendChild(inputEmail)
-
-      // const divRadioButtons = document.createElement('div');
-      // divRadioButtons.className = 'divEdit';
-      // let userType = 'none'
-
-      // divRadioButtons.innerHTML = `<span class="spanSwitch">Kunde</span>
-      //                             <div class="switch-toggle switch-3 switch-candy">
-      //                               <input id="edit-user-kunde-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" name="edit-user-position-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" type="radio" ${userType === 'client' ? 'checked' : ''}/>
-      //                               <label for="edit-user-kunde-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}">&nbsp;</label>
-                                  
-      //                               <input id="edit-user-none-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" name="edit-user-position-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" type="radio" ${userType === 'none' ? 'checked' : ''}/>
-      //                               <label for="edit-user-none-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" class="disabled">&nbsp;</label>
-                                  
-      //                               <input id="edit-user-admin-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" name="edit-user-position-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" type="radio" ${userType === 'admin' ? 'checked' : ''}/>
-      //                               <label for="edit-user-admin-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}">&nbsp;</label>
-                                  
-      //                               <a></a>
-      //                             </div>
-      //                             <span class="spanSwitch admin">Admin</span>`;
-
 
 
       const divNutzer = document.createElement('div');
