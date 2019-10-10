@@ -200,7 +200,10 @@
           checkbox.addEventListener('click', () => {
             if (this.$('input:checkbox:checked').length > 1 ){
               this.$('.buttonSendInvitation').addClass('disabled')
-              this.$('.buttonSendInvitation').disabled = false;
+              this.$('.buttonSendInvitation').disabled = true;
+            }else if (this.$('input:checkbox:checked').length <= 1 ){
+              this.$('.buttonSendInvitation:not(.none)').removeClass('disabled')
+              this.$('.buttonSendInvitation:not(.none)').disabled = false;
             }
           })
           cellTd.appendChild(checkbox)
@@ -230,6 +233,7 @@
                 document.getElementById(`buttonSendInvitation-${id}`).disabled = false
                 document.getElementById(`checkbox-${id}`).disabled = false
                 document.getElementById(`buttonSendInvitation-${id}`).classList.remove('disabled');
+                document.getElementById(`buttonSendInvitation-${id}`).classList.remove('none');
               }
             }
           })
@@ -251,6 +255,7 @@
               document.getElementById(`checkbox-${id}`).disabled = true
               document.getElementById(`checkbox-${id}`).checked = false
               document.getElementById(`buttonSendInvitation-${id}`).classList.add('disabled');
+              document.getElementById(`buttonSendInvitation-${id}`).classList.add('none');
             }
           })
           const labelNone = document.createElement('label');
@@ -267,6 +272,7 @@
                 document.getElementById(`checkbox-${id}`).disabled = false
                 document.getElementById(`buttonSendInvitation-${id}`).disabled = false
                 document.getElementById(`buttonSendInvitation-${id}`).classList.remove('disabled');
+                document.getElementById(`buttonSendInvitation-${id}`).classList.remove('none');
               }
             }
           })
@@ -305,6 +311,7 @@
           button.innerHTML = i18n('sendAnInvitation');
           if ( userType === 'none' ){
             button.classList.add('disabled');
+            button.classList.add('none');
             button.disabled = true;
           }
           button.onclick = () => {
@@ -704,6 +711,70 @@
       divEmail.appendChild(labelEmail)
       divEmail.appendChild(inputEmail)
 
+      const divRadioButtons = document.createElement('div');
+      divRadioButtons.className = 'divEdit';
+      const  userType = 'none';
+
+      const spanSwitchKunde = document.createElement('span');
+      const id = 'new-user';
+      spanSwitchKunde.className = 'spanSwitch';
+      spanSwitchKunde.innerText = 'Kunde';
+
+      const divSwitch = document.createElement('div');
+      divSwitch.className = 'switch-toggle switch-3 switch-candy';
+
+      const inputKundeAdd = document.createElement('input');
+      inputKundeAdd.type = 'radio';
+      inputKundeAdd.name = `state-d-${id}`
+      inputKundeAdd.id = `edit-kunde-${id}`;
+      inputKundeAdd.checked = false;
+
+      const labelKunde = document.createElement('label');
+      labelKunde.setAttribute('for', `edit-kunde-${id}`);
+      labelKunde.innerHTML = '&nbsp;';
+
+      const inputNoneAdd = document.createElement('input');
+      inputNoneAdd.type = 'radio';
+      inputNoneAdd.name = `state-d-${id}`
+      inputNoneAdd.id = `edit-none-${id}`;
+      inputNoneAdd.checked = true;
+      inputNoneAdd.setAttribute('checked', 'checked')
+
+      const labelNone = document.createElement('label');
+      labelNone.setAttribute('for', `edit-none-${id}`);
+      labelNone.innerHTML = '&nbsp;';
+
+      const inputAdminAdd = document.createElement('input');
+      inputAdminAdd.type = 'radio';
+      inputAdminAdd.name = `state-d-${id}`;
+      inputAdminAdd.id = `edit-admin-${id}`;
+      inputAdminAdd.checked = false;
+
+
+      const labelAdmin = document.createElement('label');
+      labelAdmin.setAttribute('for', `edit-admin-${id}`);
+      labelAdmin.innerHTML = '&nbsp;';
+
+      const aLabel = document.createElement('a');
+
+      const spanSwitchAdmin = document.createElement('span');
+      spanSwitchAdmin.className = 'spanSwitch admin';
+      spanSwitchAdmin.innerText = 'Admin';
+
+
+      divSwitch.appendChild(inputKundeAdd);
+      divSwitch.appendChild(labelKunde);
+      divSwitch.appendChild(inputNoneAdd);
+      divSwitch.appendChild(labelNone);
+      divSwitch.appendChild(inputAdminAdd);
+      divSwitch.appendChild(labelAdmin);
+      divSwitch.appendChild(aLabel);
+
+      divRadioButtons.appendChild(spanSwitchKunde);
+      divRadioButtons.appendChild(divSwitch);
+      divRadioButtons.appendChild(spanSwitchAdmin)
+
+
 
       const divNutzer = document.createElement('div');
       divNutzer.className = 'divEdit';
@@ -748,6 +819,17 @@
         const tsElement = document.createElementNS('', 'ts');
         const tsText = document.createTextNode('');
         tsElement.appendChild(tsText)
+        let type = null;
+        if(inputKundeAdd.checked){
+          type = 'client';
+        }
+        if(inputAdminAdd.checked){
+          type = 'admin'
+        }
+        const typeElement = document.createElementNS('', 'type');
+        const typeText = document.createTextNode(type);
+        typeElement.appendChild(typeText)
+
 
         // append parent element
         parentElement.appendChild(nameElement);
@@ -756,6 +838,7 @@
         parentElement.appendChild(emailElement);
         parentElement.appendChild(telephoneElement);
         parentElement.appendChild(tsElement);
+        parentElement.appendChild(typeElement);
 
         // prepare data and save on DB
         xmlData.appendChild(parentElement);
@@ -772,7 +855,7 @@
       divMainContentEdit.appendChild(divEditPosition);
       divMainContentEdit.appendChild(divTelephone);
       divMainContentEdit.appendChild(divEmail);
-      // divMainContentEdit.appendChild(divRadioButtons);
+      divMainContentEdit.appendChild(divRadioButtons);
       // divMainContentEdit.appendChild(divStatus);
       divMainContentEdit.appendChild(divNutzer);
       divMainContentEdit.appendChild(buttonSaveChanges);
