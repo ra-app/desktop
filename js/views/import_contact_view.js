@@ -192,10 +192,17 @@
           checkbox.type = 'checkbox'; 
           checkbox.name = '#'; 
           checkbox.value = '#'; 
+          checkbox.className = 'checkbox-user'; 
           checkbox.id = `checkbox-${id}`; 
           if ( userType === 'none' ){
             checkbox.disabled = true;
           }
+          checkbox.addEventListener('click', () => {
+            if (this.$('input:checkbox:checked').length > 1 ){
+              this.$('.buttonSendInvitation').addClass('disabled')
+              this.$('.buttonSendInvitation').disabled = false;
+            }
+          })
           cellTd.appendChild(checkbox)
           break;
         }
@@ -219,9 +226,11 @@
           }
           inputKunde.addEventListener('click', () => {
             if ( inputKunde.checked ){
-              document.getElementById(`buttonSendInvitation-${id}`).disabled = false
-              document.getElementById(`checkbox-${id}`).disabled = false
-              document.getElementById(`buttonSendInvitation-${id}`).className = ''
+              if ( this.$('input:checkbox:checked').length <= 1 ){
+                document.getElementById(`buttonSendInvitation-${id}`).disabled = false
+                document.getElementById(`checkbox-${id}`).disabled = false
+                document.getElementById(`buttonSendInvitation-${id}`).classList.remove('disabled');
+              }
             }
           })
           const labelKunde = document.createElement('label');
@@ -240,7 +249,8 @@
             if ( inputNone.checked ){
               document.getElementById(`buttonSendInvitation-${id}`).disabled = true
               document.getElementById(`checkbox-${id}`).disabled = true
-              document.getElementById(`buttonSendInvitation-${id}`).className = 'disabled'
+              document.getElementById(`checkbox-${id}`).checked = false
+              document.getElementById(`buttonSendInvitation-${id}`).classList.add('disabled');
             }
           })
           const labelNone = document.createElement('label');
@@ -253,9 +263,11 @@
           inputAdmin.id = `admin-${id}`;
           inputAdmin.addEventListener('click', () => {
             if ( inputAdmin.checked ){
-              document.getElementById(`checkbox-${id}`).disabled = false
-              document.getElementById(`buttonSendInvitation-${id}`).disabled = false
-              document.getElementById(`buttonSendInvitation-${id}`).className = ''
+              if ( this.$('input:checkbox:checked').length ){
+                document.getElementById(`checkbox-${id}`).disabled = false
+                document.getElementById(`buttonSendInvitation-${id}`).disabled = false
+                document.getElementById(`buttonSendInvitation-${id}`).classList.remove('disabled');
+              }
             }
           })
           if ( userType == 'admin' ){
@@ -289,9 +301,10 @@
         case 6:
           const button = document.createElement('button');
           button.id = `buttonSendInvitation-${id}`
+          button.classList.add('buttonSendInvitation')
           button.innerHTML = i18n('sendAnInvitation');
           if ( userType === 'none' ){
-            button.className = 'disabled';
+            button.classList.add('disabled');
             button.disabled = true;
           }
           button.onclick = () => {
