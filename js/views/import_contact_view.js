@@ -753,8 +753,8 @@
       divMainContentEdit.appendChild(divEditVorname);
       divMainContentEdit.appendChild(divEditNachname);
       divMainContentEdit.appendChild(divEditPosition);
-      divMainContentEdit.appendChild(divTelephone);
       divMainContentEdit.appendChild(divEmail);
+      divMainContentEdit.appendChild(divTelephone);
       // divMainContentEdit.appendChild(divRadioButtons);
       // divMainContentEdit.appendChild(divStatus);
       divMainContentEdit.appendChild(divNutzer);
