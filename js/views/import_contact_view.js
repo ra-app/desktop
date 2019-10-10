@@ -82,7 +82,6 @@
       //Append content
       table.appendChild(tbody)
       this.$('#contactTable').append(table);
-
       this.$('table').tablesort();
     },
     searchTable(e){
@@ -201,20 +200,69 @@
         }
         // eslint-disable-next-line no-case-declarations
         case 5:
-          cellTd.innerHTML = `<span class="spanSwitch">Kunde</span>
-                              <div class="switch-toggle switch-3 switch-candy">
-                                <input id="on-${id}" name="state-d-${id}" type="radio" ${userType === 'client' ? 'checked' : ''}/>
-                                <label for="on-${id}">&nbsp;</label>
-                              
-                                <input id="na-${id}" name="state-d-${id}" type="radio" ${userType === 'none' ? 'checked' : ''}/>
-                                <label for="na-${id}" class="disabled">&nbsp;</label>
-                              
-                                <input id="off-${id}" name="state-d-${id}" type="radio" ${userType === 'admin' ? 'checked' : ''}/>
-                                <label for="off-${id}">&nbsp;</label>
-                              
-                                <a></a>
-                              </div>
-                              <span class="spanSwitch admin">Admin</span>`
+
+        console.log('User Type', userType)
+          const spanSwitchKunde = document.createElement('span');
+          spanSwitchKunde.className = 'spanSwitch';
+          spanSwitchKunde.innerText = 'Kunde';
+
+          const divSwitch = document.createElement('div');
+          divSwitch.className = 'switch-toggle switch-3 switch-candy';
+
+          const inputKunde = document.createElement('input');
+          inputKunde.type = 'radio';
+          inputKunde.name = `state-d-${id}`
+          inputKunde.id = `kunde-${id}`;
+          if ( userType === 'client' ){
+            inputKunde.checked = true;
+            inputKunde.setAttribute('checked', 'checked')
+          }
+          const labelKunde = document.createElement('label');
+          labelKunde.setAttribute('for', `kunde-${id}`);
+          labelKunde.innerHTML = '&nbsp;';
+
+          const inputNone = document.createElement('input');
+          inputNone.type = 'radio';
+          inputNone.name = `state-d-${id}`
+          inputNone.id = `none-${id}`;
+          if ( userType == 'none' ){
+            inputNone.checked = true;
+            inputNone.setAttribute('checked', 'checked')
+          }
+          const labelNone = document.createElement('label');
+          labelNone.setAttribute('for', `none-${id}`);
+          labelNone.innerHTML = '&nbsp;';
+
+          const inputAdmin = document.createElement('input');
+          inputAdmin.type = 'radio';
+          inputAdmin.name = `state-d-${id}`
+          inputAdmin.id = `admin-${id}`;
+          if ( userType == 'admin' ){
+            inputAdmin.checked = true;
+            inputAdmin.setAttribute('checked', 'checked')
+          }
+          const labelAdmin = document.createElement('label');
+          labelAdmin.setAttribute('for', `admin-${id}`);
+          labelAdmin.innerHTML = '&nbsp;';
+
+          const aLabel = document.createElement('a');
+
+          const spanSwitchAdmin = document.createElement('span');
+          spanSwitchAdmin.className = 'spanSwitch admin';
+          spanSwitchAdmin.innerText = 'Admin';
+
+
+          divSwitch.appendChild(inputKunde);
+          divSwitch.appendChild(labelKunde);
+          divSwitch.appendChild(inputNone);
+          divSwitch.appendChild(labelNone);
+          divSwitch.appendChild(inputAdmin);
+          divSwitch.appendChild(labelAdmin);
+          divSwitch.appendChild(aLabel);
+
+          cellTd.appendChild(spanSwitchKunde)
+          cellTd.appendChild(divSwitch);
+          cellTd.appendChild(spanSwitchAdmin);
           break;
         // eslint-disable-next-line no-case-declarations
         case 6:
@@ -392,23 +440,73 @@
       let userType;
       if ( xmlData.getElementsByTagName('type')[positionXML] ){
         userType = xmlData.getElementsByTagName('type')[positionXML].childNodes[0].nodeValue
-          }else{
-            userType = 'none'
-          }
-      divRadioButtons.innerHTML = `<span class="spanSwitch">Kunde</span>
-                                  <div class="switch-toggle switch-3 switch-candy">
-                                    <input id="edit-user-kunde-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" name="edit-user-position-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" type="radio" ${userType === 'client' ? 'checked' : ''}/>
-                                    <label for="edit-user-kunde-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}">&nbsp;</label>
-                                  
-                                    <input id="edit-user-none-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" name="edit-user-position-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" type="radio" ${userType === 'none' ? 'checked' : ''}/>
-                                    <label for="edit-user-none-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" class="disabled">&nbsp;</label>
-                                  
-                                    <input id="edit-user-admin-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" name="edit-user-position-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" type="radio" ${userType === 'admin' ? 'checked' : ''}/>
-                                    <label for="edit-user-admin-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}">&nbsp;</label>
-                                  
-                                    <a></a>
-                                  </div>
-                                  <span class="spanSwitch admin">Admin</span>`;
+      }else{
+        userType = 'none'
+      }
+
+      const spanSwitchKunde = document.createElement('span');
+      const id = xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue;
+      spanSwitchKunde.className = 'spanSwitch';
+      spanSwitchKunde.innerText = 'Kunde';
+
+      const divSwitch = document.createElement('div');
+      divSwitch.className = 'switch-toggle switch-3 switch-candy';
+
+      const inputKunde = document.createElement('input');
+      inputKunde.type = 'radio';
+      inputKunde.name = `state-d-${id}`
+      inputKunde.id = `edit-kunde-${id}`;
+      if ( userType === 'client' ){
+        inputKunde.checked = true;
+        inputKunde.setAttribute('checked', 'checked')
+      }
+      const labelKunde = document.createElement('label');
+      labelKunde.setAttribute('for', `edit-kunde-${id}`);
+      labelKunde.innerHTML = '&nbsp;';
+
+      const inputNone = document.createElement('input');
+      inputNone.type = 'radio';
+      inputNone.name = `state-d-${id}`
+      inputNone.id = `edit-none-${id}`;
+      if ( userType == 'none' ){
+        inputNone.checked = true;
+        inputNone.setAttribute('checked', 'checked')
+      }
+      const labelNone = document.createElement('label');
+      labelNone.setAttribute('for', `edit-none-${id}`);
+      labelNone.innerHTML = '&nbsp;';
+
+      const inputAdmin = document.createElement('input');
+      inputAdmin.type = 'radio';
+      inputAdmin.name = `state-d-${id}`
+      inputAdmin.id = `edit-admin-${id}`;
+      if ( userType == 'admin' ){
+        inputAdmin.checked = true;
+        inputAdmin.setAttribute('checked', 'checked')
+      }
+      const labelAdmin = document.createElement('label');
+      labelAdmin.setAttribute('for', `edit-admin-${id}`);
+      labelAdmin.innerHTML = '&nbsp;';
+
+      const aLabel = document.createElement('a');
+
+      const spanSwitchAdmin = document.createElement('span');
+      spanSwitchAdmin.className = 'spanSwitch admin';
+      spanSwitchAdmin.innerText = 'Admin';
+
+
+      divSwitch.appendChild(inputKunde);
+      divSwitch.appendChild(labelKunde);
+      divSwitch.appendChild(inputNone);
+      divSwitch.appendChild(labelNone);
+      divSwitch.appendChild(inputAdmin);
+      divSwitch.appendChild(labelAdmin);
+      divSwitch.appendChild(aLabel);
+
+      divRadioButtons.appendChild(spanSwitchKunde);
+      divRadioButtons.appendChild(divSwitch);
+      divRadioButtons.appendChild(spanSwitchAdmin)
+
 
       // const divStatus = document.createElement('div');
       // divStatus.className = 'divEdit';
@@ -440,23 +538,23 @@
         xmlData.getElementsByTagName('position')[positionXML].childNodes[0].nodeValue = inputPosition.value
         xmlData.getElementsByTagName('email')[positionXML].childNodes[0].nodeValue = inputEmail.value
         if(!xmlData.getElementsByTagName('type')[positionXML]){
-          if(this.$(`#edit-user-kunde-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}`).checked){
+          if(inputKunde.checked){
             const newElement=  document.createElementNS('', 'type');
             const newText = document.createTextNode('client');
             newElement.appendChild(newText);
             xmlData.getElementsByTagName('contact')[positionXML].appendChild(newElement)
           }
-          if(this.$(`#edit-user-admin-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}`).checked){
+          if(inputAdmin.checked){
             const newElement=  document.createElementNS('', 'type');
             const newText = document.createTextNode('admin');
             newElement.appendChild(newText);
             xmlData.getElementsByTagName('contact')[positionXML].appendChild(newElement)
           }
         }else {
-          if(this.$(`#edit-user-kunde-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}`).checked){
+          if(inputKunde.checked){
             xmlData.getElementsByTagName('type')[positionXML].childNodes[0].nodeValue = 'client'
           }
-          if(this.$(`#edit-user-admin-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}`).checked){
+          if(inputAdmin.checked){
             xmlData.getElementsByTagName('type')[positionXML].childNodes[0].nodeValue = 'admin'
           }
         }
@@ -468,7 +566,7 @@
         this.refreshTable();
 
         
-        // console.log(dataToUpdate)
+        console.log(dataToUpdate)
       }
 
       divMainContentEdit.appendChild(divEditVorname);

@@ -579,12 +579,12 @@ p.ticket-time {
   .sortable{
     max-height: calc(1080px - 85px);
     margin-bottom: 20%;
+    width: 100%;
     th{
       height: 30px;
       font-weight: normal;
       text-transform: capitalize;
       text-align: center;
-      width: 1%;
       text-transform: uppercase;
       font-family: $poppins-regular;
       font-size: 13px;
