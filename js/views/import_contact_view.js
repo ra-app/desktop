@@ -201,9 +201,13 @@
             if (this.$('input:checkbox:checked').length > 1 ){
               this.$('.buttonSendInvitation').addClass('disabled')
               this.$('.buttonSendInvitation').disabled = true;
+              this.$('#sendMultipleInvitations').removeClass('disabled')
+              this.$('#sendMultipleInvitations').disabled = false
             }else if (this.$('input:checkbox:checked').length <= 1 ){
-              this.$('.buttonSendInvitation:not(.none)').removeClass('disabled')
+              this.$('.buttonSendInvitation:not(.none)').removeClass('disabled');
               this.$('.buttonSendInvitation:not(.none)').disabled = false;
+              this.$('#sendMultipleInvitations').addClass('disabled');
+              this.$('#sendMultipleInvitations').disabled = true;
             }
           })
           cellTd.appendChild(checkbox)
