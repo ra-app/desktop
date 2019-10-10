@@ -143,8 +143,10 @@
         this.contactsData = {
           'contact_data':  aux.toString().replace(/>\s*/g, '>'),
         }
-        const companyNumber = textsecure.storage.get('companyNumber', null);
-        await updateContact(companyNumber, this.contactsData);
+        this.updateXmlDB(this.contactsData)
+        // const companyNumber = textsecure.storage.get('companyNumber', null);
+        // await updateContact(companyNumber, this.contactsData);
+        // localStorage.setItem('ContactList', contactsData.contact_data);
       } catch (err) {
         // TODO: show invalid xml error
         console.error(err);
@@ -232,21 +234,7 @@
             inputKunde.checked = true;
             inputKunde.setAttribute('checked', 'checked')
           }
-          inputKunde.addEventListener('click', () => {
-            if ( inputKunde.checked ){
-              dataUsersToUpdate[id] = {
-                position: 'kunde',
-                userid: id,
-                cell: contact.outerHTML,
-              }
-              if ( this.$('input:checkbox:checked').length <= 1 ){
-                document.getElementById(`buttonSendInvitation-${id}`).disabled = false
-                document.getElementById(`checkbox-${id}`).disabled = false
-                document.getElementById(`buttonSendInvitation-${id}`).classList.remove('disabled');
-                document.getElementById(`buttonSendInvitation-${id}`).classList.remove('none');
-              }
-            }
-          })
+      
           const labelKunde = document.createElement('label');
           labelKunde.setAttribute('for', `kunde-${id}`);
           labelKunde.innerHTML = '&nbsp;';
@@ -259,15 +247,7 @@
             inputNone.checked = true;
             inputNone.setAttribute('checked', 'checked')
           }
-          inputNone.addEventListener('click', () => {
-            if ( inputNone.checked ){
-              document.getElementById(`buttonSendInvitation-${id}`).disabled = true
-              document.getElementById(`checkbox-${id}`).disabled = true
-              document.getElementById(`checkbox-${id}`).checked = false
-              document.getElementById(`buttonSendInvitation-${id}`).classList.add('disabled');
-              document.getElementById(`buttonSendInvitation-${id}`).classList.add('none');
-            }
-          })
+       
           const labelNone = document.createElement('label');
           labelNone.setAttribute('for', `none-${id}`);
           labelNone.innerHTML = '&nbsp;';
@@ -276,22 +256,7 @@
           inputAdmin.type = 'radio';
           inputAdmin.name = `state-d-${id}`
           inputAdmin.id = `admin-${id}`;
-          inputAdmin.addEventListener('click', () => {
-            if ( inputAdmin.checked ){
-              dataUsersToUpdate[id] = {
-                position: 'admin',
-                userid: id,
-                cell: contact.outerHTML,
-              }
-              if ( this.$('input:checkbox:checked').length <=1 ){
-                document.getElementById(`checkbox-${id}`).disabled = false
-                document.getElementById(`buttonSendInvitation-${id}`).disabled = false
-                document.getElementById(`buttonSendInvitation-${id}`).classList.remove('disabled');
-                document.getElementById(`buttonSendInvitation-${id}`).classList.remove('none');
-              }
-            }
-            console.log('dataUsersToUpdate ===> ', dataUsersToUpdate)
-          })
+          
           if ( userType == 'admin' ){
             inputAdmin.checked = true;
             inputAdmin.setAttribute('checked', 'checked')
@@ -318,6 +283,62 @@
           cellTd.appendChild(spanSwitchKunde)
           cellTd.appendChild(divSwitch);
           cellTd.appendChild(spanSwitchAdmin);
+
+          inputKunde.addEventListener('click', () => {
+            if ( inputKunde.checked ){
+              dataUsersToUpdate[id] = {
+                position: 'kunde',
+                userid: id,
+                cell: contact.outerHTML,
+              }
+              document.getElementById(`admin-${id}`).checked = false;
+              document.getElementById(`none-${id}`).checked = false;
+              document.getElementById(`admin-${id}`).removeAttribute('cheked');
+              document.getElementById(`none-${id}`).removeAttribute('cheked');
+
+
+              if ( this.$('input:checkbox:checked').length <= 1 ){
+                document.getElementById(`buttonSendInvitation-${id}`).disabled = false
+                document.getElementById(`checkbox-${id}`).disabled = false
+                document.getElementById(`buttonSendInvitation-${id}`).classList.remove('disabled');
+                document.getElementById(`buttonSendInvitation-${id}`).classList.remove('none');
+              }
+            }
+          })
+          inputNone.addEventListener('click', () => {
+            if ( inputNone.checked ){
+              document.getElementById(`admin-${id}`).checked = false;
+              document.getElementById(`kunde-${id}`).checked = false;
+              document.getElementById(`admin-${id}`).removeAttribute('cheked');
+              document.getElementById(`kunde-${id}`).removeAttribute('cheked');
+
+              document.getElementById(`buttonSendInvitation-${id}`).disabled = true
+              document.getElementById(`checkbox-${id}`).disabled = true
+              document.getElementById(`checkbox-${id}`).checked = false
+              document.getElementById(`buttonSendInvitation-${id}`).classList.add('disabled');
+              document.getElementById(`buttonSendInvitation-${id}`).classList.add('none');
+            }
+          })
+          inputAdmin.addEventListener('click', () => {
+            if ( inputAdmin.checked ){
+              dataUsersToUpdate[id] = {
+                position: 'admin',
+                userid: id,
+                cell: contact.outerHTML,
+              }
+              document.getElementById(`kunde-${id}`).checked = false;
+              document.getElementById(`none-${id}`).checked = false;
+              document.getElementById(`kunde-${id}`).removeAttribute('cheked');
+              document.getElementById(`none-${id}`).removeAttribute('cheked');
+              if ( this.$('input:checkbox:checked').length <=1 ){
+                document.getElementById(`checkbox-${id}`).disabled = false
+                document.getElementById(`buttonSendInvitation-${id}`).disabled = false
+                document.getElementById(`buttonSendInvitation-${id}`).classList.remove('disabled');
+                document.getElementById(`buttonSendInvitation-${id}`).classList.remove('none');
+              }
+            }
+            console.log('dataUsersToUpdate ===> ', dataUsersToUpdate)
+          })
           break;
         // eslint-disable-next-line no-case-declarations
         case 6:
@@ -414,13 +435,14 @@
       
     },
     createEditPanel(cln, xmlData, positionXML){
+      console.log('CLN !!!! ', cln.getElementsByTagName('name'))
       const divMainHeaderEdit = document.createElement('div');
       divMainHeaderEdit.className = 'divModalHeader';
       const pUserName = document.createElement('p');
-      pUserName.innerText = xmlData.getElementsByTagName('name')[positionXML].childNodes[0].nodeValue + ' ' + xmlData.getElementsByTagName('surname')[positionXML].childNodes[0].nodeValue
+      pUserName.innerText = cln.getElementsByTagName('name')[0].childNodes[0].nodeValue + ' ' + cln.getElementsByTagName('surname')[0].childNodes[0].nodeValue
       pUserName.className = 'titleHeaderEdit';
       const pUserPhone = document.createElement('p');
-      pUserPhone.innerText = xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue
+      pUserPhone.innerText = cln.getElementsByTagName('phone')[0].childNodes[0].nodeValue
       pUserPhone.className = 'titleHeaderEdit';
       const imageClosePanel = document.createElement('img');
       imageClosePanel.className = 'imageClosePanel';
@@ -444,7 +466,7 @@
       labelField.innerText = 'Vorname';
       const inputEditVorname = document.createElement('input');
       inputEditVorname.type = 'text';
-      inputEditVorname.value = xmlData.getElementsByTagName('name')[positionXML].childNodes[0].nodeValue;
+      inputEditVorname.value = cln.getElementsByTagName('name')[0].childNodes[0].nodeValue;
       divEditVorname.appendChild(labelField)
       divEditVorname.appendChild(inputEditVorname)
 
@@ -455,7 +477,7 @@
       labelNachName.innerText = 'Nachname';
       const inputNachName = document.createElement('input');
       inputNachName.type = 'text';
-      inputNachName.value = xmlData.getElementsByTagName('surname')[positionXML].childNodes[0].nodeValue;
+      inputNachName.value = cln.getElementsByTagName('surname')[0].childNodes[0].nodeValue;
       divEditNachname.appendChild(labelNachName)
       divEditNachname.appendChild(inputNachName)
 
@@ -466,7 +488,7 @@
       labelPosition.innerText = 'Position';
       const inputPosition = document.createElement('input');
       inputPosition.type = 'text';
-      inputPosition.value = xmlData.getElementsByTagName('position')[positionXML].childNodes[0].nodeValue;
+      inputPosition.value = cln.getElementsByTagName('position')[0].childNodes[0].nodeValue;
       divEditPosition.appendChild(labelPosition)
       divEditPosition.appendChild(inputPosition)
 
@@ -478,7 +500,7 @@
       const inputTelephone = document.createElement('input');
       inputTelephone.type = 'text';
       inputTelephone.readOnly = true;
-      inputTelephone.value = xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue;
+      inputTelephone.value = cln.getElementsByTagName('phone')[0].childNodes[0].nodeValue;
       divTelephone.appendChild(labelTelephone)
       divTelephone.appendChild(inputTelephone)
 
@@ -489,21 +511,20 @@
       labelEmail.innerText = 'Email'
       const inputEmail = document.createElement('input');
       inputEmail.type = 'text';
-      inputEmail.value = xmlData.getElementsByTagName('email')[positionXML].childNodes[0].nodeValue;
+      inputEmail.value = cln.getElementsByTagName('email')[0].childNodes[0].nodeValue;
       divEmail.appendChild(labelEmail)
       divEmail.appendChild(inputEmail)
 
       const divRadioButtons = document.createElement('div');
       divRadioButtons.className = 'divEdit';
       let userTypeEdit;
-      if ( xmlData.getElementsByTagName('type')[positionXML] ){
-        userTypeEdit = xmlData.getElementsByTagName('type')[positionXML].childNodes[0].nodeValue
+      if ( cln.getElementsByTagName('type')[0] ){
+        userTypeEdit = cln.getElementsByTagName('type')[0].childNodes[0].nodeValue
       }else{
         userTypeEdit = 'none'
       }
-
       const spanSwitchKunde = document.createElement('span');
-      const id = xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue;
+      const id = cln.getElementsByTagName('phone')[0].childNodes[0].nodeValue;
       spanSwitchKunde.className = 'spanSwitch';
       spanSwitchKunde.innerText = 'Kunde';
 
@@ -583,7 +604,7 @@
       labelNutzer.innerText = 'Nutzer'
       const divUserPrev = document.createElement('div');
       divUserPrev.className = 'divUserPrev';
-      divUserPrev.innerHTML = '<img src="images/header-chat.png" /> <span> ' + xmlData.getElementsByTagName('name')[positionXML].childNodes[0].nodeValue + ' ' + xmlData.getElementsByTagName('surname')[positionXML].childNodes[0].nodeValue + '</span>';
+      divUserPrev.innerHTML = '<img src="images/header-chat.png" /> <span> ' + cln.getElementsByTagName('name')[0].childNodes[0].nodeValue + ' ' + cln.getElementsByTagName('surname')[0].childNodes[0].nodeValue + '</span>';
       divNutzer.appendChild(labelNutzer)
       divNutzer.appendChild(divUserPrev)
 
@@ -591,31 +612,35 @@
       buttonSaveChanges.classList = 'buttonSave buttonsModal';
       buttonSaveChanges.innerText = 'Save';
       buttonSaveChanges.onclick = () => {
-        xmlData.getElementsByTagName('name')[positionXML].childNodes[0].nodeValue = inputEditVorname.value
-        xmlData.getElementsByTagName('surname')[positionXML].childNodes[0].nodeValue = inputNachName.value
-        xmlData.getElementsByTagName('position')[positionXML].childNodes[0].nodeValue = inputPosition.value
-        xmlData.getElementsByTagName('email')[positionXML].childNodes[0].nodeValue = inputEmail.value
-        if(!xmlData.getElementsByTagName('type')[positionXML]){
+        cln.getElementsByTagName('name')[0].childNodes[0].nodeValue = inputEditVorname.value
+        cln.getElementsByTagName('surname')[0].childNodes[0].nodeValue = inputNachName.value
+        cln.getElementsByTagName('position')[0].childNodes[0].nodeValue = inputPosition.value
+        cln.getElementsByTagName('email')[0].childNodes[0].nodeValue = inputEmail.value
+        if(!cln.getElementsByTagName('type')[0]){
           if(inputKundeEdit.checked){
             const newElement=  document.createElementNS('', 'type');
             const newText = document.createTextNode('client');
             newElement.appendChild(newText);
-            xmlData.getElementsByTagName('contact')[positionXML].appendChild(newElement)
+            cln.appendChild(newElement)
+            // xmlData.getElementsByTagName('contact')[positionXML].appendChild(newElement)
           }
           if(inputAdminEdit.checked){
             const newElement=  document.createElementNS('', 'type');
             const newText = document.createTextNode('admin');
             newElement.appendChild(newText);
-            xmlData.getElementsByTagName('contact')[positionXML].appendChild(newElement)
+            cln.appendChild(newElement)
+            // xmlData.getElementsByTagName('contact')[positionXML].appendChild(newElement)
           }
         }else {
           if(inputKundeEdit.checked){
-            xmlData.getElementsByTagName('type')[positionXML].childNodes[0].nodeValue = 'client'
+            cln.getElementsByTagName('type')[0].childNodes[0].nodeValue = 'client'
           }
           if(inputAdminEdit.checked){
-            xmlData.getElementsByTagName('type')[positionXML].childNodes[0].nodeValue = 'admin'
+            cln.getElementsByTagName('type')[0].childNodes[0].nodeValue = 'admin'
           }
         }
+
+        xmlData.replaceChild(cln, xmlData.getElementsByTagName("contact")[positionXML]);
         const dataToUpdate = this.prepareDataToUpdate(xmlData);
         this.contactsData = dataToUpdate;
         console.log(this.contactsData, "dataaaaaaaaaaaaaaaa")
