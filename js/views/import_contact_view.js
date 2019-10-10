@@ -720,11 +720,11 @@
         const positionText = document.createTextNode(inputPosition.value);
         positionElement.appendChild(positionText)
 
-        const telephoneElement = document.createElementNS('', 'email');
+        const telephoneElement = document.createElementNS('', 'phone');
         const telephoneText = document.createTextNode(inputTelephone.value);
         telephoneElement.appendChild(telephoneText)
 
-        const emailElement = document.createElementNS('', 'phone');
+        const emailElement = document.createElementNS('', 'email');
         const emailText = document.createTextNode(inputEmail.value);
         emailElement.appendChild(emailText)
 
@@ -753,8 +753,8 @@
       divMainContentEdit.appendChild(divEditVorname);
       divMainContentEdit.appendChild(divEditNachname);
       divMainContentEdit.appendChild(divEditPosition);
-      divMainContentEdit.appendChild(divEmail);
       divMainContentEdit.appendChild(divTelephone);
+      divMainContentEdit.appendChild(divEmail);
       // divMainContentEdit.appendChild(divRadioButtons);
       // divMainContentEdit.appendChild(divStatus);
       divMainContentEdit.appendChild(divNutzer);
