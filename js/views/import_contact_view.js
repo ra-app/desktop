@@ -685,24 +685,68 @@
       divEmail.appendChild(labelEmail)
       divEmail.appendChild(inputEmail)
 
-      // const divRadioButtons = document.createElement('div');
-      // divRadioButtons.className = 'divEdit';
-      // let userType = 'none'
+      const divRadioButtons = document.createElement('div');
+      divRadioButtons.className = 'divEdit';
+      const  userType = 'none';
 
-      // divRadioButtons.innerHTML = `<span class="spanSwitch">Kunde</span>
-      //                             <div class="switch-toggle switch-3 switch-candy">
-      //                               <input id="edit-user-kunde-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" name="edit-user-position-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" type="radio" ${userType === 'client' ? 'checked' : ''}/>
-      //                               <label for="edit-user-kunde-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}">&nbsp;</label>
-                                  
-      //                               <input id="edit-user-none-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" name="edit-user-position-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" type="radio" ${userType === 'none' ? 'checked' : ''}/>
-      //                               <label for="edit-user-none-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" class="disabled">&nbsp;</label>
-                                  
-      //                               <input id="edit-user-admin-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" name="edit-user-position-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}" type="radio" ${userType === 'admin' ? 'checked' : ''}/>
-      //                               <label for="edit-user-admin-${xmlData.getElementsByTagName('phone')[positionXML].childNodes[0].nodeValue}">&nbsp;</label>
-                                  
-      //                               <a></a>
-      //                             </div>
-      //                             <span class="spanSwitch admin">Admin</span>`;
+      const spanSwitchKunde = document.createElement('span');
+      const id = 'new-user';
+      spanSwitchKunde.className = 'spanSwitch';
+      spanSwitchKunde.innerText = 'Kunde';
+
+      const divSwitch = document.createElement('div');
+      divSwitch.className = 'switch-toggle switch-3 switch-candy';
+
+      const inputKundeAdd = document.createElement('input');
+      inputKundeAdd.type = 'radio';
+      inputKundeAdd.name = `state-d-${id}`
+      inputKundeAdd.id = `edit-kunde-${id}`;
+      inputKundeAdd.checked = false;
+
+      const labelKunde = document.createElement('label');
+      labelKunde.setAttribute('for', `edit-kunde-${id}`);
+      labelKunde.innerHTML = '&nbsp;';
+
+      const inputNoneAdd = document.createElement('input');
+      inputNoneAdd.type = 'radio';
+      inputNoneAdd.name = `state-d-${id}`
+      inputNoneAdd.id = `edit-none-${id}`;
+      inputNoneAdd.checked = true;
+      inputNoneAdd.setAttribute('checked', 'checked')
+
+      const labelNone = document.createElement('label');
+      labelNone.setAttribute('for', `edit-none-${id}`);
+      labelNone.innerHTML = '&nbsp;';
+
+      const inputAdminAdd = document.createElement('input');
+      inputAdminAdd.type = 'radio';
+      inputAdminAdd.name = `state-d-${id}`;
+      inputAdminAdd.id = `edit-admin-${id}`;
+      inputAdminAdd.checked = false;
+
+
+      const labelAdmin = document.createElement('label');
+      labelAdmin.setAttribute('for', `edit-admin-${id}`);
+      labelAdmin.innerHTML = '&nbsp;';
+
+      const aLabel = document.createElement('a');
+
+      const spanSwitchAdmin = document.createElement('span');
+      spanSwitchAdmin.className = 'spanSwitch admin';
+      spanSwitchAdmin.innerText = 'Admin';
+
+
+      divSwitch.appendChild(inputKundeAdd);
+      divSwitch.appendChild(labelKunde);
+      divSwitch.appendChild(inputNoneAdd);
+      divSwitch.appendChild(labelNone);
+      divSwitch.appendChild(inputAdminAdd);
+      divSwitch.appendChild(labelAdmin);
+      divSwitch.appendChild(aLabel);
+
+      divRadioButtons.appendChild(spanSwitchKunde);
+      divRadioButtons.appendChild(divSwitch);
+      divRadioButtons.appendChild(spanSwitchAdmin)
 
 
 
@@ -749,6 +793,17 @@
         const tsElement = document.createElementNS('', 'ts');
         const tsText = document.createTextNode('');
         tsElement.appendChild(tsText)
+        let type = null;
+        if(inputKundeAdd.checked){
+          type = 'client';
+        }
+        if(inputAdminAdd.checked){
+          type = 'admin'
+        }
+        const typeElement = document.createElementNS('', 'type');
+        const typeText = document.createTextNode(type);
+        typeElement.appendChild(typeText)
+
 
         // append parent element
         parentElement.appendChild(nameElement);
@@ -757,6 +812,7 @@
         parentElement.appendChild(emailElement);
         parentElement.appendChild(telephoneElement);
         parentElement.appendChild(tsElement);
+        parentElement.appendChild(typeElement);
 
         // prepare data and save on DB
         xmlData.appendChild(parentElement);
@@ -773,7 +829,7 @@
       divMainContentEdit.appendChild(divEditPosition);
       divMainContentEdit.appendChild(divTelephone);
       divMainContentEdit.appendChild(divEmail);
-      // divMainContentEdit.appendChild(divRadioButtons);
+      divMainContentEdit.appendChild(divRadioButtons);
       // divMainContentEdit.appendChild(divStatus);
       divMainContentEdit.appendChild(divNutzer);
       divMainContentEdit.appendChild(buttonSaveChanges);
