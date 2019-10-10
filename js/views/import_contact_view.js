@@ -198,8 +198,6 @@
         }
         // eslint-disable-next-line no-case-declarations
         case 5:
-
-        console.log('User Type', userType)
           const spanSwitchKunde = document.createElement('span');
           spanSwitchKunde.className = 'spanSwitch';
           spanSwitchKunde.innerText = 'Kunde';
@@ -211,10 +209,17 @@
           inputKunde.type = 'radio';
           inputKunde.name = `state-d-${id}`
           inputKunde.id = `kunde-${id}`;
+          
           if ( userType === 'client' ){
             inputKunde.checked = true;
             inputKunde.setAttribute('checked', 'checked')
           }
+          inputKunde.addEventListener('click', () => {
+            if ( inputKunde.checked ){
+              document.getElementById(`buttonSendInvitation-${id}`).disabled = false
+              document.getElementById(`buttonSendInvitation-${id}`).className = ''
+            }
+          })
           const labelKunde = document.createElement('label');
           labelKunde.setAttribute('for', `kunde-${id}`);
           labelKunde.innerHTML = '&nbsp;';
@@ -227,6 +232,12 @@
             inputNone.checked = true;
             inputNone.setAttribute('checked', 'checked')
           }
+          inputNone.addEventListener('click', () => {
+            if ( inputNone.checked ){
+              document.getElementById(`buttonSendInvitation-${id}`).disabled = true
+              document.getElementById(`buttonSendInvitation-${id}`).className = 'disabled'
+            }
+          })
           const labelNone = document.createElement('label');
           labelNone.setAttribute('for', `none-${id}`);
           labelNone.innerHTML = '&nbsp;';
@@ -235,6 +246,12 @@
           inputAdmin.type = 'radio';
           inputAdmin.name = `state-d-${id}`
           inputAdmin.id = `admin-${id}`;
+          inputAdmin.addEventListener('click', () => {
+            if ( inputAdmin.checked ){
+              document.getElementById(`buttonSendInvitation-${id}`).disabled = false
+              document.getElementById(`buttonSendInvitation-${id}`).className = ''
+            }
+          })
           if ( userType == 'admin' ){
             inputAdmin.checked = true;
             inputAdmin.setAttribute('checked', 'checked')
@@ -265,6 +282,7 @@
         // eslint-disable-next-line no-case-declarations
         case 6:
           const button = document.createElement('button');
+          button.id = `buttonSendInvitation-${id}`
           button.innerHTML = i18n('sendAnInvitation');
           if ( userType === 'none' ){
             button.className = 'disabled';
