@@ -8,6 +8,7 @@
   window.Whisper = window.Whisper || {};
 
   const contactsData = null
+  const dataUsersToUpdate = {};
 
   Whisper.ImportContactView = Whisper.View.extend({
     templateName: 'import-contact-table',
@@ -233,6 +234,11 @@
           }
           inputKunde.addEventListener('click', () => {
             if ( inputKunde.checked ){
+              dataUsersToUpdate[id] = {
+                position: 'kunde',
+                userid: id,
+                cell: contact.outerHTML,
+              }
               if ( this.$('input:checkbox:checked').length <= 1 ){
                 document.getElementById(`buttonSendInvitation-${id}`).disabled = false
                 document.getElementById(`checkbox-${id}`).disabled = false
@@ -272,13 +278,19 @@
           inputAdmin.id = `admin-${id}`;
           inputAdmin.addEventListener('click', () => {
             if ( inputAdmin.checked ){
-              if ( this.$('input:checkbox:checked').length ){
+              dataUsersToUpdate[id] = {
+                position: 'admin',
+                userid: id,
+                cell: contact.outerHTML,
+              }
+              if ( this.$('input:checkbox:checked').length <=1 ){
                 document.getElementById(`checkbox-${id}`).disabled = false
                 document.getElementById(`buttonSendInvitation-${id}`).disabled = false
                 document.getElementById(`buttonSendInvitation-${id}`).classList.remove('disabled');
                 document.getElementById(`buttonSendInvitation-${id}`).classList.remove('none');
               }
             }
+            console.log('dataUsersToUpdate ===> ', dataUsersToUpdate)
           })
           if ( userType == 'admin' ){
             inputAdmin.checked = true;
