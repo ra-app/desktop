@@ -1835,3 +1835,27 @@ button, input{
     margin-left: 6px;
   }
 }
+.disabled{
+  cursor: default;
+  background: rgb(127, 172, 250);
+  background: linear-gradient(
+      90deg,
+      #005af5 0%,
+      #015df2 18%,
+      #0567eb 32%,
+      #0c78de 46%,
+      #1690cc 58%,
+      #23afb5 70%,
+      #33d49b 82%,
+      #34d49a 90%,
+      #3bd696 93%,
+      #47da91 95%,
+      #58de89 97%,
+      #6ee57f 98%,
+      #88ed72 99%,
+      #99f26b 100%
+    )
+    0% 0% no-repeat padding-box;
+  opacity: 0.5;
+  pointer-events: none;
+}
