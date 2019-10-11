@@ -441,9 +441,10 @@
       buttonInviteContact.classList.add('buttonInviteContact');
       buttonInviteContact.innerHTML = 'Teilen';
       const divUserToSend =  document.createElement('div');
-      Object.keys(dataUsersToInvitate).forEach(element => {
+      Object.keys(dataUsersToInvitate).forEach((element, index) => {
         const data = this.prepareDataXml(dataUsersToInvitate[element].cell);
         const userDiv = document.createElement('div');
+        userDiv.id= 'user' + id;
         const avatarUser= document.createElement('img');
         avatarUser.src = 'images/header-chat.png';
         const divInfo = document.createElement('div');
@@ -454,6 +455,10 @@
         const removeUser = document.createElement('img');
         removeUser.src = 'images/icons/x-contact-list.svg';
         removeUser.className = 'imageCloseUser';
+        removeUser.onclick = () => {
+          delete dataUsersToInvitate[id];
+          // todo remove content div
+        }
         divInfo.appendChild(nameUser);
         divInfo.appendChild(tlfUser);
         userDiv.appendChild(avatarUser);
