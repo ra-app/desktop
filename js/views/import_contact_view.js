@@ -414,12 +414,14 @@
       this.panelSendeInvitation(xml, id);
     },
     panelSendeInvitation(xml, id){
+      console.log(dataUsersToInvitate, "data to inviteeeeeeeeeeeeeeeeeeeee")
       const divMainHeaderEdit = document.createElement('div');
       divMainHeaderEdit.className = 'divModalHeader';
       const imageClosePanel = document.createElement('img');
       imageClosePanel.className = 'imageClosePanel';
       imageClosePanel.src = 'images/icons/x-contact-list.svg'
       imageClosePanel.onclick = () => {
+        dataUsersToInvitate = {};
         this.closeModal();
       }
       const divMainContentEdit = document.createElement('div');
@@ -439,6 +441,26 @@
       buttonInviteContact.classList.add('buttonInviteContact');
       buttonInviteContact.innerHTML = 'Teilen';
       const divUserToSend =  document.createElement('div');
+      Object.keys(dataUsersToInvitate).forEach(element => {
+        const data = this.prepareDataXml(dataUsersToInvitate[element].cell);
+        const userDiv = document.createElement('div');
+        const avatarUser= document.createElement('img');
+        avatarUser.src = 'images/header-chat.png';
+        const divInfo = document.createElement('div');
+        const nameUser = document.createElement('span');
+        nameUser.textContent =  data.getElementsByTagName('name')[0].childNodes[0].nodeValue + ' ' +  data.getElementsByTagName('surname')[0].childNodes[0].nodeValue;
+        const tlfUser = document.createElement('span');
+        tlfUser.textContent =data.getElementsByTagName('phone')[0].childNodes[0].nodeValue;
+        const removeUser = document.createElement('img');
+        removeUser.src = 'images/icons/x-contact-list.svg';
+        removeUser.className = 'imageCloseUser';
+        divInfo.appendChild(nameUser);
+        divInfo.appendChild(tlfUser);
+        userDiv.appendChild(avatarUser);
+        userDiv.appendChild(divInfo);
+        userDiv.appendChild(removeUser);
+        divUserToSend.appendChild(userDiv);
+      });
       divMainContentEdit.appendChild(textarea);
       divMainContentEdit.appendChild(labelInput);
       divMainContentEdit.appendChild(inputSelect);
