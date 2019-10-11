@@ -1859,3 +1859,54 @@ button, input{
   opacity: 0.5;
   pointer-events: none;
 }
+
+.mainInvitationDiv{
+  padding: 10px;
+  input[type="text"]{
+    height: 40px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid #707070;
+    width: 85%;
+    display: inline-block;
+  }
+  .imagePlus{
+    height: 25px;
+    width: 25px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 20px;
+    position: relative;
+    top: 10px;
+  }
+
+  .labelInputInvitation{
+    color: #B1BBC0;
+    font-size: 13px;
+  }
+}
+.textareaSendeInvitation{
+  resize: none;
+  width: 100%;
+  color: $footer-text-color;
+  border: 1px solid #707070;
+  min-height: 120px;
+  margin-bottom: 10px;
+  padding: 5px
+}
+
+.buttonInviteContact{
+  @include backgroudGradient();
+  position: absolute;
+  bottom: 15px;
+  left: calc(100% - 340px);
+  right: 0;
+  color: white;
+  border-radius: 20px;
+  border: none;
+  padding: 9px;
+  padding-left: 20px;
+  padding-right: 20px;
+  min-width: 300px;
+}

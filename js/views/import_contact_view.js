@@ -9,6 +9,7 @@
 
   const contactsData = null
   var dataUsersToUpdate = [];
+  var dataUsersToInvitate = [];
 
 
   Whisper.ImportContactView = Whisper.View.extend({
@@ -376,6 +377,10 @@
             button.disabled = true;
           }
           button.onclick = () => {
+            dataUsersToInvitate[id] ={
+              userid: id,
+              cell: contact.outerHTML,
+            }
             this.sendInvitation(id)
           }
           cellTd.appendChild(button);
@@ -402,9 +407,48 @@
           break;
       }
     },
-    sendInvitation(id){
+    async sendInvitation(id){
       console.log(id, "click function external");
+      const  xml =  await this.getXmlFile();
       this.openModal('invite');
+      this.panelSendeInvitation(xml, id);
+    },
+    panelSendeInvitation(xml, id){
+      const divMainHeaderEdit = document.createElement('div');
+      divMainHeaderEdit.className = 'divModalHeader';
+      const imageClosePanel = document.createElement('img');
+      imageClosePanel.className = 'imageClosePanel';
+      imageClosePanel.src = 'images/icons/x-contact-list.svg'
+      imageClosePanel.onclick = () => {
+        this.closeModal();
+      }
+      const divMainContentEdit = document.createElement('div');
+      divMainContentEdit.classList.add('mainInvitationDiv')
+      const textarea = document.createElement('textarea');
+      textarea.className = 'textareaSendeInvitation';
+      textarea.placeholder =  'Lass uns mit OfficeApp kommunizieren: https://oaapp.link/1kepeYmFp';
+      const inputSelect = document.createElement('input');
+      inputSelect.type = 'text';
+      const labelInput = document.createElement('label');
+      labelInput.innerHTML = 'NAME HINZUFÜGEN';
+      labelInput.classList.add('labelInputInvitation')
+      const imagePlus = document.createElement('img')
+      imagePlus.src = 'images/icons/icon-picture-add-200.svg';
+      imagePlus.classList.add('imagePlus')
+      const buttonInviteContact = document.createElement('button');
+      buttonInviteContact.classList.add('buttonInviteContact');
+      buttonInviteContact.innerHTML = 'Teilen';
+      const divUserToSend =  document.createElement('div');
+      divMainContentEdit.appendChild(textarea);
+      divMainContentEdit.appendChild(labelInput);
+      divMainContentEdit.appendChild(inputSelect);
+      divMainContentEdit.appendChild(imagePlus);
+      divMainHeaderEdit.appendChild(imageClosePanel); 
+      this.$('#modalContact').append(divMainHeaderEdit);
+      this.$('#modalContact').append(divMainContentEdit);
+      this.$('#modalContact').append(divUserToSend);
+      this.$('#modalContact').append(buttonInviteContact);
+
     },
     async removeContact(id){
       console.log(id, "remove contact");
