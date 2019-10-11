@@ -8,7 +8,8 @@
   window.Whisper = window.Whisper || {};
 
   const contactsData = null
-  const dataUsersToUpdate = {};
+  var dataUsersToUpdate = [];
+
 
   Whisper.ImportContactView = Whisper.View.extend({
     templateName: 'import-contact-table',
@@ -98,7 +99,25 @@
         );
       });
     },
-    closeContact(){
+    async closeContact(){
+      const  xml =  await this.getXmlFile();
+      const xmlData = this.prepareDataXml(xml, false)
+      Object.keys(dataUsersToUpdate).forEach(element => {
+        const data = this.prepareDataXml(dataUsersToUpdate[element].cell)
+        const positionXML = this.findUserXml(dataUsersToUpdate[element].userid, xmlData)
+        if(data.getElementsByTagName('type')[0]){
+          data.getElementsByTagName('type')[0].childNodes[0].nodeValue = dataUsersToUpdate[element].position;
+        }else {
+          const typeElement = document.createElementNS('', 'type');
+          const typeText = document.createTextNode(dataUsersToUpdate[element].position);
+          typeElement.appendChild(typeText)
+          data.appendChild(typeElement)
+        }
+        xmlData.replaceChild(data,xmlData.getElementsByTagName('contact')[positionXML]);
+      });
+      const dataToUpdate = this.prepareDataToUpdate(xmlData);
+      this.contactsData = dataToUpdate;
+      this.updateXmlDB(dataToUpdate);
       this.$el.trigger('openInbox');
     },
     importContact(e){
@@ -307,6 +326,11 @@
           })
           inputNone.addEventListener('click', () => {
             if ( inputNone.checked ){
+              dataUsersToUpdate[id] = {
+                position: 'none',
+                userid: id,
+                cell: contact.outerHTML,
+              }
               document.getElementById(`admin-${id}`).checked = false;
               document.getElementById(`kunde-${id}`).checked = false;
               document.getElementById(`admin-${id}`).removeAttribute('cheked');
@@ -321,7 +345,7 @@
           })
           inputAdmin.addEventListener('click', () => {
             if ( inputAdmin.checked ){
-              dataUsersToUpdate[id] = {
+              dataUsersToUpdate[id] ={
                 position: 'admin',
                 userid: id,
                 cell: contact.outerHTML,
