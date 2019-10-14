@@ -425,7 +425,7 @@
     },
     panelSendeInvitation(xml, id){
       const divMainHeaderEdit = document.createElement('div');
-      divMainHeaderEdit.className = 'divModalHeader';
+      divMainHeaderEdit.className = 'divModalHeader divModalInvitation';
       const imageClosePanel = document.createElement('img');
       imageClosePanel.className = 'imageClosePanel';
       imageClosePanel.src = 'images/icons/x-contact-list.svg'
@@ -450,15 +450,18 @@
       buttonInviteContact.classList.add('buttonInviteContact');
       buttonInviteContact.innerHTML = 'Teilen';
       const divUserToSend =  document.createElement('div');
+      divUserToSend.classList.add('mainDivUserSendInvitation')
       Object.keys(dataUsersToInvitate).forEach((element, index) => {
         const data = this.prepareDataXml(dataUsersToInvitate[element].cell);
         const userDiv = document.createElement('div');
+        userDiv.classList.add('userInvitation')
         userDiv.id= 'user' + id;
         const avatarUser= document.createElement('img');
         avatarUser.src = 'images/header-chat.png';
         const divInfo = document.createElement('div');
         const nameUser = document.createElement('span');
         nameUser.textContent =  data.getElementsByTagName('name')[0].childNodes[0].nodeValue + ' ' +  data.getElementsByTagName('surname')[0].childNodes[0].nodeValue;
+        const breakLine = document.createElement('br');
         const tlfUser = document.createElement('span');
         tlfUser.textContent =data.getElementsByTagName('phone')[0].childNodes[0].nodeValue;
         const removeUser = document.createElement('img');
@@ -469,6 +472,7 @@
           delete dataUsersToInvitate[id];
         }
         divInfo.appendChild(nameUser);
+        divInfo.appendChild(breakLine)
         divInfo.appendChild(tlfUser);
         userDiv.appendChild(avatarUser);
         userDiv.appendChild(divInfo);
