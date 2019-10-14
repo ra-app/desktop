@@ -456,7 +456,7 @@
       const divUserToSend =  document.createElement('div');
       Object.keys(dataUsersToInvitate).forEach((element, index) => {
         console.log(dataUsersToInvitate,'dataUsersToInvitate')
-        let id = dataUsersToInvitate[element].userid
+        const id = dataUsersToInvitate[element].userid
         const data = this.prepareDataXml(dataUsersToInvitate[element].cell);
         const userDiv = document.createElement('div');
         userDiv.id= 'user' + id;
