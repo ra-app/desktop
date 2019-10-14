@@ -205,7 +205,7 @@
           this.resetViews();
           const companyNumber = textsecure.storage.get('companyNumber', null);
           const xml = await getContactXml(companyNumber);
-          localStorage.setItem('ContactList', xml.contact_data);
+          localStorage.setItem('ContactList', xml ? xml.contact_data : '');
           const ContactView = new Whisper.ImportContactView(xml);
           this.ContactView = ContactView;
           this.openView(this.ContactView);

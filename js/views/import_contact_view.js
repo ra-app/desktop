@@ -40,6 +40,7 @@
       'click #sendMultipleInvitations': 'importMultiContact',
       'change #contact-import-file-input': 'onChoseContactsFile',
       'keyup  #addNameInput, #addSurnameInput, #addPositionInput, #addTelephoneInput, #addEmailInput':'activateButtonAddNewContact',
+      'click #searchContactInvitation, #imagePlus' : 'searchContact',
     },
     createEmptyMessage () {
       const divNoContacts = document.createElement('div');
@@ -438,23 +439,29 @@
         this.closeModal();
       }
       const divMainContentEdit = document.createElement('div');
-      divMainContentEdit.classList.add('mainInvitationDiv')
+      divMainContentEdit.classList.add('mainInvitationDiv');
+      divMainContentEdit.id = 'divMainContentEdit';
       const textarea = document.createElement('textarea');
       textarea.className = 'textareaSendeInvitation';
+      textarea.id = 'textareaSendeInvitation'
       textarea.placeholder =  'Lass uns mit OfficeApp kommunizieren: https://oaapp.link/1kepeYmFp';
       const inputSelect = document.createElement('input');
       inputSelect.type = 'text';
+      inputSelect.id = 'searchContactInvitation';
       const labelInput = document.createElement('label');
       labelInput.innerHTML = 'NAME HINZUFÜGEN';
       labelInput.classList.add('labelInputInvitation')
       const imagePlus = document.createElement('img')
       imagePlus.src = 'images/icons/icon-picture-add-200.svg';
       imagePlus.classList.add('imagePlus')
+      imagePlus.id = 'imagePlus';
       const buttonInviteContact = document.createElement('button');
       buttonInviteContact.classList.add('buttonInviteContact');
+      buttonInviteContact.id = 'buttonInviteContact';
       buttonInviteContact.innerHTML = 'Teilen';
       const divUserToSend =  document.createElement('div');
-      divUserToSend.classList.add('mainDivUserSendInvitation')
+      divUserToSend.classList.add('mainDivUserSendInvitation');
+      divUserToSend.id = 'mainDivUserSendInvitation';
       Object.keys(dataUsersToInvitate).forEach((element, index) => {
         console.log(dataUsersToInvitate,'dataUsersToInvitate')
         let id = dataUsersToInvitate[element].userid
@@ -489,7 +496,7 @@
       divMainContentEdit.appendChild(labelInput);
       divMainContentEdit.appendChild(inputSelect);
       divMainContentEdit.appendChild(imagePlus);
-      divMainHeaderEdit.appendChild(imageClosePanel); 
+      divMainHeaderEdit.appendChild(imageClosePanel);
       this.$('#modalContact').append(divMainHeaderEdit);
       this.$('#modalContact').append(divMainContentEdit);
       this.$('#modalContact').append(divUserToSend);
@@ -1035,6 +1042,56 @@
         button.removeClass('disabled');
       } else {
         button.addClass('disabled');
+      }
+    },
+    searchContact() {
+      this.$('#divMainContentEdit').empty();
+      this.$('#mainDivUserSendInvitation').remove();
+      this.$('#buttonInviteContact').remove();
+      const searchInput = document.createElement('input');
+      searchInput.className = 'searchInput';
+      searchInput.placeholder = 'find';
+      this.$('#divMainContentEdit').append(searchInput);
+      const searchTab = document.createElement('div');
+      searchTab.className = 'tab';
+      this.$('#divMainContentEdit').append(searchTab);
+      const buttonAll = document.createElement('button');
+      const buttonAdmin = document.createElement('button');
+      const buttonUsers = document.createElement('button');
+      buttonAll.className = 'tablinks';
+      buttonAll.innerHTML = 'Alle';
+      buttonAdmin.className = 'tablinks';
+      buttonAdmin.innerHTML = 'Admin';
+      buttonUsers.className = 'tablinks';
+      buttonUsers.innerHTML = 'Users';
+      searchTab.append(buttonAll);
+      searchTab.append(buttonAdmin);
+      searchTab.append(buttonUsers);
+      this.getSearchContact();
+    },
+    async getSearchContact () {
+      const  xml =  await this.getXmlFile();
+      const xmlData = this.prepareDataXml(xml, false)
+       this.searchContactList(xmlData);
+    },
+    searchContactList(xml){
+      for (let i = 0; i < xml.children.length; i++) {
+        const userDiv = document.createElement('div');
+        userDiv.classList.add('userInvitation')
+        const avatarUser= document.createElement('img');
+        avatarUser.src = 'images/header-chat.png';
+        const divInfo = document.createElement('div');
+        const nameUser = document.createElement('span');
+        nameUser.textContent =  xml.children[i].getElementsByTagName('name')[0].textContent;
+        const breakLine = document.createElement('br');
+        const tlfUser = document.createElement('span');
+        tlfUser.textContent = xml.children[i].getElementsByTagName('phone')[0].textContent;
+        divInfo.appendChild(nameUser);
+        divInfo.appendChild(breakLine)
+        divInfo.appendChild(tlfUser);
+        userDiv.appendChild(avatarUser);
+        userDiv.appendChild(divInfo);
+        this.$('#divMainContentEdit').append(userDiv);
       }
     },
     //  ****************************************************function for xml*************************************************
