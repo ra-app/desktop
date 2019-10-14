@@ -37,6 +37,7 @@
       'click #ferting-button': 'closeContact',
       'click #hinzufügen-button': 'importIndividualContact',
       'click #import-button': 'importContact',
+      'click #sendMultipleInvitations': 'importMultiContact',
       'change #contact-import-file-input': 'onChoseContactsFile',
       'keyup  #addNameInput, #addSurnameInput, #addPositionInput, #addTelephoneInput, #addEmailInput':'activateButtonAddNewContact',
     },
@@ -232,6 +233,15 @@
               this.$('#sendMultipleInvitations').addClass('disabled');
               this.$('#sendMultipleInvitations').disabled = true;
             }
+            // add element to object
+            if(checkbox.checked){
+              dataUsersToInvitate[id] ={
+                userid: id,
+                cell: contact.outerHTML,
+              }
+            }else {
+              delete dataUsersToInvitate[id];
+            }
           })
           cellTd.appendChild(checkbox)
           break;
@@ -414,7 +424,6 @@
       this.panelSendeInvitation(xml, id);
     },
     panelSendeInvitation(xml, id){
-      console.log(dataUsersToInvitate, "data to inviteeeeeeeeeeeeeeeeeeeee")
       const divMainHeaderEdit = document.createElement('div');
       divMainHeaderEdit.className = 'divModalHeader';
       const imageClosePanel = document.createElement('img');
@@ -456,8 +465,8 @@
         removeUser.src = 'images/icons/x-contact-list.svg';
         removeUser.className = 'imageCloseUser';
         removeUser.onclick = () => {
+          document.getElementById('user'+id).remove();
           delete dataUsersToInvitate[id];
-          // todo remove content div
         }
         divInfo.appendChild(nameUser);
         divInfo.appendChild(tlfUser);
