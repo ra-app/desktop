@@ -226,12 +226,12 @@
               this.$('.buttonSendInvitation').addClass('disabled')
               this.$('.buttonSendInvitation').disabled = true;
               this.$('#sendMultipleInvitations').removeClass('disabled')
-              this.$('#sendMultipleInvitations').disabled = false
+              this.$('#sendMultipleInvitations').prop('disabled', false)
             }else if (this.$('input:checkbox:checked').length <= 1 ){
               this.$('.buttonSendInvitation:not(.none)').removeClass('disabled');
               this.$('.buttonSendInvitation:not(.none)').disabled = false;
               this.$('#sendMultipleInvitations').addClass('disabled');
-              this.$('#sendMultipleInvitations').disabled = true;
+              this.$('#sendMultipleInvitations').prop('disabled', true)
             }
             // add element to object
             if(checkbox.checked){
@@ -391,7 +391,7 @@
               userid: id,
               cell: contact.outerHTML,
             }
-            this.sendInvitation(id)
+            this.sendInvitation()
           }
           cellTd.appendChild(button);
           break;
@@ -417,13 +417,17 @@
           break;
       }
     },
-    async sendInvitation(id){
-      console.log(id, "click function external");
+    importMultiContact(){
+      console.log('clickkkkkkkkkkkkkkkkkkk')
+      this.sendInvitation();
+    },
+    async sendInvitation(){
+      console.log("click function external");
       const  xml =  await this.getXmlFile();
       this.openModal('invite');
-      this.panelSendeInvitation(xml, id);
+      this.panelSendeInvitation(xml);
     },
-    panelSendeInvitation(xml, id){
+    panelSendeInvitation(xml){
       const divMainHeaderEdit = document.createElement('div');
       divMainHeaderEdit.className = 'divModalHeader';
       const imageClosePanel = document.createElement('img');
@@ -451,6 +455,8 @@
       buttonInviteContact.innerHTML = 'Teilen';
       const divUserToSend =  document.createElement('div');
       Object.keys(dataUsersToInvitate).forEach((element, index) => {
+        console.log(dataUsersToInvitate,'dataUsersToInvitate')
+        let id = dataUsersToInvitate[element].userid
         const data = this.prepareDataXml(dataUsersToInvitate[element].cell);
         const userDiv = document.createElement('div');
         userDiv.id= 'user' + id;
