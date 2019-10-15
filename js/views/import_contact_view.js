@@ -1122,17 +1122,33 @@
       searchTab.append(buttonUsers);
       this.getSearchContact();
     },
-    filterTab (filter) {
-      console.log('AAAAA', filter);
+    async filterTab (filter) {
+      if ( filter === 'Alle') {
+        console.log('ALL');
+      } else if (filter === 'Admin') {
+        console.log('ADMIN');
+      } else if (filter === 'User') {
+        console.log('USER');
+      }
     },
     async getSearchContact () {
       const  xml =  await this.getXmlFile();
       const xmlData = this.prepareDataXml(xml, false)
        this.contactList(xmlData);
     },
-    contactList(xml){
+    async contactList(xml){
+      // start change this lines with a Local Storage (waiting for Jacobo)
+      const companyNumber = textsecure.storage.get('companyNumber', null);
+      const AdminUserListResponse = await getClientAdminCompany(companyNumber);
+      // end change this lines with a Local Storage (waiting for Jacobo)
       const allUsersList = document.createElement('div');
       allUsersList.id = 'allUsersList';
+      const AdminList = document.createElement('div');
+      AdminList.id = 'AdminList';
+      AdminList.className = 'hidden'
+      const UsersList = document.createElement('div');
+      UsersList.id = 'UsersList';
+      UsersList.className = 'hidden'
       for (let i = 0; i < xml.children.length; i++) {
         const userDiv = document.createElement('div');
         userDiv.classList.add('userInvitation');
@@ -1150,8 +1166,23 @@
         divInfo.appendChild(tlfUser);
         userDiv.appendChild(avatarUser);
         userDiv.appendChild(divInfo);
-        this.$('#allUsersList').append(userDiv)
+        // fill all user list
+        this.$('#allUsersList').append(userDiv);
+        // fill admin list
+        for (let j = 0; j < AdminUserListResponse.admins.length; j++) {
+          if (AdminUserListResponse.admins[j].phone_number === xml.children[i].getElementsByTagName('phone')[0].textContent) {
+            this.$('#AdminList').append(userDiv);
+          }
+        }
+        // fill user list
+        for (let j = 0; j < AdminUserListResponse.clients.length; j++) {
+          if (AdminUserListResponse.clients[j].phone_number === xml.children[i].getElementsByTagName('phone')[0].textContent) {
+            this.$('#UsersList').append(userDiv);
+          }
+        }
         this.$('#divMainContentEdit').append(allUsersList);
+        this.$('#divMainContentEdit').append(AdminList);
+        this.$('#divMainContentEdit').append(UsersList);
       }
     },
     searchContactList(e){
