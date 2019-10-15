@@ -1193,31 +1193,42 @@
       searchTab.append(buttonUsers);
       this.getSearchContact();
     },
-    filterTab(filter){
-      switch (filter){
+    filterTab(filter) {
+      switch (filter) {
         case 'Alle':
-			this.$('#allUsersList').removeClass('hidden');
-        	this.$('#AdminList').addClass('hidden');
-        	this.$('#UsersList').addClass('hidden');
-        break;
+          this.$('#allUsersList').removeClass('hidden');
+          this.$('#AdminList').addClass('hidden');
+          this.$('#UsersList').addClass('hidden');
+          break;
         case 'Admin':
-			this.$('#allUsersList').addClass('hidden');
-        	this.$('#AdminList').removeClass('hidden');
-        	this.$('#UsersList').addClass('hidden');
-        break;
+          this.$('#allUsersList').addClass('hidden');
+          this.$('#AdminList').removeClass('hidden');
+          this.$('#UsersList').addClass('hidden');
+          break;
         case 'Users':
-			this.$('#allUsersList').addClass('hidden');
-        	this.$('#AdminList').addClass('hidden');
-        	this.$('#UsersList').removeClass('hidden');
-        break;
+          this.$('#allUsersList').addClass('hidden');
+          this.$('#AdminList').addClass('hidden');
+          this.$('#UsersList').removeClass('hidden');
+          break;
         default:
-        break;
+          break;
       }
     },
     async getSearchContact() {
       const xml = await this.getXmlFile();
       const xmlData = this.prepareDataXml(xml, false)
       this.contactList(xmlData);
+    },
+    addRemoveInvitation(user, element) {
+      const id = user.getElementsByTagName('phone')[0].textContent
+      if (element) {
+        dataUsersToInvitate[id] = {
+          userid: id,
+          cell: user.outerHTML,
+        }
+      } else {
+        delete dataUsersToInvitate[id]
+      }
     },
     async contactList(xml) {
       const AdminUserListResponse = await this.getInvitationList();
@@ -1241,16 +1252,20 @@
         nameUser.textContent = xml.children[i].getElementsByTagName('name')[0].textContent + ' ' + xml.children[i].getElementsByTagName('surname')[0].textContent;
         const breakLine = document.createElement('br');
         const tlfUser = document.createElement('span');
-        const userCheckbox = document.createElement('input');
-        userCheckbox.type = 'checkbox'
-        userCheckbox.classList.add('contactListCheckbox')
         tlfUser.textContent = xml.children[i].getElementsByTagName('phone')[0].textContent;
+        const userCheckbox = document.createElement('input');
+        userCheckbox.type = 'checkbox';
+        userCheckbox.id = 'checkbox' + tlfUser.textContent;
+        userCheckbox.classList.add('contactListCheckbox');
+        userCheckbox.addEventListener('click', () => {
+          this.addRemoveInvitation(xml.children[i], userCheckbox.checked);
+        })
         divInfo.appendChild(nameUser);
         divInfo.appendChild(breakLine)
         divInfo.appendChild(tlfUser);
         userDiv.appendChild(avatarUser);
         userDiv.appendChild(divInfo);
-		    userDiv.appendChild(userCheckbox);
+        userDiv.appendChild(userCheckbox);
         this.$('#allUsersList').append(userDiv)		// fill all user list
         this.$('#allUsersList').append(userDiv);
         // fill admin list
