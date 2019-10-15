@@ -1199,10 +1199,11 @@
       }
     },
     cleanMultiSelectInvite () {
-      this.$('#divMainContentEdit').empty();
-      this.$('#UsersList').remove();
-      this.$('#AdminList').remove();
-      this.$('#sendInvitationIcon').remove();
+      // document.getElementById('divMainContentEdit').remove()
+      // document.getElementById('UsersList').remove();
+      // document.getElementById('AdminList').remove();
+      // document.getElementById('sendInvitationIcon').remove();
+      document.getElementById('modalContact').innerHTML = ''
       this.panelSendeInvitation();
     },
     searchContact() {
