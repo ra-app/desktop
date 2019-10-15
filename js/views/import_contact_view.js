@@ -484,6 +484,35 @@
       textarea.className = 'textareaSendeInvitation';
       textarea.id = 'textareaSendeInvitation'
       textarea.placeholder = 'Lass uns mit OfficeApp kommunizieren: https://oaapp.link/1kepeYmFp';
+
+      const searchTab = document.createElement('div');
+      searchTab.className = 'tab';
+      this.$('#divMainContentEdit').append(searchTab);
+      const buttonAll = document.createElement('button');
+      const buttonAdmin = document.createElement('button');
+      const buttonUsers = document.createElement('button');
+      buttonAll.className = 'tablinks active';
+      buttonAll.innerHTML = 'Alle';
+      buttonAll.id = 'filterAll';
+      buttonAll.onclick = () => {
+        this.filterTab('Alle')
+      }
+      buttonAdmin.className = 'tablinks';
+      buttonAdmin.innerHTML = 'Admin';
+      buttonAdmin.id = 'filterAdmin';
+      buttonAdmin.onclick = () => {
+        this.filterTab('Admin')
+      }
+      buttonUsers.className = 'tablinks';
+      buttonUsers.innerHTML = 'Users';
+      buttonUsers.id = 'filterUsers';
+      buttonUsers.onclick = () => {
+        this.filterTab('Users')
+      }
+      searchTab.append(buttonAll);
+      searchTab.append(buttonAdmin);
+      searchTab.append(buttonUsers);
+
       const inputSelect = document.createElement('input');
       inputSelect.type = 'text';
       inputSelect.id = 'searchContactInvitation';
@@ -1125,29 +1154,36 @@
       this.$('#divMainContentEdit').empty();
       this.$('#mainDivUserSendInvitation').remove();
       this.$('#buttonInviteContact').remove();
+      const headerSearch = document.createElement('div');
+      headerSearch.classList.add('divHeaderSearch')
       const searchInput = document.createElement('input');
       searchInput.id = 'searchInput';
       searchInput.className = 'searchInput';
       searchInput.placeholder = 'find';
-      this.$('#divMainContentEdit').append(searchInput);
+      searchInput.type = 'text';
+      headerSearch.appendChild(searchInput)
+      this.$('#divMainContentEdit').append(headerSearch);
       const searchTab = document.createElement('div');
       searchTab.className = 'tab';
       this.$('#divMainContentEdit').append(searchTab);
       const buttonAll = document.createElement('button');
       const buttonAdmin = document.createElement('button');
       const buttonUsers = document.createElement('button');
-      buttonAll.className = 'tablinks';
+      buttonAll.className = 'tablinks active';
       buttonAll.innerHTML = 'Alle';
+      buttonAll.id = 'filterAll';
       buttonAll.onclick = () => {
         this.filterTab('Alle')
       }
       buttonAdmin.className = 'tablinks';
       buttonAdmin.innerHTML = 'Admin';
+      buttonAdmin.id = 'filterAdmin';
       buttonAdmin.onclick = () => {
         this.filterTab('Admin')
       }
       buttonUsers.className = 'tablinks';
       buttonUsers.innerHTML = 'Users';
+      buttonUsers.id = 'filterUsers';
       buttonUsers.onclick = () => {
         this.filterTab('Users')
       }
@@ -1156,19 +1192,25 @@
       searchTab.append(buttonUsers);
       this.getSearchContact();
     },
-    async filterTab(filter) {
-      if (filter === 'Alle') {
-        this.$('#allUsersList').removeClass('hidden');
-        this.$('#AdminList').addClass('hidden');
-        this.$('#UsersList').addClass('hidden');
-      } else if (filter === 'Admin') {
-        this.$('#allUsersList').addClass('hidden');
-        this.$('#AdminList').removeClass('hidden');
-        this.$('#UsersList').addClass('hidden');
-      } else if (filter === 'Users') {
-        this.$('#allUsersList').addClass('hidden');
-        this.$('#AdminList').addClass('hidden');
-        this.$('#UsersList').removeClass('hidden');
+
+      switch (filter){
+        case 'Alle':
+			this.$('#allUsersList').removeClass('hidden');
+        	this.$('#AdminList').addClass('hidden');
+        	this.$('#UsersList').addClass('hidden');
+        break;
+        case 'Admin':
+			this.$('#allUsersList').addClass('hidden');
+        	this.$('#AdminList').removeClass('hidden');
+        	this.$('#UsersList').addClass('hidden');
+        break;
+        case 'Users':
+			this.$('#allUsersList').addClass('hidden');
+        	this.$('#AdminList').addClass('hidden');
+        	this.$('#UsersList').removeClass('hidden');
+        break;
+        default:
+        break;
       }
     },
     async getSearchContact() {
@@ -1198,13 +1240,17 @@
         nameUser.textContent = xml.children[i].getElementsByTagName('name')[0].textContent + ' ' + xml.children[i].getElementsByTagName('surname')[0].textContent;
         const breakLine = document.createElement('br');
         const tlfUser = document.createElement('span');
+        const userCheckbox = document.createElement('input');
+        userCheckbox.type = 'checkbox'
+        userCheckbox.classList.add('contactListCheckbox')
         tlfUser.textContent = xml.children[i].getElementsByTagName('phone')[0].textContent;
         divInfo.appendChild(nameUser);
         divInfo.appendChild(breakLine)
         divInfo.appendChild(tlfUser);
         userDiv.appendChild(avatarUser);
         userDiv.appendChild(divInfo);
-        // fill all user list
+		userDiv.appendChild(userCheckbox);
+        this.$('#allUsersList').append(userDiv)		// fill all user list
         this.$('#allUsersList').append(userDiv);
         // fill admin list
         for (let j = 0; j < AdminUserListResponse.admins.length; j++) {
@@ -1219,6 +1265,7 @@
             this.$('#UsersList').append(userDiv);
           }
         }
+
         this.$('#divMainContentEdit').append(allUsersList);
         this.$('#divMainContentEdit').append(AdminList);
         this.$('#divMainContentEdit').append(UsersList);
