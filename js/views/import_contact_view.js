@@ -10,6 +10,7 @@
   const contactsData = null
   var dataUsersToUpdate = [];
   var dataUsersToInvitate = [];
+  var activeRolToInvitate = null;
 
 
   Whisper.ImportContactView = Whisper.View.extend({
@@ -42,7 +43,7 @@
       'keyup  #addNameInput, #addSurnameInput, #addPositionInput, #addTelephoneInput, #addEmailInput': 'activateButtonAddNewContact',
       'click #searchContactInvitation, #imagePlus': 'searchContact',
       'keyup #searchInput': 'searchContactList',
-      'click #sendInvitationIcon' : 'sendInvitationCall',
+      'click #sendInvitationIcon' : 'cleanMultiSelectInvite',
     },
     createEmptyMessage() {
       const divNoContacts = document.createElement('div');
@@ -1197,7 +1198,21 @@
         button.addClass('disabled');
       }
     },
+    cleanMultiSelectInvite () {
+      this.$('#divMainContentEdit').empty();
+      this.$('#UsersList').remove();
+      this.$('#AdminList').remove();
+      this.$('#sendInvitationIcon').remove();
+      this.panelSendeInvitation();
+    },
     searchContact() {
+      // filterAdmin
+      if (this.$('#filterAdmin').hasClass('active')) {
+        activeRolToInvitate = 'admin'
+      }
+      if (this.$('#filterUsers').hasClass('active')) {
+        activeRolToInvitate = 'kunde'
+      }
       this.$('#divMainContentEdit').empty();
       this.$('#mainDivUserSendInvitation').remove();
       this.$('#buttonInviteContact').remove();
@@ -1275,6 +1290,7 @@
         dataUsersToInvitate[id] = {
           userid: id,
           cell: user.outerHTML,
+          position: activeRolToInvitate,
         }
       } else {
         delete dataUsersToInvitate[id]
