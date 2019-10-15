@@ -1214,9 +1214,9 @@
       if (this.$('#filterUsers').hasClass('active')) {
         activeRolToInvitate = 'kunde'
       }
-      this.$('#divMainContentEdit').empty();
-      this.$('#mainDivUserSendInvitation').remove();
-      this.$('#buttonInviteContact').remove();
+      document.getElementById('divMainContentEdit').innerHTML = '';
+      document.getElementById('mainDivUserSendInvitation').remove();
+      document.getElementById('buttonInviteContact').remove();
       const headerSearch = document.createElement('div');
       headerSearch.classList.add('divHeaderSearch')
       const searchInput = document.createElement('input');
