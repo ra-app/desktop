@@ -1215,8 +1215,8 @@
         activeRolToInvitate = 'kunde'
       }
       this.$('#divMainContentEdit').empty();
-      document.getElementById('mainDivUserSendInvitation').remove();
-      document.getElementById('buttonInviteContact').remove();
+      this.$('#mainDivUserSendInvitation').remove();
+      this.$('#buttonInviteContact').remove();
       const headerSearch = document.createElement('div');
       headerSearch.classList.add('divHeaderSearch')
       const searchInput = document.createElement('input');
