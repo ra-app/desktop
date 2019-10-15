@@ -2,7 +2,7 @@
 /* global textsecure: false */
 
 // eslint-disable-next-line func-names
-(function() {
+(function () {
   'use strict';
 
   window.Whisper = window.Whisper || {};
@@ -26,9 +26,9 @@
 
     initialize(options) {
       this.render();
-      if (options){
+      if (options) {
         this.prepareDataXml(options.contact_data, true)
-      }else{
+      } else {
         this.createEmptyMessage();
       }
     },
@@ -39,34 +39,34 @@
       'click #import-button': 'importContact',
       'click #sendMultipleInvitations': 'importMultiContact',
       'change #contact-import-file-input': 'onChoseContactsFile',
-      'keyup  #addNameInput, #addSurnameInput, #addPositionInput, #addTelephoneInput, #addEmailInput':'activateButtonAddNewContact',
-      'click #searchContactInvitation, #imagePlus' : 'searchContact',
+      'keyup  #addNameInput, #addSurnameInput, #addPositionInput, #addTelephoneInput, #addEmailInput': 'activateButtonAddNewContact',
+      'click #searchContactInvitation, #imagePlus': 'searchContact',
       'keyup #searchInput': 'searchContactList',
     },
-    createEmptyMessage () {
+    createEmptyMessage() {
       const divNoContacts = document.createElement('div');
       divNoContacts.className = 'divNoContacts';
       divNoContacts.innerText = 'You have not imported your contacts.'
       this.$('#contactTable').append(divNoContacts)
     },
-    createTable (contactListXml){
+    createTable(contactListXml) {
       const table = document.createElement('table');
       table.className = 'sortable';
 
-      const headerTexts = ['#','name', 'surname', 'position', 'email', 'kunde/admin', 'invitation status', 'profile', 'actions'];
-      if(table){
+      const headerTexts = ['#', 'name', 'surname', 'position', 'email', 'kunde/admin', 'invitation status', 'profile', 'actions'];
+      if (table) {
         const header = table.createTHead();
         const row = header.insertRow();
         headerTexts.forEach((element, index) => {
           const cell = document.createElement('th');
-          if(index === 0 || index === 5 ||  index === 7|| index === 8){
+          if (index === 0 || index === 5 || index === 7 || index === 8) {
             cell.className = 'no-sort';
           }
           cell.innerHTML = element;
           row.appendChild(cell)
         });
       }
-      const list =  contactListXml.children;
+      const list = contactListXml.children;
       const tbody = document.createElement('tbody');
       tbody.setAttribute('id', 'myTable');
       for (let i = 0; i < contactListXml.children.length; i++) {
@@ -75,11 +75,11 @@
         tbody.appendChild(tableRow);
         for (let j = 0; j < headerTexts.length; j++) {
           const cellTd = document.createElement('td');
-          if(contact.getElementsByTagName(headerTexts[j])[0]){
+          if (contact.getElementsByTagName(headerTexts[j])[0]) {
             const cell = contact.getElementsByTagName(headerTexts[j])[0].textContent;
             const cellTdContent = document.createTextNode(cell);
             cellTd.appendChild(cellTdContent);
-          }else {
+          } else {
             const id = contact.getElementsByTagName('phone')[0].textContent;
             this.appendElemtns(j, cellTd, id, contact)
 
@@ -92,9 +92,9 @@
       this.$('#contactTable').append(table);
       this.$('table').tablesort();
     },
-    searchTable(e){
+    searchTable(e) {
       let value = e.target.value.toLowerCase();
-      $('#myTable tr').filter(function() {
+      $('#myTable tr').filter(function () {
         $(this).toggle(
           $(this)
             .text()
@@ -103,7 +103,7 @@
         );
       });
     },
-    async closeContact(){
+    async closeContact() {
       // const  xml =  await this.getXmlFile();
       // const xmlData = this.prepareDataXml(xml, false)
       // Object.keys(dataUsersToUpdate).forEach(element => {
@@ -124,7 +124,7 @@
       // this.updateXmlDB(dataToUpdate);
       this.$el.trigger('openInbox');
     },
-    importContact(e){
+    importContact(e) {
       if (e.target.tagName === 'INPUT') return;
       if (e) {
         e.stopPropagation();
@@ -142,21 +142,21 @@
 
 
       if (file) {
-          this.openModal('import');
-          this.$('#acept-import-contact').click(()=>{
-            this.acceptImportContact(file);
-            this.$('#modalOverLay').addClass('hidden');
-          })
-          this.$('#cancel-import-contact').click(()=>{
-            this.$('#modalOverLay').addClass('hidden');
-            input.val('');
-            file = null;
-          })
+        this.openModal('import');
+        this.$('#acept-import-contact').click(() => {
+          this.acceptImportContact(file);
+          this.$('#modalOverLay').addClass('hidden');
+        })
+        this.$('#cancel-import-contact').click(() => {
+          this.$('#modalOverLay').addClass('hidden');
+          input.val('');
+          file = null;
+        })
       }
       if (!file) this.contactsData = null;
       console.log('Import file chose', files);
     },
-    async acceptImportContact(file){
+    async acceptImportContact(file) {
       try {
         const xml = await readFileAsText(file);
         // console.log(xml);
@@ -164,7 +164,7 @@
         this.contactsData = xml;
         const aux = this.contactsData.toString().replace(/\r|\n|\t/g, '');
         this.contactsData = {
-          'contact_data':  aux.toString().replace(/>\s*/g, '>'),
+          'contact_data': aux.toString().replace(/>\s*/g, '>'),
         }
         this.updateXmlDB(this.contactsData)
         // const companyNumber = textsecure.storage.get('companyNumber', null);
@@ -177,76 +177,76 @@
         this.$('#contact-import-file-error').text(i18n('invalidXML'));
         file = null;
       }
-      this.refreshTable() 
+      this.refreshTable()
     },
-    openModal(type){
+    openModal(type) {
       const modal = this.$('#modalContact');
       modal.empty();
       this.$('#modalOverLay').removeClass('hidden');
-      if(type === 'import'){
-         const aceptButton  = document.createElement('button'); 
-         aceptButton.innerHTML='Accept'
-         aceptButton.id = 'acept-import-contact';
-         aceptButton.className = 'buttonsModal';
-         const cancelButton  = document.createElement('button'); 
-         cancelButton.innerHTML='Cancel';
-         cancelButton.id = 'cancel-import-contact';
-         cancelButton.className = 'buttonsModal';
-          modal.append(aceptButton);
-          modal.append(cancelButton);
+      if (type === 'import') {
+        const aceptButton = document.createElement('button');
+        aceptButton.innerHTML = 'Accept'
+        aceptButton.id = 'acept-import-contact';
+        aceptButton.className = 'buttonsModal';
+        const cancelButton = document.createElement('button');
+        cancelButton.innerHTML = 'Cancel';
+        cancelButton.id = 'cancel-import-contact';
+        cancelButton.className = 'buttonsModal';
+        modal.append(aceptButton);
+        modal.append(cancelButton);
       }
-      
+
     },
-    closeModal(){
+    closeModal() {
 
       this.$('#modalOverLay').addClass('hidden');
     },
-    async refreshTable(){
+    async refreshTable() {
       this.$('#contactTable').empty();
       this.prepareDataXml(this.contactsData.contact_data, true)
     },
-   async  appendElemtns(j, cellTd, id, contact){
-    const hasInvitation = await this.hasInvitation(id);
+    async  appendElemtns(j, cellTd, id, contact) {
+      const hasInvitation = await this.hasInvitation(id);
       let userType;
-          if ( hasInvitation.found ){
-            if(hasInvitation.role_id === 1){
-              userType = 'admin';
-            }else {
-              userType = 'client';
-            }
-          }else{
-            userType = 'none'
-          }
+      if (hasInvitation.found) {
+        if (hasInvitation.role_id === 1) {
+          userType = 'admin';
+        } else {
+          userType = 'client';
+        }
+      } else {
+        userType = 'none'
+      }
       switch (j) {
         case 0: {
-          const checkbox = document.createElement('input'); 
-          checkbox.type = 'checkbox'; 
-          checkbox.name = '#'; 
-          checkbox.value = '#'; 
-          checkbox.className = 'checkbox-user'; 
-          checkbox.id = `checkbox-${id}`; 
-          if ( userType === 'none' ){
+          const checkbox = document.createElement('input');
+          checkbox.type = 'checkbox';
+          checkbox.name = '#';
+          checkbox.value = '#';
+          checkbox.className = 'checkbox-user';
+          checkbox.id = `checkbox-${id}`;
+          if (userType === 'none') {
             checkbox.disabled = true;
           }
           checkbox.addEventListener('click', () => {
-            if (this.$('input:checkbox:checked').length > 1 ){
+            if (this.$('input:checkbox:checked').length > 1) {
               this.$('.buttonSendInvitation').addClass('disabled')
               this.$('.buttonSendInvitation').disabled = true;
               this.$('#sendMultipleInvitations').removeClass('disabled')
               this.$('#sendMultipleInvitations').prop('disabled', false)
-            }else if (this.$('input:checkbox:checked').length <= 1 ){
+            } else if (this.$('input:checkbox:checked').length <= 1) {
               this.$('.buttonSendInvitation:not(.none)').removeClass('disabled');
               this.$('.buttonSendInvitation:not(.none)').disabled = false;
               this.$('#sendMultipleInvitations').addClass('disabled');
               this.$('#sendMultipleInvitations').prop('disabled', true)
             }
             // add element to object
-            if(checkbox.checked){
-              dataUsersToInvitate[id] ={
+            if (checkbox.checked) {
+              dataUsersToInvitate[id] = {
                 userid: id,
                 cell: contact.outerHTML,
               }
-            }else {
+            } else {
               delete dataUsersToInvitate[id];
             }
           })
@@ -266,12 +266,12 @@
           inputKunde.type = 'radio';
           inputKunde.name = `state-d-${id}`
           inputKunde.id = `kunde-${id}`;
-          
-          if ( userType === 'client' ){
+
+          if (userType === 'client') {
             inputKunde.checked = true;
             inputKunde.setAttribute('checked', 'checked')
           }
-      
+
           const labelKunde = document.createElement('label');
           labelKunde.setAttribute('for', `kunde-${id}`);
           labelKunde.innerHTML = '&nbsp;';
@@ -280,11 +280,11 @@
           inputNone.type = 'radio';
           inputNone.name = `state-d-${id}`
           inputNone.id = `none-${id}`;
-          if ( userType == 'none' ){
+          if (userType == 'none') {
             inputNone.checked = true;
             inputNone.setAttribute('checked', 'checked')
           }
-       
+
           const labelNone = document.createElement('label');
           labelNone.setAttribute('for', `none-${id}`);
           labelNone.innerHTML = '&nbsp;';
@@ -293,8 +293,8 @@
           inputAdmin.type = 'radio';
           inputAdmin.name = `state-d-${id}`
           inputAdmin.id = `admin-${id}`;
-          
-          if ( userType == 'admin' ){
+
+          if (userType == 'admin') {
             inputAdmin.checked = true;
             inputAdmin.setAttribute('checked', 'checked')
           }
@@ -322,7 +322,7 @@
           cellTd.appendChild(spanSwitchAdmin);
 
           inputKunde.addEventListener('click', () => {
-            if ( inputKunde.checked ){
+            if (inputKunde.checked) {
               dataUsersToUpdate[id] = {
                 position: 'kunde',
                 userid: id,
@@ -334,7 +334,7 @@
               document.getElementById(`none-${id}`).removeAttribute('cheked');
 
 
-              if ( this.$('input:checkbox:checked').length <= 1 ){
+              if (this.$('input:checkbox:checked').length <= 1) {
                 document.getElementById(`buttonSendInvitation-${id}`).disabled = false
                 document.getElementById(`checkbox-${id}`).disabled = false
                 document.getElementById(`buttonSendInvitation-${id}`).classList.remove('disabled');
@@ -343,7 +343,7 @@
             }
           })
           inputNone.addEventListener('click', () => {
-            if ( inputNone.checked ){
+            if (inputNone.checked) {
               dataUsersToUpdate[id] = {
                 position: 'none',
                 userid: id,
@@ -362,8 +362,8 @@
             }
           })
           inputAdmin.addEventListener('click', () => {
-            if ( inputAdmin.checked ){
-              dataUsersToUpdate[id] ={
+            if (inputAdmin.checked) {
+              dataUsersToUpdate[id] = {
                 position: 'admin',
                 userid: id,
                 cell: contact.outerHTML,
@@ -372,7 +372,7 @@
               document.getElementById(`none-${id}`).checked = false;
               document.getElementById(`kunde-${id}`).removeAttribute('cheked');
               document.getElementById(`none-${id}`).removeAttribute('cheked');
-              if ( this.$('input:checkbox:checked').length <=1 ){
+              if (this.$('input:checkbox:checked').length <= 1) {
                 document.getElementById(`checkbox-${id}`).disabled = false
                 document.getElementById(`buttonSendInvitation-${id}`).disabled = false
                 document.getElementById(`buttonSendInvitation-${id}`).classList.remove('disabled');
@@ -388,25 +388,25 @@
           button.id = `buttonSendInvitation-${id}`
           button.classList.add('buttonSendInvitation')
           button.innerHTML = i18n('sendAnInvitation');
-          if(hasInvitation.found){
-            if(hasInvitation.accepted){
+          if (hasInvitation.found) {
+            if (hasInvitation.accepted) {
               button.innerHTML = i18n('aceptedInvitation');
               button.classList.add('disabled');
               button.classList.add('none');
               button.disabled = true;
-              
-            }else {
+
+            } else {
               button.innerHTML = i18n('sendAgainInvitation');
             }
-            
+
           }
-          if ( userType === 'none' ){
+          if (userType === 'none') {
             button.classList.add('disabled');
             button.classList.add('none');
             button.disabled = true;
           }
           button.onclick = () => {
-            dataUsersToInvitate[id] ={
+            dataUsersToInvitate[id] = {
               userid: id,
               cell: contact.outerHTML,
             }
@@ -436,38 +436,38 @@
           break;
       }
     },
-    async hasInvitation(id){
-      let invitationList =  await this.getInvitationList();
+    async hasInvitation(id) {
+      let invitationList = await this.getInvitationList();
       let resp = {
         found: false,
         accepted: false,
-        role_id:null,
+        role_id: null,
       }
-      if(invitationList){
+      if (invitationList) {
         if (invitationList.invites) {
           invitationList.invites.forEach(element => {
-           if(id === element.identifier){
-            resp = {
-              found: true,
-              accepted: element.accepted,
-              role_id:element.role_id,
+            if (id === element.identifier) {
+              resp = {
+                found: true,
+                accepted: element.accepted,
+                role_id: element.role_id,
+              }
             }
-           }
           });
         }
       }
 
-     return resp;
+      return resp;
     },
-    importMultiContact(){
+    importMultiContact() {
       this.sendInvitation();
     },
-    async sendInvitation(){
-      const  xml =  await this.getXmlFile();
+    async sendInvitation() {
+      const xml = await this.getXmlFile();
       this.openModal('invite');
       this.panelSendeInvitation(xml);
     },
-    panelSendeInvitation(xml){
+    panelSendeInvitation(xml) {
       const divMainHeaderEdit = document.createElement('div');
       divMainHeaderEdit.className = 'divModalHeader divModalInvitation';
       const imageClosePanel = document.createElement('img');
@@ -483,7 +483,7 @@
       const textarea = document.createElement('textarea');
       textarea.className = 'textareaSendeInvitation';
       textarea.id = 'textareaSendeInvitation'
-      textarea.placeholder =  'Lass uns mit OfficeApp kommunizieren: https://oaapp.link/1kepeYmFp';
+      textarea.placeholder = 'Lass uns mit OfficeApp kommunizieren: https://oaapp.link/1kepeYmFp';
       const inputSelect = document.createElement('input');
       inputSelect.type = 'text';
       inputSelect.id = 'searchContactInvitation';
@@ -510,33 +510,33 @@
 
       // };
       // buttonClient.onclick = () => {
-        
+
       // };
       // sortTab.appendChild(buttonAdmin);
       // sortTab.appendChild(buttonClient);
-      const divUserToSend =  document.createElement('div');
+      const divUserToSend = document.createElement('div');
       divUserToSend.classList.add('mainDivUserSendInvitation');
       divUserToSend.id = 'mainDivUserSendInvitation';
       Object.keys(dataUsersToInvitate).forEach((element, index) => {
-        console.log(dataUsersToInvitate,'dataUsersToInvitate')
+        console.log(dataUsersToInvitate, 'dataUsersToInvitate')
         const id = dataUsersToInvitate[element].userid
         const data = this.prepareDataXml(dataUsersToInvitate[element].cell);
         const userDiv = document.createElement('div');
         userDiv.classList.add('userInvitation')
-        userDiv.id= 'user' + id;
-        const avatarUser= document.createElement('img');
+        userDiv.id = 'user' + id;
+        const avatarUser = document.createElement('img');
         avatarUser.src = 'images/header-chat.png';
         const divInfo = document.createElement('div');
         const nameUser = document.createElement('span');
-        nameUser.textContent =  data.getElementsByTagName('name')[0].childNodes[0].nodeValue + ' ' +  data.getElementsByTagName('surname')[0].childNodes[0].nodeValue;
+        nameUser.textContent = data.getElementsByTagName('name')[0].childNodes[0].nodeValue + ' ' + data.getElementsByTagName('surname')[0].childNodes[0].nodeValue;
         const breakLine = document.createElement('br');
         const tlfUser = document.createElement('span');
-        tlfUser.textContent =data.getElementsByTagName('phone')[0].childNodes[0].nodeValue;
+        tlfUser.textContent = data.getElementsByTagName('phone')[0].childNodes[0].nodeValue;
         const removeUser = document.createElement('img');
         removeUser.src = 'images/icons/x-contact-list.svg';
         removeUser.className = 'imageCloseUser';
         removeUser.onclick = () => {
-          document.getElementById('user'+id).remove();
+          document.getElementById('user' + id).remove();
           delete dataUsersToInvitate[id];
         }
         divInfo.appendChild(nameUser);
@@ -559,36 +559,36 @@
       this.$('#modalContact').append(buttonInviteContact);
 
     },
-    async sendInvitationCall(){
+    async sendInvitationCall() {
       Object.keys(dataUsersToUpdate).forEach(element => {
         const id = dataUsersToUpdate[element].userid;
         const type = dataUsersToUpdate[element].position;
         const companyNumber = textsecure.storage.get('companyNumber', null);
         let data = {};
-        if(type === 'admin'){
+        if (type === 'admin') {
           data = {
             isAdminInvite: true,
             identifier: id,
           };
-        }else {
+        } else {
           data = {
             isAdminInvite: false,
             identifier: id,
           };
         }
-        const result =  createInvitation(companyNumber, data);
+        const result = createInvitation(companyNumber, data);
         dataUsersToUpdate = {};
         this.closeModal();
       })
     },
-    async removeContact(id){
+    async removeContact(id) {
       console.log(id, "remove contact");
       this.openModal('remove');
-      const  xml =  await this.getXmlFile();
+      const xml = await this.getXmlFile();
       this.panelRemoveContact(id, xml)
     },
 
-    panelRemoveContact(id, xml){
+    panelRemoveContact(id, xml) {
       const divMainHeaderEdit = document.createElement('div');
       divMainHeaderEdit.className = 'divModalHeader';
       const imageClosePanel = document.createElement('img');
@@ -597,8 +597,8 @@
       imageClosePanel.onclick = () => {
         this.closeModal();
       }
-      divMainHeaderEdit.appendChild(imageClosePanel); 
-      
+      divMainHeaderEdit.appendChild(imageClosePanel);
+
       const divMainContentEdit = document.createElement('div');
       divMainContentEdit.className = 'divMainContentEdit divRemoveContact';
       divMainContentEdit.innerHTML = 'Are you sure you want to remove this contact ? <br>'
@@ -606,10 +606,10 @@
       buttonRemoveContact.classList = 'marginTop20 buttonsModal';
       buttonRemoveContact.innerText = 'Accept';
       buttonRemoveContact.onclick = () => {
-       
+
         const xmlData = this.prepareDataXml(xml, false)
         const positionXML = this.findUserXml(id, xmlData)
-        const  y = xmlData.getElementsByTagName('contact')[positionXML];
+        const y = xmlData.getElementsByTagName('contact')[positionXML];
         xmlData.removeChild(y);
         const dataToUpdate = this.prepareDataToUpdate(xmlData);
         this.contactsData = dataToUpdate;
@@ -622,18 +622,18 @@
       this.$('#modalContact').append(divMainContentEdit);
     },
 
-    async editContact(id){
+    async editContact(id) {
       this.openModal('edit');
-      const  xml =  await this.getXmlFile();
+      const xml = await this.getXmlFile();
       const xmlData = this.prepareDataXml(xml, false)
       const positionXML = this.findUserXml(id, xmlData)
       const userInfo = xmlData.children.item(positionXML);
       // xmlData.getElementsByTagName("surname")[positionXML].childNodes[0].nodeValue = "new content" ; //// USE THAT FOR MODIFY ELEMENT
       const cln = userInfo.cloneNode(true);
       this.createEditPanel(cln, xmlData, positionXML)
-      
+
     },
-    createEditPanel(cln, xmlData, positionXML){
+    createEditPanel(cln, xmlData, positionXML) {
       console.log('CLN !!!! ', cln.getElementsByTagName('name'))
       const divMainHeaderEdit = document.createElement('div');
       divMainHeaderEdit.className = 'divModalHeader';
@@ -651,9 +651,9 @@
       }
 
 
-      divMainHeaderEdit.appendChild(pUserName); 
-      divMainHeaderEdit.appendChild(pUserPhone); 
-      divMainHeaderEdit.appendChild(imageClosePanel); 
+      divMainHeaderEdit.appendChild(pUserName);
+      divMainHeaderEdit.appendChild(pUserPhone);
+      divMainHeaderEdit.appendChild(imageClosePanel);
 
       const divMainContentEdit = document.createElement('div');
       divMainContentEdit.className = 'divMainContentEdit';
@@ -717,9 +717,9 @@
       const divRadioButtons = document.createElement('div');
       divRadioButtons.className = 'divEdit';
       let userTypeEdit;
-      if ( cln.getElementsByTagName('type')[0] ){
+      if (cln.getElementsByTagName('type')[0]) {
         userTypeEdit = cln.getElementsByTagName('type')[0].childNodes[0].nodeValue
-      }else{
+      } else {
         userTypeEdit = 'none'
       }
       const spanSwitchKunde = document.createElement('span');
@@ -734,7 +734,7 @@
       inputKundeEdit.type = 'radio';
       inputKundeEdit.name = `edit-state-d-${id}`
       inputKundeEdit.id = `edit-kunde-${id}`;
-      if ( userTypeEdit === 'client' ){
+      if (userTypeEdit === 'client') {
         inputKundeEdit.checked = true;
         inputKundeEdit.setAttribute('checked', 'checked')
       }
@@ -746,7 +746,7 @@
       inputNoneEdit.type = 'radio';
       inputNoneEdit.name = `edit-state-d-${id}`
       inputNoneEdit.id = `edit-none-${id}`;
-      if ( userTypeEdit == 'none' ){
+      if (userTypeEdit == 'none') {
         inputNoneEdit.checked = true;
         inputNoneEdit.setAttribute('checked', 'checked')
       }
@@ -758,7 +758,7 @@
       inputAdminEdit.type = 'radio';
       inputAdminEdit.name = `edit-state-d-${id}`
       inputAdminEdit.id = `edit-admin-${id}`;
-      if ( userTypeEdit == 'admin' ){
+      if (userTypeEdit == 'admin') {
         inputAdminEdit.checked = true;
         inputAdminEdit.setAttribute('checked', 'checked')
       }
@@ -815,26 +815,26 @@
         cln.getElementsByTagName('surname')[0].childNodes[0].nodeValue = inputNachName.value
         cln.getElementsByTagName('position')[0].childNodes[0].nodeValue = inputPosition.value
         cln.getElementsByTagName('email')[0].childNodes[0].nodeValue = inputEmail.value
-        if(!cln.getElementsByTagName('type')[0]){
-          if(inputKundeEdit.checked){
-            const newElement=  document.createElementNS('', 'type');
+        if (!cln.getElementsByTagName('type')[0]) {
+          if (inputKundeEdit.checked) {
+            const newElement = document.createElementNS('', 'type');
             const newText = document.createTextNode('client');
             newElement.appendChild(newText);
             cln.appendChild(newElement)
             // xmlData.getElementsByTagName('contact')[positionXML].appendChild(newElement)
           }
-          if(inputAdminEdit.checked){
-            const newElement=  document.createElementNS('', 'type');
+          if (inputAdminEdit.checked) {
+            const newElement = document.createElementNS('', 'type');
             const newText = document.createTextNode('admin');
             newElement.appendChild(newText);
             cln.appendChild(newElement)
             // xmlData.getElementsByTagName('contact')[positionXML].appendChild(newElement)
           }
-        }else {
-          if(inputKundeEdit.checked){
+        } else {
+          if (inputKundeEdit.checked) {
             cln.getElementsByTagName('type')[0].childNodes[0].nodeValue = 'client'
           }
-          if(inputAdminEdit.checked){
+          if (inputAdminEdit.checked) {
             cln.getElementsByTagName('type')[0].childNodes[0].nodeValue = 'admin'
           }
         }
@@ -846,8 +846,8 @@
         this.closeModal();
         this.refreshTable();
 
-        
-      
+
+
       }
 
       divMainContentEdit.appendChild(divEditVorname);
@@ -863,13 +863,13 @@
       this.$('#modalContact').append(divMainHeaderEdit);
       this.$('#modalContact').append(divMainContentEdit);
     },
-    async importIndividualContact(){
+    async importIndividualContact() {
       this.openModal();
-      const  xml =  await this.getXmlFile();
+      const xml = await this.getXmlFile();
       const xmlData = this.prepareDataXml(xml, false)
       this.createAddPanel(xmlData);
     },
-    createAddPanel(xmlData){
+    createAddPanel(xmlData) {
       const divMainHeaderEdit = document.createElement('div');
       divMainHeaderEdit.className = 'divModalHeader';
       const pUserName = document.createElement('p');
@@ -883,9 +883,9 @@
         this.closeModal();
       }
 
-      divMainHeaderEdit.appendChild(pUserName); 
-      divMainHeaderEdit.appendChild(pUserPhone); 
-      divMainHeaderEdit.appendChild(imageClosePanel); 
+      divMainHeaderEdit.appendChild(pUserName);
+      divMainHeaderEdit.appendChild(pUserPhone);
+      divMainHeaderEdit.appendChild(imageClosePanel);
 
       const divMainContentEdit = document.createElement('div');
       divMainContentEdit.className = 'divMainContentEdit';
@@ -952,7 +952,7 @@
 
       const divRadioButtons = document.createElement('div');
       divRadioButtons.className = 'divEdit';
-      const  userType = 'none';
+      const userType = 'none';
 
       const spanSwitchKunde = document.createElement('span');
       const id = 'new-user';
@@ -1029,11 +1029,11 @@
       const buttonSaveChanges = document.createElement('button');
       buttonSaveChanges.classList = 'buttonSave buttonsModal disabled';
       buttonSaveChanges.innerText = 'Save';
-      buttonSaveChanges.id= 'addNewContactButton'
+      buttonSaveChanges.id = 'addNewContactButton'
       buttonSaveChanges.onclick = () => {
 
         // creating a news element
-        const parentElement=  document.createElementNS('', 'contact');
+        const parentElement = document.createElementNS('', 'contact');
 
         const nameElement = document.createElementNS('', 'name');
         const nameText = document.createTextNode(inputEditVorname.value);
@@ -1059,10 +1059,10 @@
         const tsText = document.createTextNode('');
         tsElement.appendChild(tsText)
         let type = null;
-        if(inputKundeAdd.checked){
+        if (inputKundeAdd.checked) {
           type = 'client';
         }
-        if(inputAdminAdd.checked){
+        if (inputAdminAdd.checked) {
           type = 'admin'
         }
         const typeElement = document.createElementNS('', 'type');
@@ -1102,7 +1102,7 @@
       this.$('#modalContact').append(divMainHeaderEdit);
       this.$('#modalContact').append(divMainContentEdit);
     },
-    activateButtonAddNewContact(){
+    activateButtonAddNewContact() {
       const name = this.$el.find('#addNameInput')[0].value.length;
       const surname = this.$el.find('#addSurnameInput')[0].value.length;
       const position = this.$el.find('#addPositionInput')[0].value.length;
@@ -1156,21 +1156,27 @@
       searchTab.append(buttonUsers);
       this.getSearchContact();
     },
-    async filterTab (filter) {
-      if ( filter === 'Alle') {
-        console.log('ALL');
+    async filterTab(filter) {
+      if (filter === 'Alle') {
+        this.$('#allUsersList').removeClass('hidden');
+        this.$('#AdminList').addClass('hidden');
+        this.$('#UsersList').addClass('hidden');
       } else if (filter === 'Admin') {
-        console.log('ADMIN');
-      } else if (filter === 'User') {
-        console.log('USER');
+        this.$('#allUsersList').addClass('hidden');
+        this.$('#AdminList').removeClass('hidden');
+        this.$('#UsersList').addClass('hidden');
+      } else if (filter === 'Users') {
+        this.$('#allUsersList').addClass('hidden');
+        this.$('#AdminList').addClass('hidden');
+        this.$('#UsersList').removeClass('hidden');
       }
     },
-    async getSearchContact () {
-      const  xml =  await this.getXmlFile();
+    async getSearchContact() {
+      const xml = await this.getXmlFile();
       const xmlData = this.prepareDataXml(xml, false)
-       this.contactList(xmlData);
+      this.contactList(xmlData);
     },
-    async contactList(xml){
+    async contactList(xml) {
       const AdminUserListResponse = await this.getInvitationList();
       const allUsersList = document.createElement('div');
       allUsersList.id = 'allUsersList';
@@ -1179,16 +1185,17 @@
       AdminList.className = 'hidden'
       const UsersList = document.createElement('div');
       UsersList.id = 'UsersList';
-      UsersList.className = 'hidden'
+      UsersList.className = 'hidden';
+      let userFound = false;
       for (let i = 0; i < xml.children.length; i++) {
         const userDiv = document.createElement('div');
         userDiv.classList.add('userInvitation');
         userDiv.id = 'user' + xml.children[i].getElementsByTagName('phone')[0].textContent;
-        const avatarUser= document.createElement('img');
+        const avatarUser = document.createElement('img');
         avatarUser.src = 'images/header-chat.png';
         const divInfo = document.createElement('div');
         const nameUser = document.createElement('span');
-        nameUser.textContent =  xml.children[i].getElementsByTagName('name')[0].textContent + ' ' + xml.children[i].getElementsByTagName('surname')[0].textContent;
+        nameUser.textContent = xml.children[i].getElementsByTagName('name')[0].textContent + ' ' + xml.children[i].getElementsByTagName('surname')[0].textContent;
         const breakLine = document.createElement('br');
         const tlfUser = document.createElement('span');
         tlfUser.textContent = xml.children[i].getElementsByTagName('phone')[0].textContent;
@@ -1203,6 +1210,7 @@
         for (let j = 0; j < AdminUserListResponse.admins.length; j++) {
           if (AdminUserListResponse.admins[j].phone_number === xml.children[i].getElementsByTagName('phone')[0].textContent) {
             this.$('#AdminList').append(userDiv);
+            userFound = true;
           }
         }
         // fill user list
@@ -1215,10 +1223,20 @@
         this.$('#divMainContentEdit').append(AdminList);
         this.$('#divMainContentEdit').append(UsersList);
       }
+      if (userFound === false) {
+        const emptyAdmin = document.createElement('span');
+        emptyAdmin.textContent = 'Admin contact list is empty';
+        this.$('#AdminList').append(emptyAdmin);
+      }
+      if (AdminUserListResponse.clients.length <= 0) {
+        const emptyUser = document.createElement('span');
+        emptyUser.textContent = 'User contact list is empty';
+        this.$('#UsersList').append(emptyUser);
+      }
     },
-    searchContactList(e){
+    searchContactList(e) {
       let value = e.target.value.toLowerCase();
-      $('#allUsersList div').filter(function() {
+      $('#allUsersList div').filter(function () {
         $(this).toggle(
           $(this)
             .text()
@@ -1228,30 +1246,30 @@
       });
     },
     //  ****************************************************function for xml*************************************************
-    findUserXml(id, xmlData){
+    findUserXml(id, xmlData) {
       let position = null;
       for (let i = 0; i < xmlData.children.length; i++) {
         const contact = xmlData.children.item(i);
-        const phone =  contact.getElementsByTagName('phone')[0].textContent
-       if(phone === id){
-         position = i
-         return position; // only first position TODO LIST OF POSITION FOR MULTI SELECT
-       }
+        const phone = contact.getElementsByTagName('phone')[0].textContent
+        if (phone === id) {
+          position = i
+          return position; // only first position TODO LIST OF POSITION FOR MULTI SELECT
+        }
       }
       return position;
     },
-    async getXmlFile(){
+    async getXmlFile() {
       let xml = localStorage.getItem('ContactList')
-      if(!xml){
+      if (!xml) {
         const companyNumber = textsecure.storage.get('companyNumber', null);
-         xml = await getContactXml(companyNumber);
+        xml = await getContactXml(companyNumber);
         localStorage.setItem('ContactList', JSON.stringify(xml));
       }
       return xml
     },
-    prepareDataXml(contact_data, createTable){
+    prepareDataXml(contact_data, createTable) {
       const parser = new DOMParser();
-      let  xmlRes;
+      let xmlRes;
       try {
         // WebKit returns null on unsupported types
         xmlRes = parser.parseFromString(contact_data, 'text/xml');
@@ -1260,36 +1278,36 @@
       }
       document.xmlRes = xmlRes;
       const contactListXml = xmlRes.children[0];
-      if(createTable){
+      if (createTable) {
         this.createTable(contactListXml)
-      }else {
+      } else {
         return contactListXml;
       }
     },
-    prepareDataToUpdate (xmlData){
+    prepareDataToUpdate(xmlData) {
       const dataString = xmlData.outerHTML
       console.log(xmlData.outerHTML, 'outerrrr')
       const aux = dataString.toString().replace(/\r|\n|\t/g, '');
       const data = {
-        'contact_data':  aux.toString().replace(/>\s*/g, '>'),
+        'contact_data': aux.toString().replace(/>\s*/g, '>'),
       }
       return data
     },
-    async updateXmlDB(data){
+    async updateXmlDB(data) {
       const companyNumber = textsecure.storage.get('companyNumber', null);
       await updateContact(companyNumber, data);
       localStorage.setItem('ContactList', data.contact_data);
     },
-    async getInvitationList(){
+    async getInvitationList() {
       let invitationList = localStorage.getItem('InvitationList')
-      if(!invitationList){
+      if (!invitationList) {
         const companyNumber = textsecure.storage.get('companyNumber', null);
-        invitationList =  await getClientAdminCompany(companyNumber);
-        if(invitationList){
+        invitationList = await getClientAdminCompany(companyNumber);
+        if (invitationList) {
           localStorage.setItem('InvitationList', invitationList);
         }
       }
-      return  JSON.parse(invitationList)
+      return JSON.parse(invitationList)
     },
   });
 
