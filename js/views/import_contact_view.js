@@ -444,16 +444,17 @@
         role_id:null,
       }
       if(invitationList){
-        invitationList = JSON.parse(invitationList);
-        invitationList.invites.forEach(element => {
-         if(id === element.identifier){
-          resp = {
-            found: true,
-            accepted: element.accepted,
-            role_id:element.role_id,
-          }
-         }
-        });
+        if (invitationList.invites) {
+          invitationList.invites.forEach(element => {
+           if(id === element.identifier){
+            resp = {
+              found: true,
+              accepted: element.accepted,
+              role_id:element.role_id,
+            }
+           }
+          });
+        }
       }
 
      return resp;
@@ -1170,10 +1171,7 @@
        this.contactList(xmlData);
     },
     async contactList(xml){
-      // start change this lines with a Local Storage (waiting for Jacobo)
-      const companyNumber = textsecure.storage.get('companyNumber', null);
-      const AdminUserListResponse = await getClientAdminCompany(companyNumber);
-      // end change this lines with a Local Storage (waiting for Jacobo)
+      const AdminUserListResponse = await this.getInvitationList();
       const allUsersList = document.createElement('div');
       allUsersList.id = 'allUsersList';
       const AdminList = document.createElement('div');
@@ -1291,7 +1289,7 @@
           localStorage.setItem('InvitationList', invitationList);
         }
       }
-      return  invitationList
+      return  JSON.parse(invitationList)
     },
   });
 
