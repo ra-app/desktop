@@ -449,6 +449,35 @@
       textarea.className = 'textareaSendeInvitation';
       textarea.id = 'textareaSendeInvitation'
       textarea.placeholder =  'Lass uns mit OfficeApp kommunizieren: https://oaapp.link/1kepeYmFp';
+
+      const searchTab = document.createElement('div');
+      searchTab.className = 'tab';
+      this.$('#divMainContentEdit').append(searchTab);
+      const buttonAll = document.createElement('button');
+      const buttonAdmin = document.createElement('button');
+      const buttonUsers = document.createElement('button');
+      buttonAll.className = 'tablinks active';
+      buttonAll.innerHTML = 'Alle';
+      buttonAll.id = 'filterAll';
+      buttonAll.onclick = () => {
+        this.filterTab('Alle')
+      }
+      buttonAdmin.className = 'tablinks';
+      buttonAdmin.innerHTML = 'Admin';
+      buttonAdmin.id = 'filterAdmin';
+      buttonAdmin.onclick = () => {
+        this.filterTab('Admin')
+      }
+      buttonUsers.className = 'tablinks';
+      buttonUsers.innerHTML = 'Users';
+      buttonUsers.id = 'filterUsers';
+      buttonUsers.onclick = () => {
+        this.filterTab('Users')
+      }
+      searchTab.append(buttonAll);
+      searchTab.append(buttonAdmin);
+      searchTab.append(buttonUsers);
+
       const inputSelect = document.createElement('input');
       inputSelect.type = 'text';
       inputSelect.id = 'searchContactInvitation';
@@ -1091,29 +1120,36 @@
       this.$('#divMainContentEdit').empty();
       this.$('#mainDivUserSendInvitation').remove();
       this.$('#buttonInviteContact').remove();
+      const headerSearch = document.createElement('div');
+      headerSearch.classList.add('divHeaderSearch')
       const searchInput = document.createElement('input');
       searchInput.id = 'searchInput';
       searchInput.className = 'searchInput';
       searchInput.placeholder = 'find';
-      this.$('#divMainContentEdit').append(searchInput);
+      searchInput.type = 'text';
+      headerSearch.appendChild(searchInput)
+      this.$('#divMainContentEdit').append(headerSearch);
       const searchTab = document.createElement('div');
       searchTab.className = 'tab';
       this.$('#divMainContentEdit').append(searchTab);
       const buttonAll = document.createElement('button');
       const buttonAdmin = document.createElement('button');
       const buttonUsers = document.createElement('button');
-      buttonAll.className = 'tablinks';
+      buttonAll.className = 'tablinks active';
       buttonAll.innerHTML = 'Alle';
+      buttonAll.id = 'filterAll';
       buttonAll.onclick = () => {
         this.filterTab('Alle')
       }
       buttonAdmin.className = 'tablinks';
       buttonAdmin.innerHTML = 'Admin';
+      buttonAdmin.id = 'filterAdmin';
       buttonAdmin.onclick = () => {
         this.filterTab('Admin')
       }
       buttonUsers.className = 'tablinks';
       buttonUsers.innerHTML = 'Users';
+      buttonUsers.id = 'filterUsers';
       buttonUsers.onclick = () => {
         this.filterTab('Users')
       }
@@ -1123,6 +1159,16 @@
       this.getSearchContact();
     },
     filterTab (filter) {
+      switch (filter){
+        case 'All':
+        break;
+        case 'Admin':
+        break;
+        case 'Users':
+        break;
+        default:
+        break;
+      }
       console.log('AAAAA', filter);
     },
     async getSearchContact () {
@@ -1144,12 +1190,16 @@
         nameUser.textContent =  xml.children[i].getElementsByTagName('name')[0].textContent + ' ' + xml.children[i].getElementsByTagName('surname')[0].textContent;
         const breakLine = document.createElement('br');
         const tlfUser = document.createElement('span');
+        const userCheckbox = document.createElement('input');
+        userCheckbox.type = 'checkbox'
+        userCheckbox.classList.add('contactListCheckbox')
         tlfUser.textContent = xml.children[i].getElementsByTagName('phone')[0].textContent;
         divInfo.appendChild(nameUser);
         divInfo.appendChild(breakLine)
         divInfo.appendChild(tlfUser);
         userDiv.appendChild(avatarUser);
         userDiv.appendChild(divInfo);
+        userDiv.appendChild(userCheckbox);
         this.$('#allUsersList').append(userDiv)
         this.$('#divMainContentEdit').append(allUsersList);
       }
