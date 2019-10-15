@@ -1192,7 +1192,7 @@
       searchTab.append(buttonUsers);
       this.getSearchContact();
     },
-
+    filterTab(filter){
       switch (filter){
         case 'Alle':
 			this.$('#allUsersList').removeClass('hidden');
@@ -1249,7 +1249,7 @@
         divInfo.appendChild(tlfUser);
         userDiv.appendChild(avatarUser);
         userDiv.appendChild(divInfo);
-		userDiv.appendChild(userCheckbox);
+		    userDiv.appendChild(userCheckbox);
         this.$('#allUsersList').append(userDiv)		// fill all user list
         this.$('#allUsersList').append(userDiv);
         // fill admin list
@@ -1357,7 +1357,4 @@
       return JSON.parse(invitationList)
     },
   });
-
-
-
 })();
