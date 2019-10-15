@@ -326,6 +326,14 @@ const updateAdmin = async (company_id, name) => {
 //   return (await apiRequest('api/v1/companies/getcompanyinfo')).companies;
 // };
 
+const getClientAdminCompany = async number => {
+  return (apiRequest('api/v1/admin/' + number + '/info'));
+};
+const createInvitation = async (company_id, data) => {
+  return (apiRequest('api/v1/admin/' + company_id + '/invites/create', data));
+};
+
+
 const getCompany = async number => {
   return (await apiRequest('api/v1/companies/' + number)).company;
 };

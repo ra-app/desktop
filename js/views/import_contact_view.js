@@ -102,24 +102,24 @@
       });
     },
     async closeContact(){
-      const  xml =  await this.getXmlFile();
-      const xmlData = this.prepareDataXml(xml, false)
-      Object.keys(dataUsersToUpdate).forEach(element => {
-        const data = this.prepareDataXml(dataUsersToUpdate[element].cell)
-        const positionXML = this.findUserXml(dataUsersToUpdate[element].userid, xmlData)
-        if(data.getElementsByTagName('type')[0]){
-          data.getElementsByTagName('type')[0].childNodes[0].nodeValue = dataUsersToUpdate[element].position;
-        }else {
-          const typeElement = document.createElementNS('', 'type');
-          const typeText = document.createTextNode(dataUsersToUpdate[element].position);
-          typeElement.appendChild(typeText)
-          data.appendChild(typeElement)
-        }
-        xmlData.replaceChild(data,xmlData.getElementsByTagName('contact')[positionXML]);
-      });
-      const dataToUpdate = this.prepareDataToUpdate(xmlData);
-      this.contactsData = dataToUpdate;
-      this.updateXmlDB(dataToUpdate);
+      // const  xml =  await this.getXmlFile();
+      // const xmlData = this.prepareDataXml(xml, false)
+      // Object.keys(dataUsersToUpdate).forEach(element => {
+      //   const data = this.prepareDataXml(dataUsersToUpdate[element].cell)
+      //   const positionXML = this.findUserXml(dataUsersToUpdate[element].userid, xmlData)
+      //   if(data.getElementsByTagName('type')[0]){
+      //     data.getElementsByTagName('type')[0].childNodes[0].nodeValue = dataUsersToUpdate[element].position;
+      //   }else {
+      //     const typeElement = document.createElementNS('', 'type');
+      //     const typeText = document.createTextNode(dataUsersToUpdate[element].position);
+      //     typeElement.appendChild(typeText)
+      //     data.appendChild(typeElement)
+      //   }
+      //   xmlData.replaceChild(data,xmlData.getElementsByTagName('contact')[positionXML]);
+      // });
+      // const dataToUpdate = this.prepareDataToUpdate(xmlData);
+      // this.contactsData = dataToUpdate;
+      // this.updateXmlDB(dataToUpdate);
       this.$el.trigger('openInbox');
     },
     importContact(e){
@@ -380,6 +380,11 @@
           const button = document.createElement('button');
           button.id = `buttonSendInvitation-${id}`
           button.classList.add('buttonSendInvitation')
+          const invitatioList =  this.getInvitationList();
+          console.log(Promise.resolve(invitatioList), "iiiiiiiiiiiiiiiiiiiiiiiiii")
+          // invitatioList.forEach(element => {
+          //   console.log(element, "elementssssssssssssssssssss")
+          // });
           button.innerHTML = i18n('sendAnInvitation');
           if ( userType === 'none' ){
             button.classList.add('disabled');
@@ -418,11 +423,9 @@
       }
     },
     importMultiContact(){
-      console.log('clickkkkkkkkkkkkkkkkkkk')
       this.sendInvitation();
     },
     async sendInvitation(){
-      console.log("click function external");
       const  xml =  await this.getXmlFile();
       this.openModal('invite');
       this.panelSendeInvitation(xml);
@@ -453,6 +456,22 @@
       const buttonInviteContact = document.createElement('button');
       buttonInviteContact.classList.add('buttonInviteContact');
       buttonInviteContact.innerHTML = 'Teilen';
+      buttonInviteContact.onclick = () => {
+        this.sendInvitationCall()
+      }
+      // const sortTab = document.createElement('div');
+      // const buttonAdmin = document.createElement('button');
+      // buttonAdmin.innerHTML = 'Admin';
+      // const buttonClient = document.createElement('button');
+      // buttonClient.innerHTML = 'Client';
+      // buttonAdmin.onclick = () => {
+
+      // };
+      // buttonClient.onclick = () => {
+        
+      // };
+      // sortTab.appendChild(buttonAdmin);
+      // sortTab.appendChild(buttonClient);
       const divUserToSend =  document.createElement('div');
       divUserToSend.classList.add('mainDivUserSendInvitation')
       Object.keys(dataUsersToInvitate).forEach((element, index) => {
@@ -492,9 +511,32 @@
       divMainHeaderEdit.appendChild(imageClosePanel); 
       this.$('#modalContact').append(divMainHeaderEdit);
       this.$('#modalContact').append(divMainContentEdit);
+      // this.$('#modalContact').append(sortTab);
       this.$('#modalContact').append(divUserToSend);
       this.$('#modalContact').append(buttonInviteContact);
 
+    },
+    async sendInvitationCall(){
+      Object.keys(dataUsersToUpdate).forEach(element => {
+        const id = dataUsersToUpdate[element].userid;
+        const type = dataUsersToUpdate[element].position;
+        const companyNumber = textsecure.storage.get('companyNumber', null);
+        let data = {};
+        if(type === 'admin'){
+          data = {
+            isAdminInvite: true,
+            identifier: id,
+          };
+        }else {
+          data = {
+            isAdminInvite: false,
+            identifier: id,
+          };
+        }
+        const result =  createInvitation(companyNumber, data);
+        dataUsersToUpdate = {};
+        this.closeModal();
+      })
     },
     async removeContact(id){
       console.log(id, "remove contact");
@@ -1089,6 +1131,15 @@
       const companyNumber = textsecure.storage.get('companyNumber', null);
       await updateContact(companyNumber, data);
       localStorage.setItem('ContactList', data.contact_data);
+    },
+    async getInvitationList(){
+      let invitationList = localStorage.getItem('InvitationList')
+      if(!invitationList){
+        const companyNumber = textsecure.storage.get('companyNumber', null);
+        invitationList =  await getClientAdminCompany(companyNumber);
+        localStorage.setItem('InvitationList', JSON.stringify(xml));
+      }
+      return await invitationList
     },
   });
 
