@@ -333,9 +333,12 @@ const getInvitationList = async number => {
   return (await apiRequest('api/v1/admin/' + number + '/info')).invites;
 };
 const createInvitation = async (company_id, data) => {
-  return (apiRequest('api/v1/admin/' + company_id + '/invites/create', data));
+  return (await apiRequest('api/v1/admin/' + company_id + '/invites/create', data)).inviteInfo;
 };
 
+const sendSms = async (company_id, data) => {
+  return (apiRequest('api/v1/admin/' + company_id + '/invites/send', data));
+};
 
 const getCompany = async number => {
   return (await apiRequest('api/v1/companies/' + number)).company;

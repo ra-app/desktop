@@ -632,7 +632,7 @@
 
     },
     async sendInvitationCall() {
-      Object.keys(dataUsersToInvitate).forEach(element => {
+      await parallel(1, Object.keys(dataUsersToInvitate), async (element) => {
         const id = dataUsersToInvitate[element].userid;
         const type = dataUsersToInvitate[element].position;
         const companyNumber = textsecure.storage.get('companyNumber', null);
@@ -648,7 +648,14 @@
             identifier: id,
           };
         }
-        const result = createInvitation(companyNumber, data);
+        const result = await createInvitation(companyNumber, data);
+        const dataSms = {
+          // phone_number: '+34687011338',
+          code: result.code,
+        }
+        sendSms(companyNumber, dataSms)
+
+        console.log(result, "resultttttttttttttttttttt")
         dataUsersToInvitate = {};
         document.getElementById(`buttonSendInvitation-${id}`).innerText = i18n('sendAgainInvitation')
         this.closeModal();
