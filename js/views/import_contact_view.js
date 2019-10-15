@@ -42,6 +42,7 @@
       'keyup  #addNameInput, #addSurnameInput, #addPositionInput, #addTelephoneInput, #addEmailInput': 'activateButtonAddNewContact',
       'click #searchContactInvitation, #imagePlus': 'searchContact',
       'keyup #searchInput': 'searchContactList',
+      'click #sendInvitationIcon' : 'sendInvitationCall',
     },
     createEmptyMessage() {
       const divNoContacts = document.createElement('div');
@@ -500,8 +501,10 @@
     panelSendeInvitation(xml) {
       const divMainHeaderEdit = document.createElement('div');
       divMainHeaderEdit.className = 'divModalHeader divModalInvitation';
+      divMainHeaderEdit.id = 'divModalHeader';
       const imageClosePanel = document.createElement('img');
       imageClosePanel.className = 'imageClosePanel';
+      imageClosePanel.id = 'imageClosePanel';
       imageClosePanel.src = 'images/icons/x-contact-list.svg'
       imageClosePanel.onclick = () => {
         dataUsersToInvitate = {};
@@ -1271,6 +1274,12 @@
       UsersList.id = 'UsersList';
       UsersList.className = 'hidden';
       let userFound = false;
+      const sendInvitationIcon = document.createElement('img');
+      sendInvitationIcon.src = 'images/icons/check_over_blue_24x24.svg';
+      sendInvitationIcon.className = 'imageClosePanel';
+      sendInvitationIcon.id = 'sendInvitationIcon';
+      this.$('#imageClosePanel').remove();
+      this.$('#divModalHeader').append(sendInvitationIcon);
       for (let i = 0; i < xml.children.length; i++) {
         const userDiv = document.createElement('div');
         userDiv.classList.add('userInvitation');
