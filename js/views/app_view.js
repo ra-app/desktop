@@ -206,6 +206,9 @@
           const companyNumber = textsecure.storage.get('companyNumber', null);
           const xml = await getContactXml(companyNumber);
           localStorage.setItem('ContactList', xml ? xml.contact_data : '');
+          const InvitationList = await getClientAdminCompany(companyNumber);
+          InvitationList.toString();
+          localStorage.setItem('InvitationList',JSON.stringify(InvitationList.invites));
           const ContactView = new Whisper.ImportContactView(xml);
           this.ContactView = ContactView;
           this.openView(this.ContactView);
