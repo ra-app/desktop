@@ -205,10 +205,15 @@
       this.$('#contactTable').empty();
       this.prepareDataXml(this.contactsData.contact_data, true)
     },
-    appendElemtns(j, cellTd, id, contact){
+   async  appendElemtns(j, cellTd, id, contact){
+    const hasInvitation = await this.hasInvitation(id);
       let userType;
-          if ( contact.getElementsByTagName('type')[0] ){
-            userType = contact.getElementsByTagName('type')[0].textContent;
+          if ( hasInvitation.found ){
+            if(hasInvitation.role_id === 1){
+              userType = 'admin';
+            }else {
+              userType = 'client';
+            }
           }else{
             userType = 'none'
           }
@@ -382,12 +387,19 @@
           const button = document.createElement('button');
           button.id = `buttonSendInvitation-${id}`
           button.classList.add('buttonSendInvitation')
-          const invitatioList =  this.getInvitationList();
-          console.log(Promise.resolve(invitatioList), "iiiiiiiiiiiiiiiiiiiiiiiiii")
-          // invitatioList.forEach(element => {
-          //   console.log(element, "elementssssssssssssssssssss")
-          // });
           button.innerHTML = i18n('sendAnInvitation');
+          if(hasInvitation.found){
+            if(hasInvitation.accepted){
+              button.innerHTML = i18n('aceptedInvitation');
+              button.classList.add('disabled');
+              button.classList.add('none');
+              button.disabled = true;
+              
+            }else {
+              button.innerHTML = i18n('sendAgainInvitation');
+            }
+            
+          }
           if ( userType === 'none' ){
             button.classList.add('disabled');
             button.classList.add('none');
@@ -423,6 +435,28 @@
         default:
           break;
       }
+    },
+    async hasInvitation(id){
+      let invitationList =  await this.getInvitationList();
+      let resp = {
+        found: false,
+        accepted: false,
+        role_id:null,
+      }
+      if(invitationList){
+        invitationList = JSON.parse(invitationList);
+        invitationList.invites.forEach(element => {
+         if(id === element.identifier){
+          resp = {
+            found: true,
+            accepted: element.accepted,
+            role_id:element.role_id,
+          }
+         }
+        });
+      }
+
+     return resp;
     },
     importMultiContact(){
       this.sendInvitation();
@@ -836,13 +870,12 @@
         xmlData.replaceChild(cln, xmlData.getElementsByTagName("contact")[positionXML]);
         const dataToUpdate = this.prepareDataToUpdate(xmlData);
         this.contactsData = dataToUpdate;
-        console.log(this.contactsData, "dataaaaaaaaaaaaaaaa")
         this.updateXmlDB(dataToUpdate);
         this.closeModal();
         this.refreshTable();
 
         
-        console.log(dataToUpdate)
+      
       }
 
       divMainContentEdit.appendChild(divEditVorname);
@@ -1273,9 +1306,11 @@
       if(!invitationList){
         const companyNumber = textsecure.storage.get('companyNumber', null);
         invitationList =  await getClientAdminCompany(companyNumber);
-        localStorage.setItem('InvitationList', JSON.stringify(xml));
+        if(invitationList){
+          localStorage.setItem('InvitationList', invitationList);
+        }
       }
-      return await invitationList
+      return  invitationList
     },
   });
 
