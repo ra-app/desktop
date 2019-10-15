@@ -242,9 +242,24 @@
             }
             // add element to object
             if (checkbox.checked) {
-              dataUsersToInvitate[id] = {
-                userid: id,
-                cell: contact.outerHTML,
+              if(document.getElementById('kunde-'+id).checked){
+                dataUsersToInvitate[id] = {
+                  userid: id,
+                  cell: contact.outerHTML,
+                  position: 'kunde',
+                }
+              }else if(document.getElementById('admin-'+id).checked){
+                dataUsersToInvitate[id] = {
+                  userid: id,
+                  cell: contact.outerHTML,
+                  position: 'admin',
+                }
+              }else if(document.getElementById('none-'+id).checked){
+                dataUsersToInvitate[id] = {
+                  userid: id,
+                  cell: contact.outerHTML,
+                  position: 'none',
+                }
               }
             } else {
               delete dataUsersToInvitate[id];
@@ -406,9 +421,24 @@
             button.disabled = true;
           }
           button.onclick = () => {
-            dataUsersToInvitate[id] = {
-              userid: id,
-              cell: contact.outerHTML,
+            if(document.getElementById('kunde-'+id).checked){
+              dataUsersToInvitate[id] = {
+                userid: id,
+                cell: contact.outerHTML,
+                position: 'kunde',
+              }
+            } else if(document.getElementById('admin-'+id).checked){
+              dataUsersToInvitate[id] = {
+                userid: id,
+                cell: contact.outerHTML,
+                position: 'admin',
+              }
+            }else if(document.getElementById('none-'+id).checked){
+              dataUsersToInvitate[id] = {
+                userid: id,
+                cell: contact.outerHTML,
+                position: 'none',
+              }
             }
             this.sendInvitation()
           }
@@ -589,9 +619,9 @@
 
     },
     async sendInvitationCall() {
-      Object.keys(dataUsersToUpdate).forEach(element => {
-        const id = dataUsersToUpdate[element].userid;
-        const type = dataUsersToUpdate[element].position;
+      Object.keys(dataUsersToInvitate).forEach(element => {
+        const id = dataUsersToInvitate[element].userid;
+        const type = dataUsersToInvitate[element].position;
         const companyNumber = textsecure.storage.get('companyNumber', null);
         let data = {};
         if (type === 'admin') {
@@ -606,7 +636,7 @@
           };
         }
         const result = createInvitation(companyNumber, data);
-        dataUsersToUpdate = {};
+        dataUsersToInvitate = {};
         document.getElementById(`buttonSendInvitation-${id}`).innerText = i18n('sendAgainInvitation')
         this.closeModal();
       })
