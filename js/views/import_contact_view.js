@@ -520,16 +520,16 @@
 
       const searchTab = document.createElement('div');
       searchTab.className = 'tab';
-      const buttonAll = document.createElement('button');
+      // const buttonAll = document.createElement('button');
       const buttonAdmin = document.createElement('button');
       const buttonUsers = document.createElement('button');
-      buttonAll.className = 'tablinks active';
-      buttonAll.innerHTML = 'Alle';
-      buttonAll.id = 'filterAll';
-      buttonAll.onclick = () => {
-        this.filterTab('Alle')
-      }
-      buttonAdmin.className = 'tablinks';
+      // buttonAll.className = 'tablinks active';
+      // buttonAll.innerHTML = 'Alle';
+      // buttonAll.id = 'filterAll';
+      // buttonAll.onclick = () => {
+      //   this.filterTab('Alle')
+      // }
+      buttonAdmin.className = 'tablinks active';
       buttonAdmin.innerHTML = 'Admin';
       buttonAdmin.id = 'filterAdmin';
       buttonAdmin.onclick = () => {
@@ -541,7 +541,7 @@
       buttonUsers.onclick = () => {
         this.filterTab('Users')
       }
-      searchTab.append(buttonAll);
+      // searchTab.append(buttonAll);
       searchTab.append(buttonAdmin);
       searchTab.append(buttonUsers);
 
@@ -575,9 +575,16 @@
       // };
       // sortTab.appendChild(buttonAdmin);
       // sortTab.appendChild(buttonClient);
-      const divUserToSend = document.createElement('div');
-      divUserToSend.classList.add('mainDivUserSendInvitation');
-      divUserToSend.id = 'mainDivUserSendInvitation';
+      const divKundeToSend = document.createElement('div');
+      divKundeToSend.classList.add('mainDivUserSendInvitation');
+      divKundeToSend.classList.add('hidden');
+      divKundeToSend.id = 'UsersList';
+      const divAdminToSend = document.createElement('div');
+      divAdminToSend.classList.add('mainDivUserSendInvitation');
+      divAdminToSend.id = 'AdminList';
+
+// AdminList
+// UsersList
       Object.keys(dataUsersToInvitate).forEach((element, index) => {
         console.log(dataUsersToInvitate, 'dataUsersToInvitate')
         const id = dataUsersToInvitate[element].userid
@@ -606,7 +613,12 @@
         userDiv.appendChild(avatarUser);
         userDiv.appendChild(divInfo);
         userDiv.appendChild(removeUser);
-        divUserToSend.appendChild(userDiv);
+        if(dataUsersToInvitate[element].position === 'admin'){
+          divAdminToSend.appendChild(userDiv);
+        }
+        if(dataUsersToInvitate[element].position === 'kunde'){
+          divKundeToSend.appendChild(userDiv);
+        }
       });
       divMainContentEdit.appendChild(textarea);
       divMainContentEdit.appendChild(searchTab)
@@ -617,7 +629,8 @@
       this.$('#modalContact').append(divMainHeaderEdit);
       this.$('#modalContact').append(divMainContentEdit);
       // this.$('#modalContact').append(sortTab);
-      this.$('#modalContact').append(divUserToSend);
+      this.$('#modalContact').append(divKundeToSend);
+      this.$('#modalContact').append(divAdminToSend);
       this.$('#modalContact').append(buttonInviteContact);
 
     },
@@ -1236,12 +1249,16 @@
         case 'Admin':
           this.$('#allUsersList').addClass('hidden');
           this.$('#AdminList').removeClass('hidden');
+          this.$('#filterAdmin').addClass('active');
           this.$('#UsersList').addClass('hidden');
+          this.$('#filterUsers').removeClass('active');
           break;
         case 'Users':
           this.$('#allUsersList').addClass('hidden');
           this.$('#AdminList').addClass('hidden');
+          this.$('#filterAdmin').removeClass('active');
           this.$('#UsersList').removeClass('hidden');
+          this.$('#filterUsers').addClass('active');
           break;
         default:
           break;
