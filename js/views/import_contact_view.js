@@ -41,6 +41,7 @@
       'change #contact-import-file-input': 'onChoseContactsFile',
       'keyup  #addNameInput, #addSurnameInput, #addPositionInput, #addTelephoneInput, #addEmailInput':'activateButtonAddNewContact',
       'click #searchContactInvitation, #imagePlus' : 'searchContact',
+      'keyup #searchInput': 'searchContactList',
     },
     createEmptyMessage () {
       const divNoContacts = document.createElement('div');
@@ -92,7 +93,7 @@
       this.$('table').tablesort();
     },
     searchTable(e){
-      let value = e.target.value;
+      let value = e.target.value.toLowerCase();
       $('#myTable tr').filter(function() {
         $(this).toggle(
           $(this)
@@ -1049,6 +1050,7 @@
       this.$('#mainDivUserSendInvitation').remove();
       this.$('#buttonInviteContact').remove();
       const searchInput = document.createElement('input');
+      searchInput.id = 'searchInput';
       searchInput.className = 'searchInput';
       searchInput.placeholder = 'find';
       this.$('#divMainContentEdit').append(searchInput);
@@ -1072,17 +1074,20 @@
     async getSearchContact () {
       const  xml =  await this.getXmlFile();
       const xmlData = this.prepareDataXml(xml, false)
-       this.searchContactList(xmlData);
+       this.contactList(xmlData);
     },
-    searchContactList(xml){
+    contactList(xml){
+      const allUsersList = document.createElement('div');
+      allUsersList.id = 'allUsersList';
       for (let i = 0; i < xml.children.length; i++) {
         const userDiv = document.createElement('div');
-        userDiv.classList.add('userInvitation')
+        userDiv.classList.add('userInvitation');
+        userDiv.id = 'user' + xml.children[i].getElementsByTagName('phone')[0].textContent;
         const avatarUser= document.createElement('img');
         avatarUser.src = 'images/header-chat.png';
         const divInfo = document.createElement('div');
         const nameUser = document.createElement('span');
-        nameUser.textContent =  xml.children[i].getElementsByTagName('name')[0].textContent;
+        nameUser.textContent =  xml.children[i].getElementsByTagName('name')[0].textContent + ' ' + xml.children[i].getElementsByTagName('surname')[0].textContent;
         const breakLine = document.createElement('br');
         const tlfUser = document.createElement('span');
         tlfUser.textContent = xml.children[i].getElementsByTagName('phone')[0].textContent;
@@ -1091,8 +1096,20 @@
         divInfo.appendChild(tlfUser);
         userDiv.appendChild(avatarUser);
         userDiv.appendChild(divInfo);
-        this.$('#divMainContentEdit').append(userDiv);
+        this.$('#allUsersList').append(userDiv)
+        this.$('#divMainContentEdit').append(allUsersList);
       }
+    },
+    searchContactList(e){
+      let value = e.target.value.toLowerCase();
+      $('#allUsersList div').filter(function() {
+        $(this).toggle(
+          $(this)
+            .text()
+            .toLowerCase()
+            .indexOf(value) > -1
+        );
+      });
     },
     //  ****************************************************function for xml*************************************************
     findUserXml(id, xmlData){
