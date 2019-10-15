@@ -1062,14 +1062,26 @@
       const buttonUsers = document.createElement('button');
       buttonAll.className = 'tablinks';
       buttonAll.innerHTML = 'Alle';
+      buttonAll.onclick = () => {
+        this.filterTab('Alle')
+      }
       buttonAdmin.className = 'tablinks';
       buttonAdmin.innerHTML = 'Admin';
+      buttonAdmin.onclick = () => {
+        this.filterTab('Admin')
+      }
       buttonUsers.className = 'tablinks';
       buttonUsers.innerHTML = 'Users';
+      buttonUsers.onclick = () => {
+        this.filterTab('Users')
+      }
       searchTab.append(buttonAll);
       searchTab.append(buttonAdmin);
       searchTab.append(buttonUsers);
       this.getSearchContact();
+    },
+    filterTab (filter) {
+      console.log('AAAAA', filter);
     },
     async getSearchContact () {
       const  xml =  await this.getXmlFile();
