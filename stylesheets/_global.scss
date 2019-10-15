@@ -1904,6 +1904,7 @@ button, input{
   }
   .tab{
     height: 30px;
+    margin-bottom: 10px;
     button.tablinks {
       background: white;
       border: none;
@@ -1912,6 +1913,9 @@ button, input{
       font-family: $poppins-regular;
       font-size: 15px;
       color: $color-input-chat;
+      &:first-child{
+        padding-left: 0px;
+      }
       &.active{
         color: $link-color;
       }

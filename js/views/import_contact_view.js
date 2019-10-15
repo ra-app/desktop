@@ -486,7 +486,6 @@
 
       const searchTab = document.createElement('div');
       searchTab.className = 'tab';
-      this.$('#divMainContentEdit').append(searchTab);
       const buttonAll = document.createElement('button');
       const buttonAdmin = document.createElement('button');
       const buttonUsers = document.createElement('button');
@@ -576,6 +575,7 @@
         divUserToSend.appendChild(userDiv);
       });
       divMainContentEdit.appendChild(textarea);
+      divMainContentEdit.appendChild(searchTab)
       divMainContentEdit.appendChild(labelInput);
       divMainContentEdit.appendChild(inputSelect);
       divMainContentEdit.appendChild(imagePlus);
@@ -606,6 +606,7 @@
         }
         const result =  createInvitation(companyNumber, data);
         dataUsersToUpdate = {};
+        document.getElementById(`buttonSendInvitation-${id}`).innerText = i18n('sendAgainInvitation')
         this.closeModal();
       })
     },
