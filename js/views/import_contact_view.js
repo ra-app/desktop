@@ -10,6 +10,7 @@
   const contactsData = null
   var dataUsersToUpdate = [];
   var dataUsersToInvitate = [];
+  var activeRolToInvitate = null;
 
 
   Whisper.ImportContactView = Whisper.View.extend({
@@ -42,6 +43,7 @@
       'keyup  #addNameInput, #addSurnameInput, #addPositionInput, #addTelephoneInput, #addEmailInput': 'activateButtonAddNewContact',
       'click #searchContactInvitation, #imagePlus': 'searchContact',
       'keyup #searchInput': 'searchContactList',
+      'click #sendInvitationIcon' : 'cleanMultiSelectInvite',
     },
     createEmptyMessage() {
       const divNoContacts = document.createElement('div');
@@ -500,8 +502,10 @@
     panelSendeInvitation(xml) {
       const divMainHeaderEdit = document.createElement('div');
       divMainHeaderEdit.className = 'divModalHeader divModalInvitation';
+      divMainHeaderEdit.id = 'divModalHeader';
       const imageClosePanel = document.createElement('img');
       imageClosePanel.className = 'imageClosePanel';
+      imageClosePanel.id = 'imageClosePanel';
       imageClosePanel.src = 'images/icons/x-contact-list.svg'
       imageClosePanel.onclick = () => {
         dataUsersToInvitate = {};
@@ -1201,7 +1205,22 @@
         button.addClass('disabled');
       }
     },
+    cleanMultiSelectInvite () {
+      // document.getElementById('divMainContentEdit').remove()
+      // document.getElementById('UsersList').remove();
+      // document.getElementById('AdminList').remove();
+      // document.getElementById('sendInvitationIcon').remove();
+      document.getElementById('modalContact').innerHTML = ''
+      this.panelSendeInvitation();
+    },
     searchContact() {
+      // filterAdmin
+      if (this.$('#filterAdmin').hasClass('active')) {
+        activeRolToInvitate = 'admin'
+      }
+      if (this.$('#filterUsers').hasClass('active')) {
+        activeRolToInvitate = 'kunde'
+      }
       this.$('#divMainContentEdit').empty();
       this.$('#mainDivUserSendInvitation').remove();
       this.$('#buttonInviteContact').remove();
@@ -1243,35 +1262,47 @@
       searchTab.append(buttonUsers);
       this.getSearchContact();
     },
-    filterTab(filter){
-      switch (filter){
+    filterTab(filter) {
+      switch (filter) {
         case 'Alle':
-			this.$('#allUsersList').removeClass('hidden');
-        	this.$('#AdminList').addClass('hidden');
-        	this.$('#UsersList').addClass('hidden');
-        break;
+          this.$('#allUsersList').removeClass('hidden');
+          this.$('#AdminList').addClass('hidden');
+          this.$('#UsersList').addClass('hidden');
+          break;
         case 'Admin':
-			this.$('#allUsersList').addClass('hidden');
+          this.$('#allUsersList').addClass('hidden');
           this.$('#AdminList').removeClass('hidden');
           this.$('#filterAdmin').addClass('active');
           this.$('#UsersList').addClass('hidden');
           this.$('#filterUsers').removeClass('active');
-        break;
+          break;
         case 'Users':
-			    this.$('#allUsersList').addClass('hidden');
+          this.$('#allUsersList').addClass('hidden');
           this.$('#AdminList').addClass('hidden');
           this.$('#filterAdmin').removeClass('active');
           this.$('#UsersList').removeClass('hidden');
           this.$('#filterUsers').addClass('active');
-        break;
+          break;
         default:
-        break;
+          break;
       }
     },
     async getSearchContact() {
       const xml = await this.getXmlFile();
       const xmlData = this.prepareDataXml(xml, false)
       this.contactList(xmlData);
+    },
+    addRemoveInvitation(user, element) {
+      const id = user.getElementsByTagName('phone')[0].textContent
+      if (element) {
+        dataUsersToInvitate[id] = {
+          userid: id,
+          cell: user.outerHTML,
+          position: activeRolToInvitate,
+        }
+      } else {
+        delete dataUsersToInvitate[id]
+      }
     },
     async contactList(xml) {
       const AdminUserListResponse = await this.getInvitationList();
@@ -1284,6 +1315,12 @@
       UsersList.id = 'UsersList';
       UsersList.className = 'hidden';
       let userFound = false;
+      const sendInvitationIcon = document.createElement('img');
+      sendInvitationIcon.src = 'images/icons/check_over_blue_24x24.svg';
+      sendInvitationIcon.className = 'imageClosePanel';
+      sendInvitationIcon.id = 'sendInvitationIcon';
+      this.$('#imageClosePanel').remove();
+      this.$('#divModalHeader').append(sendInvitationIcon);
       for (let i = 0; i < xml.children.length; i++) {
         const userDiv = document.createElement('div');
         userDiv.classList.add('userInvitation');
@@ -1295,16 +1332,20 @@
         nameUser.textContent = xml.children[i].getElementsByTagName('name')[0].textContent + ' ' + xml.children[i].getElementsByTagName('surname')[0].textContent;
         const breakLine = document.createElement('br');
         const tlfUser = document.createElement('span');
-        const userCheckbox = document.createElement('input');
-        userCheckbox.type = 'checkbox'
-        userCheckbox.classList.add('contactListCheckbox')
         tlfUser.textContent = xml.children[i].getElementsByTagName('phone')[0].textContent;
+        const userCheckbox = document.createElement('input');
+        userCheckbox.type = 'checkbox';
+        userCheckbox.id = 'checkbox' + tlfUser.textContent;
+        userCheckbox.classList.add('contactListCheckbox');
+        userCheckbox.addEventListener('click', () => {
+          this.addRemoveInvitation(xml.children[i], userCheckbox.checked);
+        })
         divInfo.appendChild(nameUser);
         divInfo.appendChild(breakLine)
         divInfo.appendChild(tlfUser);
         userDiv.appendChild(avatarUser);
         userDiv.appendChild(divInfo);
-		    userDiv.appendChild(userCheckbox);
+        userDiv.appendChild(userCheckbox);
         this.$('#allUsersList').append(userDiv)		// fill all user list
         this.$('#allUsersList').append(userDiv);
         // fill admin list
