@@ -53,6 +53,7 @@ export class MainHeader extends React.Component<Props> {
   private readonly setFocusBound: () => void;
   private readonly chatMenuBound: () => void;
   private readonly showContactsBound: () => void;
+  private readonly importAdminBound: () => void;
   private readonly inputRef: React.RefObject<HTMLInputElement>;
   private readonly debouncedSearch: (searchTerm: string) => void;
 
@@ -65,6 +66,8 @@ export class MainHeader extends React.Component<Props> {
     this.setFocusBound = this.setFocus.bind(this);
     this.chatMenuBound = this.chatMenu.bind(this);
     this.showContactsBound = this.showContacts.bind(this);
+    this.importAdminBound = this.importAdmin.bind(this);
+    
     this.inputRef = React.createRef();
 
     this.debouncedSearch = debounce(this.search.bind(this), 20);
@@ -140,6 +143,12 @@ export class MainHeader extends React.Component<Props> {
     appView.openContact();
 
   }
+
+  public importAdmin(){
+    console.log("aaaaa");
+    const {appView} = window['owsDesktopApp']
+    appView.openModalImport();
+  }
   public render() {
     const {
       searchTerm,
@@ -169,7 +178,7 @@ export class MainHeader extends React.Component<Props> {
                   <span>Users einladen</span>
                   <img src="images/icons/user_einladen_35x35.svg" className="imageLiChatMenu" alt="Add user" />
                 </li>
-                <li>
+                <li  onClick={this.importAdminBound}>
                   <span>Admins einladen</span>
                   <img src="images/icons/admin_einladen_35x35.svg" className="imageLiChatMenu" alt="Add admin" />
                 </li>

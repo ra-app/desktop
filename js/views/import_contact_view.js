@@ -1389,4 +1389,23 @@
       });
     },
   });
+  Whisper.ModalImport = Whisper.View.extend({
+    templateName: 'modal-importer',
+    className: 'modal-importer',
+    template: $('#modal-importer').html(),
+    render_attributes() {
+      // console.log('This model import contact view!!!! ', this.model)
+      return {
+        'send-message': i18n('sendMessage'),
+        model: this.model,
+      };
+    },
+
+    initialize(options) {
+      this.render();
+    },
+    events: {
+    },
+
+  });
 })();
