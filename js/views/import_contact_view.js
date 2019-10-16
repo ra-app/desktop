@@ -1422,6 +1422,7 @@
         }
         this.objectContact.push(tmpObj)
       }
+      this.type = options.type;
       if ( options.type == 'kunde' ){
         this.typeAdmin = true;
         this.typeKunde = false;
@@ -1445,6 +1446,8 @@
       'click .imageClosePanel' : 'closePanel',
       'click  #imageGoBack' : 'goBack',
       'click #searchContactInvitation': 'showContactListPanel',
+      'click #imageSendInvitation': 'selectedUserToInvite',
+      'click .contactListCheckbox': 'checkBoxevent',
     },
     closePanel(){
       document.getElementsByClassName('modal-importer')[0].remove();
@@ -1456,6 +1459,22 @@
     goBack(){
       this.$('#modalContact').removeClass('hidden');
       this.$('#modalSearchUsers').addClass('hidden');
+    },
+    selectedUserToInvite(){
+      console.log("555555555555555555555555")
+    },
+    checkBoxevent(event){
+      console.log(event, "eventttt")
+      const id = event.target.attributes.dataPhone.nodeValue;
+      if(event.target.checked){
+        dataUsersToInvitate[id] = {
+          userid: id,
+          position: this.type,
+        }
+      }else {
+        delete dataUsersToInvitate[id];
+      }
+      console.log(dataUsersToInvitate, "dataaaaaaaaaaaaaaaaaaa");
     },
   });
 })();
