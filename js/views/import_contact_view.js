@@ -1418,7 +1418,11 @@
       };
     },
     events: {
+      'click #imageClosePanel' : 'closePanel',
     },
-
+    closePanel(){
+      console.log('closePanel !!!!!! ')
+      this.$('.modal-importer').remove();
+    },
   });
 })();
