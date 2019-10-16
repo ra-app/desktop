@@ -28,7 +28,8 @@
     initialize(options) {
       this.render();
       if (options) {
-        this.prepareDataXml(options.contact_data, true)
+        const contactListXml = prepareDataXml(options.contact_data)
+        this.createTable(contactListXml);
       } else {
         this.createEmptyMessage();
       }
@@ -168,7 +169,7 @@
         this.contactsData = {
           'contact_data': aux.toString().replace(/>\s*/g, '>'),
         }
-        this.updateXmlDB(this.contactsData)
+        updateXmlDB(this.contactsData)
         // const companyNumber = textsecure.storage.get('companyNumber', null);
         // await updateContact(companyNumber, this.contactsData);
         // localStorage.setItem('ContactList', contactsData.contact_data);
@@ -205,7 +206,8 @@
     },
     async refreshTable() {
       this.$('#contactTable').empty();
-      this.prepareDataXml(this.contactsData.contact_data, true)
+      const  contactListXml = prepareDataXml(this.contactsData.contact_data)
+      this.createTable(contactListXml)
     },
     async  appendElemtns(j, cellTd, id, contact) {
       const hasInvitation = await this.hasInvitation(id);
@@ -469,7 +471,7 @@
       }
     },
     async hasInvitation(id) {
-      let invitationList = await this.getInvitationList();
+      const invitationList = await getListInvitation();
       let resp = {
         found: false,
         accepted: false,
@@ -495,7 +497,7 @@
       this.sendInvitation();
     },
     async sendInvitation() {
-      const xml = await this.getXmlFile();
+      const xml = await getXmlFile();
       this.openModal('invite');
       this.panelSendeInvitation(xml);
     },
@@ -601,7 +603,7 @@
       Object.keys(dataUsersToInvitate).forEach((element, index) => {
         // console.log(dataUsersToInvitate, 'dataUsersToInvitate')
         const id = dataUsersToInvitate[element].userid
-        const data = this.prepareDataXml(dataUsersToInvitate[element].cell);
+        const data = prepareDataXml(dataUsersToInvitate[element].cell);
         const userDiv = document.createElement('div');
         userDiv.classList.add('userInvitation')
         userDiv.id = 'user' + id;
@@ -678,7 +680,7 @@
     },
     async removeContact(id) {
       this.openModal('remove');
-      const xml = await this.getXmlFile();
+      const xml = await getXmlFile();
       this.panelRemoveContact(id, xml)
     },
 
@@ -701,13 +703,13 @@
       buttonRemoveContact.innerText = 'Accept';
       buttonRemoveContact.onclick = () => {
 
-        const xmlData = this.prepareDataXml(xml, false)
-        const positionXML = this.findUserXml(id, xmlData)
+        const xmlData = prepareDataXml(xml)
+        const positionXML = findUserXml(id, xmlData)
         const y = xmlData.getElementsByTagName('contact')[positionXML];
         xmlData.removeChild(y);
-        const dataToUpdate = this.prepareDataToUpdate(xmlData);
+        const dataToUpdate = prepareDataToUpdate(xmlData);
         this.contactsData = dataToUpdate;
-        this.updateXmlDB(dataToUpdate);
+        updateXmlDB(dataToUpdate);
         this.closeModal();
         this.refreshTable();
       }
@@ -718,9 +720,9 @@
 
     async editContact(id) {
       this.openModal('edit');
-      const xml = await this.getXmlFile();
-      const xmlData = this.prepareDataXml(xml, false)
-      const positionXML = this.findUserXml(id, xmlData)
+      const xml = await getXmlFile();
+      const xmlData = prepareDataXml(xml)
+      const positionXML = findUserXml(id, xmlData)
       const userInfo = xmlData.children.item(positionXML);
       // xmlData.getElementsByTagName("surname")[positionXML].childNodes[0].nodeValue = "new content" ; //// USE THAT FOR MODIFY ELEMENT
       const cln = userInfo.cloneNode(true);
@@ -934,9 +936,9 @@
         }
 
         xmlData.replaceChild(cln, xmlData.getElementsByTagName("contact")[positionXML]);
-        const dataToUpdate = this.prepareDataToUpdate(xmlData);
+        const dataToUpdate = prepareDataToUpdate(xmlData);
         this.contactsData = dataToUpdate;
-        this.updateXmlDB(dataToUpdate);
+        updateXmlDB(dataToUpdate);
         this.closeModal();
         this.refreshTable();
 
@@ -959,8 +961,8 @@
     },
     async importIndividualContact() {
       this.openModal();
-      const xml = await this.getXmlFile();
-      const xmlData = this.prepareDataXml(xml, false)
+      const xml = await getXmlFile();
+      const xmlData = prepareDataXml(xml)
       this.createAddPanel(xmlData);
     },
     createAddPanel(xmlData) {
@@ -1175,9 +1177,9 @@
 
         // prepare data and save on DB
         xmlData.appendChild(parentElement);
-        const dataToUpdate = this.prepareDataToUpdate(xmlData);
+        const dataToUpdate = prepareDataToUpdate(xmlData);
         this.contactsData = dataToUpdate;
-        this.updateXmlDB(dataToUpdate);
+        updateXmlDB(dataToUpdate);
         this.closeModal();
         this.refreshTable();
 
@@ -1298,8 +1300,8 @@
       }
     },
     async getSearchContact() {
-      const xml = await this.getXmlFile();
-      const xmlData = this.prepareDataXml(xml, false)
+      const xml = await getXmlFile();
+      const xmlData = prepareDataXml(xml)
       this.contactList(xmlData);
     },
     addRemoveInvitation(user, element) {
@@ -1315,7 +1317,7 @@
       }
     },
     async contactList(xml) {
-      const AdminUserListResponse = await this.getInvitationList();
+      const AdminUserListResponse = await getListInvitation();
       const allUsersList = document.createElement('div');
       allUsersList.id = 'allUsersList';
       const AdminList = document.createElement('div');
@@ -1397,70 +1399,6 @@
             .indexOf(value) > -1
         );
       });
-    },
-    //  ****************************************************function for xml*************************************************
-    findUserXml(id, xmlData) {
-      let position = null;
-      for (let i = 0; i < xmlData.children.length; i++) {
-        const contact = xmlData.children.item(i);
-        const phone = contact.getElementsByTagName('phone')[0].textContent
-        if (phone === id) {
-          position = i
-          return position; // only first position TODO LIST OF POSITION FOR MULTI SELECT
-        }
-      }
-      return position;
-    },
-    async getXmlFile() {
-      let xml = localStorage.getItem('ContactList')
-      if (!xml) {
-        const companyNumber = textsecure.storage.get('companyNumber', null);
-        xml = await getContactXml(companyNumber);
-        localStorage.setItem('ContactList', JSON.stringify(xml));
-      }
-      return xml
-    },
-    prepareDataXml(contact_data, createTable) {
-      const parser = new DOMParser();
-      let xmlRes;
-      try {
-        // WebKit returns null on unsupported types
-        xmlRes = parser.parseFromString(contact_data, 'text/xml');
-      } catch (ex) {
-        console.log(ex)
-      }
-      document.xmlRes = xmlRes;
-      const contactListXml = xmlRes.children[0];
-      if (createTable) {
-        this.createTable(contactListXml)
-      } else {
-        return contactListXml;
-      }
-    },
-    prepareDataToUpdate(xmlData) {
-      const dataString = xmlData.outerHTML
-      // console.log(xmlData.outerHTML, 'outerrrr')
-      const aux = dataString.toString().replace(/\r|\n|\t/g, '');
-      const data = {
-        'contact_data': aux.toString().replace(/>\s*/g, '>'),
-      }
-      return data
-    },
-    async updateXmlDB(data) {
-      const companyNumber = textsecure.storage.get('companyNumber', null);
-      await updateContact(companyNumber, data);
-      localStorage.setItem('ContactList', data.contact_data);
-    },
-    async getInvitationList() {
-      let invitationList = localStorage.getItem('InvitationList')
-      if (!invitationList) {
-        const companyNumber = textsecure.storage.get('companyNumber', null);
-        invitationList = await getClientAdminCompany(companyNumber);
-        if (invitationList) {
-          localStorage.setItem('InvitationList', invitationList);
-        }
-      }
-      return JSON.parse(invitationList)
     },
   });
 })();
