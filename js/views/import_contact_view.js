@@ -1418,11 +1418,16 @@
       };
     },
     events: {
-      'click #imageClosePanel' : 'closePanel',
+      'click .imageClosePanel, #imageGoBack' : 'closePanel',
+      'click #searchContactInvitation': 'showContactListPanel',
     },
     closePanel(){
       console.log('closePanel !!!!!! ')
-      this.$('.modal-importer').remove();
+      document.getElementsByClassName('modal-importer')[0].remove();
     },
+    showContactListPanel(){
+      this.$('#modalContact').addClass('hidden');
+      this.$('#modalSearchUsers').removeClass('hidden');
+    }
   });
 })();
