@@ -1455,6 +1455,7 @@
       'click  #imageGoBack' : 'goBack',
       'click #searchContactInvitation': 'showContactListPanel',
       'click .contactListCheckbox': 'checkBoxevent',
+      'click #buttonInviteContact': 'sendInvitations',
     },
     closePanel(){
       document.getElementsByClassName('modal-importer')[0].remove();
@@ -1468,10 +1469,74 @@
       this.$('#modalSearchUsers').addClass('hidden');
     },
     sendDataToModal(){
+      this.$('#modalContact').removeClass('hidden');
+      this.$('#modalSearchUsers').addClass('hidden');
+      for (let i = 0; i < this.contactListXml.children.length; i++) {
+        const contact = this.contactListXml.children.item(i);
+        // eslint-disable-next-line no-loop-func
+        Object.keys(dataUsersToInvitate).forEach((element) => {
+          const id = dataUsersToInvitate[element].userid;
+          if(id === contact.getElementsByTagName('phone')[0].textContent){
+            const data = this.contactListXml;
+            const userDiv = document.createElement('div');
+            userDiv.classList.add('userInvitation')
+            userDiv.id = 'user' + id;
+            const avatarUser = document.createElement('img');
+            avatarUser.src = 'images/header-chat.png';
+            const divInfo = document.createElement('div');
+            const nameUser = document.createElement('span');
+            nameUser.textContent = data.getElementsByTagName('name')[i].childNodes[0].nodeValue + ' ' + data.getElementsByTagName('surname')[i].childNodes[0].nodeValue;
+            const breakLine = document.createElement('br');
+            const tlfUser = document.createElement('span');
+            tlfUser.textContent = data.getElementsByTagName('phone')[i].childNodes[0].nodeValue;
+            const removeUser = document.createElement('img');
+            removeUser.src = 'images/icons/x-contact-list.svg';
+            removeUser.className = 'imageCloseUser';
+            removeUser.onclick = () => {
+              document.getElementById('user' + id).remove();
+              delete dataUsersToInvitate[id];
+            }
+            divInfo.appendChild(nameUser);
+            divInfo.appendChild(breakLine)
+            divInfo.appendChild(tlfUser);
+            userDiv.appendChild(avatarUser);
+            userDiv.appendChild(divInfo);
+            userDiv.appendChild(removeUser);
+            document.getElementById('userSendList').appendChild(userDiv);
+          }
+        })
 
+      }
+    },
+    async sendInvitations(){
+      await parallel(1, Object.keys(dataUsersToInvitate), async (element) => {
+        const id = dataUsersToInvitate[element].userid;
+        const type = dataUsersToInvitate[element].position;
+        const companyNumber = textsecure.storage.get('companyNumber', null);
+        let data = {};
+        if (type === 'admin') {
+          data = {
+            isAdminInvite: true,
+            identifier: id,
+          };
+        } else {
+          data = {
+            isAdminInvite: false,
+            identifier: id,
+          };
+        }
+        const result = await createInvitation(companyNumber, data);
+        const dataSms = {
+          phone_number: id,
+          code: result.code,
+        }
+        sendSms(companyNumber, dataSms)
+
+        dataUsersToInvitate = {};
+        this.closePanel();
+      })
     },
     checkBoxevent(event){
-      console.log(event, "eventttt")
       const id = event.target.attributes.dataPhone.nodeValue;
       if(event.target.checked){
         dataUsersToInvitate[id] = {
