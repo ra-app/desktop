@@ -44,7 +44,7 @@
       'keyup  #addNameInput, #addSurnameInput, #addPositionInput, #addTelephoneInput, #addEmailInput': 'activateButtonAddNewContact',
       'click #searchContactInvitation, #imagePlus': 'searchContact',
       'keyup #searchInput': 'searchContactList',
-      'click #sendInvitationIcon' : 'cleanMultiSelectInvite',
+      'click #sendInvitationIcon': 'cleanMultiSelectInvite',
     },
     createEmptyMessage() {
       const divNoContacts = document.createElement('div');
@@ -206,7 +206,7 @@
     },
     async refreshTable() {
       this.$('#contactTable').empty();
-      const  contactListXml = prepareDataXml(this.contactsData.contact_data)
+      const contactListXml = prepareDataXml(this.contactsData.contact_data)
       this.createTable(contactListXml)
     },
     async  appendElemtns(j, cellTd, id, contact) {
@@ -246,19 +246,19 @@
             }
             // add element to object
             if (checkbox.checked) {
-              if(document.getElementById('kunde-'+id).checked){
+              if (document.getElementById('kunde-' + id).checked) {
                 dataUsersToInvitate[id] = {
                   userid: id,
                   cell: contact.outerHTML,
                   position: 'kunde',
                 }
-              }else if(document.getElementById('admin-'+id).checked){
+              } else if (document.getElementById('admin-' + id).checked) {
                 dataUsersToInvitate[id] = {
                   userid: id,
                   cell: contact.outerHTML,
                   position: 'admin',
                 }
-              }else if(document.getElementById('none-'+id).checked){
+              } else if (document.getElementById('none-' + id).checked) {
                 dataUsersToInvitate[id] = {
                   userid: id,
                   cell: contact.outerHTML,
@@ -425,19 +425,19 @@
             button.disabled = true;
           }
           button.onclick = () => {
-            if(document.getElementById('kunde-'+id).checked){
+            if (document.getElementById('kunde-' + id).checked) {
               dataUsersToInvitate[id] = {
                 userid: id,
                 cell: contact.outerHTML,
                 position: 'kunde',
               }
-            } else if(document.getElementById('admin-'+id).checked){
+            } else if (document.getElementById('admin-' + id).checked) {
               dataUsersToInvitate[id] = {
                 userid: id,
                 cell: contact.outerHTML,
                 position: 'admin',
               }
-            }else if(document.getElementById('none-'+id).checked){
+            } else if (document.getElementById('none-' + id).checked) {
               dataUsersToInvitate[id] = {
                 userid: id,
                 cell: contact.outerHTML,
@@ -589,7 +589,7 @@
       Object.keys(dataUsersToInvitate).forEach((element, index) => {
         selectedTab = dataUsersToInvitate[element].position
       });
-      if(selectedTab === 'kunde') {
+      if (selectedTab === 'kunde') {
         divAdminToSend.classList.add('hidden');
         buttonUsers.classList.add('active');
       } else {
@@ -598,8 +598,8 @@
       }
 
 
-// AdminList
-// UsersList
+      // AdminList
+      // UsersList
       Object.keys(dataUsersToInvitate).forEach((element, index) => {
         // console.log(dataUsersToInvitate, 'dataUsersToInvitate')
         const id = dataUsersToInvitate[element].userid
@@ -628,10 +628,10 @@
         userDiv.appendChild(avatarUser);
         userDiv.appendChild(divInfo);
         userDiv.appendChild(removeUser);
-        if(dataUsersToInvitate[element].position === 'admin'){
+        if (dataUsersToInvitate[element].position === 'admin') {
           divAdminToSend.appendChild(userDiv);
         }
-        if(dataUsersToInvitate[element].position === 'kunde'){
+        if (dataUsersToInvitate[element].position === 'kunde') {
           divKundeToSend.appendChild(userDiv);
         }
       });
@@ -1217,7 +1217,7 @@
         button.addClass('disabled');
       }
     },
-    cleanMultiSelectInvite () {
+    cleanMultiSelectInvite() {
       // document.getElementById('divMainContentEdit').remove()
       // document.getElementById('UsersList').remove();
       // document.getElementById('AdminList').remove();
@@ -1234,7 +1234,7 @@
         activeRolToInvitate = 'kunde'
       }
       this.$('#divMainContentEdit').empty();
-      this.$('#mainDivUserSendInvitation').remove();
+      this.$('#UsersList').remove();
       this.$('#buttonInviteContact').remove();
       const headerSearch = document.createElement('div');
       headerSearch.classList.add('divHeaderSearch')
@@ -1335,6 +1335,7 @@
       this.$('#imageClosePanel').remove();
       this.$('#divModalHeader').append(sendInvitationIcon);
       for (let i = 0; i < xml.children.length; i++) {
+        // show in the list the users that are not selected previously
         const userDiv = document.createElement('div');
         userDiv.classList.add('userInvitation');
         userDiv.id = 'user' + xml.children[i].getElementsByTagName('phone')[0].textContent;
@@ -1349,6 +1350,11 @@
         const userCheckbox = document.createElement('input');
         userCheckbox.type = 'checkbox';
         userCheckbox.id = 'checkbox' + tlfUser.textContent;
+        Object.keys(dataUsersToInvitate).forEach((element, index) => {
+          if (element === xml.children[i].getElementsByTagName('phone')[0].textContent) {
+            userCheckbox.setAttribute('checked', 'checked')
+          }
+        });
         userCheckbox.classList.add('contactListCheckbox');
         userCheckbox.addEventListener('click', () => {
           this.addRemoveInvitation(xml.children[i], userCheckbox.checked);
@@ -1378,6 +1384,7 @@
         this.$('#divMainContentEdit').append(allUsersList);
         this.$('#divMainContentEdit').append(AdminList);
         this.$('#divMainContentEdit').append(UsersList);
+
       }
       if (userFound === false) {
         const emptyAdmin = document.createElement('span');
