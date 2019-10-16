@@ -1407,7 +1407,8 @@
     template: $('#modal-importer').html(),
 
     initialize(options) {
-      console.log(options, "optionsssssssssssss")
+      this.contactListXml = prepareDataXml(options.contact_data);
+      console.log(this.contactListXml, "optionsssssssssssss")
       this.render();
     },
     render_attributes() {
@@ -1415,6 +1416,7 @@
       return {
         'send-message': i18n('sendMessage'),
         model: this.model,
+        contactListXml: this.contactListXml,
       };
     },
     events: {
