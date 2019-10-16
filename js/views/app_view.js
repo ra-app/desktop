@@ -217,13 +217,7 @@
         });
   },
   openModalImport(){
-    // this.openInbox().then(async() => {
-    //   // const ModalImportView = new Whisper.ModalImport();
-    //   // this.ModalImportView = ModalImportView;
-    //   // this.openView(this.ModalImportView);
-    // })
     const dialog = new Whisper.ModalImport({});
-
     dialog.$el.insertBefore(document.getElementsByClassName('network-status-container')[0]);
   },
   });
