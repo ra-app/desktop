@@ -1452,6 +1452,7 @@
     },
     events: {
       'click #imageSendInvitation' : 'sendDataToModal',
+      'click #imageClosePanel': 'closePanel',
       'click  #imageGoBack' : 'goBack',
       'click #searchContactInvitation': 'showContactListPanel',
       'click .contactListCheckbox': 'checkBoxevent',
@@ -1546,7 +1547,6 @@
       }else {
         delete dataUsersToInvitate[id];
       }
-      console.log(dataUsersToInvitate, "dataaaaaaaaaaaaaaaaaaa");
     },
   });
 })();
