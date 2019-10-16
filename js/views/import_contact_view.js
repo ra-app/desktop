@@ -532,7 +532,7 @@
       // buttonAll.onclick = () => {
       //   this.filterTab('Alle')
       // }
-      buttonAdmin.className = 'tablinks active';
+      buttonAdmin.className = 'tablinks';
       buttonAdmin.innerHTML = 'Admin';
       buttonAdmin.id = 'filterAdmin';
       buttonAdmin.onclick = () => {
@@ -580,11 +580,23 @@
       // sortTab.appendChild(buttonClient);
       const divKundeToSend = document.createElement('div');
       divKundeToSend.classList.add('mainDivUserSendInvitation');
-      divKundeToSend.classList.add('hidden');
       divKundeToSend.id = 'UsersList';
       const divAdminToSend = document.createElement('div');
       divAdminToSend.classList.add('mainDivUserSendInvitation');
       divAdminToSend.id = 'AdminList';
+
+      let selectedTab;
+      Object.keys(dataUsersToInvitate).forEach((element, index) => {
+        selectedTab = dataUsersToInvitate[element].position
+      });
+      if(selectedTab === 'kunde') {
+        divAdminToSend.classList.add('hidden');
+        buttonUsers.classList.add('active');
+      } else {
+        divKundeToSend.classList.add('hidden');
+        buttonAdmin.classList.add('active');
+      }
+
 
 // AdminList
 // UsersList
