@@ -1937,7 +1937,7 @@ button, input{
     }
   }
 
-  #allUsersList, #AdminList, #UsersList{
+  .mainDivUserSendInvitation{
     .userInvitation{
       height: 59px;
       display: flex;
@@ -2023,4 +2023,9 @@ button, input{
 }
 .imageCloseUser{
   width:20px;
+}
+.contactListCheckbox{
+  position: absolute;
+  right: 10px;
+  top: 20px;
 }

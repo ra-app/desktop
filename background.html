@@ -247,8 +247,12 @@
         <textarea class="textareaSendeInvitation" id="textareaSendeInvitation" placeholder="Lass uns mit OfficeApp kommunizieren: https://oaapp.link/1kepeYmFp" />
         <div class="tab">
           <button class="tablinks" id="filterAll">All</button>
-          <button class="tablinks" id="filterAdmin">Admin</button>
-          <button class="tablinks" id="filterUsers">Users</button>
+          {{ #typeAdmin }}
+            <button class="tablinks" id="filterUsers">Users</button>
+          {{ /typeAdmin }}
+          {{ #typeKunde }}
+            <button class="tablinks" id="filterAdmin">Admin</button>
+          {{ /typeKunde }}
         </div>
         <label class="labelInputInvitation">NAME HINZUFÜGEN</label>
         <input type="text" id="searchContactInvitation" />
@@ -270,6 +274,20 @@
             <button class="tablinks" id="filterUsers">Users</button>
           </div>
         </div>
+        <div class="mainDivUserSendInvitation">
+            {{ #objectContact }}
+              <div class="userInvitation">
+                <img src="images/header-chat.png" />
+                <div>
+                  <span>{{name}} {{surname}}</span>
+                  <br>
+                  <span>{{phone}}</span>
+                </div>
+                <input type="checkbox" class="contactListCheckbox" />
+              </div>
+            {{ /objectContact }}
+        </div>
+        
       </div>
   </script>
 
