@@ -241,22 +241,25 @@
   <script type='text/x-tmpl-mustache' id='modal-importer'>
     <div class="modalContact" id="modalContact">
       <div class="divModalHeader divModalInvitation" id="divModalHeader">
-        <img src="images/icons/x-contact-list.svg" class="imageClosePanel">
+        <img src="images/icons/x-contact-list.svg" class="imageClosePanel" id='imageClosePanel'>
       </div>
       <div class="mainInvitationDiv" id="divMainContentEdit">
         <textarea class="textareaSendeInvitation" id="textareaSendeInvitation" placeholder="Lass uns mit OfficeApp kommunizieren: https://oaapp.link/1kepeYmFp" />
         <div class="tab">
-          <button class="tablinks" id="filterAll">All</button>
+          <!-- <button class="tablinks" id="filterAll">All</button>
           {{ #typeAdmin }}
             <button class="tablinks" id="filterUsers">Users</button>
           {{ /typeAdmin }}
           {{ #typeKunde }}
             <button class="tablinks" id="filterAdmin">Admin</button>
-          {{ /typeKunde }}
+          {{ /typeKunde }} -->
         </div>
         <label class="labelInputInvitation">NAME HINZUFÜGEN</label>
         <input type="text" id="searchContactInvitation" />
         <img src="images/icons/icon-picture-add-200.svg" class="imagePlus" id="imagePlus" />
+      </div>
+      <div class="mainDivUserSendInvitation" id="userSendList">
+        
       </div>
       <button class="buttonInviteContact" id="buttonInviteContact"> Teilen </button>
     </div>
@@ -267,13 +270,17 @@
           <img src="images/icons/back_24x24.svg" class="imageGoBack" id="imageGoBack">
           <img src="images/icons/check_over_blue_24x24.svg" class="imageClosePanel" id="imageSendInvitation">
         </div>
-        <div class="mainInvitationDiv" id="divMainContentEdit">
+        <!-- <div class="mainInvitationDiv" id="divMainContentEdit">
           <div class="tab">
             <button class="tablinks" id="filterAll">All</button>
-            <button class="tablinks" id="filterAdmin">Admin</button>
+            {{ #typeAdmin }}
             <button class="tablinks" id="filterUsers">Users</button>
+          {{ /typeAdmin }}
+          {{ #typeKunde }}
+            <button class="tablinks" id="filterAdmin">Admin</button>
+          {{ /typeKunde }}
           </div>
-        </div>
+        </div> -->
         <div class="mainDivUserSendInvitation">
             {{ #objectContact }}
               <div class="userInvitation">
@@ -283,7 +290,7 @@
                   <br>
                   <span>{{phone}}</span>
                 </div>
-                <input type="checkbox" class="contactListCheckbox" />
+                <input type="checkbox" dataPhone={{phone}} id="checkbox-user-{{phone}}" class="contactListCheckbox" />
               </div>
             {{ /objectContact }}
         </div>
