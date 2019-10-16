@@ -147,6 +147,7 @@ export class MainHeader extends React.Component<Props> {
   public importAdmin(){
     console.log("aaaaa");
     const {appView} = window['owsDesktopApp']
+    this.setState({openMenu: !this.state.openMenu})
     appView.openModalImport();
   }
   public render() {
