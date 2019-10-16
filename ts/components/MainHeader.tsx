@@ -40,9 +40,9 @@ declare global {
 }
 
 export class MainHeader extends React.Component<Props> {
-    public state = {
-      openMenu: false,
-      };
+  public state = {
+    openMenu: false,
+  };
   private readonly updateSearchBound: (
     event: React.FormEvent<HTMLInputElement>
   ) => void;
@@ -54,6 +54,7 @@ export class MainHeader extends React.Component<Props> {
   private readonly chatMenuBound: () => void;
   private readonly showContactsBound: () => void;
   private readonly importAdminBound: () => void;
+  private readonly importKundeBound: () => void;
   private readonly inputRef: React.RefObject<HTMLInputElement>;
   private readonly debouncedSearch: (searchTerm: string) => void;
 
@@ -67,7 +68,8 @@ export class MainHeader extends React.Component<Props> {
     this.chatMenuBound = this.chatMenu.bind(this);
     this.showContactsBound = this.showContacts.bind(this);
     this.importAdminBound = this.importAdmin.bind(this);
-    
+    this.importKundeBound = this.importKunde.bind(this);
+
     this.inputRef = React.createRef();
 
     this.debouncedSearch = debounce(this.search.bind(this), 20);
@@ -132,22 +134,24 @@ export class MainHeader extends React.Component<Props> {
     }
   }
 
-  public chatMenu(){
-    this.setState({openMenu: !this.state.openMenu});
+  public chatMenu() {
+    this.setState({ openMenu: !this.state.openMenu });
   }
-  public showContacts(){
+  public showContacts() {
     // this.setState({openMenu: !this.state.openMenu});
-    const {appView} = window['owsDesktopApp']
+    const { appView } = window['owsDesktopApp']
     console.log('appView', appView);
-    this.setState({openMenu: !this.state.openMenu})
+    this.setState({ openMenu: !this.state.openMenu })
     appView.openContact();
 
   }
-
-  public importAdmin(){
-    console.log("aaaaa");
-    const {appView} = window['owsDesktopApp']
-    appView.openModalImport();
+  public importAdmin() {
+    const { appView } = window['owsDesktopApp']
+    appView.openModalImport('admin');
+  }
+  public importKunde() {
+    const { appView } = window['owsDesktopApp']
+    appView.openModalImport('kunde');
   }
   public render() {
     const {
@@ -159,14 +163,14 @@ export class MainHeader extends React.Component<Props> {
       // phoneNumber,
       // profileName,
     } = this.props;
-    const {openMenu} = this.state;
+    const { openMenu } = this.state;
 
     return (
       <div>
         <div className="module-main-header__info">
           <img src="images/header-chat.png" alt="header chat" />
           <span>Kommunikation</span>
-          <img src="images/icons/menu_over_blue_24x24.svg" className="chat_menu" alt="Cbat menu"  onClick={this.chatMenuBound}/>
+          <img src="images/icons/menu_over_blue_24x24.svg" className="chat_menu" alt="Cbat menu" onClick={this.chatMenuBound} />
           {openMenu &&
             <div className="menuChat">
               <ul className="ulMenuChat">
@@ -174,11 +178,11 @@ export class MainHeader extends React.Component<Props> {
                   <span>Broadcast erstellen</span>
                   <img src="images/icons/broadcast_einladen_35x35.svg" className="imageLiChatMenu" alt="Create broadcast" />
                 </li>
-                <li>
+                <li onClick={this.importKundeBound}>
                   <span>Users einladen</span>
                   <img src="images/icons/user_einladen_35x35.svg" className="imageLiChatMenu" alt="Add user" />
                 </li>
-                <li  onClick={this.importAdminBound}>
+                <li onClick={this.importAdminBound}>
                   <span>Admins einladen</span>
                   <img src="images/icons/admin_einladen_35x35.svg" className="imageLiChatMenu" alt="Add admin" />
                 </li>
@@ -190,8 +194,8 @@ export class MainHeader extends React.Component<Props> {
             </div>
           }
         </div>
-      <div className="module-main-header">
-        {/* <Avatar
+        <div className="module-main-header">
+          {/* <Avatar
           avatarPath={avatarPath}
           color={color}
           conversationType="direct"
@@ -201,31 +205,31 @@ export class MainHeader extends React.Component<Props> {
           profileName={profileName}
           size={28}
         /> */}
-        <div className="module-main-header__search">
-          <div
-            role="button"
-            className="module-main-header__search__icon"
-            onClick={this.setFocusBound}
-          />
-          <input
-            type="text"
-            ref={this.inputRef}
-            className="module-main-header__search__input"
-            placeholder={i18n('search')}
-            dir="auto"
-            onKeyUp={this.handleKeyUpBound}
-            value={searchTerm}
-            onChange={this.updateSearchBound}
-          />
-          {searchTerm ? (
+          <div className="module-main-header__search">
             <div
               role="button"
-              className="module-main-header__search__cancel-icon"
-              onClick={this.clearSearchBound}
+              className="module-main-header__search__icon"
+              onClick={this.setFocusBound}
             />
-          ) : null}
+            <input
+              type="text"
+              ref={this.inputRef}
+              className="module-main-header__search__input"
+              placeholder={i18n('search')}
+              dir="auto"
+              onKeyUp={this.handleKeyUpBound}
+              value={searchTerm}
+              onChange={this.updateSearchBound}
+            />
+            {searchTerm ? (
+              <div
+                role="button"
+                className="module-main-header__search__cancel-icon"
+                onClick={this.clearSearchBound}
+              />
+            ) : null}
+          </div>
         </div>
-      </div>
       </div>
     );
   }
