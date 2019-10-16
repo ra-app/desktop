@@ -596,8 +596,6 @@
         divKundeToSend.classList.add('hidden');
         buttonAdmin.classList.add('active');
       }
-
-
       // AdminList
       // UsersList
       Object.keys(dataUsersToInvitate).forEach((element, index) => {

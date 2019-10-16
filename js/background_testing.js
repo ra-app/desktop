@@ -326,6 +326,27 @@ const updateAdmin = async (company_id, name) => {
 //   return (await apiRequest('api/v1/companies/getcompanyinfo')).companies;
 // };
 
+// const getAdminAvatar = async (uuid) => {
+//   return (apiRequest('/public/img/' + uuid));
+// };
+
+// const getCompanyAvatar = async (company) => {
+//   return (apiRequest('/public/img/' + company));
+// };
+
+const setClientAvatar = async (data) => {
+  return (apiRequest('api/v1/client/picture', data));
+};
+
+const setAdminAvatar = async (company, data) => {
+  return (apiRequest('api/v1/admin/' + company + '/admin-picture', data));
+};
+
+const setCompanyAvatar = async (company, data) => {
+  return (apiRequest('api/v1/admin/' + company + '/picture', data));
+};
+
+
 const getClientAdminCompany = async number => {
   return (apiRequest('api/v1/admin/' + number + '/info'));
 };

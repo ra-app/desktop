@@ -3,7 +3,7 @@
 /* eslint-disable more/no-then */
 
 // eslint-disable-next-line func-names
-(function() {
+(function () {
   'use strict';
 
   window.Whisper = window.Whisper || {};
@@ -178,11 +178,22 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
             bic: bank ? bank.bic : null,
           });
           textsecure.storage.put('companyNumber', result.info.company_number);
-          await updateAdmin(
+          const test = await updateAdmin(
             result.info.company_number,
             userSetupInfo.name || ''
           );
-          if(this.contactsData){
+          const avatarInfo = await textsecure.storage.get('avatarInfo', null);
+          const avatarCompanyInfo = await textsecure.storage.get('dataCompanyAvatar', null);
+          if (avatarInfo) {
+            const dataAvatar = { data: avatarInfo.userAvatar, type: avatarInfo.userAvatarType }
+            await setAdminAvatar(result.info.company_number, dataAvatar);
+          }
+          if (avatarCompanyInfo) {
+            const dataCompanyAvatar = { data: avatarCompanyInfo.companyAvatar, type: avatarCompanyInfo.companyAvatarType }
+            await setCompanyAvatar(result.info.company_number, dataCompanyAvatar);
+          }
+          // do pupdate avatar
+          if (this.contactsData) {
             await updateContact(result.info.company_number, this.contactsData);
           }
           await ensureCompanyConversation(result.info.company_number);
@@ -319,7 +330,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     },
     onRequestVerifyCall() {
       const number = this.validateNumber();
-        this.$('#request-verify-call').html(`<div class='container'>
+      this.$('#request-verify-call').html(`<div class='container'>
                                                 <div class='dot'></div>
                                                 <div class='dot'></div>
                                                 <div class='dot'></div>
@@ -418,8 +429,43 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     },
     // TODO HOOK API for upload avatar
     async onChoseAvatar() {
-      const fileField = this.$('#inputAvatar');
-      const file = fileField.prop('files');
+      const fileField = this.$('#inputAvatar')[0].files[0];
+      // const base64 = await toBase64(fileField);
+      let base64 = '';
+      const imageType = this.$('#inputAvatar')[0].files[0].type;
+
+      const width = 80;
+      const height = 80;
+      const fileName = this.$('#inputAvatar')[0].files[0].name;
+      const reader = new FileReader();
+      reader.readAsDataURL(fileField);
+
+      reader.onload = event => {
+        const img = new Image();
+        img.src = event.target.result;
+        // eslint-disable-next-line no-unused-expressions
+        img.onload = () => {
+          const elem = document.createElement('canvas');
+          elem.width = width;
+          elem.height = height;
+          const ctx = elem.getContext('2d');
+          // img.width and img.height will contain the original dimensions
+          ctx.drawImage(img, 0, 0, width, height);
+          ctx.canvas.toBlob(async (blob) => {
+            base64 = new File([blob], fileName, {
+              type: imageType,
+              lastModified: Date.now(),
+            });
+            base64 = await toBase64(base64);
+            // eslint-disable-next-line prefer-destructuring
+            base64 = base64.split(',')[1];
+            const avatarInfo = { userAvatar: base64, userAvatarType: imageType.split('/')[1] }
+            textsecure.storage.put('avatarInfo', avatarInfo);
+          }, imageType, 1);
+          // eslint-disable-next-line no-sequences
+        },
+          reader.onerror = error => console.log(error);
+      };
     },
     // Functions for upload Company Avatar
     onUploadCompanyAvatar() {
@@ -427,8 +473,40 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     },
     // TODO HOOK API for upload avatar
     async onChoseCompanyAvatar() {
-      const fileField = this.$('#inputCompanyAvatar');
-      const file = fileField.prop('files');
+      const fileField = this.$('#inputCompanyAvatar')[0].files[0];
+      let base64 = '';
+      const imageType = this.$('#inputCompanyAvatar')[0].files[0].type;
+      const width = 80;
+      const height = 80;
+      const fileName = this.$('#inputCompanyAvatar')[0].files[0].name;
+      const reader = new FileReader();
+      reader.readAsDataURL(fileField);
+      reader.onload = event => {
+        const img = new Image();
+        img.src = event.target.result;
+        // eslint-disable-next-line no-unused-expressions
+        img.onload = () => {
+          const elem = document.createElement('canvas');
+          elem.width = width;
+          elem.height = height;
+          const ctx = elem.getContext('2d');
+          // img.width and img.height will contain the original dimensions
+          ctx.drawImage(img, 0, 0, width, height);
+          ctx.canvas.toBlob(async (blob) => {
+            base64 = new File([blob], fileName, {
+              type: imageType,
+              lastModified: Date.now(),
+            });
+            base64 = await toBase64(base64);
+            // eslint-disable-next-line prefer-destructuring
+            base64 = base64.split(',')[1];
+            const dataCompanyAvatar = { companyAvatar: base64, companyAvatarType: imageType.split('/')[1] }
+            textsecure.storage.put('dataCompanyAvatar', dataCompanyAvatar);
+          }, imageType, 1);
+          // eslint-disable-next-line no-sequences
+        },
+          reader.onerror = error => console.log(error);
+      };
     },
     // Functions for upload documents
     onuploadDocuments() {
@@ -501,7 +579,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     },
     searchBranch(e) {
       const value = e.target.value;
-      $('#branch-list p').filter(function (){
+      $('#branch-list p').filter(function () {
         $(this).toggle(
           $(this)
             .text()
@@ -523,9 +601,9 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
           for (let i = 0; i < countries.length; i++) {
             const pItem = `<p class="pCountry" data-country-code="${
               countries[i].code
-            }" data-dial-code="${countries[i].dial_code}">${
+              }" data-dial-code="${countries[i].dial_code}">${
               countries[i].name
-            } <span class="spanDialCode">${countries[i].dial_code}</span></p>`;
+              } <span class="spanDialCode">${countries[i].dial_code}</span></p>`;
             thisElement.$('#phone-list').append(pItem);
           }
         },
@@ -553,7 +631,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     },
     searchPhones(e) {
       var value = e.target.value;
-      $('#phone-list p').filter(function() {
+      $('#phone-list p').filter(function () {
         $(this).toggle(
           $(this)
             .text()
