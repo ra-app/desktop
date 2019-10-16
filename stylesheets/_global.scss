@@ -1605,124 +1605,135 @@ th.sorted.descending:after {
   background: #00000063;
   .modalContact{
     position: absolute;
-    // width: 33%;
     width: 25%;
-    background: #ffffff;
-    top: 0;
-    height: 100%;
-    box-shadow: 0px 3px 6px #00000029;
-    .divMainContentEdit{
-      padding: 15px;
-      &.divRemoveContact{
-        text-align: center;
-      }
-      .divEdit {
-        display: flex;
-        height: 40px;
-        border-bottom: 1px solid #C6C6C6;
-        margin-bottom: 20px;
-        .spanSwitch{
-          margin-left: 0px;
-          margin-right: 15px;
-          &.admin{
-            margin-left: 10px;
-          }
-        }
-        .divUserPrev{
-          margin-top: -13px;
-          height: 45px;
-          padding: 8px 15px;
-          background: #b1c6de52 0% 0% no-repeat padding-box;
-          img{
-            height: 30px;
-            width: 30px;
-            vertical-align: middle;
-          }
-          span{
-            font-family: $poppins-medium;
-            color: $color-raapp-text;
-          }
-        }
-        button{
-          @include backgroudGradient();
-          padding: 6px 20px;
-          color: white;
-          border: none;
-          height: 30px;
-          border-radius: 20px;
-          margin-top: -5px;
-          outline: none;
-        }
-        span.labelEdit {
-          width: 40%;
-          font-family: $poppins-regular;
-          font-size: 14px;
-          color: $color-raapp-text;
-        }
-        input[type="text"] {
-          width: 60%;
-          border: none;
-          font-size: 14px;
-          font-family: $poppins-regular;
-          height: 30px;
-          margin-top: -8px;
-          outline: none;
-          color: $color-raapp-text;
-        }
-        input[type="radio"] {
-          margin-right: 10px;
-          vertical-align: middle;    
-        }
-        span.labelRadios{
-          font-family: $poppins-regular;
-          font-size: 14px;
-          color: $color-raapp-text;
-          vertical-align: middle;
-          margin-right: 10px;
-        }
-        input[type="text"]::placeholder{
-          color: #B1BBC0;
-        }
-      }
+  }
+}
+
+.modalContact{
+  border-right: 1px solid #d5d6d6;
+  background: #ffffff;
+  top: 0;
+  height: 100%;
+  box-shadow: 0px 3px 6px #00000029;
+  .divMainContentEdit{
+    padding: 15px;
+    &.divRemoveContact{
+      text-align: center;
     }
-    .divModalHeader{
-      height: 70px;
-      padding: 15px;
-      position: relative;
-      &.divModalInvitation{
-        @include backgroudGradient();
+    .divEdit {
+      display: flex;
+      height: 40px;
+      border-bottom: 1px solid #C6C6C6;
+      margin-bottom: 20px;
+      .spanSwitch{
+        margin-left: 0px;
+        margin-right: 15px;
+        &.admin{
+          margin-left: 10px;
+        }
       }
-      .titleHeaderEdit{
-        margin: 0px;
-        font-family: $poppins-semibold;
-        font-size: 15px;
+      .divUserPrev{
+        margin-top: -13px;
+        height: 45px;
+        padding: 8px 15px;
+        background: #b1c6de52 0% 0% no-repeat padding-box;
+        img{
+          height: 30px;
+          width: 30px;
+          vertical-align: middle;
+        }
+        span{
+          font-family: $poppins-medium;
+          color: $color-raapp-text;
+        }
+      }
+      button{
+        @include backgroudGradient();
+        padding: 6px 20px;
+        color: white;
+        border: none;
+        height: 30px;
+        border-radius: 20px;
+        margin-top: -5px;
+        outline: none;
+      }
+      span.labelEdit {
+        width: 40%;
+        font-family: $poppins-regular;
+        font-size: 14px;
         color: $color-raapp-text;
       }
-      #sendInvitationIcon{
-        top: 23px;
+      input[type="text"] {
+        width: 60%;
+        border: none;
+        font-size: 14px;
+        font-family: $poppins-regular;
+        height: 30px;
+        margin-top: -8px;
+        outline: none;
+        color: $color-raapp-text;
       }
-      .imageClosePanel{
-        height: 25px;
-        width: 25px;
-        cursor: pointer;
-        position: absolute;
-        right: 15px;
-        top: 10px;
+      input[type="radio"] {
+        margin-right: 10px;
+        vertical-align: middle;    
+      }
+      span.labelRadios{
+        font-family: $poppins-regular;
+        font-size: 14px;
+        color: $color-raapp-text;
+        vertical-align: middle;
+        margin-right: 10px;
+      }
+      input[type="text"]::placeholder{
+        color: #B1BBC0;
       }
     }
-    &.open{
-      animation: panelRight 0.4 ease;
-    }
-    .buttonSave{
-      float: right;
-    }
-    .buttonsModal{
+  }
+  .divModalHeader{
+    height: 70px;
+    padding: 15px;
+    position: relative;
+    &.divModalInvitation{
       @include backgroudGradient();
-      padding: 9px 15px;
-      color: #ffffff;
-      border: none;
-      border-radius: 20px;
     }
+    .titleHeaderEdit{
+      margin: 0px;
+      font-family: $poppins-semibold;
+      font-size: 15px;
+      color: $color-raapp-text;
+    }
+    #sendInvitationIcon{
+      top: 23px;
+    }
+    .imageGoBack{
+      height: 25px;
+      width: 25px;
+      cursor: pointer;
+      position: absolute;
+      left: 9px;
+      top: 22px;
+    }
+    .imageClosePanel{
+      height: 25px;
+      width: 25px;
+      cursor: pointer;
+      position: absolute;
+      right: 9px;
+      top: 22px;
+    }
+  }
+  &.open{
+    animation: panelRight 0.4 ease;
+  }
+  .buttonSave{
+    float: right;
+  }
+  .buttonsModal{
+    @include backgroudGradient();
+    padding: 9px 15px;
+    color: #ffffff;
+    border: none;
+    border-radius: 20px;
   }
 }
 button, input{
@@ -1903,7 +1914,7 @@ button, input{
     border-left: none;
     border-right: none;
     border-bottom: 1px solid #707070;
-    width: calc(100% - 45px);
+    width: calc(100% - 50px);
     display: inline-block;
   }
   .tab{
@@ -1926,7 +1937,7 @@ button, input{
     }
   }
 
-  #allUsersList, #AdminList, #UsersList{
+  .mainDivUserSendInvitation{
     .userInvitation{
       height: 59px;
       display: flex;
@@ -2012,4 +2023,9 @@ button, input{
 }
 .imageCloseUser{
   width:20px;
+}
+.contactListCheckbox{
+  position: absolute;
+  right: 10px;
+  top: 20px;
 }

@@ -1318,12 +1318,13 @@
       const AdminUserListResponse = await getListInvitation();
       const allUsersList = document.createElement('div');
       allUsersList.id = 'allUsersList';
+      allUsersList.className = 'mainDivUserSendInvitation';
       const AdminList = document.createElement('div');
       AdminList.id = 'AdminList';
-      AdminList.className = 'hidden'
+      AdminList.className = 'hidden mainDivUserSendInvitation'
       const UsersList = document.createElement('div');
       UsersList.id = 'UsersList';
-      UsersList.className = 'hidden';
+      UsersList.className = 'hidden mainDivUserSendInvitation';
       let userFound = false;
       const sendInvitationIcon = document.createElement('img');
       sendInvitationIcon.src = 'images/icons/check_over_blue_24x24.svg';
@@ -1404,6 +1405,62 @@
             .indexOf(value) > -1
         );
       });
+    },
+  });
+  Whisper.ModalImport = Whisper.View.extend({
+    templateName: 'modal-importer',
+    className: 'modal-importer',
+    template: $('#modal-importer').html(),
+
+    initialize(options) {
+      this.contactListXml = prepareDataXml(options.contact_data);
+      this.objectContact = []
+      for (let i = 0; i < this.contactListXml.children.length; i++) {
+        const contact = this.contactListXml.children.item(i);
+        const tmpObj = {
+          name: contact.getElementsByTagName('name')[0].textContent,
+          surname: contact.getElementsByTagName('surname')[0].textContent,
+          position: contact.getElementsByTagName('position')[0].textContent,
+          email: contact.getElementsByTagName('email')[0].textContent,
+          phone: contact.getElementsByTagName('phone')[0].textContent,
+          ts: contact.getElementsByTagName('ts')[0].textContent,
+        }
+        this.objectContact.push(tmpObj)
+      }
+      if ( options.type == 'kunde' ){
+        this.typeAdmin = true;
+        this.typeKunde = false;
+      }else if ( options.type == 'admin'){
+        this.typeAdmin = false;
+        this.typeKunde = true;
+      }
+      console.log(this.objectContact, "optionsssssssssssss")
+      this.render();
+    },
+    render_attributes() {
+      // console.log('This model import contact view!!!! ', this.model)
+      return {
+        'send-message': i18n('sendMessage'),
+        typeAdmin: this.typeAdmin,
+        typeKunde: this.typeKunde,
+        objectContact: this.objectContact,
+      };
+    },
+    events: {
+      'click .imageClosePanel' : 'closePanel',
+      'click  #imageGoBack' : 'goBack',
+      'click #searchContactInvitation': 'showContactListPanel',
+    },
+    closePanel(){
+      document.getElementsByClassName('modal-importer')[0].remove();
+    },
+    showContactListPanel(){
+      this.$('#modalContact').addClass('hidden');
+      this.$('#modalSearchUsers').removeClass('hidden');
+    },
+    goBack(){
+      this.$('#modalContact').removeClass('hidden');
+      this.$('#modalSearchUsers').addClass('hidden');
     },
   });
 })();

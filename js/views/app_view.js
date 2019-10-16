@@ -216,5 +216,23 @@
       // }
         });
   },
+  async openModalImport(typeUser){
+    const companyNumber = textsecure.storage.get('companyNumber', null);
+    const xml = await getContactXml(companyNumber);
+    localStorage.setItem('ContactList', xml ? xml.contact_data : '');
+    const InvitationList = await getClientAdminCompany(companyNumber);
+    if(InvitationList){
+      localStorage.setItem('InvitationList',JSON.stringify(InvitationList));
+      if(typeUser === 'admin'){
+        xml.InvitationList = InvitationList.admins
+      }
+      if(typeUser === 'kunde'){
+        xml.InvitationList = InvitationList.clients
+      }
+    }
+    xml.type = typeUser;
+    const dialog = new Whisper.ModalImport(xml);
+    dialog.$el.insertBefore(document.getElementsByClassName('network-status-container')[0]);
+  },
   });
 })();
