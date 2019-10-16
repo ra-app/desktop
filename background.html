@@ -241,7 +241,7 @@
   <script type='text/x-tmpl-mustache' id='modal-importer'>
     <div class="modalContact" id="modalContact">
       <div class="divModalHeader divModalInvitation" id="divModalHeader">
-        <img src="images/icons/x-contact-list.svg" class="imageClosePanel" id="imageClosePanel">
+        <img src="images/icons/x-contact-list.svg" class="imageClosePanel">
       </div>
       <div class="mainInvitationDiv" id="divMainContentEdit">
         <textarea class="textareaSendeInvitation" id="textareaSendeInvitation" placeholder="Lass uns mit OfficeApp kommunizieren: https://oaapp.link/1kepeYmFp" />
@@ -256,6 +256,21 @@
       </div>
       <button class="buttonInviteContact" id="buttonInviteContact"> Teilen </button>
     </div>
+
+
+    <div class="modalContact hidden" id="modalSearchUsers">
+        <div class="divModalHeader divModalInvitation" id="divModalHeader">
+          <img src="images/icons/back_24x24.svg" class="imageGoBack" id="imageGoBack">
+          <img src="images/icons/check_over_blue_24x24.svg" class="imageClosePanel" id="imageSendInvitation">
+        </div>
+        <div class="mainInvitationDiv" id="divMainContentEdit">
+          <div class="tab">
+            <button class="tablinks" id="filterAll">All</button>
+            <button class="tablinks" id="filterAdmin">Admin</button>
+            <button class="tablinks" id="filterUsers">Users</button>
+          </div>
+        </div>
+      </div>
   </script>
 
   <script type='text/x-tmpl-mustache' id='identicon-svg'>
