@@ -18,7 +18,7 @@
     className: 'import-contact-table',
     template: $('#import-contact-table').html(),
     render_attributes() {
-      console.log('This model import contact view!!!! ', this.model)
+      // console.log('This model import contact view!!!! ', this.model)
       return {
         'send-message': i18n('sendMessage'),
         model: this.model,
@@ -156,7 +156,7 @@
         })
       }
       if (!file) this.contactsData = null;
-      console.log('Import file chose', files);
+      // console.log('Import file chose', files);
     },
     async acceptImportContact(file) {
       try {
@@ -396,7 +396,7 @@
                 document.getElementById(`buttonSendInvitation-${id}`).classList.remove('none');
               }
             }
-            console.log('dataUsersToUpdate ===> ', dataUsersToUpdate)
+            // console.log('dataUsersToUpdate ===> ', dataUsersToUpdate)
           })
           break;
         // eslint-disable-next-line no-case-declarations
@@ -587,7 +587,7 @@
 // AdminList
 // UsersList
       Object.keys(dataUsersToInvitate).forEach((element, index) => {
-        console.log(dataUsersToInvitate, 'dataUsersToInvitate')
+        // console.log(dataUsersToInvitate, 'dataUsersToInvitate')
         const id = dataUsersToInvitate[element].userid
         const data = this.prepareDataXml(dataUsersToInvitate[element].cell);
         const userDiv = document.createElement('div');
@@ -654,19 +654,17 @@
         }
         const result = await createInvitation(companyNumber, data);
         const dataSms = {
-          // phone_number: '+34687011338',
+          phone_number: id,
           code: result.code,
         }
         sendSms(companyNumber, dataSms)
 
-        console.log(result, "resultttttttttttttttttttt")
         dataUsersToInvitate = {};
         document.getElementById(`buttonSendInvitation-${id}`).innerText = i18n('sendAgainInvitation')
         this.closeModal();
       })
     },
     async removeContact(id) {
-      console.log(id, "remove contact");
       this.openModal('remove');
       const xml = await this.getXmlFile();
       this.panelRemoveContact(id, xml)
@@ -718,7 +716,7 @@
 
     },
     createEditPanel(cln, xmlData, positionXML) {
-      console.log('CLN !!!! ', cln.getElementsByTagName('name'))
+      // console.log('CLN !!!! ', cln.getElementsByTagName('name'))
       const divMainHeaderEdit = document.createElement('div');
       divMainHeaderEdit.className = 'divModalHeader';
       const pUserName = document.createElement('p');
@@ -1429,7 +1427,7 @@
     },
     prepareDataToUpdate(xmlData) {
       const dataString = xmlData.outerHTML
-      console.log(xmlData.outerHTML, 'outerrrr')
+      // console.log(xmlData.outerHTML, 'outerrrr')
       const aux = dataString.toString().replace(/\r|\n|\t/g, '');
       const data = {
         'contact_data': aux.toString().replace(/>\s*/g, '>'),
