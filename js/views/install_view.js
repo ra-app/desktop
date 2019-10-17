@@ -46,7 +46,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       'change #accept-eula-check': 'onChangeAcceptEula',
       'click #continue-eula': 'onContinueEula',
       'click #continue-setup-company': 'onCompanySetup',
-      // 'click #continue-setup-admin': 'onAdminSetup',
+      'click #continue-setup-admin': 'onAdminSetup',
       // 'validation #phone-number-value': 'onNumberValidation',
       'click #request-verify-call': 'onRequestVerifyCall',
       'click #request-verify-sms': 'onRequestVerifySMS',
@@ -108,6 +108,11 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       }
 
       this.step = step;
+      if (this.setupType == 'admin') {
+        this.setupTypeAdmin = true
+      } else if (this.setupType == 'company') {
+        this.setupTypeCompany = true;
+      }
       this.render();
 
       if (this.step === Steps.SETUP_COMPANY_PROFILE) {
@@ -539,12 +544,22 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     },
     activateButtonProfileDetails() {
       const username = this.$el.find('#user-name-input')[0].value.length;
-      const companyName = this.$el.find('#company-name-input')[0].value.length;
       const button = this.$el.find('#user-profile-done');
-      if (username > 0 && companyName > 0) {
-        button.removeClass('disabled');
-      } else {
-        button.addClass('disabled');
+      
+      let companyName = '';
+      if(this.setupTypeCompany){
+        companyName = this.$el.find('#company-name-input')[0].value.length;
+        if (companyName > 0) {
+          button.removeClass('disabled');
+        } else {
+          button.addClass('disabled');
+        }
+      } else if (this.setupTypeAdmin) {
+        if (username > 0) {
+          button.removeClass('disabled');
+        } else {
+          button.addClass('disabled');
+        }
       }
     },
     activateButtonBankDetails() {
@@ -708,6 +723,8 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         isStepSetupContactImport: this.step === Steps.SETUP_CONTACT_IMPORT,
         isStepSetupBranchen: this.step === Steps.SETUP_BRANCHEN,
         isStepSetupPhoneList: this.step === Steps.SETUP_PHONESLIST,
+        setupTypeAdmin: this.setupTypeAdmin,
+        setupTypeCompany: this.setupTypeCompany,
         EULAText: EULA,
         uploadAvatarText: i18n('uploadAvatarText'),
         BranchenTitle: i18n('BranchenTitle'),

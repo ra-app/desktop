@@ -689,7 +689,7 @@
               <input type='text' name='admin-signup-code' class='input-code' id='admin-signup-code' />
               <label for='admin-signup-code' class="label-inputs code-label">{{signupCode}}</label>
             </div>
-            <a class='button disabled ' id='continue-setup-admin'>{{continueButton}}</a>
+            <a class='button' id='continue-setup-admin'>{{continueButton}}</a>
           </div>
         </div>
       </div>
@@ -847,6 +847,7 @@
             <div class='card-header'>
                 <div class='title'>{{userProfile}}</div>
             </div>
+            {{#setupTypeCompany}}
             <input type='text' id='company-name-input' class="inputsRegister" />
             <label for='company-name-input' class="label-text labelsInput">{{companyName}}</label>
             <div class='upload-avatar-company'>
@@ -869,6 +870,20 @@
                 <p>{{uploadAvatarText}}</p>
               </div>
             </div>
+            {{/setupTypeCompany}}
+            {{#setupTypeAdmin}}
+            <input type='text' id='user-name-input' class="inputsRegister"/>
+            <label for='user-name-input' class='label-text'>{{userName}}</label>
+            <div class='upload-avatar'>
+              <div class='select-avatar' id='uploadAvatar'>
+                <img src='images/icons/icon-picture-add-user.svg' />
+              </div>
+              <input type='file' class='file-input-avatar' id='inputAvatar' />
+              <div class='text-upload-avatar'>
+                <p>{{uploadAvatarText}}</p>
+              </div>
+            </div>
+            {{/setupTypeAdmin}}
             <a class='button adminame-button disabled' id='user-profile-done'>{{continueButton}}</a>
           </div>
         </div>
