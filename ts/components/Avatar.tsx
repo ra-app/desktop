@@ -18,6 +18,8 @@ interface Props {
 
 interface State {
   imageBroken: boolean;
+  srcImage: string;
+  loading: boolean;
 }
 
 export class Avatar extends React.Component<Props, State> {
@@ -30,9 +32,20 @@ export class Avatar extends React.Component<Props, State> {
 
     this.state = {
       imageBroken: false,
+      srcImage : '',
+      loading: true,
     };
+    this.getImage();
   }
 
+  public async getImage() {
+    console.log('imageeeeeeeeeeeeeeeeeeeeeeeeeeee')
+    const { phoneNumber} = this.props;
+    const API_URL = 'https://luydm9sd26.execute-api.eu-central-1.amazonaws.com/latest/';
+    const test =  API_URL + 'public/img-uri/' + phoneNumber;
+    const result = await (await fetch(test)).json();
+    this.setState({srcImage: result.uri, loading: false});
+  }
   public handleImageError() {
     // tslint:disable-next-line no-console
     console.log('Avatar: Image failed to load; failing over to placeholder');
@@ -41,11 +54,11 @@ export class Avatar extends React.Component<Props, State> {
     });
   }
 
-  public renderImage() {
-    const { avatarPath, i18n, name, phoneNumber, profileName } = this.props;
-    const { imageBroken } = this.state;
-
-    if (!avatarPath || imageBroken) {
+  public renderImage = async () => {
+    const { i18n, name, phoneNumber, profileName } = this.props;
+    const { imageBroken, srcImage } = this.state;
+    console.log(srcImage, "stateeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
+    if (imageBroken) {
       return null;
     }
 
@@ -53,11 +66,19 @@ export class Avatar extends React.Component<Props, State> {
       !name && profileName ? ` ~${profileName}` : ''
     }`;
 
+
+  // .then(function(response) {
+  //   return response.json();
+  // })
+  // .then(function(myJson) {
+  //   console.log(myJson.uri, "666666666666666666666666666666666666666666666666666");
+  //   console.log('AAAAAAAAAAA', test)
+
     return (
       <img
         onError={this.handleImageErrorBound}
         alt={i18n('contactAvatarAlt', [title])}
-        src={avatarPath}
+        src={srcImage}
       />
     );
   }
@@ -88,7 +109,6 @@ export class Avatar extends React.Component<Props, State> {
             `module-avatar__label--${size}`
           )}
         >
-          {/* {initials} */}MMMM
         </div>
       );
     }
@@ -105,11 +125,13 @@ export class Avatar extends React.Component<Props, State> {
   }
 
   public render() {
-    const { avatarPath, size, noteToSelf } = this.props;
-    const { imageBroken } = this.state;
+    const { i18n, name, phoneNumber, profileName, size } = this.props;
+    const { imageBroken, srcImage, loading } = this.state;
 
-    const hasImage = !noteToSelf && avatarPath && !imageBroken;
-
+    // const hasImage = !noteToSelf && avatarPath && !imageBroken;
+    const title = `${name || phoneNumber}${
+      !name && profileName ? ` ~${profileName}` : ''
+    }`;
     if (size !== 28 && size !== 36 && size !== 48 && size !== 80) {
       throw new Error(`Size ${size} is not supported!`);
     }
@@ -119,12 +141,13 @@ export class Avatar extends React.Component<Props, State> {
         className={classNames(
           'module-avatar',
           `module-avatar--${size}`,
-          hasImage ? 'module-avatar--with-image' : 'module-avatar--no-image'
+          !imageBroken ? 'module-avatar--with-image' : 'module-avatar--no-image'
           // !hasImage ? `module-avatar--${color}` : null
         )}
       >
-        {hasImage ? (
-          this.renderImage()
+        {!imageBroken && !loading ? (
+          // this.renderImage()
+          <img onError={this.handleImageErrorBound}  alt={i18n('contactAvatarAlt', [title])} src={srcImage}/>
         ) : (
           <img src="images/header-chat.png" alt="Default img" />
         )}
