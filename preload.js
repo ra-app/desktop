@@ -350,9 +350,16 @@ if (config.environment === 'test') {
   /* eslint-enable global-require, import/no-extraneous-dependencies */
 }
 
+const genError = obj => {
+  const err = new Error();
+  Object.assign(err, obj);
+  return err;
+}
+
 window.saveContactXML = (xml) => new Promise((resolve, reject) => {
   ipc.once('save-contact-xml-result', (evt, data) => {
-    console.log('save-contact-xml-result', data);
+    if (data.success) resolve();
+    else reject(genError(data.error));
   });
   ipc.send('save-contact-xml', xml);
 });

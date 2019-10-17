@@ -14,8 +14,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   const number = textsecure.storage.get('companyNumber', null);
   if (number) {
     await ensureCompanyConversation(number);
-    const xml = await getXmlFile();
-    if (xml) await window.saveContactXML(xml);
+    try {
+      const xml = await getXmlFile();
+      if (xml) await window.saveContactXML(xml);
+    } catch (err) {
+      console.error('Unable to save contacts XML', err);
+    }
   }
 
   // await ensureConversation('+34000000003');
