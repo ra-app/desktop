@@ -68,7 +68,7 @@ function prepareDataXml(contact_data) {
     xmlRes = checkValidXML(contact_data);
   } catch (ex) {
     console.log(ex)
-    return document.createElementNS('', 'contacts');
+    return document.createElementNS('', 'contactlist');
   }
   const contactListXml = xmlRes.children[0];
   return contactListXml;
@@ -86,6 +86,9 @@ function prepareDataToUpdate(xmlData) {
 
 async function updateXmlDB(data) {
   const companyNumber = textsecure.storage.get('companyNumber', null);
+  if (data.contact_data.indexOf('<?xml') !== 0) {
+    data.contact_data = '<?xml version="1.0" encoding="UTF-8"?>' + data.contact_data;
+  }
   await updateContact(companyNumber, data);
   localStorage.setItem('ContactList', data.contact_data);
   await window.saveContactXML(data.contact_data);

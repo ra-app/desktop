@@ -1069,7 +1069,7 @@ ipc.on('save-contact-xml', async (evt, data) => {
     evt.sender.send('save-contact-xml-result', result);
   }
   fs.mkdir(configPath, (err) => {
-    if (err && err.code !== 'ENOENT') done(err);
+    if (err && err.code !== 'EEXIST') done(err);
     else fs.writeFile(path.join(configPath, 'contacts.xml'), data, done);
   })
 });
