@@ -645,6 +645,7 @@ const checkValidXML = xml => {
     }
   };
   throwParserError(doc);
+  return doc;
 };
 
 // PROFILE STUFF START

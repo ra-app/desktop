@@ -52,7 +52,10 @@ async function getXmlFile() {
   if (!xml) {
     const companyNumber = textsecure.storage.get('companyNumber', null);
     xml = await getContactXml(companyNumber);
-    localStorage.setItem('ContactList', JSON.stringify(xml));
+    if (xml) {
+      xml = xml.contact_data;
+      localStorage.setItem('ContactList', xml);
+    }
   }
   return xml
 }
@@ -62,11 +65,11 @@ function prepareDataXml(contact_data) {
   let xmlRes;
   try {
     // WebKit returns null on unsupported types
-    xmlRes = parser.parseFromString(contact_data, 'text/xml');
+    xmlRes = checkValidXML(contact_data);
   } catch (ex) {
     console.log(ex)
+    return document.createElementNS('', 'contacts');
   }
-  document.xmlRes = xmlRes;
   const contactListXml = xmlRes.children[0];
   return contactListXml;
 }

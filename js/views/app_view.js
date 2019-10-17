@@ -204,13 +204,12 @@
         this.openInbox().then(async() => {
           this.resetViews();
           const companyNumber = textsecure.storage.get('companyNumber', null);
-          const xml = await getContactXml(companyNumber);
-          localStorage.setItem('ContactList', xml ? xml.contact_data : '');
+          const xml = await getXmlFile();
           const InvitationList = await getClientAdminCompany(companyNumber);
           if(InvitationList){
             localStorage.setItem('InvitationList',JSON.stringify(InvitationList));
           }
-          const ContactView = new Whisper.ImportContactView(xml);
+          const ContactView = new Whisper.ImportContactView({contact_data: xml});
           this.ContactView = ContactView;
           this.openView(this.ContactView);
       // }
@@ -218,8 +217,7 @@
   },
   async openModalImport(typeUser){
     const companyNumber = textsecure.storage.get('companyNumber', null);
-     const xml = await getContactXml(companyNumber);
-    localStorage.setItem('ContactList', xml ? xml.contact_data : '');
+    const xml = await getXmlFile(companyNumber);
     const InvitationList = await getClientAdminCompany(companyNumber);
     console.log(InvitationList.admins, "55555555555555")
     if(xml && InvitationList){
@@ -232,7 +230,7 @@
       }
       xml.type = typeUser;
     }
-    const dialog = new Whisper.ModalImport(xml);
+    const dialog = new Whisper.ModalImport({contact_data: xml});
     dialog.$el.insertBefore(document.getElementsByClassName('network-status-container')[0]);
   },
   });
