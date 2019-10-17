@@ -38,8 +38,9 @@ function findUserXml(id, xmlData) {
   let position = null;
   for (let i = 0; i < xmlData.children.length; i++) {
     const contact = xmlData.children.item(i);
-    const phone = contact.getElementsByTagName('phone')[0].textContent
-    if (phone === id) {
+    const phone = contact.getElementsByTagName('phone')[0].textContent;
+    const email = contact.getElementsByTagName('email')[0].textContent;
+    if (phone === id || email === id) {
       position = i
       return position; // only first position TODO LIST OF POSITION FOR MULTI SELECT
     }
@@ -61,7 +62,6 @@ async function getXmlFile() {
 }
 
 function prepareDataXml(contact_data) {
-  const parser = new DOMParser();
   let xmlRes;
   try {
     // WebKit returns null on unsupported types

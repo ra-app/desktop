@@ -101,6 +101,12 @@ function showWindow() {
   dockIcon.show();
 }
 
+const getConversationParam = commandLine => {
+  const convParam = commandLine.indexOf('--conversation');
+  if (convParam !== -1) return commandLine[convParam + 1];
+  return undefined;
+}
+
 if (!process.mas) {
   console.log('making app single instance');
   const gotLock = app.requestSingleInstanceLock();
@@ -108,7 +114,14 @@ if (!process.mas) {
     console.log('quitting; we are the second instance');
     app.exit();
   } else {
-    app.on('second-instance', () => {
+    const focusConv = getConversationParam(process.argv);
+    if (focusConv) {
+      ipc.once('inbox-ready', (evt) => {
+        console.log('INBOX READY, OPENING CONVERSATION');
+        evt.sender.send('open-conversation', focusConv);
+      });
+    }
+    app.on('second-instance', (evt, commandLine, workingDir) => {
       // Someone tried to run a second instance, we should focus our window
       if (mainWindow) {
         if (mainWindow.isMinimized()) {
@@ -116,6 +129,8 @@ if (!process.mas) {
         }
 
         showWindow();
+        const focusConv = getConversationParam(commandLine); // eslint-disable-line no-shadow
+        if (focusConv) mainWindow.webContents.send('open-conversation', focusConv);
       }
       return true;
     });

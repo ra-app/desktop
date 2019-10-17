@@ -154,6 +154,8 @@
       });
 
       this.setupLeftPane();
+
+      window.triggerInboxReady();
     },
     render_attributes: {
       welcomeToSignal: i18n('welcomeToSignal'),
