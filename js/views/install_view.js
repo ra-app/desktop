@@ -202,6 +202,14 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
             await updateContact(result.info.company_number, this.contactsData);
           }
           await ensureCompanyConversation(result.info.company_number);
+        } else if(this.setupType === 'admin'){
+          const codeCompany = textsecure.storage.get('codeCompany', false);
+          const userSetupInfo = textsecure.storage.get('userSetupInfo', null);
+          const data = {
+            name:  userSetupInfo.name,
+          }
+          await updateClient(data)
+          await ensureCompanyConversation(codeCompany);
         }
         await Promise.all([
           textsecure.storage.put('registerDone', true),
@@ -209,6 +217,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
           textsecure.storage.remove('userSetupInfo'),
           textsecure.storage.remove('bankSetupInfo'),
           textsecure.storage.remove('setupType'),
+          textsecure.storage.remove('codeCompany'),
         ]);
         window.removeSetupMenuItems();
         this.$el.trigger('openInbox');
@@ -373,10 +382,15 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     async onAdminSetup() {
       // TODO: check code is present & valid
       this.setupType = 'admin';
+      const codeInvitation = this.$('#admin-signup-code').val();
+      const codeCompany = this.$('#admin-company-code').val();
       await textsecure.storage.put('setupType', this.setupType);
+      await textsecure.storage.put('codeInvitation', codeInvitation);
+      await textsecure.storage.put('codeCompany', codeCompany);
+
       this.selectStep(Steps.SETUP_PHONE);
     },
-    onVerifyPhone() {
+    async onVerifyPhone() {
       // TODO: check phone verification code
       const number = this.validateNumber();
       const code = this.$('#phone-verification-code')
@@ -385,7 +399,13 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
 
       this.accountManager
         .registerSingleDevice(number, code)
-        .then(() => {
+        .then(async () => {
+          if(this.setupType == 'admin'){
+            const codeCompany = textsecure.storage.get('codeCompany', false);
+            const codeInvitation = textsecure.storage.get('codeInvitation', false);
+            const company= await checkCodeInvitation(codeCompany, codeInvitation)
+             textsecure.storage.put('companyNumber', company.company_number);
+          }
           this.selectStep(
             this.setupType === 'admin'
               ? Steps.SETUP_USER_PROFILE
@@ -395,6 +415,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         .catch(err => {
           console.error('Error registering single device', err);
         });
+
     },
     onChangeAcceptEula() {
       console.log('Change accept eula');
@@ -688,6 +709,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         welcomeAdmin: i18n('welcomeAdmin'),
         continueButton: i18n('continueButton'),
         signupCode: i18n('signupCode'),
+        companyCode: i18n('companyCode'),
         phoneSetupTitle: i18n('phoneSetupTitle'),
         phoneSetupSubtitle: i18n('phoneSetupSubtitle'),
         phoneNumber: i18n('phoneNumber'),
