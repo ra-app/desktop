@@ -172,7 +172,6 @@
         updateXmlDB(this.contactsData)
         // const companyNumber = textsecure.storage.get('companyNumber', null);
         // await updateContact(companyNumber, this.contactsData);
-        // localStorage.setItem('ContactList', contactsData.contact_data);
       } catch (err) {
         // TODO: show invalid xml error
         console.error(err);
