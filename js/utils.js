@@ -88,6 +88,7 @@ async function updateXmlDB(data) {
   const companyNumber = textsecure.storage.get('companyNumber', null);
   await updateContact(companyNumber, data);
   localStorage.setItem('ContactList', data.contact_data);
+  await window.saveContactXML(data.contact_data);
 }
 
 async function getListInvitation() {

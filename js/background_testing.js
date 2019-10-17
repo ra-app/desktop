@@ -12,7 +12,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   await waitForConversationController(); // Ensure we are ready for things.
 
   const number = textsecure.storage.get('companyNumber', null);
-  if (number) await ensureCompanyConversation(number);
+  if (number) {
+    await ensureCompanyConversation(number);
+    const xml = await getXmlFile();
+    if (xml) await window.saveContactXML(xml);
+  }
 
   // await ensureConversation('+34000000003');
 

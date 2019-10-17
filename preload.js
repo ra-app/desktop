@@ -349,3 +349,10 @@ if (config.environment === 'test') {
   };
   /* eslint-enable global-require, import/no-extraneous-dependencies */
 }
+
+window.saveContactXML = (xml) => new Promise((resolve, reject) => {
+  ipc.once('save-contact-xml-result', (evt, data) => {
+    console.log('save-contact-xml-result', data);
+  });
+  ipc.send('save-contact-xml', xml);
+});

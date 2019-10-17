@@ -1059,3 +1059,17 @@ function handleSgnlLink(incomingUrl) {
     console.error('Unhandled sgnl link');
   }
 }
+
+ipc.on('save-contact-xml', async (evt, data) => {
+  const userDataPath = await getRealPath(app.getPath('userData'));
+  const configPath = path.join(userDataPath, 'config');
+  const done = err => {
+    const result = {success: !err};
+    if (err) result.error = {message: err.message, stack: err.stack, code: err.code};
+    evt.sender.send('save-contact-xml-result', result);
+  }
+  fs.mkdir(configPath, (err) => {
+    if (err && err.code !== 'ENOENT') done(err);
+    else fs.writeFile(path.join(configPath, 'contacts.xml'), data, done);
+  })
+});
