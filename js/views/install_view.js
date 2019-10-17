@@ -205,8 +205,13 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         } else if(this.setupType === 'admin'){
           const codeCompany = textsecure.storage.get('codeCompany', false);
           const userSetupInfo = textsecure.storage.get('userSetupInfo', null);
+          const avatarInfo = await textsecure.storage.get('avatarInfo', null);
           const data = {
             name:  userSetupInfo.name,
+          }
+          if (avatarInfo) {
+            const dataAvatar = { data: avatarInfo.userAvatar, type: avatarInfo.userAvatarType }
+            await setAdminAvatar(result.info.company_number, dataAvatar);
           }
           await updateClient(data)
           await ensureCompanyConversation(codeCompany);
