@@ -115,12 +115,7 @@ if (!process.mas) {
     app.exit();
   } else {
     const focusConv = getConversationParam(process.argv);
-    if (focusConv) {
-      ipc.once('inbox-ready', (evt) => {
-        console.log('INBOX READY, OPENING CONVERSATION');
-        evt.sender.send('open-conversation', focusConv);
-      });
-    }
+    if (focusConv) ipc.once('inbox-ready', (evt) => evt.sender.send('open-conversation', focusConv));
     app.on('second-instance', (evt, commandLine, workingDir) => {
       // Someone tried to run a second instance, we should focus our window
       if (mainWindow) {
