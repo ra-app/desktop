@@ -13,7 +13,7 @@
             font-src 'self';
             form-action 'self';
             frame-src 'none';
-            img-src 'self' blob: data:;
+            img-src 'self' blob: data: https:;
             media-src 'self' blob:;
             object-src 'none';
             script-src 'self';
@@ -72,7 +72,7 @@
         {{#model}}
           <div id={{uuid}} class="main-ticket-container" >
             <div class="container-ticket-userinfo">
-              <img src="images/header-chat.png" class="ticket-user-image" />
+              <img src="{{avatarSrc}}" id='clientTicketAvatar_{{uuid}}' class="ticket-user-image" />
               {{#name}}
                 <span class="ticket-user-name">{{name}} {{surname}}</span>
               {{/name}}
