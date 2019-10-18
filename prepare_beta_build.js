@@ -23,16 +23,16 @@ console.log('prepare_beta_build: updating package.json');
 // -------
 
 const NAME_PATH = 'name';
-const PRODUCTION_NAME = 'signal-desktop';
-const BETA_NAME = 'signal-desktop-beta';
+const PRODUCTION_NAME = 'officeapp-desktop';
+const BETA_NAME = 'officeapp-desktop-beta';
 
 const PRODUCT_NAME_PATH = 'productName';
 const PRODUCTION_PRODUCT_NAME = 'OfficeApp';
 const BETA_PRODUCT_NAME = 'OfficeApp Beta';
 
 const APP_ID_PATH = 'build.appId';
-const PRODUCTION_APP_ID = 'org.whispersystems.signal-desktop';
-const BETA_APP_ID = 'org.whispersystems.signal-desktop-beta';
+const PRODUCTION_APP_ID = 'org.whispersystems.officeapp-desktop';
+const BETA_APP_ID = 'org.whispersystems.officeapp-desktop-beta';
 
 const STARTUP_WM_CLASS_PATH = 'build.linux.desktop.StartupWMClass';
 const PRODUCTION_STARTUP_WM_CLASS = 'OfficeApp';

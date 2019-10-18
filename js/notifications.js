@@ -101,7 +101,7 @@
       const last = this.last().toJSON();
       switch (userSetting) {
         case SettingNames.COUNT:
-          title = 'Signal';
+          title = 'OfficeApp';
           message = newMessageCountLabel;
           break;
         case SettingNames.NAME: {
