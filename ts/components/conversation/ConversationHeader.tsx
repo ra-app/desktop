@@ -8,7 +8,7 @@ import {
   ContextMenu,
   ContextMenuTrigger,
   MenuItem,
-  SubMenu,
+  // SubMenu,
 } from 'react-contextmenu';
 
 interface TimerOption {
@@ -170,7 +170,7 @@ export class ConversationHeader extends React.Component<Props> {
   }
 
   public renderGear(triggerId: string) {
-    // const { showBackButton } = this.props;
+    const { showBackButton } = this.props;
 
     return (
       <ContextMenuTrigger id={triggerId} ref={this.menuTriggerRef}>
@@ -184,7 +184,9 @@ export class ConversationHeader extends React.Component<Props> {
           )}
           disabled={showBackButton}
         /> */}
-        {/* <img src="images/icons/menu_over_blue_24x24.svg" className="chat_menu" alt="Chat menu" /> */}
+        <button onClick={this.showMenuBound} className="chat_menu" disabled={showBackButton}>
+          <img src="images/icons/menu_over_blue_24x24.svg" className="chat_menu" alt="Chat menu"/>
+        </button>
       </ContextMenuTrigger>
     );
   }
@@ -192,26 +194,26 @@ export class ConversationHeader extends React.Component<Props> {
   public renderMenu(triggerId: string) {
     const {
       i18n,
-      isMe,
-      isGroup,
+      // isMe,
+      // isGroup,
       isArchived,
       onDeleteMessages,
-      onResetSession,
-      onSetDisappearingMessages,
-      onShowAllMedia,
-      onShowGroupMembers,
-      onShowSafetyNumber,
+      // onResetSession,
+      // onSetDisappearingMessages,
+      // onShowAllMedia,
+      // onShowGroupMembers,
+      // onShowSafetyNumber,
       onArchive,
       onMoveToInbox,
-      timerOptions,
+      // timerOptions,
       isCompany,
     } = this.props;
 
-    const disappearingTitle = i18n('disappearingMessages') as any;
+    // const disappearingTitle = i18n('disappearingMessages') as any;
 
     return (
       <ContextMenu id={triggerId}>
-        {!isCompany ? (
+        {/* {!isCompany ? (
           <SubMenu title={disappearingTitle}>
             {(timerOptions || []).map(item => (
               <MenuItem
@@ -224,21 +226,21 @@ export class ConversationHeader extends React.Component<Props> {
               </MenuItem>
             ))}
           </SubMenu>
-        ) : null}
-        <MenuItem onClick={onShowAllMedia}>{i18n('viewAllMedia')}</MenuItem>
-        {isGroup ? (
+        ) : null} */}
+        {/* <MenuItem onClick={onShowAllMedia}>{i18n('viewAllMedia')}</MenuItem> */}
+        {/* {isGroup ? (
           <MenuItem onClick={onShowGroupMembers}>
             {i18n('showMembers')}
           </MenuItem>
-        ) : null}
-        {!isGroup && !isMe && !isCompany ? (
+        ) : null} */}
+        {/* {!isGroup && !isMe && !isCompany ? (
           <MenuItem onClick={onShowSafetyNumber}>
             {i18n('showSafetyNumber')}
           </MenuItem>
-        ) : null}
-        {!isGroup && !isCompany ? (
+        ) : null} */}
+        {/* {!isGroup && !isCompany ? (
           <MenuItem onClick={onResetSession}>{i18n('resetSession')}</MenuItem>
-        ) : null}
+        ) : null} */}
 
         {isArchived ? (
           <MenuItem onClick={onMoveToInbox}>
