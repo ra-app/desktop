@@ -206,12 +206,20 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
           const codeCompany = textsecure.storage.get('codeCompany', false);
           const userSetupInfo = textsecure.storage.get('userSetupInfo', null);
           const avatarInfo = await textsecure.storage.get('avatarInfo', null);
-          const data = {
-            name:  userSetupInfo.name,
-          }
+          const role = await textsecure.storage.get('role', null);
+          // const client_uuid = await textsecure.storage.get('client_uuid', null);
+          
+      
           if (avatarInfo) {
             const dataAvatar = { data: avatarInfo.userAvatar, type: avatarInfo.userAvatarType }
-            await setAdminAvatar(codeCompany, dataAvatar);
+            if(role === 'user'){
+              await setClientAvatar(dataAvatar);
+            } else {
+              await setAdminAvatar(codeCompany, dataAvatar);
+            }
+          }
+          const data = {
+            name:  userSetupInfo.name,
           }
           await updateClient(data)
           await ensureCompanyConversation(codeCompany);
@@ -408,8 +416,11 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
           if(this.setupType == 'admin'){
             const codeCompany = textsecure.storage.get('codeCompany', false);
             const codeInvitation = textsecure.storage.get('codeInvitation', false);
-            const company= await checkCodeInvitation(codeCompany, codeInvitation)
-             textsecure.storage.put('companyNumber', company.company_number);
+            const company= await checkCodeInvitation(codeCompany, codeInvitation);
+            console.log(company, "companyyyyyyyyyyyyyyyyyyyyyyyyyyyyy")
+             textsecure.storage.put('companyNumber', company.company.company_number);
+             textsecure.storage.put('role', company.role);
+            //  textsecure.storage.put('client_uuid', company.client_uuid);
           }
           this.selectStep(
             this.setupType === 'admin'
