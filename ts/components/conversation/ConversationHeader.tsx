@@ -255,6 +255,11 @@ export class ConversationHeader extends React.Component<Props> {
             {i18n('deleteMessages')}
           </MenuItem>
         ) : null}
+        {!isCompany ? (
+          <MenuItem>
+            {i18n('closeTicket')}
+          </MenuItem>
+        ) : null}
       </ContextMenu>
     );
   }

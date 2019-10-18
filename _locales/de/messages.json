@@ -1893,5 +1893,9 @@
       "uploadAvatarText":{
         "message":"Bitte Fügen SIE EIN Profilbild HINZU",
         "description":"Upload user avatar"
+      },
+      "closeTicket":{
+          "message": "Close ticket",
+          "description": "Chat menu close ticket"
       }
 }
