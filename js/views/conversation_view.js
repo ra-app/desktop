@@ -84,6 +84,7 @@
     className: 'tickets-view',
     template: $('#tickets-view').html(),
     render_attributes() {
+      console.log(this.model, "modellllllll")
       if (this.model[0].hasTicket) {
         return {
           'send-message': i18n('sendMessage'),
@@ -114,6 +115,9 @@
         this.$('#claim_' + element.uuid).click(() =>
           this.claimTicket(element.company_id, element.uuid)
         );
+        this.$('img').on("error", function() {
+          $(this).attr('src', 'images/header-chat.png');
+        });
       });
     },
     async showInfoTicket(evt, element) {

@@ -277,6 +277,7 @@
         arrayList[index].date = new Date(element.ts_created).toUTCString().split('GMT')[0];
         arrayList[index].hasTicket = true;
         arrayList[index].company_name = list.company_name;
+        arrayList[index].avatarSrc = getAvatar(element.client_uuid);
         console.log('Element state !!!! ', element.state)
         switch (element.state) {
           case 0:
@@ -349,6 +350,9 @@
         // if(this.tmpticketId !== id){
         // this.conversation_stack.open(tickets, isTicket, clientDetails);
         if (ticketList.tickets) {
+          // ticketList.tickets.forEach((element, index) => {
+          //   ticketList.tickets[index].avatarSrc = getAvatar(element.company_id);
+          // });
           ticketList.tickets = this.changeListTicket(ticketList);
         } else {
           let tmpisClaimed = false;
@@ -386,6 +390,7 @@
             },
           ];
         }
+        console.log(ticketList.tickets, "returnnnnnnnnnnnn")
         this.conversation_stack.open(ticketList.tickets, isTicket);
         this.focusConversation();
         // }

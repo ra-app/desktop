@@ -342,9 +342,14 @@ const updateAdmin = async (company_id, name) => {
 //   return (apiRequest('/public/img/' + company));
 // };
 
-const getAvatar = async (info) => {
-  return (await apiRequest('public/img-uri/'+ info)).uri;
+
+const getAvatar = (info) => {
+  return API_URL + 'public/img/' + info;
 };
+
+// const getAvatar = async (info) => {
+  // return (await apiRequest('public/img-uri/'+ info)).uri;
+// };
 
 const setClientAvatar = async (data) => {
   return (apiRequest('api/v1/client/picture', data));
