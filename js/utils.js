@@ -38,8 +38,9 @@ function findUserXml(id, xmlData) {
   let position = null;
   for (let i = 0; i < xmlData.children.length; i++) {
     const contact = xmlData.children.item(i);
-    const phone = contact.getElementsByTagName('phone')[0].textContent
-    if (phone === id) {
+    const phone = contact.getElementsByTagName('phone')[0].textContent;
+    const email = contact.getElementsByTagName('email')[0].textContent;
+    if (phone === id || email === id) {
       position = i
       return position; // only first position TODO LIST OF POSITION FOR MULTI SELECT
     }
@@ -61,14 +62,13 @@ async function getXmlFile() {
 }
 
 function prepareDataXml(contact_data) {
-  const parser = new DOMParser();
   let xmlRes;
   try {
     // WebKit returns null on unsupported types
     xmlRes = checkValidXML(contact_data);
   } catch (ex) {
     console.log(ex)
-    return document.createElementNS('', 'contacts');
+    return document.createElementNS('', 'contactlist');
   }
   const contactListXml = xmlRes.children[0];
   return contactListXml;
@@ -86,8 +86,12 @@ function prepareDataToUpdate(xmlData) {
 
 async function updateXmlDB(data) {
   const companyNumber = textsecure.storage.get('companyNumber', null);
+  if (data.contact_data.indexOf('<?xml') !== 0) {
+    data.contact_data = '<?xml version="1.0" encoding="UTF-8"?>' + data.contact_data;
+  }
   await updateContact(companyNumber, data);
   localStorage.setItem('ContactList', data.contact_data);
+  await window.saveContactXML(data.contact_data);
 }
 
 async function getListInvitation() {

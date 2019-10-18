@@ -2,7 +2,7 @@
   "name": "officeapp-desktop",
   "productName": "OfficeApp",
   "description": "Private messaging from your desktop",
-  "desktopName": "signal-desktop.desktop",
+  "desktopName": "officeapp-desktop.desktop",
   "repository": "https://github.com/signalapp/Signal-Desktop.git",
   "version": "1.26.2",
   "license": "GPL-3.0",
@@ -189,7 +189,7 @@
     "node": "*"
   },
   "build": {
-    "appId": "org.whispersystems.signal-desktop",
+    "appId": "org.whispersystems.officeapp-desktop",
     "mac": {
       "artifactName": "${name}-mac-${version}.${ext}",
       "category": "public.app-category.social-networking",

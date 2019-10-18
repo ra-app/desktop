@@ -349,3 +349,28 @@ if (config.environment === 'test') {
   };
   /* eslint-enable global-require, import/no-extraneous-dependencies */
 }
+
+window.saveContactXML = (xml) => new Promise((resolve, reject) => {
+  ipc.once('save-contact-xml-result', (evt, data) => {
+    if (data.success) resolve();
+    else reject(Object.assign(new Error(), data.error));
+  });
+  ipc.send('save-contact-xml', xml);
+});
+
+window.triggerInboxReady = () => ipc.send('inbox-ready');
+
+ipc.on('open-conversation', async (evt, id) => {
+  try {
+    const xml = await getXmlFile();
+    const data = prepareDataXml(xml);
+    const idx = findUserXml(id, data);
+    if (idx === null) throw new Error(`No such contact: ${id}`);
+    const cnt = data.getElementsByTagName('contact')[idx];
+    const phone = cnt.getElementsByTagName('phone')[0].textContent;
+    await ensureConversation(phone);
+    window.Whisper.events.trigger('showConversation', phone);
+  } catch (err) {
+    console.error('Error opening conversation', err);
+  }
+})

@@ -12,7 +12,15 @@ document.addEventListener('DOMContentLoaded', async () => {
   await waitForConversationController(); // Ensure we are ready for things.
 
   const number = textsecure.storage.get('companyNumber', null);
-  if (number) await ensureCompanyConversation(number);
+  if (number) {
+    await ensureCompanyConversation(number);
+    try {
+      const xml = await getXmlFile();
+      if (xml) await window.saveContactXML(xml);
+    } catch (err) {
+      console.error('Unable to save contacts XML', err);
+    }
+  }
 
   // await ensureConversation('+34000000003');
 
