@@ -46,7 +46,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       'change #accept-eula-check': 'onChangeAcceptEula',
       'click #continue-eula': 'onContinueEula',
       'click #continue-setup-company': 'onCompanySetup',
-      // 'click #continue-setup-admin': 'onAdminSetup',
+      'click #continue-setup-admin': 'onAdminSetup',
       // 'validation #phone-number-value': 'onNumberValidation',
       'click #request-verify-call': 'onRequestVerifyCall',
       'click #request-verify-sms': 'onRequestVerifySMS',
@@ -108,6 +108,11 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       }
 
       this.step = step;
+      if (this.setupType == 'admin') {
+        this.setupTypeAdmin = true
+      } else if (this.setupType == 'company') {
+        this.setupTypeCompany = true;
+      }
       this.render();
 
       if (this.step === Steps.SETUP_COMPANY_PROFILE) {
@@ -197,6 +202,19 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
             await updateContact(result.info.company_number, this.contactsData);
           }
           await ensureCompanyConversation(result.info.company_number);
+        } else if(this.setupType === 'admin'){
+          const codeCompany = textsecure.storage.get('codeCompany', false);
+          const userSetupInfo = textsecure.storage.get('userSetupInfo', null);
+          const avatarInfo = await textsecure.storage.get('avatarInfo', null);
+          const data = {
+            name:  userSetupInfo.name,
+          }
+          if (avatarInfo) {
+            const dataAvatar = { data: avatarInfo.userAvatar, type: avatarInfo.userAvatarType }
+            await setAdminAvatar(codeCompany, dataAvatar);
+          }
+          await updateClient(data)
+          await ensureCompanyConversation(codeCompany);
         }
         await Promise.all([
           textsecure.storage.put('registerDone', true),
@@ -204,6 +222,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
           textsecure.storage.remove('userSetupInfo'),
           textsecure.storage.remove('bankSetupInfo'),
           textsecure.storage.remove('setupType'),
+          textsecure.storage.remove('codeCompany'),
         ]);
         window.removeSetupMenuItems();
         this.$el.trigger('openInbox');
@@ -368,10 +387,15 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     async onAdminSetup() {
       // TODO: check code is present & valid
       this.setupType = 'admin';
+      const codeInvitation = this.$('#admin-signup-code').val();
+      const codeCompany = this.$('#admin-company-code').val();
       await textsecure.storage.put('setupType', this.setupType);
+      await textsecure.storage.put('codeInvitation', codeInvitation);
+      await textsecure.storage.put('codeCompany', codeCompany);
+
       this.selectStep(Steps.SETUP_PHONE);
     },
-    onVerifyPhone() {
+    async onVerifyPhone() {
       // TODO: check phone verification code
       const number = this.validateNumber();
       const code = this.$('#phone-verification-code')
@@ -380,7 +404,13 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
 
       this.accountManager
         .registerSingleDevice(number, code)
-        .then(() => {
+        .then(async () => {
+          if(this.setupType == 'admin'){
+            const codeCompany = textsecure.storage.get('codeCompany', false);
+            const codeInvitation = textsecure.storage.get('codeInvitation', false);
+            const company= await checkCodeInvitation(codeCompany, codeInvitation)
+             textsecure.storage.put('companyNumber', company.company_number);
+          }
           this.selectStep(
             this.setupType === 'admin'
               ? Steps.SETUP_USER_PROFILE
@@ -390,6 +420,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         .catch(err => {
           console.error('Error registering single device', err);
         });
+
     },
     onChangeAcceptEula() {
       console.log('Change accept eula');
@@ -539,12 +570,22 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     },
     activateButtonProfileDetails() {
       const username = this.$el.find('#user-name-input')[0].value.length;
-      const companyName = this.$el.find('#company-name-input')[0].value.length;
       const button = this.$el.find('#user-profile-done');
-      if (username > 0 && companyName > 0) {
-        button.removeClass('disabled');
-      } else {
-        button.addClass('disabled');
+      
+      let companyName = '';
+      if(this.setupTypeCompany){
+        companyName = this.$el.find('#company-name-input')[0].value.length;
+        if (companyName > 0) {
+          button.removeClass('disabled');
+        } else {
+          button.addClass('disabled');
+        }
+      } else if (this.setupTypeAdmin) {
+        if (username > 0) {
+          button.removeClass('disabled');
+        } else {
+          button.addClass('disabled');
+        }
       }
     },
     activateButtonBankDetails() {
@@ -673,6 +714,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         welcomeAdmin: i18n('welcomeAdmin'),
         continueButton: i18n('continueButton'),
         signupCode: i18n('signupCode'),
+        companyCode: i18n('companyCode'),
         phoneSetupTitle: i18n('phoneSetupTitle'),
         phoneSetupSubtitle: i18n('phoneSetupSubtitle'),
         phoneNumber: i18n('phoneNumber'),
@@ -708,6 +750,8 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         isStepSetupContactImport: this.step === Steps.SETUP_CONTACT_IMPORT,
         isStepSetupBranchen: this.step === Steps.SETUP_BRANCHEN,
         isStepSetupPhoneList: this.step === Steps.SETUP_PHONESLIST,
+        setupTypeAdmin: this.setupTypeAdmin,
+        setupTypeCompany: this.setupTypeCompany,
         EULAText: EULA,
         uploadAvatarText: i18n('uploadAvatarText'),
         BranchenTitle: i18n('BranchenTitle'),

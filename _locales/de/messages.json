@@ -1559,6 +1559,10 @@
         "message": "Code",
         "description": "Label for signup code input"
     },
+    "companyCode": {
+        "message": "Buchungskreis",
+        "description": "Label for signup Buchungskreis input"
+    },
     "phoneSetupTitle": {
         "message": "Telefonnummer",
         "description": "Title for phone setup container"
@@ -1889,5 +1893,9 @@
       "uploadAvatarText":{
         "message":"Bitte Fügen SIE EIN Profilbild HINZU",
         "description":"Upload user avatar"
+      },
+      "closeTicket":{
+          "message": "Close ticket",
+          "description": "Chat menu close ticket"
       }
 }

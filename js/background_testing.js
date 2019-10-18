@@ -342,8 +342,21 @@ const updateAdmin = async (company_id, name) => {
 //   return (apiRequest('/public/img/' + company));
 // };
 
+
+const getAvatar = (info) => {
+  return API_URL + 'public/img/' + info;
+};
+
+// const getAvatar = async (info) => {
+  // return (await apiRequest('public/img-uri/'+ info)).uri;
+// };
+
 const setClientAvatar = async (data) => {
   return (apiRequest('api/v1/client/picture', data));
+};
+
+const updateClient = async (data) => {
+  return (apiRequest('api/v1/client/info', data));
 };
 
 const setAdminAvatar = async (company, data) => {
@@ -363,6 +376,10 @@ const getInvitationList = async number => {
 };
 const createInvitation = async (company_id, data) => {
   return (await apiRequest('api/v1/admin/' + company_id + '/invites/create', data)).inviteInfo;
+};
+
+const checkCodeInvitation = async (company_id, code) => {
+  return (await apiRequest('api/v1/companies/code/' + company_id + '/'+ code)).company;
 };
 
 const sendSms = async (company_id, data) => {

@@ -13,7 +13,7 @@
             font-src 'self';
             form-action 'self';
             frame-src 'none';
-            img-src 'self' blob: data:;
+            img-src 'self' blob: data: https:;
             media-src 'self' blob:;
             object-src 'none';
             script-src 'self';
@@ -57,7 +57,7 @@
   <script type='text/x-tmpl-mustache' id='tickets-view'>
     <div class='content'>
       <div class="module-main-header__info">
-        <img src="images/header-chat.png" alt="header chat" />
+        <img src="{{avatarSrc}}" alt="header chat" />
         <span id="span-chat-name">{{title}}</span>
       </div>
       <!-- Navigation tabs -->
@@ -72,7 +72,7 @@
         {{#model}}
           <div id={{uuid}} class="main-ticket-container" >
             <div class="container-ticket-userinfo">
-              <img src="images/header-chat.png" class="ticket-user-image" />
+              <img src="{{avatarSrc}}" id='clientTicketAvatar_{{uuid}}' class="ticket-user-image" />
               {{#name}}
                 <span class="ticket-user-name">{{name}} {{surname}}</span>
               {{/name}}
@@ -689,7 +689,11 @@
               <input type='text' name='admin-signup-code' class='input-code' id='admin-signup-code' />
               <label for='admin-signup-code' class="label-inputs code-label">{{signupCode}}</label>
             </div>
-            <a class='button disabled ' id='continue-setup-admin'>{{continueButton}}</a>
+            <div>
+              <input type='text' name='admin-signup-code' class='input-code' id='admin-company-code' />
+              <label for='admin-signup-code' class="label-inputs code-label">{{companyCode}}</label>
+            </div>
+            <a class='button' id='continue-setup-admin'>{{continueButton}}</a>
           </div>
         </div>
       </div>
@@ -847,6 +851,7 @@
             <div class='card-header'>
                 <div class='title'>{{userProfile}}</div>
             </div>
+            {{#setupTypeCompany}}
             <input type='text' id='company-name-input' class="inputsRegister" />
             <label for='company-name-input' class="label-text labelsInput">{{companyName}}</label>
             <div class='upload-avatar-company'>
@@ -869,6 +874,20 @@
                 <p>{{uploadAvatarText}}</p>
               </div>
             </div>
+            {{/setupTypeCompany}}
+            {{#setupTypeAdmin}}
+            <input type='text' id='user-name-input' class="inputsRegister"/>
+            <label for='user-name-input' class='label-text'>{{userName}}</label>
+            <div class='upload-avatar'>
+              <div class='select-avatar' id='uploadAvatar'>
+                <img src='images/icons/icon-picture-add-user.svg' />
+              </div>
+              <input type='file' class='file-input-avatar' id='inputAvatar' />
+              <div class='text-upload-avatar'>
+                <p>{{uploadAvatarText}}</p>
+              </div>
+            </div>
+            {{/setupTypeAdmin}}
             <a class='button adminame-button disabled' id='user-profile-done'>{{continueButton}}</a>
           </div>
         </div>
