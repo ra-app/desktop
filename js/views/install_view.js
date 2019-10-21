@@ -211,7 +211,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
           }
           if (avatarInfo) {
             const dataAvatar = { data: avatarInfo.userAvatar, type: avatarInfo.userAvatarType }
-            await setAdminAvatar(result.info.company_number, dataAvatar);
+            await setAdminAvatar(codeCompany, dataAvatar);
           }
           await updateClient(data)
           await ensureCompanyConversation(codeCompany);
