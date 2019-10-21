@@ -1576,7 +1576,7 @@
         "description": "Title for phone number input"
     },
     "verifyCode": {
-        "message": "Verifikationscode",
+        "message": "Verifizierungscode",
         "description": "Title for verification code input"
     },
     "countryCode": {
