@@ -1413,7 +1413,6 @@
 
     initialize(options) {
       if(options){
-        console.log(options.contact_data, options,   "contactsssssssssssssssss")
         if(options.contact_data !== undefined){
 
           this.contactListXml = prepareDataXml(options.contact_data);
@@ -1430,6 +1429,7 @@
             }
             this.objectContact.push(tmpObj)
           }
+          console.log(options, "optionsssssssssssssssssssssssssssssssssssssssssssssssssss")
           this.type = options.type;
           if ( options.type == 'kunde' ){
             this.typeAdmin = true;
