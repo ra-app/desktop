@@ -960,9 +960,9 @@
       this.openModal();
       const xml = await getXmlFile();
       const xmlData = prepareDataXml(xml)
-      this.createAddPanel(xmlData);
+      await this.createAddPanel(xmlData);
     },
-    createAddPanel(xmlData) {
+    async createAddPanel(xmlData) {
       const divMainHeaderEdit = document.createElement('div');
       divMainHeaderEdit.className = 'divModalHeader';
       const pUserName = document.createElement('p');
@@ -1118,7 +1118,8 @@
       divUserPrev.innerHTML = '<img src="images/header-chat.png" /> '
       divNutzer.appendChild(labelNutzer)
       divNutzer.appendChild(divUserPrev)
-
+      
+      const messageSpan = document.createElement('span');
       const buttonSaveChanges = document.createElement('button');
       buttonSaveChanges.classList = 'buttonSave buttonsModal disabled';
       buttonSaveChanges.innerText = 'Save';
@@ -1173,12 +1174,21 @@
         parentElement.appendChild(typeElement);
 
         // prepare data and save on DB
-        xmlData.appendChild(parentElement);
-        const dataToUpdate = prepareDataToUpdate(xmlData);
-        this.contactsData = dataToUpdate;
-        updateXmlDB(dataToUpdate);
-        this.closeModal();
-        this.refreshTable();
+        const finduser = findUserXml(telephoneElement.textContent, xmlData);
+        // if findUser === null not exist
+        if(finduser !==null){
+          let message = '';
+          messageSpan.innerHTML = '';
+          message= document.createTextNode('the phone already exists')
+          messageSpan.appendChild(message);
+        } else {
+          xmlData.appendChild(parentElement);
+          const dataToUpdate = prepareDataToUpdate(xmlData);
+          this.contactsData = dataToUpdate;
+          updateXmlDB(dataToUpdate);
+          this.closeModal();
+          this.refreshTable();
+        }
 
       }
 
@@ -1190,6 +1200,7 @@
       divMainContentEdit.appendChild(divRadioButtons);
       // divMainContentEdit.appendChild(divStatus);
       divMainContentEdit.appendChild(divNutzer);
+      divMainContentEdit.appendChild(messageSpan);
       divMainContentEdit.appendChild(buttonSaveChanges);
 
       this.$('#modalContact').append(divMainHeaderEdit);
