@@ -37,7 +37,7 @@ interface Props {
   timerOptions: Array<TimerOption>;
 
   onSetDisappearingMessages: (seconds: number) => void;
-  onDeleteMessages: () => void;
+  // onDeleteMessages: () => void;
   onResetSession: () => void;
 
   onShowSafetyNumber: () => void;
@@ -200,7 +200,7 @@ export class ConversationHeader extends React.Component<Props> {
       // isMe,
       // isGroup,
       isArchived,
-      onDeleteMessages,
+      // onDeleteMessages,
       // onResetSession,
       // onSetDisappearingMessages,
       // onShowAllMedia,
@@ -253,11 +253,11 @@ export class ConversationHeader extends React.Component<Props> {
           <MenuItem onClick={onArchive}>{i18n('archiveConversation')}</MenuItem>
         ) : null}
 
-        {!isCompany ? (
+        {/* {!isCompany ? (
           <MenuItem onClick={onDeleteMessages}>
             {i18n('deleteMessages')}
           </MenuItem>
-        ) : null}
+        ) : null} */}
         {!isCompany ? (
           <MenuItem>
             {i18n('closeTicket')}
