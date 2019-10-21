@@ -221,6 +221,10 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
           const data = {
             name:  userSetupInfo.name,
           }
+          if (avatarInfo) {
+            const dataAvatar = { data: avatarInfo.userAvatar, type: avatarInfo.userAvatarType }
+            await setAdminAvatar(codeCompany, dataAvatar);
+          }
           await updateClient(data)
           await ensureCompanyConversation(codeCompany);
         }
