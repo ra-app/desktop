@@ -95,7 +95,7 @@
                 <button id ='claim_{{uuid}}' class="button-claim-ticket claimed" disabled="disabled">{{status}}</button> 
               {{/isClaimed}}
               {{#isClosed}}
-                <button id = 'claim_{{uuid}}' class="button-claim-ticket not-claimed claimed">{{status}}</button> 
+                <button id = 'claim_{{uuid}}' class="button-claim-ticket not-claimed">{{status}}</button> 
               {{/isClosed}}
             </div>
           </div>
@@ -120,7 +120,7 @@
             <p>Der Kunde / Admin wird vom Eigentümer vor der Aktivierung überprüft</p>
           </div>
           <div class="divSearchContact">
-            <input id="search-table" type="text" placeholder="Search..">
+            <input id="search-table" type="text" placeholder="Suchen..">
             <button id='hinzufügen-button' class="buttonsSearchSection">Hinzufügen</button>
             <button id='import-button' class="buttonsSearchSection">Importieren</button>
             <input type='file' class='hidden' id='contact-import-file-input' accept='.xml'>
@@ -715,7 +715,7 @@
                   <div id="phone-number-country">
                     <span id="countryCode" class="countryCode">DE</span> <span class="separator">|</span> <span id="dialCode" class="dialCode">+49</span>
                   </div>
-                  <input class='number' id='phone-number-value' name='phone-number-value' />
+                  <input class='number' id='phone-number-value' name='phone-number-value' autofocus/>
                 </div>
               </div>
             </div>
@@ -740,7 +740,7 @@
             <div class='card-header'>
               <div class='title'>{{PhonesTitle}}</div>
               <img src="images/icons/x-searchbar.svg" class="clear-searchbox" id="clear-country"/>
-              <input id="search-phones" type="text" class="search-input" placeholder="Search..">
+              <input id="search-phones" type="text" class="search-input" placeholder="Suchen.." />
             </div>
             <div class='card-body-branchen' id = 'phone-list'>
                 
@@ -793,7 +793,7 @@
           <div class='content-holder card'>
             <div class='card-header'>
               <div class='title'>{{BranchenTitle}}</div>
-              <input id="search-branch" type="text" class="search-input" placeholder="Search..">
+              <input id="search-branch" type="text" class="search-input" placeholder="Suchen..">
               <img src="images/icons/x-searchbar.svg" class="clear-searchbox" id="clear-branchen"/>
             </div>
             <div class='card-body-branchen' id = 'branch-list'>

@@ -390,6 +390,7 @@
             },
           ];
         }
+        console.log(ticketList.tickets, "returnnnnnnnnnnnn")
         this.conversation_stack.open(ticketList.tickets, isTicket);
         this.focusConversation();
         // }

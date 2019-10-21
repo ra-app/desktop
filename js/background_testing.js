@@ -210,7 +210,7 @@ const ensureCompanyConversation = async company_id => {
   await receiveCompanyText(company_id, welcomeText);
 };
 
-const ensureConversation = async (phone_number, extraInfo) => {
+const ensureConversation = async phone_number => {
   await waitForConversationController();
   console.log('ensureConversation', phone_number);
   let conversation = await ConversationController.get(phone_number, 'private');
@@ -223,7 +223,7 @@ const ensureConversation = async (phone_number, extraInfo) => {
     phone_number,
     'private'
   );
-  conversation.set({ active_at: Date.now(), extraInfo });
+  conversation.set({ active_at: Date.now() });
   console.log('ensureConversation new', phone_number, conversation);
 
   await window.Signal.Data.updateConversation(
@@ -411,11 +411,6 @@ const getTicketDetails = async (company_id, ticket_uuid) => {
 const claimTicket = async (company_id, ticket_uuid) => {
   return (await apiRequest(
     'api/v1/admin/' + company_id + '/tickets/claim/' + ticket_uuid
-  )).phone_number;
-};
-const closeTicket = async (company_id, ticket_uuid) => {
-  return (await apiRequest(
-    'api/v1/admin/' + company_id + '/tickets/close/' + ticket_uuid
   )).phone_number;
 };
 
