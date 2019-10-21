@@ -648,6 +648,7 @@
     },
     async sendInvitationCall() {
       await parallel(1, Object.keys(dataUsersToInvitate), async (element) => {
+        console.log(dataUsersToInvitate, "111111111111111111111")
         const id = dataUsersToInvitate[element].userid;
         const type = dataUsersToInvitate[element].position;
         const companyNumber = textsecure.storage.get('companyNumber', null);
@@ -670,10 +671,10 @@
         }
         sendSms(companyNumber, dataSms)
 
-        dataUsersToInvitate = {};
         document.getElementById(`buttonSendInvitation-${id}`).innerText = i18n('sendAgainInvitation')
-        this.closeModal();
       })
+      dataUsersToInvitate = {};
+      this.closeModal();
     },
     async removeContact(id) {
       this.openModal('remove');
