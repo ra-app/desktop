@@ -36,6 +36,7 @@
             color: this.model.getColor(),
             avatarPath: this.model.getAvatarPath(),
             phoneNumber: this.model.getNumber(),
+            rawPhoneNumber: this.model.getRawNumber(),
             name: this.model.getName(),
             profileName: this.model.getProfileName(),
             verified: this.model.isVerified(),
