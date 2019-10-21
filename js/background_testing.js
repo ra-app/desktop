@@ -204,9 +204,9 @@ const ensureCompanyConversation = async company_id => {
     }
   );
 
-  const welcomeText = `Welcome to ${
+  const welcomeText = `(${company_id})  Welcome to ${
     companyInfo.name
-  } (${company_id}) support chat.`;
+  } support chat.`;
   await receiveCompanyText(company_id, welcomeText);
 };
 
