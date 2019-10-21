@@ -170,18 +170,22 @@
     async claimTicket(company_id, uuid) {
       const phone_number = await claimTicket(company_id, uuid);
       const client =  await  getClientByPhone(company_id, phone_number)
-        const conversation = await ensureConversation(phone_number);
-        if(client.name){
-          if(client.name && client.surname){
-            conversation.set({ 'name': client.name + ' ' + client.surname });
-          }else {
-            conversation.set({ 'name': client.name });
-          }
-        }else if(client.email){
-          conversation.set({ 'name': client.email });
+      const conversation = await ensureConversation(phone_number);
+
+      let conversationName = 'User without data';
+
+      if(client.name){
+        if(client.name && client.surname){
+          conversationName =  client.name + ' ' + client.surname;
         }else {
-          conversation.set({ 'name': 'User without data'});
+          conversationName = client.name;
         }
+      }else if(client.email){
+        conversationName = client.email;
+      }
+
+      conversation.set({ 'name': conversationName, 'ticket_uuid': uuid, 'company_id': company_id  });
+
       // send event ticket
       const ticketDETAIL = await getTicketDetails(company_id, uuid);
       ticketDETAIL.events.forEach(mssg => {
@@ -417,6 +421,13 @@
           onArchive: () => {
             this.unload('archive');
             this.model.setArchived(true);
+          },
+          closeTicket: async () => {
+            const uuid = this.model.attributes.ticket_uuid;
+            const company_id = this.model.attributes.company_id;
+             closeTicket(company_id, uuid);
+             this.unload('archive');
+             this.model.setArchived(true);
           },
           onMoveToInbox: () => {
             this.model.setArchived(false);
