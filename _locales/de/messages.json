@@ -1596,11 +1596,11 @@
         "description": "Text for requesting SMS instead of call"
     },
     "companyDetails": {
-        "message": "Company details",
+        "message": "Firmendaten",
         "description": "Title for company details entry"
     },
     "taxNumber": {
-        "message": "Tax Number",
+        "message": "Steuernummer",
         "description": "Label for tax number input"
     },
     "taxID": {
@@ -1608,15 +1608,15 @@
         "description": "Label for tax id input"
     },
     "companyRegistrationID": {
-        "message": "Commercial Register ID",
+        "message": "Handelsregisternummer",
         "description": "Label for commercial register id input"
     },
     "imprint": {
-        "message": "Imprint",
+        "message": "Impressum",
         "description": "Label for imprint input"
     },
     "branch": {
-        "message": "Branch",
+        "message": "Branche",
         "description": "Label for company branch input"
     },
     "companyName": {
@@ -1860,7 +1860,7 @@
         "description": "closed ticket"
       },
       "uploadCard": {
-        "message": "Handelsregistereinträge bei Marken oder Ausweisdokumente bei Unternehmen hochladen.",
+        "message": "Handeslregisterauszüge oder Gewerbeanmeldungen hochladen",
         "description": "Upload company card"
       },
       "sendAnInvitation":{
