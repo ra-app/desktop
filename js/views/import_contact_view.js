@@ -1413,27 +1413,31 @@
 
     initialize(options) {
       if(options){
-        this.contactListXml = prepareDataXml(options.contact_data);
-        this.objectContact = []
-        for (let i = 0; i < this.contactListXml.children.length; i++) {
-          const contact = this.contactListXml.children.item(i);
-          const tmpObj = {
-            name: contact.getElementsByTagName('name')[0].textContent,
-            surname: contact.getElementsByTagName('surname')[0].textContent,
-            position: contact.getElementsByTagName('position')[0].textContent,
-            email: contact.getElementsByTagName('email')[0].textContent,
-            phone: contact.getElementsByTagName('phone')[0].textContent,
-            ts: contact.getElementsByTagName('ts')[0].textContent,
+        console.log(options.contact_data, options,   "contactsssssssssssssssss")
+        if(options.contact_data !== undefined){
+
+          this.contactListXml = prepareDataXml(options.contact_data);
+          this.objectContact = []
+          for (let i = 0; i < this.contactListXml.children.length; i++) {
+            const contact = this.contactListXml.children.item(i);
+            const tmpObj = {
+              name: contact.getElementsByTagName('name')[0].textContent,
+              surname: contact.getElementsByTagName('surname')[0].textContent,
+              position: contact.getElementsByTagName('position')[0].textContent,
+              email: contact.getElementsByTagName('email')[0].textContent,
+              phone: contact.getElementsByTagName('phone')[0].textContent,
+              ts: contact.getElementsByTagName('ts')[0].textContent,
+            }
+            this.objectContact.push(tmpObj)
           }
-          this.objectContact.push(tmpObj)
-        }
-        this.type = options.type;
-        if ( options.type == 'kunde' ){
-          this.typeAdmin = true;
-          this.typeKunde = false;
-        }else if ( options.type == 'admin'){
-          this.typeAdmin = false;
-          this.typeKunde = true;
+          this.type = options.type;
+          if ( options.type == 'kunde' ){
+            this.typeAdmin = true;
+            this.typeKunde = false;
+          }else if ( options.type == 'admin'){
+            this.typeAdmin = false;
+            this.typeKunde = true;
+          }
         }
       }
       this.render();
