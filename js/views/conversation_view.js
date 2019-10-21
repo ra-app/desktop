@@ -112,9 +112,11 @@
         this.$('#' + element.uuid).click(evt =>
           this.showInfoTicket(evt, element)
         );
-        this.$('#claim_' + element.uuid).click(() =>
-          this.claimTicket(element.company_id, element.uuid)
-        );
+        if(element.state === 1){
+          this.$('#claim_' + element.uuid).click(() =>
+            this.claimTicket(element.company_id, element.uuid)
+          );
+        }
         this.$('img').on("error", function() {
           $(this).attr('src', 'images/header-chat.png');
         });
