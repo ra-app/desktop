@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { getInitials } from '../util/getInitials';
 import { LocalizerType } from '../types/Util';
 
+declare var getClientPhone: any;
 interface Props {
   avatarPath?: string;
   color?: string;
@@ -14,6 +15,7 @@ interface Props {
   phoneNumber?: string;
   profileName?: string;
   size: number;
+  rawPhoneNumber?: string;
 }
 
 interface State {
@@ -39,12 +41,18 @@ export class Avatar extends React.Component<Props, State> {
   }
 
   public async getImage() {
-    console.log('imageeeeeeeeeeeeeeeeeeeeeeeeeeee')
-    const { phoneNumber} = this.props;
+    const { phoneNumber, rawPhoneNumber, conversationType} = this.props;
     const API_URL = 'https://luydm9sd26.execute-api.eu-central-1.amazonaws.com/latest/';
-    const test =  API_URL + 'public/img-uri/' + phoneNumber;
-    const result = await (await fetch(test)).json();
-    this.setState({srcImage: result.uri, loading: false});
+    let avatar = '';
+    if (conversationType === 'company') {
+      avatar =  API_URL + 'public/img/' + phoneNumber;
+    } else if (conversationType === 'direct') {
+      const getClientInfo = await getClientPhone(rawPhoneNumber);
+      const clientUuid = getClientInfo.client.uuid;
+      avatar =  API_URL + 'public/img/' + clientUuid;
+    }
+    const result = await (await fetch(avatar));
+    this.setState({srcImage: result.url, loading: false});
   }
   public handleImageError() {
     // tslint:disable-next-line no-console
@@ -57,7 +65,6 @@ export class Avatar extends React.Component<Props, State> {
   public renderImage = async () => {
     const { i18n, name, phoneNumber, profileName } = this.props;
     const { imageBroken, srcImage } = this.state;
-    console.log(srcImage, "stateeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
     if (imageBroken) {
       return null;
     }
@@ -65,14 +72,6 @@ export class Avatar extends React.Component<Props, State> {
     const title = `${name || phoneNumber}${
       !name && profileName ? ` ~${profileName}` : ''
     }`;
-
-
-  // .then(function(response) {
-  //   return response.json();
-  // })
-  // .then(function(myJson) {
-  //   console.log(myJson.uri, "666666666666666666666666666666666666666666666666666");
-  //   console.log('AAAAAAAAAAA', test)
 
     return (
       <img

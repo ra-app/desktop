@@ -18,6 +18,7 @@ export type PropsData = {
   type: 'group' | 'direct' | 'company';
   avatarPath?: string;
   isMe: boolean;
+  rawPhoneNumber?: string;
 
   lastUpdated: number;
   unreadCount: number;
@@ -50,6 +51,7 @@ export class ConversationListItem extends React.PureComponent<Props> {
       name,
       phoneNumber,
       profileName,
+      rawPhoneNumber,
     } = this.props;
 
     return (
@@ -64,6 +66,7 @@ export class ConversationListItem extends React.PureComponent<Props> {
           phoneNumber={phoneNumber}
           profileName={profileName}
           size={48}
+          rawPhoneNumber={rawPhoneNumber}
         />
         {this.renderUnread()}
       </div>
