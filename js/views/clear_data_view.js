@@ -36,6 +36,9 @@
     },
     async clearAllData() {
       try {
+        // clean localstorage 
+        localStorage.removeItem('ContactList')
+        localStorage.removeItem('InvitationList')
         await Logs.deleteAll();
 
         await window.Signal.Data.removeAll();
@@ -43,6 +46,7 @@
         await window.Signal.Data.removeDB();
 
         await window.Signal.Data.removeOtherData();
+
       } catch (error) {
         window.log.error(
           'Something went wrong deleting all data:',

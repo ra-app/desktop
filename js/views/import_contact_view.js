@@ -27,9 +27,9 @@
 
     initialize(options) {
       this.render();
-      if (options) {
-        const contactListXml = prepareDataXml(options.contact_data)
-        this.createTable(contactListXml);
+      if (options && options.contact_data !== undefined) {
+          const contactListXml = prepareDataXml(options.contact_data)
+          this.createTable(contactListXml);
       } else {
         this.createEmptyMessage();
       }
@@ -670,10 +670,10 @@
         }
         sendSms(companyNumber, dataSms)
 
-        dataUsersToInvitate = {};
         document.getElementById(`buttonSendInvitation-${id}`).innerText = i18n('sendAgainInvitation')
-        this.closeModal();
       })
+      dataUsersToInvitate = {};
+      this.closeModal();
     },
     async removeContact(id) {
       this.openModal('remove');
@@ -820,63 +820,63 @@
       spanSwitchKunde.className = 'spanSwitch';
       spanSwitchKunde.innerText = 'Kunde';
 
-      const divSwitch = document.createElement('div');
-      divSwitch.className = 'switch-toggle switch-3 switch-candy';
+      // const divSwitch = document.createElement('div');
+      // divSwitch.className = 'switch-toggle switch-3 switch-candy';
 
-      const inputKundeEdit = document.createElement('input');
-      inputKundeEdit.type = 'radio';
-      inputKundeEdit.name = `edit-state-d-${id}`
-      inputKundeEdit.id = `edit-kunde-${id}`;
-      if (userTypeEdit === 'client') {
-        inputKundeEdit.checked = true;
-        inputKundeEdit.setAttribute('checked', 'checked')
-      }
-      const labelKunde = document.createElement('label');
-      labelKunde.setAttribute('for', `edit-kunde-${id}`);
-      labelKunde.innerHTML = '&nbsp;';
+      // const inputKundeEdit = document.createElement('input');
+      // inputKundeEdit.type = 'radio';
+      // inputKundeEdit.name = `edit-state-d-${id}`
+      // inputKundeEdit.id = `edit-kunde-${id}`;
+      // if (userTypeEdit === 'client') {
+      //   inputKundeEdit.checked = true;
+      //   inputKundeEdit.setAttribute('checked', 'checked')
+      // }
+      // const labelKunde = document.createElement('label');
+      // labelKunde.setAttribute('for', `edit-kunde-${id}`);
+      // labelKunde.innerHTML = '&nbsp;';
 
-      const inputNoneEdit = document.createElement('input');
-      inputNoneEdit.type = 'radio';
-      inputNoneEdit.name = `edit-state-d-${id}`
-      inputNoneEdit.id = `edit-none-${id}`;
-      if (userTypeEdit == 'none') {
-        inputNoneEdit.checked = true;
-        inputNoneEdit.setAttribute('checked', 'checked')
-      }
-      const labelNone = document.createElement('label');
-      labelNone.setAttribute('for', `edit-none-${id}`);
-      labelNone.innerHTML = '&nbsp;';
+      // const inputNoneEdit = document.createElement('input');
+      // inputNoneEdit.type = 'radio';
+      // inputNoneEdit.name = `edit-state-d-${id}`
+      // inputNoneEdit.id = `edit-none-${id}`;
+      // if (userTypeEdit == 'none') {
+      //   inputNoneEdit.checked = true;
+      //   inputNoneEdit.setAttribute('checked', 'checked')
+      // }
+      // const labelNone = document.createElement('label');
+      // labelNone.setAttribute('for', `edit-none-${id}`);
+      // labelNone.innerHTML = '&nbsp;';
 
-      const inputAdminEdit = document.createElement('input');
-      inputAdminEdit.type = 'radio';
-      inputAdminEdit.name = `edit-state-d-${id}`
-      inputAdminEdit.id = `edit-admin-${id}`;
-      if (userTypeEdit == 'admin') {
-        inputAdminEdit.checked = true;
-        inputAdminEdit.setAttribute('checked', 'checked')
-      }
-      const labelAdmin = document.createElement('label');
-      labelAdmin.setAttribute('for', `edit-admin-${id}`);
-      labelAdmin.innerHTML = '&nbsp;';
+      // const inputAdminEdit = document.createElement('input');
+      // inputAdminEdit.type = 'radio';
+      // inputAdminEdit.name = `edit-state-d-${id}`
+      // inputAdminEdit.id = `edit-admin-${id}`;
+      // if (userTypeEdit == 'admin') {
+      //   inputAdminEdit.checked = true;
+      //   inputAdminEdit.setAttribute('checked', 'checked')
+      // }
+      // const labelAdmin = document.createElement('label');
+      // labelAdmin.setAttribute('for', `edit-admin-${id}`);
+      // labelAdmin.innerHTML = '&nbsp;';
 
-      const aLabel = document.createElement('a');
+      // const aLabel = document.createElement('a');
 
-      const spanSwitchAdmin = document.createElement('span');
-      spanSwitchAdmin.className = 'spanSwitch admin';
-      spanSwitchAdmin.innerText = 'Admin';
+      // const spanSwitchAdmin = document.createElement('span');
+      // spanSwitchAdmin.className = 'spanSwitch admin';
+      // spanSwitchAdmin.innerText = 'Admin';
 
 
-      divSwitch.appendChild(inputKundeEdit);
-      divSwitch.appendChild(labelKunde);
-      divSwitch.appendChild(inputNoneEdit);
-      divSwitch.appendChild(labelNone);
-      divSwitch.appendChild(inputAdminEdit);
-      divSwitch.appendChild(labelAdmin);
-      divSwitch.appendChild(aLabel);
+      // divSwitch.appendChild(inputKundeEdit);
+      // divSwitch.appendChild(labelKunde);
+      // divSwitch.appendChild(inputNoneEdit);
+      // divSwitch.appendChild(labelNone);
+      // divSwitch.appendChild(inputAdminEdit);
+      // divSwitch.appendChild(labelAdmin);
+      // divSwitch.appendChild(aLabel);
 
-      divRadioButtons.appendChild(spanSwitchKunde);
-      divRadioButtons.appendChild(divSwitch);
-      divRadioButtons.appendChild(spanSwitchAdmin)
+      // divRadioButtons.appendChild(spanSwitchKunde);
+      // divRadioButtons.appendChild(divSwitch);
+      // divRadioButtons.appendChild(spanSwitchAdmin)
 
 
       // const divStatus = document.createElement('div');
@@ -908,29 +908,29 @@
         cln.getElementsByTagName('surname')[0].childNodes[0].nodeValue = inputNachName.value
         cln.getElementsByTagName('position')[0].childNodes[0].nodeValue = inputPosition.value
         cln.getElementsByTagName('email')[0].childNodes[0].nodeValue = inputEmail.value
-        if (!cln.getElementsByTagName('type')[0]) {
-          if (inputKundeEdit.checked) {
-            const newElement = document.createElementNS('', 'type');
-            const newText = document.createTextNode('client');
-            newElement.appendChild(newText);
-            cln.appendChild(newElement)
-            // xmlData.getElementsByTagName('contact')[positionXML].appendChild(newElement)
-          }
-          if (inputAdminEdit.checked) {
-            const newElement = document.createElementNS('', 'type');
-            const newText = document.createTextNode('admin');
-            newElement.appendChild(newText);
-            cln.appendChild(newElement)
-            // xmlData.getElementsByTagName('contact')[positionXML].appendChild(newElement)
-          }
-        } else {
-          if (inputKundeEdit.checked) {
-            cln.getElementsByTagName('type')[0].childNodes[0].nodeValue = 'client'
-          }
-          if (inputAdminEdit.checked) {
-            cln.getElementsByTagName('type')[0].childNodes[0].nodeValue = 'admin'
-          }
-        }
+        // if (!cln.getElementsByTagName('type')[0]) {
+        //   if (inputKundeEdit.checked) {
+        //     const newElement = document.createElementNS('', 'type');
+        //     const newText = document.createTextNode('client');
+        //     newElement.appendChild(newText);
+        //     cln.appendChild(newElement)
+        //     // xmlData.getElementsByTagName('contact')[positionXML].appendChild(newElement)
+        //   }
+        //   if (inputAdminEdit.checked) {
+        //     const newElement = document.createElementNS('', 'type');
+        //     const newText = document.createTextNode('admin');
+        //     newElement.appendChild(newText);
+        //     cln.appendChild(newElement)
+        //     // xmlData.getElementsByTagName('contact')[positionXML].appendChild(newElement)
+        //   }
+        // } else {
+        //   if (inputKundeEdit.checked) {
+        //     cln.getElementsByTagName('type')[0].childNodes[0].nodeValue = 'client'
+        //   }
+        //   if (inputAdminEdit.checked) {
+        //     cln.getElementsByTagName('type')[0].childNodes[0].nodeValue = 'admin'
+        //   }
+        // }
 
         xmlData.replaceChild(cln, xmlData.getElementsByTagName("contact")[positionXML]);
         const dataToUpdate = prepareDataToUpdate(xmlData);
@@ -948,7 +948,7 @@
       divMainContentEdit.appendChild(divEditPosition);
       divMainContentEdit.appendChild(divTelephone);
       divMainContentEdit.appendChild(divEmail);
-      divMainContentEdit.appendChild(divRadioButtons);
+      // divMainContentEdit.appendChild(divRadioButtons);
       // divMainContentEdit.appendChild(divStatus);
       divMainContentEdit.appendChild(divNutzer);
       divMainContentEdit.appendChild(buttonSaveChanges);
@@ -1043,68 +1043,68 @@
       divEmail.appendChild(labelEmail)
       divEmail.appendChild(inputEmail)
 
-      const divRadioButtons = document.createElement('div');
-      divRadioButtons.className = 'divEdit';
-      const userType = 'none';
+      // const divRadioButtons = document.createElement('div');
+      // divRadioButtons.className = 'divEdit';
+      // const userType = 'none';
 
-      const spanSwitchKunde = document.createElement('span');
-      const id = 'new-user';
-      spanSwitchKunde.className = 'spanSwitch';
-      spanSwitchKunde.innerText = 'Kunde';
+      // const spanSwitchKunde = document.createElement('span');
+      // const id = 'new-user';
+      // spanSwitchKunde.className = 'spanSwitch';
+      // spanSwitchKunde.innerText = 'Kunde';
 
-      const divSwitch = document.createElement('div');
-      divSwitch.className = 'switch-toggle switch-3 switch-candy';
+      // const divSwitch = document.createElement('div');
+      // divSwitch.className = 'switch-toggle switch-3 switch-candy';
 
-      const inputKundeAdd = document.createElement('input');
-      inputKundeAdd.type = 'radio';
-      inputKundeAdd.name = `state-d-${id}`
-      inputKundeAdd.id = `edit-kunde-${id}`;
-      inputKundeAdd.checked = false;
+      // const inputKundeAdd = document.createElement('input');
+      // inputKundeAdd.type = 'radio';
+      // inputKundeAdd.name = `state-d-${id}`
+      // inputKundeAdd.id = `edit-kunde-${id}`;
+      // inputKundeAdd.checked = false;
 
-      const labelKunde = document.createElement('label');
-      labelKunde.setAttribute('for', `edit-kunde-${id}`);
-      labelKunde.innerHTML = '&nbsp;';
+      // const labelKunde = document.createElement('label');
+      // labelKunde.setAttribute('for', `edit-kunde-${id}`);
+      // labelKunde.innerHTML = '&nbsp;';
 
-      const inputNoneAdd = document.createElement('input');
-      inputNoneAdd.type = 'radio';
-      inputNoneAdd.name = `state-d-${id}`
-      inputNoneAdd.id = `edit-none-${id}`;
-      inputNoneAdd.checked = true;
-      inputNoneAdd.setAttribute('checked', 'checked')
+      // const inputNoneAdd = document.createElement('input');
+      // inputNoneAdd.type = 'radio';
+      // inputNoneAdd.name = `state-d-${id}`
+      // inputNoneAdd.id = `edit-none-${id}`;
+      // inputNoneAdd.checked = true;
+      // inputNoneAdd.setAttribute('checked', 'checked')
 
-      const labelNone = document.createElement('label');
-      labelNone.setAttribute('for', `edit-none-${id}`);
-      labelNone.innerHTML = '&nbsp;';
+      // const labelNone = document.createElement('label');
+      // labelNone.setAttribute('for', `edit-none-${id}`);
+      // labelNone.innerHTML = '&nbsp;';
 
-      const inputAdminAdd = document.createElement('input');
-      inputAdminAdd.type = 'radio';
-      inputAdminAdd.name = `state-d-${id}`;
-      inputAdminAdd.id = `edit-admin-${id}`;
-      inputAdminAdd.checked = false;
-
-
-      const labelAdmin = document.createElement('label');
-      labelAdmin.setAttribute('for', `edit-admin-${id}`);
-      labelAdmin.innerHTML = '&nbsp;';
-
-      const aLabel = document.createElement('a');
-
-      const spanSwitchAdmin = document.createElement('span');
-      spanSwitchAdmin.className = 'spanSwitch admin';
-      spanSwitchAdmin.innerText = 'Admin';
+      // const inputAdminAdd = document.createElement('input');
+      // inputAdminAdd.type = 'radio';
+      // inputAdminAdd.name = `state-d-${id}`;
+      // inputAdminAdd.id = `edit-admin-${id}`;
+      // inputAdminAdd.checked = false;
 
 
-      divSwitch.appendChild(inputKundeAdd);
-      divSwitch.appendChild(labelKunde);
-      divSwitch.appendChild(inputNoneAdd);
-      divSwitch.appendChild(labelNone);
-      divSwitch.appendChild(inputAdminAdd);
-      divSwitch.appendChild(labelAdmin);
-      divSwitch.appendChild(aLabel);
+      // const labelAdmin = document.createElement('label');
+      // labelAdmin.setAttribute('for', `edit-admin-${id}`);
+      // labelAdmin.innerHTML = '&nbsp;';
 
-      divRadioButtons.appendChild(spanSwitchKunde);
-      divRadioButtons.appendChild(divSwitch);
-      divRadioButtons.appendChild(spanSwitchAdmin)
+      // const aLabel = document.createElement('a');
+
+      // const spanSwitchAdmin = document.createElement('span');
+      // spanSwitchAdmin.className = 'spanSwitch admin';
+      // spanSwitchAdmin.innerText = 'Admin';
+
+
+      // divSwitch.appendChild(inputKundeAdd);
+      // divSwitch.appendChild(labelKunde);
+      // divSwitch.appendChild(inputNoneAdd);
+      // divSwitch.appendChild(labelNone);
+      // divSwitch.appendChild(inputAdminAdd);
+      // divSwitch.appendChild(labelAdmin);
+      // divSwitch.appendChild(aLabel);
+
+      // divRadioButtons.appendChild(spanSwitchKunde);
+      // divRadioButtons.appendChild(divSwitch);
+      // divRadioButtons.appendChild(spanSwitchAdmin)
 
 
 
@@ -1149,19 +1149,19 @@
         const emailText = document.createTextNode(inputEmail.value);
         emailElement.appendChild(emailText)
 
-        const tsElement = document.createElementNS('', 'ts');
-        const tsText = document.createTextNode('');
-        tsElement.appendChild(tsText)
-        let type = null;
-        if (inputKundeAdd.checked) {
-          type = 'client';
-        }
-        if (inputAdminAdd.checked) {
-          type = 'admin'
-        }
-        const typeElement = document.createElementNS('', 'type');
-        const typeText = document.createTextNode(type);
-        typeElement.appendChild(typeText)
+        // const tsElement = document.createElementNS('', 'ts');
+        // const tsText = document.createTextNode('');
+        // tsElement.appendChild(tsText)
+        // let type = null;
+        // if (inputKundeAdd.checked) {
+        //   type = 'client';
+        // }
+        // if (inputAdminAdd.checked) {
+        //   type = 'admin'
+        // }
+        // const typeElement = document.createElementNS('', 'type');
+        // const typeText = document.createTextNode(type);
+        // typeElement.appendChild(typeText)
 
 
         // append parent element
@@ -1170,8 +1170,8 @@
         parentElement.appendChild(positionElement);
         parentElement.appendChild(emailElement);
         parentElement.appendChild(telephoneElement);
-        parentElement.appendChild(tsElement);
-        parentElement.appendChild(typeElement);
+        // parentElement.appendChild(tsElement);
+        // parentElement.appendChild(typeElement);
 
         // prepare data and save on DB
         const finduser = findUserXml(telephoneElement.textContent, xmlData);
@@ -1196,7 +1196,7 @@
       divMainContentEdit.appendChild(divEditPosition);
       divMainContentEdit.appendChild(divTelephone);
       divMainContentEdit.appendChild(divEmail);
-      divMainContentEdit.appendChild(divRadioButtons);
+      // divMainContentEdit.appendChild(divRadioButtons);
       // divMainContentEdit.appendChild(divStatus);
       divMainContentEdit.appendChild(divNutzer);
       divMainContentEdit.appendChild(messageSpan);
@@ -1423,27 +1423,31 @@
 
     initialize(options) {
       if(options){
-        this.contactListXml = prepareDataXml(options.contact_data);
-        this.objectContact = []
-        for (let i = 0; i < this.contactListXml.children.length; i++) {
-          const contact = this.contactListXml.children.item(i);
-          const tmpObj = {
-            name: contact.getElementsByTagName('name')[0].textContent,
-            surname: contact.getElementsByTagName('surname')[0].textContent,
-            position: contact.getElementsByTagName('position')[0].textContent,
-            email: contact.getElementsByTagName('email')[0].textContent,
-            phone: contact.getElementsByTagName('phone')[0].textContent,
-            ts: contact.getElementsByTagName('ts')[0].textContent,
+        if(options.contact_data !== undefined){
+
+          this.contactListXml = prepareDataXml(options.contact_data);
+          this.objectContact = []
+          for (let i = 0; i < this.contactListXml.children.length; i++) {
+            const contact = this.contactListXml.children.item(i);
+            const tmpObj = {
+              name: contact.getElementsByTagName('name')[0].textContent,
+              surname: contact.getElementsByTagName('surname')[0].textContent,
+              position: contact.getElementsByTagName('position')[0].textContent,
+              email: contact.getElementsByTagName('email')[0].textContent,
+              phone: contact.getElementsByTagName('phone')[0].textContent,
+              ts: contact.getElementsByTagName('ts')[0].textContent,
+            }
+            this.objectContact.push(tmpObj)
           }
-          this.objectContact.push(tmpObj)
-        }
-        this.type = options.type;
-        if ( options.type == 'kunde' ){
-          this.typeAdmin = true;
-          this.typeKunde = false;
-        }else if ( options.type == 'admin'){
-          this.typeAdmin = false;
-          this.typeKunde = true;
+          console.log(options, "optionsssssssssssssssssssssssssssssssssssssssssssssssssss")
+          this.type = options.type;
+          if ( options.type == 'kunde' ){
+            this.typeAdmin = true;
+            this.typeKunde = false;
+          }else if ( options.type == 'admin'){
+            this.typeAdmin = false;
+            this.typeKunde = true;
+          }
         }
       }
       this.render();

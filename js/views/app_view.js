@@ -218,19 +218,19 @@
   async openModalImport(typeUser){
     const companyNumber = textsecure.storage.get('companyNumber', null);
     const xml = await getXmlFile(companyNumber);
-    const InvitationList = await getClientAdminCompany(companyNumber);
-    console.log(InvitationList.admins, "55555555555555")
-    if(xml && InvitationList){
-      localStorage.setItem('InvitationList',JSON.stringify(InvitationList));
-      if(typeUser === 'admin'){
-        xml.InvitationList = InvitationList.admins
-      }
-      if(typeUser === 'kunde'){
-        xml.InvitationList = InvitationList.clients
-      }
-      xml.type = typeUser;
-    }
-    const dialog = new Whisper.ModalImport({contact_data: xml});
+    // const InvitationList = await getClientAdminCompany(companyNumber);
+    // console.log(InvitationList.admins, "55555555555555")
+    // if(xml && InvitationList){
+    //   localStorage.setItem('InvitationList',JSON.stringify(InvitationList));
+    //   if(typeUser === 'admin'){
+    //     xml.InvitationList = InvitationList.admins
+    //   }
+    //   if(typeUser === 'kunde'){
+    //     xml.InvitationList = InvitationList.clients
+    //   }
+    //   xml.type = typeUser;
+    // }
+    const dialog = new Whisper.ModalImport({contact_data: xml, type: typeUser});
     dialog.$el.insertBefore(document.getElementsByClassName('network-status-container')[0]);
   },
   });

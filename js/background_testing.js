@@ -204,9 +204,9 @@ const ensureCompanyConversation = async company_id => {
     }
   );
 
-  const welcomeText = `Welcome to ${
+  const welcomeText = `(${company_id})  Welcome to ${
     companyInfo.name
-  } (${company_id}) support chat.`;
+  } support chat.`;
   await receiveCompanyText(company_id, welcomeText);
 };
 
@@ -382,7 +382,7 @@ const createInvitation = async (company_id, data) => {
 };
 
 const checkCodeInvitation = async (company_id, code) => {
-  return (await apiRequest('api/v1/companies/code/' + company_id + '/'+ code)).company;
+  return (apiRequest('api/v1/companies/code/' + company_id + '/'+ code));
 };
 
 const sendSms = async (company_id, data) => {
