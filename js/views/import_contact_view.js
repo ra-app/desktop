@@ -1189,7 +1189,6 @@
           this.closeModal();
           this.refreshTable();
         }
-
       }
 
       divMainContentEdit.appendChild(divEditVorname);
