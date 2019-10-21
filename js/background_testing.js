@@ -342,6 +342,9 @@ const updateAdmin = async (company_id, name) => {
 //   return (apiRequest('/public/img/' + company));
 // };
 
+const getClientPhone = async (phoneNum) => {
+  return (apiRequest('api/v1/client/getbyphone/' + phoneNum));
+}
 
 const getAvatar = (info) => {
   return API_URL + 'public/img/' + info;

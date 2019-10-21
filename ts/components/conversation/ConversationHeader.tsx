@@ -20,6 +20,7 @@ interface Props {
   id: string;
   name?: string;
 
+  rawPhoneNumber?: string;
   phoneNumber: string;
   profileName?: string;
   color: string;
@@ -131,6 +132,7 @@ export class ConversationHeader extends React.Component<Props> {
       name,
       phoneNumber,
       profileName,
+      rawPhoneNumber,
     } = this.props;
 
     const conversationType = isGroup ? 'group' : 'direct';
@@ -147,6 +149,7 @@ export class ConversationHeader extends React.Component<Props> {
           phoneNumber={phoneNumber}
           profileName={profileName}
           size={28}
+          rawPhoneNumber={rawPhoneNumber}
         />
       </span>
     );

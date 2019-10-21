@@ -22,6 +22,12 @@
       return textsecure.utils.unencodeNumber(numberId)[0];
     },
 
+    getRawNumber() {
+      const numberId = textsecure.storage.get('number_id');
+      if (numberId === undefined) return undefined;
+      return numberId;
+    },
+
     getDeviceId() {
       const numberId = textsecure.storage.get('number_id');
       if (numberId === undefined) return undefined;
