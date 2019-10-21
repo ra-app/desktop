@@ -27,9 +27,9 @@
 
     initialize(options) {
       this.render();
-      if (options) {
-        const contactListXml = prepareDataXml(options.contact_data)
-        this.createTable(contactListXml);
+      if (options && options.contact_data !== undefined) {
+          const contactListXml = prepareDataXml(options.contact_data)
+          this.createTable(contactListXml);
       } else {
         this.createEmptyMessage();
       }
