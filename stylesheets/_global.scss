@@ -1356,6 +1356,12 @@ $debug: 0;
   .labelsInput {
     top: -50px !important;
   }
+  #bank-iban-input, #bank-bic-input{
+    font-family: $poppins-medium;
+    font-size: 15px;
+    cursor: pointer;
+    color: $color-raapp-text;
+  }
   .inputsRegister {
     height: 30px;
     margin: 10px 0px 5px;
@@ -1450,7 +1456,7 @@ $debug: 0;
       display: block;
       position: relative;
       // top: -55px;
-      &[for="phone-verification-code"], &[for="user-name-input"]{
+      &[for="phone-verification-code"], &[for="user-name-input"], &[for="bank-iban-input"], &[for="bank-bic-input"]{
         top: -55px;
       }
       top: -41px;
