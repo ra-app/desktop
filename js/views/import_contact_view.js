@@ -1603,7 +1603,8 @@
         usersForGroups.push(dataUsersToInvitate[element].userid);
       })
       if ( groupName !== '' ){
-        const conversation = await createGroup(groupName, usersForGroups);
+        const company = await getCompany(textsecure.storage.get('companyNumber', null))
+        await createGroup(`${company.name} - ${groupName}`, usersForGroups);
         document.getElementsByClassName('modal-importer')[0].remove();
         dataUsersToInvitate = {};
       }
