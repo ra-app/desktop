@@ -30,6 +30,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     createDeveloperInterface();
   }, 1000);
 
+  // testGroup();
+
   // await testProfile();
 });
 
@@ -235,6 +237,41 @@ const ensureConversation = async phone_number => {
   );
 
   return conversation;
+};
+
+const createGroup = async (name, members) => {
+  await waitForConversationController();
+  console.log('createGroup', members);
+
+  const id = members.join('_');
+
+  let conversation = await ConversationController.get(id, 'group');
+  if (conversation && conversation.get('active_at')) {
+    console.log('createGroup existing', conversation);
+    // return conversation;
+  }
+
+  conversation = await ConversationController.getOrCreateAndWait(id, 'group');
+  conversation.set({
+    name, active_at: Date.now(), members, type: 'group', left: false, color: 'blue',
+  });
+  console.log('createGroup new', id, conversation);
+
+  await window.Signal.Data.updateConversation(
+    id,
+    conversation.attributes,
+    {
+      Conversation: Whisper.Conversation,
+    }
+  );
+
+  return conversation;
+};
+
+const testGroup = async () => {
+  const members = ['+34664666666', '+34000000005'];
+  const conversation = await createGroup('testgroup', members);
+  console.log('TestGroup', conversation);
 };
 
 // Crutch to ensure conversations controller is ready.

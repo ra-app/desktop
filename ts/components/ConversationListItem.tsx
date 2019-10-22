@@ -186,10 +186,11 @@ export class ConversationListItem extends React.PureComponent<Props> {
       <div
         role="button"
         onClick={() => {
+          console.log("CLICK", this);
           if (this.props.type == 'company' && onClick) {
             onClick(id);
           }
-          if (this.props.type == 'direct' && openConversation) {
+          if ( (this.props.type == 'direct' || this.props.type == 'group' ) && openConversation) {
             openConversation(id)
           }
         }}
