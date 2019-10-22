@@ -1149,9 +1149,9 @@
         const emailText = document.createTextNode(inputEmail.value);
         emailElement.appendChild(emailText)
 
-        // const tsElement = document.createElementNS('', 'ts');
-        // const tsText = document.createTextNode('');
-        // tsElement.appendChild(tsText)
+        const tsElement = document.createElementNS('', 'ts');
+        const tsText = document.createTextNode('');
+        tsElement.appendChild(tsText)
         // let type = null;
         // if (inputKundeAdd.checked) {
         //   type = 'client';
@@ -1170,7 +1170,7 @@
         parentElement.appendChild(positionElement);
         parentElement.appendChild(emailElement);
         parentElement.appendChild(telephoneElement);
-        // parentElement.appendChild(tsElement);
+        parentElement.appendChild(tsElement);
         // parentElement.appendChild(typeElement);
 
         // prepare data and save on DB
@@ -1465,7 +1465,7 @@
       'click #imageSendInvitation' : 'sendDataToModal',
       'click #imageClosePanel': 'closePanel',
       'click  #imageGoBack' : 'goBack',
-      'click #searchContactInvitation': 'showContactListPanel',
+      'click #searchContactInvitation, #imagePlus': 'showContactListPanel',
       'click .contactListCheckbox': 'checkBoxevent',
       'click #buttonInviteContact': 'sendInvitations',
     },
