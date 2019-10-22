@@ -186,6 +186,11 @@
       modal.empty();
       this.$('#modalOverLay').removeClass('hidden');
       if (type === 'import') {
+        const message = document.createElement('p');
+        message.innerText = i18n('messageImportContact');
+        message.className = 'messageModal'
+        const divButtonsImport = document.createElement('div');
+        divButtonsImport.className = 'divButtonsImport';
         const aceptButton = document.createElement('button');
         aceptButton.innerHTML = 'Accept'
         aceptButton.id = 'acept-import-contact';
@@ -194,8 +199,11 @@
         cancelButton.innerHTML = 'Cancel';
         cancelButton.id = 'cancel-import-contact';
         cancelButton.className = 'buttonsModal';
-        modal.append(aceptButton);
-        modal.append(cancelButton);
+        cancelButton.style.marginLeft =  '10px';
+        divButtonsImport.appendChild(aceptButton);
+        divButtonsImport.appendChild(cancelButton);
+        modal.append(message);
+        modal.append(divButtonsImport);
       }
 
     },

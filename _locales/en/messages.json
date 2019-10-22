@@ -2276,5 +2276,9 @@
   "closeTicket":{
       "message": "Close ticket",
       "description": "Chat menu close ticket"
+  },
+  "messageImportContact": {
+      "message": "Bitte beachten Sie, dass beim Kontaktimport Ihre bereits vorhandenen Kontakte überschrieben werden. Möchten Sie fortfahren?",
+      "description": "Message to import new contact list"
   }
 }
