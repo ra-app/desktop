@@ -1035,10 +1035,10 @@
       divEmail.className = 'divEdit';
       const labelEmail = document.createElement('span');
       labelEmail.className = 'labelEdit';
-      labelEmail.innerText = 'Email'
+      labelEmail.innerText = 'E-Mail '
       const inputEmail = document.createElement('input');
       inputEmail.type = 'text';
-      inputEmail.placeholder = 'Email';
+      inputEmail.placeholder = 'E-Mail';
       inputEmail.id = 'addEmailInput';
       divEmail.appendChild(labelEmail)
       divEmail.appendChild(inputEmail)
@@ -1108,21 +1108,21 @@
 
 
 
-      const divNutzer = document.createElement('div');
-      divNutzer.className = 'divEdit';
-      const labelNutzer = document.createElement('span');
-      labelNutzer.className = 'labelEdit';
-      labelNutzer.innerText = 'Nutzer'
-      const divUserPrev = document.createElement('div');
-      divUserPrev.className = 'divUserPrev';
-      divUserPrev.innerHTML = '<img src="images/header-chat.png" /> '
-      divNutzer.appendChild(labelNutzer)
-      divNutzer.appendChild(divUserPrev)
+      // const divNutzer = document.createElement('div');
+      // divNutzer.className = 'divEdit';
+      // const labelNutzer = document.createElement('span');
+      // labelNutzer.className = 'labelEdit';
+      // labelNutzer.innerText = 'Nutzer'
+      // const divUserPrev = document.createElement('div');
+      // divUserPrev.className = 'divUserPrev';
+      // divUserPrev.innerHTML = '<img src="images/header-chat.png" /> '
+      // divNutzer.appendChild(labelNutzer)
+      // divNutzer.appendChild(divUserPrev)
       
       const messageSpan = document.createElement('span');
       const buttonSaveChanges = document.createElement('button');
       buttonSaveChanges.classList = 'buttonSave buttonsModal disabled';
-      buttonSaveChanges.innerText = 'Save';
+      buttonSaveChanges.innerText = 'Speichern';
       buttonSaveChanges.id = 'addNewContactButton'
       buttonSaveChanges.onclick = () => {
 
@@ -1149,9 +1149,9 @@
         const emailText = document.createTextNode(inputEmail.value);
         emailElement.appendChild(emailText)
 
-        // const tsElement = document.createElementNS('', 'ts');
-        // const tsText = document.createTextNode('');
-        // tsElement.appendChild(tsText)
+        const tsElement = document.createElementNS('', 'ts');
+        const tsText = document.createTextNode('');
+        tsElement.appendChild(tsText)
         // let type = null;
         // if (inputKundeAdd.checked) {
         //   type = 'client';
@@ -1170,7 +1170,7 @@
         parentElement.appendChild(positionElement);
         parentElement.appendChild(emailElement);
         parentElement.appendChild(telephoneElement);
-        // parentElement.appendChild(tsElement);
+        parentElement.appendChild(tsElement);
         // parentElement.appendChild(typeElement);
 
         // prepare data and save on DB
@@ -1198,7 +1198,7 @@
       divMainContentEdit.appendChild(divEmail);
       // divMainContentEdit.appendChild(divRadioButtons);
       // divMainContentEdit.appendChild(divStatus);
-      divMainContentEdit.appendChild(divNutzer);
+      // divMainContentEdit.appendChild(divNutzer);
       divMainContentEdit.appendChild(messageSpan);
       divMainContentEdit.appendChild(buttonSaveChanges);
 
@@ -1465,7 +1465,7 @@
       'click #imageSendInvitation' : 'sendDataToModal',
       'click #imageClosePanel': 'closePanel',
       'click  #imageGoBack' : 'goBack',
-      'click #searchContactInvitation': 'showContactListPanel',
+      'click #searchContactInvitation, #imagePlus': 'showContactListPanel',
       'click .contactListCheckbox': 'checkBoxevent',
       'click #buttonInviteContact': 'sendInvitations',
     },
