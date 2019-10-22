@@ -244,7 +244,15 @@
         <img src="images/icons/x-contact-list.svg" class="imageClosePanel" id='imageClosePanel'>
       </div>
       <div class="mainInvitationDiv" id="divMainContentEdit">
-        <textarea class="textareaSendeInvitation" id="textareaSendeInvitation" placeholder="Lass uns mit OfficeApp kommunizieren: https://oaapp.link/1kepeYmFp" />
+        {{ #isCreatingGroup }}
+        <textarea class="textareaSendeInvitation" id="textareaSendeInvitation" placeholder="Group name" />
+        {{ /isCreatingGroup }}
+        {{ #typeKunde }}
+          <textarea class="textareaSendeInvitation" id="textareaSendeInvitation" placeholder="Lass uns mit OfficeApp kommunizieren: https://oaapp.link/1kepeYmFp" />
+        {{ /typeKunde }}
+        {{ #typeAdmin }}
+          <textarea class="textareaSendeInvitation" id="textareaSendeInvitation" placeholder="Lass uns mit OfficeApp kommunizieren: https://oaapp.link/1kepeYmFp" />
+        {{ /typeAdmin }}
         <div class="tab">
           <!-- <button class="tablinks" id="filterAll">All</button>
           {{ #typeAdmin }}
@@ -261,7 +269,15 @@
       <div class="mainDivUserSendInvitation" id="userSendList">
         
       </div>
-      <button class="buttonInviteContact disabled" id="buttonInviteContact"> Teilen </button>
+      {{ #typeKunde }}
+        <button class="buttonInviteContact disabled" id="buttonInviteContact"> Teilen </button>
+      {{ /typeKunde }}
+      {{ #typeAdmin }}
+        <button class="buttonInviteContact disabled" id="buttonInviteContact"> Teilen </button>
+      {{ /typeAdmin }}
+      {{ #isCreatingGroup }}
+        <button class="buttonInviteContact disabled" id="buttonCreateGroup"> Create group </button>
+      {{ /isCreatingGroup}}
     </div>
 
 
