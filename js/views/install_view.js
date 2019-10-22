@@ -718,7 +718,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     activateButtonRegisterAdminClient(){
       const code = this.$el.find('#admin-signup-code')[0].value.length;
       const Companycode = this.$el.find('#admin-company-code')[0].value.length;
-      const button = this.$el.find('#continue-setup-admin ');
+      const button = this.$el.find('#continue-setup-admin');
       if(code > 0 && Companycode > 0){
         button.removeClass('disabled');
       } else {
