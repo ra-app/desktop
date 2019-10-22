@@ -905,7 +905,7 @@
 
       const buttonSaveChanges = document.createElement('button');
       buttonSaveChanges.classList = 'buttonSave buttonsModal';
-      buttonSaveChanges.innerText = 'Save';
+      buttonSaveChanges.innerText = 'Speichern';
       buttonSaveChanges.onclick = () => {
         cln.getElementsByTagName('name')[0].childNodes[0].nodeValue = inputEditVorname.value
         cln.getElementsByTagName('surname')[0].childNodes[0].nodeValue = inputNachName.value
