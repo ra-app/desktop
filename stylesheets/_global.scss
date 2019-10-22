@@ -1616,7 +1616,8 @@ th.sorted.descending:after {
   background: #00000063;
   .modalContact{
     position: absolute;
-    width: 25%;
+    // width: 25%;
+    width: 400px;
   }
 }
 
@@ -1680,7 +1681,7 @@ th.sorted.descending:after {
         font-size: 14px;
         font-family: $poppins-regular;
         height: 30px;
-        margin-top: -8px;
+        margin-top: -4px;
         outline: none;
         color: $color-raapp-text;
       }
