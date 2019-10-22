@@ -341,7 +341,7 @@
         timestamp: this.get('timestamp'),
         title: this.getTitle(),
         unreadCount: this.get('unreadCount') || 0,
-
+        rawPhoneNumber: this.getRawNumber(),
         phoneNumber: format(this.id, {
           ourRegionCode: regionCode,
         }),
@@ -2022,6 +2022,14 @@
       } catch (e) {
         return number;
       }
+    },
+
+    getRawNumber() {
+      if (!this.isPrivate()) {
+        return '';
+      }
+      const number = this.id;
+      return number;
     },
 
     getInitials(name) {

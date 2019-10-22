@@ -57,11 +57,19 @@ export class LeftPane extends React.Component<Props> {
       openTicket,
       showArchived,
     } = this.props;
+
+    this.sortConversations();
     if (!conversations || !archivedConversations) {
       throw new Error(
         'renderRow: Tried to render without conversations or archivedConversations'
       );
     }
+
+    // tslint:disable-next-line:no-console
+    // console.log('GGGG', conversations, conversations.sort(function(a, b) {
+    //   return a - b;
+    // })
+    // );
 
     if (!showArchived && index === conversations.length) {
       return this.renderArchivedButton({ key, style });
@@ -95,6 +103,25 @@ export class LeftPane extends React.Component<Props> {
       </div>
     );
   };
+
+  public sortConversations() {
+    const {
+      conversations,
+    } = this.props;
+    if (conversations) {
+      // tslint:disable-next-line:no-function-expression
+      conversations.sort(function (a, b) {
+        if (a.type > b.type) {
+          return 1;
+        }
+        if (a.type < b.type) {
+          return -1;
+        }
+        // a must be equal to b
+        return 0;
+      });
+    }
+  }
 
   public renderArchivedButton({
     key,

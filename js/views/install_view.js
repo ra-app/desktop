@@ -119,7 +119,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         const info = textsecure.storage.get('companySetupInfo', null);
         if (info) {
           this.$('#tax-number-input').val(info.taxNumber);
-          this.$('#tax-id-input').val(info.taxID);
+          // this.$('#tax-id-input').val(info.taxID);
           this.$('#company-register-id-input').val(info.registerID);
           this.$('#imprint-input').val(info.imprint);
           this.$('#branch-select').val(info.branch);
@@ -177,7 +177,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
             name: userSetupInfo.companyName,
             business: company.branch,
             tax_number: company.taxNumber,
-            tax_id: company.taxID,
+            // tax_id: company.taxID,
             commarcial_register: company.registerID,
             iban: bank ? bank.iban : null,
             bic: bank ? bank.bic : null,
@@ -220,6 +220,10 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
           }
           const data = {
             name:  userSetupInfo.name,
+          }
+          if (avatarInfo) {
+            const dataAvatar = { data: avatarInfo.userAvatar, type: avatarInfo.userAvatarType }
+            await setAdminAvatar(codeCompany, dataAvatar);
           }
           await updateClient(data)
           await ensureCompanyConversation(codeCompany);
@@ -286,7 +290,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     async onCompanyProfileDone() {
       const company = {
         taxNumber: this.$('#tax-number-input').val(),
-        taxID: this.$('#tax-id-input').val(),
+        // taxID: this.$('#tax-id-input').val(),
         registerID: this.$('#company-register-id-input').val(),
         imprint: this.$('#imprint-input').val(),
         branch: this.$('#branch-select').val(),
@@ -561,7 +565,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     },
     activateButtonCompanyInfo() {
       const taxNumber = this.$el.find('#tax-number-input')[0].value.length;
-      const taxID = this.$el.find('#tax-id-input')[0].value.length;
+      // const taxID = this.$el.find('#tax-id-input')[0].value.length;
       const comercialRegisterId = this.$el.find('#company-register-id-input')[0]
         .value.length;
       const imprint = this.$el.find('#imprint-input')[0].value.length;
@@ -569,7 +573,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       const button = this.$el.find('#company-profile-done');
       if (
         taxNumber > 0 &&
-        taxID > 0 &&
+        // taxID > 0 &&
         comercialRegisterId > 0 &&
         imprint > 0 &&
         branch > 0
@@ -612,7 +616,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     onOpenSelectBranch() {
       Tmp = {
         taxNumber: this.$el.find('#tax-number-input')[0].value,
-        taxID: this.$el.find('#tax-id-input')[0].value,
+        // taxID: this.$el.find('#tax-id-input')[0].value,
         comercialRegisterId: this.$el.find('#company-register-id-input')[0]
           .value,
         imprint: this.$el.find('#imprint-input')[0].value,
@@ -622,7 +626,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     onSelectBranch(e) {
       this.selectStep(Steps.SETUP_COMPANY_PROFILE);
       this.$('#tax-number-input').val(Tmp.taxNumber);
-      this.$('#tax-id-input').val(Tmp.taxID);
+      // this.$('#tax-id-input').val(Tmp.taxID);
       this.$('#company-register-id-input').val(Tmp.comercialRegisterId);
       this.$('#imprint-input').val(Tmp.imprint);
       this.$('#branch-select').val(e.target.textContent);
@@ -737,7 +741,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         companyDetails: i18n('companyDetails'),
         companyName: i18n('companyName'),
         taxNumber: i18n('taxNumber'),
-        taxID: i18n('taxID'),
+        // taxID: i18n('taxID'),
         companyRegistrationID: i18n('companyRegistrationID'),
         imprint: i18n('imprint'),
         branch: i18n('branch'),
