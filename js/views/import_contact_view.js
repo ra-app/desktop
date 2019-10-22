@@ -56,18 +56,28 @@
       const table = document.createElement('table');
       table.className = 'sortable';
 
-      const headerTexts = ['#', 'name', 'Nachname', 'position', 'E-Mail', 'kunde/admin', 'Einladungsstatus', 'Profil', 'Aktion'];
+      const headerTexts = {'#':'#', 'name':'name', 'surname':'Nachname', 'position':'position', 'email':'E-Mail', 'type':'kunde/admin', 'status':'Einladungsstatus', 'profile':'Profil', 'actions':'Aktion'};
+      console.log('HEADEEEEE',headerTexts, headerTexts[0]);
       if (table) {
         const header = table.createTHead();
         const row = header.insertRow();
-        headerTexts.forEach((element, index) => {
+
+        for (const prop in headerTexts) {
           const cell = document.createElement('th');
-          if (index === 0 || index === 5 || index === 7 || index === 8) {
+          if (prop === '#' || prop === 'type' || prop === 'profile' || prop === 'actions') {
             cell.className = 'no-sort';
           }
-          cell.innerHTML = element;
+          cell.innerHTML = headerTexts[prop];
           row.appendChild(cell)
-        });
+        }
+        // headerTexts.forEach((element, index) => {
+        //   const cell = document.createElement('th');
+        //   if (index === 0 || index === 5 || index === 7 || index === 8) {
+        //     cell.className = 'no-sort';
+        //   }
+        //   cell.innerHTML = element.value;
+        //   row.appendChild(cell)
+        // });
       }
       const list = contactListXml.children;
       const tbody = document.createElement('tbody');
@@ -76,19 +86,32 @@
         const contact = contactListXml.children.item(i);
         const tableRow = document.createElement('tr');
         tbody.appendChild(tableRow);
-        for (let j = 0; j < headerTexts.length; j++) {
+        for (const prop in headerTexts) {
           const cellTd = document.createElement('td');
-          if (contact.getElementsByTagName(headerTexts[j])[0]) {
-            const cell = contact.getElementsByTagName(headerTexts[j])[0].textContent;
+            if (contact.getElementsByTagName(prop)[0]) {
+            const cell = contact.getElementsByTagName(prop)[0].textContent;
             const cellTdContent = document.createTextNode(cell);
             cellTd.appendChild(cellTdContent);
           } else {
             const id = contact.getElementsByTagName('phone')[0].textContent;
-            this.appendElemtns(j, cellTd, id, contact)
+            this.appendElemtns(prop, cellTd, id, contact)
 
           }
           tableRow.appendChild(cellTd);
         }
+        // for (let j = 0; j < headerTexts.length; j++) {
+        //   const cellTd = document.createElement('td');
+        //   if (contact.getElementsByTagName(headerTexts[j])[0]) {
+        //     const cell = contact.getElementsByTagName(headerTexts[j])[0].textContent;
+        //     const cellTdContent = document.createTextNode(cell);
+        //     cellTd.appendChild(cellTdContent);
+        //   } else {
+        //     const id = contact.getElementsByTagName('phone')[0].textContent;
+        //     this.appendElemtns(j, cellTd, id, contact)
+
+        //   }
+        //   tableRow.appendChild(cellTd);
+        // }
       }
       //Append content
       table.appendChild(tbody)
@@ -216,7 +239,7 @@
       const contactListXml = prepareDataXml(this.contactsData.contact_data)
       this.createTable(contactListXml)
     },
-    async  appendElemtns(j, cellTd, id, contact) {
+    async  appendElemtns(prop, cellTd, id, contact) {
       const hasInvitation = await this.hasInvitation(id);
       let userType;
       if (hasInvitation.found) {
@@ -228,8 +251,8 @@
       } else {
         userType = 'none'
       }
-      switch (j) {
-        case 0: {
+      switch (prop) {
+        case '#': {
           const checkbox = document.createElement('input');
           checkbox.type = 'checkbox';
           checkbox.name = '#';
@@ -280,7 +303,7 @@
           break;
         }
         // eslint-disable-next-line no-case-declarations
-        case 5:
+        case 'type':
           const spanSwitchKunde = document.createElement('span');
           spanSwitchKunde.className = 'spanSwitch';
           spanSwitchKunde.innerText = 'Kunde';
@@ -409,7 +432,7 @@
           })
           break;
         // eslint-disable-next-line no-case-declarations
-        case 6:
+        case 'status':
           const button = document.createElement('button');
           button.id = `buttonSendInvitation-${id}`
           button.classList.add('buttonSendInvitation')
@@ -456,7 +479,7 @@
           cellTd.appendChild(button);
           break;
         // eslint-disable-next-line no-case-declarations
-        case 8:
+        case 'actions':
           // eslint-disable-next-line no-case-declarations
           const buttonEdit = document.createElement('img');
           buttonEdit.setAttribute('src', 'images/icons/edit-contact-list.svg')
