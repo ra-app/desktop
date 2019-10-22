@@ -1035,10 +1035,10 @@
       divEmail.className = 'divEdit';
       const labelEmail = document.createElement('span');
       labelEmail.className = 'labelEdit';
-      labelEmail.innerText = 'Email'
+      labelEmail.innerText = 'E-Mail '
       const inputEmail = document.createElement('input');
       inputEmail.type = 'text';
-      inputEmail.placeholder = 'Email';
+      inputEmail.placeholder = 'E-Mail';
       inputEmail.id = 'addEmailInput';
       divEmail.appendChild(labelEmail)
       divEmail.appendChild(inputEmail)
@@ -1108,21 +1108,21 @@
 
 
 
-      const divNutzer = document.createElement('div');
-      divNutzer.className = 'divEdit';
-      const labelNutzer = document.createElement('span');
-      labelNutzer.className = 'labelEdit';
-      labelNutzer.innerText = 'Nutzer'
-      const divUserPrev = document.createElement('div');
-      divUserPrev.className = 'divUserPrev';
-      divUserPrev.innerHTML = '<img src="images/header-chat.png" /> '
-      divNutzer.appendChild(labelNutzer)
-      divNutzer.appendChild(divUserPrev)
+      // const divNutzer = document.createElement('div');
+      // divNutzer.className = 'divEdit';
+      // const labelNutzer = document.createElement('span');
+      // labelNutzer.className = 'labelEdit';
+      // labelNutzer.innerText = 'Nutzer'
+      // const divUserPrev = document.createElement('div');
+      // divUserPrev.className = 'divUserPrev';
+      // divUserPrev.innerHTML = '<img src="images/header-chat.png" /> '
+      // divNutzer.appendChild(labelNutzer)
+      // divNutzer.appendChild(divUserPrev)
       
       const messageSpan = document.createElement('span');
       const buttonSaveChanges = document.createElement('button');
       buttonSaveChanges.classList = 'buttonSave buttonsModal disabled';
-      buttonSaveChanges.innerText = 'Save';
+      buttonSaveChanges.innerText = 'Speichern';
       buttonSaveChanges.id = 'addNewContactButton'
       buttonSaveChanges.onclick = () => {
 
@@ -1198,7 +1198,7 @@
       divMainContentEdit.appendChild(divEmail);
       // divMainContentEdit.appendChild(divRadioButtons);
       // divMainContentEdit.appendChild(divStatus);
-      divMainContentEdit.appendChild(divNutzer);
+      // divMainContentEdit.appendChild(divNutzer);
       divMainContentEdit.appendChild(messageSpan);
       divMainContentEdit.appendChild(buttonSaveChanges);
 
