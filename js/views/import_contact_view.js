@@ -1475,7 +1475,7 @@
     },
     showContactListPanel(){
       if ( this.objectContact === undefined ){
-        this.$('#ptextNoContacts').innerHTML = i18n('noContactsImported');
+        this.$('#ptextNoContacts').innerText = i18n('noContactsImported');
         this.$('#divNoContacts').removeClass('hidden')
       }
       this.$('#modalContact').addClass('hidden');
@@ -1484,7 +1484,7 @@
     goBack(){
       this.$('#modalContact').removeClass('hidden');
       this.$('#modalSearchUsers').addClass('hidden');
-      this.$('#ptextNoContacts').innerHTML = '';
+      this.$('#ptextNoContacts').innerText = '';
       this.$('#divNoContacts').addClass('hidden')
     },
     sendDataToModal(){

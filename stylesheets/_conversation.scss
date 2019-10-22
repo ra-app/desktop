@@ -641,7 +641,11 @@ p.ticket-time {
     }
   }
 }
-
+#ptextNoContacts{
+  font-family: $poppins-semibold;
+  color: $color-raapp-text;
+  font-size: 14px;
+}
 tbody#myTable tr{
   text-align: center;
   background: white;
