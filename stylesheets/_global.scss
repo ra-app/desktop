@@ -1740,6 +1740,15 @@ th.sorted.descending:after {
   .buttonSave{
     float: right;
   }
+  .messageModal{
+    text-align: center;
+    font-family: $poppins-regular;
+    margin-bottom: 15px;
+    padding: 20px;
+  }
+  .divButtonsImport{
+    text-align: center;
+  }
   .buttonsModal{
     @include backgroudGradient();
     padding: 9px 15px;
