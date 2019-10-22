@@ -26,9 +26,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // await addAllCompanies();
 
-  setInterval(() => {
-    createDeveloperInterface();
-  }, 1000);
+  // setInterval(() => {
+  //   createDeveloperInterface();
+  // }, 1000);
 
   // testGroup();
 
@@ -503,6 +503,13 @@ const devToaster = msg => {
   setTimeout(() => {
     document.body.removeChild(toaster);
   }, 5000);
+};
+
+const removeDeveloperInterface = () => {
+  const existingPanel = document.getElementById('devPanel');
+  if (!existingPanel) return;
+  // existingPanel.remove();
+  existingPanel.parentNode.removeChild(existingPanel);
 };
 
 const createDeveloperInterface = () => {
