@@ -397,10 +397,12 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       // TODO: check code is present & valid
       this.setupType = 'admin';
       const codeInvitation = this.$('#admin-signup-code').val();
-      const codeCompany = this.$('#admin-company-code').val();
+      // const codeCompany = this.$('#admin-company-code').val();
+      // const codeCompany = textsecure.storage.get('companyNumber', false);
+      // console.log('CODEEEEE', codeCompany)
       await textsecure.storage.put('setupType', this.setupType);
       await textsecure.storage.put('codeInvitation', codeInvitation);
-      await textsecure.storage.put('codeCompany', codeCompany);
+      // await textsecure.storage.put('codeCompany', codeCompany);
 
       this.selectStep(Steps.SETUP_PHONE);
     },
@@ -417,8 +419,10 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
           if(this.setupType == 'admin'){
             // const codeCompany = textsecure.storage.get('codeCompany', false);
             const codeInvitation = textsecure.storage.get('codeInvitation', false);
-            const company= await checkCodeInvitation(codeInvitation);
-             textsecure.storage.put('companyNumber', company.company.company_number);
+            const company = await checkCodeInvitation(codeInvitation);
+            await textsecure.storage.put('codeCompany', company.company_id + '');
+            //  textsecure.storage.put('companyNumber', company.company.company_number);
+             textsecure.storage.put('companyNumber', company.company_id);
              textsecure.storage.put('role', company.role);
             //  textsecure.storage.put('client_uuid', company.client_uuid);
           }

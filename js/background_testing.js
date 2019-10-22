@@ -424,7 +424,7 @@ const createInvitation = async (company_id, data) => {
 };
 
 const checkCodeInvitation = async (code) => {
-  return (apiRequest('api/v1/companies/code/'+ code));
+  return apiRequest('api/v1/companies/code/'+ code);
 };
 
 const sendSms = async (company_id, data) => {
