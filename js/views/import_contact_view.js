@@ -1234,6 +1234,7 @@
     },
     searchContact() {
       // filterAdmin
+      console.log('here !???? ')
       if (this.$('#filterAdmin').hasClass('active')) {
         activeRolToInvitate = 'admin'
       }
@@ -1473,12 +1474,18 @@
       document.getElementsByClassName('modal-importer')[0].remove();
     },
     showContactListPanel(){
+      if ( this.objectContact === undefined ){
+        this.$('#ptextNoContacts').innerHTML = i18n('noContactsImported');
+        this.$('#divNoContacts').removeClass('hidden')
+      }
       this.$('#modalContact').addClass('hidden');
       this.$('#modalSearchUsers').removeClass('hidden');
     },
     goBack(){
       this.$('#modalContact').removeClass('hidden');
       this.$('#modalSearchUsers').addClass('hidden');
+      this.$('#ptextNoContacts').innerHTML = '';
+      this.$('#divNoContacts').addClass('hidden')
     },
     sendDataToModal(){
       this.$('#modalContact').removeClass('hidden');
