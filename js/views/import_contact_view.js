@@ -275,7 +275,7 @@
         case 5:
           const spanSwitchKunde = document.createElement('span');
           spanSwitchKunde.className = 'spanSwitch';
-          spanSwitchKunde.innerText = 'Kunde';
+          spanSwitchKunde.innerText = 'Extern';
 
           const divSwitch = document.createElement('div');
           divSwitch.className = 'switch-toggle switch-3 switch-candy';
@@ -324,7 +324,7 @@
 
           const spanSwitchAdmin = document.createElement('span');
           spanSwitchAdmin.className = 'spanSwitch admin';
-          spanSwitchAdmin.innerText = 'Admin';
+          spanSwitchAdmin.innerText = 'Intern';
 
 
           divSwitch.appendChild(inputKunde);
@@ -534,7 +534,7 @@
       //   this.filterTab('Alle')
       // }
       buttonAdmin.className = 'tablinks';
-      buttonAdmin.innerHTML = 'Admin';
+      buttonAdmin.innerHTML = 'Intern';
       buttonAdmin.id = 'filterAdmin';
       buttonAdmin.onclick = () => {
         this.filterTab('Admin')
@@ -821,7 +821,7 @@
       const spanSwitchKunde = document.createElement('span');
       const id = cln.getElementsByTagName('phone')[0].childNodes[0].nodeValue;
       spanSwitchKunde.className = 'spanSwitch';
-      spanSwitchKunde.innerText = 'Kunde';
+      spanSwitchKunde.innerText = 'Extern';
 
       // const divSwitch = document.createElement('div');
       // divSwitch.className = 'switch-toggle switch-3 switch-candy';
