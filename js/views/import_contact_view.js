@@ -56,18 +56,28 @@
       const table = document.createElement('table');
       table.className = 'sortable';
 
-      const headerTexts = ['#', 'name', 'surname', 'position', 'email', 'kunde/admin', 'invitation status', 'profile', 'actions'];
+      const headerTexts = {'#':'#', 'name':'name', 'surname':'Nachname', 'position':'position', 'email':'E-Mail', 'type':'kunde/admin', 'status':'Einladungsstatus', 'profile':'Profil', 'actions':'Aktion'};
+      console.log('HEADEEEEE',headerTexts, headerTexts[0]);
       if (table) {
         const header = table.createTHead();
         const row = header.insertRow();
-        headerTexts.forEach((element, index) => {
+
+        for (const prop in headerTexts) {
           const cell = document.createElement('th');
-          if (index === 0 || index === 5 || index === 7 || index === 8) {
+          if (prop === '#' || prop === 'type' || prop === 'profile' || prop === 'actions') {
             cell.className = 'no-sort';
           }
-          cell.innerHTML = element;
+          cell.innerHTML = headerTexts[prop];
           row.appendChild(cell)
-        });
+        }
+        // headerTexts.forEach((element, index) => {
+        //   const cell = document.createElement('th');
+        //   if (index === 0 || index === 5 || index === 7 || index === 8) {
+        //     cell.className = 'no-sort';
+        //   }
+        //   cell.innerHTML = element.value;
+        //   row.appendChild(cell)
+        // });
       }
       const list = contactListXml.children;
       const tbody = document.createElement('tbody');
@@ -76,19 +86,32 @@
         const contact = contactListXml.children.item(i);
         const tableRow = document.createElement('tr');
         tbody.appendChild(tableRow);
-        for (let j = 0; j < headerTexts.length; j++) {
+        for (const prop in headerTexts) {
           const cellTd = document.createElement('td');
-          if (contact.getElementsByTagName(headerTexts[j])[0]) {
-            const cell = contact.getElementsByTagName(headerTexts[j])[0].textContent;
+            if (contact.getElementsByTagName(prop)[0]) {
+            const cell = contact.getElementsByTagName(prop)[0].textContent;
             const cellTdContent = document.createTextNode(cell);
             cellTd.appendChild(cellTdContent);
           } else {
             const id = contact.getElementsByTagName('phone')[0].textContent;
-            this.appendElemtns(j, cellTd, id, contact)
+            this.appendElemtns(prop, cellTd, id, contact)
 
           }
           tableRow.appendChild(cellTd);
         }
+        // for (let j = 0; j < headerTexts.length; j++) {
+        //   const cellTd = document.createElement('td');
+        //   if (contact.getElementsByTagName(headerTexts[j])[0]) {
+        //     const cell = contact.getElementsByTagName(headerTexts[j])[0].textContent;
+        //     const cellTdContent = document.createTextNode(cell);
+        //     cellTd.appendChild(cellTdContent);
+        //   } else {
+        //     const id = contact.getElementsByTagName('phone')[0].textContent;
+        //     this.appendElemtns(j, cellTd, id, contact)
+
+        //   }
+        //   tableRow.appendChild(cellTd);
+        // }
       }
       //Append content
       table.appendChild(tbody)
@@ -186,16 +209,24 @@
       modal.empty();
       this.$('#modalOverLay').removeClass('hidden');
       if (type === 'import') {
+        const message = document.createElement('p');
+        message.innerText = i18n('messageImportContact');
+        message.className = 'messageModal'
+        const divButtonsImport = document.createElement('div');
+        divButtonsImport.className = 'divButtonsImport';
         const aceptButton = document.createElement('button');
-        aceptButton.innerHTML = 'Accept'
+        aceptButton.innerHTML = 'Weiter'
         aceptButton.id = 'acept-import-contact';
         aceptButton.className = 'buttonsModal';
         const cancelButton = document.createElement('button');
-        cancelButton.innerHTML = 'Cancel';
+        cancelButton.innerHTML = 'Abbrechen';
         cancelButton.id = 'cancel-import-contact';
         cancelButton.className = 'buttonsModal';
-        modal.append(aceptButton);
-        modal.append(cancelButton);
+        cancelButton.style.marginLeft =  '10px';
+        divButtonsImport.appendChild(aceptButton);
+        divButtonsImport.appendChild(cancelButton);
+        modal.append(message);
+        modal.append(divButtonsImport);
       }
 
     },
@@ -208,7 +239,7 @@
       const contactListXml = prepareDataXml(this.contactsData.contact_data)
       this.createTable(contactListXml)
     },
-    async  appendElemtns(j, cellTd, id, contact) {
+    async  appendElemtns(prop, cellTd, id, contact) {
       const hasInvitation = await this.hasInvitation(id);
       let userType;
       if (hasInvitation.found) {
@@ -220,8 +251,8 @@
       } else {
         userType = 'none'
       }
-      switch (j) {
-        case 0: {
+      switch (prop) {
+        case '#': {
           const checkbox = document.createElement('input');
           checkbox.type = 'checkbox';
           checkbox.name = '#';
@@ -272,7 +303,7 @@
           break;
         }
         // eslint-disable-next-line no-case-declarations
-        case 5:
+        case 'type':
           const spanSwitchKunde = document.createElement('span');
           spanSwitchKunde.className = 'spanSwitch';
           spanSwitchKunde.innerText = 'Extern';
@@ -401,7 +432,7 @@
           })
           break;
         // eslint-disable-next-line no-case-declarations
-        case 6:
+        case 'status':
           const button = document.createElement('button');
           button.id = `buttonSendInvitation-${id}`
           button.classList.add('buttonSendInvitation')
@@ -448,7 +479,7 @@
           cellTd.appendChild(button);
           break;
         // eslint-disable-next-line no-case-declarations
-        case 8:
+        case 'actions':
           // eslint-disable-next-line no-case-declarations
           const buttonEdit = document.createElement('img');
           buttonEdit.setAttribute('src', 'images/icons/edit-contact-list.svg')
@@ -561,6 +592,7 @@
       imagePlus.id = 'imagePlus';
       const buttonInviteContact = document.createElement('button');
       buttonInviteContact.classList.add('buttonInviteContact');
+      buttonInviteContact.classList.add('disabled');
       buttonInviteContact.id = 'buttonInviteContact';
       buttonInviteContact.innerHTML = 'Teilen';
       buttonInviteContact.onclick = () => {
@@ -587,8 +619,11 @@
       divAdminToSend.id = 'AdminList';
 
       let selectedTab;
+      if(Object.keys(dataUsersToInvitate).length > 0){
+        buttonInviteContact.classList.remove('disabled');
+      }
       Object.keys(dataUsersToInvitate).forEach((element, index) => {
-        selectedTab = dataUsersToInvitate[element].position
+        selectedTab = dataUsersToInvitate[element].position;
       });
       if (selectedTab === 'kunde') {
         divAdminToSend.classList.add('hidden');
@@ -620,6 +655,9 @@
         removeUser.onclick = () => {
           document.getElementById('user' + id).remove();
           delete dataUsersToInvitate[id];
+          if(Object.keys(dataUsersToInvitate).length === 0){
+            buttonInviteContact.classList.add('disabled');
+          }
         }
         divInfo.appendChild(nameUser);
         divInfo.appendChild(breakLine)
@@ -697,10 +735,10 @@
 
       const divMainContentEdit = document.createElement('div');
       divMainContentEdit.className = 'divMainContentEdit divRemoveContact';
-      divMainContentEdit.innerHTML = 'Are you sure you want to remove this contact ? <br>'
+      divMainContentEdit.innerHTML = 'Sind Sie sicher, dass Sie diesen Kontakt entfernen möchten? <br>'
       const buttonRemoveContact = document.createElement('button');
       buttonRemoveContact.classList = 'marginTop20 buttonsModal';
-      buttonRemoveContact.innerText = 'Accept';
+      buttonRemoveContact.innerText = 'Entfernen';
       buttonRemoveContact.onclick = () => {
 
         const xmlData = prepareDataXml(xml)
@@ -1475,6 +1513,7 @@
     },
     closePanel(){
       document.getElementsByClassName('modal-importer')[0].remove();
+      dataUsersToInvitate = {};
     },
     showContactListPanel(){
       this.$('#modalContact').addClass('hidden');
@@ -1489,6 +1528,9 @@
       this.$('#modalSearchUsers').addClass('hidden');
       for (let i = 0; i < this.contactListXml.children.length; i++) {
         const contact = this.contactListXml.children.item(i);
+        if( Object.keys(dataUsersToInvitate).length > 0){
+          document.getElementById('buttonInviteContact').classList.remove('disabled');
+        }
         // eslint-disable-next-line no-loop-func
         Object.keys(dataUsersToInvitate).forEach((element) => {
           const id = dataUsersToInvitate[element].userid;
@@ -1511,6 +1553,10 @@
             removeUser.onclick = () => {
               document.getElementById('user' + id).remove();
               delete dataUsersToInvitate[id];
+              if( Object.keys(dataUsersToInvitate).length === 0){
+                document.getElementById('buttonInviteContact').classList.add('disabled');
+                
+              }
             }
             divInfo.appendChild(nameUser);
             divInfo.appendChild(breakLine)

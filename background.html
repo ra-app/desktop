@@ -117,14 +117,14 @@
       <div id= "headerContactTable">
           <div class="divPaginationContact">
             <span>Kontakte</span>
-            <p>Der Kunde / Admin wird vom Eigentümer vor der Aktivierung überprüft</p>
+            <p>Interne und externe Benutzer werden von der Verwaltung vor der Aktivierung überprüft.</p>
           </div>
           <div class="divSearchContact">
             <input id="search-table" type="text" placeholder="Suchen..">
             <button id='hinzufügen-button' class="buttonsSearchSection">Hinzufügen</button>
             <button id='import-button' class="buttonsSearchSection">Importieren</button>
             <input type='file' class='hidden' id='contact-import-file-input' accept='.xml'>
-            <button id='sendMultipleInvitations' class="buttonsSearchSection disabled" disabled>Einladungen Senden</button>
+            <button id='sendMultipleInvitations' class="buttonsSearchSection disabled" disabled>Einladungen senden</button>
             <button id='ferting-button' class="buttonsSearchSection">Fertig</button>
           </div>
       </div>
@@ -261,7 +261,7 @@
       <div class="mainDivUserSendInvitation" id="userSendList">
         
       </div>
-      <button class="buttonInviteContact" id="buttonInviteContact"> Teilen </button>
+      <button class="buttonInviteContact disabled" id="buttonInviteContact"> Teilen </button>
     </div>
 
 
@@ -693,7 +693,7 @@
               <input type='text' name='admin-signup-code' class='input-code' id='admin-company-code' />
               <label for='admin-signup-code' class="label-inputs code-label">{{companyCode}}</label>
             </div>
-            <a class='button' id='continue-setup-admin'>{{continueButton}}</a>
+            <a class='button disabled' id='continue-setup-admin'>{{continueButton}}</a>
           </div>
         </div>
       </div>
