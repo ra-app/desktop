@@ -2284,5 +2284,9 @@
   "messageImportContact": {
       "message": "Bitte beachten Sie, dass beim Kontaktimport Ihre bereits vorhandenen Kontakte überschrieben werden. Möchten Sie fortfahren?",
       "description": "Message to import new contact list"
+  },
+  "createGroup":{
+    "message": "Create group",
+    "description": "Create group menu item"
   }
 }
