@@ -215,11 +215,11 @@
         const divButtonsImport = document.createElement('div');
         divButtonsImport.className = 'divButtonsImport';
         const aceptButton = document.createElement('button');
-        aceptButton.innerHTML = 'Accept'
+        aceptButton.innerHTML = 'Weiter'
         aceptButton.id = 'acept-import-contact';
         aceptButton.className = 'buttonsModal';
         const cancelButton = document.createElement('button');
-        cancelButton.innerHTML = 'Cancel';
+        cancelButton.innerHTML = 'Abbrechen';
         cancelButton.id = 'cancel-import-contact';
         cancelButton.className = 'buttonsModal';
         cancelButton.style.marginLeft =  '10px';
