@@ -331,6 +331,7 @@
       }
     },
     async openTicket(id, messageId = null, resetCall = null, type ) {
+      console.log('open ticket', id, type);
       this.$('.conversation-stack').on(
         'scroll',
         _.debounce(this.onTicketScroll.bind(this), 100)
