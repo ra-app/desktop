@@ -181,11 +181,11 @@ export class MainHeader extends React.Component<Props> {
                   <img src="images/icons/broadcast_einladen_35x35.svg" className="imageLiChatMenu" alt="Create broadcast" />
                 </li>
                 <li onClick={this.importKundeBound}>
-                  <span>Users einladen</span>
+                  <span>Externe Nutzer einladen</span>
                   <img src="images/icons/user_einladen_35x35.svg" className="imageLiChatMenu" alt="Add user" />
                 </li>
                 <li onClick={this.importAdminBound}>
-                  <span>Admins einladen</span>
+                  <span>Interne Nutzer einladen</span>
                   <img src="images/icons/admin_einladen_35x35.svg" className="imageLiChatMenu" alt="Add admin" />
                 </li>
                 <li onClick={this.showContactsBound}>
