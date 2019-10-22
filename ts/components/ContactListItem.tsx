@@ -8,6 +8,7 @@ import { LocalizerType } from '../types/Util';
 
 interface Props {
   phoneNumber: string;
+  rawPhoneNumber?: string;
   isMe?: boolean;
   name?: string;
   color: string;
@@ -27,6 +28,7 @@ export class ContactListItem extends React.Component<Props> {
       name,
       phoneNumber,
       profileName,
+      rawPhoneNumber,
     } = this.props;
 
     return (
@@ -39,6 +41,7 @@ export class ContactListItem extends React.Component<Props> {
         phoneNumber={phoneNumber}
         profileName={profileName}
         size={48}
+        rawPhoneNumber={rawPhoneNumber}
       />
     );
   }
