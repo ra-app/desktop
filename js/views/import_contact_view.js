@@ -1126,7 +1126,7 @@
       // divUserPrev.innerHTML = '<img src="images/header-chat.png" /> '
       // divNutzer.appendChild(labelNutzer)
       // divNutzer.appendChild(divUserPrev)
-      
+
       const messageSpan = document.createElement('span');
       const buttonSaveChanges = document.createElement('button');
       buttonSaveChanges.classList = 'buttonSave buttonsModal disabled';
@@ -1212,6 +1212,7 @@
 
       this.$('#modalContact').append(divMainHeaderEdit);
       this.$('#modalContact').append(divMainContentEdit);
+      this.$('#addNameInput').focus();
     },
     activateButtonAddNewContact() {
       const name = this.$el.find('#addNameInput')[0].value.length;
