@@ -1660,7 +1660,7 @@
         "description": "Text for file upload input"
     },
     "noFileChosen": {
-        "message": "Keine datei ausgewählt",
+        "message": "Keine Datei ausgewählt",
         "description": "Text for no file chosen"
     },
     "invalidXML": {
