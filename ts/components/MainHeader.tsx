@@ -55,6 +55,7 @@ export class MainHeader extends React.Component<Props> {
   private readonly showContactsBound: () => void;
   private readonly importAdminBound: () => void;
   private readonly importKundeBound: () => void;
+  private readonly createGroupBound: () => void;
   private readonly inputRef: React.RefObject<HTMLInputElement>;
   private readonly debouncedSearch: (searchTerm: string) => void;
 
@@ -69,7 +70,7 @@ export class MainHeader extends React.Component<Props> {
     this.showContactsBound = this.showContacts.bind(this);
     this.importAdminBound = this.importAdmin.bind(this);
     this.importKundeBound = this.importKunde.bind(this);
-
+    this.createGroupBound = this.createGroup.bind(this);
     this.inputRef = React.createRef();
 
     this.debouncedSearch = debounce(this.search.bind(this), 20);
@@ -155,6 +156,12 @@ export class MainHeader extends React.Component<Props> {
     appView.openModalImport('kunde');
     this.setState({ openMenu: !this.state.openMenu })
   }
+
+  public createGroup() {
+    const { appView } = window['owsDesktopApp']
+    appView.openModalImport('allUsers');
+    this.setState({ openMenu: !this.state.openMenu })
+  }
   public render() {
     const {
       searchTerm,
@@ -178,6 +185,10 @@ export class MainHeader extends React.Component<Props> {
               <ul className="ulMenuChat">
                 <li>
                   <span>Broadcast erstellen</span>
+                  <img src="images/icons/broadcast_einladen_35x35.svg" className="imageLiChatMenu" alt="Create broadcast" />
+                </li>
+                <li onClick={this.createGroupBound}>
+                  <span>{i18n('createGroup')}</span>
                   <img src="images/icons/broadcast_einladen_35x35.svg" className="imageLiChatMenu" alt="Create broadcast" />
                 </li>
                 <li onClick={this.importKundeBound}>

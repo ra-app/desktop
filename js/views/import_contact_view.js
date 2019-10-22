@@ -1468,7 +1468,6 @@
     initialize(options) {
       if(options){
         if(options.contact_data !== undefined){
-
           this.contactListXml = prepareDataXml(options.contact_data);
           this.objectContact = []
           for (let i = 0; i < this.contactListXml.children.length; i++) {
@@ -1485,12 +1484,18 @@
           }
           console.log(options, "optionsssssssssssssssssssssssssssssssssssssssssssssssssss")
           this.type = options.type;
-          if ( options.type == 'kunde' ){
+          if ( options.type === 'kunde' ){
             this.typeAdmin = true;
             this.typeKunde = false;
-          }else if ( options.type == 'admin'){
+            this.isCreatingGroup = false;
+          }else if ( options.type === 'admin'){
             this.typeAdmin = false;
             this.typeKunde = true;
+            this.isCreatingGroup = false;
+          }else if ( options.type === 'allUsers'){
+            this.isCreatingGroup = true;
+            this.typeAdmin = false;
+            this.typeKunde = false;
           }
         }
       }
@@ -1503,6 +1508,7 @@
         typeAdmin: this.typeAdmin,
         typeKunde: this.typeKunde,
         objectContact: this.objectContact,
+        isCreatingGroup: this.isCreatingGroup,
       };
     },
     events: {
@@ -1512,6 +1518,7 @@
       'click #searchContactInvitation, #imagePlus': 'showContactListPanel',
       'click .contactListCheckbox': 'checkBoxevent',
       'click #buttonInviteContact': 'sendInvitations',
+      'click #buttonCreateGroup': 'createGroup',
     },
     closePanel(){
       document.getElementsByClassName('modal-importer')[0].remove();
@@ -1537,7 +1544,12 @@
       for (let i = 0; i < this.contactListXml.children.length; i++) {
         const contact = this.contactListXml.children.item(i);
         if( Object.keys(dataUsersToInvitate).length > 0){
-          document.getElementById('buttonInviteContact').classList.remove('disabled');
+          if ( document.getElementById('buttonInviteContact') ){
+            document.getElementById('buttonInviteContact').classList.remove('disabled');
+          }
+          if ( document.getElementById('buttonCreateGroup') ){
+            document.getElementById('buttonCreateGroup').classList.remove('disabled');
+          }
         }
         // eslint-disable-next-line no-loop-func
         Object.keys(dataUsersToInvitate).forEach((element) => {
@@ -1562,7 +1574,12 @@
               document.getElementById('user' + id).remove();
               delete dataUsersToInvitate[id];
               if( Object.keys(dataUsersToInvitate).length === 0){
-                document.getElementById('buttonInviteContact').classList.add('disabled');
+                if ( document.getElementById('buttonInviteContact') ){
+                  document.getElementById('buttonInviteContact').classList.add('disabled');
+                }
+                if ( document.getElementById('buttonCreateGroup') ){
+                  document.getElementById('buttonCreateGroup').classList.add('disabled');
+                }
                 
               }
             }
@@ -1576,6 +1593,18 @@
           }
         })
 
+      }
+    },
+    async createGroup(){
+      const usersForGroups = [];
+      const groupName = document.getElementById('textareaSendeInvitation').value;
+      Object.keys(dataUsersToInvitate).forEach((element) => {
+        usersForGroups.push(dataUsersToInvitate[element].userid);
+      })
+      if ( groupName !== '' ){
+        const conversation = await createGroup(groupName, usersForGroups);
+        document.getElementsByClassName('modal-importer')[0].remove();
+        dataUsersToInvitate = {};
       }
     },
     async sendInvitations(){
