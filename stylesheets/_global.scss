@@ -1096,7 +1096,7 @@ $debug: 0;
       // }
     }
     &.register {
-      height: 310px;
+      height: 350px;
       width: 100%;
       margin: 0px;
       max-width: unset;
@@ -1131,7 +1131,7 @@ $debug: 0;
       }
     }
     .empty-div {
-      height: 50px;
+      height: 86px;
       @media (min-width: 800px) and (max-width: 901px) {
         height: 87px;
       }
@@ -1707,6 +1707,7 @@ th.sorted.descending:after {
     position: relative;
     &.divModalInvitation{
       @include backgroudGradient();
+      text-align: center;
     }
     .titleHeaderEdit{
       margin: 0px;

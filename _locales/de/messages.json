@@ -1898,6 +1898,10 @@
           "message": "Close ticket",
           "description": "Chat menu close ticket"
       },
+      "noContactsImported":{
+        "message": "Sie haben keine Kontakte, bitte Kontaktliste importieren.",
+        "description": "No contacts imported"
+      },
       "messageImportContact": {
           "message": "Bitte beachten Sie, dass beim Kontaktimport Ihre bereits vorhandenen Kontakte überschrieben werden. Möchten Sie fortfahren?",
           "description": "Message to import new contact list"

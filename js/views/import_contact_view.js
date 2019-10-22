@@ -263,12 +263,12 @@
             checkbox.disabled = true;
           }
           checkbox.addEventListener('click', () => {
-            if (this.$('input:checkbox:checked').length > 1) {
+            if (this.$('input:checkbox:checked').length >= 1) {
               this.$('.buttonSendInvitation').addClass('disabled')
               this.$('.buttonSendInvitation').disabled = true;
               this.$('#sendMultipleInvitations').removeClass('disabled')
               this.$('#sendMultipleInvitations').prop('disabled', false)
-            } else if (this.$('input:checkbox:checked').length <= 1) {
+            } else if (this.$('input:checkbox:checked').length < 1) {
               this.$('.buttonSendInvitation:not(.none)').removeClass('disabled');
               this.$('.buttonSendInvitation:not(.none)').disabled = false;
               this.$('#sendMultipleInvitations').addClass('disabled');
@@ -545,6 +545,7 @@
       }
       const sendInvitationTitle = document.createElement('span');
       sendInvitationTitle.innerHTML = 'Benutzer einladen';
+      sendInvitationTitle.className = 'titleSendInvitation'
       const divMainContentEdit = document.createElement('div');
       divMainContentEdit.classList.add('mainInvitationDiv');
       divMainContentEdit.id = 'divMainContentEdit';
@@ -1276,6 +1277,7 @@
     },
     searchContact() {
       // filterAdmin
+      console.log('here !???? ')
       if (this.$('#filterAdmin').hasClass('active')) {
         activeRolToInvitate = 'admin'
       }
@@ -1516,12 +1518,18 @@
       dataUsersToInvitate = {};
     },
     showContactListPanel(){
+      if ( this.objectContact === undefined ){
+        this.$('#ptextNoContacts').innerText = i18n('noContactsImported');
+        this.$('#divNoContacts').removeClass('hidden')
+      }
       this.$('#modalContact').addClass('hidden');
       this.$('#modalSearchUsers').removeClass('hidden');
     },
     goBack(){
       this.$('#modalContact').removeClass('hidden');
       this.$('#modalSearchUsers').addClass('hidden');
+      this.$('#ptextNoContacts').innerText = '';
+      this.$('#divNoContacts').addClass('hidden')
     },
     sendDataToModal(){
       this.$('#modalContact').removeClass('hidden');
