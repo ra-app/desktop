@@ -48,6 +48,7 @@ img.ticket-user-image {
   width: 42px;
   margin-top: 0px;
   margin-left: 10px;
+  border-radius: 50%;
 }
 .container-ticket-info {
   padding: 13px 10px 10px 10px;
@@ -641,7 +642,18 @@ p.ticket-time {
     }
   }
 }
-
+.titleSendInvitation{
+  font-family: $poppins-semibold;
+  color: white;
+  font-size: 14px;
+  position: relative;
+  top: 15px;
+}
+#ptextNoContacts{
+  font-family: $poppins-semibold;
+  color: $color-raapp-text;
+  font-size: 14px;
+}
 tbody#myTable tr{
   text-align: center;
   background: white;

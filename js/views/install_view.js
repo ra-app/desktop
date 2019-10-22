@@ -47,6 +47,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       'click #continue-eula': 'onContinueEula',
       'click #continue-setup-company': 'onCompanySetup',
       'click #continue-setup-admin': 'onAdminSetup',
+      'keyup #admin-signup-code, #admin-company-code': 'activateButtonRegisterAdminClient',
       // 'validation #phone-number-value': 'onNumberValidation',
       'click #request-verify-call': 'onRequestVerifyCall',
       'click #request-verify-sms': 'onRequestVerifySMS',
@@ -648,7 +649,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       const thisElement = this;
       $.ajax({
         type: 'GET',
-        url: 'config/countries.json', // Using our resources.json file to serve results
+        url: 'config/countries_de.json', // Using our resources.json file to serve results
         success: result => {
           const countries = JSON.parse(result);
           countries.sort((a, b) => {
@@ -709,6 +710,16 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       const code = this.$el.find('#phone-verification-code')[0].value.length;
       const button = this.$el.find('#verify-phone-code');
       if (code > 0) {
+        button.removeClass('disabled');
+      } else {
+        button.addClass('disabled');
+      }
+    },
+    activateButtonRegisterAdminClient(){
+      const code = this.$el.find('#admin-signup-code')[0].value.length;
+      const Companycode = this.$el.find('#admin-company-code')[0].value.length;
+      const button = this.$el.find('#continue-setup-admin');
+      if(code > 0 && Companycode > 0){
         button.removeClass('disabled');
       } else {
         button.addClass('disabled');

@@ -407,6 +407,11 @@ const setCompanyAvatar = async (company, data) => {
   return (apiRequest('api/v1/admin/' + company + '/picture', data));
 };
 
+const closeTicket = async (company_id, ticket_uuid) => {
+  return (await apiRequest(
+    'api/v1/admin/' + company_id + '/tickets/close/' + ticket_uuid
+  )).phone_number;
+};
 
 const getClientAdminCompany = async number => {
   return (apiRequest('api/v1/admin/' + number + '/info'));
