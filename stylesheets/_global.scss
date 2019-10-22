@@ -1571,7 +1571,7 @@ $debug: 0;
     font-size: 14px;
     font-family: $poppins-regular;
     cursor: pointer;
-    text-transform: capitalize;
+    // text-transform: capitalize;
     &.true {
       background: #f5f5f5;
       cursor: default;
@@ -1739,6 +1739,15 @@ th.sorted.descending:after {
   }
   .buttonSave{
     float: right;
+  }
+  .messageModal{
+    text-align: center;
+    font-family: $poppins-regular;
+    margin-bottom: 15px;
+    padding: 20px;
+  }
+  .divButtonsImport{
+    text-align: center;
   }
   .buttonsModal{
     @include backgroudGradient();

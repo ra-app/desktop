@@ -63,8 +63,8 @@
       <!-- Navigation tabs -->
       <ul class="ulNavigationTickets">
         <li id="unclaimed" class="ticket-nav {{unclaimed}}">Nicht zugewiesen</li>
-        <li id="claimed" class="ticket-nav {{claimed}}">zugewiesen</li>
-        <li id="closed" class="ticket-nav {{closed}}">geschlossen</li>
+        <li id="claimed" class="ticket-nav {{claimed}}">Zugewiesen</li>
+        <li id="closed" class="ticket-nav {{closed}}">Geschlossen</li>
       </ul>
       <div class='container-ticket'>
           {{#hasTicket}}
@@ -117,14 +117,14 @@
       <div id= "headerContactTable">
           <div class="divPaginationContact">
             <span>Kontakte</span>
-            <p>Der Kunde / Admin wird vom Eigentümer vor der Aktivierung überprüft</p>
+            <p>Interne und externe Benutzer werden von der Verwaltung vor der Aktivierung überprüft.</p>
           </div>
           <div class="divSearchContact">
             <input id="search-table" type="text" placeholder="Suchen..">
             <button id='hinzufügen-button' class="buttonsSearchSection">Hinzufügen</button>
             <button id='import-button' class="buttonsSearchSection">Importieren</button>
             <input type='file' class='hidden' id='contact-import-file-input' accept='.xml'>
-            <button id='sendMultipleInvitations' class="buttonsSearchSection disabled" disabled>Einladungen Senden</button>
+            <button id='sendMultipleInvitations' class="buttonsSearchSection disabled" disabled>Einladungen senden</button>
             <button id='ferting-button' class="buttonsSearchSection">Fertig</button>
           </div>
       </div>
@@ -261,7 +261,7 @@
       <div class="mainDivUserSendInvitation" id="userSendList">
         
       </div>
-      <button class="buttonInviteContact" id="buttonInviteContact"> Teilen </button>
+      <button class="buttonInviteContact disabled" id="buttonInviteContact"> Teilen </button>
     </div>
 
 
@@ -696,7 +696,7 @@
               <input type='text' name='admin-signup-code' class='input-code' id='admin-company-code' />
               <label for='admin-signup-code' class="label-inputs code-label">{{companyCode}}</label>
             </div>
-            <a class='button' id='continue-setup-admin'>{{continueButton}}</a>
+            <a class='button disabled' id='continue-setup-admin'>{{continueButton}}</a>
           </div>
         </div>
       </div>
@@ -762,7 +762,7 @@
             <!-- <input type='text' id='company-name-input' class="inputsRegister" />
             <label for='company-name-input' class="label-text labelsInput">{{companyName}}</label> -->
 
-            <input type='text' id='tax-number-input' class="inputsRegister" />
+            <input type='text' id='tax-number-input' class="inputsRegister" autofocus />
             <label for='tax-number-input' class="label-text labelsInput">{{taxNumber}}</label>
 <!-- 
             <input type='text' id='tax-id-input' class="inputsRegister" />
@@ -918,7 +918,7 @@
               </div>
             </div>
             <div class="text-bankdetails">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus iaculis, turpis a gravida varius, mi massa fermentum velit, vitae euismod ante odio nec arcu.
+              Bitte tragen Sie hier die Bankdaten Ihres Unternehmens ein.
             </div>
             <a class='button disabled' id='bank-details-done'>{{continueButton}}</a>
             <div class='action-link'><a id='bank-details-skip'>{{notNow}}</a></div>

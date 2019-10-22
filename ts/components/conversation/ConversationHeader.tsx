@@ -39,6 +39,7 @@ interface Props {
   onSetDisappearingMessages: (seconds: number) => void;
   // onDeleteMessages: () => void;
   onResetSession: () => void;
+  closeTicket: () => void;
 
   onShowSafetyNumber: () => void;
   onShowAllMedia: () => void;
@@ -201,6 +202,7 @@ export class ConversationHeader extends React.Component<Props> {
       // isGroup,
       isArchived,
       // onDeleteMessages,
+      closeTicket,
       // onResetSession,
       // onSetDisappearingMessages,
       // onShowAllMedia,
@@ -260,7 +262,7 @@ export class ConversationHeader extends React.Component<Props> {
         ) : null} */}
         {!isCompany ? (
           <MenuItem>
-            {i18n('closeTicket')}
+            <MenuItem onClick={closeTicket}>{i18n('closeTicket')}</MenuItem>
           </MenuItem>
         ) : null}
       </ContextMenu>

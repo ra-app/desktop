@@ -418,6 +418,13 @@
             this.unload('archive');
             this.model.setArchived(true);
           },
+          closeTicket: async () => {
+            const uuid = this.model.attributes.ticket_uuid;
+            const company_id = this.model.attributes.company_id;
+             closeTicket(company_id, uuid);
+             this.unload('archive');
+             this.model.setArchived(true);
+          },
           onMoveToInbox: () => {
             this.model.setArchived(false);
           },
