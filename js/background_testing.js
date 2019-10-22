@@ -204,10 +204,10 @@ const ensureCompanyConversation = async company_id => {
     }
   );
 
-  const welcomeText = `(${company_id})  Welcome to ${
-    companyInfo.name
-  } support chat.`;
-  await receiveCompanyText(company_id, welcomeText);
+  // const welcomeText = `(${company_id})  Welcome to ${
+  //   companyInfo.name
+  // } support chat.`;
+  // await receiveCompanyText(company_id, welcomeText);
 };
 
 const ensureConversation = async phone_number => {
