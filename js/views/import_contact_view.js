@@ -732,10 +732,10 @@
 
       const divMainContentEdit = document.createElement('div');
       divMainContentEdit.className = 'divMainContentEdit divRemoveContact';
-      divMainContentEdit.innerHTML = 'Are you sure you want to remove this contact ? <br>'
+      divMainContentEdit.innerHTML = 'Sind Sie sicher, dass Sie diesen Kontakt entfernen möchten? <br>'
       const buttonRemoveContact = document.createElement('button');
       buttonRemoveContact.classList = 'marginTop20 buttonsModal';
-      buttonRemoveContact.innerText = 'Accept';
+      buttonRemoveContact.innerText = 'Entfernen';
       buttonRemoveContact.onclick = () => {
 
         const xmlData = prepareDataXml(xml)
