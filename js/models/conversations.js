@@ -325,6 +325,7 @@
         id: this.id,
 
         isArchived: this.get('isArchived'),
+        isClosed: this.get('isClosed'),
         activeAt: this.get('active_at'),
         avatarPath: this.getAvatarPath(),
         color,
@@ -975,6 +976,7 @@
           active_at: now,
           timestamp: now,
           isArchived: false,
+          isClosed: false,
         });
         await window.Signal.Data.updateConversation(this.id, this.attributes, {
           Conversation: Whisper.Conversation,
@@ -1273,6 +1275,12 @@
 
     async setArchived(isArchived) {
       this.set({ isArchived });
+      await window.Signal.Data.updateConversation(this.id, this.attributes, {
+        Conversation: Whisper.Conversation,
+      });
+    },
+    async setClosed(isClosed) {
+      this.set({ isClosed });
       await window.Signal.Data.updateConversation(this.id, this.attributes, {
         Conversation: Whisper.Conversation,
       });

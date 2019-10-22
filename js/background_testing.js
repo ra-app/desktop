@@ -26,9 +26,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // await addAllCompanies();
 
-  setInterval(() => {
-    createDeveloperInterface();
-  }, 1000);
+  // setInterval(() => {
+  //   createDeveloperInterface();
+  // }, 1000);
 
   // testGroup();
 
@@ -206,10 +206,10 @@ const ensureCompanyConversation = async company_id => {
     }
   );
 
-  const welcomeText = `(${company_id})  Welcome to ${
-    companyInfo.name
-  } support chat.`;
-  await receiveCompanyText(company_id, welcomeText);
+  // const welcomeText = `(${company_id})  Welcome to ${
+  //   companyInfo.name
+  // } support chat.`;
+  // await receiveCompanyText(company_id, welcomeText);
 };
 
 const ensureConversation = async phone_number => {
@@ -503,6 +503,13 @@ const devToaster = msg => {
   setTimeout(() => {
     document.body.removeChild(toaster);
   }, 5000);
+};
+
+const removeDeveloperInterface = () => {
+  const existingPanel = document.getElementById('devPanel');
+  if (!existingPanel) return;
+  // existingPanel.remove();
+  existingPanel.parentNode.removeChild(existingPanel);
 };
 
 const createDeveloperInterface = () => {

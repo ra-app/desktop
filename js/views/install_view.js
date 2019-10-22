@@ -211,7 +211,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
           // const client_uuid = await textsecure.storage.get('client_uuid', null);
           
       
-          if (avatarInfo) {
+          if (avatarInfo && role) {
             const dataAvatar = { data: avatarInfo.userAvatar, type: avatarInfo.userAvatarType }
             if(role === 'user'){
               await setClientAvatar(dataAvatar);
@@ -221,10 +221,6 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
           }
           const data = {
             name:  userSetupInfo.name,
-          }
-          if (avatarInfo) {
-            const dataAvatar = { data: avatarInfo.userAvatar, type: avatarInfo.userAvatarType }
-            await setAdminAvatar(codeCompany, dataAvatar);
           }
           await updateClient(data)
           await ensureCompanyConversation(codeCompany);
@@ -422,7 +418,6 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
             const codeCompany = textsecure.storage.get('codeCompany', false);
             const codeInvitation = textsecure.storage.get('codeInvitation', false);
             const company= await checkCodeInvitation(codeCompany, codeInvitation);
-            console.log(company, "companyyyyyyyyyyyyyyyyyyyyyyyyyyyyy")
              textsecure.storage.put('companyNumber', company.company.company_number);
              textsecure.storage.put('role', company.role);
             //  textsecure.storage.put('client_uuid', company.client_uuid);
@@ -717,9 +712,9 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
     },
     activateButtonRegisterAdminClient(){
       const code = this.$el.find('#admin-signup-code')[0].value.length;
-      const Companycode = this.$el.find('#admin-company-code')[0].value.length;
+      // const Companycode = this.$el.find('#admin-company-code')[0].value.length;
       const button = this.$el.find('#continue-setup-admin');
-      if(code > 0 && Companycode > 0){
+      if(code > 0){
         button.removeClass('disabled');
       } else {
         button.addClass('disabled');
