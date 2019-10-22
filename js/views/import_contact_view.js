@@ -56,7 +56,7 @@
       const table = document.createElement('table');
       table.className = 'sortable';
 
-      const headerTexts = {'#':'#', 'name':'name', 'surname':'Nachname', 'position':'position', 'email':'E-Mail', 'type':'kunde/admin', 'status':'Einladungsstatus', 'profile':'Profil', 'actions':'Aktion'};
+      const headerTexts = {'#':'#', 'name':'name', 'surname':'Nachname', 'position':'position', 'email':'E-Mail', 'type':'Extern/Intern', 'status':'Einladungsstatus', 'profile':'Profil', 'actions':'Aktion'};
       console.log('HEADEEEEE',headerTexts, headerTexts[0]);
       if (table) {
         const header = table.createTHead();
