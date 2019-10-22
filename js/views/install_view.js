@@ -415,9 +415,9 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
         .registerSingleDevice(number, code)
         .then(async () => {
           if(this.setupType == 'admin'){
-            const codeCompany = textsecure.storage.get('codeCompany', false);
+            // const codeCompany = textsecure.storage.get('codeCompany', false);
             const codeInvitation = textsecure.storage.get('codeInvitation', false);
-            const company= await checkCodeInvitation(codeCompany, codeInvitation);
+            const company= await checkCodeInvitation(codeInvitation);
              textsecure.storage.put('companyNumber', company.company.company_number);
              textsecure.storage.put('role', company.role);
             //  textsecure.storage.put('client_uuid', company.client_uuid);

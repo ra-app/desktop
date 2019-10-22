@@ -423,8 +423,8 @@ const createInvitation = async (company_id, data) => {
   return (await apiRequest('api/v1/admin/' + company_id + '/invites/create', data)).inviteInfo;
 };
 
-const checkCodeInvitation = async (company_id, code) => {
-  return (apiRequest('api/v1/companies/code/' + company_id + '/'+ code));
+const checkCodeInvitation = async (code) => {
+  return (apiRequest('api/v1/companies/code/'+ code));
 };
 
 const sendSms = async (company_id, data) => {
