@@ -1707,6 +1707,7 @@ th.sorted.descending:after {
     position: relative;
     &.divModalInvitation{
       @include backgroudGradient();
+      text-align: center;
     }
     .titleHeaderEdit{
       margin: 0px;

@@ -545,6 +545,7 @@
       }
       const sendInvitationTitle = document.createElement('span');
       sendInvitationTitle.innerHTML = 'Benutzer einladen';
+      sendInvitationTitle.className = 'titleSendInvitation'
       const divMainContentEdit = document.createElement('div');
       divMainContentEdit.classList.add('mainInvitationDiv');
       divMainContentEdit.id = 'divMainContentEdit';
