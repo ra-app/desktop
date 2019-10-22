@@ -56,7 +56,7 @@
       const table = document.createElement('table');
       table.className = 'sortable';
 
-      const headerTexts = ['#', 'name', 'Nachname', 'position', 'E-Mail', 'kunde/admin', 'Change to Einladungsstatus', 'Profil', 'Aktion'];
+      const headerTexts = ['#', 'name', 'Nachname', 'position', 'E-Mail', 'kunde/admin', 'Einladungsstatus', 'Profil', 'Aktion'];
       if (table) {
         const header = table.createTHead();
         const row = header.insertRow();
