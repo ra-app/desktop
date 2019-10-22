@@ -512,6 +512,8 @@
         dataUsersToInvitate = {};
         this.closeModal();
       }
+      const sendInvitationTitle = document.createElement('span');
+      sendInvitationTitle.innerHTML = 'Benutzer einladen';
       const divMainContentEdit = document.createElement('div');
       divMainContentEdit.classList.add('mainInvitationDiv');
       divMainContentEdit.id = 'divMainContentEdit';
@@ -638,6 +640,7 @@
       divMainContentEdit.appendChild(inputSelect);
       divMainContentEdit.appendChild(imagePlus);
       divMainHeaderEdit.appendChild(imageClosePanel);
+      divMainHeaderEdit.appendChild(sendInvitationTitle);
       this.$('#modalContact').append(divMainHeaderEdit);
       this.$('#modalContact').append(divMainContentEdit);
       // this.$('#modalContact').append(sortTab);
