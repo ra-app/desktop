@@ -1471,6 +1471,7 @@
     },
     closePanel(){
       document.getElementsByClassName('modal-importer')[0].remove();
+      dataUsersToInvitate = {};
     },
     showContactListPanel(){
       this.$('#modalContact').addClass('hidden');
