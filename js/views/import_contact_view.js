@@ -567,6 +567,7 @@
       imagePlus.id = 'imagePlus';
       const buttonInviteContact = document.createElement('button');
       buttonInviteContact.classList.add('buttonInviteContact');
+      buttonInviteContact.classList.add('disabled');
       buttonInviteContact.id = 'buttonInviteContact';
       buttonInviteContact.innerHTML = 'Teilen';
       buttonInviteContact.onclick = () => {
@@ -593,8 +594,11 @@
       divAdminToSend.id = 'AdminList';
 
       let selectedTab;
+      if(Object.keys(dataUsersToInvitate).length > 0){
+        buttonInviteContact.classList.remove('disabled');
+      }
       Object.keys(dataUsersToInvitate).forEach((element, index) => {
-        selectedTab = dataUsersToInvitate[element].position
+        selectedTab = dataUsersToInvitate[element].position;
       });
       if (selectedTab === 'kunde') {
         divAdminToSend.classList.add('hidden');
@@ -626,6 +630,9 @@
         removeUser.onclick = () => {
           document.getElementById('user' + id).remove();
           delete dataUsersToInvitate[id];
+          if(Object.keys(dataUsersToInvitate).length === 0){
+            buttonInviteContact.classList.add('disabled');
+          }
         }
         divInfo.appendChild(nameUser);
         divInfo.appendChild(breakLine)
@@ -1495,6 +1502,9 @@
       this.$('#modalSearchUsers').addClass('hidden');
       for (let i = 0; i < this.contactListXml.children.length; i++) {
         const contact = this.contactListXml.children.item(i);
+        if( Object.keys(dataUsersToInvitate).length > 0){
+          document.getElementById('buttonInviteContact').classList.remove('disabled');
+        }
         // eslint-disable-next-line no-loop-func
         Object.keys(dataUsersToInvitate).forEach((element) => {
           const id = dataUsersToInvitate[element].userid;
@@ -1517,6 +1527,10 @@
             removeUser.onclick = () => {
               document.getElementById('user' + id).remove();
               delete dataUsersToInvitate[id];
+              if( Object.keys(dataUsersToInvitate).length === 0){
+                document.getElementById('buttonInviteContact').classList.add('disabled');
+                
+              }
             }
             divInfo.appendChild(nameUser);
             divInfo.appendChild(breakLine)
