@@ -1040,7 +1040,7 @@
         "description": "Header of the full-screen delete data confirmation screen"
     },
     "deleteAllDataBody": {
-        "message": "Du bist dabei, alle gespeicherten Benutzerkontoinformationen dieser Anwendung zu löschen, einschließlich aller Kontakte und Nachrichten. Du kannst OfficeApp Desktop jederzeit wieder mit deinem Mobilgerät koppeln, dies wird aber gelöschte Nachrichten nicht wiederherstellen.",
+        "message": "Sind Sie sicher, dass alle gespeicherten Benutzerkontoinformationen dieser Anwendung, einschließlich aller Kontakte und Nachrichten, gelöscht werden sollen? Sie können OfficeApp-Desktop jederzeit wieder mit einem Mobilgerät koppeln, dies wird aber gelöschte Nachrichten nicht wiederherstellen.",
         "description": "Text describing what exactly will happen if the user clicks the button to delete all data"
     },
     "deleteAllDataButton": {
@@ -1540,7 +1540,7 @@
         "description": "Header for company registration"
     },
     "registerAdmin": {
-        "message": "Adminsregistrierung",
+        "message": "Registrierung mit SMS-Einladung",
         "description": "Header for admin registration"
     },
     "welcomeCompany": {
@@ -1548,7 +1548,7 @@
         "description": "Description for registering company"
     },
     "welcomeAdmin": {
-        "message": "Willkommen in der OfficeApp. Bitte fügen Sie hier Ihren Code ein.",
+        "message": "Willkommen in der OfficeApp. Bitte fügen Sie hier Ihren Einladungscode ein.",
         "description": "Description for registering admin"
     },
     "continueButton": {
@@ -1556,11 +1556,11 @@
         "description": "Button label for continuing to next step"
     },
     "signupCode": {
-        "message": "Code",
+        "message": "Einladungscode",
         "description": "Label for signup code input"
     },
     "companyCode": {
-        "message": "Buchungskreis",
+        "message": "Firmennummer",
         "description": "Label for signup Buchungskreis input"
     },
     "phoneSetupTitle": {
