@@ -649,7 +649,7 @@ Donec pellentesque sapien nec congue aliquam. Maecenas auctor dictum massa, in f
       const thisElement = this;
       $.ajax({
         type: 'GET',
-        url: 'config/countries.json', // Using our resources.json file to serve results
+        url: 'config/countries_de.json', // Using our resources.json file to serve results
         success: result => {
           const countries = JSON.parse(result);
           countries.sort((a, b) => {
