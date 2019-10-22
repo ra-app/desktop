@@ -1268,21 +1268,21 @@
       buttonAll.onclick = () => {
         this.filterTab('Alle')
       }
-      buttonAdmin.className = 'tablinks';
-      buttonAdmin.innerHTML = 'Admin';
-      buttonAdmin.id = 'filterAdmin';
-      buttonAdmin.onclick = () => {
-        this.filterTab('Admin')
-      }
-      buttonUsers.className = 'tablinks';
-      buttonUsers.innerHTML = 'Users';
-      buttonUsers.id = 'filterUsers';
-      buttonUsers.onclick = () => {
-        this.filterTab('Users')
-      }
+      // buttonAdmin.className = 'tablinks';
+      // buttonAdmin.innerHTML = 'Admin';
+      // buttonAdmin.id = 'filterAdmin';
+      // buttonAdmin.onclick = () => {
+      //   this.filterTab('Admin')
+      // }
+      // buttonUsers.className = 'tablinks';
+      // buttonUsers.innerHTML = 'Users';
+      // buttonUsers.id = 'filterUsers';
+      // buttonUsers.onclick = () => {
+      //   this.filterTab('Users')
+      // }
       searchTab.append(buttonAll);
-      searchTab.append(buttonAdmin);
-      searchTab.append(buttonUsers);
+      // searchTab.append(buttonAdmin);
+      // searchTab.append(buttonUsers);
       this.getSearchContact();
     },
     filterTab(filter) {
