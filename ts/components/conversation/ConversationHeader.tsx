@@ -30,6 +30,7 @@ interface Props {
   isMe: boolean;
   isGroup: boolean;
   isArchived: boolean;
+  isClosed: boolean;
   isCompany: boolean;
 
   expirationSettingName?: string;
@@ -201,6 +202,7 @@ export class ConversationHeader extends React.Component<Props> {
       // isMe,
       // isGroup,
       isArchived,
+      isClosed,
       // onDeleteMessages,
       closeTicket,
       // onResetSession,
@@ -260,7 +262,7 @@ export class ConversationHeader extends React.Component<Props> {
             {i18n('deleteMessages')}
           </MenuItem>
         ) : null} */}
-        {!isCompany ? (
+        {!isCompany && !isClosed ? (
           <MenuItem>
             <MenuItem onClick={closeTicket}>{i18n('closeTicket')}</MenuItem>
           </MenuItem>

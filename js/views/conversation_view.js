@@ -382,6 +382,7 @@
           isMe: this.model.isMe(),
           isGroup: this.model.isGroup(),
           isArchived: this.model.get('isArchived'),
+          isClosed: this.model.get('isClosed'),
           isCompany: this.model.isCompany(),
 
           expirationSettingName,
@@ -424,6 +425,7 @@
              closeTicket(company_id, uuid);
              this.unload('archive');
              this.model.setArchived(true);
+             this.model.setClosed(true);
           },
           onMoveToInbox: () => {
             this.model.setArchived(false);
