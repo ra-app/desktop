@@ -1497,6 +1497,7 @@
             this.typeAdmin = false;
             this.typeKunde = false;
           }
+          
         }
       }
       this.render();
