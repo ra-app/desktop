@@ -49,7 +49,7 @@
     createEmptyMessage() {
       const divNoContacts = document.createElement('div');
       divNoContacts.className = 'divNoContacts';
-      divNoContacts.innerText = 'Sie haben keine importierten Kontakte.'
+      divNoContacts.innerText = 'Keine Kontakte.'
       this.$('#contactTable').append(divNoContacts)
     },
     createTable(contactListXml) {
