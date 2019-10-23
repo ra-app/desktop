@@ -247,7 +247,7 @@
       </div>
       <div class="mainInvitationDiv" id="divMainContentEdit">
         {{ #isCreatingGroup }}
-        <textarea class="textareaSendeInvitation" id="textareaSendeInvitation" placeholder="Group name"/>
+        <textarea class="textareaSendeInvitation" id="textareaSendeInvitation" placeholder="Gruppenname"/>
         {{ /isCreatingGroup }}
         {{ #typeKunde }}
           <textarea class="textareaSendeInvitation" id="textareaSendeInvitation" placeholder="Lass uns mit OfficeApp kommunizieren: https://oaapp.link/1kepeYmFp" />
@@ -269,8 +269,8 @@
         <img src="images/icons/icon-picture-add-200.svg" class="imagePlus" id="imagePlus" />
       </div>
       <div class="mainDivUserSendInvitation" id="userSendList">
-        
       </div>
+      <div class="errorMessageModal" id = 'errorMessage'></div>
       {{ #typeKunde }}
         <button class="buttonInviteContact disabled" id="buttonInviteContact"> Teilen </button>
       {{ /typeKunde }}
@@ -278,7 +278,7 @@
         <button class="buttonInviteContact disabled" id="buttonInviteContact"> Teilen </button>
       {{ /typeAdmin }}
       {{ #isCreatingGroup }}
-        <button class="buttonInviteContact disabled" id="buttonCreateGroup"> Create group </button>
+        <button class="buttonInviteContact disabled" id="buttonCreateGroup"> Gruppe erstellen </button>
       {{ /isCreatingGroup}}
     </div>
 
