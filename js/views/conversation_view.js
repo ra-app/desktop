@@ -430,8 +430,9 @@
           closeTicket: async () => {
             const uuid = this.model.attributes.ticket_uuid;
             const company_id = this.model.attributes.company_id;
-             closeTicket(company_id, uuid);
-             const message = '[![TICKETMSG]!] This ticket has been closed';
+            await closeTicket(company_id, uuid) + '';
+            const conversation = this.model.messageCollection.conversation;
+            const message = '[![TICKETMSG]!] This ticket has been closed';
              conversation.sendMessage(message);
             //  this.unload('archive');
             //  this.model.setArchived(true);
