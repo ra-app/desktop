@@ -1492,7 +1492,6 @@
             }
             this.objectContact.push(tmpObj)
           }
-          console.log(options, "optionsssssssssssssssssssssssssssssssssssssssssssssssssss")
           this.type = options.type;
           if ( options.type === 'kunde' ){
             this.typeAdmin = true;
@@ -1626,9 +1625,11 @@
     async createGroup(){
       const usersForGroups = [];
       const groupName = document.getElementById('textareaSendeInvitation').value;
+      const myNumber = textsecure.storage.user.getNumber()
       Object.keys(dataUsersToInvitate).forEach((element) => {
         usersForGroups.push(dataUsersToInvitate[element].userid);
       })
+      usersForGroups.push(myNumber);
       if ( groupName !== '' ){
         const company = await getCompany(textsecure.storage.get('companyNumber', null))
         await createGroup(`${company.name} - ${groupName}`, usersForGroups);
