@@ -1520,6 +1520,7 @@
       'click .contactListCheckbox': 'checkBoxevent',
       'click #buttonInviteContact': 'sendInvitations',
       'click #buttonCreateGroup': 'createGroup',
+      'keyup #textareaSendeInvitation': 'enableCreateGroup',
     },
     closePanel(){
       document.getElementsByClassName('modal-importer')[0].remove();
@@ -1607,6 +1608,10 @@
         await createGroup(`${company.name} - ${groupName}`, usersForGroups);
         document.getElementsByClassName('modal-importer')[0].remove();
         dataUsersToInvitate = {};
+      }else {
+        const message = 'Bitte Gruppenname eingeben';
+        this.$('#errorMessage').html('')
+        this.$('#errorMessage').append(message);
       }
     },
     async sendInvitations(){

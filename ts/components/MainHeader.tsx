@@ -188,7 +188,7 @@ export class MainHeader extends React.Component<Props> {
                   <img src="images/icons/broadcast_einladen_35x35.svg" className="imageLiChatMenu" alt="Create broadcast" />
                 </li>
                 <li onClick={this.createGroupBound}>
-                  <span>{i18n('createGroup')}</span>
+                  <span>Gruppe erstellen</span>
                   <img src="images/icons/broadcast_einladen_35x35.svg" className="imageLiChatMenu" alt="Create broadcast" />
                 </li>
                 <li onClick={this.importKundeBound}>
