@@ -572,7 +572,7 @@
         this.filterTab('Admin')
       }
       buttonUsers.className = 'tablinks';
-      buttonUsers.innerHTML = 'Users';
+      buttonUsers.innerHTML = 'Extern';
       buttonUsers.id = 'filterUsers';
       buttonUsers.onclick = () => {
         this.filterTab('Users')
