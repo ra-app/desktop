@@ -1292,7 +1292,7 @@
       const searchInput = document.createElement('input');
       searchInput.id = 'searchInput';
       searchInput.className = 'searchInput';
-      searchInput.placeholder = 'find';
+      searchInput.placeholder = i18n('search')
       searchInput.type = 'text';
       headerSearch.appendChild(searchInput)
       this.$('#divMainContentEdit').append(headerSearch);
