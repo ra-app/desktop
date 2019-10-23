@@ -84,17 +84,20 @@
     className: 'tickets-view',
     template: $('#tickets-view').html(),
     render_attributes() {
-      console.log(this.model, "modellllllll")
       if (this.model[0].hasTicket) {
         return {
           'send-message': i18n('sendMessage'),
           model: this.model,
           title: this.model[0].company_name,
           hasTicket: this.model[0].hasTicket,
-          claimed: this.model[0].isClaimed,
+          claimed: this.model[0].isClaimed ,
           unclaimed: this.model[0].isUnclaimed,
           closed: this.model[0].isClosed,
         };
+      }else{
+        if ( !this.model[0].hasTicket && !this.model[0].isClaimed && !this.model[0].isUnclaimed && !this.model[0].isClosed){
+          this.model[0].isUnclaimed = true;
+        }
       }
       return {
         'send-message': i18n('sendMessage'),
