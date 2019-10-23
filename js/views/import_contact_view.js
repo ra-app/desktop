@@ -262,6 +262,9 @@
           if (userType === 'none') {
             checkbox.disabled = true;
           }
+          if (hasInvitation.found && hasInvitation.accepted) {
+            checkbox.disabled = true;
+          }
           checkbox.addEventListener('click', () => {
             if (this.$('input:checkbox:checked').length >= 1) {
               this.$('.buttonSendInvitation').addClass('disabled')
@@ -356,7 +359,14 @@
           const spanSwitchAdmin = document.createElement('span');
           spanSwitchAdmin.className = 'spanSwitch admin';
           spanSwitchAdmin.innerText = 'Intern';
-
+          if (hasInvitation.found && hasInvitation.accepted) {
+            inputAdmin.setAttribute('disabled', true)
+            inputNone.setAttribute('disabled', true)
+            inputKunde.setAttribute('disabled', true)
+            inputKunde.disabled = true;
+            inputAdmin.disabled = true;
+            inputNone.disabled = true;
+          }
 
           divSwitch.appendChild(inputKunde);
           divSwitch.appendChild(labelKunde);
