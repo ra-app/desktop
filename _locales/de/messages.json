@@ -1895,7 +1895,7 @@
         "description":"Upload user avatar"
       },
       "closeTicket":{
-          "message": "Close ticket",
+          "message": "Ticket schließen",
           "description": "Chat menu close ticket"
       },
       "noContactsImported":{
