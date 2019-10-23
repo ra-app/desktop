@@ -562,7 +562,7 @@
       const textarea = document.createElement('textarea');
       textarea.className = 'textareaSendeInvitation';
       textarea.id = 'textareaSendeInvitation'
-      textarea.placeholder = 'Lass uns mit OfficeApp kommunizieren: https://oaapp.link/1kepeYmFp';
+      textarea.placeholder = 'Lass uns mit OfficeApp kommunizieren: http://officeapp.eu';
 
       const searchTab = document.createElement('div');
       searchTab.className = 'tab';
