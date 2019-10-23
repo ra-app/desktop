@@ -288,6 +288,7 @@
           <img src="images/icons/back_24x24.svg" class="imageGoBack" id="imageGoBack">
           <img src="images/icons/check_over_blue_24x24.svg" class="imageClosePanel" id="imageSendInvitation">
         </div>
+        <input type='text' id='searchInput' class='searchInput' placeholder='{{searchPlaceholder}}' />
         <div class="divNoContacts hidden" id="divNoContacts">
             <p id="ptextNoContacts"></p>
         </div>
@@ -302,7 +303,7 @@
           {{ /typeKunde }}
           </div>
         </div> -->
-        <div class="mainDivUserSendInvitation">
+        <div class="mainDivUserSendInvitation" id='mainDivUserSendInvitation'>
             {{ #objectContact }}
               <div class="userInvitation">
                 <img src="images/header-chat.png" />
