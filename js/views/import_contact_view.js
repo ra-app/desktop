@@ -307,6 +307,7 @@
         }
         // eslint-disable-next-line no-case-declarations
         case 'type':
+          console.log(userType, "usertypeeeeeeeeeeeeeeeeee")
           const spanSwitchKunde = document.createElement('span');
           spanSwitchKunde.className = 'spanSwitch';
           spanSwitchKunde.innerText = 'Extern';
@@ -702,6 +703,7 @@
       await parallel(1, Object.keys(dataUsersToInvitate), async (element) => {
         const id = dataUsersToInvitate[element].userid;
         const type = dataUsersToInvitate[element].position;
+        console.log(type, )
         const companyNumber = textsecure.storage.get('companyNumber', null);
         let data = {};
         if (type === 'admin') {
@@ -723,6 +725,14 @@
         sendSms(companyNumber, dataSms)
 
         document.getElementById(`buttonSendInvitation-${id}`).innerText = i18n('sendAgainInvitation')
+        if(type === 'admin'){
+          document.getElementById(`admin-${id}`).checkeds = true;
+          document.getElementById(`admin-${id}`).setAttribute('checked', 'checked')
+        }
+        if (type === 'kunde') {
+          document.getElementById(`kunde-${id}`).checked = true;
+          document.getElementById(`kunde-${id}`).setAttribute('checked', 'checked')
+        }
       })
       dataUsersToInvitate = {};
       this.closeModal();
