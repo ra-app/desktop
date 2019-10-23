@@ -1528,7 +1528,9 @@
     },
     showContactListPanel(){
       if ( this.objectContact === undefined ){
-        this.$('#ptextNoContacts').innerText = i18n('noContactsImported');
+        // this.$('#ptextNoContacts').html = i18n('noContactsImported');
+        document.getElementById('ptextNoContacts').innerHTML = '';
+        document.getElementById('ptextNoContacts').innerHTML = i18n('noContactsImported')
         this.$('#divNoContacts').removeClass('hidden')
       }
       this.$('#modalContact').addClass('hidden');
