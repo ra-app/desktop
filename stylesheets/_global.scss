@@ -2020,6 +2020,33 @@ button, input{
     font-size: 13px;
   }
 }
+
+.searchInput{
+  height: 28px;
+  box-shadow: 0px 3px 6px #00000029;
+  border-radius: 19px;
+  opacity: 1;
+  color: $color-input-chat;
+  width: calc(100% - 20px);
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 14px;
+  border: solid 1px $color-gray-15;
+  margin-top: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+  color: $color-gray-90;
+  font-size: 14px;
+
+  &::placeholder {
+    color: $color-input-chat;
+  }
+
+  &:focus {
+    border: solid 1px blue;
+    outline: none;
+  }
+}
 .textareaSendeInvitation{
   resize: none;
   width: 100%;
