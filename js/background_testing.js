@@ -22,6 +22,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     createDeveloperInterface();
   }, 1000);
 
+  // await testGroup();
+
   // await testProfile();
 });
 
@@ -44,6 +46,8 @@ async function testProfile() {
     await encryptProfile(pictureBuffer)
   );
   // console.log('putToCDN', r);
+
+  
 
   // const enc = await encryptProfileName("TEST");
   // console.log("ENCRYPT", enc);
@@ -228,6 +232,51 @@ const ensureConversation = async phone_number => {
   );
 };
 
+const createGroup = async (name, members) => {
+  await waitForConversationController();
+  console.log('createGroup', members);
+
+  // const id = members.join('_');
+  const id = '' + Date.now();
+  name = name;
+
+  // let conversation = await ConversationController.get(id, 'group');
+  // if (conversation && conversation.get('active_at')) {
+  //   console.log('createGroup existing', conversation);
+  //   // return conversation;
+  // }
+
+  let conversation = await ConversationController.getOrCreateAndWait(id, 'group');
+
+  conversation.set({
+    id, name, active_at: Date.now(), members, type: 'group', avatar: false, // left: false, color: 'blue',
+  });
+  console.log('createGroup new', id, conversation);
+
+  await window.Signal.Data.updateConversation(
+    id,
+    conversation.attributes,
+    {
+      Conversation: Whisper.Conversation,
+    }
+  );
+  
+  // const r = await conversation.updateGroup(); // { name, members }
+  // console.log('CreateGroup updategroup', r);
+
+  const options = conversation.getSendOptions();
+  const r2 = await textsecure.messaging.setGroupName(id, name, members, options);
+  console.log('createGroup createGroup', r2);
+
+  return conversation;
+};
+
+const testGroup = async () => {
+  const members = ['+34666666667', '+34664695919', getOwnNumber()];
+  const conversation = await createGroup('argh-', members);
+  console.log('TestGroup', conversation);
+};
+
 // Crutch to ensure conversations controller is ready.
 const waitForConversationController = () => {
   const initialPromise = ConversationController.loadPromise();
@@ -294,6 +343,10 @@ const getAuth = async () => {
   console.log('getAuth', USERNAME, PASSWORD);
   const auth = btoa(`${USERNAME}:${PASSWORD}`);
   return `Basic ${auth}`;
+};
+
+const getOwnNumber = () => {
+  return window.storage.get('number_id').split('.')[0];
 };
 
 const apiRequest = async (call, data = undefined) => {
