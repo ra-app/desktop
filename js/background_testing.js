@@ -1010,3 +1010,54 @@ const draggableHelper = (
   window.addEventListener('resize', animFrameDebounce(ensureVisible), false);
 };
 // === DRAGGABLE_HELPER END ===
+
+
+// === CACHING THINGS START ===
+const cachedThings = {};
+
+// const cleanCache = () => {
+//   const keys = Object.keys(cachedThings);
+//   for (let i = 0; i < keys.length; i++) {
+//     const key = keys[i];
+//     const entry = cachedThings[key];
+//     const age = Date.now() - entry.ts;
+//     if (age > 60000 * 60) {
+//       delete cachedThings[key];
+//     }
+//   }
+// };
+
+const addToCache = (key, value) => {
+  cachedThings[key] = {
+    value, ts: Date.now(),
+  };
+};
+
+const getFromCache = (key, maxAge=60000) => {
+  const entry = cachedThings[key];
+  if (!entry) return undefined;
+  const age = Date.now() - entry.ts;
+  if (age > maxAge) {
+    delete cachedThings[key];
+    return undefined;
+  }
+  return entry.value;
+};
+
+const wrapFunctionForCaching = (func, maxAge=60000) => {
+  return async (...args) => {
+    // const key = func.name + '_' + args.join('-');
+    const key = func.name + '_' + JSON.stringify(args);
+    const cached = getFromCache(key, maxAge);
+    if (!cached) {
+      const res = await func(...args);
+      addToCache(key, res);
+      return res;
+    }
+    return cached;
+  };
+};
+// === CACHING THINGS END ===
+
+// const cachedGetClientDetails = wrapFunctionForCaching(getClientDetails);
+// const cachedGetClientPhone = wrapFunctionForCaching(getClientPhone);
