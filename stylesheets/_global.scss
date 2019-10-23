@@ -608,7 +608,8 @@ $loading-height: 16px;
     display: inline-block;
     border: none;
     min-width: 300px;
-    padding: 0.2em;
+    // padding: 0.2em;
+    padding: 7px;
     margin-top: 1em;
     margin-left: 0.5em;
     margin-right: 0.5em;
@@ -633,7 +634,7 @@ $loading-height: 16px;
     // box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     border-radius: 30px;
     height: 30px;
-    font-size: 12pt;
+    font-size: 14px;
     &.disabled {
       cursor: default;
       background: rgb(127, 172, 250);
