@@ -1592,7 +1592,7 @@
         "description": "Label for phone verify call phone"
     },
     "sendSMSInstead": {
-        "message": "Mir Stattdessen eine SMS senden",
+        "message": "Verifzierungscode in SMS senden",
         "description": "Text for requesting SMS instead of call"
     },
     "companyDetails": {
