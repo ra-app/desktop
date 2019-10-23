@@ -1515,6 +1515,7 @@
     render_attributes() {
       // console.log('This model import contact view!!!! ', this.model)
       return {
+        'searchPlaceholder': i18n('search'),
         'send-message': i18n('sendMessage'),
         typeAdmin: this.typeAdmin,
         typeKunde: this.typeKunde,
@@ -1531,6 +1532,7 @@
       'click #buttonInviteContact': 'sendInvitations',
       'click #buttonCreateGroup': 'createGroup',
       'keyup #textareaSendeInvitation': 'enableCreateGroup',
+      'keyup #searchInput': 'searchContactList',
     },
     closePanel(){
       document.getElementsByClassName('modal-importer')[0].remove();
@@ -1545,6 +1547,18 @@
       }
       this.$('#modalContact').addClass('hidden');
       this.$('#modalSearchUsers').removeClass('hidden');
+    },
+    searchContactList(e) {
+      console.log('1111111111', e)
+      let value = e.target.value.toLowerCase();
+      $('#mainDivUserSendInvitation div').filter(function () {
+        $(this).toggle(
+          $(this)
+            .text()
+            .toLowerCase()
+            .indexOf(value) > -1
+        );
+      });
     },
     goBack(){
       this.$('#modalContact').removeClass('hidden');
