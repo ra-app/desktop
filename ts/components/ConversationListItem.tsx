@@ -142,7 +142,12 @@ export class ConversationListItem extends React.PureComponent<Props> {
     if (!lastMessage && !isTyping) {
       return null;
     }
-    const text = lastMessage && lastMessage.text ? lastMessage.text : '';
+    let text = lastMessage && lastMessage.text ? lastMessage.text : '';
+
+    const magicWord = '[![TICKETMSG]!]';
+    if (text.indexOf(magicWord) !== -1) {
+      text = text.replace(magicWord, '');
+    }
 
     return (
       <div className="module-conversation-list-item__message">

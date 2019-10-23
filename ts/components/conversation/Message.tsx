@@ -135,6 +135,7 @@ interface State {
   expiring: boolean;
   expired: boolean;
   imageBroken: boolean;
+  textModified: string;
 }
 
 const EXPIRATION_CHECK_MINIMUM = 2000;
@@ -160,6 +161,7 @@ export class Message extends React.PureComponent<Props, State> {
       expiring: false,
       expired: false,
       imageBroken: false,
+      textModified: '',
     };
   }
 
@@ -757,10 +759,10 @@ export class Message extends React.PureComponent<Props, State> {
   public renderText() {
     const { text, textPending, i18n, direction, status } = this.props;
 
-    const contents =
+    let contents =
       direction === 'incoming' && status === 'error'
         ? i18n('incomingError')
-        : text;
+        : this.state.textModified ? this.state.textModified : text;
 
     if (!contents) {
       return null;
@@ -1209,7 +1211,16 @@ export class Message extends React.PureComponent<Props, State> {
       isTapToViewExpired,
       isTapToViewError,
       timestamp,
+      text,
     } = this.props;
+
+    let isTicketMsg = false;
+    const magicWord = '[![TICKETMSG]!]';
+    if (text && text.indexOf(magicWord) !== -1) {
+      this.setState({textModified: text.replace(magicWord, '')});
+      isTicketMsg = true;
+    }
+
     const { expired, expiring, imageBroken } = this.state;
     const isAttachmentPending = this.isAttachmentPending();
     const isButton = isTapToView && !isTapToViewExpired && !isAttachmentPending;
@@ -1244,6 +1255,7 @@ export class Message extends React.PureComponent<Props, State> {
         <div
           className={classNames(
             'module-message__container',
+            isTicketMsg ? 'receivedTicketInformation' : null,
             isSticker ? 'module-message__container--with-sticker' : null,
             !isSticker ? `module-message__container--${direction}` : null,
             isTapToView ? 'module-message__container--with-tap-to-view' : null,

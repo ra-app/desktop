@@ -187,10 +187,11 @@
       conversation.set({ 'name': conversationName, 'ticket_uuid': uuid, 'company_id': company_id  });
       // send event ticket
       const ticketDETAIL = await getTicketDetails(company_id, uuid);
+      let message = '[![TICKETMSG]!]';
       ticketDETAIL.events.forEach(mssg => {
-        const message = JSON.parse(mssg.json).body;
-        conversation.sendMessage(message);
+        message = message + ' ' + JSON.parse(mssg.json).body;
       });
+      conversation.sendMessage(message);
       window.Whisper.events.trigger('showConversation', phone_number);
       this.$(`#${uuid}`).remove()
     },

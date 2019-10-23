@@ -67,14 +67,14 @@ exports.createTemplate = (options, messages) => {
           role: 'pasteandmatchstyle',
           label: messages.editMenuPasteAndMatchStyle.message,
         },
-        {
-          role: 'delete',
-          label: messages.editMenuDelete.message,
-        },
-        {
-          role: 'selectall',
-          label: messages.editMenuSelectAll.message,
-        },
+        // {
+        //   role: 'delete',
+        //   label: messages.editMenuDelete.message,
+        // },
+        // {
+        //   role: 'selectall',
+        //   label: messages.editMenuSelectAll.message,
+        // },
       ],
     },
     {
@@ -165,23 +165,23 @@ exports.createTemplate = (options, messages) => {
 
     // These are in reverse order, since we're prepending them one at a time
     // if (options.development) {
-    fileMenu.submenu.unshift({
-      label: messages.menuSetupAsStandalone.message,
-      click: setupAsStandalone,
-    });
+    // fileMenu.submenu.unshift({
+    //   label: messages.menuSetupAsStandalone.message,
+    //   click: setupAsStandalone,
+    // });
     // }
 
-    fileMenu.submenu.unshift({
-      type: 'separator',
-    });
-    fileMenu.submenu.unshift({
-      label: messages.menuSetupAsNewDevice.message,
-      click: setupAsNewDevice,
-    });
-    fileMenu.submenu.unshift({
-      label: messages.menuSetupWithImport.message,
-      click: setupWithImport,
-    });
+    // fileMenu.submenu.unshift({
+    //   type: 'separator',
+    // });
+    // fileMenu.submenu.unshift({
+    //   label: messages.menuSetupAsNewDevice.message,
+    //   click: setupAsNewDevice,
+    // });
+    // fileMenu.submenu.unshift({
+    //   label: messages.menuSetupWithImport.message,
+    //   click: setupWithImport,
+    // });
   }
 
   if (platform === 'darwin') {
