@@ -262,6 +262,9 @@
           if (userType === 'none') {
             checkbox.disabled = true;
           }
+          if (hasInvitation.found && hasInvitation.accepted) {
+            checkbox.disabled = true;
+          }
           checkbox.addEventListener('click', () => {
             if (this.$('input:checkbox:checked').length >= 1) {
               this.$('.buttonSendInvitation').addClass('disabled')
@@ -356,7 +359,14 @@
           const spanSwitchAdmin = document.createElement('span');
           spanSwitchAdmin.className = 'spanSwitch admin';
           spanSwitchAdmin.innerText = 'Intern';
-
+          if (hasInvitation.found && hasInvitation.accepted) {
+            inputAdmin.setAttribute('disabled', true)
+            inputNone.setAttribute('disabled', true)
+            inputKunde.setAttribute('disabled', true)
+            inputKunde.disabled = true;
+            inputAdmin.disabled = true;
+            inputNone.disabled = true;
+          }
 
           divSwitch.appendChild(inputKunde);
           divSwitch.appendChild(labelKunde);
@@ -1292,7 +1302,7 @@
       const searchInput = document.createElement('input');
       searchInput.id = 'searchInput';
       searchInput.className = 'searchInput';
-      searchInput.placeholder = 'find';
+      searchInput.placeholder = i18n('search')
       searchInput.type = 'text';
       headerSearch.appendChild(searchInput)
       this.$('#divMainContentEdit').append(headerSearch);
@@ -1528,8 +1538,8 @@
     },
     showContactListPanel(){
       if ( this.objectContact === undefined ){
-        console.log("44444444444444444444444444444444444444")
         // this.$('#ptextNoContacts').html = i18n('noContactsImported');
+        document.getElementById('ptextNoContacts').innerHTML = '';
         document.getElementById('ptextNoContacts').innerHTML = i18n('noContactsImported')
         this.$('#divNoContacts').removeClass('hidden')
       }
