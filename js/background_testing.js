@@ -234,24 +234,17 @@ const ensureConversation = async phone_number => {
 
 const createGroup = async (name, members) => {
   await waitForConversationController();
-  console.log('createGroup', members);
-
+  
   // const id = members.join('_');
   const id = '' + Date.now();
-  name = name;
-
-  // let conversation = await ConversationController.get(id, 'group');
-  // if (conversation && conversation.get('active_at')) {
-  //   console.log('createGroup existing', conversation);
-  //   // return conversation;
-  // }
+  console.log('createGroup', id, name, members);
 
   let conversation = await ConversationController.getOrCreateAndWait(id, 'group');
 
   conversation.set({
     id, name, active_at: Date.now(), members, type: 'group', avatar: false, // left: false, color: 'blue',
   });
-  console.log('createGroup new', id, conversation);
+  console.log('createGroup conversation', conversation);
 
   await window.Signal.Data.updateConversation(
     id,
@@ -267,6 +260,33 @@ const createGroup = async (name, members) => {
   const options = conversation.getSendOptions();
   const r2 = await textsecure.messaging.setGroupName(id, name, members, options);
   console.log('createGroup createGroup', r2);
+
+  return conversation;
+};
+
+const updateGroup = async (id, name, members) => {
+  await waitForConversationController();
+  let conversation = await ConversationController.getOrCreateAndWait(id, 'group');
+  console.log('updateGroup', id, name, members, conversation);
+
+  conversation.set({
+    id, name, active_at: Date.now(), members, type: 'group', avatar: false, // left: false, color: 'blue',
+  });
+
+  await window.Signal.Data.updateConversation(
+    id,
+    conversation.attributes,
+    {
+      Conversation: Whisper.Conversation,
+    }
+  );
+  
+  // const r = await conversation.updateGroup(); // { name, members }
+  // console.log('CreateGroup updategroup', r);
+
+  const options = conversation.getSendOptions();
+  const r2 = await textsecure.messaging.setGroupName(id, name, members, options);
+  console.log('updateGroup createGroup', r2);
 
   return conversation;
 };
