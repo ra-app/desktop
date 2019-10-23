@@ -207,6 +207,7 @@
     render_attributes() {
       return {
         'send-message': i18n('sendMessage'),
+        closed: this.model.get('isClosed'),
       };
     },
     initialize(options) {
