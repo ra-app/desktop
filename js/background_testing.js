@@ -241,11 +241,15 @@ const ensureConversation = async phone_number => {
   return conversation;
 };
 
+const randomThing = () => {
+  return Math.floor(Math.random() * 100000000);
+};
+
 const createGroup = async (name, members) => {
   await waitForConversationController();
   
   // const id = members.join('_');
-  const id = '' + Date.now();
+  const id = Date.now() + '-' + randomThing();
   console.log('createGroup', id, name, members);
 
   let conversation = await ConversationController.getOrCreateAndWait(id, 'group');
