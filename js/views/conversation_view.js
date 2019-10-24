@@ -205,6 +205,8 @@
       conversation.sendMessage(message);
       window.Whisper.events.trigger('showConversation', phone_number);
       this.$(`#${uuid}`).remove();
+      this.model.setClosed(false);
+      this.updateCompose();
     },
   });
 
@@ -221,6 +223,13 @@
         'send-message': i18n('sendMessage'),
         closed: this.model.get('isClosed'),
       };
+    },
+    updateCompose() {
+      const closed = this.model.get('isClosed');
+      const composer = this.$('.message_composer');
+      if (composer) {
+        closed ? composer.hide() : composer.show();
+      }
     },
     initialize(options) {
       this.listenTo(this.model, 'destroy', this.stopListening);
@@ -354,6 +363,7 @@
 
       this.setupHeader();
       this.setupCompositionArea();
+      this.updateCompose();
     },
 
     events: {
@@ -381,6 +391,11 @@
 
     setupHeader() {
       const getHeaderProps = () => {
+        const uuid = this.model.attributes.ticket_uuid;
+        const company_id = this.model.attributes.company_id;
+        const message = '[![TICKETMSG]!] This ticket has been closed';
+        const messageLine = '[![TICKETLINE]!]';
+        const conversation = this.model.messageCollection.conversation;
         const expireTimer = this.model.get('expireTimer');
         const expirationSettingName = expireTimer
           ? Whisper.ExpirationTimerOptions.getName(expireTimer || 0)
@@ -436,17 +451,16 @@
             this.model.setArchived(true);
           },
           closeTicket: async () => {
-            const uuid = this.model.attributes.ticket_uuid;
-            const company_id = this.model.attributes.company_id;
-            await closeTicket(company_id, uuid) + '';
-            const conversation = this.model.messageCollection.conversation;
-            const message = '[![TICKETMSG]!] This ticket has been closed';
-             conversation.sendMessage(message);
-            //  this.unload('archive');
-            //  this.model.setArchived(true);
-            const messageLine = '[![TICKETLINE]!]';
+            await closeTicket(company_id + '', uuid);
+            conversation.sendMessage(message);
             conversation.sendMessage(messageLine);
-             this.model.setClosed(true);
+            setTimeout(() => {
+              this.model.setClosed(true);
+              // this.updateHeader();
+              this.updateCompose();
+            }, 1000);
+            // //  this.unload('archive');
+            // //  this.model.setArchived(true);
           },
           onMoveToInbox: () => {
             this.model.setArchived(false);
@@ -855,6 +869,7 @@
       } else {
         this.updateUnread();
       }
+      this.updateCompose();
     },
 
     addScrollDownButtonWithCount() {
