@@ -2239,53 +2239,52 @@
     "description": "closed ticket"
   },
   "uploadCard": {
-    "message": "Upload commercial register entries to brands or identity documents to companies.",
+    "message":
+      "Upload commercial register entries to brands or identity documents to companies.",
     "description": "Upload company card"
   },
-  "sendAnInvitation":{
-    "message":"Send an Invitation",
-    "description":"send an invitation button on import contact"
-  }
-  ,
-  "sendAgainInvitation":{
-    "message":"Sent (send again)",
-    "description":"send again an invitation button on import contact"
-  }
-  ,
-  "aceptedInvitation":{
-    "message":"Accept",
-    "description":"Accept invitation button on import contact"
+  "sendAnInvitation": {
+    "message": "Send an Invitation",
+    "description": "send an invitation button on import contact"
   },
-  "clientButton":{
-    "message":"Client",
-    "description":"Client button on import contact"
-  }
-  ,
-  "adminButton":{
-    "message":"Admin",
-    "description":"Admin button on import contact"
+  "sendAgainInvitation": {
+    "message": "Sent (send again)",
+    "description": "send again an invitation button on import contact"
   },
-  "uploadCompanyAvatarText":{
-    "message":"Bitte Fügen SIE EIN Profilbild Für das unternehmen HINZU",
-    "description":"Upload company avatar"
+  "aceptedInvitation": {
+    "message": "Accept",
+    "description": "Accept invitation button on import contact"
   },
-  "uploadAvatarText":{
-    "message":"Bitte Fügen SIE EIN Profilbild HINZU",
-    "description":"Upload user avatar"
+  "clientButton": {
+    "message": "Client",
+    "description": "Client button on import contact"
   },
-  "closeTicket":{
-      "message": "Close ticket",
-      "description": "Chat menu close ticket"
+  "adminButton": {
+    "message": "Admin",
+    "description": "Admin button on import contact"
   },
-  "noContactsImported":{
+  "uploadCompanyAvatarText": {
+    "message": "Bitte Fügen SIE EIN Profilbild Für das unternehmen HINZU",
+    "description": "Upload company avatar"
+  },
+  "uploadAvatarText": {
+    "message": "Bitte Fügen SIE EIN Profilbild HINZU",
+    "description": "Upload user avatar"
+  },
+  "closeTicket": {
+    "message": "Close ticket",
+    "description": "Chat menu close ticket"
+  },
+  "noContactsImported": {
     "message": "Sie haben keine Kontakte, bitte Kontaktliste importieren.",
     "description": "No contacts imported"
   },
   "messageImportContact": {
-      "message": "Bitte beachten Sie, dass beim Kontaktimport Ihre bereits vorhandenen Kontakte überschrieben werden. Möchten Sie fortfahren?",
-      "description": "Message to import new contact list"
+    "message":
+      "Bitte beachten Sie, dass beim Kontaktimport Ihre bereits vorhandenen Kontakte überschrieben werden. Möchten Sie fortfahren?",
+    "description": "Message to import new contact list"
   },
-  "createGroup":{
+  "createGroup": {
     "message": "Create group",
     "description": "Create group menu item"
   }

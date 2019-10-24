@@ -16,16 +16,30 @@ const KeyCodes = {
   39: 'right',
   40: 'down',
   65: 'a',
-  66: 'b'
+  66: 'b',
 };
 
-const KonamiCode = [KeyCodes.up, KeyCodes.up, KeyCodes.down, KeyCodes.down, KeyCodes.left, KeyCodes.right, KeyCodes.left, KeyCodes.right, KeyCodes.b, KeyCodes.a, KeyCodes.enter];
+const KonamiCode = [
+  KeyCodes.up,
+  KeyCodes.up,
+  KeyCodes.down,
+  KeyCodes.down,
+  KeyCodes.left,
+  KeyCodes.right,
+  KeyCodes.left,
+  KeyCodes.right,
+  KeyCodes.b,
+  KeyCodes.a,
+  KeyCodes.enter,
+];
 
 function storeKonami(newVal) {
   try {
     KonamiSolved = newVal;
     localStorage.setItem('PowerOfGlasses', JSON.stringify(newVal));
-    document.dispatchEvent(new CustomEvent('nerdModeToggle', { detail: newVal }))
+    document.dispatchEvent(
+      new CustomEvent('nerdModeToggle', { detail: newVal })
+    );
   } catch (err) {
     //
   }
@@ -85,7 +99,10 @@ function konamiEffect(solved) {
 }
 
 try {
-  document.addEventListener('keyup', onKeyUp, { capture: false, passive: true });
+  document.addEventListener('keyup', onKeyUp, {
+    capture: false,
+    passive: true,
+  });
   KonamiSolved = getKonamiStored();
   konamiEffect(KonamiSolved);
 } catch (err) {

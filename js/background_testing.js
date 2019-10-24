@@ -55,8 +55,6 @@ async function testProfile() {
   );
   // console.log('putToCDN', r);
 
-  
-
   // const enc = await encryptProfileName("TEST");
   // console.log("ENCRYPT", enc);
   // const dec = await decryptProfileName(enc);
@@ -267,31 +265,40 @@ const randomThing = () => {
 
 const createGroup = async (name, members) => {
   await waitForConversationController();
-  
+
   // const id = members.join('_');
   const id = Date.now() + '-' + randomThing();
   console.log('createGroup', id, name, members);
 
-  let conversation = await ConversationController.getOrCreateAndWait(id, 'group');
+  let conversation = await ConversationController.getOrCreateAndWait(
+    id,
+    'group'
+  );
 
   conversation.set({
-    id, name, active_at: Date.now(), members, type: 'group', avatar: false, // left: false, color: 'blue',
+    id,
+    name,
+    active_at: Date.now(),
+    members,
+    type: 'group',
+    avatar: false, // left: false, color: 'blue',
   });
   console.log('createGroup conversation', conversation);
 
-  await window.Signal.Data.updateConversation(
-    id,
-    conversation.attributes,
-    {
-      Conversation: Whisper.Conversation,
-    }
-  );
-  
+  await window.Signal.Data.updateConversation(id, conversation.attributes, {
+    Conversation: Whisper.Conversation,
+  });
+
   // const r = await conversation.updateGroup(); // { name, members }
   // console.log('CreateGroup updategroup', r);
 
   const options = conversation.getSendOptions();
-  const r2 = await textsecure.messaging.setGroupName(id, name, members, options);
+  const r2 = await textsecure.messaging.setGroupName(
+    id,
+    name,
+    members,
+    options
+  );
   console.log('createGroup createGroup', r2);
 
   return conversation;
@@ -299,26 +306,35 @@ const createGroup = async (name, members) => {
 
 const updateGroup = async (id, name, members) => {
   await waitForConversationController();
-  let conversation = await ConversationController.getOrCreateAndWait(id, 'group');
+  let conversation = await ConversationController.getOrCreateAndWait(
+    id,
+    'group'
+  );
   console.log('updateGroup', id, name, members, conversation);
 
   conversation.set({
-    id, name, active_at: Date.now(), members, type: 'group', avatar: false, // left: false, color: 'blue',
+    id,
+    name,
+    active_at: Date.now(),
+    members,
+    type: 'group',
+    avatar: false, // left: false, color: 'blue',
   });
 
-  await window.Signal.Data.updateConversation(
-    id,
-    conversation.attributes,
-    {
-      Conversation: Whisper.Conversation,
-    }
-  );
-  
+  await window.Signal.Data.updateConversation(id, conversation.attributes, {
+    Conversation: Whisper.Conversation,
+  });
+
   // const r = await conversation.updateGroup(); // { name, members }
   // console.log('CreateGroup updategroup', r);
 
   const options = conversation.getSendOptions();
-  const r2 = await textsecure.messaging.setGroupName(id, name, members, options);
+  const r2 = await textsecure.messaging.setGroupName(
+    id,
+    name,
+    members,
+    options
+  );
   console.log('updateGroup createGroup', r2);
 
   return conversation;
@@ -443,28 +459,28 @@ const getClientPhone = async (phoneNum) => {
   return (await apiRequest('api/v1/client/getbyphone/' + phoneNum)).client;
 }
 
-const getAvatar = (info) => {
+const getAvatar = info => {
   return API_URL + 'public/img/' + info;
 };
 
 // const getAvatar = async (info) => {
-  // return (await apiRequest('public/img-uri/'+ info)).uri;
+// return (await apiRequest('public/img-uri/'+ info)).uri;
 // };
 
-const setClientAvatar = async (data) => {
-  return (apiRequest('api/v1/client/picture', data));
+const setClientAvatar = async data => {
+  return apiRequest('api/v1/client/picture', data);
 };
 
-const updateClient = async (data) => {
-  return (apiRequest('api/v1/client/info', data));
+const updateClient = async data => {
+  return apiRequest('api/v1/client/info', data);
 };
 
 const setAdminAvatar = async (company, data) => {
-  return (apiRequest('api/v1/admin/' + company + '/admin-picture', data));
+  return apiRequest('api/v1/admin/' + company + '/admin-picture', data);
 };
 
 const setCompanyAvatar = async (company, data) => {
-  return (apiRequest('api/v1/admin/' + company + '/picture', data));
+  return apiRequest('api/v1/admin/' + company + '/picture', data);
 };
 
 const closeTicket = async (company_id, ticket_uuid) => {
@@ -474,21 +490,24 @@ const closeTicket = async (company_id, ticket_uuid) => {
 };
 
 const getClientAdminCompany = async number => {
-  return (apiRequest('api/v1/admin/' + number + '/info'));
+  return apiRequest('api/v1/admin/' + number + '/info');
 };
 const getInvitationList = async number => {
   return (await apiRequest('api/v1/admin/' + number + '/info')).invites;
 };
 const createInvitation = async (company_id, data) => {
-  return (await apiRequest('api/v1/admin/' + company_id + '/invites/create', data)).inviteInfo;
+  return (await apiRequest(
+    'api/v1/admin/' + company_id + '/invites/create',
+    data
+  )).inviteInfo;
 };
 
-const checkCodeInvitation = async (code) => {
-  return apiRequest('api/v1/companies/code/'+ code);
+const checkCodeInvitation = async code => {
+  return apiRequest('api/v1/companies/code/' + code);
 };
 
 const sendSms = async (company_id, data) => {
-  return (apiRequest('api/v1/admin/' + company_id + '/invites/send', data));
+  return apiRequest('api/v1/admin/' + company_id + '/invites/send', data);
 };
 
 const getCompany = async number => {
@@ -496,7 +515,9 @@ const getCompany = async number => {
 };
 
 const getClientByPhone = async (company_id, number) => {
-  return (await apiRequest('/api/v1/admin/' + company_id + '/clients/getbyphone/'+ number)).client
+  return (await apiRequest(
+    '/api/v1/admin/' + company_id + '/clients/getbyphone/' + number
+  )).client;
 };
 
 const getUnclaimedCompanyTickets = async company_id => {
@@ -507,7 +528,7 @@ const getUnclaimedCompanyTickets = async company_id => {
 const getContacts = async company_id => {
   return (await apiRequest('api/v1/admin/' + company_id + '/contacts/get'))
     .contacts;
-}
+};
 
 const getTicketDetails = async (company_id, ticket_uuid) => {
   return (await apiRequest(
@@ -531,10 +552,14 @@ const getTicketsList = async (company_id, data) => {
 };
 
 const updateContact = async (company_id, contacts_data) => {
-  return apiRequest('api/v1/admin/' + company_id + '/contacts/update', contacts_data);
+  return apiRequest(
+    'api/v1/admin/' + company_id + '/contacts/update',
+    contacts_data
+  );
 };
-const getContactXml = async (company_id) => {
-  return (await apiRequest('api/v1/admin/' + company_id + '/contacts/get')).contacts;
+const getContactXml = async company_id => {
+  return (await apiRequest('api/v1/admin/' + company_id + '/contacts/get'))
+    .contacts;
 };
 
 // dev
@@ -734,7 +759,7 @@ const createDeveloperInterface = () => {
   contactList.id = 'contactlist';
   // contactList.style.cssText = 'border: 1px solid black; background-color: white; position: absolute; right: 5px; top: 50px; padding: 5px; z-index: 9999;';
 
-  const headerTexts = ["name", "surname", "position", "email", "phone", "ts"];
+  const headerTexts = ['name', 'surname', 'position', 'email', 'phone', 'ts'];
   const header = contactList.createTHead();
   const row = header.insertRow();
 
@@ -754,12 +779,15 @@ const createDeveloperInterface = () => {
       try {
         const contacts = await getContacts(companyID);
         console.log(contacts);
-        if (contacts){
+        if (contacts) {
           const parser = new DOMParser();
-          const xmlRes = parser.parseFromString(contacts.contact_data, "text/xml");
+          const xmlRes = parser.parseFromString(
+            contacts.contact_data,
+            'text/xml'
+          );
           console.log(xmlRes);
           document.xmlRes = xmlRes;
-          
+
           const contactListXml = xmlRes.children[0];
 
           for (let i = 0; i < contactListXml.children.length; i++) {
@@ -769,8 +797,9 @@ const createDeveloperInterface = () => {
             contactList.appendChild(tableRow);
 
             for (let j = 0; j < headerTexts.length; j++) {
-              const content = contact.getElementsByTagName(headerTexts[j])[0].textContent;
-              
+              const content = contact.getElementsByTagName(headerTexts[j])[0]
+                .textContent;
+
               const contentTd = tableRow.insertCell();
               contentTd.style.cssText = 'text-align: left;padding: 5px;';
               contentTd.innerHTML = content;
@@ -783,7 +812,7 @@ const createDeveloperInterface = () => {
       }
     }
   });
-  
+
   // Input Change Handling
   const updateBtn = () => {
     const m = addCompanyInput.value.match(/^\d{6}$/);
@@ -949,7 +978,7 @@ async function decryptProfileName(encryptedName) {
 // === DRAGGABLE_HELPER START ===
 // Debounce by using animationFrame
 // https://gomakethings.com/debouncing-events-with-requestanimationframe-for-better-performance/
-const animFrameDebounce = (fn) => {
+const animFrameDebounce = fn => {
   let timeout;
   return (...args) => {
     const context = this;
@@ -1135,7 +1164,6 @@ const draggableHelper = (
 };
 // === DRAGGABLE_HELPER END ===
 
-
 // === CACHING THINGS START ===
 const cachedThings = {};
 
@@ -1153,11 +1181,12 @@ const cachedThings = {};
 
 const addToCache = (key, value) => {
   cachedThings[key] = {
-    value, ts: Date.now(),
+    value,
+    ts: Date.now(),
   };
 };
 
-const getFromCache = (key, maxAge=60000) => {
+const getFromCache = (key, maxAge = 60000) => {
   const entry = cachedThings[key];
   if (!entry) return undefined;
   const age = Date.now() - entry.ts;
@@ -1168,7 +1197,7 @@ const getFromCache = (key, maxAge=60000) => {
   return entry.value;
 };
 
-const wrapFunctionForCaching = (func, maxAge=60000) => {
+const wrapFunctionForCaching = (func, maxAge = 60000) => {
   return async (...args) => {
     // const key = func.name + '_' + args.join('-');
     const key = func.name + '_' + JSON.stringify(args);

@@ -135,10 +135,7 @@ window.searchResults.messages = [
     openConversationInternal={(id, messageId) =>
       console.log('openConversation', id, messageId)
     }
-    openTicket={(id, messageId) =>
-      console.log('openConversation', id)
-    }
-    
+    openTicket={(id, messageId) => console.log('openConversation', id)}
     showArchivedConversations={() => console.log('showArchivedConversations')}
     showInbox={() => console.log('showInbox')}
     renderMainHeader={() => (
@@ -168,9 +165,7 @@ window.searchResults.messages = [
     openConversationInternal={(id, messageId) =>
       console.log('openConversation', id, messageId)
     }
-     openTicket={(id, messageId) =>
-      console.log('openConversation', id)
-    }
+    openTicket={(id, messageId) => console.log('openConversation', id)}
     showArchivedConversations={() => console.log('showArchivedConversations')}
     showInbox={() => console.log('showInbox')}
     renderMainHeader={() => (
@@ -200,9 +195,7 @@ window.searchResults.messages = [
     openConversationInternal={(id, messageId) =>
       console.log('openConversation', id, messageId)
     }
-     openTicket={(id, messageId) =>
-      console.log('openConversation', id)
-    }
+    openTicket={(id, messageId) => console.log('openConversation', id)}
     showArchivedConversations={() => console.log('showArchivedConversations')}
     showInbox={() => console.log('showInbox')}
     renderMainHeader={() => (

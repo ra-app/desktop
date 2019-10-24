@@ -189,8 +189,16 @@ export class ConversationHeader extends React.Component<Props> {
           )}
           disabled={showBackButton}
         /> */}
-        <button onClick={this.showMenuBound} className="chat_menu" disabled={showBackButton}>
-          <img src="images/icons/menu_over_blue_24x24.svg" className="chat_menu" alt="Chat menu"/>
+        <button
+          onClick={this.showMenuBound}
+          className="chat_menu"
+          disabled={showBackButton}
+        >
+          <img
+            src="images/icons/menu_over_blue_24x24.svg"
+            className="chat_menu"
+            alt="Chat menu"
+          />
         </button>
       </ContextMenuTrigger>
     );

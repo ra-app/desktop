@@ -350,13 +350,14 @@ if (config.environment === 'test') {
   /* eslint-enable global-require, import/no-extraneous-dependencies */
 }
 
-window.saveContactXML = (xml) => new Promise((resolve, reject) => {
-  ipc.once('save-contact-xml-result', (evt, data) => {
-    if (data.success) resolve();
-    else reject(Object.assign(new Error(), data.error));
+window.saveContactXML = xml =>
+  new Promise((resolve, reject) => {
+    ipc.once('save-contact-xml-result', (evt, data) => {
+      if (data.success) resolve();
+      else reject(Object.assign(new Error(), data.error));
+    });
+    ipc.send('save-contact-xml', xml);
   });
-  ipc.send('save-contact-xml', xml);
-});
 
 window.triggerInboxReady = () => ipc.send('inbox-ready');
 
@@ -373,4 +374,4 @@ ipc.on('open-conversation', async (evt, id) => {
   } catch (err) {
     console.error('Error opening conversation', err);
   }
-})
+});
