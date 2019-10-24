@@ -25,3 +25,11 @@ test/blanket_mocha.js
 # TypeScript generated files
 ts/**/*.js
 
+js/background_testing.js
+js/models/conversations.js
+js/tablesort.js
+js/views/conversation_view.js
+js/views/import_contact_view.js
+js/views/inbox_view.js
+js/views/install_view.js
+locales.js

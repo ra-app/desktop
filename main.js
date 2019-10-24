@@ -105,7 +105,7 @@ const getConversationParam = commandLine => {
   const convParam = commandLine.indexOf('--conversation');
   if (convParam !== -1) return commandLine[convParam + 1];
   return undefined;
-}
+};
 
 if (!process.mas) {
   console.log('making app single instance');
@@ -115,7 +115,10 @@ if (!process.mas) {
     app.exit();
   } else {
     const focusConv = getConversationParam(process.argv);
-    if (focusConv) ipc.once('inbox-ready', (evt) => evt.sender.send('open-conversation', focusConv));
+    if (focusConv)
+      ipc.once('inbox-ready', evt =>
+        evt.sender.send('open-conversation', focusConv)
+      );
     app.on('second-instance', (evt, commandLine, workingDir) => {
       // Someone tried to run a second instance, we should focus our window
       if (mainWindow) {
@@ -125,7 +128,8 @@ if (!process.mas) {
 
         showWindow();
         const focusConv = getConversationParam(commandLine); // eslint-disable-line no-shadow
-        if (focusConv) mainWindow.webContents.send('open-conversation', focusConv);
+        if (focusConv)
+          mainWindow.webContents.send('open-conversation', focusConv);
       }
       return true;
     });
@@ -1074,12 +1078,13 @@ ipc.on('save-contact-xml', async (evt, data) => {
   const userDataPath = await getRealPath(app.getPath('userData'));
   const configPath = path.join(userDataPath, 'config');
   const done = err => {
-    const result = {success: !err};
-    if (err) result.error = {message: err.message, stack: err.stack, code: err.code};
+    const result = { success: !err };
+    if (err)
+      result.error = { message: err.message, stack: err.stack, code: err.code };
     evt.sender.send('save-contact-xml-result', result);
-  }
-  fs.mkdir(configPath, (err) => {
+  };
+  fs.mkdir(configPath, err => {
     if (err && err.code !== 'EEXIST') done(err);
     else fs.writeFile(path.join(configPath, 'contacts.xml'), data, done);
-  })
+  });
 });

@@ -90,12 +90,17 @@
           model: this.model,
           title: this.model[0].company_name,
           hasTicket: this.model[0].hasTicket,
-          claimed: this.model[0].isClaimed ,
+          claimed: this.model[0].isClaimed,
           unclaimed: this.model[0].isUnclaimed,
           closed: this.model[0].isClosed,
         };
-      }else{
-        if ( !this.model[0].hasTicket && !this.model[0].isClaimed && !this.model[0].isUnclaimed && !this.model[0].isClosed){
+      } else {
+        if (
+          !this.model[0].hasTicket &&
+          !this.model[0].isClaimed &&
+          !this.model[0].isUnclaimed &&
+          !this.model[0].isClosed
+        ) {
           this.model[0].isUnclaimed = true;
         }
       }
@@ -118,7 +123,7 @@
         this.$('#claim_' + element.uuid).click(() =>
           this.claimTicket(element.company_id, element.uuid)
         );
-        this.$('img').on("error", function() {
+        this.$('img').on('error', function() {
           $(this).attr('src', 'images/header-chat.png');
         });
       });
@@ -162,32 +167,35 @@
           }
           this.uuidtmp = element.uuid;
         } else {
-          if (this.$('#ticket_' + element.uuid)){
+          if (this.$('#ticket_' + element.uuid)) {
             this.$('#ticket_' + element.uuid).remove();
             this.uuidtmp = '';
           }
         }
       }
-     
     },
     async claimTicket(company_id, uuid) {
       const phone_number = await claimTicket(company_id, uuid);
-      const client =  await  getClientByPhone(company_id, phone_number)
+      const client = await getClientByPhone(company_id, phone_number);
       const conversation = await ensureConversation(phone_number);
 
       let conversationName = 'User without data';
 
-      if(client.name){
-        if(client.name && client.surname){
-          conversationName =  client.name + ' ' + client.surname;
-        }else {
+      if (client.name) {
+        if (client.name && client.surname) {
+          conversationName = client.name + ' ' + client.surname;
+        } else {
           conversationName = client.name;
         }
-      }else if(client.email){
+      } else if (client.email) {
         conversationName = client.email;
       }
 
-      conversation.set({ 'name': conversationName, 'ticket_uuid': uuid, 'company_id': company_id  });
+      conversation.set({
+        name: conversationName,
+        ticket_uuid: uuid,
+        company_id: company_id,
+      });
       // send event ticket
       const ticketDETAIL = await getTicketDetails(company_id, uuid);
       let message = '[![TICKETMSG]!]';
@@ -196,7 +204,7 @@
       });
       conversation.sendMessage(message);
       window.Whisper.events.trigger('showConversation', phone_number);
-      this.$(`#${uuid}`).remove()
+      this.$(`#${uuid}`).remove();
     },
   });
 
@@ -433,10 +441,10 @@
             await closeTicket(company_id, uuid) + '';
             const conversation = this.model.messageCollection.conversation;
             const message = '[![TICKETMSG]!] This ticket has been closed';
-             conversation.sendMessage(message);
+            conversation.sendMessage(message);
             //  this.unload('archive');
             //  this.model.setArchived(true);
-             this.model.setClosed(true);
+            this.model.setClosed(true);
           },
           onMoveToInbox: () => {
             this.model.setArchived(false);

@@ -243,7 +243,7 @@
       this.focusConversation();
     },
     async getTickets(event) {
-      if ( !scrolling ){
+      if (!scrolling) {
         const ticketType = event.currentTarget.id;
         let tmpTicketType = 1;
         switch (ticketType) {
@@ -264,21 +264,22 @@
           ticketState = tmpTicketType;
           limitTicket = 12;
           offsetTicket = 0;
-          await this.openTicket(this.tmpticketId,null, null, ticketType);
+          await this.openTicket(this.tmpticketId, null, null, ticketType);
           this.$('.ticket-nav').removeClass('active');
           event.currentTarget.classList.add('active');
         }
       }
-      
     },
     changeListTicket(list) {
       const arrayList = list.tickets;
       list.tickets.forEach((element, index) => {
-        arrayList[index].date = new Date(element.ts_created).toUTCString().split('GMT')[0];
+        arrayList[index].date = new Date(element.ts_created)
+          .toUTCString()
+          .split('GMT')[0];
         arrayList[index].hasTicket = true;
         arrayList[index].company_name = list.company_name;
         arrayList[index].avatarSrc = getAvatar(element.client_uuid);
-        console.log('Element state !!!! ', element.state)
+        console.log('Element state !!!! ', element.state);
         switch (element.state) {
           case 0:
             arrayList[index].status = i18n('Unknown');
@@ -318,25 +319,26 @@
     onTicketScroll(evt) {
       scrolling = true;
       const ticket = this.$el.find('.conversation-stack').get(0);
-      const atBottom = ticket.scrollHeight - ticket.scrollTop === ticket.clientHeight;
+      const atBottom =
+        ticket.scrollHeight - ticket.scrollTop === ticket.clientHeight;
       if (atBottom) {
-        if ((parseInt(ticketList.ticket_count, 10)) > offsetTicket) {
-          this.loadMoreTickets()
-        }else{
+        if (parseInt(ticketList.ticket_count, 10) > offsetTicket) {
+          this.loadMoreTickets();
+        } else {
           this.$('#noLoadMore').removeClass('hidden');
           scrolling = false;
         }
-      }else{
+      } else {
         scrolling = false;
       }
     },
-    async openTicket(id, messageId = null, resetCall = null, type ) {
+    async openTicket(id, messageId = null, resetCall = null, type) {
       console.log('open ticket', id, type);
       this.$('.conversation-stack').on(
         'scroll',
         _.debounce(this.onTicketScroll.bind(this), 100)
       );
-      if(resetCall){
+      if (resetCall) {
         offsetTicket = 0;
       }
       const data = {
@@ -344,7 +346,7 @@
         offset: offsetTicket,
         state: ticketState,
       };
-        offsetTicket = limitTicket + offsetTicket;
+      offsetTicket = limitTicket + offsetTicket;
       try {
         ticketList = await getTicketsList(id, data);
         const isTicket = true;
@@ -391,7 +393,7 @@
             },
           ];
         }
-        console.log(ticketList.tickets, "returnnnnnnnnnnnn")
+        console.log(ticketList.tickets, 'returnnnnnnnnnnnn');
         this.conversation_stack.open(ticketList.tickets, isTicket);
         this.focusConversation();
         // }

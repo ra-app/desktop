@@ -239,7 +239,11 @@
     "dial_code": "+856",
     "code": "LA"
   },
-  { "name": "Libysch-Arabische Dschamahirija", "dial_code": "+218", "code": "LY" },
+  {
+    "name": "Libysch-Arabische Dschamahirija",
+    "dial_code": "+218",
+    "code": "LY"
+  },
   { "name": "Macao", "dial_code": "+853", "code": "MO" },
   {
     "name": "Mazedonien",
@@ -289,6 +293,10 @@
     "code": "VE"
   },
   { "name": "Vietnam", "dial_code": "+84", "code": "VN" },
-  { "name": "Virgin Islands, Großbritannien", "dial_code": "+1284", "code": "VG" },
+  {
+    "name": "Virgin Islands, Großbritannien",
+    "dial_code": "+1284",
+    "code": "VG"
+  },
   { "name": "Virgin Islands, USA", "dial_code": "+1340", "code": "VI" }
 ]
