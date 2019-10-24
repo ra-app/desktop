@@ -135,8 +135,6 @@ interface State {
   expiring: boolean;
   expired: boolean;
   imageBroken: boolean;
-  textModified: string;
-  isTicketLine: boolean;
 }
 
 const EXPIRATION_CHECK_MINIMUM = 2000;
@@ -151,6 +149,9 @@ export class Message extends React.PureComponent<Props, State> {
   public expirationCheckInterval: any;
   public expiredTimeout: any;
 
+  public textModified: string;
+  public isTicketLine: boolean;
+
   public constructor(props: Props) {
     super(props);
 
@@ -158,12 +159,14 @@ export class Message extends React.PureComponent<Props, State> {
     this.showMenuBound = this.showMenu.bind(this);
     this.handleImageErrorBound = this.handleImageError.bind(this);
 
+    this.textModified = '';
+    this.isTicketLine = false;
+
+
     this.state = {
       expiring: false,
       expired: false,
       imageBroken: false,
-      textModified: '',
-      isTicketLine: false,
     };
   }
 
@@ -764,8 +767,8 @@ export class Message extends React.PureComponent<Props, State> {
     let contents =
       direction === 'incoming' && status === 'error'
         ? i18n('incomingError')
-        : this.state.textModified
-          ? this.state.textModified
+        : this.textModified
+          ? this.textModified
           : text;
 
     if (!contents) {
@@ -1220,13 +1223,14 @@ export class Message extends React.PureComponent<Props, State> {
     let isTicketMsg = false;
     const magicWord = '[![TICKETMSG]!]';
     if (text && text.indexOf(magicWord) !== -1) {
-      this.setState({ textModified: text.replace(magicWord, '') });
+      this.textModified =  text.replace(magicWord, '');
       isTicketMsg = true;
     }
 
     const magicLine = '[![TICKETLINE]!]';
     if (text && text.indexOf(magicLine) !== -1) {
-      this.setState({textModified: text.replace(magicLine, ''), isTicketLine: true});
+      this.textModified = text.replace(magicLine, '');
+      this.isTicketLine = true;
     }
 
     const { expired, expiring, imageBroken } = this.state;
@@ -1252,7 +1256,7 @@ export class Message extends React.PureComponent<Props, State> {
 
     return (
       <div>
-        {!this.state.isTicketLine ? (
+        {!this.isTicketLine ? (
             <div
             className={classNames(
               'module-message',
