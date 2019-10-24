@@ -8,9 +8,10 @@
 
   window.Whisper = window.Whisper || {};
 
-  const EULA = `Die OfficeApp (nachfolgend auch „OfA“) bietet OfficeApp Online („OfA“) Services und Software (im Folgenden auch: „Dienste“, „Produkte“, Software oder Services) für diverse Plattformen an.
-
-
+  const EULA = `
+  Die OfficeApp (nachfolgend auch „OfA“) bietet OfficeApp Online („OfA“) Services und Software (im Folgenden auch: „Dienste“, „Produkte“, Software oder Services) für diverse Plattformen an.
+  
+  
   § 1 Allgemeines
   Diese Allgemeinen Geschäftsbedingungen (AGB) stellen die Grundlage für die Nutzung der OfA Services dar und regeln die vertraglichen Beziehungen zwischen Anbieter(n) und dem Kunden (im Folgenden auch Nutzer, Benutzer, Besteller oder Anwender genannt). Wenn und soweit es für Produkte gesonderte Lizenzvereinbarungen gibt (so z.B. Softwarelizenzverträge bzw. Abo-Bedingungen im OfA-Store, AGB von Drittanbietern etc.), so gelten diese ergänzend.
   
@@ -189,7 +190,6 @@
   2. Ausschließlicher Gerichtsstand ist Berlin. Dies gilt auch, wenn der Kunde keinen allgemeinen Gerichtsstand im Inland hat, ein Kunde nach Vertragsabschluss seinen Wohnsitz oder gewöhnlichen Aufenthalt in das Ausland verlegt hat oder sein Wohnsitz oder gewöhnlicher Aufenthaltsort zum Zeitpunkt der Klageerhebung unbekannt ist.
   
   3. Rechte und Pflichten aus diesem Vertrag können nur nach vorheriger schriftlicher Zustimmung von OfA auf Dritte übertragen werden.`;
-
   const Steps = {
     ACCEPT_EULA: 1,
     SETUP_TYPE: 2,

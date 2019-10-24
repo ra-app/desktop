@@ -1253,7 +1253,9 @@ $debug: 0;
     font-family: $poppins-regular;
   }
   .eula-content {
-    white-space: pre-wrap;
+    // white-space: pre-wrap;
+    text-align: left;
+    white-space: pre-line;
   }
   .input-code {
     height: 30px;
