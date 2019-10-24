@@ -1091,6 +1091,7 @@
           this.$('#modalContact').append(divCountries)
           this.$('.divMainContentEdit').addClass('hidden');
           this.$('.divModalHeader').addClass('hidden');
+          document.getElementById('inputSearchCountry').focus();
         },
         error: e => {
           console.log('Error getting countries', e);
