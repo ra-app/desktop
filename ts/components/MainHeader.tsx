@@ -159,7 +159,7 @@ export class MainHeader extends React.Component<Props> {
 
   public createGroup() {
     const { appView } = window['owsDesktopApp']
-    appView.openModalImport('allUsers');
+    appView.openModalImport('group');
     this.setState({ openMenu: !this.state.openMenu })
   }
   public render() {
