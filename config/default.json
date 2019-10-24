@@ -2,9 +2,9 @@
   "serverUrl": "https://signal.officeapp.eu",
   "cdnUrl": "https://cdn.signal.officeapp.eu",
   "contentProxyUrl": "http://contentproxy.signal.org:443",
-  "updatesUrl": "https://localhost/desktop",
+  "updatesUrl": "https://updates.officeapp.eu/desktop",
   "updatesPublicKey":
-    "fd7dd3de7149dc0a127909fee7de0f7620ddd0de061b37a2c303e37de802a401",
+    "724a1d4414513add4b6540c3410df243f454431c1edf8ac13988b716a9a5a023",
   "updatesEnabled": false,
   "openDevTools": false,
   "buildExpiration": 0,

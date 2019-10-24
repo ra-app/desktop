@@ -12,7 +12,7 @@
   }
 }
 
-#noLoadMore{
+#noLoadMore {
   height: 30px;
   padding: 7px;
   text-align: center;
@@ -205,11 +205,9 @@ p.ticket-time {
 .discussion-container {
   background-color: $color-white;
 }
-
 .key-verification {
   label {
     display: block;
-
     margin: 10px 0;
     font-size: $font-size-small;
   }
@@ -239,7 +237,6 @@ p.ticket-time {
     border: solid 1px $grey_l2;
     border-radius: $border-radius;
   }
-
   .placeholder {
     font-weight: bold;
   }
@@ -288,7 +285,6 @@ p.ticket-time {
       font-size: 0;
       content: ' ';
       clear: both;
-
       height: 0;
     }
   }
@@ -377,7 +373,6 @@ p.ticket-time {
       top: 5px;
       right: 2px;
       background: #999;
-
       &:hover {
         background: $grey;
       }
@@ -484,7 +479,6 @@ p.ticket-time {
 .conversation-loading-screen {
   z-index: 99;
   position: absolute;
-
   left: 0;
   right: 0;
   top: 0;
@@ -560,7 +554,6 @@ p.ticket-time {
     background-color: $color-light-45;
   }
 }
-
 .module-scroll-down__button--new-messages {
   background-color: $color-signal-blue;
   &:hover {
@@ -572,16 +565,14 @@ p.ticket-time {
   height: 100%;
   width: 100%;
 }
-
-
-#contactTable{
+#contactTable {
   max-height: calc(1080px - 85px);
   overflow: auto;
-  .sortable{
+  .sortable {
     max-height: calc(1080px - 85px);
     margin-bottom: 20%;
     width: 100%;
-    th{
+    th {
       height: 30px;
       font-weight: normal;
       text-transform: capitalize;
@@ -592,31 +583,31 @@ p.ticket-time {
     }
   }
 }
-#headerContactTable{
+#headerContactTable {
   display: flex;
   flex-wrap: wrap;
-  .divPaginationContact{
+  .divPaginationContact {
     // width: 50%;
     min-width: 41%;
     padding: 20px;
-    span{
+    span {
       color: $link-color;
       font-family: $poppins-semibold;
       font-size: 17px;
     }
-    p{
+    p {
       margin: 0px;
       font-size: 12px;
       margin-top: 5px;
     }
   }
-  .divSearchContact{
+  .divSearchContact {
     // width: 50%;
     padding: 27px;
-    input{
+    input {
       width: 240px;
       height: 30px;
-      background: #FFFFFF 0% 0% no-repeat padding-box;
+      background: #ffffff 0% 0% no-repeat padding-box;
       box-shadow: 0px 3px 6px #00000029;
       border-radius: 19px;
       opacity: 1;
@@ -625,7 +616,7 @@ p.ticket-time {
       margin-right: 13px;
       outline: none;
     }
-    button{
+    button {
       @include backgroudGradient();
       border-radius: 20px;
       border: none;
@@ -635,53 +626,52 @@ p.ticket-time {
       padding-right: 20px;
       vertical-align: middle;
       margin-right: 5px;
-      &:last-child{
+      &:last-child {
         margin-right: 0px;
       }
-      
     }
   }
 }
-.titleSendInvitation{
+.titleSendInvitation {
   font-family: $poppins-semibold;
   color: white;
   font-size: 14px;
   position: relative;
   top: 15px;
 }
-#ptextNoContacts{
+#ptextNoContacts {
   font-family: $poppins-semibold;
   color: $color-raapp-text;
   font-size: 14px;
 }
-tbody#myTable tr{
+tbody#myTable tr {
   text-align: center;
   background: white;
   height: 55px;
   font-size: 14px;
   font-family: $poppins-semibold;
   color: $color-raapp-text;
-  button{
+  button {
     @include backgroudGradient();
     padding: 6px 10px;
     color: white;
     border: none;
     border-radius: 20px;
-    &.disabled{
-      opacity: .5;
+    &.disabled {
+      opacity: 0.5;
       cursor: default;
     }
   }
-  .editIcon{
+  .editIcon {
     width: 30px;
     vertical-align: middle;
     cursor: pointer;
-    &:first-child{
+    &:first-child {
       margin-right: 5px;
     }
   }
 }
-.divNoContacts{
+.divNoContacts {
   padding: 23px;
   font-size: 17px;
 }

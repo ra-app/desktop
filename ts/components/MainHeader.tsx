@@ -36,7 +36,9 @@ export interface Props {
 }
 
 declare global {
-  interface Window { owsDesktopApp: any; }
+  interface Window {
+    owsDesktopApp: any;
+  }
 }
 
 export class MainHeader extends React.Component<Props> {
@@ -140,21 +142,20 @@ export class MainHeader extends React.Component<Props> {
   }
   public showContacts() {
     // this.setState({openMenu: !this.state.openMenu});
-    const { appView } = window['owsDesktopApp']
+    const { appView } = window['owsDesktopApp'];
     console.log('appView', appView);
-    this.setState({ openMenu: !this.state.openMenu })
+    this.setState({ openMenu: !this.state.openMenu });
     appView.openContact();
-
   }
   public importAdmin() {
-    const { appView } = window['owsDesktopApp']
+    const { appView } = window['owsDesktopApp'];
     appView.openModalImport('admin');
-    this.setState({ openMenu: !this.state.openMenu })
+    this.setState({ openMenu: !this.state.openMenu });
   }
   public importKunde() {
-    const { appView } = window['owsDesktopApp']
+    const { appView } = window['owsDesktopApp'];
     appView.openModalImport('kunde');
-    this.setState({ openMenu: !this.state.openMenu })
+    this.setState({ openMenu: !this.state.openMenu });
   }
 
   public createGroup() {
@@ -179,33 +180,58 @@ export class MainHeader extends React.Component<Props> {
         <div className="module-main-header__info">
           <img src="images/header-chat.png" alt="header chat" />
           <span>Kommunikation</span>
-          <img src="images/icons/menu_over_blue_24x24.svg" className="chat_menu" alt="Cbat menu" onClick={this.chatMenuBound} />
-          {openMenu &&
+          <img
+            src="images/icons/menu_over_blue_24x24.svg"
+            className="chat_menu"
+            alt="Cbat menu"
+            onClick={this.chatMenuBound}
+          />
+          {openMenu && (
             <div className="menuChat">
               <ul className="ulMenuChat">
                 <li>
                   <span>Broadcast erstellen</span>
-                  <img src="images/icons/broadcast_einladen_35x35.svg" className="imageLiChatMenu" alt="Create broadcast" />
+                  <img
+                    src="images/icons/broadcast_einladen_35x35.svg"
+                    className="imageLiChatMenu"
+                    alt="Create broadcast"
+                  />
                 </li>
                 <li onClick={this.createGroupBound}>
                   <span>Gruppe erstellen</span>
-                  <img src="images/icons/broadcast_einladen_35x35.svg" className="imageLiChatMenu" alt="Create broadcast" />
+                  <img
+                    src="images/icons/broadcast_einladen_35x35.svg"
+                    className="imageLiChatMenu"
+                    alt="Create broadcast"
+                  />
                 </li>
                 <li onClick={this.importKundeBound}>
                   <span>Externe Nutzer einladen</span>
-                  <img src="images/icons/user_einladen_35x35.svg" className="imageLiChatMenu" alt="Add user" />
+                  <img
+                    src="images/icons/user_einladen_35x35.svg"
+                    className="imageLiChatMenu"
+                    alt="Add user"
+                  />
                 </li>
                 <li onClick={this.importAdminBound}>
                   <span>Interne Nutzer einladen</span>
-                  <img src="images/icons/admin_einladen_35x35.svg" className="imageLiChatMenu" alt="Add admin" />
+                  <img
+                    src="images/icons/admin_einladen_35x35.svg"
+                    className="imageLiChatMenu"
+                    alt="Add admin"
+                  />
                 </li>
                 <li onClick={this.showContactsBound}>
                   <span>Kontaktliste</span>
-                  <img src="images/icons/contact_list_35x35.svg" className="imageLiChatMenu" alt="Import contacts" />
+                  <img
+                    src="images/icons/contact_list_35x35.svg"
+                    className="imageLiChatMenu"
+                    alt="Import contacts"
+                  />
                 </li>
               </ul>
             </div>
-          }
+          )}
         </div>
         <div className="module-main-header">
           {/* <Avatar

@@ -3,7 +3,7 @@
 /* eslint-disable more/no-then */
 
 // eslint-disable-next-line func-names
-(function () {
+(function() {
   'use strict';
 
   window.Whisper = window.Whisper || {};
@@ -211,7 +211,8 @@
       'click #continue-eula': 'onContinueEula',
       'click #continue-setup-company': 'onCompanySetup',
       'click #continue-setup-admin': 'onAdminSetup',
-      'keyup #admin-signup-code, #admin-company-code': 'activateButtonRegisterAdminClient',
+      'keyup #admin-signup-code, #admin-company-code':
+        'activateButtonRegisterAdminClient',
       // 'validation #phone-number-value': 'onNumberValidation',
       'click #request-verify-call': 'onRequestVerifyCall',
       'click #request-verify-sms': 'onRequestVerifySMS',
@@ -274,7 +275,7 @@
 
       this.step = step;
       if (this.setupType == 'admin') {
-        this.setupTypeAdmin = true
+        this.setupTypeAdmin = true;
       } else if (this.setupType == 'company') {
         this.setupTypeCompany = true;
       }
@@ -361,40 +362,54 @@
             userSetupInfo.name || ''
           );
           const avatarInfo = await textsecure.storage.get('avatarInfo', null);
-          const avatarCompanyInfo = await textsecure.storage.get('dataCompanyAvatar', null);
+          const avatarCompanyInfo = await textsecure.storage.get(
+            'dataCompanyAvatar',
+            null
+          );
           if (avatarInfo) {
-            const dataAvatar = { data: avatarInfo.userAvatar, type: avatarInfo.userAvatarType }
+            const dataAvatar = {
+              data: avatarInfo.userAvatar,
+              type: avatarInfo.userAvatarType,
+            };
             await setAdminAvatar(result.info.company_number, dataAvatar);
           }
           if (avatarCompanyInfo) {
-            const dataCompanyAvatar = { data: avatarCompanyInfo.companyAvatar, type: avatarCompanyInfo.companyAvatarType }
-            await setCompanyAvatar(result.info.company_number, dataCompanyAvatar);
+            const dataCompanyAvatar = {
+              data: avatarCompanyInfo.companyAvatar,
+              type: avatarCompanyInfo.companyAvatarType,
+            };
+            await setCompanyAvatar(
+              result.info.company_number,
+              dataCompanyAvatar
+            );
           }
           // do pupdate avatar
           if (this.contactsData) {
             await updateContact(result.info.company_number, this.contactsData);
           }
           await ensureCompanyConversation(result.info.company_number);
-        } else if(this.setupType === 'admin'){
+        } else if (this.setupType === 'admin') {
           const codeCompany = textsecure.storage.get('codeCompany', false);
           const userSetupInfo = textsecure.storage.get('userSetupInfo', null);
           const avatarInfo = await textsecure.storage.get('avatarInfo', null);
           const role = await textsecure.storage.get('role', null);
           // const client_uuid = await textsecure.storage.get('client_uuid', null);
-          
-      
+
           if (avatarInfo && role) {
-            const dataAvatar = { data: avatarInfo.userAvatar, type: avatarInfo.userAvatarType }
-            if(role === 'user'){
+            const dataAvatar = {
+              data: avatarInfo.userAvatar,
+              type: avatarInfo.userAvatarType,
+            };
+            if (role === 'user') {
               await setClientAvatar(dataAvatar);
             } else {
               await setAdminAvatar(codeCompany, dataAvatar);
             }
           }
           const data = {
-            name:  userSetupInfo.name,
-          }
-          await updateClient(data)
+            name: userSetupInfo.name,
+          };
+          await updateClient(data);
           await ensureCompanyConversation(codeCompany);
         }
         await Promise.all([
@@ -432,8 +447,8 @@
           checkValidXML(xml);
           this.contactsData = xml;
           this.contactsData = {
-            'contact_data': this.contactsData.toString().replace('\n', ''),
-          }
+            contact_data: this.contactsData.toString().replace('\n', ''),
+          };
         } catch (err) {
           // TODO: show invalid xml error
           console.error(err);
@@ -540,14 +555,17 @@
                                                 <div class='dot'></div>
                                                 <div class='dot'></div>
                                                 <div class='dot'></div>
-                                              </div>`)
+                                              </div>`);
       if (number) {
-        this.accountManager.requestVoiceVerification(number).then(resp => {
-          this.$('#request-verify-call').html(i18n('callPhone'))
-        }).catch(err => {
-          console.error('Error requesting Voice verification', err);
-          this.$('#request-verify-call').html(i18n('callPhone'))
-        });
+        this.accountManager
+          .requestVoiceVerification(number)
+          .then(resp => {
+            this.$('#request-verify-call').html(i18n('callPhone'));
+          })
+          .catch(err => {
+            console.error('Error requesting Voice verification', err);
+            this.$('#request-verify-call').html(i18n('callPhone'));
+          });
       }
     },
     onRequestVerifySMS() {
@@ -556,14 +574,17 @@
                                                 <div class='dot'></div>
                                                 <div class='dot'></div>
                                                 <div class='dot'></div>
-                                              </div>`)
+                                              </div>`);
       if (number) {
-        this.accountManager.requestSMSVerification(number).then(resp => {
-          this.$('#verify-phone-code').html(i18n('verifyPhone'));
-        }).catch(err => {
-          console.error('Error requesting SMS verification', err);
-          this.$('#verify-phone-code').html(i18n('verifyPhone'))
-        });
+        this.accountManager
+          .requestSMSVerification(number)
+          .then(resp => {
+            this.$('#verify-phone-code').html(i18n('verifyPhone'));
+          })
+          .catch(err => {
+            console.error('Error requesting SMS verification', err);
+            this.$('#verify-phone-code').html(i18n('verifyPhone'));
+          });
       }
     },
     async onCompanySetup() {
@@ -599,14 +620,20 @@
       this.accountManager
         .registerSingleDevice(number, code)
         .then(async () => {
-          if(this.setupType == 'admin'){
+          if (this.setupType == 'admin') {
             // const codeCompany = textsecure.storage.get('codeCompany', false);
-            const codeInvitation = textsecure.storage.get('codeInvitation', false);
+            const codeInvitation = textsecure.storage.get(
+              'codeInvitation',
+              false
+            );
             const company = await checkCodeInvitation(codeInvitation);
-            await textsecure.storage.put('codeCompany', company.company_id + '');
+            await textsecure.storage.put(
+              'codeCompany',
+              company.company_id + ''
+            );
             //  textsecure.storage.put('companyNumber', company.company.company_number);
-             textsecure.storage.put('companyNumber', company.company_id);
-             textsecure.storage.put('role', company.role);
+            textsecure.storage.put('companyNumber', company.company_id);
+            textsecure.storage.put('role', company.role);
             //  textsecure.storage.put('client_uuid', company.client_uuid);
           }
           this.$('#verify-phone-code').html(i18n('verifyPhone'))
@@ -619,7 +646,6 @@
         .catch(err => {
           console.error('Error registering single device', err);
         });
-
     },
     onChangeAcceptEula() {
       console.log('Change accept eula');
@@ -674,27 +700,34 @@
         const img = new Image();
         img.src = event.target.result;
         // eslint-disable-next-line no-unused-expressions
-        img.onload = () => {
+        (img.onload = () => {
           const elem = document.createElement('canvas');
           elem.width = width;
           elem.height = height;
           const ctx = elem.getContext('2d');
           // img.width and img.height will contain the original dimensions
           ctx.drawImage(img, 0, 0, width, height);
-          ctx.canvas.toBlob(async (blob) => {
-            base64 = new File([blob], fileName, {
-              type: imageType,
-              lastModified: Date.now(),
-            });
-            base64 = await toBase64(base64);
-            // eslint-disable-next-line prefer-destructuring
-            base64 = base64.split(',')[1];
-            const avatarInfo = { userAvatar: base64, userAvatarType: imageType.split('/')[1] }
-            textsecure.storage.put('avatarInfo', avatarInfo);
-          }, imageType, 1);
+          ctx.canvas.toBlob(
+            async blob => {
+              base64 = new File([blob], fileName, {
+                type: imageType,
+                lastModified: Date.now(),
+              });
+              base64 = await toBase64(base64);
+              // eslint-disable-next-line prefer-destructuring
+              base64 = base64.split(',')[1];
+              const avatarInfo = {
+                userAvatar: base64,
+                userAvatarType: imageType.split('/')[1],
+              };
+              textsecure.storage.put('avatarInfo', avatarInfo);
+            },
+            imageType,
+            1
+          );
           // eslint-disable-next-line no-sequences
-        },
-          reader.onerror = error => console.log(error);
+        }),
+          (reader.onerror = error => console.log(error));
       };
     },
     // Functions for upload Company Avatar
@@ -715,27 +748,34 @@
         const img = new Image();
         img.src = event.target.result;
         // eslint-disable-next-line no-unused-expressions
-        img.onload = () => {
+        (img.onload = () => {
           const elem = document.createElement('canvas');
           elem.width = width;
           elem.height = height;
           const ctx = elem.getContext('2d');
           // img.width and img.height will contain the original dimensions
           ctx.drawImage(img, 0, 0, width, height);
-          ctx.canvas.toBlob(async (blob) => {
-            base64 = new File([blob], fileName, {
-              type: imageType,
-              lastModified: Date.now(),
-            });
-            base64 = await toBase64(base64);
-            // eslint-disable-next-line prefer-destructuring
-            base64 = base64.split(',')[1];
-            const dataCompanyAvatar = { companyAvatar: base64, companyAvatarType: imageType.split('/')[1] }
-            textsecure.storage.put('dataCompanyAvatar', dataCompanyAvatar);
-          }, imageType, 1);
+          ctx.canvas.toBlob(
+            async blob => {
+              base64 = new File([blob], fileName, {
+                type: imageType,
+                lastModified: Date.now(),
+              });
+              base64 = await toBase64(base64);
+              // eslint-disable-next-line prefer-destructuring
+              base64 = base64.split(',')[1];
+              const dataCompanyAvatar = {
+                companyAvatar: base64,
+                companyAvatarType: imageType.split('/')[1],
+              };
+              textsecure.storage.put('dataCompanyAvatar', dataCompanyAvatar);
+            },
+            imageType,
+            1
+          );
           // eslint-disable-next-line no-sequences
-        },
-          reader.onerror = error => console.log(error);
+        }),
+          (reader.onerror = error => console.log(error));
       };
     },
     // Functions for upload documents
@@ -770,9 +810,9 @@
     activateButtonProfileDetails() {
       const username = this.$el.find('#user-name-input')[0].value.length;
       const button = this.$el.find('#user-profile-done');
-      
+
       let companyName = '';
-      if(this.setupTypeCompany){
+      if (this.setupTypeCompany) {
         companyName = this.$el.find('#company-name-input')[0].value.length;
         if (companyName > 0) {
           button.removeClass('disabled');
@@ -820,7 +860,7 @@
     },
     searchBranch(e) {
       const value = e.target.value;
-      $('#branch-list p').filter(function () {
+      $('#branch-list p').filter(function() {
         $(this).toggle(
           $(this)
             .text()
@@ -842,9 +882,9 @@
           for (let i = 0; i < countries.length; i++) {
             const pItem = `<p class="pCountry" data-country-code="${
               countries[i].code
-              }" data-dial-code="${countries[i].dial_code}">${
+            }" data-dial-code="${countries[i].dial_code}">${
               countries[i].name
-              } <span class="spanDialCode">${countries[i].dial_code}</span></p>`;
+            } <span class="spanDialCode">${countries[i].dial_code}</span></p>`;
             thisElement.$('#phone-list').append(pItem);
           }
         },
@@ -872,7 +912,7 @@
     },
     searchPhones(e) {
       var value = e.target.value;
-      $('#phone-list p').filter(function () {
+      $('#phone-list p').filter(function() {
         $(this).toggle(
           $(this)
             .text()
@@ -899,11 +939,11 @@
         button.addClass('disabled');
       }
     },
-    activateButtonRegisterAdminClient(){
+    activateButtonRegisterAdminClient() {
       const code = this.$el.find('#admin-signup-code')[0].value.length;
       // const Companycode = this.$el.find('#admin-company-code')[0].value.length;
       const button = this.$el.find('#continue-setup-admin');
-      if(code > 0){
+      if (code > 0) {
         button.removeClass('disabled');
       } else {
         button.addClass('disabled');

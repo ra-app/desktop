@@ -7,29 +7,30 @@
 
 /* eslint strict: ["error", "global"] */
 async function parallel(num, arr, func) {
-  const thread = (item) => {
+  const thread = item => {
     if (!item) return;
     return func(item) // eslint-disable-line consistent-return, more/no-then
       .catch(err => {
         console.error('Error in parallel, should be handled in func!', err);
         return true;
       })
-      .then(() => { // eslint-disable-line consistent-return
+      .then(() => {
+        // eslint-disable-line consistent-return
         if (arr.length) return thread(arr.shift());
       });
-  }
+  };
   const promises = []; // eslint-disable-next-line no-plusplus
   for (let i = 0; i < num; ++i) promises.push(thread(arr.shift()));
   await Promise.all(promises);
 }
 
-function toBase64(file){
- return new Promise((resolve, reject) => {
+function toBase64(file) {
+  return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result);
     reader.onerror = error => reject(error);
-  })
+  });
 }
 
 //  ****************************************************function for xml*************************************************
@@ -41,7 +42,7 @@ function findUserXml(id, xmlData) {
     const phone = contact.getElementsByTagName('phone')[0].textContent;
     const email = contact.getElementsByTagName('email')[0].textContent;
     if (phone === id || email === id) {
-      position = i
+      position = i;
       return position; // only first position TODO LIST OF POSITION FOR MULTI SELECT
     }
   }
@@ -49,7 +50,7 @@ function findUserXml(id, xmlData) {
 }
 
 async function getXmlFile() {
-  let xml = localStorage.getItem('ContactList')
+  let xml = localStorage.getItem('ContactList');
   if (!xml) {
     const companyNumber = textsecure.storage.get('companyNumber', null);
     xml = await getContactXml(companyNumber);
@@ -58,7 +59,7 @@ async function getXmlFile() {
       localStorage.setItem('ContactList', xml);
     }
   }
-  return xml
+  return xml;
 }
 
 function prepareDataXml(contact_data) {
@@ -67,7 +68,7 @@ function prepareDataXml(contact_data) {
     // WebKit returns null on unsupported types
     xmlRes = checkValidXML(contact_data);
   } catch (ex) {
-    console.log(ex)
+    console.log(ex);
     return document.createElementNS('', 'contactlist');
   }
   const contactListXml = xmlRes.children[0];
@@ -75,19 +76,20 @@ function prepareDataXml(contact_data) {
 }
 
 function prepareDataToUpdate(xmlData) {
-  const dataString = xmlData.outerHTML
+  const dataString = xmlData.outerHTML;
   // console.log(xmlData.outerHTML, 'outerrrr')
   const aux = dataString.toString().replace(/\r|\n|\t/g, '');
   const data = {
-    'contact_data': aux.toString().replace(/>\s*/g, '>'),
-  }
-  return data
+    contact_data: aux.toString().replace(/>\s*/g, '>'),
+  };
+  return data;
 }
 
 async function updateXmlDB(data) {
   const companyNumber = textsecure.storage.get('companyNumber', null);
   if (data.contact_data.indexOf('<?xml') !== 0) {
-    data.contact_data = '<?xml version="1.0" encoding="UTF-8"?>' + data.contact_data;
+    data.contact_data =
+      '<?xml version="1.0" encoding="UTF-8"?>' + data.contact_data;
   }
   await updateContact(companyNumber, data);
   localStorage.setItem('ContactList', data.contact_data);
@@ -95,7 +97,7 @@ async function updateXmlDB(data) {
 }
 
 async function getListInvitation() {
-  let invitationList = localStorage.getItem('InvitationList')
+  let invitationList = localStorage.getItem('InvitationList');
   if (!invitationList) {
     const companyNumber = textsecure.storage.get('companyNumber', null);
     invitationList = await getClientAdminCompany(companyNumber);
@@ -103,5 +105,5 @@ async function getListInvitation() {
       localStorage.setItem('InvitationList', invitationList);
     }
   }
-  return JSON.parse(invitationList)
+  return JSON.parse(invitationList);
 }

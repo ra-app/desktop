@@ -764,7 +764,9 @@ export class Message extends React.PureComponent<Props, State> {
     let contents =
       direction === 'incoming' && status === 'error'
         ? i18n('incomingError')
-        : this.state.textModified ? this.state.textModified : text;
+        : this.state.textModified
+          ? this.state.textModified
+          : text;
 
     if (!contents) {
       return null;
@@ -1218,7 +1220,7 @@ export class Message extends React.PureComponent<Props, State> {
     let isTicketMsg = false;
     const magicWord = '[![TICKETMSG]!]';
     if (text && text.indexOf(magicWord) !== -1) {
-      this.setState({textModified: text.replace(magicWord, '')});
+      this.setState({ textModified: text.replace(magicWord, '') });
       isTicketMsg = true;
     }
 

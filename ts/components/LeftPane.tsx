@@ -86,31 +86,29 @@ export class LeftPane extends React.Component<Props> {
         className="module-left-pane__conversation-container"
         style={style}
       >
-      {!isAdmin ?
-        <ConversationListItem
-          {...conversation}
-          onClick={openConversationInternal}
-          i18n={i18n}
-        />
-        :
-        <ConversationListItem
-          {...conversation}
-          onClick={openTicket}
-          openConversation={openConversationInternal}
-          i18n={i18n}
-        />
-      }
+        {!isAdmin ? (
+          <ConversationListItem
+            {...conversation}
+            onClick={openConversationInternal}
+            i18n={i18n}
+          />
+        ) : (
+          <ConversationListItem
+            {...conversation}
+            onClick={openTicket}
+            openConversation={openConversationInternal}
+            i18n={i18n}
+          />
+        )}
       </div>
     );
   };
 
   public sortConversations() {
-    const {
-      conversations,
-    } = this.props;
+    const { conversations } = this.props;
     if (conversations) {
       // tslint:disable-next-line:no-function-expression
-      conversations.sort(function (a, b) {
+      conversations.sort(function(a, b) {
         if (a.type > b.type) {
           return 1;
         }
@@ -163,7 +161,7 @@ export class LeftPane extends React.Component<Props> {
       archivedConversations,
       i18n,
       conversations,
-       openConversationInternal,
+      openConversationInternal,
       // openTicket,
       startNewConversation,
       searchResults,
