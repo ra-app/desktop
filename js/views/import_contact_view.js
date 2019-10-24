@@ -1693,32 +1693,34 @@
           this.objectContact = [];
           const myNumber = textsecure.storage.user.getNumber();
           if (options.type === 'group') {
-            for (let i = 0; i < options.admin_client.admins.length; i++) {
-              const contact = options.admin_client.admins[i];
-              if (contact.name !== null && myNumber !== contact.phone_number) {
-                const tmpObj = {
-                  name: contact.name,
-                  surname: contact.surname,
-                  position: '',
-                  email: '',
-                  phone: contact.phone_number,
-                  ts: contact.ts_registration,
+            if(options.admin_client) {
+              for (let i = 0; i < options.admin_client.admins.length; i++) {
+                const contact = options.admin_client.admins[i];
+                if (contact.name !== null && myNumber !== contact.phone_number) {
+                  const tmpObj = {
+                    name: contact.name,
+                    surname: contact.surname,
+                    position: '',
+                    email: '',
+                    phone: contact.phone_number,
+                    ts: contact.ts_registration,
+                  }
+                  this.objectContact.push(tmpObj)
                 }
-                this.objectContact.push(tmpObj)
               }
-            }
-            for (let i = 0; i < options.admin_client.clients.length; i++) {
-              const contact = options.admin_client.clients[i];
-              if (contact.name !== null && myNumber !== contact.phone_number) {
-                const tmpObj = {
-                  name: contact.name,
-                  surname: contact.surname,
-                  position: '',
-                  email: '',
-                  phone: contact.phone_number,
-                  ts: contact.ts_registration,
+              for (let i = 0; i < options.admin_client.clients.length; i++) {
+                const contact = options.admin_client.clients[i];
+                if (contact.name !== null && myNumber !== contact.phone_number) {
+                  const tmpObj = {
+                    name: contact.name,
+                    surname: contact.surname,
+                    position: '',
+                    email: '',
+                    phone: contact.phone_number,
+                    ts: contact.ts_registration,
+                  }
+                  this.objectContact.push(tmpObj)
                 }
-                this.objectContact.push(tmpObj)
               }
             }
           } else {
