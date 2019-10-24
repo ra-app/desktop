@@ -436,6 +436,8 @@
              conversation.sendMessage(message);
             //  this.unload('archive');
             //  this.model.setArchived(true);
+            const messageLine = '[![TICKETLINE]!]';
+            conversation.sendMessage(messageLine);
              this.model.setClosed(true);
           },
           onMoveToInbox: () => {

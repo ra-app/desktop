@@ -136,6 +136,7 @@ interface State {
   expired: boolean;
   imageBroken: boolean;
   textModified: string;
+  isTicketLine: boolean;
 }
 
 const EXPIRATION_CHECK_MINIMUM = 2000;
@@ -162,6 +163,7 @@ export class Message extends React.PureComponent<Props, State> {
       expired: false,
       imageBroken: false,
       textModified: '',
+      isTicketLine: false,
     };
   }
 
@@ -769,22 +771,22 @@ export class Message extends React.PureComponent<Props, State> {
     }
 
     return (
-      <div
-        dir="auto"
-        className={classNames(
-          'module-message__text',
-          `module-message__text--${direction}`,
-          status === 'error' && direction === 'incoming'
-            ? 'module-message__text--error'
-            : null
-        )}
-      >
-        <MessageBody
+          <div
+            dir="auto"
+            className={classNames(
+              'module-message__text',
+              `module-message__text--${direction}`,
+              status === 'error' && direction === 'incoming'
+                ? 'module-message__text--error'
+                : null
+            )}
+          >
+          <MessageBody
           text={contents || ''}
           i18n={i18n}
           textPending={textPending}
-        />
-      </div>
+          />
+          </div>
     );
   }
 
@@ -1197,7 +1199,6 @@ export class Message extends React.PureComponent<Props, State> {
     );
   }
 
-  // tslint:disable-next-line cyclomatic-complexity
   public render() {
     const {
       authorPhoneNumber,
@@ -1219,6 +1220,11 @@ export class Message extends React.PureComponent<Props, State> {
     if (text && text.indexOf(magicWord) !== -1) {
       this.setState({textModified: text.replace(magicWord, '')});
       isTicketMsg = true;
+    }
+
+    const magicLine = '[![TICKETLINE]!]';
+    if (text && text.indexOf(magicLine) !== -1) {
+      this.setState({textModified: text.replace(magicLine, ''), isTicketLine: true});
     }
 
     const { expired, expiring, imageBroken } = this.state;
@@ -1243,51 +1249,57 @@ export class Message extends React.PureComponent<Props, State> {
     const onClick = isButton ? () => displayTapToViewMessage(id) : undefined;
 
     return (
-      <div
-        className={classNames(
-          'module-message',
-          `module-message--${direction}`,
-          expiring ? 'module-message--expired' : null
+      <div>
+        {!this.state.isTicketLine ? (
+            <div
+            className={classNames(
+              'module-message',
+              `module-message--${direction}`,
+              expiring ? 'module-message--expired' : null
+            )}
+            >
+            {this.renderError(direction === 'incoming')}
+            {this.renderMenu(direction === 'outgoing', triggerId)}
+            <div
+              className={classNames(
+                'module-message__container',
+                isTicketMsg ? 'receivedTicketInformation' : null,
+                isSticker ? 'module-message__container--with-sticker' : null,
+                !isSticker ? `module-message__container--${direction}` : null,
+                isTapToView ? 'module-message__container--with-tap-to-view' : null,
+                isTapToView && isTapToViewExpired
+                  ? 'module-message__container--with-tap-to-view-expired'
+                  : null,
+                !isSticker && direction === 'incoming'
+                  ? `module-message__container--incoming`
+                  : null,
+                isTapToView && isAttachmentPending && !isTapToViewExpired
+                  ? 'module-message__container--with-tap-to-view-pending'
+                  : null,
+                isTapToView && isAttachmentPending && !isTapToViewExpired
+                  ? `module-message__container--${direction}-${authorColor}-tap-to-view-pending`
+                  : null,
+                isTapToViewError
+                  ? 'module-message__container--with-tap-to-view-error'
+                  : null
+              )}
+              style={{
+                width: isShowingImage ? width : undefined,
+              }}
+              role={role}
+              onClick={onClick}
+            >
+              {this.renderAuthor()}
+              {this.renderContents()}
+              {this.renderAvatar()}
+            </div>
+            {this.renderError(direction === 'outgoing')}
+            {this.renderMenu(direction === 'incoming', triggerId)}
+            {this.renderContextMenu(triggerId)}
+            </div>
+        ) : (
+          <hr />
         )}
-      >
-        {this.renderError(direction === 'incoming')}
-        {this.renderMenu(direction === 'outgoing', triggerId)}
-        <div
-          className={classNames(
-            'module-message__container',
-            isTicketMsg ? 'receivedTicketInformation' : null,
-            isSticker ? 'module-message__container--with-sticker' : null,
-            !isSticker ? `module-message__container--${direction}` : null,
-            isTapToView ? 'module-message__container--with-tap-to-view' : null,
-            isTapToView && isTapToViewExpired
-              ? 'module-message__container--with-tap-to-view-expired'
-              : null,
-            !isSticker && direction === 'incoming'
-              ? `module-message__container--incoming`
-              : null,
-            isTapToView && isAttachmentPending && !isTapToViewExpired
-              ? 'module-message__container--with-tap-to-view-pending'
-              : null,
-            isTapToView && isAttachmentPending && !isTapToViewExpired
-              ? `module-message__container--${direction}-${authorColor}-tap-to-view-pending`
-              : null,
-            isTapToViewError
-              ? 'module-message__container--with-tap-to-view-error'
-              : null
-          )}
-          style={{
-            width: isShowingImage ? width : undefined,
-          }}
-          role={role}
-          onClick={onClick}
-        >
-          {this.renderAuthor()}
-          {this.renderContents()}
-          {this.renderAvatar()}
-        </div>
-        {this.renderError(direction === 'outgoing')}
-        {this.renderMenu(direction === 'incoming', triggerId)}
-        {this.renderContextMenu(triggerId)}
       </div>
     );
   }
