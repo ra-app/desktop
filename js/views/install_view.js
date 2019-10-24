@@ -457,6 +457,11 @@
       this.onSetupCompleted();
     },
     async onCompanyProfileDone() {
+      this.$('#company-profile-done').html(`<div class='container'>
+                                                <div class='dot'></div>
+                                                <div class='dot'></div>
+                                                <div class='dot'></div>
+                                              </div>`)
       const company = {
         taxNumber: this.$('#tax-number-input').val(),
         // taxID: this.$('#tax-id-input').val(),
@@ -465,6 +470,7 @@
         branch: this.$('#branch-select').val(),
       };
       await textsecure.storage.put('companySetupInfo', company);
+      this.$('#company-profile-done').html(i18n('continueButton'))
       this.selectStep(Steps.SETUP_USER_PROFILE);
     },
     async onUserProfileDone() {
@@ -580,6 +586,11 @@
     },
     async onVerifyPhone() {
       // TODO: check phone verification code
+      this.$('#verify-phone-code').html(`<div class='container'>
+                                                <div class='dot'></div>
+                                                <div class='dot'></div>
+                                                <div class='dot'></div>
+                                              </div>`)
       const number = this.validateNumber();
       const code = this.$('#phone-verification-code')
         .val()
@@ -598,6 +609,7 @@
              textsecure.storage.put('role', company.role);
             //  textsecure.storage.put('client_uuid', company.client_uuid);
           }
+          this.$('#verify-phone-code').html(i18n('verifyPhone'))
           this.selectStep(
             this.setupType === 'admin'
               ? Steps.SETUP_USER_PROFILE
