@@ -1688,7 +1688,7 @@
             this.typeAdmin = false;
             this.typeKunde = true;
             this.isCreatingGroup = false;
-          }else if ( options.type === 'allUsers'){
+          }else if ( options.type === 'allUsers' || options.type === 'group'){
             this.isCreatingGroup = true;
             this.typeAdmin = false;
             this.typeKunde = false;
