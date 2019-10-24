@@ -1532,7 +1532,7 @@
         "description": "Shown in the about box for the link to https://signal.org/legal"
     },
     "appTagLine": {
-        "message": "Moderne Kommunikationswelt für jede Firma im sicheren Datenraum",
+        "message": "Sichere Kundenkommunikation für Unternehmen und Organisationen",
         "description": "Tagline of the OfficeApp application"
     },
     "registerCompany": {
