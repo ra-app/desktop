@@ -505,7 +505,7 @@
             this.removeContact(id)
           }
           const buttonOpenConversation = document.createElement('img');
-          buttonOpenConversation.setAttribute('src', 'images/icons/message_over_white_24x24 black.svg')
+          buttonOpenConversation.setAttribute('src', 'images/icons/chat-contact-list.svg')
           buttonOpenConversation.classList = 'editIcon';
           buttonOpenConversation.onclick = () => {
             this.createConversation(id)
