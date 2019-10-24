@@ -668,6 +668,7 @@ $loading-height: 16px;
     }
     @media (min-height: 750px) and (min-width: 700px) {
       font-size: 14pt;
+      padding: 5px;
     }
   }
   a.link {
@@ -1252,7 +1253,9 @@ $debug: 0;
     font-family: $poppins-regular;
   }
   .eula-content {
-    white-space: pre-wrap;
+    // white-space: pre-wrap;
+    text-align: left;
+    white-space: pre-line;
   }
   .input-code {
     height: 30px;
