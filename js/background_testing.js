@@ -214,7 +214,25 @@ const ensureCompanyConversation = async company_id => {
   // await receiveCompanyText(company_id, welcomeText);
 };
 
-const ensureConversation = async phone_number => {
+const ensurePersonIsKnown = async (phoneNumber) => {
+  try {
+    const client = await getClientPhone(phoneNumber);
+    const conversation = await ensureConversation(phoneNumber, true);
+    let conversationName = 'User without data';
+    if (client.name) {
+      if (client.surname) {
+        conversationName =  client.name + ' ' + client.surname;
+      } else {
+        conversationName = client.name;
+      }
+    }
+    conversation.set({ 'name': conversationName, 'uuid': client.uuid });
+  } catch (err) {
+    console.error('ensurePersonIsKnown', phoneNumber, err);
+  }
+};
+
+const ensureConversation = async (phone_number, notUpdate = false) => {
   await waitForConversationController();
   console.log('ensureConversation', phone_number);
   let conversation = await ConversationController.get(phone_number, 'private');
@@ -227,7 +245,9 @@ const ensureConversation = async phone_number => {
     phone_number,
     'private'
   );
-  conversation.set({ active_at: Date.now() });
+  if(!notUpdate){
+    conversation.set({ active_at: Date.now() });
+  }
   console.log('ensureConversation new', phone_number, conversation);
 
   await window.Signal.Data.updateConversation(
