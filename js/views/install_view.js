@@ -292,6 +292,14 @@
         this.activateButtonCompanyInfo();
       }
 
+      if ( this.step === Steps.SETUP_BRANCHEN ){
+        document.getElementById('search-branch').focus()
+      }
+
+      if ( this.step === Steps.SETUP_PHONESLIST ){
+        document.getElementById('search-phones').focus()
+      }
+
       if (this.step === Steps.SETUP_USER_PROFILE) {
         const info = textsecure.storage.get('userSetupInfo', null);
         if (info) {
@@ -786,6 +794,7 @@
         imprint: this.$el.find('#imprint-input')[0].value,
       };
       this.selectStep(Steps.SETUP_BRANCHEN);
+     
     },
     onSelectBranch(e) {
       this.selectStep(Steps.SETUP_COMPANY_PROFILE);
