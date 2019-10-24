@@ -2,16 +2,15 @@
 /* global textsecure: false */
 
 // eslint-disable-next-line func-names
-(function () {
+(function() {
   'use strict';
 
   window.Whisper = window.Whisper || {};
 
-  const contactsData = null
+  const contactsData = null;
   var dataUsersToUpdate = [];
   var dataUsersToInvitate = [];
   var activeRolToInvitate = null;
-
 
   Whisper.ImportContactView = Whisper.View.extend({
     templateName: 'import-contact-table',
@@ -28,8 +27,8 @@
     initialize(options) {
       this.render();
       if (options && options.contact_data !== undefined) {
-          const contactListXml = prepareDataXml(options.contact_data)
-          this.createTable(contactListXml);
+        const contactListXml = prepareDataXml(options.contact_data);
+        this.createTable(contactListXml);
       } else {
         this.createEmptyMessage();
       }
@@ -41,7 +40,8 @@
       'click #import-button': 'importContact',
       'click #sendMultipleInvitations': 'importMultiContact',
       'change #contact-import-file-input': 'onChoseContactsFile',
-      'keyup  #addNameInput, #addSurnameInput, #addPositionInput, #addTelephoneInput, #addEmailInput': 'activateButtonAddNewContact',
+      'keyup  #addNameInput, #addSurnameInput, #addPositionInput, #addTelephoneInput, #addEmailInput':
+        'activateButtonAddNewContact',
       'click #searchContactInvitation, #imagePlus': 'searchContact',
       'keyup #searchInput': 'searchContactList',
       'click #sendInvitationIcon': 'cleanMultiSelectInvite',
@@ -49,26 +49,41 @@
     createEmptyMessage() {
       const divNoContacts = document.createElement('div');
       divNoContacts.className = 'divNoContacts';
-      divNoContacts.innerText = 'Sie haben keine importierten Kontakte.'
-      this.$('#contactTable').append(divNoContacts)
+      divNoContacts.innerText = 'Sie haben keine importierten Kontakte.';
+      this.$('#contactTable').append(divNoContacts);
     },
     createTable(contactListXml) {
       const table = document.createElement('table');
       table.className = 'sortable';
 
-      const headerTexts = {'#':'#', 'name':'name', 'surname':'Nachname', 'position':'position', 'email':'E-Mail', 'type':'Extern/Intern', 'status':'Einladungsstatus', 'profile':'Profil', 'actions':'Aktion'};
-      console.log('HEADEEEEE',headerTexts, headerTexts[0]);
+      const headerTexts = {
+        '#': '#',
+        name: 'name',
+        surname: 'Nachname',
+        position: 'position',
+        email: 'E-Mail',
+        type: 'Extern/Intern',
+        status: 'Einladungsstatus',
+        profile: 'Profil',
+        actions: 'Aktion',
+      };
+      console.log('HEADEEEEE', headerTexts, headerTexts[0]);
       if (table) {
         const header = table.createTHead();
         const row = header.insertRow();
 
         for (const prop in headerTexts) {
           const cell = document.createElement('th');
-          if (prop === '#' || prop === 'type' || prop === 'profile' || prop === 'actions') {
+          if (
+            prop === '#' ||
+            prop === 'type' ||
+            prop === 'profile' ||
+            prop === 'actions'
+          ) {
             cell.className = 'no-sort';
           }
           cell.innerHTML = headerTexts[prop];
-          row.appendChild(cell)
+          row.appendChild(cell);
         }
         // headerTexts.forEach((element, index) => {
         //   const cell = document.createElement('th');
@@ -88,14 +103,13 @@
         tbody.appendChild(tableRow);
         for (const prop in headerTexts) {
           const cellTd = document.createElement('td');
-            if (contact.getElementsByTagName(prop)[0]) {
+          if (contact.getElementsByTagName(prop)[0]) {
             const cell = contact.getElementsByTagName(prop)[0].textContent;
             const cellTdContent = document.createTextNode(cell);
             cellTd.appendChild(cellTdContent);
           } else {
             const id = contact.getElementsByTagName('phone')[0].textContent;
-            this.appendElemtns(prop, cellTd, id, contact)
-
+            this.appendElemtns(prop, cellTd, id, contact);
           }
           tableRow.appendChild(cellTd);
         }
@@ -114,13 +128,13 @@
         // }
       }
       //Append content
-      table.appendChild(tbody)
+      table.appendChild(tbody);
       this.$('#contactTable').append(table);
       this.$('table').tablesort();
     },
     searchTable(e) {
       let value = e.target.value.toLowerCase();
-      $('#myTable tr').filter(function () {
+      $('#myTable tr').filter(function() {
         $(this).toggle(
           $(this)
             .text()
@@ -157,7 +171,7 @@
         e.preventDefault();
       }
 
-      this.$('#contact-import-file-input').click()
+      this.$('#contact-import-file-input').click();
     },
     async onChoseContactsFile() {
       this.contactsData = null;
@@ -166,18 +180,17 @@
       let file = files[0];
       this.$('#contact-import-file-error').text('');
 
-
       if (file) {
         this.openModal('import');
         this.$('#acept-import-contact').click(() => {
           this.acceptImportContact(file);
           this.$('#modalOverLay').addClass('hidden');
-        })
+        });
         this.$('#cancel-import-contact').click(() => {
           this.$('#modalOverLay').addClass('hidden');
           input.val('');
           file = null;
-        })
+        });
       }
       if (!file) this.contactsData = null;
       // console.log('Import file chose', files);
@@ -190,9 +203,9 @@
         this.contactsData = xml;
         const aux = this.contactsData.toString().replace(/\r|\n|\t/g, '');
         this.contactsData = {
-          'contact_data': aux.toString().replace(/>\s*/g, '>'),
-        }
-        updateXmlDB(this.contactsData)
+          contact_data: aux.toString().replace(/>\s*/g, '>'),
+        };
+        updateXmlDB(this.contactsData);
         // const companyNumber = textsecure.storage.get('companyNumber', null);
         // await updateContact(companyNumber, this.contactsData);
       } catch (err) {
@@ -202,7 +215,7 @@
         this.$('#contact-import-file-error').text(i18n('invalidXML'));
         file = null;
       }
-      this.refreshTable()
+      this.refreshTable();
     },
     openModal(type) {
       const modal = this.$('#modalContact');
@@ -211,35 +224,33 @@
       if (type === 'import') {
         const message = document.createElement('p');
         message.innerText = i18n('messageImportContact');
-        message.className = 'messageModal'
+        message.className = 'messageModal';
         const divButtonsImport = document.createElement('div');
         divButtonsImport.className = 'divButtonsImport';
         const aceptButton = document.createElement('button');
-        aceptButton.innerHTML = 'Weiter'
+        aceptButton.innerHTML = 'Weiter';
         aceptButton.id = 'acept-import-contact';
         aceptButton.className = 'buttonsModal';
         const cancelButton = document.createElement('button');
         cancelButton.innerHTML = 'Abbrechen';
         cancelButton.id = 'cancel-import-contact';
         cancelButton.className = 'buttonsModal';
-        cancelButton.style.marginLeft =  '10px';
+        cancelButton.style.marginLeft = '10px';
         divButtonsImport.appendChild(aceptButton);
         divButtonsImport.appendChild(cancelButton);
         modal.append(message);
         modal.append(divButtonsImport);
       }
-
     },
     closeModal() {
-
       this.$('#modalOverLay').addClass('hidden');
     },
     async refreshTable() {
       this.$('#contactTable').empty();
-      const contactListXml = prepareDataXml(this.contactsData.contact_data)
-      this.createTable(contactListXml)
+      const contactListXml = prepareDataXml(this.contactsData.contact_data);
+      this.createTable(contactListXml);
     },
-    async  appendElemtns(prop, cellTd, id, contact) {
+    async appendElemtns(prop, cellTd, id, contact) {
       const hasInvitation = await this.hasInvitation(id);
       let userType;
       if (hasInvitation.found) {
@@ -249,7 +260,7 @@
           userType = 'client';
         }
       } else {
-        userType = 'none'
+        userType = 'none';
       }
       switch (prop) {
         case '#': {
@@ -267,15 +278,17 @@
           }
           checkbox.addEventListener('click', () => {
             if (this.$('input:checkbox:checked').length >= 1) {
-              this.$('.buttonSendInvitation').addClass('disabled')
+              this.$('.buttonSendInvitation').addClass('disabled');
               this.$('.buttonSendInvitation').disabled = true;
-              this.$('#sendMultipleInvitations').removeClass('disabled')
-              this.$('#sendMultipleInvitations').prop('disabled', false)
+              this.$('#sendMultipleInvitations').removeClass('disabled');
+              this.$('#sendMultipleInvitations').prop('disabled', false);
             } else if (this.$('input:checkbox:checked').length < 1) {
-              this.$('.buttonSendInvitation:not(.none)').removeClass('disabled');
+              this.$('.buttonSendInvitation:not(.none)').removeClass(
+                'disabled'
+              );
               this.$('.buttonSendInvitation:not(.none)').disabled = false;
               this.$('#sendMultipleInvitations').addClass('disabled');
-              this.$('#sendMultipleInvitations').prop('disabled', true)
+              this.$('#sendMultipleInvitations').prop('disabled', true);
             }
             // add element to object
             if (checkbox.checked) {
@@ -284,25 +297,25 @@
                   userid: id,
                   cell: contact.outerHTML,
                   position: 'kunde',
-                }
+                };
               } else if (document.getElementById('admin-' + id).checked) {
                 dataUsersToInvitate[id] = {
                   userid: id,
                   cell: contact.outerHTML,
                   position: 'admin',
-                }
+                };
               } else if (document.getElementById('none-' + id).checked) {
                 dataUsersToInvitate[id] = {
                   userid: id,
                   cell: contact.outerHTML,
                   position: 'none',
-                }
+                };
               }
             } else {
               delete dataUsersToInvitate[id];
             }
-          })
-          cellTd.appendChild(checkbox)
+          });
+          cellTd.appendChild(checkbox);
           break;
         }
         // eslint-disable-next-line no-case-declarations
@@ -316,12 +329,12 @@
 
           const inputKunde = document.createElement('input');
           inputKunde.type = 'radio';
-          inputKunde.name = `state-d-${id}`
+          inputKunde.name = `state-d-${id}`;
           inputKunde.id = `kunde-${id}`;
 
           if (userType === 'client') {
             inputKunde.checked = true;
-            inputKunde.setAttribute('checked', 'checked')
+            inputKunde.setAttribute('checked', 'checked');
           }
 
           const labelKunde = document.createElement('label');
@@ -330,11 +343,11 @@
 
           const inputNone = document.createElement('input');
           inputNone.type = 'radio';
-          inputNone.name = `state-d-${id}`
+          inputNone.name = `state-d-${id}`;
           inputNone.id = `none-${id}`;
           if (userType == 'none') {
             inputNone.checked = true;
-            inputNone.setAttribute('checked', 'checked')
+            inputNone.setAttribute('checked', 'checked');
           }
 
           const labelNone = document.createElement('label');
@@ -343,12 +356,12 @@
 
           const inputAdmin = document.createElement('input');
           inputAdmin.type = 'radio';
-          inputAdmin.name = `state-d-${id}`
+          inputAdmin.name = `state-d-${id}`;
           inputAdmin.id = `admin-${id}`;
 
           if (userType == 'admin') {
             inputAdmin.checked = true;
-            inputAdmin.setAttribute('checked', 'checked')
+            inputAdmin.setAttribute('checked', 'checked');
           }
           const labelAdmin = document.createElement('label');
           labelAdmin.setAttribute('for', `admin-${id}`);
@@ -360,9 +373,9 @@
           spanSwitchAdmin.className = 'spanSwitch admin';
           spanSwitchAdmin.innerText = 'Intern';
           if (hasInvitation.found && hasInvitation.accepted) {
-            inputAdmin.setAttribute('disabled', true)
-            inputNone.setAttribute('disabled', true)
-            inputKunde.setAttribute('disabled', true)
+            inputAdmin.setAttribute('disabled', true);
+            inputNone.setAttribute('disabled', true);
+            inputKunde.setAttribute('disabled', true);
             inputKunde.disabled = true;
             inputAdmin.disabled = true;
             inputNone.disabled = true;
@@ -376,7 +389,7 @@
           divSwitch.appendChild(labelAdmin);
           divSwitch.appendChild(aLabel);
 
-          cellTd.appendChild(spanSwitchKunde)
+          cellTd.appendChild(spanSwitchKunde);
           cellTd.appendChild(divSwitch);
           cellTd.appendChild(spanSwitchAdmin);
 
@@ -386,66 +399,83 @@
                 position: 'kunde',
                 userid: id,
                 cell: contact.outerHTML,
-              }
+              };
               document.getElementById(`admin-${id}`).checked = false;
               document.getElementById(`none-${id}`).checked = false;
               document.getElementById(`admin-${id}`).removeAttribute('cheked');
               document.getElementById(`none-${id}`).removeAttribute('cheked');
 
-
               if (this.$('input:checkbox:checked').length <= 1) {
-                document.getElementById(`buttonSendInvitation-${id}`).disabled = false
-                document.getElementById(`checkbox-${id}`).disabled = false
-                document.getElementById(`buttonSendInvitation-${id}`).classList.remove('disabled');
-                document.getElementById(`buttonSendInvitation-${id}`).classList.remove('none');
+                document.getElementById(
+                  `buttonSendInvitation-${id}`
+                ).disabled = false;
+                document.getElementById(`checkbox-${id}`).disabled = false;
+                document
+                  .getElementById(`buttonSendInvitation-${id}`)
+                  .classList.remove('disabled');
+                document
+                  .getElementById(`buttonSendInvitation-${id}`)
+                  .classList.remove('none');
               }
             }
-          })
+          });
           inputNone.addEventListener('click', () => {
             if (inputNone.checked) {
               dataUsersToUpdate[id] = {
                 position: 'none',
                 userid: id,
                 cell: contact.outerHTML,
-              }
+              };
               document.getElementById(`admin-${id}`).checked = false;
               document.getElementById(`kunde-${id}`).checked = false;
               document.getElementById(`admin-${id}`).removeAttribute('cheked');
               document.getElementById(`kunde-${id}`).removeAttribute('cheked');
 
-              document.getElementById(`buttonSendInvitation-${id}`).disabled = true
-              document.getElementById(`checkbox-${id}`).disabled = true
-              document.getElementById(`checkbox-${id}`).checked = false
-              document.getElementById(`buttonSendInvitation-${id}`).classList.add('disabled');
-              document.getElementById(`buttonSendInvitation-${id}`).classList.add('none');
+              document.getElementById(
+                `buttonSendInvitation-${id}`
+              ).disabled = true;
+              document.getElementById(`checkbox-${id}`).disabled = true;
+              document.getElementById(`checkbox-${id}`).checked = false;
+              document
+                .getElementById(`buttonSendInvitation-${id}`)
+                .classList.add('disabled');
+              document
+                .getElementById(`buttonSendInvitation-${id}`)
+                .classList.add('none');
             }
-          })
+          });
           inputAdmin.addEventListener('click', () => {
             if (inputAdmin.checked) {
               dataUsersToUpdate[id] = {
                 position: 'admin',
                 userid: id,
                 cell: contact.outerHTML,
-              }
+              };
               document.getElementById(`kunde-${id}`).checked = false;
               document.getElementById(`none-${id}`).checked = false;
               document.getElementById(`kunde-${id}`).removeAttribute('cheked');
               document.getElementById(`none-${id}`).removeAttribute('cheked');
               if (this.$('input:checkbox:checked').length <= 1) {
-                document.getElementById(`checkbox-${id}`).disabled = false
-                document.getElementById(`buttonSendInvitation-${id}`).disabled = false
-                document.getElementById(`buttonSendInvitation-${id}`).classList.remove('disabled');
-                document.getElementById(`buttonSendInvitation-${id}`).classList.remove('none');
+                document.getElementById(`checkbox-${id}`).disabled = false;
+                document.getElementById(
+                  `buttonSendInvitation-${id}`
+                ).disabled = false;
+                document
+                  .getElementById(`buttonSendInvitation-${id}`)
+                  .classList.remove('disabled');
+                document
+                  .getElementById(`buttonSendInvitation-${id}`)
+                  .classList.remove('none');
               }
             }
             // console.log('dataUsersToUpdate ===> ', dataUsersToUpdate)
-          })
+          });
           break;
         // eslint-disable-next-line no-case-declarations
         case 'status':
           const button = document.createElement('button');
-          button.id = `buttonSendInvitation-${id}`
-          button.classList.add('buttonSendInvitation')
+          button.id = `buttonSendInvitation-${id}`;
+          button.classList.add('buttonSendInvitation');
           button.innerHTML = i18n('sendAnInvitation');
           if (hasInvitation.found) {
             if (hasInvitation.accepted) {
@@ -453,11 +483,9 @@
               button.classList.add('disabled');
               button.classList.add('none');
               button.disabled = true;
-
             } else {
               button.innerHTML = i18n('sendAgainInvitation');
             }
-
           }
           if (userType === 'none') {
             button.classList.add('disabled');
@@ -470,39 +498,39 @@
                 userid: id,
                 cell: contact.outerHTML,
                 position: 'kunde',
-              }
+              };
             } else if (document.getElementById('admin-' + id).checked) {
               dataUsersToInvitate[id] = {
                 userid: id,
                 cell: contact.outerHTML,
                 position: 'admin',
-              }
+              };
             } else if (document.getElementById('none-' + id).checked) {
               dataUsersToInvitate[id] = {
                 userid: id,
                 cell: contact.outerHTML,
                 position: 'none',
-              }
+              };
             }
-            this.sendInvitation()
-          }
+            this.sendInvitation();
+          };
           cellTd.appendChild(button);
           break;
         // eslint-disable-next-line no-case-declarations
         case 'actions':
           // eslint-disable-next-line no-case-declarations
           const buttonEdit = document.createElement('img');
-          buttonEdit.setAttribute('src', 'images/icons/edit-contact-list.svg')
-          buttonEdit.classList = 'editIcon'
+          buttonEdit.setAttribute('src', 'images/icons/edit-contact-list.svg');
+          buttonEdit.classList = 'editIcon';
           buttonEdit.onclick = () => {
-            this.editContact(id)
-          }
+            this.editContact(id);
+          };
           const buttonRemove = document.createElement('img');
-          buttonRemove.setAttribute('src', 'images/icons/x-contact-list.svg')
+          buttonRemove.setAttribute('src', 'images/icons/x-contact-list.svg');
           buttonRemove.classList = 'editIcon';
           buttonRemove.onclick = () => {
-            this.removeContact(id)
-          }
+            this.removeContact(id);
+          };
           cellTd.appendChild(buttonEdit);
           cellTd.appendChild(buttonRemove);
           break;
@@ -516,7 +544,7 @@
         found: false,
         accepted: false,
         role_id: null,
-      }
+      };
       if (invitationList) {
         if (invitationList.invites) {
           invitationList.invites.forEach(element => {
@@ -525,7 +553,7 @@
                 found: true,
                 accepted: element.accepted,
                 role_id: element.role_id,
-              }
+              };
             }
           });
         }
@@ -548,21 +576,22 @@
       const imageClosePanel = document.createElement('img');
       imageClosePanel.className = 'imageClosePanel';
       imageClosePanel.id = 'imageClosePanel';
-      imageClosePanel.src = 'images/icons/x-contact-list.svg'
+      imageClosePanel.src = 'images/icons/x-contact-list.svg';
       imageClosePanel.onclick = () => {
         dataUsersToInvitate = {};
         this.closeModal();
-      }
+      };
       const sendInvitationTitle = document.createElement('span');
       sendInvitationTitle.innerHTML = 'Benutzer einladen';
-      sendInvitationTitle.className = 'titleSendInvitation'
+      sendInvitationTitle.className = 'titleSendInvitation';
       const divMainContentEdit = document.createElement('div');
       divMainContentEdit.classList.add('mainInvitationDiv');
       divMainContentEdit.id = 'divMainContentEdit';
       const textarea = document.createElement('textarea');
       textarea.className = 'textareaSendeInvitation';
-      textarea.id = 'textareaSendeInvitation'
-      textarea.placeholder = 'Lass uns mit OfficeApp kommunizieren: http://officeapp.eu';
+      textarea.id = 'textareaSendeInvitation';
+      textarea.placeholder =
+        'Lass uns mit OfficeApp kommunizieren: http://officeapp.eu';
 
       const searchTab = document.createElement('div');
       searchTab.className = 'tab';
@@ -579,14 +608,14 @@
       buttonAdmin.innerHTML = 'Intern';
       buttonAdmin.id = 'filterAdmin';
       buttonAdmin.onclick = () => {
-        this.filterTab('Admin')
-      }
+        this.filterTab('Admin');
+      };
       buttonUsers.className = 'tablinks';
       buttonUsers.innerHTML = 'Extern';
       buttonUsers.id = 'filterUsers';
       buttonUsers.onclick = () => {
-        this.filterTab('Users')
-      }
+        this.filterTab('Users');
+      };
       // searchTab.append(buttonAll);
       searchTab.append(buttonAdmin);
       searchTab.append(buttonUsers);
@@ -596,10 +625,10 @@
       inputSelect.id = 'searchContactInvitation';
       const labelInput = document.createElement('label');
       labelInput.innerHTML = 'NAME HINZUFÜGEN';
-      labelInput.classList.add('labelInputInvitation')
-      const imagePlus = document.createElement('img')
+      labelInput.classList.add('labelInputInvitation');
+      const imagePlus = document.createElement('img');
       imagePlus.src = 'images/icons/icon-picture-add-200.svg';
-      imagePlus.classList.add('imagePlus')
+      imagePlus.classList.add('imagePlus');
       imagePlus.id = 'imagePlus';
       const buttonInviteContact = document.createElement('button');
       buttonInviteContact.classList.add('buttonInviteContact');
@@ -607,8 +636,8 @@
       buttonInviteContact.id = 'buttonInviteContact';
       buttonInviteContact.innerHTML = 'Teilen';
       buttonInviteContact.onclick = () => {
-        this.sendInvitationCall()
-      }
+        this.sendInvitationCall();
+      };
       // const sortTab = document.createElement('div');
       // const buttonAdmin = document.createElement('button');
       // buttonAdmin.innerHTML = 'Admin';
@@ -630,7 +659,7 @@
       divAdminToSend.id = 'AdminList';
 
       let selectedTab;
-      if(Object.keys(dataUsersToInvitate).length > 0){
+      if (Object.keys(dataUsersToInvitate).length > 0) {
         buttonInviteContact.classList.remove('disabled');
       }
       Object.keys(dataUsersToInvitate).forEach((element, index) => {
@@ -647,31 +676,36 @@
       // UsersList
       Object.keys(dataUsersToInvitate).forEach((element, index) => {
         // console.log(dataUsersToInvitate, 'dataUsersToInvitate')
-        const id = dataUsersToInvitate[element].userid
+        const id = dataUsersToInvitate[element].userid;
         const data = prepareDataXml(dataUsersToInvitate[element].cell);
         const userDiv = document.createElement('div');
-        userDiv.classList.add('userInvitation')
+        userDiv.classList.add('userInvitation');
         userDiv.id = 'user' + id;
         const avatarUser = document.createElement('img');
         avatarUser.src = 'images/header-chat.png';
         const divInfo = document.createElement('div');
         const nameUser = document.createElement('span');
-        nameUser.textContent = data.getElementsByTagName('name')[0].childNodes[0].nodeValue + ' ' + data.getElementsByTagName('surname')[0].childNodes[0].nodeValue;
+        nameUser.textContent =
+          data.getElementsByTagName('name')[0].childNodes[0].nodeValue +
+          ' ' +
+          data.getElementsByTagName('surname')[0].childNodes[0].nodeValue;
         const breakLine = document.createElement('br');
         const tlfUser = document.createElement('span');
-        tlfUser.textContent = data.getElementsByTagName('phone')[0].childNodes[0].nodeValue;
+        tlfUser.textContent = data.getElementsByTagName(
+          'phone'
+        )[0].childNodes[0].nodeValue;
         const removeUser = document.createElement('img');
         removeUser.src = 'images/icons/x-contact-list.svg';
         removeUser.className = 'imageCloseUser';
         removeUser.onclick = () => {
           document.getElementById('user' + id).remove();
           delete dataUsersToInvitate[id];
-          if(Object.keys(dataUsersToInvitate).length === 0){
+          if (Object.keys(dataUsersToInvitate).length === 0) {
             buttonInviteContact.classList.add('disabled');
           }
-        }
+        };
         divInfo.appendChild(nameUser);
-        divInfo.appendChild(breakLine)
+        divInfo.appendChild(breakLine);
         divInfo.appendChild(tlfUser);
         userDiv.appendChild(avatarUser);
         userDiv.appendChild(divInfo);
@@ -684,7 +718,7 @@
         }
       });
       divMainContentEdit.appendChild(textarea);
-      divMainContentEdit.appendChild(searchTab)
+      divMainContentEdit.appendChild(searchTab);
       divMainContentEdit.appendChild(labelInput);
       divMainContentEdit.appendChild(inputSelect);
       divMainContentEdit.appendChild(imagePlus);
@@ -696,10 +730,9 @@
       this.$('#modalContact').append(divKundeToSend);
       this.$('#modalContact').append(divAdminToSend);
       this.$('#modalContact').append(buttonInviteContact);
-
     },
     async sendInvitationCall() {
-      await parallel(1, Object.keys(dataUsersToInvitate), async (element) => {
+      await parallel(1, Object.keys(dataUsersToInvitate), async element => {
         const id = dataUsersToInvitate[element].userid;
         const type = dataUsersToInvitate[element].position;
         const companyNumber = textsecure.storage.get('companyNumber', null);
@@ -719,18 +752,20 @@
         const dataSms = {
           phone_number: id,
           code: result.code,
-        }
-        sendSms(companyNumber, dataSms)
+        };
+        sendSms(companyNumber, dataSms);
 
-        document.getElementById(`buttonSendInvitation-${id}`).innerText = i18n('sendAgainInvitation')
-      })
+        document.getElementById(`buttonSendInvitation-${id}`).innerText = i18n(
+          'sendAgainInvitation'
+        );
+      });
       dataUsersToInvitate = {};
       this.closeModal();
     },
     async removeContact(id) {
       this.openModal('remove');
       const xml = await getXmlFile();
-      this.panelRemoveContact(id, xml)
+      this.panelRemoveContact(id, xml);
     },
 
     panelRemoveContact(id, xml) {
@@ -738,22 +773,22 @@
       divMainHeaderEdit.className = 'divModalHeader';
       const imageClosePanel = document.createElement('img');
       imageClosePanel.className = 'imageClosePanel';
-      imageClosePanel.src = 'images/icons/x-contact-list.svg'
+      imageClosePanel.src = 'images/icons/x-contact-list.svg';
       imageClosePanel.onclick = () => {
         this.closeModal();
-      }
+      };
       divMainHeaderEdit.appendChild(imageClosePanel);
 
       const divMainContentEdit = document.createElement('div');
       divMainContentEdit.className = 'divMainContentEdit divRemoveContact';
-      divMainContentEdit.innerHTML = 'Sind Sie sicher, dass Sie diesen Kontakt entfernen möchten? <br>'
+      divMainContentEdit.innerHTML =
+        'Sind Sie sicher, dass Sie diesen Kontakt entfernen möchten? <br>';
       const buttonRemoveContact = document.createElement('button');
       buttonRemoveContact.classList = 'marginTop20 buttonsModal';
       buttonRemoveContact.innerText = 'Entfernen';
       buttonRemoveContact.onclick = () => {
-
-        const xmlData = prepareDataXml(xml)
-        const positionXML = findUserXml(id, xmlData)
+        const xmlData = prepareDataXml(xml);
+        const positionXML = findUserXml(id, xmlData);
         const y = xmlData.getElementsByTagName('contact')[positionXML];
         xmlData.removeChild(y);
         const dataToUpdate = prepareDataToUpdate(xmlData);
@@ -761,7 +796,7 @@
         updateXmlDB(dataToUpdate);
         this.closeModal();
         this.refreshTable();
-      }
+      };
       divMainContentEdit.appendChild(buttonRemoveContact);
       this.$('#modalContact').append(divMainHeaderEdit);
       this.$('#modalContact').append(divMainContentEdit);
@@ -770,31 +805,34 @@
     async editContact(id) {
       this.openModal('edit');
       const xml = await getXmlFile();
-      const xmlData = prepareDataXml(xml)
-      const positionXML = findUserXml(id, xmlData)
+      const xmlData = prepareDataXml(xml);
+      const positionXML = findUserXml(id, xmlData);
       const userInfo = xmlData.children.item(positionXML);
       // xmlData.getElementsByTagName("surname")[positionXML].childNodes[0].nodeValue = "new content" ; //// USE THAT FOR MODIFY ELEMENT
       const cln = userInfo.cloneNode(true);
-      this.createEditPanel(cln, xmlData, positionXML)
-
+      this.createEditPanel(cln, xmlData, positionXML);
     },
     createEditPanel(cln, xmlData, positionXML) {
       // console.log('CLN !!!! ', cln.getElementsByTagName('name'))
       const divMainHeaderEdit = document.createElement('div');
       divMainHeaderEdit.className = 'divModalHeader';
       const pUserName = document.createElement('p');
-      pUserName.innerText = cln.getElementsByTagName('name')[0].childNodes[0].nodeValue + ' ' + cln.getElementsByTagName('surname')[0].childNodes[0].nodeValue
+      pUserName.innerText =
+        cln.getElementsByTagName('name')[0].childNodes[0].nodeValue +
+        ' ' +
+        cln.getElementsByTagName('surname')[0].childNodes[0].nodeValue;
       pUserName.className = 'titleHeaderEdit';
       const pUserPhone = document.createElement('p');
-      pUserPhone.innerText = cln.getElementsByTagName('phone')[0].childNodes[0].nodeValue
+      pUserPhone.innerText = cln.getElementsByTagName(
+        'phone'
+      )[0].childNodes[0].nodeValue;
       pUserPhone.className = 'titleHeaderEdit';
       const imageClosePanel = document.createElement('img');
       imageClosePanel.className = 'imageClosePanel';
-      imageClosePanel.src = 'images/icons/x-contact-list.svg'
+      imageClosePanel.src = 'images/icons/x-contact-list.svg';
       imageClosePanel.onclick = () => {
         this.closeModal();
-      }
-
+      };
 
       divMainHeaderEdit.appendChild(pUserName);
       divMainHeaderEdit.appendChild(pUserPhone);
@@ -810,9 +848,11 @@
       labelField.innerText = 'Vorname';
       const inputEditVorname = document.createElement('input');
       inputEditVorname.type = 'text';
-      inputEditVorname.value = cln.getElementsByTagName('name')[0].childNodes[0].nodeValue;
-      divEditVorname.appendChild(labelField)
-      divEditVorname.appendChild(inputEditVorname)
+      inputEditVorname.value = cln.getElementsByTagName(
+        'name'
+      )[0].childNodes[0].nodeValue;
+      divEditVorname.appendChild(labelField);
+      divEditVorname.appendChild(inputEditVorname);
 
       const divEditNachname = document.createElement('div');
       divEditNachname.className = 'divEdit';
@@ -821,9 +861,11 @@
       labelNachName.innerText = 'Nachname';
       const inputNachName = document.createElement('input');
       inputNachName.type = 'text';
-      inputNachName.value = cln.getElementsByTagName('surname')[0].childNodes[0].nodeValue;
-      divEditNachname.appendChild(labelNachName)
-      divEditNachname.appendChild(inputNachName)
+      inputNachName.value = cln.getElementsByTagName(
+        'surname'
+      )[0].childNodes[0].nodeValue;
+      divEditNachname.appendChild(labelNachName);
+      divEditNachname.appendChild(inputNachName);
 
       const divEditPosition = document.createElement('div');
       divEditPosition.className = 'divEdit';
@@ -832,9 +874,11 @@
       labelPosition.innerText = 'Position';
       const inputPosition = document.createElement('input');
       inputPosition.type = 'text';
-      inputPosition.value = cln.getElementsByTagName('position')[0].childNodes[0].nodeValue;
-      divEditPosition.appendChild(labelPosition)
-      divEditPosition.appendChild(inputPosition)
+      inputPosition.value = cln.getElementsByTagName(
+        'position'
+      )[0].childNodes[0].nodeValue;
+      divEditPosition.appendChild(labelPosition);
+      divEditPosition.appendChild(inputPosition);
 
       const divTelephone = document.createElement('div');
       divTelephone.className = 'divEdit';
@@ -844,28 +888,33 @@
       const inputTelephone = document.createElement('input');
       inputTelephone.type = 'text';
       inputTelephone.readOnly = true;
-      inputTelephone.value = cln.getElementsByTagName('phone')[0].childNodes[0].nodeValue;
-      divTelephone.appendChild(labelTelephone)
-      divTelephone.appendChild(inputTelephone)
+      inputTelephone.value = cln.getElementsByTagName(
+        'phone'
+      )[0].childNodes[0].nodeValue;
+      divTelephone.appendChild(labelTelephone);
+      divTelephone.appendChild(inputTelephone);
 
       const divEmail = document.createElement('div');
       divEmail.className = 'divEdit';
       const labelEmail = document.createElement('span');
       labelEmail.className = 'labelEdit';
-      labelEmail.innerText = 'Email'
+      labelEmail.innerText = 'Email';
       const inputEmail = document.createElement('input');
       inputEmail.type = 'text';
-      inputEmail.value = cln.getElementsByTagName('email')[0].childNodes[0].nodeValue;
-      divEmail.appendChild(labelEmail)
-      divEmail.appendChild(inputEmail)
+      inputEmail.value = cln.getElementsByTagName(
+        'email'
+      )[0].childNodes[0].nodeValue;
+      divEmail.appendChild(labelEmail);
+      divEmail.appendChild(inputEmail);
 
       const divRadioButtons = document.createElement('div');
       divRadioButtons.className = 'divEdit';
       let userTypeEdit;
       if (cln.getElementsByTagName('type')[0]) {
-        userTypeEdit = cln.getElementsByTagName('type')[0].childNodes[0].nodeValue
+        userTypeEdit = cln.getElementsByTagName('type')[0].childNodes[0]
+          .nodeValue;
       } else {
-        userTypeEdit = 'none'
+        userTypeEdit = 'none';
       }
       const spanSwitchKunde = document.createElement('span');
       const id = cln.getElementsByTagName('phone')[0].childNodes[0].nodeValue;
@@ -917,7 +966,6 @@
       // spanSwitchAdmin.className = 'spanSwitch admin';
       // spanSwitchAdmin.innerText = 'Admin';
 
-
       // divSwitch.appendChild(inputKundeEdit);
       // divSwitch.appendChild(labelKunde);
       // divSwitch.appendChild(inputNoneEdit);
@@ -929,7 +977,6 @@
       // divRadioButtons.appendChild(spanSwitchKunde);
       // divRadioButtons.appendChild(divSwitch);
       // divRadioButtons.appendChild(spanSwitchAdmin)
-
 
       // const divStatus = document.createElement('div');
       // divStatus.className = 'divEdit';
@@ -945,21 +992,30 @@
       divNutzer.className = 'divEdit';
       const labelNutzer = document.createElement('span');
       labelNutzer.className = 'labelEdit';
-      labelNutzer.innerText = 'Nutzer'
+      labelNutzer.innerText = 'Nutzer';
       const divUserPrev = document.createElement('div');
       divUserPrev.className = 'divUserPrev';
-      divUserPrev.innerHTML = '<img src="images/header-chat.png" /> <span> ' + cln.getElementsByTagName('name')[0].childNodes[0].nodeValue + ' ' + cln.getElementsByTagName('surname')[0].childNodes[0].nodeValue + '</span>';
-      divNutzer.appendChild(labelNutzer)
-      divNutzer.appendChild(divUserPrev)
+      divUserPrev.innerHTML =
+        '<img src="images/header-chat.png" /> <span> ' +
+        cln.getElementsByTagName('name')[0].childNodes[0].nodeValue +
+        ' ' +
+        cln.getElementsByTagName('surname')[0].childNodes[0].nodeValue +
+        '</span>';
+      divNutzer.appendChild(labelNutzer);
+      divNutzer.appendChild(divUserPrev);
 
       const buttonSaveChanges = document.createElement('button');
       buttonSaveChanges.classList = 'buttonSave buttonsModal';
       buttonSaveChanges.innerText = 'Speichern';
       buttonSaveChanges.onclick = () => {
-        cln.getElementsByTagName('name')[0].childNodes[0].nodeValue = inputEditVorname.value
-        cln.getElementsByTagName('surname')[0].childNodes[0].nodeValue = inputNachName.value
-        cln.getElementsByTagName('position')[0].childNodes[0].nodeValue = inputPosition.value
-        cln.getElementsByTagName('email')[0].childNodes[0].nodeValue = inputEmail.value
+        cln.getElementsByTagName('name')[0].childNodes[0].nodeValue =
+          inputEditVorname.value;
+        cln.getElementsByTagName('surname')[0].childNodes[0].nodeValue =
+          inputNachName.value;
+        cln.getElementsByTagName('position')[0].childNodes[0].nodeValue =
+          inputPosition.value;
+        cln.getElementsByTagName('email')[0].childNodes[0].nodeValue =
+          inputEmail.value;
         // if (!cln.getElementsByTagName('type')[0]) {
         //   if (inputKundeEdit.checked) {
         //     const newElement = document.createElementNS('', 'type');
@@ -984,16 +1040,16 @@
         //   }
         // }
 
-        xmlData.replaceChild(cln, xmlData.getElementsByTagName("contact")[positionXML]);
+        xmlData.replaceChild(
+          cln,
+          xmlData.getElementsByTagName('contact')[positionXML]
+        );
         const dataToUpdate = prepareDataToUpdate(xmlData);
         this.contactsData = dataToUpdate;
         updateXmlDB(dataToUpdate);
         this.closeModal();
         this.refreshTable();
-
-
-
-      }
+      };
 
       divMainContentEdit.appendChild(divEditVorname);
       divMainContentEdit.appendChild(divEditNachname);
@@ -1011,7 +1067,7 @@
     async importIndividualContact() {
       this.openModal();
       const xml = await getXmlFile();
-      const xmlData = prepareDataXml(xml)
+      const xmlData = prepareDataXml(xml);
       await this.createAddPanel(xmlData);
     },
     async createAddPanel(xmlData) {
@@ -1023,10 +1079,10 @@
       pUserPhone.className = 'titleHeaderEdit';
       const imageClosePanel = document.createElement('img');
       imageClosePanel.className = 'imageClosePanel';
-      imageClosePanel.src = 'images/icons/x-contact-list.svg'
+      imageClosePanel.src = 'images/icons/x-contact-list.svg';
       imageClosePanel.onclick = () => {
         this.closeModal();
-      }
+      };
 
       divMainHeaderEdit.appendChild(pUserName);
       divMainHeaderEdit.appendChild(pUserPhone);
@@ -1043,9 +1099,9 @@
       const inputEditVorname = document.createElement('input');
       inputEditVorname.type = 'text';
       inputEditVorname.id = 'addNameInput';
-      inputEditVorname.placeholder = 'Vorname'
-      divEditVorname.appendChild(labelField)
-      divEditVorname.appendChild(inputEditVorname)
+      inputEditVorname.placeholder = 'Vorname';
+      divEditVorname.appendChild(labelField);
+      divEditVorname.appendChild(inputEditVorname);
 
       const divEditNachname = document.createElement('div');
       divEditNachname.className = 'divEdit';
@@ -1056,8 +1112,8 @@
       inputNachName.type = 'text';
       inputNachName.placeholder = 'Nachname';
       inputNachName.id = 'addSurnameInput';
-      divEditNachname.appendChild(labelNachName)
-      divEditNachname.appendChild(inputNachName)
+      divEditNachname.appendChild(labelNachName);
+      divEditNachname.appendChild(inputNachName);
 
       const divEditPosition = document.createElement('div');
       divEditPosition.className = 'divEdit';
@@ -1068,8 +1124,8 @@
       inputPosition.type = 'text';
       inputPosition.placeholder = 'Position';
       inputPosition.id = 'addPositionInput';
-      divEditPosition.appendChild(labelPosition)
-      divEditPosition.appendChild(inputPosition)
+      divEditPosition.appendChild(labelPosition);
+      divEditPosition.appendChild(inputPosition);
 
       const divTelephone = document.createElement('div');
       divTelephone.className = 'divEdit';
@@ -1080,20 +1136,20 @@
       inputTelephone.type = 'text';
       inputTelephone.placeholder = 'Telefonnummer';
       inputTelephone.id = 'addTelephoneInput';
-      divTelephone.appendChild(labelTelephone)
-      divTelephone.appendChild(inputTelephone)
+      divTelephone.appendChild(labelTelephone);
+      divTelephone.appendChild(inputTelephone);
 
       const divEmail = document.createElement('div');
       divEmail.className = 'divEdit';
       const labelEmail = document.createElement('span');
       labelEmail.className = 'labelEdit';
-      labelEmail.innerText = 'E-Mail '
+      labelEmail.innerText = 'E-Mail ';
       const inputEmail = document.createElement('input');
       inputEmail.type = 'text';
       inputEmail.placeholder = 'E-Mail';
       inputEmail.id = 'addEmailInput';
-      divEmail.appendChild(labelEmail)
-      divEmail.appendChild(inputEmail)
+      divEmail.appendChild(labelEmail);
+      divEmail.appendChild(inputEmail);
 
       // const divRadioButtons = document.createElement('div');
       // divRadioButtons.className = 'divEdit';
@@ -1134,7 +1190,6 @@
       // inputAdminAdd.id = `edit-admin-${id}`;
       // inputAdminAdd.checked = false;
 
-
       // const labelAdmin = document.createElement('label');
       // labelAdmin.setAttribute('for', `edit-admin-${id}`);
       // labelAdmin.innerHTML = '&nbsp;';
@@ -1144,7 +1199,6 @@
       // const spanSwitchAdmin = document.createElement('span');
       // spanSwitchAdmin.className = 'spanSwitch admin';
       // spanSwitchAdmin.innerText = 'Admin';
-
 
       // divSwitch.appendChild(inputKundeAdd);
       // divSwitch.appendChild(labelKunde);
@@ -1157,8 +1211,6 @@
       // divRadioButtons.appendChild(spanSwitchKunde);
       // divRadioButtons.appendChild(divSwitch);
       // divRadioButtons.appendChild(spanSwitchAdmin)
-
-
 
       // const divNutzer = document.createElement('div');
       // divNutzer.className = 'divEdit';
@@ -1175,35 +1227,34 @@
       const buttonSaveChanges = document.createElement('button');
       buttonSaveChanges.classList = 'buttonSave buttonsModal disabled';
       buttonSaveChanges.innerText = 'Speichern';
-      buttonSaveChanges.id = 'addNewContactButton'
+      buttonSaveChanges.id = 'addNewContactButton';
       buttonSaveChanges.onclick = () => {
-
         // creating a news element
         const parentElement = document.createElementNS('', 'contact');
 
         const nameElement = document.createElementNS('', 'name');
         const nameText = document.createTextNode(inputEditVorname.value);
-        nameElement.appendChild(nameText)
+        nameElement.appendChild(nameText);
 
         const surnameElement = document.createElementNS('', 'surname');
         const surnameText = document.createTextNode(inputNachName.value);
-        surnameElement.appendChild(surnameText)
+        surnameElement.appendChild(surnameText);
 
         const positionElement = document.createElementNS('', 'position');
         const positionText = document.createTextNode(inputPosition.value);
-        positionElement.appendChild(positionText)
+        positionElement.appendChild(positionText);
 
         const telephoneElement = document.createElementNS('', 'phone');
         const telephoneText = document.createTextNode(inputTelephone.value);
-        telephoneElement.appendChild(telephoneText)
+        telephoneElement.appendChild(telephoneText);
 
         const emailElement = document.createElementNS('', 'email');
         const emailText = document.createTextNode(inputEmail.value);
-        emailElement.appendChild(emailText)
+        emailElement.appendChild(emailText);
 
         const tsElement = document.createElementNS('', 'ts');
         const tsText = document.createTextNode('');
-        tsElement.appendChild(tsText)
+        tsElement.appendChild(tsText);
         // let type = null;
         // if (inputKundeAdd.checked) {
         //   type = 'client';
@@ -1214,7 +1265,6 @@
         // const typeElement = document.createElementNS('', 'type');
         // const typeText = document.createTextNode(type);
         // typeElement.appendChild(typeText)
-
 
         // append parent element
         parentElement.appendChild(nameElement);
@@ -1228,10 +1278,10 @@
         // prepare data and save on DB
         const finduser = findUserXml(telephoneElement.textContent, xmlData);
         // if findUser === null not exist
-        if(finduser !==null){
+        if (finduser !== null) {
           let message = '';
           messageSpan.innerHTML = '';
-          message= document.createTextNode('the phone already exists')
+          message = document.createTextNode('the phone already exists');
           messageSpan.appendChild(message);
         } else {
           xmlData.appendChild(parentElement);
@@ -1241,7 +1291,7 @@
           this.closeModal();
           this.refreshTable();
         }
-      }
+      };
 
       divMainContentEdit.appendChild(divEditVorname);
       divMainContentEdit.appendChild(divEditNachname);
@@ -1265,13 +1315,7 @@
       const phone = this.$el.find('#addTelephoneInput')[0].value.length;
       const email = this.$el.find('#addEmailInput')[0].value.length;
       const button = this.$el.find('#addNewContactButton');
-      if (
-        name > 0 &&
-        surname > 0 &&
-        position > 0 &&
-        phone > 0 &&
-        email > 0
-      ) {
+      if (name > 0 && surname > 0 && position > 0 && phone > 0 && email > 0) {
         button.removeClass('disabled');
       } else {
         button.addClass('disabled');
@@ -1282,29 +1326,29 @@
       // document.getElementById('UsersList').remove();
       // document.getElementById('AdminList').remove();
       // document.getElementById('sendInvitationIcon').remove();
-      document.getElementById('modalContact').innerHTML = ''
+      document.getElementById('modalContact').innerHTML = '';
       this.panelSendeInvitation();
     },
     searchContact() {
       // filterAdmin
-      console.log('here !???? ')
+      console.log('here !???? ');
       if (this.$('#filterAdmin').hasClass('active')) {
-        activeRolToInvitate = 'admin'
+        activeRolToInvitate = 'admin';
       }
       if (this.$('#filterUsers').hasClass('active')) {
-        activeRolToInvitate = 'kunde'
+        activeRolToInvitate = 'kunde';
       }
       this.$('#divMainContentEdit').empty();
       this.$('#UsersList').remove();
       this.$('#buttonInviteContact').remove();
       const headerSearch = document.createElement('div');
-      headerSearch.classList.add('divHeaderSearch')
+      headerSearch.classList.add('divHeaderSearch');
       const searchInput = document.createElement('input');
       searchInput.id = 'searchInput';
       searchInput.className = 'searchInput';
-      searchInput.placeholder = i18n('search')
+      searchInput.placeholder = i18n('search');
       searchInput.type = 'text';
-      headerSearch.appendChild(searchInput)
+      headerSearch.appendChild(searchInput);
       this.$('#divMainContentEdit').append(headerSearch);
       const searchTab = document.createElement('div');
       searchTab.className = 'tab';
@@ -1316,8 +1360,8 @@
       buttonAll.innerHTML = 'Alle';
       buttonAll.id = 'filterAll';
       buttonAll.onclick = () => {
-        this.filterTab('Alle')
-      }
+        this.filterTab('Alle');
+      };
       // buttonAdmin.className = 'tablinks';
       // buttonAdmin.innerHTML = 'Admin';
       // buttonAdmin.id = 'filterAdmin';
@@ -1362,19 +1406,19 @@
     },
     async getSearchContact() {
       const xml = await getXmlFile();
-      const xmlData = prepareDataXml(xml)
+      const xmlData = prepareDataXml(xml);
       this.contactList(xmlData);
     },
     addRemoveInvitation(user, element) {
-      const id = user.getElementsByTagName('phone')[0].textContent
+      const id = user.getElementsByTagName('phone')[0].textContent;
       if (element) {
         dataUsersToInvitate[id] = {
           userid: id,
           cell: user.outerHTML,
           position: activeRolToInvitate,
-        }
+        };
       } else {
-        delete dataUsersToInvitate[id]
+        delete dataUsersToInvitate[id];
       }
     },
     async contactList(xml) {
@@ -1384,7 +1428,7 @@
       allUsersList.className = 'mainDivUserSendInvitation';
       const AdminList = document.createElement('div');
       AdminList.id = 'AdminList';
-      AdminList.className = 'hidden mainDivUserSendInvitation'
+      AdminList.className = 'hidden mainDivUserSendInvitation';
       const UsersList = document.createElement('div');
       UsersList.id = 'UsersList';
       UsersList.className = 'hidden mainDivUserSendInvitation';
@@ -1399,45 +1443,60 @@
         // show in the list the users that are not selected previously
         const userDiv = document.createElement('div');
         userDiv.classList.add('userInvitation');
-        userDiv.id = 'user' + xml.children[i].getElementsByTagName('phone')[0].textContent;
+        userDiv.id =
+          'user' + xml.children[i].getElementsByTagName('phone')[0].textContent;
         const avatarUser = document.createElement('img');
         avatarUser.src = 'images/header-chat.png';
         const divInfo = document.createElement('div');
         const nameUser = document.createElement('span');
-        nameUser.textContent = xml.children[i].getElementsByTagName('name')[0].textContent + ' ' + xml.children[i].getElementsByTagName('surname')[0].textContent;
+        nameUser.textContent =
+          xml.children[i].getElementsByTagName('name')[0].textContent +
+          ' ' +
+          xml.children[i].getElementsByTagName('surname')[0].textContent;
         const breakLine = document.createElement('br');
         const tlfUser = document.createElement('span');
-        tlfUser.textContent = xml.children[i].getElementsByTagName('phone')[0].textContent;
+        tlfUser.textContent = xml.children[i].getElementsByTagName(
+          'phone'
+        )[0].textContent;
         const userCheckbox = document.createElement('input');
         userCheckbox.type = 'checkbox';
         userCheckbox.id = 'checkbox' + tlfUser.textContent;
         Object.keys(dataUsersToInvitate).forEach((element, index) => {
-          if (element === xml.children[i].getElementsByTagName('phone')[0].textContent) {
-            userCheckbox.setAttribute('checked', 'checked')
+          if (
+            element ===
+            xml.children[i].getElementsByTagName('phone')[0].textContent
+          ) {
+            userCheckbox.setAttribute('checked', 'checked');
           }
         });
         userCheckbox.classList.add('contactListCheckbox');
         userCheckbox.addEventListener('click', () => {
           this.addRemoveInvitation(xml.children[i], userCheckbox.checked);
-        })
+        });
         divInfo.appendChild(nameUser);
-        divInfo.appendChild(breakLine)
+        divInfo.appendChild(breakLine);
         divInfo.appendChild(tlfUser);
         userDiv.appendChild(avatarUser);
         userDiv.appendChild(divInfo);
         userDiv.appendChild(userCheckbox);
-        this.$('#allUsersList').append(userDiv)		// fill all user list
+        this.$('#allUsersList').append(userDiv); // fill all user list
         this.$('#allUsersList').append(userDiv);
         // fill admin list
         for (let j = 0; j < AdminUserListResponse.admins.length; j++) {
-          if (AdminUserListResponse.admins[j].phone_number === xml.children[i].getElementsByTagName('phone')[0].textContent) {
+          if (
+            AdminUserListResponse.admins[j].phone_number ===
+            xml.children[i].getElementsByTagName('phone')[0].textContent
+          ) {
             this.$('#AdminList').append(userDiv);
             userFound = true;
           }
         }
         // fill user list
         for (let j = 0; j < AdminUserListResponse.clients.length; j++) {
-          if (AdminUserListResponse.clients[j].phone_number === xml.children[i].getElementsByTagName('phone')[0].textContent) {
+          if (
+            AdminUserListResponse.clients[j].phone_number ===
+            xml.children[i].getElementsByTagName('phone')[0].textContent
+          ) {
             this.$('#UsersList').append(userDiv);
           }
         }
@@ -1445,7 +1504,6 @@
         this.$('#divMainContentEdit').append(allUsersList);
         this.$('#divMainContentEdit').append(AdminList);
         this.$('#divMainContentEdit').append(UsersList);
-
       }
       if (userFound === false) {
         const emptyAdmin = document.createElement('span');
@@ -1460,7 +1518,7 @@
     },
     searchContactList(e) {
       let value = e.target.value.toLowerCase();
-      $('#allUsersList div').filter(function () {
+      $('#allUsersList div').filter(function() {
         $(this).toggle(
           $(this)
             .text()
@@ -1476,10 +1534,10 @@
     template: $('#modal-importer').html(),
 
     initialize(options) {
-      if(options){
-        if(options.contact_data !== undefined){
+      if (options) {
+        if (options.contact_data !== undefined) {
           this.contactListXml = prepareDataXml(options.contact_data);
-          this.objectContact = []
+          this.objectContact = [];
           for (let i = 0; i < this.contactListXml.children.length; i++) {
             const contact = this.contactListXml.children.item(i);
             const tmpObj = {
@@ -1489,24 +1547,23 @@
               email: contact.getElementsByTagName('email')[0].textContent,
               phone: contact.getElementsByTagName('phone')[0].textContent,
               ts: contact.getElementsByTagName('ts')[0].textContent,
-            }
-            this.objectContact.push(tmpObj)
+            };
+            this.objectContact.push(tmpObj);
           }
           this.type = options.type;
-          if ( options.type === 'kunde' ){
+          if (options.type === 'kunde') {
             this.typeAdmin = true;
             this.typeKunde = false;
             this.isCreatingGroup = false;
-          }else if ( options.type === 'admin'){
+          } else if (options.type === 'admin') {
             this.typeAdmin = false;
             this.typeKunde = true;
             this.isCreatingGroup = false;
-          }else if ( options.type === 'allUsers'){
+          } else if (options.type === 'allUsers') {
             this.isCreatingGroup = true;
             this.typeAdmin = false;
             this.typeKunde = false;
           }
-          
         }
       }
       this.render();
@@ -1522,113 +1579,129 @@
       };
     },
     events: {
-      'click #imageSendInvitation' : 'sendDataToModal',
+      'click #imageSendInvitation': 'sendDataToModal',
       'click #imageClosePanel': 'closePanel',
-      'click  #imageGoBack' : 'goBack',
+      'click  #imageGoBack': 'goBack',
       'click #searchContactInvitation, #imagePlus': 'showContactListPanel',
       'click .contactListCheckbox': 'checkBoxevent',
       'click #buttonInviteContact': 'sendInvitations',
       'click #buttonCreateGroup': 'createGroup',
       'keyup #textareaSendeInvitation': 'enableCreateGroup',
     },
-    closePanel(){
+    closePanel() {
       document.getElementsByClassName('modal-importer')[0].remove();
       dataUsersToInvitate = {};
     },
-    showContactListPanel(){
-      if ( this.objectContact === undefined ){
+    showContactListPanel() {
+      if (this.objectContact === undefined) {
         // this.$('#ptextNoContacts').html = i18n('noContactsImported');
         document.getElementById('ptextNoContacts').innerHTML = '';
-        document.getElementById('ptextNoContacts').innerHTML = i18n('noContactsImported')
-        this.$('#divNoContacts').removeClass('hidden')
+        document.getElementById('ptextNoContacts').innerHTML = i18n(
+          'noContactsImported'
+        );
+        this.$('#divNoContacts').removeClass('hidden');
       }
       this.$('#modalContact').addClass('hidden');
       this.$('#modalSearchUsers').removeClass('hidden');
     },
-    goBack(){
+    goBack() {
       this.$('#modalContact').removeClass('hidden');
       this.$('#modalSearchUsers').addClass('hidden');
       this.$('#ptextNoContacts').innerText = '';
-      this.$('#divNoContacts').addClass('hidden')
+      this.$('#divNoContacts').addClass('hidden');
     },
-    sendDataToModal(){
+    sendDataToModal() {
       this.$('#modalContact').removeClass('hidden');
       this.$('#modalSearchUsers').addClass('hidden');
       for (let i = 0; i < this.contactListXml.children.length; i++) {
         const contact = this.contactListXml.children.item(i);
-        if( Object.keys(dataUsersToInvitate).length > 0){
-          if ( document.getElementById('buttonInviteContact') ){
-            document.getElementById('buttonInviteContact').classList.remove('disabled');
+        if (Object.keys(dataUsersToInvitate).length > 0) {
+          if (document.getElementById('buttonInviteContact')) {
+            document
+              .getElementById('buttonInviteContact')
+              .classList.remove('disabled');
           }
-          if ( document.getElementById('buttonCreateGroup') ){
-            document.getElementById('buttonCreateGroup').classList.remove('disabled');
+          if (document.getElementById('buttonCreateGroup')) {
+            document
+              .getElementById('buttonCreateGroup')
+              .classList.remove('disabled');
           }
         }
         // eslint-disable-next-line no-loop-func
-        Object.keys(dataUsersToInvitate).forEach((element) => {
+        Object.keys(dataUsersToInvitate).forEach(element => {
           const id = dataUsersToInvitate[element].userid;
-          if(id === contact.getElementsByTagName('phone')[0].textContent){
+          if (id === contact.getElementsByTagName('phone')[0].textContent) {
             const data = this.contactListXml;
             const userDiv = document.createElement('div');
-            userDiv.classList.add('userInvitation')
+            userDiv.classList.add('userInvitation');
             userDiv.id = 'user' + id;
             const avatarUser = document.createElement('img');
             avatarUser.src = 'images/header-chat.png';
             const divInfo = document.createElement('div');
             const nameUser = document.createElement('span');
-            nameUser.textContent = data.getElementsByTagName('name')[i].childNodes[0].nodeValue + ' ' + data.getElementsByTagName('surname')[i].childNodes[0].nodeValue;
+            nameUser.textContent =
+              data.getElementsByTagName('name')[i].childNodes[0].nodeValue +
+              ' ' +
+              data.getElementsByTagName('surname')[i].childNodes[0].nodeValue;
             const breakLine = document.createElement('br');
             const tlfUser = document.createElement('span');
-            tlfUser.textContent = data.getElementsByTagName('phone')[i].childNodes[0].nodeValue;
+            tlfUser.textContent = data.getElementsByTagName('phone')[
+              i
+            ].childNodes[0].nodeValue;
             const removeUser = document.createElement('img');
             removeUser.src = 'images/icons/x-contact-list.svg';
             removeUser.className = 'imageCloseUser';
             removeUser.onclick = () => {
               document.getElementById('user' + id).remove();
               delete dataUsersToInvitate[id];
-              if( Object.keys(dataUsersToInvitate).length === 0){
-                if ( document.getElementById('buttonInviteContact') ){
-                  document.getElementById('buttonInviteContact').classList.add('disabled');
+              if (Object.keys(dataUsersToInvitate).length === 0) {
+                if (document.getElementById('buttonInviteContact')) {
+                  document
+                    .getElementById('buttonInviteContact')
+                    .classList.add('disabled');
                 }
-                if ( document.getElementById('buttonCreateGroup') ){
-                  document.getElementById('buttonCreateGroup').classList.add('disabled');
+                if (document.getElementById('buttonCreateGroup')) {
+                  document
+                    .getElementById('buttonCreateGroup')
+                    .classList.add('disabled');
                 }
-                
               }
-            }
+            };
             divInfo.appendChild(nameUser);
-            divInfo.appendChild(breakLine)
+            divInfo.appendChild(breakLine);
             divInfo.appendChild(tlfUser);
             userDiv.appendChild(avatarUser);
             userDiv.appendChild(divInfo);
             userDiv.appendChild(removeUser);
             document.getElementById('userSendList').appendChild(userDiv);
           }
-        })
-
+        });
       }
     },
-    async createGroup(){
+    async createGroup() {
       const usersForGroups = [];
-      const groupName = document.getElementById('textareaSendeInvitation').value;
-      const myNumber = textsecure.storage.user.getNumber()
-      Object.keys(dataUsersToInvitate).forEach((element) => {
+      const groupName = document.getElementById('textareaSendeInvitation')
+        .value;
+      const myNumber = textsecure.storage.user.getNumber();
+      Object.keys(dataUsersToInvitate).forEach(element => {
         usersForGroups.push(dataUsersToInvitate[element].userid);
-      })
+      });
       usersForGroups.push(myNumber);
-      if ( groupName !== '' ){
-        const company = await getCompany(textsecure.storage.get('companyNumber', null))
+      if (groupName !== '') {
+        const company = await getCompany(
+          textsecure.storage.get('companyNumber', null)
+        );
         await createGroup(`${company.name} - ${groupName}`, usersForGroups);
         document.getElementsByClassName('modal-importer')[0].remove();
         dataUsersToInvitate = {};
-      }else {
+      } else {
         const message = 'Bitte Gruppenname eingeben';
-        this.$('#errorMessage').html('')
+        this.$('#errorMessage').html('');
         this.$('#errorMessage').append(message);
       }
     },
-    async sendInvitations(){
-      await parallel(1, Object.keys(dataUsersToInvitate), async (element) => {
+    async sendInvitations() {
+      await parallel(1, Object.keys(dataUsersToInvitate), async element => {
         const id = dataUsersToInvitate[element].userid;
         const type = dataUsersToInvitate[element].position;
         const companyNumber = textsecure.storage.get('companyNumber', null);
@@ -1648,21 +1721,21 @@
         const dataSms = {
           phone_number: id,
           code: result.code,
-        }
-        sendSms(companyNumber, dataSms)
+        };
+        sendSms(companyNumber, dataSms);
 
         dataUsersToInvitate = {};
         this.closePanel();
-      })
+      });
     },
-    checkBoxevent(event){
+    checkBoxevent(event) {
       const id = event.target.attributes.dataPhone.nodeValue;
-      if(event.target.checked){
+      if (event.target.checked) {
         dataUsersToInvitate[id] = {
           userid: id,
           position: this.type,
-        }
-      }else {
+        };
+      } else {
         delete dataUsersToInvitate[id];
       }
     },

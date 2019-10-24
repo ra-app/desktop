@@ -55,7 +55,6 @@
     @include color-svg($svg, white);
   }
 }
-
 @mixin header-icon-black($svg) {
   @include color-svg($svg, rgba(0, 0, 0, 0.5));
   &:focus,

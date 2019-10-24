@@ -194,44 +194,53 @@
     openTicket(id, messageId) {
       if (id) {
         this.openInbox().then(() => {
-
           this.inboxView.openTicket(id, messageId, true);
         });
       }
     },
-     openContact() {
+    openContact() {
       // if (id) {
-        this.openInbox().then(async() => {
-          this.resetViews();
-          const companyNumber = textsecure.storage.get('companyNumber', null);
-          const xml = await getXmlFile();
-          const InvitationList = await getClientAdminCompany(companyNumber);
-          if(InvitationList){
-            localStorage.setItem('InvitationList',JSON.stringify(InvitationList));
-          }
-          const ContactView = new Whisper.ImportContactView({contact_data: xml});
-          this.ContactView = ContactView;
-          this.openView(this.ContactView);
-      // }
+      this.openInbox().then(async () => {
+        this.resetViews();
+        const companyNumber = textsecure.storage.get('companyNumber', null);
+        const xml = await getXmlFile();
+        const InvitationList = await getClientAdminCompany(companyNumber);
+        if (InvitationList) {
+          localStorage.setItem(
+            'InvitationList',
+            JSON.stringify(InvitationList)
+          );
+        }
+        const ContactView = new Whisper.ImportContactView({
+          contact_data: xml,
         });
-  },
-  async openModalImport(typeUser){
-    const companyNumber = textsecure.storage.get('companyNumber', null);
-    const xml = await getXmlFile(companyNumber);
-    // const InvitationList = await getClientAdminCompany(companyNumber);
-    // console.log(InvitationList.admins, "55555555555555")
-    // if(xml && InvitationList){
-    //   localStorage.setItem('InvitationList',JSON.stringify(InvitationList));
-    //   if(typeUser === 'admin'){
-    //     xml.InvitationList = InvitationList.admins
-    //   }
-    //   if(typeUser === 'kunde'){
-    //     xml.InvitationList = InvitationList.clients
-    //   }
-    //   xml.type = typeUser;
-    // }
-    const dialog = new Whisper.ModalImport({contact_data: xml, type: typeUser});
-    dialog.$el.insertBefore(document.getElementsByClassName('network-status-container')[0]);
-  },
+        this.ContactView = ContactView;
+        this.openView(this.ContactView);
+        // }
+      });
+    },
+    async openModalImport(typeUser) {
+      const companyNumber = textsecure.storage.get('companyNumber', null);
+      const xml = await getXmlFile(companyNumber);
+      // const InvitationList = await getClientAdminCompany(companyNumber);
+      // console.log(InvitationList.admins, "55555555555555")
+      // if(xml && InvitationList){
+      //   localStorage.setItem('InvitationList',JSON.stringify(InvitationList));
+      //   if(typeUser === 'admin'){
+      //     xml.InvitationList = InvitationList.admins
+      //   }
+      //   if(typeUser === 'kunde'){
+      //     xml.InvitationList = InvitationList.clients
+      //   }
+      //   xml.type = typeUser;
+      // }
+      const dialog = new Whisper.ModalImport({
+        contact_data: xml,
+        type: typeUser,
+      });
+      dialog.$el.insertBefore(
+        document.getElementsByClassName('network-status-container')[0]
+      );
+    },
   });
 })();

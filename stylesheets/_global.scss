@@ -352,7 +352,7 @@ $loading-height: 16px;
     float: left;
     margin: 0 6px;
     transform: scale(0);
-  
+
     animation: loading 1500ms ease infinite 0ms;
     &:nth-child(2) {
       animation: loading 1500ms ease infinite 333ms;
@@ -361,11 +361,11 @@ $loading-height: 16px;
       animation: loading 1500ms ease infinite 666ms;
     }
   }
- 
 }
 
-#request-verify-call, #verify-phone-code{
-  .container{
+#request-verify-call,
+#verify-phone-code {
+  .container {
     width: 100%;
     float: left;
     text-align: center;
@@ -387,7 +387,6 @@ $loading-height: 16px;
     }
   }
 }
-
 
 .full-screen-flow {
   position: absolute;
@@ -726,26 +725,26 @@ $loading-height: 16px;
       float: left;
     }
   }
-  .content-column{
+  .content-column {
     padding: 10% 30px;
     max-width: 95%;
     margin: 0 auto;
-    @media (min-height: 600px) and (max-height: 800px){
+    @media (min-height: 600px) and (max-height: 800px) {
       padding: 40px 0px !important;
     }
     @media (max-width: 1202px) {
       padding: 10% 0px;
     }
-    .content-register-info{
+    .content-register-info {
       margin: 0px;
       margin-bottom: 80px;
       @media (max-width: 1202px) {
         margin-bottom: 40px;
       }
-      @media (min-height: 600px) and (max-height: 700px){
+      @media (min-height: 600px) and (max-height: 700px) {
         margin-bottom: 15px;
       }
-      .content-logo{
+      .content-logo {
         margin: 0px;
       }
     }
@@ -819,8 +818,7 @@ $debug: 0;
     width: 49%;
     margin-right: 2%;
   }
-
-  .content-code{
+  .content-code {
     width: 49%;
   }
   .search-input {
@@ -852,9 +850,9 @@ $debug: 0;
     }
   }
   // .content-code {
-  //   @media (max-width: 1755px) {
-  //     width: calc(100% / 2);
-  //   }
+  // @media (max-width: 1755px) {
+  // width: calc(100% / 2);
+  // }
   // }
   .register-title {
     text-align: left;
@@ -947,15 +945,14 @@ $debug: 0;
   margin-left: auto;
   margin-right: auto;
   // @media (max-width: 1755px) {
-  //   padding-left: 10px;
-  //   padding-right: 10px;
+  // padding-left: 10px;
+  // padding-right: 10px;
   // }
 }
 .content-register-info {
   height: auto;
   margin-top: 180px;
   margin-bottom: 80px;
-
 }
 .content-column {
   flex-direction: column;
@@ -983,21 +980,20 @@ $debug: 0;
     @if $debug == 1 {
       border: 1px solid #00abff;
     }
-    border-radius: 5px; // background: #f5f5f5;
+    border-radius: 5px;
+
+    // background: #f5f5f5;
     margin: 0px 50px;
-    font-size: 15px;
-    /* width: 50%;
+    font-size: 15px; /* width: 50%;
     height: 50%; */
     &.content-eula {
       margin: 0px;
     }
   }
   .content-logo {
-    margin-left: 270px;
-    // @media (max-width: 1755px) {
-    //   margin-left: 0px;
-    //   width: 100%;
-    // }
+    margin-left: 270px; // @media (max-width: 1755px) {
+    // margin-left: 0px;
+    // width: 100%; // }
   }
   .card {
     // width: 670px; // max-width:670px;
@@ -1032,16 +1028,12 @@ $debug: 0;
       padding: 30px 10px 10px 10px; // padding-top: 30px;
       position: relative;
       text-align: center;
-      color: #fff; // background: rgb(0, 90, 245); // background: linear-gradient( // 0deg,
-      // #005af5 0%,
-      // #015df2 18%, // #0567eb 32%, // #0c78de 46%,
+      color: #fff; // background: rgb(0, 90, 245); // background: linear-gradient( // 0deg, // #005af5 0%, // #015df2 18%, // #0567eb 32%, // #0c78de 46%,
       // #1690cc 56%,
-      // #23afb5 66%,
-      // #33d49b 85%, // #34d49a 90%,
+      // #23afb5 66%, // #33d49b 85%, // #34d49a 90%,
       // #3bd696 93%, // #47da91 95%,
       // #58de89 97%,
-      // #99f26b 100%
-      // )
+      // #99f26b 100% // )
       // 0% 0% no-repeat padding-box;
       background: transparent
         linear-gradient(
@@ -1092,8 +1084,8 @@ $debug: 0;
       padding: 8px;
       font-family: $poppins-regular;
       // @media (max-width: 1755px) {
-      //   margin-bottom: 20px;
-      //   margin-top: 15px;
+      // margin-bottom: 20px;
+      // margin-top: 15px;
       // }
     }
     &.register {
@@ -1101,14 +1093,13 @@ $debug: 0;
       width: 100%;
       margin: 0px;
       max-width: unset;
-      @media (min-height: 600px) and (max-height: 700px){
+      @media (min-height: 600px) and (max-height: 700px) {
         height: 320px !important;
       }
-      
       @media (min-width: 998px) and (max-width: 1202px) {
         height: 310px;
       }
-      @media (max-width: 901px) and (min-width: 800px){
+      @media (max-width: 901px) and (min-width: 800px) {
         height: 310px;
       }
       @media (max-width: 997px) and (min-width: 902px) {
@@ -1241,7 +1232,6 @@ $debug: 0;
     font-size: 22px;
     font-family: $poppins-bold;
     // margin-bottom: 10px;
-
   }
   .eula-Subtitle {
     text-align: left;
@@ -1259,7 +1249,7 @@ $debug: 0;
     margin-top: unset;
     margin-bottom: unset;
     // @media (max-width: 1755px) {
-    //   height: 50px;
+    // height: 50px;
     // }
   }
   .file-input-avatar,
@@ -1335,7 +1325,6 @@ $debug: 0;
       text-transform: uppercase;
       opacity: 1;
       font-weight: 500;
-
       font-size: 13px !important;
       font-family: $poppins-medium;
       width: 134px;
@@ -1357,7 +1346,8 @@ $debug: 0;
   .labelsInput {
     top: -50px !important;
   }
-  #bank-iban-input, #bank-bic-input{
+  #bank-iban-input,
+  #bank-bic-input {
     font-family: $poppins-medium;
     font-size: 15px;
     cursor: pointer;
@@ -1366,7 +1356,6 @@ $debug: 0;
   .inputsRegister {
     height: 30px;
     margin: 10px 0px 5px;
-
     font-family: $poppins-medium;
     font-size: 15px;
     cursor: pointer;
@@ -1409,6 +1398,7 @@ $debug: 0;
       display: block;
       height: 0px;
       position: relative;
+
       top: -60px;
       font-weight: bold;
       width: 100%;
@@ -1457,7 +1447,10 @@ $debug: 0;
       display: block;
       position: relative;
       // top: -55px;
-      &[for="phone-verification-code"], &[for="user-name-input"], &[for="bank-iban-input"], &[for="bank-bic-input"]{
+      &[for='phone-verification-code'],
+      &[for='user-name-input'],
+      &[for='bank-iban-input'],
+      &[for='bank-bic-input'] {
         top: -55px;
       }
       top: -41px;
@@ -1465,11 +1458,10 @@ $debug: 0;
       width: 100%;
       font-weight: bold; // opacity: 0.7;
       font-size: 13px;
-      &.code-label {
-        // @media (max-width: 1755px) {
-        //   top: -45px;
-        // }
-      }
+      // &.code-label {
+      // @media (max-width: 1755px) { // top: -45px;
+      //  }
+      // }
     }
     &.errored {
       color: red;
@@ -1514,7 +1506,7 @@ $debug: 0;
     margin: 5px 0px 5px 0px;
     font-size: 1em;
   }
-  .divTicketsDev{
+  .divTicketsDev {
     display: block;
     ul {
       list-style: none;
@@ -1579,88 +1571,82 @@ $debug: 0;
     }
   }
 }
-
-.hidden{
+.hidden {
   display: none;
 }
-
 table.sortable thead {
-  background-color:#eee;
-  color:#666666;
+  background-color: #eee;
+  color: #666666;
   font-weight: bold;
   cursor: default;
 }
 th.sorted.ascending:after {
-	content: "  \2191";
+  content: '  \2191';
 }
-
 th.sorted.descending:after {
-	content: " \2193";
+  content: ' \2193';
 }
 @keyframes panelRight {
   from {
-      opacity: 0.4;
-      transform: translateX(-30%)
+    opacity: 0.4;
+    transform: translateX(-30%);
   }
-
   to {
-      opacity: 1;
-      transform: translateX(0)
+    opacity: 1;
+    transform: translateX(0);
   }
 }
-
-.modalOverLay{
+.modalOverLay {
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
   background: #00000063;
-  .modalContact{
+  .modalContact {
     position: absolute;
     // width: 25%;
     width: 400px;
   }
 }
-
-.modalContact{
+.modalContact {
   border-right: 1px solid #d5d6d6;
   background: #ffffff;
   top: 0;
   height: 100%;
   box-shadow: 0px 3px 6px #00000029;
-  .divMainContentEdit{
+  .divMainContentEdit {
     padding: 15px;
-    &.divRemoveContact{
+    &.divRemoveContact {
       text-align: center;
     }
     .divEdit {
       display: flex;
       height: 40px;
-      border-bottom: 1px solid #C6C6C6;
+      border-bottom: 1px solid #c6c6c6;
       margin-bottom: 20px;
-      .spanSwitch{
+      .spanSwitch {
         margin-left: 0px;
         margin-right: 15px;
-        &.admin{
+        &.admin {
           margin-left: 10px;
         }
       }
-      .divUserPrev{
+      .divUserPrev {
         margin-top: -13px;
         height: 45px;
         padding: 8px 15px;
         background: #b1c6de52 0% 0% no-repeat padding-box;
-        img{
+        img {
           height: 30px;
           width: 30px;
           vertical-align: middle;
         }
-        span{
+        span {
           font-family: $poppins-medium;
           color: $color-raapp-text;
         }
       }
-      button{
+      button {
         @include backgroudGradient();
         padding: 6px 20px;
         color: white;
@@ -1676,7 +1662,7 @@ th.sorted.descending:after {
         font-size: 14px;
         color: $color-raapp-text;
       }
-      input[type="text"] {
+      input[type='text'] {
         width: 60%;
         border: none;
         font-size: 14px;
@@ -1686,40 +1672,40 @@ th.sorted.descending:after {
         outline: none;
         color: $color-raapp-text;
       }
-      input[type="radio"] {
+      input[type='radio'] {
         margin-right: 10px;
-        vertical-align: middle;    
+        vertical-align: middle;
       }
-      span.labelRadios{
+      span.labelRadios {
         font-family: $poppins-regular;
         font-size: 14px;
         color: $color-raapp-text;
         vertical-align: middle;
         margin-right: 10px;
       }
-      input[type="text"]::placeholder{
-        color: #B1BBC0;
+      input[type='text']::placeholder {
+        color: #b1bbc0;
       }
     }
   }
-  .divModalHeader{
+  .divModalHeader {
     height: 70px;
     padding: 15px;
     position: relative;
-    &.divModalInvitation{
+    &.divModalInvitation {
       @include backgroudGradient();
       text-align: center;
     }
-    .titleHeaderEdit{
+    .titleHeaderEdit {
       margin: 0px;
       font-family: $poppins-semibold;
       font-size: 15px;
       color: $color-raapp-text;
     }
-    #sendInvitationIcon{
+    #sendInvitationIcon {
       top: 23px;
     }
-    .imageGoBack{
+    .imageGoBack {
       height: 25px;
       width: 25px;
       cursor: pointer;
@@ -1727,7 +1713,7 @@ th.sorted.descending:after {
       left: 9px;
       top: 22px;
     }
-    .imageClosePanel{
+    .imageClosePanel {
       height: 25px;
       width: 25px;
       cursor: pointer;
@@ -1736,22 +1722,22 @@ th.sorted.descending:after {
       top: 22px;
     }
   }
-  &.open{
+  &.open {
     animation: panelRight 0.4 ease;
   }
-  .buttonSave{
+  .buttonSave {
     float: right;
   }
-  .messageModal{
+  .messageModal {
     text-align: center;
     font-family: $poppins-regular;
     margin-bottom: 15px;
     padding: 20px;
   }
-  .divButtonsImport{
+  .divButtonsImport {
     text-align: center;
   }
-  .buttonsModal{
+  .buttonsModal {
     @include backgroudGradient();
     padding: 9px 15px;
     color: #ffffff;
@@ -1759,14 +1745,13 @@ th.sorted.descending:after {
     border-radius: 20px;
   }
 }
-button, input{
+button,
+input {
   outline: none;
 }
-
-.marginTop20{
+.marginTop20 {
   margin-top: 20px;
 }
-
 .switch-toggle {
   position: relative;
   display: block;
@@ -1777,24 +1762,26 @@ button, input{
   margin-left: 7px;
   float: left;
 }
-
-.switch-toggle.switch-candy, .switch-light.switch-candy > span {
+.switch-toggle.switch-candy,
+.switch-light.switch-candy > span {
   border-radius: 20px;
-  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.3),
+    0 1px 0 rgba(255, 255, 255, 0.2);
   @include backgroudGradient();
 }
-
-.switch-toggle *, .switch-toggle *:before, .switch-toggle *:after {
+.switch-toggle *,
+.switch-toggle *:before,
+.switch-toggle *:after {
   box-sizing: border-box;
 }
-
-.switch-light.switch-candy span span, .switch-light.switch-candy input:checked ~ span span:first-child, .switch-toggle.switch-candy label {
+.switch-light.switch-candy span span,
+.switch-light.switch-candy input:checked ~ span span:first-child,
+.switch-toggle.switch-candy label {
   color: #fff;
   font-weight: bold;
   text-align: center;
   text-shadow: 1px 1px 1px #191b1e;
 }
-
 .switch-toggle input + label {
   position: relative;
   z-index: 2;
@@ -1804,7 +1791,8 @@ button, input{
   margin: 0;
   text-align: center;
 }
-.switch-toggle label, .switch-toggle > span {
+.switch-toggle label,
+.switch-toggle > span {
   line-height: 2em;
 }
 .switch-toggle input {
@@ -1812,19 +1800,27 @@ button, input{
   left: 0;
   opacity: 0;
 }
-
-.switch-toggle label:nth-child(2):nth-last-child(6), .switch-toggle label:nth-child(2):nth-last-child(6) ~ label, .switch-toggle label:nth-child(2):nth-last-child(6) ~ a {
+.switch-toggle label:nth-child(2):nth-last-child(6),
+.switch-toggle label:nth-child(2):nth-last-child(6) ~ label,
+.switch-toggle label:nth-child(2):nth-last-child(6) ~ a {
   width: 33.33%;
 }
-.switch-toggle label:nth-child(2):nth-last-child(6) ~ input:checked:nth-child(5) + label ~ a {
+.switch-toggle
+  label:nth-child(2):nth-last-child(6)
+  ~ input:checked:nth-child(5)
+  + label
+  ~ a {
   left: 75.66%;
 }
-
-.switch-toggle label:nth-child(2):nth-last-child(6) ~ input:checked:nth-child(3) + label ~ a {
+.switch-toggle
+  label:nth-child(2):nth-last-child(6)
+  ~ input:checked:nth-child(3)
+  + label
+  ~ a {
   left: 40.33%;
 }
 // .switch-toggle label:nth-child(2):nth-last-child(6), .switch-toggle label:nth-child(2):nth-last-child(6) ~ label, .switch-toggle label:nth-child(2):nth-last-child(6) ~ a {
-//   width: 40.33%;
+// width: 40.33%;
 // }
 
 .switch-candy a {
@@ -1834,7 +1830,6 @@ button, input{
   height: 15px !important;
   width: 15px !important;
 }
-
 .switch-toggle a {
   position: absolute;
   top: 2px;
@@ -1842,16 +1837,15 @@ button, input{
   padding: 0;
   z-index: 1;
 }
-
 .switch-toggle a {
   display: block;
   transition: all 0.2s ease-out;
 }
-
-.switch-toggle *, .switch-toggle *:before, .switch-toggle *:after {
+.switch-toggle *,
+.switch-toggle *:before,
+.switch-toggle *:after {
   box-sizing: border-box;
 }
-
 .switch-light span span {
   display: none;
 }
@@ -1861,14 +1855,13 @@ button, input{
   content: '';
   display: table;
 }
-
-.spanSwitch{
+.spanSwitch {
   top: 0px;
   position: relative;
   left: 5px;
   float: left;
   margin-left: 15px;
-  &.admin{
+  &.admin {
     top: 0px;
     right: 2px;
     left: unset;
@@ -1876,7 +1869,7 @@ button, input{
     margin-left: 6px;
   }
 }
-.disabled{
+.disabled {
   cursor: default;
   background: rgb(127, 172, 250);
   background: linear-gradient(
@@ -1900,9 +1893,9 @@ button, input{
   opacity: 0.5;
   pointer-events: none;
 }
-.mainDivUserSendInvitation{
+.mainDivUserSendInvitation {
   padding: 20px 10px;
-  .userInvitation{
+  .userInvitation {
     height: 59px;
     display: flex;
     padding: 10px 10px;
@@ -1910,17 +1903,17 @@ button, input{
     border-color: #cac8c8;
     position: relative;
     margin-top: 10px;
-    span{
+    span {
       vertical-align: middle;
-      &:first-child{
+      &:first-child {
         color: $color-gray-90;
       }
     }
-    img{
+    img {
       height: 40px;
       width: 40px;
     }
-    .imageCloseUser{
+    .imageCloseUser {
       height: 20px;
       position: absolute;
       top: 18px;
@@ -1928,10 +1921,9 @@ button, input{
     }
   }
 }
-
-.mainInvitationDiv{
+.mainInvitationDiv {
   padding: 10px;
-  input[type="text"]{
+  input[type='text'] {
     height: 40px;
     border-top: none;
     border-left: none;
@@ -1940,7 +1932,7 @@ button, input{
     width: calc(100% - 50px);
     display: inline-block;
   }
-  .tab{
+  .tab {
     height: 30px;
     margin-bottom: 10px;
     button.tablinks {
@@ -1951,17 +1943,16 @@ button, input{
       font-family: $poppins-regular;
       font-size: 15px;
       color: $color-input-chat;
-      &:first-child{
+      &:first-child {
         padding-left: 0px;
       }
-      &.active{
+      &.active {
         color: $link-color;
       }
     }
   }
-
-  .mainDivUserSendInvitation{
-    .userInvitation{
+  .mainDivUserSendInvitation {
+    .userInvitation {
       height: 59px;
       display: flex;
       padding: 10px 10px;
@@ -1969,33 +1960,33 @@ button, input{
       border-color: #cac8c8;
       position: relative;
       margin-top: 10px;
-      .contactListCheckbox{
+      .contactListCheckbox {
         position: absolute;
         right: 10px;
         top: 20px;
       }
-      img{
+      img {
         height: 40px;
         width: 40px;
       }
-      span{
+      span {
         vertical-align: middle;
-        &:first-child{
+        &:first-child {
           color: $color-gray-90;
         }
       }
     }
   }
-  .divHeaderSearch{
+  .divHeaderSearch {
     width: 100%;
     justify-content: center;
     align-items: center;
     height: 40px;
     text-align: center;
-    input[type="text"]{
+    input[type='text'] {
       // width: 240px;
       height: 30px;
-      background: #FFFFFF 0% 0% no-repeat padding-box;
+      background: #ffffff 0% 0% no-repeat padding-box;
       box-shadow: 0px 3px 6px #00000029;
       border-radius: 19px;
       opacity: 1;
@@ -2005,7 +1996,7 @@ button, input{
       outline: none;
     }
   }
-  .imagePlus{
+  .imagePlus {
     height: 25px;
     width: 25px;
     display: inline-block;
@@ -2014,23 +2005,21 @@ button, input{
     position: relative;
     top: 10px;
   }
-
-  .labelInputInvitation{
-    color: #B1BBC0;
+  .labelInputInvitation {
+    color: #b1bbc0;
     font-size: 13px;
   }
 }
-.textareaSendeInvitation{
+.textareaSendeInvitation {
   resize: none;
   width: 100%;
   color: $footer-text-color;
   border: 1px solid #707070;
   min-height: 120px;
   margin-bottom: 10px;
-  padding: 5px
+  padding: 5px;
 }
-
-.buttonInviteContact{
+.buttonInviteContact {
   @include backgroudGradient();
   position: absolute;
   bottom: 15px;
@@ -2044,26 +2033,25 @@ button, input{
   padding-right: 20px;
   min-width: 250px;
 }
-.imageCloseUser{
-  width:20px;
+.imageCloseUser {
+  width: 20px;
 }
-.contactListCheckbox{
+.contactListCheckbox {
   position: absolute;
   right: 10px;
   top: 20px;
 }
-.errorMessageModal{
+.errorMessageModal {
   position: absolute;
-    bottom: 60px;
-    left: calc(50% - 108px);
-    right: 0;
-    border-radius: 20px;
-    border: none;
-    padding: 9px;
-    padding-left: 20px;
-    padding-right: 20px;
+  bottom: 60px;
+  left: calc(50% - 108px);
+  right: 0;
+  border-radius: 20px;
+  border: none;
+  padding: 9px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
-
 .receivedTicketInformation {
   background-color: #ffff9b !important;
 }

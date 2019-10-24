@@ -45,6 +45,7 @@
     "regen": "yarn clean-transpile && yarn grunt",
     "just-build": "yarn install && yarn ready && SIGNAL_ENV=production yarn build",
     "just-build-win": "yarn install && yarn clean-transpile && yarn grunt && set SIGNAL_ENV=production && yarn build",
+    "just-build-win-rel": "yarn install && yarn clean-transpile && yarn grunt && set SIGNAL_ENV=production && yarn build  --config.directories.output=release",
     "dev": "yarn regen && yarn start"
   },
   "dependencies": {

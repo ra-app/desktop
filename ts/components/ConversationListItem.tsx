@@ -185,18 +185,28 @@ export class ConversationListItem extends React.PureComponent<Props> {
   }
 
   public render() {
-    const { unreadCount, onClick, id, isSelected, openConversation, style } = this.props;
-    console.log('CONVERSATION LIST ITEM RENDER !!!! ', this.props)
+    const {
+      unreadCount,
+      onClick,
+      id,
+      isSelected,
+      openConversation,
+      style,
+    } = this.props;
+    console.log('CONVERSATION LIST ITEM RENDER !!!! ', this.props);
     return (
       <div
         role="button"
         onClick={() => {
-          console.log("CLICK", this);
+          console.log('CLICK', this);
           if (this.props.type == 'company' && onClick) {
             onClick(id);
           }
-          if ( (this.props.type == 'direct' || this.props.type == 'group' ) && openConversation) {
-            openConversation(id)
+          if (
+            (this.props.type == 'direct' || this.props.type == 'group') &&
+            openConversation
+          ) {
+            openConversation(id);
           }
         }}
         style={style}

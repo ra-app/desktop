@@ -34,25 +34,26 @@ export class Avatar extends React.Component<Props, State> {
 
     this.state = {
       imageBroken: false,
-      srcImage : '',
+      srcImage: '',
       loading: true,
     };
     this.getImage();
   }
 
   public async getImage() {
-    const { phoneNumber, rawPhoneNumber, conversationType} = this.props;
-    const API_URL = 'https://luydm9sd26.execute-api.eu-central-1.amazonaws.com/latest/';
+    const { phoneNumber, rawPhoneNumber, conversationType } = this.props;
+    const API_URL =
+      'https://luydm9sd26.execute-api.eu-central-1.amazonaws.com/latest/';
     let avatar = '';
     if (conversationType === 'company') {
-      avatar =  API_URL + 'public/img/' + phoneNumber;
+      avatar = API_URL + 'public/img/' + phoneNumber;
     } else if (conversationType === 'direct') {
       const getClientInfo = await getClientPhone(rawPhoneNumber);
       const clientUuid = getClientInfo.client.uuid;
-      avatar =  API_URL + 'public/img/' + clientUuid;
+      avatar = API_URL + 'public/img/' + clientUuid;
     }
-    const result = await (await fetch(avatar));
-    this.setState({srcImage: result.url, loading: false});
+    const result = await await fetch(avatar);
+    this.setState({ srcImage: result.url, loading: false });
   }
   public handleImageError() {
     // tslint:disable-next-line no-console
@@ -80,7 +81,7 @@ export class Avatar extends React.Component<Props, State> {
         src={srcImage}
       />
     );
-  }
+  };
 
   public renderNoImage() {
     const { conversationType, name, noteToSelf, size } = this.props;
@@ -107,8 +108,7 @@ export class Avatar extends React.Component<Props, State> {
             'module-avatar__label',
             `module-avatar__label--${size}`
           )}
-        >
-        </div>
+        />
       );
     }
 
@@ -146,7 +146,11 @@ export class Avatar extends React.Component<Props, State> {
       >
         {!imageBroken && !loading ? (
           // this.renderImage()
-          <img onError={this.handleImageErrorBound}  alt={i18n('contactAvatarAlt', [title])} src={srcImage}/>
+          <img
+            onError={this.handleImageErrorBound}
+            alt={i18n('contactAvatarAlt', [title])}
+            src={srcImage}
+          />
         ) : (
           <img src="images/header-chat.png" alt="Default img" />
         )}
