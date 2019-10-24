@@ -1781,6 +1781,7 @@ th.sorted.descending:after {
     height: 70px;
     padding: 15px;
     position: relative;
+    @include backgroudGradient();
     &.divModalInvitation{
       @include backgroudGradient();
       text-align: center;
