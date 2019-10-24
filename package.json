@@ -46,7 +46,9 @@
     "just-build": "yarn install && yarn ready && SIGNAL_ENV=production yarn build",
     "just-build-win": "yarn install && yarn clean-transpile && yarn grunt && set SIGNAL_ENV=production && yarn build",
     "just-build-win-rel": "yarn install && yarn clean-transpile && yarn grunt && set SIGNAL_ENV=production && yarn build  --config.directories.output=release",
-    "dev": "yarn regen && yarn start"
+    "public-release": "yarn clean-release && yarn just-build-win-rel && yarn sign-release && bash sync-update.sh",
+    "dev": "yarn regen && yarn start",
+    "clean-release": "rimraf release/* && rimraf release/**/*"
   },
   "dependencies": {
     "@journeyapps/sqlcipher": "https://github.com/scottnonnenberg-signal/node-sqlcipher.git#2e28733b61640556b0272a3bfc78b0357daf71e6",
