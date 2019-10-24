@@ -48,7 +48,7 @@ export class Avatar extends React.Component<Props, State> {
       avatar =  API_URL + 'public/img/' + phoneNumber;
     } else if (conversationType === 'direct') {
       const getClientInfo = await getClientPhone(rawPhoneNumber);
-      const clientUuid = getClientInfo.client.uuid;
+      const clientUuid = getClientInfo.uuid;
       avatar =  API_URL + 'public/img/' + clientUuid;
     }
     const result = await (await fetch(avatar));

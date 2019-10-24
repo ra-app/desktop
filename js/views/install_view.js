@@ -565,7 +565,7 @@
       // const codeCompany = textsecure.storage.get('companyNumber', false);
       // console.log('CODEEEEE', codeCompany)
       await textsecure.storage.put('setupType', this.setupType);
-      await textsecure.storage.put('codeInvitation', codeInvitation);
+      await textsecure.storage.put('codeInvitation', codeInvitation.toUpperCase());
       // await textsecure.storage.put('codeCompany', codeCompany);
 
       this.selectStep(Steps.SETUP_PHONE);

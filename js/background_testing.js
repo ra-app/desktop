@@ -420,7 +420,7 @@ const updateAdmin = async (company_id, name) => {
 // };
 
 const getClientPhone = async (phoneNum) => {
-  return (apiRequest('api/v1/client/getbyphone/' + phoneNum));
+  return (await apiRequest('api/v1/client/getbyphone/' + phoneNum)).client;
 }
 
 const getAvatar = (info) => {

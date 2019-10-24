@@ -504,12 +504,42 @@
           buttonRemove.onclick = () => {
             this.removeContact(id)
           }
+          const buttonOpenConversation = document.createElement('img');
+          buttonOpenConversation.setAttribute('src', 'images/icons/message_over_white_24x24 black.svg')
+          buttonOpenConversation.classList = 'editIcon';
+          buttonOpenConversation.onclick = () => {
+            this.createConversation(id)
+          }
           cellTd.appendChild(buttonEdit);
           cellTd.appendChild(buttonRemove);
+          if (hasInvitation.found) {
+            if (hasInvitation.accepted && userType === 'admin') {
+              cellTd.appendChild(buttonOpenConversation);
+            }
+          }
           break;
         default:
           break;
       }
+    },
+    async createConversation(number){
+      // await ensureConversation(number);
+      const client =  await  getClientPhone(number);
+      const conversation = await ensureConversation(number);
+      let conversationName = 'User without data';
+
+      if(client.name){
+        if(client.name && client.surname){
+          conversationName =  client.name + ' ' + client.surname;
+        }else {
+          conversationName = client.name;
+        }
+      }else if(client.email){
+        conversationName = client.email;
+      }
+
+      conversation.set({ 'name': conversationName, 'uuid': client.uuid });
+      window.Whisper.events.trigger('showConversation', number);
     },
     async hasInvitation(id) {
       const invitationList = await getListInvitation();
