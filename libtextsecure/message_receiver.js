@@ -1351,6 +1351,14 @@ MessageReceiver.prototype.extend({
           decrypted.group.members = [];
           decrypted.group.avatar = null;
           break;
+        // case textsecure.protobuf.GroupContext.Type.REQUEST_INFO:
+        //   decrypted.body = null;
+        //   decrypted.attachments = [];
+        //   ConversationController.getOrCreateAndWait(decrypted.group.id, 'group').then(async (conversation) => {
+        //     const r = await conversation.updateGroup();
+        //     console.log('REQUEST_INFO updategroup', r);
+        //   });
+        //   break;
         default:
           this.removeFromCache(envelope);
           throw new Error('Unknown group message type');

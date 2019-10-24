@@ -1465,7 +1465,7 @@
       message.set({ id });
 
       const options = this.getSendOptions();
-      message.send(
+      return message.send(
         this.wrapSend(
           textsecure.messaging.updateGroup(
             this.id,

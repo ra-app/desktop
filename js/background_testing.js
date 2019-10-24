@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   //   createDeveloperInterface();
   // }, 1000);
 
-  // testGroup();
+  // await testGroup();
 
   // await testProfile();
 });
@@ -54,6 +54,8 @@ async function testProfile() {
     await encryptProfile(pictureBuffer)
   );
   // console.log('putToCDN', r);
+
+  
 
   // const enc = await encryptProfileName("TEST");
   // console.log("ENCRYPT", enc);
@@ -241,21 +243,17 @@ const ensureConversation = async phone_number => {
 
 const createGroup = async (name, members) => {
   await waitForConversationController();
-  console.log('createGroup', members);
+  
+  // const id = members.join('_');
+  const id = '' + Date.now();
+  console.log('createGroup', id, name, members);
 
-  const id = members.join('_');
+  let conversation = await ConversationController.getOrCreateAndWait(id, 'group');
 
-  let conversation = await ConversationController.get(id, 'group');
-  if (conversation && conversation.get('active_at')) {
-    console.log('createGroup existing', conversation);
-    // return conversation;
-  }
-
-  conversation = await ConversationController.getOrCreateAndWait(id, 'group');
   conversation.set({
-    name, active_at: Date.now(), members, type: 'group', left: false, color: 'blue',
+    id, name, active_at: Date.now(), members, type: 'group', avatar: false, // left: false, color: 'blue',
   });
-  console.log('createGroup new', id, conversation);
+  console.log('createGroup conversation', conversation);
 
   await window.Signal.Data.updateConversation(
     id,
@@ -264,13 +262,47 @@ const createGroup = async (name, members) => {
       Conversation: Whisper.Conversation,
     }
   );
+  
+  // const r = await conversation.updateGroup(); // { name, members }
+  // console.log('CreateGroup updategroup', r);
+
+  const options = conversation.getSendOptions();
+  const r2 = await textsecure.messaging.setGroupName(id, name, members, options);
+  console.log('createGroup createGroup', r2);
+
+  return conversation;
+};
+
+const updateGroup = async (id, name, members) => {
+  await waitForConversationController();
+  let conversation = await ConversationController.getOrCreateAndWait(id, 'group');
+  console.log('updateGroup', id, name, members, conversation);
+
+  conversation.set({
+    id, name, active_at: Date.now(), members, type: 'group', avatar: false, // left: false, color: 'blue',
+  });
+
+  await window.Signal.Data.updateConversation(
+    id,
+    conversation.attributes,
+    {
+      Conversation: Whisper.Conversation,
+    }
+  );
+  
+  // const r = await conversation.updateGroup(); // { name, members }
+  // console.log('CreateGroup updategroup', r);
+
+  const options = conversation.getSendOptions();
+  const r2 = await textsecure.messaging.setGroupName(id, name, members, options);
+  console.log('updateGroup createGroup', r2);
 
   return conversation;
 };
 
 const testGroup = async () => {
-  const members = ['+34664666666', '+34000000005'];
-  const conversation = await createGroup('testgroup', members);
+  const members = ['+34666666667', '+34664695919', getOwnNumber()];
+  const conversation = await createGroup('argh-', members);
   console.log('TestGroup', conversation);
 };
 
@@ -342,6 +374,10 @@ const getAuth = async () => {
   console.log('getAuth', USERNAME, PASSWORD);
   const auth = btoa(`${USERNAME}:${PASSWORD}`);
   return `Basic ${auth}`;
+};
+
+const getOwnNumber = () => {
+  return window.storage.get('number_id').split('.')[0];
 };
 
 const apiRequest = async (call, data = undefined) => {
@@ -443,6 +479,11 @@ const getUnclaimedCompanyTickets = async company_id => {
   return (await apiRequest('api/v1/admin/' + company_id + '/tickets/list'))
     .tickets;
 };
+
+const getContacts = async company_id => {
+  return (await apiRequest('api/v1/admin/' + company_id + '/contacts/get'))
+    .contacts;
+}
 
 const getTicketDetails = async (company_id, ticket_uuid) => {
   return (await apiRequest(
@@ -664,12 +705,68 @@ const createDeveloperInterface = () => {
     }
   });
 
+  // Contact list
+  const contactList = document.createElement('table');
+  contactList.id = 'contactlist';
+  // contactList.style.cssText = 'border: 1px solid black; background-color: white; position: absolute; right: 5px; top: 50px; padding: 5px; z-index: 9999;';
+
+  const headerTexts = ["name", "surname", "position", "email", "phone", "ts"];
+  const header = contactList.createTHead();
+  const row = header.insertRow();
+
+  for (let i = 0; i < headerTexts.length; i++) {
+    let cell = row.insertCell();
+    cell.innerHTML = headerTexts[i];
+  }
+
+  // Contactlist Button
+  const getContactlistBtn = document.createElement('button');
+  getContactlistBtn.textContent = 'Contacts';
+
+  getContactlistBtn.addEventListener('click', async () => {
+    if (addCompanyInput.value) {
+      contactList.innerHTML = '';
+      const companyID = addCompanyInput.value;
+      try {
+        const contacts = await getContacts(companyID);
+        console.log(contacts);
+        if (contacts){
+          const parser = new DOMParser();
+          const xmlRes = parser.parseFromString(contacts.contact_data, "text/xml");
+          console.log(xmlRes);
+          document.xmlRes = xmlRes;
+          
+          const contactListXml = xmlRes.children[0];
+
+          for (let i = 0; i < contactListXml.children.length; i++) {
+            const contact = contactListXml.children.item(i);
+
+            const tableRow = contactList.insertRow();
+            contactList.appendChild(tableRow);
+
+            for (let j = 0; j < headerTexts.length; j++) {
+              const content = contact.getElementsByTagName(headerTexts[j])[0].textContent;
+              
+              const contentTd = tableRow.insertCell();
+              contentTd.style.cssText = 'text-align: left;padding: 5px;';
+              contentTd.innerHTML = content;
+              tableRow.appendChild(contentTd);
+            }
+          }
+        }
+      } catch (err) {
+        devToaster('getCompanyContacts Error: "' + err.message + '"');
+      }
+    }
+  });
+  
   // Input Change Handling
   const updateBtn = () => {
     const m = addCompanyInput.value.match(/^\d{6}$/);
     const disabled = !m;
     addCompanyBtn.disabled = disabled;
     getCompanyTicketsBtn.disabled = disabled;
+    getContactlistBtn.disabled = disabled;
   };
   addCompanyInput.addEventListener('change', updateBtn);
   addCompanyInput.addEventListener('keyup', updateBtn);
@@ -688,6 +785,8 @@ const createDeveloperInterface = () => {
   addCompanyDiv.appendChild(addCompanyInput);
   addCompanyDiv.appendChild(addCompanyBtn);
   addCompanyDiv.appendChild(getCompanyTicketsBtn);
+  addCompanyDiv.appendChild(getContactlistBtn);
+  addCompanyDiv.appendChild(ticketsList);
   phoneNumberDiv.appendChild(addAdminInput);
   phoneNumberDiv.appendChild(addAdminBtn);
   phoneNumberDiv.appendChild(removeAdminBtn);
@@ -695,6 +794,7 @@ const createDeveloperInterface = () => {
   divTicketsDev.appendChild(ticketsList);
   devPanel.appendChild(h3Title);
   devPanel.appendChild(addCompanyDiv);
+  addCompanyDiv.appendChild(contactList);
   devPanel.appendChild(phoneNumberDiv);
   devPanel.appendChild(divTicketsDev);
 };
@@ -1010,3 +1110,54 @@ const draggableHelper = (
   window.addEventListener('resize', animFrameDebounce(ensureVisible), false);
 };
 // === DRAGGABLE_HELPER END ===
+
+
+// === CACHING THINGS START ===
+const cachedThings = {};
+
+// const cleanCache = () => {
+//   const keys = Object.keys(cachedThings);
+//   for (let i = 0; i < keys.length; i++) {
+//     const key = keys[i];
+//     const entry = cachedThings[key];
+//     const age = Date.now() - entry.ts;
+//     if (age > 60000 * 60) {
+//       delete cachedThings[key];
+//     }
+//   }
+// };
+
+const addToCache = (key, value) => {
+  cachedThings[key] = {
+    value, ts: Date.now(),
+  };
+};
+
+const getFromCache = (key, maxAge=60000) => {
+  const entry = cachedThings[key];
+  if (!entry) return undefined;
+  const age = Date.now() - entry.ts;
+  if (age > maxAge) {
+    delete cachedThings[key];
+    return undefined;
+  }
+  return entry.value;
+};
+
+const wrapFunctionForCaching = (func, maxAge=60000) => {
+  return async (...args) => {
+    // const key = func.name + '_' + args.join('-');
+    const key = func.name + '_' + JSON.stringify(args);
+    const cached = getFromCache(key, maxAge);
+    if (!cached) {
+      const res = await func(...args);
+      addToCache(key, res);
+      return res;
+    }
+    return cached;
+  };
+};
+// === CACHING THINGS END ===
+
+// const cachedGetClientDetails = wrapFunctionForCaching(getClientDetails);
+// const cachedGetClientPhone = wrapFunctionForCaching(getClientPhone);
