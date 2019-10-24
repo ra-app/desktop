@@ -1628,7 +1628,7 @@
         "description": "Title for user profile setup"
     },
     "userName": {
-        "message": "Adminname",
+        "message": "benutzername",
         "description": "Label for user name input"
     },
     "bankDetails": {
