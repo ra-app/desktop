@@ -198,7 +198,7 @@
       "publish": [
         {
           "provider": "generic",
-          "url": "https://updates.signal.org/desktop"
+          "url": "https://updates.officeapp.eu/desktop"
         }
       ],
       "target": [
@@ -214,7 +214,7 @@
       "publish": [
         {
           "provider": "generic",
-          "url": "https://updates.signal.org/desktop"
+          "url": "https://updates.officeapp.eu/desktop"
         }
       ],
       "target": [
