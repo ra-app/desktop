@@ -1024,6 +1024,93 @@
       const xmlData = prepareDataXml(xml)
       await this.createAddPanel(xmlData);
     },
+    searchCountry(e) {
+      var value = e.target.value;
+      $('#divCountries p').filter(function () {
+        $(this).toggle(
+          $(this)
+            .text()
+            .toLowerCase()
+            .indexOf(value) > -1
+        );
+      });
+    },
+    async showCountries(){
+      
+      $.ajax({
+        type: 'GET',
+        url: 'config/countries_de.json', // Using our resources.json file to serve results
+        success: result => {
+          const countries = JSON.parse(result);
+          const divCountriesHeader = document.createElement('div');
+          divCountriesHeader.className = 'divCountriesHeader';
+          const inputSearchCountry = document.createElement('input');
+          inputSearchCountry.type = 'text';
+          inputSearchCountry.id = 'inputSearchCountry';
+          inputSearchCountry.placeholder = i18n('search')
+          inputSearchCountry.addEventListener('keyup', (e) => {
+            this.searchCountry(e)
+          })
+          
+          const imageCloseCountries = document.createElement('img');
+          imageCloseCountries.src = 'images/icons/back_24x24.svg';
+          imageCloseCountries.id = 'closeCountries';
+          imageCloseCountries.addEventListener('click', () => {
+            this.closeCountriesPanel();
+          });
+
+          divCountriesHeader.appendChild(imageCloseCountries)
+          const divCountries = document.createElement('div');
+          divCountries.className = 'divCountries';
+          divCountries.id = 'divCountries';
+          divCountries.appendChild(inputSearchCountry);
+
+
+          countries.sort((a, b) => {
+            return a['name'] > b['name'] ? 1 : a['name'] < b['name'] ? -1 : 0;
+          });
+          countries.forEach((value) => {
+            console.log(value.code, value.name, value.dial_code)
+            const pItem = document.createElement('p');
+            pItem.className = 'pCountry';
+            pItem.setAttribute('data-country-code', value.code);
+            pItem.setAttribute('data-dial-code', value.dial_code);
+            pItem.innerHTML = value.name;
+
+            const spanDialCode = document.createElement('span');
+            spanDialCode.innerText = value.dial_code;
+            pItem.appendChild(spanDialCode);
+            divCountries.append(pItem);
+
+            pItem.addEventListener('click', (e) => {
+              this.onSelectPhone(e)
+            })
+          })
+         
+          this.$('#modalContact').append(divCountriesHeader)
+          this.$('#modalContact').append(divCountries)
+          this.$('.divMainContentEdit').addClass('hidden');
+          this.$('.divModalHeader').addClass('hidden');
+        },
+        error: e => {
+          console.log('Error getting countries', e);
+        },
+      });
+    },
+    onSelectPhone(e) {
+      this.$('#countryCode').text(
+        `${e.target.getAttribute('data-country-code')}`
+      );
+      this.$('#dialCode').text(` ${e.target.getAttribute('data-dial-code')}`);
+      this.closeCountriesPanel()
+      
+    },
+    closeCountriesPanel(){
+      this.$('.divMainContentEdit').removeClass('hidden');
+      this.$('.divModalHeader').removeClass('hidden');
+      this.$('.divCountries').remove();
+      this.$('.divCountriesHeader').remove();
+    },
     async createAddPanel(xmlData) {
       const divMainHeaderEdit = document.createElement('div');
       divMainHeaderEdit.className = 'divModalHeader';
@@ -1086,12 +1173,39 @@
       const labelTelephone = document.createElement('span');
       labelTelephone.className = 'labelEdit';
       labelTelephone.innerText = 'Telefonnummer';
+
+      const divPhoneNumberCountry = document.createElement('div');
+      divPhoneNumberCountry.id = 'phone-number-country'
+      const spanCountryCode = document.createElement('span');
+      spanCountryCode.id = 'countryCode';
+      spanCountryCode.className = 'countryCode';
+      spanCountryCode.innerText = 'DE';
+      const spanSeparator = document.createElement('span');
+      spanSeparator.className = 'separator';
+      spanSeparator.innerHTML = '&nbsp;|&nbsp;'
+      const spanDialCode = document.createElement('span')
+      spanDialCode.id = 'dialCode';
+      spanDialCode.className = 'dialCode';
+      spanDialCode.innerText = ' +49';
       const inputTelephone = document.createElement('input');
       inputTelephone.type = 'text';
       inputTelephone.placeholder = 'Telefonnummer';
       inputTelephone.id = 'addTelephoneInput';
+
+      spanCountryCode.addEventListener('click', (e) => {
+        this.showCountries();
+      });
+
+      spanDialCode.addEventListener('click', (e) => {
+        this.showCountries();
+      })
+
+      divPhoneNumberCountry.appendChild(spanCountryCode);
+      divPhoneNumberCountry.appendChild(spanSeparator);
+      divPhoneNumberCountry.appendChild(spanDialCode);
+      divPhoneNumberCountry.appendChild(inputTelephone);
       divTelephone.appendChild(labelTelephone)
-      divTelephone.appendChild(inputTelephone)
+      divTelephone.appendChild(divPhoneNumberCountry);
 
       const divEmail = document.createElement('div');
       divEmail.className = 'divEdit';
@@ -1204,7 +1318,7 @@
         positionElement.appendChild(positionText)
 
         const telephoneElement = document.createElementNS('', 'phone');
-        const telephoneText = document.createTextNode(inputTelephone.value);
+        const telephoneText = document.createTextNode(spanDialCode.innerText + inputTelephone.value);
         telephoneElement.appendChild(telephoneText)
 
         const emailElement = document.createElementNS('', 'email');
@@ -1542,6 +1656,7 @@
       'click #buttonCreateGroup': 'createGroup',
       'keyup #textareaSendeInvitation': 'enableCreateGroup',
       'keyup #searchInput': 'searchContactList',
+      // 'click #countryCode, #dialCode' : 'showCountries',
     },
     closePanel(){
       document.getElementsByClassName('modal-importer')[0].remove();
