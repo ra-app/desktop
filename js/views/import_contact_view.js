@@ -1634,18 +1634,50 @@
       if(options){
         if(options.contact_data !== undefined){
           this.contactListXml = prepareDataXml(options.contact_data);
-          this.objectContact = []
-          for (let i = 0; i < this.contactListXml.children.length; i++) {
-            const contact = this.contactListXml.children.item(i);
-            const tmpObj = {
-              name: contact.getElementsByTagName('name')[0].textContent,
-              surname: contact.getElementsByTagName('surname')[0].textContent,
-              position: contact.getElementsByTagName('position')[0].textContent,
-              email: contact.getElementsByTagName('email')[0].textContent,
-              phone: contact.getElementsByTagName('phone')[0].textContent,
-              ts: contact.getElementsByTagName('ts')[0].textContent,
+          this.objectContact = [];
+          const myNumber = textsecure.storage.user.getNumber();
+          if (options.type === 'group') {
+            for (let i = 0; i < options.admin_client.admins.length; i++) {
+              const contact = options.admin_client.admins[i];
+              if (contact.name !== null && myNumber !== contact.phone_number) {
+                const tmpObj = {
+                  name: contact.name,
+                  surname: contact.surname,
+                  position: '',
+                  email: '',
+                  phone: contact.phone_number,
+                  ts: contact.ts_registration,
+                }
+                this.objectContact.push(tmpObj)
+              }
             }
-            this.objectContact.push(tmpObj)
+            for (let i = 0; i < options.admin_client.clients.length; i++) {
+              const contact = options.admin_client.clients[i];
+              if (contact.name !== null && myNumber !== contact.phone_number) {
+                const tmpObj = {
+                  name: contact.name,
+                  surname: contact.surname,
+                  position: '',
+                  email: '',
+                  phone: contact.phone_number,
+                  ts: contact.ts_registration,
+                }
+                this.objectContact.push(tmpObj)
+              }
+            }
+          } else {
+            for (let i = 0; i < this.contactListXml.children.length; i++) {
+              const contact = this.contactListXml.children.item(i);
+              const tmpObj = {
+                name: contact.getElementsByTagName('name')[0].textContent,
+                surname: contact.getElementsByTagName('surname')[0].textContent,
+                position: contact.getElementsByTagName('position')[0].textContent,
+                email: contact.getElementsByTagName('email')[0].textContent,
+                phone: contact.getElementsByTagName('phone')[0].textContent,
+                ts: contact.getElementsByTagName('ts')[0].textContent,
+              }
+              this.objectContact.push(tmpObj)
+            }
           }
           this.type = options.type;
           if ( options.type === 'kunde' ){
@@ -1704,7 +1736,6 @@
       this.$('#modalSearchUsers').removeClass('hidden');
     },
     searchContactList(e) {
-      console.log('1111111111', e)
       let value = e.target.value.toLowerCase();
       $('#mainDivUserSendInvitation div').filter(function () {
         $(this).toggle(
