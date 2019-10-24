@@ -141,7 +141,7 @@
                 element.uuid
               }" class="mainMssgDiv"></div>`;
               this.$('#' + element.uuid).append(mainMssgDiv);
-              ticketDETAIL.events.forEach(mssg => {
+              ticketDETAIL.events.reverse().forEach(mssg => {
                 const mssgDiv = `<div class="received-message">
                                   <p class="mssgUsername">${
                                     element.name ? element.name : 'username'
@@ -191,8 +191,8 @@
       // send event ticket
       const ticketDETAIL = await getTicketDetails(company_id, uuid);
       let message = '[![TICKETMSG]!]';
-      ticketDETAIL.events.forEach(mssg => {
-        message = message + ' ' + JSON.parse(mssg.json).body;
+      ticketDETAIL.events.reverse().forEach(mssg => {
+        message = message + '\n ' + JSON.parse(mssg.json).body;
       });
       conversation.sendMessage(message);
       window.Whisper.events.trigger('showConversation', phone_number);
