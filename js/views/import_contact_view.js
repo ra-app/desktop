@@ -1412,7 +1412,6 @@
     },
     searchContact() {
       // filterAdmin
-      console.log('here !???? ')
       if (this.$('#filterAdmin').hasClass('active')) {
         activeRolToInvitate = 'admin'
       }
@@ -1433,6 +1432,7 @@
       this.$('#divMainContentEdit').append(headerSearch);
       const searchTab = document.createElement('div');
       searchTab.className = 'tab';
+      searchTab.style.marginTop = '20px';
       this.$('#divMainContentEdit').append(searchTab);
       const buttonAll = document.createElement('button');
       const buttonAdmin = document.createElement('button');
