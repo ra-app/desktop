@@ -205,8 +205,8 @@
       conversation.sendMessage(message);
       window.Whisper.events.trigger('showConversation', phone_number);
       this.$(`#${uuid}`).remove();
-      this.model.setClosed(false);
-      this.updateCompose();
+      // this.model[0].setClosed(false);
+      this.updateCompose(true);
     },
   });
 
@@ -224,7 +224,10 @@
         closed: this.model.get('isClosed'),
       };
     },
-    updateCompose() {
+    updateCompose(isClaim) {
+      if(isClaim){
+          this.model.setClosed(false);
+      }
       const closed = this.model.get('isClosed');
       const composer = this.$('.message_composer');
       if (composer) {
