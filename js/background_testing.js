@@ -72,7 +72,6 @@ async function testProfile() {
 const API_URL =
   'https://luydm9sd26.execute-api.eu-central-1.amazonaws.com/latest/';
 // const API_URL = 'http://127.0.0.1:4000/';
-
 // XXX: Queue for sent messages, sent/received/seen indicators, error handling!
 
 // Receives messages to send from conversations.js switchcase.

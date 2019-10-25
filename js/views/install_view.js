@@ -1049,6 +1049,7 @@
         BranchOption41: i18n('BranchOption41'),
         BranchOption42: i18n('BranchOption42'),
         PhonesTitle: i18n('PhonesTitle'),
+        versionFooter: window.getVersion()
       };
     },
   });
