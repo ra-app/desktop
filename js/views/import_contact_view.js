@@ -1776,8 +1776,6 @@
       dataUsersToInvitate = {};
     },
     showContactListPanel() {
-
-      console.log('Are we here !????? ', this.objectContact)
       if (this.objectContact === undefined || this.objectContact.length === 0 ) {
         // this.$('#ptextNoContacts').html = i18n('noContactsImported');
         document.getElementById('ptextNoContacts').innerHTML = '';
