@@ -955,6 +955,7 @@
     render_attributes() {
       return {
         appTagLine: i18n('appTagLine'),
+        appTagLineSecond:i18n('appTagLineSecond'),
         eulaTitle: i18n('eulaTitle'),
         eulaSubTitle: i18n('eulaSubTitle'),
         acceptEula: i18n('acceptEula'),

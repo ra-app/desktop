@@ -1535,6 +1535,10 @@
         "message": "Sichere Kundenkommunikation für Unternehmen und Organisationen",
         "description": "Tagline of the OfficeApp application"
     },
+    "appTagLineSecond": {
+        "message": "Customer Care Messenger System",
+        "description": "second Tagline of the OfficeApp application"
+    },
     "registerCompany": {
         "message": "Unternehmensregistrierung",
         "description": "Header for company registration"

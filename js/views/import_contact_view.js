@@ -1688,7 +1688,7 @@
 
     initialize(options) {
       if (options) {
-        if (options.contact_data !== undefined) {
+        // if (options.contact_data !== undefined) {
           this.contactListXml = prepareDataXml(options.contact_data);
           this.objectContact = [];
           const myNumber = textsecure.storage.user.getNumber();
@@ -1742,6 +1742,7 @@
             }
           }
           this.type = options.type;
+          console.log(this.type, "typeeeeeeeeeeeeeeeeeeeeee")
           if (options.type === 'kunde') {
             this.typeAdmin = true;
             this.typeKunde = false;
@@ -1755,7 +1756,7 @@
             this.typeAdmin = false;
             this.typeKunde = false;
           }
-        }
+        // }
       }
       this.render();
     },
