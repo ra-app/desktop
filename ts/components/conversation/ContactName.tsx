@@ -3,7 +3,7 @@ import React from 'react';
 import { Emojify } from './Emojify';
 
 interface Props {
-  phoneNumber: string;
+  phoneNumber?: string;
   name?: string;
   profileName?: string;
   module?: string;
@@ -11,10 +11,10 @@ interface Props {
 
 export class ContactName extends React.Component<Props> {
   public render() {
-    const { phoneNumber, name, profileName, module } = this.props;
+    const { /*phoneNumber,*/ name, profileName, module } = this.props;
     const prefix = module ? module : 'module-contact-name';
 
-    const title = name ? name : phoneNumber;
+    const title = name ? name : 'unknown';
     const shouldShowProfile = Boolean(profileName && !name);
     const profileElement = shouldShowProfile ? (
       <span className={`${prefix}__profile-name`}>

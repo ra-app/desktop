@@ -393,7 +393,7 @@
       const getHeaderProps = () => {
         const uuid = this.model.attributes.ticket_uuid;
         const company_id = this.model.attributes.company_id;
-        const message = '[![TICKETMSG]!] This ticket has been closed';
+        const message = '[![TICKETMSG]!] Dieses Ticket wurde geschlossen';
         const messageLine = '[![TICKETLINE]!]';
         const conversation = this.model.messageCollection.conversation;
         const expireTimer = this.model.get('expireTimer');
@@ -457,10 +457,10 @@
             setTimeout(() => {
               this.model.setClosed(true);
               // this.updateHeader();
-              this.updateCompose();
+              this.unload('archive');
+              this.model.setArchived(true);
+              // this.updateCompose();
             }, 1000);
-            // //  this.unload('archive');
-            // //  this.model.setArchived(true);
           },
           onMoveToInbox: () => {
             this.model.setArchived(false);
