@@ -71,12 +71,14 @@
           Component: Components.VerificationNotification,
           props,
         };
-      } else if (type === 'groupNotification') {
-        return {
-          Component: Components.GroupNotification,
-          props,
-        };
-      } else if (type === 'resetSessionNotification') {
+      }
+      // else if (type === 'groupNotification') {
+      //   return {
+      //     Component: Components.GroupNotification,
+      //     props,
+      //   };
+      // }
+      else if (type === 'resetSessionNotification') {
         return {
           Component: Components.ResetSessionNotification,
           props,
