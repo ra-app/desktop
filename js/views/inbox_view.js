@@ -100,6 +100,7 @@
     },
     render_attributes: {
       message: i18n('loading'),
+      versionFooter: window.getVersion()
     },
   });
   // Whisper.TicketScreen = Whisper.View.extend({
