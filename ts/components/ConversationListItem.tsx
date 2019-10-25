@@ -149,6 +149,11 @@ export class ConversationListItem extends React.PureComponent<Props> {
       text = text.replace(magicWord, '');
     }
 
+    const magicLine = '[![TICKETLINE]!]';
+    if (text.indexOf(magicLine) !== -1) {
+      text = text.replace(magicLine, '');
+    }
+
     return (
       <div className="module-conversation-list-item__message">
         <div

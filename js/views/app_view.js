@@ -221,6 +221,10 @@
     },
     async openModalImport(typeUser) {
       const companyNumber = textsecure.storage.get('companyNumber', null);
+      let admin_client_data = null;
+      if (typeUser === 'group') {
+        admin_client_data = await getClientAdminCompany(companyNumber);
+      }
       const xml = await getXmlFile(companyNumber);
       // const InvitationList = await getClientAdminCompany(companyNumber);
       // console.log(InvitationList.admins, "55555555555555")
@@ -237,6 +241,7 @@
       const dialog = new Whisper.ModalImport({
         contact_data: xml,
         type: typeUser,
+        admin_client: admin_client_data,
       });
       dialog.$el.insertBefore(
         document.getElementsByClassName('network-status-container')[0]
