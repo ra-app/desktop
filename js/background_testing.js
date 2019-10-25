@@ -263,7 +263,7 @@ const ensureCompanyConversation = async company_id => {
   // await receiveCompanyText(company_id, welcomeText);
 };
 
-const ensurePersonIsKnown = async (phoneNumber) => {
+const ensurePersonIsKnownImpl = async (phoneNumber) => {
   try {
     console.log('ensurePersonIsKnown', phoneNumber);
     const client = await getClientPhone(phoneNumber);
@@ -285,6 +285,18 @@ const ensurePersonIsKnown = async (phoneNumber) => {
   } catch (err) {
     console.error('ensurePersonIsKnown', phoneNumber, err);
   }
+};
+
+const _ensurePersonIsKnownPromises = {};
+const ensurePersonIsKnown = (phoneNumber) => {
+  if (!_ensurePersonIsKnownPromises[phoneNumber]) {
+    const p = ensurePersonIsKnownImpl(phoneNumber).catch(async (err) => {
+      delete _ensurePersonIsKnownPromises[phoneNumber];
+      throw err;
+    });
+    _ensurePersonIsKnownPromises[phoneNumber] = p;
+  }
+  return _ensurePersonIsKnownPromises[phoneNumber];
 };
 
 const ensureConversation = async (phone_number, notUpdate = false) => {

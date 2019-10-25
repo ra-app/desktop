@@ -472,9 +472,7 @@
 
       const isTapToView = this.isTapToView();
 
-      if (isGroup) {
-        ensurePersonIsKnown(phoneNumber);
-      }
+      ensurePersonIsKnown(phoneNumber);
 
       return {
         text: this.createNonBreakingLastSeparator(this.get('body')),
