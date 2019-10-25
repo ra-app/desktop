@@ -1905,33 +1905,36 @@
         this.$('#errorMessage').append(message);
       }
     },
-    async sendInvitations() {
-      await parallel(1, Object.keys(dataUsersToInvitate), async element => {
-        const id = dataUsersToInvitate[element].userid;
-        const type = dataUsersToInvitate[element].position;
-        const companyNumber = textsecure.storage.get('companyNumber', null);
-        let data = {};
-        if (type === 'admin') {
-          data = {
-            isAdminInvite: true,
-            identifier: id,
-          };
-        } else {
-          data = {
-            isAdminInvite: false,
-            identifier: id,
-          };
+    async sendInvitations(){
+      await parallel(1, Object.keys(dataUsersToInvitate), async (element) => {
+        if ( dataUsersToInvitate[element] !== undefined ){
+          const id = dataUsersToInvitate[element].userid;
+          const type = dataUsersToInvitate[element].position;
+          const companyNumber = textsecure.storage.get('companyNumber', null);
+          let data = {};
+          if (type === 'admin') {
+            data = {
+              isAdminInvite: true,
+              identifier: id,
+            };
+          } else {
+            data = {
+              isAdminInvite: false,
+              identifier: id,
+            };
+          }
+          const result = await createInvitation(companyNumber, data);
+          const dataSms = {
+            phone_number: id,
+            code: result.code,
+          }
+          sendSms(companyNumber, dataSms)
+  
         }
-        const result = await createInvitation(companyNumber, data);
-        const dataSms = {
-          phone_number: id,
-          code: result.code,
-        };
-        sendSms(companyNumber, dataSms);
-
-        dataUsersToInvitate = {};
-        this.closePanel();
-      });
+        
+      })
+      dataUsersToInvitate = {};
+      this.closePanel();
     },
     checkBoxevent(event) {
       const id = event.target.attributes.dataPhone.nodeValue;
