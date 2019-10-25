@@ -471,7 +471,11 @@
       const sticker = this.get('sticker');
 
       const isTapToView = this.isTapToView();
-      ensurePersonIsKnown(phoneNumber);
+
+      if (isGroup) {
+        ensurePersonIsKnown(phoneNumber);
+      }
+
       return {
         text: this.createNonBreakingLastSeparator(this.get('body')),
         textPending: this.get('bodyPending'),

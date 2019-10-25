@@ -195,6 +195,8 @@
         name: conversationName,
         ticket_uuid: uuid,
         company_id: company_id,
+        isClosed: false,
+        isArchived: false,
       });
       // send event ticket
       const ticketDETAIL = await getTicketDetails(company_id, uuid);
@@ -206,7 +208,7 @@
       window.Whisper.events.trigger('showConversation', phone_number);
       this.$(`#${uuid}`).remove();
       // this.model[0].setClosed(false);
-      this.updateCompose(true);
+      // this.updateCompose();
     },
   });
 
@@ -224,15 +226,16 @@
         closed: this.model.get('isClosed'),
       };
     },
-    updateCompose(isClaim) {
-      if(isClaim){
-          this.model.setClosed(false);
-      }
+    updateCompose() {
+      // if(isClaim){
+      //     this.model.setClosed(false);
+      // }
       const closed = this.model.get('isClosed');
       const composer = this.$('.message_composer');
       if (composer) {
         closed ? composer.hide() : composer.show();
       }
+      // this.view.update();
     },
     initialize(options) {
       this.listenTo(this.model, 'destroy', this.stopListening);
@@ -448,27 +451,24 @@
             this.resetPanel();
             this.updateHeader();
           },
-
           onArchive: () => {
             this.unload('archive');
             this.model.setArchived(true);
           },
           closeTicket: async () => {
             await closeTicket(company_id + '', uuid);
-            conversation.set({
-              isClosed: true,
-            });
+            // conversation.set({
+            //   isClosed: true,
+            // });
             conversation.sendMessage(message);
             conversation.sendMessage(messageLine);
+            this.model.setClosed(true);
+            this.updateCompose();
+
             setTimeout(() => {
-              this.model.setClosed(true);
-              // this.updateHeader();
               this.unload('archive');
               this.model.setArchived(true);
-              
-              // this.updateCompose();
-            }, 1000);
-      
+            }, 300);
           },
           onMoveToInbox: () => {
             this.model.setArchived(false);
