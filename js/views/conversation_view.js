@@ -452,6 +452,9 @@
           },
           closeTicket: async () => {
             await closeTicket(company_id + '', uuid);
+            conversation.set({
+              isClosed: true,
+            });
             conversation.sendMessage(message);
             conversation.sendMessage(messageLine);
             setTimeout(() => {
@@ -459,8 +462,10 @@
               // this.updateHeader();
               this.unload('archive');
               this.model.setArchived(true);
+              
               // this.updateCompose();
             }, 1000);
+      
           },
           onMoveToInbox: () => {
             this.model.setArchived(false);
