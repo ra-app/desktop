@@ -457,10 +457,10 @@
             setTimeout(() => {
               this.model.setClosed(true);
               // this.updateHeader();
-              this.updateCompose();
+              this.unload('archive');
+              this.model.setArchived(true);
+              // this.updateCompose();
             }, 1000);
-            // //  this.unload('archive');
-            // //  this.model.setArchived(true);
           },
           onMoveToInbox: () => {
             this.model.setArchived(false);
