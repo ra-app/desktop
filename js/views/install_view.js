@@ -467,6 +467,8 @@
     onContactImportDone() {
       if (this.$('#contact-import-done').is('.disabled')) return;
       this.onSetupCompleted();
+      this.$('#contact-import-done').attr("disabled", true);
+      this.$('#contact-import-done').addClass('disabled');
     },
     onContactImportSkip() {
       this.onSetupCompleted();
