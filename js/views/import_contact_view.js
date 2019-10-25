@@ -1515,18 +1515,6 @@
       buttonAll.onclick = () => {
         this.filterTab('Alle');
       };
-      // buttonAdmin.className = 'tablinks';
-      // buttonAdmin.innerHTML = 'Admin';
-      // buttonAdmin.id = 'filterAdmin';
-      // buttonAdmin.onclick = () => {
-      //   this.filterTab('Admin')
-      // }
-      // buttonUsers.className = 'tablinks';
-      // buttonUsers.innerHTML = 'Users';
-      // buttonUsers.id = 'filterUsers';
-      // buttonUsers.onclick = () => {
-      //   this.filterTab('Users')
-      // }
       searchTab.append(buttonAll);
       // searchTab.append(buttonAdmin);
       // searchTab.append(buttonUsers);
@@ -1788,7 +1776,9 @@
       dataUsersToInvitate = {};
     },
     showContactListPanel() {
-      if (this.objectContact === undefined) {
+
+      console.log('Are we here !????? ', this.objectContact)
+      if (this.objectContact === undefined || this.objectContact.length === 0 ) {
         // this.$('#ptextNoContacts').html = i18n('noContactsImported');
         document.getElementById('ptextNoContacts').innerHTML = '';
         document.getElementById('ptextNoContacts').innerHTML = i18n(
