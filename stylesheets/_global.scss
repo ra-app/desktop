@@ -809,8 +809,8 @@ $debug: 0;
       margin-right: 38.4px;
     }
     & .logo {
-      width: 150px;
-      height: 150px;
+      width: 200px;
+      height: 200px;
     }
   }
   .content-new-register {
@@ -863,10 +863,39 @@ $debug: 0;
     color: #476077;
     opacity: 1;
     font-weight: 600;
-    margin-bottom: 28px;
+    margin-bottom: 10px;
     @media (max-width: 1202px) {
       font-size: 30px;
       margin-bottom: 10px;
+    }
+  }
+
+  .register-firstTitle{
+    text-align: left;
+    font-size: 35px;
+    font-family: $poppins;
+    letter-spacing: 0;
+    opacity: 1;
+    max-width: 680px;
+    margin-bottom: 10px;
+    font-style: italic;
+    background: -webkit-linear-gradient( 0deg,
+    #005af5 0%,
+    #015df2 18%,
+    #0567eb 32%,
+    #0c78de 36%,
+    #1690cc 46%,
+    #23afb5 56%,
+    #33d49b 75%,
+    #34d49a 80%,
+    #3bd696 83%,
+    #47da91 85%,
+    #58de89 97%,
+    #99f26b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    @media (max-width: 1202px) {
+      font-size: 25px;
     }
   }
   .register-Subtitle {
@@ -1095,13 +1124,13 @@ $debug: 0;
       margin: 0px;
       max-width: unset;
       @media (min-height: 600px) and (max-height: 700px) {
-        height: 320px !important;
+        height: 320px;
       }
       @media (min-width: 998px) and (max-width: 1202px) {
-        height: 310px;
+        height: 270px;
       }
       @media (max-width: 901px) and (min-width: 800px) {
-        height: 310px;
+        height: 260px;
       }
       @media (max-width: 997px) and (min-width: 902px) {
         height: 310px;
@@ -1125,19 +1154,25 @@ $debug: 0;
     }
     .empty-div {
       height: 45px;
-      @media (min-width: 800px) and (max-width: 901px) {
-        height: 87px;
-      }
-      @media (min-width: 902px) and (max-width: 997px) {
-        height: 54px;
-      }
-      @media (min-width: 998px) and (max-width: 1202px) {
-        height: 62px;
-      }
-      @media (min-width: 1329px) {
-        // height: 74px;
+      @media (min-width: 800px) and (max-width: 1123px) {
         height: 43px;
       }
+      @media (min-width: 1124px) and (max-width: 1161px) {
+        height: 64px;
+      }
+      // @media (min-width: 800px) and (max-width: 901px) {
+      //   height: 87px;
+      // }
+      // @media (min-width: 902px) and (max-width: 997px) {
+      //   height: 54px;
+      // }
+      // @media (min-width: 998px) and (max-width: 1202px) {
+      //   height: 62px;
+      // }
+      // @media (min-width: 1329px) {
+      //   // height: 74px;
+      //   height: 43px;
+      // }
     }
   }
   .action-link {
