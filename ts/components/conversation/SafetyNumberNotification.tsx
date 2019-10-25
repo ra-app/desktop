@@ -7,7 +7,7 @@ import { LocalizerType } from '../../types/Util';
 
 interface ContactType {
   id: string;
-  phoneNumber: string;
+  // phoneNumber: string;
   profileName?: string;
   name?: string;
 }
@@ -48,7 +48,7 @@ export class SafetyNumberNotification extends React.Component<Props> {
                 <ContactName
                   name={contact.name}
                   profileName={contact.profileName}
-                  phoneNumber={contact.phoneNumber}
+                  // phoneNumber={contact.phoneNumber}
                   module="module-safety-number-notification__contact"
                 />
               </span>,
