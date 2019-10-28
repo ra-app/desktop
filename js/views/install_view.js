@@ -496,11 +496,7 @@
         companyName: this.$('#company-name-input').val(),
       };
       await textsecure.storage.put('userSetupInfo', profile);
-      this.selectStep(
-        this.setupType === 'admin'
-          ? Steps.SETUP_CONTACT_IMPORT
-          : Steps.SETUP_COMPANY_BANK
-      );
+      this.selectStep(Steps.SETUP_CONTACT_IMPORT)
     },
     async onBankDetailsDone() {
       const bank = {
