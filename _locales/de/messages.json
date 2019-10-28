@@ -830,7 +830,7 @@
         "description": ""
     },
     "deleteWarning": {
-        "message": "Bist Sie sicher? Das Anklicken von »Löschen« wird diese Nachricht unwiderruflich von nur diesem Gerät entfernen.",
+        "message": "Sind Sie sicher? Das Anklicken von »Löschen« wird diese Nachricht unwiderruflich von nur diesem Gerät entfernen.",
         "description": ""
     },
     "deleteThisMessage": {
