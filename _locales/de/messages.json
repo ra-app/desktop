@@ -1925,6 +1925,10 @@
       "addContactModal":{
         "message": "Benutzerdaten",
         "description": "Benutzerdaten modal"
+    },
+    "extraInfoPhones":{
+        "message": "Landesvorwahl auswählen",
+        "description": "Landesvorwahl auswählen tittle"
     }
       
 }

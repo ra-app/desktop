@@ -775,6 +775,13 @@ $debug: 0;
     justify-content: center;
     align-items: center;
     flex-grow: 0;
+    flex-direction: column;
+    .titleOutside{
+      width: 450px;
+    text-align: left;
+    max-width: 450px;
+    margin-bottom: 20px;
+    }
   }
   .content-main-footer {
     position: absolute;
