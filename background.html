@@ -40,7 +40,7 @@
       <div class='message'>{{ message}}</div>
     </div>
     <div class="footer">
-      <span>© 2019 OfficeApp</span> | Desktop Version 1.8.20
+      <span>© 2019 OfficeApp</span> | Desktop Version {{versionFooter}}
     </div>
   </script>
 
@@ -95,7 +95,7 @@
                 <button id ='claim_{{uuid}}' class="button-claim-ticket claimed" disabled="disabled">{{status}}</button> 
               {{/isClaimed}}
               {{#isClosed}}
-                <button id = 'claim_{{uuid}}' class="button-claim-ticket not-claimed">{{status}}</button> 
+                <!-- <button id = 'claim_{{uuid}}' class="button-claim-ticket not-claimed">{{status}}</button>  -->
               {{/isClosed}}
             </div>
           </div>
@@ -108,6 +108,24 @@
         {{^hasTicket}}
         <span>Keine Tickets vorhanden</span>
         {{/hasTicket}}
+      </div>
+      
+    </div>
+  </script>
+  <script type='text/x-tmpl-mustache' id='blackboard-view'>
+    <div class='content'>
+      <div class="module-main-header__info">
+        <span id="span-chat-name">Blackboard</span>
+      </div>
+      <div class='container-blackboard'>
+        <div class="flex-container">
+          {{#model}}
+            <div>
+              <p class="titleCardBlackboard">{{title}}</p>
+              <p class="contentCardBlackboard">{{content}}</p>
+            </div>
+          {{/model}}
+        </div>
       </div>
       
     </div>
@@ -198,7 +216,6 @@
 
       <div class='bottom-bar' id='footer'>
           <div class='attachment-list'></div>
-          <!-- {{^closed}} -->
           <div class='compose message_composer'>
             <form class='send clearfix file-input'>
               <div class='flex'>
@@ -213,7 +230,6 @@
               </div>
             </form>
           </div>
-          <!-- {{/closed}} -->
       </div>
     </div>
   </script>
@@ -673,7 +689,7 @@
         </div>
       </div>
       <div class='content-footer content-main-footer'>
-        <div class='content-holder'><span class='footer-copyright'>&copy; 2019 OfficeApp</span> | <span class='footer-version'>Desktop Version 1.26.2</span></div>
+        <div class='content-holder'><span class='footer-copyright'>&copy; 2019 OfficeApp</span> | <span class='footer-version'>Desktop Version {{versionFooter}}</span></div>
       </div>
       {{/isStepEula}}
       {{#isStepSetupType}}
@@ -723,12 +739,13 @@
         </div>
       </div>
       <div class='content-footer content-main-footer'>
-        <div class='content-holder'><span class='footer-copyright'>&copy; 2019 OfficeApp</span> | <span class='footer-version'>Desktop Version 1.26.2</span></div>
+        <div class='content-holder'><span class='footer-copyright'>&copy; 2019 OfficeApp</span> | <span class='footer-version'>Desktop Version {{versionFooter}}</span></div>
       </div>
       {{/isStepSetupType}}
       {{#isStepSetupPhone}}
       <div class='content-row'>
         <div class='content-center'>
+            <div class='titleOutside'><span>{{extraInfoPhonesModal}}</span></div>
           <div class='content-holder card setup-form'>
             <div class='card-header'>
               <div class='title'>{{phoneSetupTitle}}</div>
@@ -740,7 +757,7 @@
                   <div id="phone-number-country">
                     <span id="countryCode" class="countryCode">DE</span> <span class="separator">|</span> <span id="dialCode" class="dialCode">+49</span>
                   </div>
-                  <input class='number' id='phone-number-value' name='phone-number-value' autofocus/>
+                  <input class='number' type='number' id='phone-number-value' name='phone-number-value' autofocus/>
                 </div>
               </div>
             </div>
@@ -748,7 +765,10 @@
             <a class='button disabled' id='request-verify-call'>
                 {{callPhone}}
             </a>
-            <div class='action-link'><a id='request-verify-sms'>{{sendSMSInstead}}</a></div>
+            <div class='orOtherOption'><span >{{or}}</span></div>
+            <a class='button buttonSendSMS disabled'  id='request-verify-sms'>
+              {{sendSMSInstead}}
+            </a>
             <div>
               <input type='text' class='number' name='phone-verification-code' id='phone-verification-code' />
               <label for='phone-verification-code' class="label-inputs">{{verifyCode}}</label>
@@ -761,15 +781,14 @@
       {{#isStepSetupPhoneList}}
       <div class='content-row'>
         <div class='content-center'>
+          <div class='titleOutside'><span>{{extraInfoPhones}}</span></div>
           <div class='content-holder card'>
             <div class='card-header'>
               <div class='title'>{{PhonesTitle}}</div>
               <img src="images/icons/x-searchbar.svg" class="clear-searchbox" id="clear-country"/>
               <input id="search-phones" type="text" class="search-input" placeholder="Suchen.." />
             </div>
-            <div class='card-body-branchen' id = 'phone-list'>
-                
-            </div>
+            <div class='card-body-branchen' id = 'phone-list'></div>
           </div>
         </div>
       </div>
@@ -886,6 +905,7 @@
               <input type='file' class='file-input-company-avatar' id='inputCompanyAvatar' />
               <div class='text-upload-avatar'>
                 <p>{{uploadCompanyAvatarText}}</p>
+                <p>Formate: JPG, JPEG, PNG</p>
               </div>
             </div>
             <input type='text' id='user-name-input' class="inputsRegister"/>

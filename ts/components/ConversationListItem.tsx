@@ -36,6 +36,7 @@ type PropsHousekeeping = {
   style?: Object;
   onClick?: (id: string) => void;
   openConversation?: (id: string) => void;
+  openBlackboard?: (id: string) => void;
 };
 
 type Props = PropsData & PropsHousekeeping;
@@ -196,6 +197,7 @@ export class ConversationListItem extends React.PureComponent<Props> {
       id,
       isSelected,
       openConversation,
+      openBlackboard,
       style,
     } = this.props;
     console.log('CONVERSATION LIST ITEM RENDER !!!! ', this.props);
@@ -203,7 +205,6 @@ export class ConversationListItem extends React.PureComponent<Props> {
       <div
         role="button"
         onClick={() => {
-          console.log('CLICK', this);
           if (this.props.type == 'company' && onClick) {
             onClick(id);
           }
@@ -225,8 +226,14 @@ export class ConversationListItem extends React.PureComponent<Props> {
         <div className="module-conversation-list-item__content">
           {this.renderHeader()}
           {this.renderMessage()}
+          {(this.props.type === 'company' && openBlackboard) && (
+            <div onClick = {(evt) => {evt.preventDefault(); evt.stopPropagation(); openBlackboard(id)}}>
+              <img className='iconOpenBlackboard' src='images/icons/message_over_white_24x24 black.svg' />
+            </div>
+          )}
         </div>
       </div>
+  
     );
   }
 }

@@ -191,6 +191,14 @@
         });
       }
     },
+    openBlackboard(id){
+
+      if (id) {
+        this.openInbox().then(() => {
+          this.inboxView.openBlackboard(id);
+        });
+      }
+    },
     openTicket(id, messageId) {
       if (id) {
         this.openInbox().then(() => {

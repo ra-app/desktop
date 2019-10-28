@@ -467,6 +467,8 @@
     onContactImportDone() {
       if (this.$('#contact-import-done').is('.disabled')) return;
       this.onSetupCompleted();
+      this.$('#contact-import-done').attr("disabled", true);
+      this.$('#contact-import-done').addClass('disabled');
     },
     onContactImportSkip() {
       this.onSetupCompleted();
@@ -494,11 +496,7 @@
         companyName: this.$('#company-name-input').val(),
       };
       await textsecure.storage.put('userSetupInfo', profile);
-      this.selectStep(
-        this.setupType === 'admin'
-          ? Steps.SETUP_CONTACT_IMPORT
-          : Steps.SETUP_COMPANY_BANK
-      );
+      this.selectStep(Steps.SETUP_CONTACT_IMPORT)
     },
     async onBankDetailsDone() {
       const bank = {
@@ -924,10 +922,13 @@
     activateButtonVerifyCall() {
       const number = this.$el.find('#phone-number-value')[0].value.length;
       const button = this.$el.find('#request-verify-call');
+      const buttonSms = this.$el.find('#request-verify-sms');
       if (number > 0) {
         button.removeClass('disabled');
+        buttonSms.removeClass('disabled');
       } else {
         button.addClass('disabled');
+        buttonSms.addClass('disabled');
       }
     },
     activateButtonVerifyCode() {
@@ -972,6 +973,7 @@
         countryCode: i18n('countryCode'),
         verifyCode: i18n('verifyCode'),
         callPhone: i18n('callPhone'),
+        or: i18n('or'),
         sendSMSInstead: i18n('sendSMSInstead'),
         verifyPhone: i18n('verifyPhone'),
         companyDetails: i18n('companyDetails'),
@@ -1049,6 +1051,9 @@
         BranchOption41: i18n('BranchOption41'),
         BranchOption42: i18n('BranchOption42'),
         PhonesTitle: i18n('PhonesTitle'),
+        versionFooter: window.getVersion(),
+        extraInfoPhones: i18n('extraInfoPhones'),
+        extraInfoPhonesModal: i18n('extraInfoPhonesModal'),
       };
     },
   });

@@ -67,12 +67,63 @@ async function testProfile() {
   // console.log('DEC', dec);
 }
 
+// === CACHING THINGS START ===
+const cachedThings = {};
+
+// const cleanCache = () => {
+//   const keys = Object.keys(cachedThings);
+//   for (let i = 0; i < keys.length; i++) {
+//     const key = keys[i];
+//     const entry = cachedThings[key];
+//     const age = Date.now() - entry.ts;
+//     if (age > 60000 * 60) {
+//       delete cachedThings[key];
+//     }
+//   }
+// };
+
+const addToCache = (key, value) => {
+  cachedThings[key] = {
+    value,
+    ts: Date.now(),
+  };
+};
+
+const getFromCache = (key, maxAge = 60000) => {
+  const entry = cachedThings[key];
+  if (!entry) return undefined;
+  const age = Date.now() - entry.ts;
+  if (age > maxAge) {
+    delete cachedThings[key];
+    return undefined;
+  }
+  return entry.value;
+};
+
+const wrapFunctionForCaching = (func, maxAge = 60000) => {
+  return async (...args) => {
+    // const key = func.name + '_' + args.join('-');
+    const key = func.name + '_' + JSON.stringify(args);
+    const cached = getFromCache(key, maxAge);
+    if (!cached) {
+      const res = await func(...args);
+      addToCache(key, res);
+      return res;
+    }
+    return cached;
+  };
+};
+// === CACHING THINGS END ===
+
+// const cachedGetClientDetails = wrapFunctionForCaching(getClientDetails);
+// const cachedGetClientPhone = wrapFunctionForCaching(getClientPhone);
+
+
 // ===
 
 const API_URL =
   'https://luydm9sd26.execute-api.eu-central-1.amazonaws.com/latest/';
 // const API_URL = 'http://127.0.0.1:4000/';
-
 // XXX: Queue for sent messages, sent/received/seen indicators, error handling!
 
 // Receives messages to send from conversations.js switchcase.
@@ -212,10 +263,12 @@ const ensureCompanyConversation = async company_id => {
   // await receiveCompanyText(company_id, welcomeText);
 };
 
-const ensurePersonIsKnown = async (phoneNumber) => {
+const ensurePersonIsKnownImpl = async (phoneNumber) => {
   try {
+    console.log('ensurePersonIsKnown', phoneNumber);
     const client = await getClientPhone(phoneNumber);
     const conversation = await ensureConversation(phoneNumber, true);
+
     let conversationName = 'User without data';
     if (client.name) {
       if (client.surname) {
@@ -224,17 +277,33 @@ const ensurePersonIsKnown = async (phoneNumber) => {
         conversationName = client.name;
       }
     }
-    conversation.set({ 'name': conversationName, 'uuid': client.uuid });
+
+    if (conversation.get('name') !== conversationName || conversation.get('uuid') !== client.uuid) {
+      conversation.set({ 'name': conversationName, 'uuid': client.uuid });
+      console.log('ensurePersonIsKnown update', phoneNumber, conversation, client);
+    }
   } catch (err) {
     console.error('ensurePersonIsKnown', phoneNumber, err);
   }
+};
+
+const _ensurePersonIsKnownPromises = {};
+const ensurePersonIsKnown = (phoneNumber) => {
+  if (!_ensurePersonIsKnownPromises[phoneNumber]) {
+    const p = ensurePersonIsKnownImpl(phoneNumber).catch(async (err) => {
+      delete _ensurePersonIsKnownPromises[phoneNumber];
+      throw err;
+    });
+    _ensurePersonIsKnownPromises[phoneNumber] = p;
+  }
+  return _ensurePersonIsKnownPromises[phoneNumber];
 };
 
 const ensureConversation = async (phone_number, notUpdate = false) => {
   await waitForConversationController();
   console.log('ensureConversation', phone_number);
   let conversation = await ConversationController.get(phone_number, 'private');
-  if (conversation && conversation.get('active_at')) {
+  if (conversation) { // && conversation.get('active_at')) {
     console.log('ensureConversation existing', conversation);
     return conversation;
   }
@@ -455,9 +524,11 @@ const updateAdmin = async (company_id, name) => {
 //   return (apiRequest('/public/img/' + company));
 // };
 
-const getClientPhone = async (phoneNum) => {
+const getClientPhoneImpl = async (phoneNum) => {
   return (await apiRequest('api/v1/client/getbyphone/' + phoneNum)).client;
 }
+
+const getClientPhone = wrapFunctionForCaching(getClientPhoneImpl, 60000 * 30);
 
 const getAvatar = info => {
   return API_URL + 'public/img/' + info;
@@ -1163,54 +1234,3 @@ const draggableHelper = (
   window.addEventListener('resize', animFrameDebounce(ensureVisible), false);
 };
 // === DRAGGABLE_HELPER END ===
-
-// === CACHING THINGS START ===
-const cachedThings = {};
-
-// const cleanCache = () => {
-//   const keys = Object.keys(cachedThings);
-//   for (let i = 0; i < keys.length; i++) {
-//     const key = keys[i];
-//     const entry = cachedThings[key];
-//     const age = Date.now() - entry.ts;
-//     if (age > 60000 * 60) {
-//       delete cachedThings[key];
-//     }
-//   }
-// };
-
-const addToCache = (key, value) => {
-  cachedThings[key] = {
-    value,
-    ts: Date.now(),
-  };
-};
-
-const getFromCache = (key, maxAge = 60000) => {
-  const entry = cachedThings[key];
-  if (!entry) return undefined;
-  const age = Date.now() - entry.ts;
-  if (age > maxAge) {
-    delete cachedThings[key];
-    return undefined;
-  }
-  return entry.value;
-};
-
-const wrapFunctionForCaching = (func, maxAge = 60000) => {
-  return async (...args) => {
-    // const key = func.name + '_' + args.join('-');
-    const key = func.name + '_' + JSON.stringify(args);
-    const cached = getFromCache(key, maxAge);
-    if (!cached) {
-      const res = await func(...args);
-      addToCache(key, res);
-      return res;
-    }
-    return cached;
-  };
-};
-// === CACHING THINGS END ===
-
-// const cachedGetClientDetails = wrapFunctionForCaching(getClientDetails);
-// const cachedGetClientPhone = wrapFunctionForCaching(getClientPhone);

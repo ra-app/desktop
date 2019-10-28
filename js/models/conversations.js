@@ -975,8 +975,8 @@
           lastMessageStatus: 'sending',
           active_at: now,
           timestamp: now,
-          isArchived: false,
-          isClosed: false,
+          // isArchived: false,
+          // isClosed: false,
         });
         await window.Signal.Data.updateConversation(this.id, this.attributes, {
           Conversation: Whisper.Conversation,
@@ -1280,7 +1280,7 @@
       });
     },
     async setClosed(isClosed) {
-      this.set({ isClosed });
+      this.set({ isClosed, isArchived: isClosed });
       await window.Signal.Data.updateConversation(this.id, this.attributes, {
         Conversation: Whisper.Conversation,
       });

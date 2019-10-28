@@ -809,12 +809,16 @@
     panelRemoveContact(id, xml) {
       const divMainHeaderEdit = document.createElement('div');
       divMainHeaderEdit.className = 'divModalHeader';
+      const titleHeader = document.createElement('p');
+      titleHeader.innerText = i18n('deleteContactModal');
+      titleHeader.className = 'titleHeaderEdit';
       const imageClosePanel = document.createElement('img');
       imageClosePanel.className = 'imageClosePanel';
       imageClosePanel.src = 'images/icons/x-contact-list.svg';
       imageClosePanel.onclick = () => {
         this.closeModal();
       };
+      divMainHeaderEdit.appendChild(titleHeader);
       divMainHeaderEdit.appendChild(imageClosePanel);
 
       const divMainContentEdit = document.createElement('div');
@@ -1200,6 +1204,7 @@
       const divMainHeaderEdit = document.createElement('div');
       divMainHeaderEdit.className = 'divModalHeader';
       const pUserName = document.createElement('p');
+      pUserName.innerText = i18n('addContactModal');
       pUserName.className = 'titleHeaderEdit';
       const pUserPhone = document.createElement('p');
       pUserPhone.className = 'titleHeaderEdit';
@@ -1434,7 +1439,7 @@
         if (finduser !== null) {
           let message = '';
           messageSpan.innerHTML = '';
-          message = document.createTextNode('the phone already exists');
+          message = document.createTextNode('Telefonnummer bereits vorhanden');
           messageSpan.appendChild(message);
         } else {
           xmlData.appendChild(parentElement);
@@ -1515,18 +1520,6 @@
       buttonAll.onclick = () => {
         this.filterTab('Alle');
       };
-      // buttonAdmin.className = 'tablinks';
-      // buttonAdmin.innerHTML = 'Admin';
-      // buttonAdmin.id = 'filterAdmin';
-      // buttonAdmin.onclick = () => {
-      //   this.filterTab('Admin')
-      // }
-      // buttonUsers.className = 'tablinks';
-      // buttonUsers.innerHTML = 'Users';
-      // buttonUsers.id = 'filterUsers';
-      // buttonUsers.onclick = () => {
-      //   this.filterTab('Users')
-      // }
       searchTab.append(buttonAll);
       // searchTab.append(buttonAdmin);
       // searchTab.append(buttonUsers);
@@ -1788,7 +1781,7 @@
       dataUsersToInvitate = {};
     },
     showContactListPanel() {
-      if (this.objectContact === undefined) {
+      if (this.objectContact === undefined || this.objectContact.length === 0 ) {
         // this.$('#ptextNoContacts').html = i18n('noContactsImported');
         document.getElementById('ptextNoContacts').innerHTML = '';
         document.getElementById('ptextNoContacts').innerHTML = i18n(
