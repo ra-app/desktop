@@ -1057,6 +1057,7 @@
         PhonesTitle: i18n('PhonesTitle'),
         versionFooter: window.getVersion(),
         extraInfoPhones: i18n('extraInfoPhones'),
+        extraInfoPhonesModal: i18n('extraInfoPhonesModal'),
       };
     },
   });

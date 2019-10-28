@@ -1929,6 +1929,10 @@
     "extraInfoPhones":{
         "message": "Landesvorwahl auswählen",
         "description": "Landesvorwahl auswählen tittle"
+    },
+    "extraInfoPhonesModal":{
+        "message": "Einrichtung neues OfA-Office",
+        "description": "Einrichtung neues OfA-Office tittle"
     }
       
 }
