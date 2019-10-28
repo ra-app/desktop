@@ -1568,11 +1568,11 @@
         "description": "Label for signup Buchungskreis input"
     },
     "phoneSetupTitle": {
-        "message": "Telefonnummer",
+        "message": "OfA-Office-Teilnehmernummer",
         "description": "Title for phone setup container"
     },
     "phoneSetupSubtitle": {
-        "message": "Bitte geben Sie Ihre Bürotelefonnummer ein. Sie werden angerufen und erhalten einen Verifikationscode. Dabei können Gebühren anfallen.",
+        "message": "Unter dieser Telefonnummer sollte Ihr OfA-Office stets empfangsbereit sein. Es empfiehlt sich eine Festnetz-Telefonnummer",
         "description": "Phone setup container subtitle"
     },
     "phoneNumber": {
@@ -1588,16 +1588,20 @@
         "description": "Title for country code input"
     },
     "verifyPhone": {
-        "message": "Starten",
+        "message": "Weiter",
         "description": "Label for phone verify button"
     },
     "callPhone": {
-        "message": "Anrufen",
+        "message": "per Anruf",
         "description": "Label for phone verify call phone"
     },
     "sendSMSInstead": {
-        "message": "Verifzierungscode in SMS senden",
+        "message": "per SMS",
         "description": "Text for requesting SMS instead of call"
+    },
+    "or": {
+        "message": "oder",
+        "description": "oder option"
     },
     "companyDetails": {
         "message": "Firmendaten",

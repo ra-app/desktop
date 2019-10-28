@@ -746,7 +746,10 @@
             <a class='button disabled' id='request-verify-call'>
                 {{callPhone}}
             </a>
-            <div class='action-link'><a id='request-verify-sms'>{{sendSMSInstead}}</a></div>
+            <div class='orOtherOption'><span >{{or}}</span></div>
+            <a class='button buttonSendSMS disabled'  id='request-verify-sms'>
+              {{sendSMSInstead}}
+            </a>
             <div>
               <input type='text' class='number' name='phone-verification-code' id='phone-verification-code' />
               <label for='phone-verification-code' class="label-inputs">{{verifyCode}}</label>

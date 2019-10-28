@@ -926,10 +926,13 @@
     activateButtonVerifyCall() {
       const number = this.$el.find('#phone-number-value')[0].value.length;
       const button = this.$el.find('#request-verify-call');
+      const buttonSms = this.$el.find('#request-verify-sms');
       if (number > 0) {
         button.removeClass('disabled');
+        buttonSms.removeClass('disabled');
       } else {
         button.addClass('disabled');
+        buttonSms.addClass('disabled');
       }
     },
     activateButtonVerifyCode() {
@@ -974,6 +977,7 @@
         countryCode: i18n('countryCode'),
         verifyCode: i18n('verifyCode'),
         callPhone: i18n('callPhone'),
+        or: i18n('or'),
         sendSMSInstead: i18n('sendSMSInstead'),
         verifyPhone: i18n('verifyPhone'),
         companyDetails: i18n('companyDetails'),
