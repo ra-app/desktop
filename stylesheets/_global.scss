@@ -1801,6 +1801,7 @@ th.sorted.descending:after {
     height: 70px;
     padding: 15px;
     position: relative;
+    color: $color-white;
     @include backgroudGradient();
     &.divModalInvitation{
       @include backgroudGradient();
@@ -1810,7 +1811,7 @@ th.sorted.descending:after {
       margin: 0px;
       font-family: $poppins-semibold;
       font-size: 15px;
-      color: $color-raapp-text;
+      // color: $color-raapp-text;
     }
     #sendInvitationIcon {
       top: 23px;
