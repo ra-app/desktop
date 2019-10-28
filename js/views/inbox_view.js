@@ -8,7 +8,7 @@
 */
 
 // eslint-disable-next-line func-names
-(function() {
+(function () {
   'use strict';
   // variables
   let limitTicket = 12;
@@ -53,6 +53,9 @@
         if (this.$('.tickets-view')) {
           this.$('.tickets-view').remove();
         }
+        if (this.$('.blackboard-view')) {
+          this.$('.blackboard-view').remove();
+        }
         conversation.trigger('opened');
         if (this.lastConversation) {
           this.lastConversation.trigger('backgrounded');
@@ -73,6 +76,9 @@
           if ($el === null || $el.length === 0) {
             if (this.$('.tickets-view')) {
               this.$('.tickets-view').remove();
+            }
+            if (this.$('.blackboard-view')) {
+              this.$('.blackboard-view').remove();
             }
             const view = new Whisper.TicketScreen({
               model: conversation,
@@ -108,6 +114,106 @@
   //   className: 'tickets-view',
 
   // });
+  Whisper.BlackboardStack = Whisper.View.extend({
+    className: 'blackboard-stack',
+    lastConversation: null,
+    openBlackboard(conversation) {
+      // isTicket = false;
+      const id = `conversation-${conversation.cid}`;
+      if (id !== this.el.firstChild.id) {
+        this.$el
+          .first()
+          .find('video, audio')
+          .each(function pauseMedia() {
+            this.pause();
+          });
+        let $el = this.$(`#${id}`);
+        if ($el === null || $el.length === 0) {
+          if (this.$('.tickets-view')) {
+            this.$('.tickets-view').remove();
+          }
+          if (this.$('.blackboard-view')) {
+            this.$('.blackboard-view').remove();
+          }
+          const view = new Whisper.BlackboardScreen({
+            model: [
+              {
+                'title': 'Title card',
+                'content': '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "'
+              },
+              {
+                'title': 'Title card',
+                'content': '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "'
+              },
+              {
+                'title': 'Title card',
+                'content': '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "'
+              },
+              {
+                'title': 'Title card',
+                'content': '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "'
+              },
+              {
+                'title': 'Title card',
+                'content': '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "'
+              },
+              {
+                'title': 'Title card',
+                'content': '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "'
+              },
+              {
+                'title': 'Title card',
+                'content': '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "'
+              },
+              {
+                'title': 'Title card',
+                'content': '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "'
+              },
+              {
+                'title': 'Title card',
+                'content': '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "'
+              },
+              {
+                'title': 'Title card',
+                'content': '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "'
+              },
+              {
+                'title': 'Title card',
+                'content': '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "'
+              },
+              {
+                'title': 'Title card',
+                'content': '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "'
+              },
+              {
+                'title': 'Title card',
+                'content': '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "'
+              },
+              {
+                'title': 'Title card',
+                'content': '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "'
+              },
+              {
+                'title': 'Title card',
+                'content': '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "'
+              }
+              
+            ]
+          });
+          // eslint-disable-next-line prefer-destructuring
+          $el = view.$el;
+        }
+
+        $el.prependTo(this.el);
+      }
+      if (this.$('.tickets-view')) {
+        this.$('.tickets-view').remove();
+      }
+      // Make sure poppers are positioned properly
+
+      window.dispatchEvent(new Event('resize'));
+    },
+  });
 
   Whisper.InboxView = Whisper.View.extend({
     templateName: 'two-column',
@@ -118,6 +224,11 @@
       this.$el.attr('tabindex', '1');
 
       this.conversation_stack = new Whisper.ConversationStack({
+        el: this.$('.conversation-stack'),
+        model: { window: options.window },
+      });
+
+      this.blackboard_stack = new Whisper.BlackboardStack({
         el: this.$('.conversation-stack'),
         model: { window: options.window },
       });
@@ -404,6 +515,11 @@
         this.openConversation(id, messageId);
       }
     },
+    openBlackboard() {
+      this.blackboard_stack.openBlackboard(conversation);
+
+    },
+
     async loadMoreTickets() {
       const data = {
         limit: limitTicket,

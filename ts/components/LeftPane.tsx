@@ -26,6 +26,7 @@ export interface Props {
   ) => void;
   openConversationInternal: (id: string, messageId?: string) => void;
   openTicket: (id: string, type?: string, messageId?: string) => void;
+  openBlackboard: (id: string, type?: string) => void;
   showArchivedConversations: () => void;
   showInbox: () => void;
 
@@ -55,6 +56,7 @@ export class LeftPane extends React.Component<Props> {
       i18n,
       openConversationInternal,
       openTicket,
+      openBlackboard,
       showArchived,
     } = this.props;
 
@@ -97,6 +99,7 @@ export class LeftPane extends React.Component<Props> {
             {...conversation}
             onClick={openTicket}
             openConversation={openConversationInternal}
+            openBlackboard={openBlackboard}
             i18n={i18n}
           />
         )}

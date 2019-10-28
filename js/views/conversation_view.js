@@ -2479,4 +2479,20 @@
       );
     },
   });
+  Whisper.BlackboardScreen = Whisper.View.extend({
+    templateName: 'blackboard-view',
+    className: 'blackboard-view',
+    template: $('#blackboard-view').html(),
+    render_attributes() {
+      return {
+        model: this.model,
+      }
+    },
+      initialize(options) {
+        this.render();
+      },
+      events: {
+        
+      },
+  });
 })();

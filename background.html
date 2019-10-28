@@ -112,6 +112,24 @@
       
     </div>
   </script>
+  <script type='text/x-tmpl-mustache' id='blackboard-view'>
+    <div class='content'>
+      <div class="module-main-header__info">
+        <span id="span-chat-name">Blackboard</span>
+      </div>
+      <div class='container-blackboard'>
+        <div class="flex-container">
+          {{#model}}
+            <div>
+              <p class="titleCardBlackboard">{{title}}</p>
+              <p class="contentCardBlackboard">{{content}}</p>
+            </div>
+          {{/model}}
+        </div>
+      </div>
+      
+    </div>
+  </script>
   <script type='text/x-tmpl-mustache' id='import-contact-table'>
     <div>
       <div id= "headerContactTable">

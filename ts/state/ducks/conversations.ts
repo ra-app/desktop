@@ -153,6 +153,7 @@ export const actions = {
   showInbox,
   showArchivedConversations,
   openTicket,
+  openBlackboard,
 };
 
 function conversationAdded(
@@ -246,7 +247,18 @@ function openConversationExternal(
     },
   };
 }
+function openBlackboard(
+  id: string
+): SelectedConversationChangedActionType {
+  trigger('showOpenBlackboard', id);
 
+  return {
+    type: 'SELECTED_CONVERSATION_CHANGED',
+    payload: {
+      id,
+    },
+  };
+}
 function showInbox() {
   return {
     type: 'SHOW_INBOX',
