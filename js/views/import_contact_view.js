@@ -1434,7 +1434,7 @@
         if (finduser !== null) {
           let message = '';
           messageSpan.innerHTML = '';
-          message = document.createTextNode('the phone already exists');
+          message = document.createTextNode('Telefonnummer bereits vorhanden');
           messageSpan.appendChild(message);
         } else {
           xmlData.appendChild(parentElement);
