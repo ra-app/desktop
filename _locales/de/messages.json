@@ -1913,5 +1913,10 @@
       "createGroup":{
         "message": "Create group",
         "description": "Create group menu item"
+      },
+      "deleteContactModal":{
+          "message": "Kontakt löschen",
+          "description": "Kontakt löschen modal"
       }
+      
 }

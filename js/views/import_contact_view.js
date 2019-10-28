@@ -809,12 +809,16 @@
     panelRemoveContact(id, xml) {
       const divMainHeaderEdit = document.createElement('div');
       divMainHeaderEdit.className = 'divModalHeader';
+      const titleHeader = document.createElement('p');
+      titleHeader.innerText = i18n('deleteContactModal');
+      titleHeader.className = 'titleHeaderEdit';
       const imageClosePanel = document.createElement('img');
       imageClosePanel.className = 'imageClosePanel';
       imageClosePanel.src = 'images/icons/x-contact-list.svg';
       imageClosePanel.onclick = () => {
         this.closeModal();
       };
+      divMainHeaderEdit.appendChild(titleHeader);
       divMainHeaderEdit.appendChild(imageClosePanel);
 
       const divMainContentEdit = document.createElement('div');
