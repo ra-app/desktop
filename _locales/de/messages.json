@@ -1917,6 +1917,10 @@
       "deleteContactModal":{
           "message": "Kontakt löschen",
           "description": "Kontakt löschen modal"
-      }
+      },
+      "addContactModal":{
+        "message": "Benutzerdaten",
+        "description": "Benutzerdaten modal"
+    }
       
 }

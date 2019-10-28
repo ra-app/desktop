@@ -1204,6 +1204,7 @@
       const divMainHeaderEdit = document.createElement('div');
       divMainHeaderEdit.className = 'divModalHeader';
       const pUserName = document.createElement('p');
+      pUserName.innerText = i18n('addContactModal');
       pUserName.className = 'titleHeaderEdit';
       const pUserPhone = document.createElement('p');
       pUserPhone.className = 'titleHeaderEdit';
