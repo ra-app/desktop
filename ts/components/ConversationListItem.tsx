@@ -228,7 +228,7 @@ export class ConversationListItem extends React.PureComponent<Props> {
           {this.renderMessage()}
           {(this.props.type === 'company' && openBlackboard) && (
             <div onClick = {(evt) => {evt.preventDefault(); evt.stopPropagation(); openBlackboard(id)}}>
-              <img className='iconOpenBlackboard' src='images/icons/message_over_white_24x24 black.svg' />
+              <img className='iconOpenBlackboard' src='images/icons/pin-button.svg' />
             </div>
           )}
         </div>
