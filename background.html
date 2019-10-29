@@ -124,7 +124,7 @@
         <div class="flex-container">
           {{#isMultiViewMode}}
             {{#model}}
-              <div class = 'card-blackboard' id = {{id}} >
+              <div class = 'card-blackboard' id={{id}} >
                 <p class="titleCardBlackboard">{{title}}</p>
                 <p class="contentCardBlackboard">{{content}}</p>
               </div>
@@ -132,7 +132,7 @@
           {{/isMultiViewMode}}
           {{#isViewMode}}
           {{#model}}
-            <div class = 'card-blackboard oneCard' dataId={{id}}>
+            <div class = 'card-blackboard oneCard'>
               <p class="titleCardBlackboard">{{title}}</p>
               <p class="contentCardBlackboard">{{content}}</p>
             </div>
