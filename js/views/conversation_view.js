@@ -2486,13 +2486,24 @@
     render_attributes() {
       return {
         model: this.model,
+        isViewMode: this.isViewMode,
+        isMultiViewMode: this.isMultiViewMode
       }
     },
       initialize(options) {
+        this.isMultiViewMode = true
+        this.isViewMode = false;
         this.render();
       },
       events: {
-        
+        'click .card-blackboard': 'openDetailView',
       },
+      async openDetailView(event){
+        // const id = event.target.attributes.id.nodeValue;
+        this.isViewMode = true;
+        this.isMultiViewMode = false;
+        this.render();
+        // console.log(id, "idddddddddddddddddddd")
+      }
   });
 })();
