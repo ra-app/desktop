@@ -117,7 +117,8 @@
   Whisper.BlackboardStack = Whisper.View.extend({
     className: 'blackboard-stack',
     lastConversation: null,
-    openBlackboard(conversation) {
+    openBlackboard(conversation, notes) {
+      console.log(notes, "notesssssssssssssssss")
       // isTicket = false;
       const id = `conversation-${conversation.cid}`;
       if (id !== this.el.firstChild.id) {
@@ -135,85 +136,10 @@
           if (this.$('.blackboard-view')) {
             this.$('.blackboard-view').remove();
           }
+          console.log(conversation, "conversationnnnnnnnnnnnnnnnnnnnn")
           const view = new Whisper.BlackboardScreen({
-            model: [
-              {
-                'title': 'Title card',
-                'content': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ',
-                'id': '1',
-              },
-              {
-                'title': 'Title card',
-                'content': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-                'id': '2',
-              },
-              {
-                'title': 'Title card',
-                'content': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-                'id': '3',
-              },
-              {
-                'title': 'Title card',
-                'content': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-                'id': '4',
-              },
-              {
-                'title': 'Title card',
-                'content': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-                'id': '5',
-              },
-              {
-                'title': 'Title card',
-                'content': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-                'id': '6',
-              },
-              {
-                'title': 'Title card',
-                'content': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-                'id': '7',
-              },
-              {
-                'title': 'Title card',
-                'content': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-                'id': '8',
-              },
-              {
-                'title': 'Title card',
-                'content': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ',
-                'id': '9',
-              },
-              {
-                'title': 'Title card',
-                'content': '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "',
-                'id': '10',
-              },
-              {
-                'title': 'Title card',
-                'content': '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "',
-                'id': '11',
-              },
-              {
-                'title': 'Title card',
-                'content': '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "',
-                'id': '12',
-              },
-              {
-                'title': 'Title card',
-                'content': '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "',
-                'id': '13',
-              },
-              {
-                'title': 'Title card',
-                'content': '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "',
-                'id': '14',
-              },
-              {
-                'title': 'Title card',
-                'content': '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "',
-                'id': '15',
-              }
-              
-            ]
+            model: notes,
+            company_id: conversation
           });
           // eslint-disable-next-line prefer-destructuring
           $el = view.$el;
@@ -530,8 +456,15 @@
         this.openConversation(id, messageId);
       }
     },
-    openBlackboard() {
-      this.blackboard_stack.openBlackboard(conversation);
+    async openBlackboard(id) {
+      try{
+        const notes = await getCardsBlackboard(id);
+        this.blackboard_stack.openBlackboard(id, notes);
+      }
+      catch (err) {
+        console.warn('openTicker error', err);
+
+      }
 
     },
 

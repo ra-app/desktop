@@ -2484,6 +2484,7 @@
     className: 'blackboard-view',
     template: $('#blackboard-view').html(),
     render_attributes() {
+
       return {
         model: this.model,
         isViewMode: this.isViewMode,
@@ -2492,33 +2493,95 @@
       }
     },
       initialize(options) {
-        this.isMultiViewMode = true
+        console.log(this.company_id, options, "companyyyyyyyyyyyyyyy")
+        this.isMultiViewMode = true;
         this.isViewMode = false;
+        this.currentId = null;
+        this.company_id = options.company_id;
         this.render();
       },
       events: {
         'click .card-blackboard': 'openDetailView',
         'click #imageGoBackBlackboard': 'backMultiView',
+        'click #openEditCard': 'openEditCard'
         
       },
       async openDetailView(event){
-        const id = event.currentTarget.id
+        const id = event.currentTarget.id;
+        this.currentId = id;
         console.log('ID of click ========> ', id);
         this.isViewMode = true;
         this.isMultiViewMode = false;
-        this.multiView = [
-          {
-            'title': 'Title card',
-            'content': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ',
-            'id': '1',
-          },
-        ]
+        const data = {
+          'note_id':this.currentId,
+        }
+        this.multiView = await getIndividualCardBlackboard( this.company_id, data)
+        // this.multiView = [
+        //   {
+        //     'title': 'Title card',
+        //     'content': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ',
+        //     'id': '1',
+        //   },
+        // ]
         this.render();
       },
       backMultiView(){
         this.isViewMode = false;
         this.isMultiViewMode = true;
+        this.currentId = null;
         this.render();
+      },
+      openEditCard(id){
+        console.log('editing')
+        const dialog = new Whisper.EditCardBlackboard({
+          id: this.currentId,
+          company_id: this.company_id,
+          data_to_edit: this.multiView
+        });
+        dialog.render();
+        dialog.$el.insertBefore(
+          document.getElementsByClassName('network-status-container')[0]
+        );
+      }
+  });
+  Whisper.EditCardBlackboard = Whisper.View.extend({
+    templateName: 'edit-card-blackboard',
+    className: 'edit-card-blackboard',
+    template: $('#edit-card-blackboard').html(),
+    render_attributes() {
+      return {
+        model: this.data_to_edit
+    }
+  },
+      initialize(options) {
+        this.card_id = options.id;
+        this.company_id = options.company_id;
+        this.data_to_edit = options.data_to_edit;
+        console.log(this.data_to_edit, "dataaaaaaaaaaaaaaaaaaaaa");
+        this.render();
+      },
+      events: {
+        'click #EditCardClosePanel': 'closePanel',
+        'click #sendEditCard': 'saveEditCard'
+        
+      },
+      closePanel(){
+        document.getElementsByClassName('edit-card-blackboard')[0].remove();
+      },
+      async saveEditCard(){
+        const title =  this.$('#title-card').val();
+        const content =  this.$('#textareaTextCard').val();
+        const id = this.card_id;
+        const company_id = this.company_id
+        const data = {
+          'note_id':id,
+          'title':title,
+          'content':content
+        };
+        console.log(company_id, data, "data to send")
+        await editCardsBlackboard(company_id, data)
+        this.closePanel();
+        window.Whisper.events.trigger('showOpenBlackboard', company_id);
       }
   });
 })();

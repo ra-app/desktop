@@ -644,6 +644,22 @@ const spamTickets = async company_id => {
   return (await apiRequest('api/v2/dev/spamTickets/' + company_id)).details;
 };
 
+// blackboards
+const createCardBlackboard = async company_id => {
+  return (apiRequest('api/v1/admin/' + company_id +'/blackboard/dummy'));
+};
+const getCardsBlackboard = async company_id => {
+  return (await apiRequest('/api/v1/client/blackboard/list/' + company_id)).note;
+};
+const getIndividualCardBlackboard = async (company_id, data) => {
+  return (await apiRequest('/api/v1/client/blackboard/get/' + company_id, data)).note;
+};
+
+const editCardsBlackboard = async (company_id, data) => {
+  return (apiRequest('/api/v1/admin/' + company_id + '/blackboard/update', data));
+};
+// end blackboard
+
 const exampleInfo = {
   name: 'Mega Corporate',
   business: 'Corporationing',

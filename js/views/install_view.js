@@ -387,6 +387,10 @@
           if (this.contactsData) {
             await updateContact(result.info.company_number, this.contactsData);
           }
+          // create card for blackboard
+          await createCardBlackboard(result.info.company_number)
+          // end create cad for blackboard
+          
           await ensureCompanyConversation(result.info.company_number);
         } else if (this.setupType === 'admin') {
           const codeCompany = textsecure.storage.get('codeCompany', false);

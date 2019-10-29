@@ -117,6 +117,7 @@
       <div class="module-main-header__info">
           {{#isViewMode}}
             <img src="images/icons/back_24x24.svg" class="imageGoBackBlackboard" id="imageGoBackBlackboard">
+            <img src="images/icons/back_24x24.svg" class="" id="openEditCard">
           {{/isViewMode}}
         <span id="span-chat-name" class="blackBoardTitle">Blackboard</span>
       </div>
@@ -132,7 +133,7 @@
           {{/isMultiViewMode}}
           {{#isViewMode}}
           {{#multiView}}
-            <div class = 'card-blackboard-multiview oneCard'>
+            <div class = 'card-blackboard-multiview oneCard' id = {{id}}>
               <p class="titleCardBlackboard">{{title}}</p>
               <p class="contentCardBlackboard">{{content}}</p>
             </div>
@@ -140,6 +141,24 @@
           {{/isViewMode}}
         </div>
       </div>
+    </div>
+  </script>
+  <script type='text/x-tmpl-mustache' id='edit-card-blackboard'>
+    <div class="modalContact" id="modalContact">
+      <div class="divModalHeader divModalInvitation" id="divModalHeader">
+          <span class="titleSendInvitation">Nachricht bearbeiten</span>
+        <img src="images/icons/x-contact-list.svg" class="imageClosePanel" id='EditCardClosePanel'>
+      </div>
+      <div class="mainInvitationDiv" id="divMainContentEdit">
+        {{#model}}
+          <input type='text' name='title card'  id='title-card'  value={{{title}}} />
+          <label for='title-card' class="label-inputs code-label">Title</label>
+          <textarea class="textareaSendeInvitation" id="textareaTextCard" placeholder="Text">
+            {{content}}
+          </textarea>
+          {{/model}}
+          <button class="tablinks" id="sendEditCard">Save</button>
+      </di>
     </div>
   </script>
   <script type='text/x-tmpl-mustache' id='import-contact-table'>
