@@ -117,7 +117,7 @@
       <div class="module-main-header__info">
           {{#isViewMode}}
             <img src="images/icons/back_24x24.svg" class="imageGoBackBlackboard" id="imageGoBackBlackboard">
-            <img src="images/icons/back_24x24.svg" class="" id="openEditCard">
+            <img src="images/icons/message_white.svg" class="openEditCard" id="openEditCard">
           {{/isViewMode}}
         <span id="span-chat-name" class="blackBoardTitle">Blackboard</span>
       </div>
@@ -151,8 +151,9 @@
       </div>
       <div class="mainInvitationDiv" id="divMainContentEdit">
         {{#model}}
-          <input type='text' name='title card'  id='title-card'  value={{{title}}} />
           <label for='title-card' class="label-inputs code-label">Title</label>
+          <input type='text' name='title card'  id='title-card'  value={{title}} />
+          <label for='title-card' class="label-inputs code-label">content</label>
           <textarea class="textareaSendeInvitation" id="textareaTextCard" placeholder="Text">
             {{content}}
           </textarea>

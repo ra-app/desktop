@@ -1003,6 +1003,12 @@ $debug: 0;
     border: 1px solid #ff0;
   }
 }
+
+.label-inputs {
+  color: $placeholder-color;
+  text-transform: uppercase;
+  @include font15-poppinsMedium;
+}
 .content-column,
 .content-row {
   .button {
@@ -1437,11 +1443,7 @@ $debug: 0;
       color: $placeholder-color;
     }
   }
-  .label-inputs {
-    color: $placeholder-color;
-    text-transform: uppercase;
-    @include font15-poppinsMedium;
-  }
+
   #phone-number-input {
     margin: 20px 0px 10px;
     .intl-tel-input {
@@ -1661,6 +1663,30 @@ th.sorted.descending:after {
     width: 400px;
   }
 }
+
+.edit-card-blackboard{
+  .modalContact{
+    position: absolute;
+    height: 100%;
+    z-index: 9;
+  }
+  button{
+    @include backgroudGradient();
+    padding: 9px 15px;
+    color: #ffffff;
+    border: none;
+    border-radius: 20px;
+  }
+  input[type="text"]{
+    width: 100% !important;
+    margin-bottom: 20px;
+  }
+
+  textarea{
+    width: 100%;
+    margin-top: 20px;
+  }
+}
 .modalContact {
   border-right: 1px solid #d5d6d6;
   background: #ffffff;
@@ -1878,6 +1904,16 @@ th.sorted.descending:after {
   cursor: pointer;
   position: absolute;
   left: 13px;
+  top: 30px;
+}
+
+.openEditCard{
+  height: 35px !important;
+  width: 35px !important;
+  cursor: pointer;
+  position: absolute;
+  right: 13px;
+  opacity: 0.5;
   top: 30px;
 }
 
@@ -2259,6 +2295,7 @@ input {
  
   }
   &.oneCard{
+    background-image: url(./../images/post-it-open.svg);
     width: 100%;
     height: calc(100% - 70px);
     p.titleCardBlackboard {
