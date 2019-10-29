@@ -2503,7 +2503,6 @@
       },
       async openDetailView(event){
         // const id = event.target.attributes.id.nodeValue;
-        console.log(id, "ddddddddd")
         this.isViewMode = true;
         this.isMultiViewMode = false;
         this.multiView = [
