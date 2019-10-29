@@ -117,7 +117,9 @@
       <div class="module-main-header__info">
           {{#isViewMode}}
             <img src="images/icons/back_24x24.svg" class="imageGoBackBlackboard" id="imageGoBackBlackboard">
+            {{#isAdmin}}
             <img src="images/icons/message_white.svg" class="openEditCard" id="openEditCard">
+            {{/isAdmin}}
           {{/isViewMode}}
         <span id="span-chat-name" class="blackBoardTitle">Pinnwand</span>
       </div>

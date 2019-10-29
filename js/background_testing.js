@@ -563,6 +563,9 @@ const closeTicket = async (company_id, ticket_uuid) => {
 const getClientAdminCompany = async number => {
   return apiRequest('api/v1/admin/' + number + '/info');
 };
+const getAdminCompany = async number => {
+  return apiRequest('api/v1/admin/' + number + '/admins/list');
+};
 const getInvitationList = async number => {
   return (await apiRequest('api/v1/admin/' + number + '/info')).invites;
 };

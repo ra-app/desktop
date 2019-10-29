@@ -2489,7 +2489,8 @@
         model: this.model,
         isViewMode: this.isViewMode,
         isMultiViewMode: this.isMultiViewMode,
-        multiView: this.multiView
+        multiView: this.multiView,
+        isAdmin: this.isadmin
       }
     },
       initialize(options) {
@@ -2498,6 +2499,7 @@
         this.isViewMode = false;
         this.currentId = null;
         this.company_id = options.company_id;
+        this.isadmin = true;
         this.render();
       },
       events: {
@@ -2507,7 +2509,12 @@
         
       },
       async openDetailView(event){
-        console.log(textsecure.storage.user.getNumber(), "companyyyyyyyyyyyyyyy")
+        const admins = await getAdminCompany( this.company_id)
+        if(admins.success){
+          this.isAdmin = true;
+        }else {
+          this.isadmin = false;
+        }
         const id = event.currentTarget.id;
         this.currentId = id;
         console.log('ID of click ========> ', id);
