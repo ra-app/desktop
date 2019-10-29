@@ -1871,6 +1871,19 @@ th.sorted.descending:after {
     border-radius: 20px;
   }
 }
+
+.imageGoBackBlackboard{
+  height: 35px !important;
+  width: 35px !important;
+  cursor: pointer;
+  position: absolute;
+  left: 13px;
+  top: 30px;
+}
+
+.blackBoardTitle{
+  top: 5px !important;
+}
 button,
 input {
   outline: none;
