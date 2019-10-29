@@ -2487,7 +2487,8 @@
       return {
         model: this.model,
         isViewMode: this.isViewMode,
-        isMultiViewMode: this.isMultiViewMode
+        isMultiViewMode: this.isMultiViewMode,
+        multiView: this.multiView
       }
     },
       initialize(options) {
@@ -2497,18 +2498,26 @@
       },
       events: {
         'click .card-blackboard': 'openDetailView',
+        'click #imageGoBackBlackboard': 'backMultiView',
+        
       },
       async openDetailView(event){
         // const id = event.target.attributes.id.nodeValue;
+        console.log(id, "ddddddddd")
         this.isViewMode = true;
         this.isMultiViewMode = false;
-        this.model = [
+        this.multiView = [
           {
             'title': 'Title card',
             'content': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ',
             'id': '1',
           },
         ]
+        this.render();
+      },
+      backMultiView(){
+        this.isViewMode = false;
+        this.isMultiViewMode = true;
         this.render();
       }
   });
