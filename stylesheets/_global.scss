@@ -2274,7 +2274,7 @@ input {
 
 .flex-container > div {
   margin-bottom: 5px;
-  padding: 20px;
+  padding: 35px;
   width: calc(100% / 5);
   height: 205px;
   overflow: hidden;
@@ -2287,6 +2287,8 @@ input {
   .titleCardBlackboard{
     max-width: 70%;
     margin: 20px auto;
+    font-weight: 300;
+    color: #476077;
   }
 
   .contentCardBlackboard{
