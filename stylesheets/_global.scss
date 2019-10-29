@@ -1871,6 +1871,19 @@ th.sorted.descending:after {
     border-radius: 20px;
   }
 }
+
+.imageGoBackBlackboard{
+  height: 35px !important;
+  width: 35px !important;
+  cursor: pointer;
+  position: absolute;
+  left: 13px;
+  top: 30px;
+}
+
+.blackBoardTitle{
+  top: 5px !important;
+}
 button,
 input {
   outline: none;
@@ -2220,6 +2233,7 @@ input {
   flex-direction: row;
   justify-content: flex-start;
   flex-wrap: wrap;
+  height: 100%;
 }
 
 .flex-container > div {
@@ -2232,6 +2246,22 @@ input {
   background-image: url(./../images/post-it.svg);
   background-size: contain;
   background-repeat: no-repeat;
+  background-position: center;
+  text-align: center; 
+  .titleCardBlackboard{
+    max-width: 70%;
+    margin: 20px auto;
+  }
+
+  .contentCardBlackboard{
+    max-width: 70%;
+    margin: 0 auto;
+ 
+  }
+  &.oneCard{
+    width: 100%;
+    height: calc(100% - 70px);
+  }
 }
 .iconOpenBlackboard{
   width: 30px;
