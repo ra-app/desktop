@@ -2565,7 +2565,8 @@
       },
       events: {
         'click #EditCardClosePanel': 'closePanel',
-        'click #sendEditCard': 'saveEditCard'
+        'click #sendEditCard': 'saveEditCard',
+        'click #removeCard': 'removeCard'
         
       },
       closePanel(){
@@ -2574,6 +2575,21 @@
       async saveEditCard(){
         const title =  this.$('#title-card').val();
         const content =  this.$('#textareaTextCard').val();
+        const id = this.card_id;
+        const company_id = this.company_id
+        const data = {
+          'note_id':id,
+          'title':title,
+          'content':content
+        };
+        console.log(company_id, data, "data to send")
+        await editCardsBlackboard(company_id, data)
+        this.closePanel();
+        window.Whisper.events.trigger('showOpenBlackboard', company_id);
+      },
+      async removeCard(){
+        const title = '';
+        const content = '';
         const id = this.card_id;
         const company_id = this.company_id
         const data = {
