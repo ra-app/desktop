@@ -2502,6 +2502,13 @@
         const id = event.target.attributes.id.nodeValue;
         this.isViewMode = true;
         this.isMultiViewMode = false;
+        this.model = [
+          {
+            'title': 'Title card',
+            'content': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ',
+            'id': '1',
+          },
+        ]
         this.render();
       }
   });

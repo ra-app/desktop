@@ -128,10 +128,12 @@
             {{/model}}
           {{/isMultiViewMode}}
           {{#isViewMode}}
+          {{#model}}
             <div class = 'card-blackboard' dataId={{id}}>
               <p class="titleCardBlackboard">{{title}}</p>
               <p class="contentCardBlackboard">{{content}}</p>
             </div>
+            {{/model}}
           {{/isViewMode}}
         </div>
       </div>
