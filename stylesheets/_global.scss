@@ -2225,12 +2225,12 @@ input {
 .flex-container > div {
   margin-bottom: 5px;
   padding: 20px;
-  width: calc(100% / 6);
+  width: calc(100% / 8);
   height: 205px;
   overflow: hidden;
   font-size: 14px;
   background-image: url(./../images/post-it.svg);
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
 }
 .iconOpenBlackboard{
