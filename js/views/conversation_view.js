@@ -2529,6 +2529,9 @@
         this.isViewMode = false;
         this.isMultiViewMode = true;
         this.currentId = null;
+        if(document.getElementsByClassName('edit-card-blackboard')[0]){
+          document.getElementsByClassName('edit-card-blackboard')[0].remove();
+        }
         this.render();
       },
       openEditCard(id){
