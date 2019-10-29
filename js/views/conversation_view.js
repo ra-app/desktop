@@ -2499,11 +2499,10 @@
         'click .card-blackboard': 'openDetailView',
       },
       async openDetailView(event){
-        // const id = event.target.attributes.id.nodeValue;
+        const id = event.target.attributes.id.nodeValue;
         this.isViewMode = true;
         this.isMultiViewMode = false;
         this.render();
-        // console.log(id, "idddddddddddddddddddd")
       }
   });
 })();
