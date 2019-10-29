@@ -2502,7 +2502,8 @@
         
       },
       async openDetailView(event){
-        // const id = event.target.attributes.id.nodeValue;
+        const id = event.currentTarget.id
+        console.log('ID of click ========> ', id);
         this.isViewMode = true;
         this.isMultiViewMode = false;
         this.multiView = [
