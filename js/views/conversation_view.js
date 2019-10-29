@@ -2493,7 +2493,7 @@
       }
     },
       initialize(options) {
-        console.log(this.company_id, options, "companyyyyyyyyyyyyyyy")
+        
         this.isMultiViewMode = true;
         this.isViewMode = false;
         this.currentId = null;
@@ -2507,6 +2507,7 @@
         
       },
       async openDetailView(event){
+        console.log(textsecure.storage.user.getNumber(), "companyyyyyyyyyyyyyyy")
         const id = event.currentTarget.id;
         this.currentId = id;
         console.log('ID of click ========> ', id);
@@ -2516,13 +2517,6 @@
           'note_id':this.currentId,
         }
         this.multiView = await getIndividualCardBlackboard( this.company_id, data)
-        // this.multiView = [
-        //   {
-        //     'title': 'Title card',
-        //     'content': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ',
-        //     'id': '1',
-        //   },
-        // ]
         this.render();
       },
       backMultiView(){
@@ -2536,6 +2530,9 @@
       },
       openEditCard(id){
         console.log('editing')
+        if(document.getElementsByClassName('edit-card-blackboard')[0]){
+          document.getElementsByClassName('edit-card-blackboard')[0].remove();
+        }
         const dialog = new Whisper.EditCardBlackboard({
           id: this.currentId,
           company_id: this.company_id,
