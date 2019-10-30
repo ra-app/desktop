@@ -1278,7 +1278,7 @@
       spanDialCode.className = 'dialCode';
       spanDialCode.innerText = ' +49';
       const inputTelephone = document.createElement('input');
-      inputTelephone.type = 'text';
+      inputTelephone.type = 'number';
       inputTelephone.placeholder = 'Telefonnummer';
       inputTelephone.id = 'addTelephoneInput';
 
