@@ -2335,3 +2335,7 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance:textfield; /* Firefox */
 }
+.disablelistitem {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

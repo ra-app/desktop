@@ -5,7 +5,7 @@ import { debounce } from 'lodash';
 
 import { cleanSearchTerm } from '../util/cleanSearchTerm';
 import { LocalizerType } from '../types/Util';
-
+// declare var getXmlFile: any;
 export interface Props {
   searchTerm: string;
 
@@ -44,6 +44,8 @@ declare global {
 export class MainHeader extends React.Component<Props> {
   public state = {
     openMenu: false,
+    isAdmin: true,
+    // hasContact: false,
   };
   private readonly updateSearchBound: (
     event: React.FormEvent<HTMLInputElement>
@@ -80,11 +82,24 @@ export class MainHeader extends React.Component<Props> {
     this.wrapperRef  = React.createRef();
     this.wrapperRefImage = React.createRef();
     this.handleClickOutside = this.handleClickOutside.bind(this);
-   
   }
-  public componentDidMount(){
+  public async componentDidMount(){
     document.addEventListener('mousedown', this.handleClickOutside);
+    // this.getDataTocheck();
   }
+
+  // public async getDataTocheck(){
+  //   try {
+  //     const contact = await getXmlFile();
+  //     if (contact === undefined || contact == null) {
+  //       this.setState({hasContact: false, isAdmin: true});
+  //     } else {
+  //       this.setState({hasContact: true, isAdmin: true});
+  //     }
+  //   } catch (error) {
+  //     this.setState({isAdmin: false});
+  //   }
+  // }
   public componentWillUnmount (){
     document.removeEventListener('mousedown', this.handleClickOutside);
   }
@@ -189,13 +204,14 @@ export class MainHeader extends React.Component<Props> {
       // phoneNumber,
       // profileName,
     } = this.props;
-    const { openMenu } = this.state;
+    const { openMenu, isAdmin } = this.state;
 
     return (
       <div>
         <div className="module-main-header__info">
           <img src="images/header-chat.png" alt="header chat" />
           <span>Kommunikation</span>
+          {isAdmin && (
           <img 
             src="images/icons/menu_over_blue_24x24.svg"
             className="chat_menu"
@@ -204,6 +220,7 @@ export class MainHeader extends React.Component<Props> {
             id="openMenuChat"
             ref={this.wrapperRefImage}
           />
+          )}
           {openMenu && (
             <div className="menuChat"  ref={this.wrapperRef}>
               <ul className="ulMenuChat">
@@ -215,7 +232,7 @@ export class MainHeader extends React.Component<Props> {
                     alt="Create broadcast"
                   />
                 </li>
-                <li onClick={this.createGroupBound}>
+                <li   onClick={this.createGroupBound}>
                   <span>Gruppe erstellen</span>
                   <img
                     src="images/icons/broadcast_einladen_35x35.svg"
@@ -223,7 +240,7 @@ export class MainHeader extends React.Component<Props> {
                     alt="Create broadcast"
                   />
                 </li>
-                <li onClick={this.importKundeBound}>
+                <li   onClick={this.importKundeBound}>
                   <span>Externe Nutzer einladen</span>
                   <img
                     src="images/icons/user_einladen_35x35.svg"
@@ -231,7 +248,8 @@ export class MainHeader extends React.Component<Props> {
                     alt="Add user"
                   />
                 </li>
-                <li onClick={this.importAdminBound}>
+                
+                <li   onClick={this.importAdminBound}>
                   <span>Interne Nutzer einladen</span>
                   <img
                     src="images/icons/admin_einladen_35x35.svg"
@@ -239,7 +257,8 @@ export class MainHeader extends React.Component<Props> {
                     alt="Add admin"
                   />
                 </li>
-                <li onClick={this.showContactsBound}>
+        
+                <li  onClick={this.showContactsBound}>
                   <span>Kontaktliste</span>
                   <img
                     src="images/icons/contact_list_35x35.svg"
