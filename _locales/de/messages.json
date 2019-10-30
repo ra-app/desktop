@@ -770,7 +770,7 @@
         }
     },
     "audioPermissionNeeded": {
-        "message": "Zum Senden von Audionachrichten musst du OfficeApp Desktop den Zugriff auf dein Mikrofon erlauben.",
+        "message": "Zum Senden von Audionachrichten müssen Sie OfficeApp den Zugriff auf Ihr Mikrofon erlauben.",
         "description": "Shown if the user attempts to send an audio message without audio permssions turned on"
     },
     "allowAccess": {
