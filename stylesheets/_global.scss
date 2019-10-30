@@ -2274,7 +2274,7 @@ input {
 
 .flex-container > div {
   margin-bottom: 5px;
-  padding: 35px;
+  padding: 10px;
   width: calc(100% / 5);
   height: 205px;
   overflow: hidden;
@@ -2286,14 +2286,18 @@ input {
   text-align: center; 
   .titleCardBlackboard{
     max-width: 70%;
-    margin: 20px auto;
+    margin: 40px auto 5px auto;
     font-weight: 300;
-    color: #476077;
+    color: $color-raapp-text;
   }
 
   .contentCardBlackboard{
     max-width: 70%;
     margin: 0 auto;
+    color: $color-raapp-text;
+    text-align: left;
+    max-height: 113px;
+    overflow: hidden;
  
   }
   &.oneCard{
@@ -2302,8 +2306,12 @@ input {
     height: calc(100% - 70px);
     p.titleCardBlackboard {
         max-width: 50% !important;
-        margin: 150px auto !important;
-        margin-bottom: 10px !important;
+        margin: 80px auto !important;
+        margin-bottom: 5px !important;
+    }
+    p.contentCardBlackboard{
+      max-width: 53%;
+      max-height: calc(100% - 195px);
     }
   }
 }
