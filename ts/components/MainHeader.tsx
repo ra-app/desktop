@@ -88,12 +88,11 @@ export class MainHeader extends React.Component<Props> {
     this.getDataTocheck();
   }
 
-  public async getDataTocheck(){
+  public async getDataTocheck() { 
     try {
-      const contact = await getXmlFile();
-      if (contact === undefined || contact == null) {
+         await getXmlFile();
         this.setState({isAdmin: true});
-      }
+
       // if (contact === undefined || contact == null) {
       //   this.setState({isAdmin: true});
       //   this.setState({hasContact: false, isAdmin: true});
