@@ -76,7 +76,7 @@
           const cell = document.createElement('th');
           if (
             prop === '#' ||
-            prop === 'type' ||
+            // prop === 'type' ||
             prop === 'profile' ||
             prop === 'actions'
           ) {
@@ -393,9 +393,11 @@
           cellTd.appendChild(spanSwitchKunde);
           cellTd.appendChild(divSwitch);
           cellTd.appendChild(spanSwitchAdmin);
+          cellTd.setAttribute('data-sort-value', userType)
 
           inputKunde.addEventListener('click', () => {
             if (inputKunde.checked) {
+              cellTd.setAttribute('data-sort-value', 'client')
               dataUsersToUpdate[id] = {
                 position: 'kunde',
                 userid: id,
@@ -422,6 +424,7 @@
           });
           inputNone.addEventListener('click', () => {
             if (inputNone.checked) {
+              cellTd.setAttribute('data-sort-value', 'none')
               dataUsersToUpdate[id] = {
                 position: 'none',
                 userid: id,
@@ -447,6 +450,7 @@
           });
           inputAdmin.addEventListener('click', () => {
             if (inputAdmin.checked) {
+              cellTd.setAttribute('data-sort-value', 'admin')
               dataUsersToUpdate[id] = {
                 position: 'admin',
                 userid: id,
