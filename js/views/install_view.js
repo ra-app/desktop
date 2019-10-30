@@ -473,9 +473,15 @@
       this.onSetupCompleted();
       this.$('#contact-import-done').attr("disabled", true);
       this.$('#contact-import-done').addClass('disabled');
+      this.$('#contact-import-skip').attr("disabled", true);
+      this.$('#contact-import-skip').addClass('disabled');
     },
     onContactImportSkip() {
       this.onSetupCompleted();
+      this.$('#contact-import-done').attr("disabled", true);
+      this.$('#contact-import-done').addClass('disabled');
+      this.$('#contact-import-skip').attr("disabled", true);
+      this.$('#contact-import-skip').addClass('disabled');
     },
     async onCompanyProfileDone() {
       this.$('#company-profile-done').html(`<div class='container'>
@@ -500,7 +506,11 @@
         companyName: this.$('#company-name-input').val(),
       };
       await textsecure.storage.put('userSetupInfo', profile);
-      this.selectStep(Steps.SETUP_CONTACT_IMPORT)
+      if( this.setupType === 'admin'){
+        this.onSetupCompleted();
+      }else {
+        this.selectStep(Steps.SETUP_CONTACT_IMPORT)
+      }
     },
     async onBankDetailsDone() {
       const bank = {

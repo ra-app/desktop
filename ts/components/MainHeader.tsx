@@ -5,7 +5,7 @@ import { debounce } from 'lodash';
 
 import { cleanSearchTerm } from '../util/cleanSearchTerm';
 import { LocalizerType } from '../types/Util';
-// declare var getXmlFile: any;
+declare var getXmlFile: any;
 export interface Props {
   searchTerm: string;
 
@@ -85,21 +85,25 @@ export class MainHeader extends React.Component<Props> {
   }
   public async componentDidMount(){
     document.addEventListener('mousedown', this.handleClickOutside);
-    // this.getDataTocheck();
+    this.getDataTocheck();
   }
 
-  // public async getDataTocheck(){
-  //   try {
-  //     const contact = await getXmlFile();
-  //     if (contact === undefined || contact == null) {
-  //       this.setState({hasContact: false, isAdmin: true});
-  //     } else {
-  //       this.setState({hasContact: true, isAdmin: true});
-  //     }
-  //   } catch (error) {
-  //     this.setState({isAdmin: false});
-  //   }
-  // }
+  public async getDataTocheck(){
+    try {
+      const contact = await getXmlFile();
+      if (contact === undefined || contact == null) {
+        this.setState({isAdmin: true});
+      }
+      // if (contact === undefined || contact == null) {
+      //   this.setState({isAdmin: true});
+      //   this.setState({hasContact: false, isAdmin: true});
+      // } else {
+      //   this.setState({hasContact: true, isAdmin: true});
+      // }
+    } catch (error) {
+      this.setState({isAdmin: false});
+    }
+  }
   public componentWillUnmount (){
     document.removeEventListener('mousedown', this.handleClickOutside);
   }
