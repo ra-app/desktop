@@ -60,6 +60,8 @@ export class MainHeader extends React.Component<Props> {
   private readonly createGroupBound: () => void;
   private readonly inputRef: React.RefObject<HTMLInputElement>;
   private readonly debouncedSearch: (searchTerm: string) => void;
+  private readonly wrapperRef: any ;
+  private readonly wrapperRefImage: any;
 
   constructor(props: Props) {
     super(props);
@@ -74,10 +76,24 @@ export class MainHeader extends React.Component<Props> {
     this.importKundeBound = this.importKunde.bind(this);
     this.createGroupBound = this.createGroup.bind(this);
     this.inputRef = React.createRef();
-
     this.debouncedSearch = debounce(this.search.bind(this), 20);
+    this.wrapperRef  = React.createRef();
+    this.wrapperRefImage = React.createRef();
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+   
   }
-
+  public componentDidMount(){
+    document.addEventListener('mousedown', this.handleClickOutside);
+  }
+  public componentWillUnmount (){
+    document.removeEventListener('mousedown', this.handleClickOutside);
+  }
+  public handleClickOutside(event: any) {
+    const { openMenu } = this.state;
+    if (openMenu && (this.wrapperRef && (!this.wrapperRef.current.contains(event.target) && !this.wrapperRefImage.current.contains(event.target)))) {
+      this.setState({openMenu: false});
+    }
+  }
   public search() {
     const { searchTerm, search, i18n, ourNumber, regionCode } = this.props;
     if (search) {
@@ -180,14 +196,16 @@ export class MainHeader extends React.Component<Props> {
         <div className="module-main-header__info">
           <img src="images/header-chat.png" alt="header chat" />
           <span>Kommunikation</span>
-          <img
+          <img 
             src="images/icons/menu_over_blue_24x24.svg"
             className="chat_menu"
             alt="Cbat menu"
             onClick={this.chatMenuBound}
+            id="openMenuChat"
+            ref={this.wrapperRefImage}
           />
           {openMenu && (
-            <div className="menuChat">
+            <div className="menuChat"  ref={this.wrapperRef}>
               <ul className="ulMenuChat">
                 <li>
                   <span>Broadcast erstellen</span>
