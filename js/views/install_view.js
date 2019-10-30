@@ -816,7 +816,7 @@
       let companyName = '';
       if (this.setupTypeCompany) {
         companyName = this.$el.find('#company-name-input')[0].value.length;
-        if (companyName > 0) {
+        if (companyName > 0 && username > 0) {
           button.removeClass('disabled');
         } else {
           button.addClass('disabled');
