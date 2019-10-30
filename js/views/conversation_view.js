@@ -2490,16 +2490,16 @@
         isViewMode: this.isViewMode,
         isMultiViewMode: this.isMultiViewMode,
         multiView: this.multiView,
-        isAdmin: this.isadmin
+        isAdmin: this.isAdmin
       }
     },
       initialize(options) {
         
-        this.isMultiViewMode = true;
+        this.isMultiViewMode = true; 
         this.isViewMode = false;
         this.currentId = null;
         this.company_id = options.company_id;
-        this.isadmin = true;
+        this.isadmin = options.isAdmin;
         this.render();
       },
       events: {
@@ -2509,12 +2509,17 @@
         
       },
       async openDetailView(event){
-        const admins = await getAdminCompany( this.company_id)
-        if(admins.success){
-          this.isAdmin = true;
-        }else {
-          this.isadmin = false;
-        }
+        // try {
+        //   const admins = await getAdminCompany( this.company_id)
+        //   if(admins.success){
+        //     this.isAdmin = true;
+        //   }else {
+        //     this.isAdmin = false;
+        //   }
+        // } catch (error) {
+        //   this.isAdmin = false
+        // }
+     
         const id = event.currentTarget.id;
         this.currentId = id;
         console.log('ID of click ========> ', id);

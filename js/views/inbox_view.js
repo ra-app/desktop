@@ -117,7 +117,7 @@
   Whisper.BlackboardStack = Whisper.View.extend({
     className: 'blackboard-stack',
     lastConversation: null,
-    openBlackboard(conversation, notes) {
+    openBlackboard(conversation, notes, isAdmin) {
       console.log(notes, "notesssssssssssssssss")
       // isTicket = false;
       const id = `conversation-${conversation.cid}`;
@@ -139,7 +139,8 @@
           console.log(conversation, "conversationnnnnnnnnnnnnnnnnnnnn")
           const view = new Whisper.BlackboardScreen({
             model: notes,
-            company_id: conversation
+            company_id: conversation,
+            isAdmin: isAdmin
           });
           // eslint-disable-next-line prefer-destructuring
           $el = view.$el;
@@ -457,9 +458,21 @@
       }
     },
     async openBlackboard(id) {
+      const isAdmin = true
       try{
         const notes = await getCardsBlackboard(id);
-        this.blackboard_stack.openBlackboard(id, notes);
+        try {
+          const admins = await getAdminCompany(id)
+          if(admins.success){
+            this.isAdmin = true;
+          }else {
+            this.isAdmin = false;
+          }
+        } catch (error) {
+          this.isAdmin = false;
+        }
+        
+        this.blackboard_stack.openBlackboard(id, notes, isAdmin);
       }
       catch (err) {
         console.warn('openTicker error', err);
