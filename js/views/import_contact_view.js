@@ -1045,11 +1045,15 @@
         '</span>';
       divNutzer.appendChild(labelNutzer);
       divNutzer.appendChild(divUserPrev);
-
+      const messageSpan = document.createElement('span');
+      messageSpan.id = 'messageSpan';
       const buttonSaveChanges = document.createElement('button');
       buttonSaveChanges.classList = 'buttonSave buttonsModal';
       buttonSaveChanges.innerText = 'Speichern';
       buttonSaveChanges.onclick = () => {
+        if(!this.validateEmail(inputEmail.value)){
+          messageSpan.innerHTML = 'Ungültige Email Adresse'
+        }else{
         cln.getElementsByTagName('name')[0].childNodes[0].nodeValue =
           inputEditVorname.value;
         cln.getElementsByTagName('surname')[0].childNodes[0].nodeValue =
@@ -1091,6 +1095,7 @@
         updateXmlDB(dataToUpdate);
         this.closeModal();
         this.refreshTable();
+        }
       };
 
       divMainContentEdit.appendChild(divEditVorname);
@@ -1101,6 +1106,7 @@
       // divMainContentEdit.appendChild(divRadioButtons);
       // divMainContentEdit.appendChild(divStatus);
       divMainContentEdit.appendChild(divNutzer);
+      divMainContentEdit.appendChild(messageSpan);
       divMainContentEdit.appendChild(buttonSaveChanges);
 
       this.$('#modalContact').append(divMainHeaderEdit);
@@ -1382,72 +1388,77 @@
       // divNutzer.appendChild(divUserPrev)
 
       const messageSpan = document.createElement('span');
+      messageSpan.id = 'messageSpan';
       const buttonSaveChanges = document.createElement('button');
       buttonSaveChanges.classList = 'buttonSave buttonsModal disabled';
       buttonSaveChanges.innerText = 'Speichern';
       buttonSaveChanges.id = 'addNewContactButton';
       buttonSaveChanges.onclick = () => {
-        // creating a news element
-        const parentElement = document.createElementNS('', 'contact');
+        if(!this.validateEmail(inputEmail.value)){
+          messageSpan.innerHTML = 'Ungültige Email Adresse'
+        }else{
+          // creating a news element
+          const parentElement = document.createElementNS('', 'contact');
 
-        const nameElement = document.createElementNS('', 'name');
-        const nameText = document.createTextNode(inputEditVorname.value);
-        nameElement.appendChild(nameText);
+          const nameElement = document.createElementNS('', 'name');
+          const nameText = document.createTextNode(inputEditVorname.value);
+          nameElement.appendChild(nameText);
 
-        const surnameElement = document.createElementNS('', 'surname');
-        const surnameText = document.createTextNode(inputNachName.value);
-        surnameElement.appendChild(surnameText);
+          const surnameElement = document.createElementNS('', 'surname');
+          const surnameText = document.createTextNode(inputNachName.value);
+          surnameElement.appendChild(surnameText);
 
-        const positionElement = document.createElementNS('', 'position');
-        const positionText = document.createTextNode(inputPosition.value);
-        positionElement.appendChild(positionText);
+          const positionElement = document.createElementNS('', 'position');
+          const positionText = document.createTextNode(inputPosition.value);
+          positionElement.appendChild(positionText);
 
-        const telephoneElement = document.createElementNS('', 'phone');
-        const telephoneText = document.createTextNode(spanDialCode.innerText + inputTelephone.value);
-        telephoneElement.appendChild(telephoneText)
+          const telephoneElement = document.createElementNS('', 'phone');
+          const telephoneText = document.createTextNode(spanDialCode.innerText + inputTelephone.value);
+          telephoneElement.appendChild(telephoneText)
 
-        const emailElement = document.createElementNS('', 'email');
-        const emailText = document.createTextNode(inputEmail.value);
-        emailElement.appendChild(emailText);
+          const emailElement = document.createElementNS('', 'email');
+          const emailText = document.createTextNode(inputEmail.value);
+          emailElement.appendChild(emailText);
 
-        const tsElement = document.createElementNS('', 'ts');
-        const tsText = document.createTextNode('');
-        tsElement.appendChild(tsText);
-        // let type = null;
-        // if (inputKundeAdd.checked) {
-        //   type = 'client';
-        // }
-        // if (inputAdminAdd.checked) {
-        //   type = 'admin'
-        // }
-        // const typeElement = document.createElementNS('', 'type');
-        // const typeText = document.createTextNode(type);
-        // typeElement.appendChild(typeText)
+          const tsElement = document.createElementNS('', 'ts');
+          const tsText = document.createTextNode('');
+          tsElement.appendChild(tsText);
+          // let type = null;
+          // if (inputKundeAdd.checked) {
+          //   type = 'client';
+          // }
+          // if (inputAdminAdd.checked) {
+          //   type = 'admin'
+          // }
+          // const typeElement = document.createElementNS('', 'type');
+          // const typeText = document.createTextNode(type);
+          // typeElement.appendChild(typeText)
 
-        // append parent element
-        parentElement.appendChild(nameElement);
-        parentElement.appendChild(surnameElement);
-        parentElement.appendChild(positionElement);
-        parentElement.appendChild(emailElement);
-        parentElement.appendChild(telephoneElement);
-        parentElement.appendChild(tsElement);
-        // parentElement.appendChild(typeElement);
+          // append parent element
+          parentElement.appendChild(nameElement);
+          parentElement.appendChild(surnameElement);
+          parentElement.appendChild(positionElement);
+          parentElement.appendChild(emailElement);
+          parentElement.appendChild(telephoneElement);
+          parentElement.appendChild(tsElement);
+          // parentElement.appendChild(typeElement);
 
-        // prepare data and save on DB
-        const finduser = findUserXml(telephoneElement.textContent, xmlData);
-        // if findUser === null not exist
-        if (finduser !== null) {
-          let message = '';
-          messageSpan.innerHTML = '';
-          message = document.createTextNode('Telefonnummer bereits vorhanden');
-          messageSpan.appendChild(message);
-        } else {
-          xmlData.appendChild(parentElement);
-          const dataToUpdate = prepareDataToUpdate(xmlData);
-          this.contactsData = dataToUpdate;
-          updateXmlDB(dataToUpdate);
-          this.closeModal();
-          this.refreshTable();
+          // prepare data and save on DB
+          const finduser = findUserXml(telephoneElement.textContent, xmlData);
+          // if findUser === null not exist
+          if (finduser !== null) {
+            let message = '';
+            messageSpan.innerHTML = '';
+            message = document.createTextNode('Telefonnummer bereits vorhanden');
+            messageSpan.appendChild(message);
+          } else {
+            xmlData.appendChild(parentElement);
+            const dataToUpdate = prepareDataToUpdate(xmlData);
+            this.contactsData = dataToUpdate;
+            updateXmlDB(dataToUpdate);
+            this.closeModal();
+            this.refreshTable();
+          }
         }
       };
 
@@ -1478,6 +1489,10 @@
       } else {
         button.addClass('disabled');
       }
+    },
+    validateEmail(email) {
+      const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
     },
     cleanMultiSelectInvite() {
       // document.getElementById('divMainContentEdit').remove()
