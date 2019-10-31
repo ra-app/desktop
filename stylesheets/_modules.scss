@@ -2043,6 +2043,7 @@
 
   font-weight: 300;
   color: $color-raapp-text;
+  max-width: calc(100% - 65px);
 }
 
 .module-conversation-list-item__header__name--with-unread {
