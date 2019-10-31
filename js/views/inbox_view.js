@@ -458,9 +458,10 @@
       }
     },
     async openBlackboard(id) {
-      const isAdmin = true
+      const isAdmin = true;
+      var notes = '';
       try{
-        const notes = await getCardsBlackboard(id);
+        notes = await getCardsBlackboard(id);
         try {
           const admins = await getAdminCompany(id)
           if(admins.success){
@@ -471,7 +472,7 @@
         } catch (error) {
           this.isAdmin = false;
         }
-        
+        console.log(notes, "notessssssssssssssss")
         this.blackboard_stack.openBlackboard(id, notes, isAdmin);
       }
       catch (err) {

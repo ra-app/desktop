@@ -2509,16 +2509,16 @@
         
       },
       async openDetailView(event){
-        // try {
-        //   const admins = await getAdminCompany( this.company_id)
-        //   if(admins.success){
-        //     this.isAdmin = true;
-        //   }else {
-        //     this.isAdmin = false;
-        //   }
-        // } catch (error) {
-        //   this.isAdmin = false
-        // }
+        try {
+          const admins = await getAdminCompany( this.company_id)
+          if(admins.success){
+            this.isAdmin = true;
+          }else {
+            this.isAdmin = false;
+          }
+        } catch (error) {
+          this.isAdmin = false
+        }
      
         const id = event.currentTarget.id;
         this.currentId = id;
