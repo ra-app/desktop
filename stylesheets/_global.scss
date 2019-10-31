@@ -2274,23 +2274,34 @@ input {
 
 .flex-container > div {
   margin-bottom: 5px;
-  padding: 10px;
-  width: calc(100% / 5);
-  height: 205px;
+  /* padding: 10px; */
+  width: calc((100% / 5) - 10px);
+  height: 300px;
   overflow: hidden;
   font-size: 14px;
   background-image: url(./../images/post-it.svg);
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  text-align: center; 
+  text-align: center;
+  margin-right: 5px;
   .titleCardBlackboard{
     max-width: 70%;
-    margin: 40px auto 5px auto;
+    margin: 65px auto 5px auto;
     font-weight: 300;
     color: $color-raapp-text;
     font-size: 16px;
     font-weight: bold;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 16px;    
+    max-height: 32px;     
+    -webkit-line-clamp: 2; /* Write the number of 
+                              lines you want to be 
+                              displayed */
+    -webkit-box-orient: vertical;
   }
 
   .contentCardBlackboard{
@@ -2300,6 +2311,16 @@ input {
     text-align: left;
     max-height: 113px;
     overflow: hidden;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 16px;    
+    max-height: 143px;     
+    -webkit-line-clamp: 9; /* Write the number of 
+                              lines you want to be 
+                              displayed */
+    -webkit-box-orient: vertical;
  
   }
   &.oneCard{
