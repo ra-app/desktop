@@ -200,7 +200,6 @@ export class ConversationListItem extends React.PureComponent<Props> {
       openBlackboard,
       style,
     } = this.props;
-    console.log('CONVERSATION LIST ITEM RENDER !!!! ', this.props);
     return (
       <div
         role="button"
@@ -228,12 +227,11 @@ export class ConversationListItem extends React.PureComponent<Props> {
           {this.renderMessage()}
           {(this.props.type === 'company' && openBlackboard) && (
             <div onClick = {(evt) => {evt.preventDefault(); evt.stopPropagation(); openBlackboard(id)}}>
-              <img className='iconOpenBlackboard' src='images/icons/pin-button.svg' />
+              <img className='iconOpenBlackboard' src='images/icons/post-it-pin-icon-4.svg' />
             </div>
           )}
         </div>
       </div>
-  
     );
   }
 }

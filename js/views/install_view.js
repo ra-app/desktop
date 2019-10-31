@@ -392,6 +392,11 @@
           // end create cad for blackboard
           
           await ensureCompanyConversation(result.info.company_number);
+          // create default group exterm and interm
+          // const members = [getOwnNumber()];
+          // await createGroup('Intern', members);
+          // await createGroup('Extern', members);
+          // end default group exterm and interm
         } else if (this.setupType === 'admin') {
           const codeCompany = textsecure.storage.get('codeCompany', false);
           const userSetupInfo = textsecure.storage.get('userSetupInfo', null);
