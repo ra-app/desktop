@@ -2325,16 +2325,23 @@ input {
   }
   &.oneCard{
     background-image: url(./../images/post-it-open.svg);
-    width: 100%;
+    width: 50%;
     height: calc(100% - 70px);
+    margin: 0 auto;
     p.titleCardBlackboard {
         max-width: 50% !important;
-        margin: 80px auto !important;
+        margin: 120px auto !important;
         margin-bottom: 5px !important;
     }
     p.contentCardBlackboard{
-      max-width: 53%;
-      max-height: calc(100% - 195px);
+      max-width: calc(100% - 40px);
+      padding-left: 10px;
+      padding-right: 10px;
+      max-height: calc(100% - 280px);
+      -webkit-line-clamp: unset;
+      -webkit-box-orient: unset;
+      text-overflow: unset;
+      overflow: auto;
     }
   }
 }
