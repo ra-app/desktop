@@ -572,7 +572,8 @@
 }
 
 .module-message__author {
-  color: $color-white;
+  /*color: $color-white;*/
+  color: $color-gray-60;
   font-size: 13px;
   font-weight: 300;
   line-height: 18px;
