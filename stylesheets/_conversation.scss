@@ -679,6 +679,9 @@ tbody#myTable tr {
     &:first-child {
       margin-right: 5px;
     }
+    &:nth-child(3) {
+      margin-left: 5px;
+    }
   }
 }
 .divNoContacts {
