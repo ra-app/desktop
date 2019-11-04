@@ -807,15 +807,15 @@
     activateButtonCompanyInfo() {
       const taxNumber = this.$el.find('#tax-number-input')[0].value.length;
       // const taxID = this.$el.find('#tax-id-input')[0].value.length;
-      const comercialRegisterId = this.$el.find('#company-register-id-input')[0]
-        .value.length;
+      // const comercialRegisterId = this.$el.find('#company-register-id-input')[0]
+      //   .value.length;
       const imprint = this.$el.find('#imprint-input')[0].value.length;
       const branch = this.$el.find('#branch-select')[0].value.length;
       const button = this.$el.find('#company-profile-done');
       if (
         taxNumber > 0 &&
         // taxID > 0 &&
-        comercialRegisterId > 0 &&
+        // comercialRegisterId > 0 &&
         imprint > 0 &&
         branch > 0
       ) {
