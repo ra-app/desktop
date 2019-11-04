@@ -1604,11 +1604,11 @@
         "description": "oder option"
     },
     "companyDetails": {
-        "message": "Firmendaten",
+        "message": "OfA-Office Betreiber anlegen",
         "description": "Title for company details entry"
     },
     "taxNumber": {
-        "message": "Steuernummer",
+        "message": "Name",
         "description": "Label for tax number input"
     },
     "taxID": {
@@ -1620,7 +1620,7 @@
         "description": "Label for commercial register id input"
     },
     "imprint": {
-        "message": "Impressum",
+        "message": "Steuernummer",
         "description": "Label for imprint input"
     },
     "branch": {
