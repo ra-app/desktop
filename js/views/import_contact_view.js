@@ -11,6 +11,7 @@
   var dataUsersToUpdate = [];
   var dataUsersToInvitate = [];
   var activeRolToInvitate = null;
+  var selectedAll = false;
 
   Whisper.ImportContactView = Whisper.View.extend({
     templateName: 'import-contact-table',
@@ -140,9 +141,19 @@
     },
     selectAllContact () {
       const checkboxList = this.$('.checkbox-user');
-      for (let i = 0; i < checkboxList.length; i++) {
-        if (!checkboxList[i].disabled && !checkboxList[i].checked) {
-          checkboxList[i].click();
+      if(!selectedAll) {
+        selectedAll = true;
+        for (let i = 0; i < checkboxList.length; i++) {
+          if (!checkboxList[i].disabled && !checkboxList[i].checked) {
+            checkboxList[i].click();
+          }
+        }
+      } else {
+        selectedAll = false;
+        for (let i = 0; i < checkboxList.length; i++) {
+          if (checkboxList[i].checked) {
+            checkboxList[i].click();
+          }
         }
       }
     },
