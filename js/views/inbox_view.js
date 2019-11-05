@@ -465,6 +465,14 @@
         notes = await getCardsBlackboard(id);
         try {
           admins = await getAdminCompany(id)
+          console.log(notes, "notessssssssssssssss")
+          if (notes == undefined){
+            console.log('CREANDOOOO BLACKBOARRRRRRDDDDD')
+            await createCardBlackboard(admins.admins[0].company_id).then(async resp => {
+              notes = await getCardsBlackboard(id);
+              console.log('RESSSSPPP',resp, notes)
+            })
+          }
           if(admins.success){
             this.isAdmin = true;
           }else {
@@ -472,11 +480,6 @@
           }
         } catch (error) {
           this.isAdmin = false;
-        }
-        console.log(notes, "notessssssssssssssss")
-        if (notes == undefined){
-          console.log('CREANDOOOO BLACKBOARRRRRRDDDDD')
-          await createCardBlackboard(admins.admins[0].company_id)
         }
         this.blackboard_stack.openBlackboard(id, notes, isAdmin);
       }
