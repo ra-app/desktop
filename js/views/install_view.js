@@ -731,6 +731,9 @@
                 lastModified: Date.now(),
               });
               base64 = await toBase64(base64);
+              if (base64) {
+                this.$('#previewAdminAvatar').attr('src', base64);
+              }
               // eslint-disable-next-line prefer-destructuring
               base64 = base64.split(',')[1];
               const avatarInfo = {
@@ -779,6 +782,9 @@
                 lastModified: Date.now(),
               });
               base64 = await toBase64(base64);
+              if(base64) {
+                this.$('#previewCompanyAvatar').attr('src', base64);
+              }
               // eslint-disable-next-line prefer-destructuring
               base64 = base64.split(',')[1];
               const dataCompanyAvatar = {

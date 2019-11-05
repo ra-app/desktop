@@ -1405,6 +1405,11 @@ $debug: 0;
   .labelsInput {
     top: -50px !important;
   }
+
+  .previewAvatar {
+    border-radius: 50%;
+  }
+
   #bank-iban-input,
   #bank-bic-input {
     font-family: $poppins-medium;
