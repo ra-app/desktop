@@ -474,7 +474,7 @@
           this.isAdmin = false;
         }
         console.log(notes, "notessssssssssssssss")
-        if (!notes){
+        if (notes == undefined){
           console.log('CREANDOOOO BLACKBOARRRRRRDDDDD')
           await createCardBlackboard(admins.admins[0].company_id)
         }
