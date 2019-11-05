@@ -482,6 +482,7 @@
       this.$('#contact-import-skip').addClass('disabled');
     },
     onContactImportSkip() {
+      this.contactsData = null;
       this.onSetupCompleted();
       this.$('#contact-import-done').attr("disabled", true);
       this.$('#contact-import-done').addClass('disabled');
