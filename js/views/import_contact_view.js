@@ -45,6 +45,7 @@
       'click #searchContactInvitation, #imagePlus': 'searchContact',
       'keyup #searchInput': 'searchContactList',
       'click #sendInvitationIcon': 'cleanMultiSelectInvite',
+      'click #all': 'selectAllContact',
     },
     createEmptyMessage() {
       const divNoContacts = document.createElement('div');
@@ -57,7 +58,7 @@
       table.className = 'sortable';
 
       const headerTexts = {
-        '#': '#',
+        'all': 'all',
         name: 'name',
         surname: 'Nachname',
         position: 'position',
@@ -75,14 +76,19 @@
         for (const prop in headerTexts) {
           const cell = document.createElement('th');
           if (
-            prop === '#' ||
+            prop === 'all' ||
             // prop === 'type' ||
             prop === 'profile' ||
             prop === 'actions'
           ) {
             cell.className = 'no-sort';
           }
-          cell.innerHTML = headerTexts[prop];
+          if(prop == 'all'){
+            cell.innerHTML = 'alle';
+          } else{
+            cell.innerHTML = headerTexts[prop];
+          }
+          cell.id = headerTexts[prop];
           row.appendChild(cell);
         }
         // headerTexts.forEach((element, index) => {
@@ -131,6 +137,14 @@
       table.appendChild(tbody);
       this.$('#contactTable').append(table);
       this.$('table').tablesort();
+    },
+    selectAllContact () {
+      const checkboxList = this.$('.checkbox-user');
+      for (let i = 0; i < checkboxList.length; i++) {
+        if (!checkboxList[i].disabled && !checkboxList[i].checked) {
+          checkboxList[i].click();
+        }
+      }
     },
     searchTable(e) {
       let value = e.target.value.toLowerCase();
@@ -263,11 +277,11 @@
         userType = 'none';
       }
       switch (prop) {
-        case '#': {
+        case 'all': {
           const checkbox = document.createElement('input');
           checkbox.type = 'checkbox';
-          checkbox.name = '#';
-          checkbox.value = '#';
+          checkbox.name = 'all';
+          checkbox.value = 'all';
           checkbox.className = 'checkbox-user';
           checkbox.id = `checkbox-${id}`;
           if (userType === 'none') {
