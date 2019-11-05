@@ -655,6 +655,9 @@ p.ticket-time {
   font-size: 14px;
 }
 tbody#myTable tr {
+  & td:last-child {
+    text-align: left;
+  }
   text-align: center;
   background: white;
   height: 55px;
