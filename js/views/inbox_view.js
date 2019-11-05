@@ -460,10 +460,11 @@
     async openBlackboard(id) {
       const isAdmin = true;
       var notes = '';
+      let admins = '';
       try{
         notes = await getCardsBlackboard(id);
         try {
-          const admins = await getAdminCompany(id)
+          admins = await getAdminCompany(id)
           if(admins.success){
             this.isAdmin = true;
           }else {
@@ -473,6 +474,10 @@
           this.isAdmin = false;
         }
         console.log(notes, "notessssssssssssssss")
+        if (!notes){
+          console.log('CREANDOOOO BLACKBOARRRRRRDDDDD')
+          await createCardBlackboard(admins.admins[0].company_id)
+        }
         this.blackboard_stack.openBlackboard(id, notes, isAdmin);
       }
       catch (err) {
