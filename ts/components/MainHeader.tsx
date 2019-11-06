@@ -45,7 +45,7 @@ export class MainHeader extends React.Component<Props> {
   public state = {
     openMenu: false,
     isAdmin: true,
-    // hasContact: false,
+    hasContact: false,
   };
   private readonly updateSearchBound: (
     event: React.FormEvent<HTMLInputElement>
@@ -88,17 +88,16 @@ export class MainHeader extends React.Component<Props> {
     this.getDataTocheck();
   }
 
-  public async getDataTocheck() { 
+  public async getDataTocheck() {
     try {
-         await getXmlFile();
-        this.setState({isAdmin: true});
+      const contact = await getXmlFile();
+      this.setState({isAdmin: true});
 
-      // if (contact === undefined || contact == null) {
-      //   this.setState({isAdmin: true});
-      //   this.setState({hasContact: false, isAdmin: true});
-      // } else {
-      //   this.setState({hasContact: true, isAdmin: true});
-      // }
+      if (contact === undefined || contact == null) {
+        this.setState({hasContact: false});
+      } else {
+        this.setState({hasContact: true});
+      }
     } catch (error) {
       this.setState({isAdmin: false});
     }
@@ -176,26 +175,34 @@ export class MainHeader extends React.Component<Props> {
   }
   public showContacts() {
     // this.setState({openMenu: !this.state.openMenu});
-    const { appView } = window['owsDesktopApp'];
-    console.log('appView', appView);
-    this.setState({ openMenu: !this.state.openMenu });
-    appView.openContact();
+    if (this.state.hasContact) {
+      const { appView } = window['owsDesktopApp'];
+      console.log('appView', appView);
+      this.setState({ openMenu: !this.state.openMenu });
+      appView.openContact();
+    }
   }
   public importAdmin() {
-    const { appView } = window['owsDesktopApp'];
-    appView.openModalImport('admin');
-    this.setState({ openMenu: !this.state.openMenu });
+    if (this.state.hasContact) {
+      const { appView } = window['owsDesktopApp'];
+      appView.openModalImport('admin');
+      this.setState({ openMenu: !this.state.openMenu });
+    }
   }
   public importKunde() {
-    const { appView } = window['owsDesktopApp'];
-    appView.openModalImport('kunde');
-    this.setState({ openMenu: !this.state.openMenu });
+    if (this.state.hasContact) {
+      const { appView } = window['owsDesktopApp'];
+      appView.openModalImport('kunde');
+      this.setState({ openMenu: !this.state.openMenu });
+    }
   }
 
   public createGroup() {
-    const { appView } = window['owsDesktopApp']
-    appView.openModalImport('group');
-    this.setState({ openMenu: !this.state.openMenu })
+    if (this.state.hasContact) {
+      const { appView } = window['owsDesktopApp']
+      appView.openModalImport('group');
+      this.setState({ openMenu: !this.state.openMenu })
+    }
   }
   public render() {
     const {
@@ -215,7 +222,7 @@ export class MainHeader extends React.Component<Props> {
           <img src="images/header-chat.png" alt="header chat" />
           <span>Kommunikation</span>
           {isAdmin && (
-          <img 
+          <img
             src="images/icons/menu_over_blue_24x24.svg"
             className="chat_menu"
             alt="Cbat menu"
@@ -235,7 +242,7 @@ export class MainHeader extends React.Component<Props> {
                     alt="Create broadcast"
                   />
                 </li>
-                <li   onClick={this.createGroupBound}>
+                <li className={`${!this.state.hasContact && 'disabledLi'}`}  onClick={this.createGroupBound}>
                   <span>Gruppe erstellen</span>
                   <img
                     src="images/icons/broadcast_einladen_35x35.svg"
@@ -243,7 +250,7 @@ export class MainHeader extends React.Component<Props> {
                     alt="Create broadcast"
                   />
                 </li>
-                <li   onClick={this.importKundeBound}>
+                <li className={`${!this.state.hasContact && 'disabledLi'}`} onClick={this.importKundeBound}>
                   <span>Externe Nutzer einladen</span>
                   <img
                     src="images/icons/user_einladen_35x35.svg"
@@ -251,8 +258,8 @@ export class MainHeader extends React.Component<Props> {
                     alt="Add user"
                   />
                 </li>
-                
-                <li   onClick={this.importAdminBound}>
+
+                <li className={`${!this.state.hasContact && 'disabledLi'}`} onClick={this.importAdminBound}>
                   <span>Interne Nutzer einladen</span>
                   <img
                     src="images/icons/admin_einladen_35x35.svg"
@@ -260,8 +267,8 @@ export class MainHeader extends React.Component<Props> {
                     alt="Add admin"
                   />
                 </li>
-        
-                <li  onClick={this.showContactsBound}>
+
+                <li className={`${!this.state.hasContact && 'disabledLi'}`} onClick={this.showContactsBound}>
                   <span>Kontaktliste</span>
                   <img
                     src="images/icons/contact_list_35x35.svg"

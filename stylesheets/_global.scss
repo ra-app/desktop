@@ -2049,6 +2049,12 @@ input {
     margin-left: 6px;
   }
 }
+
+.disabledLi {
+  color: grey !important;
+  cursor: initial !important;
+}
+
 .disabled {
   cursor: default;
   background: rgb(127, 172, 250);
