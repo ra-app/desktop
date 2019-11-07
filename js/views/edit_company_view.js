@@ -2,7 +2,7 @@
 /* global textsecure: false */
 
 // eslint-disable-next-line func-names
-(function() {
+(function () {
   'use strict';
 
   window.Whisper = window.Whisper || {};
@@ -12,14 +12,15 @@
     className: 'edit-company',
     template: $('#edit-company').html(),
     render_attributes() {
-      console.log('ESTAMOSSSSSSSS', this.model[0], textsecure.storage.user.getRawNumber());
+
       return {
         'send-message': i18n('sendMessage'),
         model: this.model,
+        company_name: this.model[0].company_name,
+        company_avatar: getAvatar(textsecure.storage.get('companyNumber', null)),
       };
     },
-    initialize(options) {
-      console.log('OPTIONNNNNNNNNNNN', options)
+    initialize() {
       this.render();
     },
 
@@ -31,7 +32,6 @@
     },
     editCompanyAvatar() {
       this.$('#inputNewAvatar').click();
-      console.log('editing company avatar');
     },
     async onChooseAvatarFile() {
       const fileField = this.$('#inputNewAvatar')[0].files[0];
@@ -60,8 +60,7 @@
                 lastModified: Date.now(),
               });
               base64 = await toBase64(base64);
-              console.log('base64', base64)
-              if(base64) {
+              if (base64) {
                 this.$('#companyAvatar').attr('src', base64);
               }
             }, imageType, 1
@@ -80,6 +79,7 @@
       textarea.className = 'editTextareaCompanyName'
       textarea.id = 'newCompanyName';
       textarea.placeholder = 'new company name';
+      textarea.innerHTML = this.model[0].company_name;
 
       const doneIcon = document.createElement('img');
       doneIcon.id = 'doneIcon';
@@ -92,8 +92,8 @@
       this.$('#edit_company_data').append(settingEditName)
     },
     saveNewCompanyName() {
-      const newName= this.$('#newCompanyName').val();
-      console.log('SAVEEEEEEE', newName);
+      const newName = this.$('#newCompanyName').val();
+      this.$('#spanCompanyName').text(newName);
       this.$('#settingEditName').remove();
       this.$('#nameSection').show();
     },
