@@ -181,26 +181,25 @@ export class MainHeader extends React.Component<Props> {
       appView.openContact();
   }
   public importAdmin() {
-    if (this.state.hasContact) {
+    // if (this.state.hasContact) {
       const { appView } = window['owsDesktopApp'];
       appView.openModalImport('admin');
       this.setState({ openMenu: !this.state.openMenu });
-    }
+    // }
   }
   public importKunde() {
-    if (this.state.hasContact) {
+    // if (this.state.hasContact) {
       const { appView } = window['owsDesktopApp'];
       appView.openModalImport('kunde');
       this.setState({ openMenu: !this.state.openMenu });
-    }
+    // }
   }
-
   public createGroup() {
-    if (this.state.hasContact) {
+    // if (this.state.hasContact) {
       const { appView } = window['owsDesktopApp']
       appView.openModalImport('group');
       this.setState({ openMenu: !this.state.openMenu })
-    }
+    // }
   }
   public render() {
     const {
@@ -240,7 +239,7 @@ export class MainHeader extends React.Component<Props> {
                     alt="Create broadcast"
                   />
                 </li> */}
-                <li className={`${!this.state.hasContact && 'disabledLi'}`}  onClick={this.createGroupBound}>
+                <li /*className={`${!this.state.hasContact && 'disabledLi'}`}*/  onClick={this.createGroupBound}>
                   <span>Gruppe erstellen</span>
                   <img
                     src="images/icons/broadcast_einladen_35x35.svg"
@@ -248,7 +247,7 @@ export class MainHeader extends React.Component<Props> {
                     alt="Create broadcast"
                   />
                 </li>
-                <li className={`${!this.state.hasContact && 'disabledLi'}`} onClick={this.importKundeBound}>
+                <li /*className={`${!this.state.hasContact && 'disabledLi'}`}*/ onClick={this.importKundeBound}>
                   <span>Externe Nutzer einladen</span>
                   <img
                     src="images/icons/user_einladen_35x35.svg"
@@ -257,7 +256,7 @@ export class MainHeader extends React.Component<Props> {
                   />
                 </li>
 
-                <li className={`${!this.state.hasContact && 'disabledLi'}`} onClick={this.importAdminBound}>
+                <li /*className={`${!this.state.hasContact && 'disabledLi'}`}*/ onClick={this.importAdminBound}>
                   <span>Interne Nutzer einladen</span>
                   <img
                     src="images/icons/admin_einladen_35x35.svg"
