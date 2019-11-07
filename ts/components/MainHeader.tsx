@@ -175,12 +175,10 @@ export class MainHeader extends React.Component<Props> {
   }
   public showContacts() {
     // this.setState({openMenu: !this.state.openMenu});
-    if (this.state.hasContact) {
       const { appView } = window['owsDesktopApp'];
       console.log('appView', appView);
       this.setState({ openMenu: !this.state.openMenu });
       appView.openContact();
-    }
   }
   public importAdmin() {
     if (this.state.hasContact) {
@@ -268,7 +266,7 @@ export class MainHeader extends React.Component<Props> {
                   />
                 </li>
 
-                <li className={`${!this.state.hasContact && 'disabledLi'}`} onClick={this.showContactsBound}>
+                <li onClick={this.showContactsBound}>
                   <span>Kontaktliste</span>
                   <img
                     src="images/icons/contact_list_35x35.svg"
