@@ -2232,6 +2232,11 @@ input {
   margin-bottom: 10px;
   padding: 5px;
 }
+
+.titleCardInput {
+  cursor: pointer;
+}
+
 .buttonInviteContact {
   @include backgroudGradient();
   position: absolute;
