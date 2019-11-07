@@ -232,14 +232,14 @@ export class MainHeader extends React.Component<Props> {
           {openMenu && (
             <div className="menuChat"  ref={this.wrapperRef}>
               <ul className="ulMenuChat">
-                <li>
+                {/* <li>
                   <span>Broadcast erstellen</span>
                   <img
                     src="images/icons/broadcast_einladen_35x35.svg"
                     className="imageLiChatMenu"
                     alt="Create broadcast"
                   />
-                </li>
+                </li> */}
                 <li className={`${!this.state.hasContact && 'disabledLi'}`}  onClick={this.createGroupBound}>
                   <span>Gruppe erstellen</span>
                   <img
