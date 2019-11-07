@@ -28,18 +28,7 @@
   Whisper.ConversationStack = Whisper.View.extend({
     className: 'conversation-stack',
     lastConversation: null,
-    open(conversation, isTicket) {
-      // isTicket = false;
-      if (this.$('#edit_company_data')) {
-        this.$('#edit_company_data').remove();
-      }
-      const edit = new Whisper.EditCompanyView({
-        model: conversation,
-        window: this.model.window,
-      });
-      let $el = this.$('.conversation-stack')[0];
-      $el = edit.$el;
-      $el.prependTo(this.el);
+    async open(conversation, isTicket) {
       if (!isTicket) {
         const id = `conversation-${conversation.cid}`;
         if (id !== this.el.firstChild.id) {
@@ -74,6 +63,30 @@
         // Make sure poppers are positioned properly
         window.dispatchEvent(new Event('resize'));
       } else {
+        const isAdmin = true;
+        let admins = '';
+        try {
+          admins = await getAdminCompany(conversation.id)
+          if (admins.success) {
+            this.isAdmin = true;
+          } else {
+            this.isAdmin = false;
+          }
+        } catch (error) {
+          this.isAdmin = false;
+        }
+        if (isAdmin) {
+          if (this.$('#edit_company_data')) {
+            this.$('#edit_company_data').remove();
+          }
+          const edit = new Whisper.EditCompanyView({
+            model: conversation,
+            window: this.model.window,
+          });
+          let $el = this.$('.conversation-stack')[0];
+          $el = edit.$el;
+          $el.prependTo(this.el);
+        }
         const id = `conversation-${conversation.cid}`;
         if (id !== this.el.firstChild.id) {
           this.$el
@@ -472,18 +485,18 @@
       const isAdmin = true;
       var notes = '';
       let admins = '';
-      try{
+      try {
         notes = await getCardsBlackboard(id);
         try {
           admins = await getAdminCompany(id)
-          if (notes == undefined){
+          if (notes == undefined) {
             await createCardBlackboard(admins.admins[0].company_id).then(async resp => {
               notes = await getCardsBlackboard(id);
             })
           }
-          if(admins.success){
+          if (admins.success) {
             this.isAdmin = true;
-          }else {
+          } else {
             this.isAdmin = false;
           }
         } catch (error) {
