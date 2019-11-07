@@ -30,6 +30,16 @@
     lastConversation: null,
     open(conversation, isTicket) {
       // isTicket = false;
+      if (this.$('#edit_company_data')) {
+        this.$('#edit_company_data').remove();
+      }
+      const edit = new Whisper.EditCompanyView({
+        model: conversation,
+        window: this.model.window,
+      });
+      let $el = this.$('.conversation-stack')[0];
+      $el = edit.$el;
+      $el.prependTo(this.el);
       if (!isTicket) {
         const id = `conversation-${conversation.cid}`;
         if (id !== this.el.firstChild.id) {
@@ -80,6 +90,7 @@
             if (this.$('.blackboard-view')) {
               this.$('.blackboard-view').remove();
             }
+            console.log('GGGGGGGGGGGG', conversation)
             const view = new Whisper.TicketScreen({
               model: conversation,
               window: this.model.window,
