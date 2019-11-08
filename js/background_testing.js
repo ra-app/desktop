@@ -542,6 +542,10 @@ const setClientAvatar = async data => {
   return apiRequest('api/v1/client/picture', data);
 };
 
+const updateCompanyName = async (company_name, company_id) => {
+  return apiRequest('/api/v1/companies/' + company_id + '/updatename', { company_name })
+}
+
 const updateClient = async data => {
   return apiRequest('api/v1/client/info', data);
 };

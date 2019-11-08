@@ -34,6 +34,7 @@
       this.$('#inputNewAvatar').click();
     },
     async onChooseAvatarFile() {
+      const company_id = textsecure.storage.get('companyNumber', null)
       const fileField = this.$('#inputNewAvatar')[0].files[0];
       let base64 = '';
       const imageType = this.$('#inputNewAvatar')[0].files[0].type;
@@ -63,6 +64,14 @@
               if (base64) {
                 this.$('#companyAvatar').attr('src', base64);
               }
+              // eslint-disable-next-line prefer-destructuring
+              base64 = base64.split(',')[1];
+              const dataCompanyAvatar = {
+                data: base64,
+                type: imageType.split('/')[1],
+              };
+              textsecure.storage.put('dataCompanyAvatar', dataCompanyAvatar);
+              setCompanyAvatar(company_id, dataCompanyAvatar);
             }, imageType, 1
           );
           // eslint-disable-next-line no-sequences
@@ -91,8 +100,10 @@
 
       this.$('#edit_company_data').append(settingEditName)
     },
-    saveNewCompanyName() {
+    async saveNewCompanyName() {
+      const company_id = textsecure.storage.get('companyNumber', null)
       const newName = this.$('#newCompanyName').val();
+      updateCompanyName(newName, company_id);
       this.$('#spanCompanyName').text(newName);
       this.$('#settingEditName').remove();
       this.$('#nameSection').show();
