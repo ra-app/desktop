@@ -263,6 +263,33 @@ const ensureCompanyConversation = async company_id => {
   // await receiveCompanyText(company_id, welcomeText);
 };
 
+const updateConversation = async (id, data, type='company') => {
+  await waitForConversationController();
+  const conversation = await getConversation(id, type);
+  if (!conversation) return undefined;
+  conversation.set(data);
+  await window.Signal.Data.updateConversation(
+    id,
+    conversation.attributes,
+    {
+      Conversation: Whisper.Conversation,
+    }
+  );
+  return conversation;
+};
+
+const getConversation = async (id, type='company') => {
+  try {
+    await waitForConversationController();
+    const conversation = await ConversationController.get(id, type);
+    if (!conversation) return undefined;
+    return conversation;
+  } catch (err) {
+    console.warn('GetConversation Error', id, type);
+    return undefined;
+  }
+};
+
 const ensurePersonIsKnownImpl = async (phoneNumber) => {
   try {
     console.log('ensurePersonIsKnown', phoneNumber);
@@ -589,7 +616,20 @@ const sendSms = async (company_id, data) => {
 };
 
 const getCompany = async number => {
-  return (await apiRequest('api/v1/companies/' + number)).company;
+  const company = (await apiRequest('api/v1/companies/' + number)).company;
+
+  try {
+    const conversation = await getConversation(number, 'company');
+    if (conversation) {
+      if (conversation.name !== company.name) {
+        await updateConversation(number, { name: company.name }, 'company');
+      }
+    }
+  } catch (err) {
+    console.warn('GetCompany Update Error:', err);
+  }
+
+  return company;
 };
 
 const getClientByPhone = async (company_id, number) => {

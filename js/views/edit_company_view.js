@@ -101,9 +101,10 @@
       this.$('#edit_company_data').append(settingEditName)
     },
     async saveNewCompanyName() {
-      const company_id = textsecure.storage.get('companyNumber', null)
+      const company_id = textsecure.storage.get('companyNumber', null);
       const newName = this.$('#newCompanyName').val();
-      updateCompanyName(newName, company_id);
+      await updateCompanyName(newName, company_id)
+      await getCompany(company_id);
       this.$('#spanCompanyName').text(newName);
       this.$('#settingEditName').remove();
       this.$('#nameSection').show();
