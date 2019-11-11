@@ -17,6 +17,7 @@
   let tmpticketId = '';
   let ticketState = 1;
   let scrolling = false;
+  let sorted = false;
   window.Whisper = window.Whisper || {};
 
   Whisper.StickerPackInstallFailedToast = Whisper.ToastView.extend({
@@ -103,7 +104,6 @@
             if (this.$('.blackboard-view')) {
               this.$('.blackboard-view').remove();
             }
-            console.log('GGGGGGGGGGGG', conversation)
             const view = new Whisper.TicketScreen({
               model: conversation,
               window: this.model.window,
@@ -242,6 +242,7 @@
     events: {
       click: 'onClick',
       'click #unclaimed, #claimed, #closed': 'getTickets',
+      'click #sortBy' : 'sortTickets',
     },
     setupLeftPane() {
       this.leftPaneView = new Whisper.ReactWrapperView({
@@ -320,6 +321,45 @@
       this.conversation_stack.open(conversation);
       this.focusConversation();
     },
+    sortTickets () {
+      if (ticketList.tickets) {
+        if(this.sorted) {
+          this.sorted = false;
+          // this.$('#sortBy').text('newest');
+        } else {
+          this.sorted = true;
+          // this.$('#sortBy').text('oldest');
+        }
+        // tslint:disable-next-line:no-function-expression
+        const secondThis = this;
+        ticketList.tickets.sort(function(a, b) {
+          const aTime = secondThis.toTimestamp(a.date);
+          const bTime = secondThis.toTimestamp(b.date);
+          if(!secondThis.sorted) {
+            if (aTime > bTime) {
+              return 1;
+            }
+            if (aTime < bTime) {
+              return -1;
+            }
+          } else {
+            if (aTime > bTime) {
+              return -1;
+            }
+            if (aTime < bTime) {
+              return 1;
+            }
+          }
+          // a must be equal to b
+          return 0;
+        });
+        this.conversation_stack.open(ticketList.tickets, true);
+      }
+    },
+    toTimestamp(strDate){
+      var datum = Date.parse(strDate);
+      return datum/1000;
+     },
     async getTickets(event) {
       if (!scrolling) {
         const ticketType = event.currentTarget.id;

@@ -68,8 +68,11 @@
       </ul>
       <div class='container-ticket'>
           {{#hasTicket}}
-        <!-- EACH -->
-        {{#model}}
+          <div class="sortBy">
+            <span id="sortBy" >Sort tickets</span>
+          </div>
+          <!-- EACH -->
+          {{#model}}
           <div id={{uuid}} class="main-ticket-container" >
             <div class="container-ticket-userinfo">
               <img src="{{avatarSrc}}" id='clientTicketAvatar_{{uuid}}' class="ticket-user-image" />
