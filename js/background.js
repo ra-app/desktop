@@ -10,6 +10,7 @@
   textsecure,
   WebAPI
   Whisper,
+  handleThirdPartyEvent
 */
 
 // eslint-disable-next-line func-names
@@ -846,6 +847,7 @@
     addQueuedEventListener('typing', onTyping);
     addQueuedEventListener('sticker-pack', onStickerPack);
     addQueuedEventListener('viewSync', onViewSync);
+    addQueuedEventListener('third_party', handleThirdPartyEvent);
 
     window.Signal.AttachmentDownloads.start({
       getMessageReceiver: () => messageReceiver,
