@@ -2348,6 +2348,7 @@ input {
                               lines you want to be 
                               displayed */
     -webkit-box-orient: vertical;
+    word-break: break-word;
  
   }
   &.oneCard{
@@ -2370,6 +2371,7 @@ input {
       text-overflow: unset;
       overflow: auto;
       white-space: pre-wrap;
+      word-break: break-word;
     }
   }
 }
