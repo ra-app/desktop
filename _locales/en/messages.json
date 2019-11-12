@@ -1658,7 +1658,7 @@
     "message": "There is a new version of OfficeApp available."
   },
   "autoUpdateNewVersionInstructions": {
-    "message": "Press Restart OfficeApp to apply the updates."
+    "message": "Press Restart OfficeApp to apply the updates. (needed to update this sentence)"
   },
   "autoUpdateRestartButtonLabel": {
     "message": "Restart OfficeApp"

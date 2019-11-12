@@ -1462,7 +1462,7 @@
         "description": ""
     },
     "autoUpdateNewVersionInstructions": {
-        "message": "Zum Aktualisieren klicke auf »OfficeApp neu starten«.",
+        "message": "Möchten Sie das letzte OfficeApp-Update herunterladen und ausführen? Dies kann einige Minuten dauern. Nach dem Download startet das Update automatisch, bitte schließen Sie OfficeApp nicht",
         "description": ""
     },
     "autoUpdateRestartButtonLabel": {
