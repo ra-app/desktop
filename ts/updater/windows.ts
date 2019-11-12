@@ -74,23 +74,6 @@ async function checkDownloadAndInstall(
       return;
     }
 
-    const { fileName: newFileName, version: newVersion } = result;
-    if (fileName !== newFileName || !version || gt(newVersion, version)) {
-      deleteCache(updateFilePath, logger);
-      fileName = newFileName;
-      version = newVersion;
-      updateFilePath = await downloadUpdate(fileName, logger);
-    }
-
-    const publicKey = hexToBinary(getFromConfig('updatesPublicKey'));
-    const verified = await verifySignature(updateFilePath, version, publicKey);
-    if (!verified) {
-      // Note: We don't delete the cache here, because we don't want to continually
-      //   re-download the broken release. We will download it only once per launch.
-      throw new Error(
-        `Downloaded update did not pass signature verification (version: '${version}'; fileName: '${fileName}')`
-      );
-    }
 
     logger.info('checkDownloadAndInstall: showing dialog...');
     const shouldUpdate = await showUpdateDialog(getMainWindow(), messages);
@@ -99,6 +82,23 @@ async function checkDownloadAndInstall(
     }
 
     try {
+      const { fileName: newFileName, version: newVersion } = result;
+      if (fileName !== newFileName || !version || gt(newVersion, version)) {
+        deleteCache(updateFilePath, logger);
+        fileName = newFileName;
+        version = newVersion;
+        updateFilePath = await downloadUpdate(fileName, logger);
+      }
+
+      const publicKey = hexToBinary(getFromConfig('updatesPublicKey'));
+      const verified = await verifySignature(updateFilePath, version, publicKey);
+      if (!verified) {
+        // Note: We don't delete the cache here, because we don't want to continually
+        //   re-download the broken release. We will download it only once per launch.
+        throw new Error(
+          `Downloaded update did not pass signature verification (version: '${version}'; fileName: '${fileName}')`
+        );
+      }
       await verifyAndInstall(updateFilePath, version, logger);
       installing = true;
     } catch (error) {
