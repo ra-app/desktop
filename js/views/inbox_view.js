@@ -243,6 +243,7 @@
       click: 'onClick',
       'click #unclaimed, #claimed, #closed': 'getTickets',
       'click #sortBy' : 'sortTickets',
+      'keyup #searchTickets' : 'searchTickets',
     },
     setupLeftPane() {
       this.leftPaneView = new Whisper.ReactWrapperView({
@@ -320,6 +321,17 @@
 
       this.conversation_stack.open(conversation);
       this.focusConversation();
+    },
+    searchTickets (e) {
+      let value = e.target.value.toLowerCase();
+      $('#ticketList>div').filter(function() {
+        $(this).toggle(
+          $(this)
+          .text()
+          .toLowerCase()
+          .indexOf(value) > -1
+          );
+        });
     },
     sortTickets () {
       if (ticketList.tickets) {

@@ -1841,7 +1841,7 @@
     },
     searchContactList(e) {
       let value = e.target.value.toLowerCase();
-      $('#mainDivUserSendInvitation div').filter(function () {
+      $('#mainDivUserSendInvitation span').filter(function () {
         $(this).toggle(
           $(this)
             .text()

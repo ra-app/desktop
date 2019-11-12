@@ -68,10 +68,19 @@
       </ul>
       <div class='container-ticket'>
           {{#hasTicket}}
+          <!-- SEARCH TICKET -->
+          <!-- <div>
+            <input
+              type="text"
+              class="module-main-header__search__input"
+              id="searchTickets"
+            />
+          </div> -->
           <div class="sortBy">
             <span id="sortBy" >Sort tickets</span>
           </div>
           <!-- EACH -->
+          <div id="ticketList">
           {{#model}}
           <div id={{uuid}} class="main-ticket-container" >
             <div class="container-ticket-userinfo">
@@ -103,6 +112,7 @@
             </div>
           </div>
           {{/model}}
+        </div>
         <!-- FIN EACH  -->
         <div id="noLoadMore" class="hidden">
             No more to load
