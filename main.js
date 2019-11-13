@@ -337,6 +337,8 @@ function createWindow() {
     mainWindow.webContents.openDevTools();
   }
 
+  tryInitThirdParty(mainWindow);
+
   captureClicks(mainWindow);
 
   // Emitted when the window is about to be closed.
@@ -393,6 +395,15 @@ function createWindow() {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
+}
+
+async function tryInitThirdParty(ipc) {
+  try {
+    const ThirdParty = require('./app/thirdPartyNode');
+    return ThirdParty.init(ipc);
+  } catch (err) {
+    console.warn('tryInitThirdParty Error:', err);
+  }
 }
 
 ipc.on('show-window', () => {

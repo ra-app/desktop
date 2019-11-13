@@ -248,6 +248,8 @@ function installSetter(name, functionName) {
 window.addSetupMenuItems = () => ipc.send('add-setup-menu-items');
 window.removeSetupMenuItems = () => ipc.send('remove-setup-menu-items');
 
+window.ipc = ipc;
+
 // We pull these dependencies in now, from here, because they have Node.js dependencies
 
 require('./js/logging');
