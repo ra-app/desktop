@@ -2484,7 +2484,6 @@
     className: 'blackboard-view',
     template: $('#blackboard-view').html(),
     render_attributes() {
-
       return {
         model: this.model,
         isViewMode: this.isViewMode,
@@ -2494,8 +2493,7 @@
       }
     },
       initialize(options) {
-        
-        this.isMultiViewMode = true; 
+        this.isMultiViewMode = true;
         this.isViewMode = false;
         this.currentId = null;
         this.company_id = options.company_id;
@@ -2506,7 +2504,7 @@
         'click .card-blackboard': 'openDetailView',
         'click #imageGoBackBlackboard': 'backMultiView',
         'click #openEditCard': 'openEditCard'
-        
+
       },
       async openDetailView(event){
         try {
@@ -2519,7 +2517,7 @@
         } catch (error) {
           this.isAdmin = false
         }
-     
+
         const id = event.currentTarget.id;
         this.currentId = id;
         console.log('ID of click ========> ', id);
@@ -2529,6 +2527,8 @@
           'note_id':this.currentId,
         }
         this.multiView = await getIndividualCardBlackboard( this.company_id, data)
+        const test = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig
+        this.multiView.textlink = this.multiView.content.replace(test, '<a target=\'_blank\' rel=\'noopener noreferrer nofollow\' href=\'$1\'>$1</a>');
         this.render();
       },
       backMultiView(){
@@ -2576,7 +2576,7 @@
         'click #EditCardClosePanel': 'closePanel',
         'click #sendEditCard': 'saveEditCard',
         'click #removeCard': 'removeCard'
-        
+
       },
       closePanel(){
         document.getElementsByClassName('edit-card-blackboard')[0].remove();
