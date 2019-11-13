@@ -694,7 +694,9 @@ app.on('ready', async () => {
   logger.info(`starting version ${packageJson.version}`);
 
   if (!locale) {
-    const appLocale = process.env.NODE_ENV === 'test' ? 'en' : app.getLocale();
+    // next line was commented because right now the entire app should be in german. Ticket #203
+    // const appLocale = process.env.NODE_ENV === 'test' ? 'en' : app.getLocale();
+    const appLocale = process.env.NODE_ENV === 'test' ? 'en' : 'de';
     locale = loadLocale({ appLocale, logger });
   }
 
