@@ -2,6 +2,7 @@ const { ipcMain } = require('electron');
 
 const path = require('path');
 const fs = require('fs');
+const parseStringPromise = require('xml2js').parseStringPromise;
 
 function getPath(...relativePath) {
   return path.join(__dirname, 'third_party', ...relativePath);
@@ -62,11 +63,23 @@ const fileLocks = {};
 
 async function sendOutboxFile(fullPath, filename) {
   try {
+    if (filename.indexOf('.xml') === -1) return;
+
     if (fileLocks[fullPath]) return;
     fileLocks[fullPath] = true;
     const content = fs.readFileSync(fullPath);
-    const response = await thirdIPC('outbox_file', { content, filename });
-    console.log('thirdPartyNode sendOutboxFile', fullPath, content, response);
+
+    const parsed = await parseStringPromise(content, { strict: false, normalizeTags: true, trim: true, normalize: true });
+
+    // console.log('CONTENT', content.toString());
+    console.log('PARSED', JSON.stringify(parsed));
+
+    const destination = parsed.destination;
+
+    if (!destination) { throw new Error('Missing destination!'); }
+    
+    const response = await thirdIPC('outbox_file', destination, { content, filename });
+    console.log('thirdPartyNode sendOutboxFile', fullPath, destination, content.toString(), response);
     if (response && response.success) {
       deleteFile(fullPath);
     }
@@ -131,9 +144,13 @@ function ipcOnce(channel, listener) {
   return ipcMain.once(channel, listener);
 }
 
+function randomID() {
+  return Math.floor(Math.random() * 9999) + '_' + Date.now();
+}
+
 async function handleInboxParcel(message) {
   console.log('InboxParcel', message);
-  fs.writeFileSync(getPath('inbox', message.filename), Buffer.from(message.content));
+  fs.writeFileSync(getPath('inbox', randomID + '_' + message.filename), Buffer.from(message.content));
 }
 
 const thirdRPCTable = {

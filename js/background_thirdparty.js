@@ -33,9 +33,9 @@ async function sendThirdPartyMsg(destination, data) {
 //   }
 // });
 
-async function handleOutboxFile(message) {
+async function handleOutboxFile(destination, message) {
   console.log('HandleOutboxFile:', message);
-  await sendThirdPartyMsg('+34664666666', JSON.stringify({ type: 'parcel', payload: message }));
+  await sendThirdPartyMsg(destination, JSON.stringify({ type: 'parcel', payload: message }));
   return { success: true };
 }
 
