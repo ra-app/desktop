@@ -63,16 +63,16 @@ async function initUpdateIPC() {
         $('#testUpdateIndicator').hide();
         break;
       case 'update_found':
-        setTestUpdateIndicator('Update found');
+        setTestUpdateIndicator('Update verfügbar');
         window.ipc.send('update-shouldUpdate', true);
-        actionsInput.value = 'Download';
+        actionsInput.value = 'Herunterladen';
         $('#testUpdateIndicator').append(actionsInput)
         break;
       case 'starting_download':
-        setTestUpdateIndicator('Starting download');
+        setTestUpdateIndicator('Starte Download');
         break;
       case 'dl_progress':
-        setTestUpdateIndicator('Download progress: ' + (msg.progress.percent * 100).toFixed(1) + '%');
+        setTestUpdateIndicator('Download Fortschritt: ' + (msg.progress.percent * 100).toFixed(1) + '%');
         // actionsInput.value = 'Cancel';
         // $('#testUpdateIndicator').append(actionsInput)
         break;
@@ -80,11 +80,11 @@ async function initUpdateIPC() {
         localStorage.setItem('existsUpdate', msg.updateFilePath);
         localStorage.setItem('existsUpdateVersion', msg.version);
         localStorage.setItem('localStorageDataFileName', msg.fileName);
-        setTestUpdateIndicator('Download finished');
+        setTestUpdateIndicator('Download beendet');
         let acceptInstall = document.createElement('input');
         acceptInstall.type = 'button';
         acceptInstall.id = 'acceptInstall';
-        acceptInstall.value = 'Install';
+        acceptInstall.value = 'Installieren';
         acceptInstall.className = 'actionsInput';
         acceptInstall.onclick = function () {
           // window.ipc.send('shouldInstall', true);
@@ -96,7 +96,7 @@ async function initUpdateIPC() {
         let cancelInstall = document.createElement('input');
         cancelInstall.type = 'button';
         cancelInstall.id = 'acceptInstall';
-        cancelInstall.value = 'Later';
+        cancelInstall.value = 'Später installieren';
         cancelInstall.className = 'actionsInput';
         cancelInstall.onclick = function () {
           $('#testUpdateIndicator').hide();
@@ -112,7 +112,7 @@ async function initUpdateIPC() {
         initInstall.type = 'button';
         initInstall.id = 'acceptInstall';
         initInstall.className = 'actionsInput';
-        initInstall.value = 'Install';
+        initInstall.value = 'Installieren';
         initInstall.onclick = function () {
           window.ipc.send('startInstall', true);
           localStorage.removeItem('existsUpdate');
@@ -123,7 +123,7 @@ async function initUpdateIPC() {
         refuseInstall.type = 'button';
         refuseInstall.id = 'acceptInstall';
         refuseInstall.className = 'actionsInput';
-        refuseInstall.value = 'Later';
+        refuseInstall.value = 'Später installieren';
         refuseInstall.onclick = function () {
           window.ipc.send('startInstall', false);
         }
