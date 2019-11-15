@@ -1,11 +1,12 @@
 import { dirname, join } from 'path';
 import { spawn as spawnEmitter, SpawnOptions } from 'child_process';
-import { readdir as readdirCallback, unlink as unlinkCallback } from 'fs';
+import { readdir as readdirCallback, unlink as unlinkCallback, existsSync } from 'fs';
 
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain, IpcMessageEvent } from 'electron';
 import { get as getFromConfig } from 'config';
 import { gt } from 'semver';
 import pify from 'pify';
+import path from 'path';
 
 import {
   checkForUpdates,
@@ -15,10 +16,11 @@ import {
   LoggerType,
   MessagesType,
   showCannotUpdateDialog,
-  showUpdateDialog,
+  // showUpdateDialog,
 } from './common';
 import { hexToBinary, verifySignature } from './signature';
 import { markShouldQuit } from '../../app/window_state';
+import got from 'got';
 
 const readdir = pify(readdirCallback);
 const unlink = pify(unlinkCallback);
@@ -35,8 +37,9 @@ export async function start(
 ) {
   logger.info('windows/start: starting checks...');
 
-  loggerForQuitHandler = logger;
+  // loggerForQuitHandler = logger;
   app.once('quit', quitHandler);
+  // await quitHandler(getMainWindow);
 
   setInterval(async () => {
     try {
@@ -46,15 +49,25 @@ export async function start(
     }
   }, INTERVAL);
 
-  await deletePreviousInstallers(logger);
+  // await deletePreviousInstallers(logger);
   await checkDownloadAndInstall(getMainWindow, messages, logger);
 }
 
 let fileName: string;
 let version: string;
 let updateFilePath: string;
-let installing: boolean;
-let loggerForQuitHandler: LoggerType;
+// let installing: boolean;
+// let loggerForQuitHandler: LoggerType;
+
+function waitForMessage(channel: string): Promise<any> {
+  return new Promise((resolve, reject) => {
+    try {
+      ipcMain.once(channel, (_: IpcMessageEvent, msg: Object) => {
+        resolve(msg);
+      });
+    } catch (err) { reject(err); }
+  });
+}
 
 async function checkDownloadAndInstall(
   getMainWindow: () => BrowserWindow,
@@ -70,44 +83,107 @@ async function checkDownloadAndInstall(
 
     logger.info('checkDownloadAndInstall: checking for update...');
     const result = await checkForUpdates(logger);
+    logger.info('checkDownloadAndInstall: Update result:', result);
     if (!result) {
-      return;
+      return getMainWindow().webContents.send('update', { status: 'up-to-date' });
     }
 
-
-    logger.info('checkDownloadAndInstall: showing dialog...');
-    const shouldUpdate = await showUpdateDialog(getMainWindow(), messages);
-    if (!shouldUpdate) {
-      return;
+    const checkUpdatePromise = waitForMessage('checkUpdate');
+    getMainWindow().webContents.send('update', { status: 'checking' });
+    const checkUpdate = await checkUpdatePromise;
+    logger.info('checkUpdate', checkUpdate);
+    const shouldUsePrevious = checkUpdate.localStorageData !== undefined && typeof checkUpdate.localStorageData === 'string' && checkUpdate.localStorageData.indexOf(result.fileName) !== -1 && existsSync(checkUpdate.localStorageData);
+    logger.info('checkDownloadAndInstall: Existing update', checkUpdate, shouldUsePrevious);
+    if (shouldUsePrevious) {
+      updateFilePath = checkUpdate.localStorageData;
+      version = checkUpdate.localStorageDataVersion;
+      fileName = checkUpdate.localStorageDataFileName;
+      // getMainWindow().webContents.send('update', { status: 'initInstall' });
+      // const startInstall = await waitForMessage('startInstall');
+      // if (startInstall) {
+      //   await verifyAndInstall(updateFilePath, version, logger);
+      //   await deletePreviousInstallers(logger);
+      // } else {
+      //   return getMainWindow().webContents.send('update', { status: 'canceled' });
+      // }
     }
 
-    try {
-      const { fileName: newFileName, version: newVersion } = result;
-      if (fileName !== newFileName || !version || gt(newVersion, version)) {
-        deleteCache(updateFilePath, logger);
-        fileName = newFileName;
-        version = newVersion;
-        updateFilePath = await downloadUpdate(fileName, logger);
+    // logger.info('checkDownloadAndInstall: showing dialog...');
+    // // const shouldUpdate = await showUpdateDialog(getMainWindow(), messages);
+    // const shouldUpdate = await waitForMessage('update-shouldUpdate');
+    // if (!shouldUpdate) {
+    //   return getMainWindow().webContents.send('update', { status: 'canceled' });
+    // }
+
+    if (!updateFilePath) {
+      const startDownloadPromise = waitForMessage('start-download');
+      getMainWindow().webContents.send('update', { status: 'update_found' });
+      const startDownload = await startDownloadPromise;
+      if (startDownload) {
+        await deletePreviousInstallers(logger);
+        getMainWindow().webContents.send('update', { status: 'starting_download' });
+        let lastPercent = 0;
+        function progressCB(progress: got.Progress) {
+          if ((progress.percent - lastPercent) > 0.001) {
+            lastPercent = progress.percent;
+            getMainWindow().webContents.send('update', { status: 'dl_progress', progress });
+          }
+        }
+
+        // const cancelationRequestPromise = new Promise(async resolve => {
+        //   const cancel = await waitForMessage('cancel-download');
+        //   resolve(!!cancel);
+        // });
+
+        try {
+          const { fileName: newFileName, version: newVersion } = result;
+          if (fileName !== newFileName || !version || gt(newVersion, version)) {
+            deleteCache(updateFilePath, logger);
+            fileName = newFileName;
+            version = newVersion;
+            updateFilePath = await downloadUpdate(fileName, logger, progressCB); // , cancelationRequestPromise);
+          }
+        } catch (error) {
+          logger.info(
+            'checkDownloadAndInstall: showing general update failure dialog...'
+          );
+          await showCannotUpdateDialog(getMainWindow(), messages);
+          throw error;
+        }
+      } else {
+        return getMainWindow().webContents.send('update', { status: 'canceled' });
       }
+    }
 
-      const publicKey = hexToBinary(getFromConfig('updatesPublicKey'));
-      const verified = await verifySignature(updateFilePath, version, publicKey);
-      if (!verified) {
-        // Note: We don't delete the cache here, because we don't want to continually
-        //   re-download the broken release. We will download it only once per launch.
-        throw new Error(
-          `Downloaded update did not pass signature verification (version: '${version}'; fileName: '${fileName}')`
+    const startInstallPromise = waitForMessage('startInstall');
+    getMainWindow().webContents.send('update', { status: 'download_finished', updateFilePath, version, fileName });
+    const startInstall = await startInstallPromise;
+    if (startInstall) {
+    // const shouldInstall = await waitForMessage('shouldInstall');
+    // if (shouldInstall === true) {
+      try {
+        const publicKey = hexToBinary(getFromConfig('updatesPublicKey'));
+        const verified = await verifySignature(updateFilePath, version, publicKey);
+        if (!verified) {
+          // Note: We don't delete the cache here, because we don't want to continually
+          //   re-download the broken release. We will download it only once per launch.
+          throw new Error(
+            `Downloaded update did not pass signature verification (version: '${version}'; fileName: '${fileName}')`
+          );
+        }
+        await verifyAndInstall(updateFilePath, version, logger);
+        await deletePreviousInstallers(logger);
+        // installing = true;
+      } catch (error) {
+        logger.info(
+          'checkDownloadAndInstall: showing general update failure dialog...'
         );
+        await showCannotUpdateDialog(getMainWindow(), messages);
+        throw error;
       }
-      await verifyAndInstall(updateFilePath, version, logger);
-      installing = true;
-    } catch (error) {
-      logger.info(
-        'checkDownloadAndInstall: showing general update failure dialog...'
-      );
-      await showCannotUpdateDialog(getMainWindow(), messages);
-
-      throw error;
+    } else {
+      // await deletePreviousInstallers(logger);
+      return getMainWindow().webContents.send('update', { status: 'canceled' });
     }
 
     markShouldQuit();
@@ -118,19 +194,31 @@ async function checkDownloadAndInstall(
     isChecking = false;
   }
 }
+  function quitHandler() {
+    // const test = false;
+    // if(test) {
+    //   if (updateFilePath && !installing) {
+    //     // tslint:disable-next-line:no-console
+    //     // console.log('EEEEEEEEEEEEEEEEE');
+    //     // getMainWindow().webContents.send('update', { status: 'initInstall' });
+    //     // const startInstall = await waitForMessage('startInstall');
+    //     // if(startInstall) {
+    //       verifyAndInstall(updateFilePath, version, loggerForQuitHandler).catch(
+    //         error => {
+    //           loggerForQuitHandler.error(
+    //             'quitHandler: error installing:',
+    //             getPrintableError(error)
+    //           );
+    //         }
+    //       );
+    //     // }
+    //   } else {
+    //     return;
+    //   }
 
-function quitHandler() {
-  if (updateFilePath && !installing) {
-    verifyAndInstall(updateFilePath, version, loggerForQuitHandler).catch(
-      error => {
-        loggerForQuitHandler.error(
-          'quitHandler: error installing:',
-          getPrintableError(error)
-        );
-      }
-    );
+    // }
   }
-}
+
 
 // Helpers
 
@@ -138,13 +226,17 @@ function quitHandler() {
 //   https://github.com/signalapp/Signal-Desktop/issues/2369
 // ...but we should also clean up those old installers.
 const IS_EXE = /\.exe$/i;
+const IS_SIG = /\.sig$/i;
 async function deletePreviousInstallers(logger: LoggerType) {
-  const userDataPath = app.getPath('userData');
+  // return;
+  const userDataPath = path.join(app.getPath('userData'), 'update');
   const files: Array<string> = await readdir(userDataPath);
   await Promise.all(
     files.map(async file => {
       const isExe = IS_EXE.test(file);
-      if (!isExe) {
+      const isSig = IS_SIG.test(file);
+      logger.info('deletePreviousInstallers', file, isExe, isSig);
+      if (!isExe && !isSig) {
         return;
       }
 

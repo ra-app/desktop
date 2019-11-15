@@ -2383,6 +2383,27 @@ input {
   cursor: pointer;
 }
 
+.testUpdateIndicator {
+  position: absolute;
+  bottom: 10px;
+  text-align: center;
+  width: 100%;
+  min-height: 22px;
+}
+
+
+.actionsInput {
+  margin-left: 10px;
+  background: transparent linear-gradient(0deg, #005af5 0%, #015df2 18%, #0567eb 32%, #0c78de 46%, #1690cc 56%, #23afb5 66%, #33d49b 85%, #34d49a 90%, #3bd696 93%, #47da91 95%, #58de89 97%, #99f26b 100%) 0% 0% no-repeat padding-box;
+  border-radius: 20px;
+  border: none;
+  padding: 6.5px;
+  color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+  vertical-align: middle;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     /* display: none; <- Crashes Chrome on hover */

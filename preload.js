@@ -73,6 +73,8 @@ window.wrapDeferred = deferredToPromise;
 const ipc = electron.ipcRenderer;
 const localeMessages = ipc.sendSync('locale-data');
 
+window.ipc = ipc;
+
 window.setBadgeCount = count => ipc.send('set-badge-count', count);
 
 // We never do these in our code, so we'll prevent it everywhere

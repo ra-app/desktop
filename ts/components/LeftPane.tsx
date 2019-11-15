@@ -212,11 +212,11 @@ export class LeftPane extends React.Component<Props> {
     const list = (
       <div className="module-left-pane__list" key={listKey}>
         <AutoSizer>
-          {({ height, width }) => (
+          {({ width }) => (
             <List
               className="module-left-pane__virtual-list"
               conversations={conversations}
-              height={height}
+              height={815}
               rowCount={length}
               rowHeight={64}
               rowRenderer={this.renderRow}
