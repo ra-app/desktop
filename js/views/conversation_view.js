@@ -127,6 +127,13 @@
           $(this).attr('src', 'images/header-chat.png');
         });
       });
+      console.log(this.model, "modellllllllllllllllllllllllllllll")
+      const edit = new Whisper.EditCompanyView({
+        model: this.model,
+        window: this.model.window,
+      });
+      let $el = this.$('.edit-company-container')[0];
+      $el.append(edit.el);
     },
     async showInfoTicket(evt, element) {
       if (evt.target.className.indexOf('button-claim-ticket') === -1) {

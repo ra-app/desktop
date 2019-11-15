@@ -21,11 +21,47 @@
 .sortBy {
   margin-bottom: 10px;
 }
-
+// .general-container{
+//   display: flex;
+// }
 .container-ticket {
   padding: 150px 21px 21px;
   cursor: pointer;
+  // width: 70%;
 }
+.edit-company-container{
+  width:30%;
+  padding: 120px 0px 21px;
+  background: white;
+  & .companyAvatarContainer{
+    background: #b1c6de54;
+    text-align: center;
+    display: flex;
+    & .buttonEditCompany{
+      width: 20%;
+      text-align: center;
+      align-items: flex-end;
+      display: flex;
+      justify-content: center;
+    }
+    & .avatarCompanyContainer{
+      width: 80%;
+    }
+  }
+  & .containerDataEditCompany{
+    display: flex;
+    margin-top: 10px;
+    & .companyNameEdit{
+      width: 80%;
+      margin-left: 10px;
+    }
+    & .buttonEditCompany{
+      width:20%;
+      text-align: center;
+    }
+  }
+}
+
 .container-blackboard {
   // padding: 115px 21px 21px;
   padding: 76px 21px 0px;

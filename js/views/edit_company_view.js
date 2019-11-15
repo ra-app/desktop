@@ -22,6 +22,10 @@
     },
     initialize() {
       this.render();
+      // eslint-disable-next-line func-names
+      this.$('img').on('error', function() {
+        $(this).attr('src', 'images/header-chat.png');
+      });
     },
 
     events: {
