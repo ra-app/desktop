@@ -188,14 +188,35 @@ async function testRPC() {
   }
 }
 
+async function handleExistingOutboxFiles() {
+  return new Promise((resolve) => {
+    fs.readdir(getPath('outbox'), async (err, files) => {
+      if (err) resolve(); // Ignore error
+      for (let file of files) {
+        await sendOutboxFile(getPath('outbox', file), file);
+      }
+    })
+  });
+}
+
+function waitForWindowReady(window) {
+  return new Promise((resolve) => {
+    window.webContents.once('did-finish-load', resolve);
+  });
+}
+
 let mainWindow = null;
 async function init(window) {
   try {
     mainWindow = window;
     ensureDirectoryStructure();
+    await waitForWindowReady(window);
+    initRPC();
+    await handleExistingOutboxFiles();
     createDirectoryWatchers();
 
-    initRPC();
+    setInterval(handleExistingOutboxFiles, 60000 * 5);
+    
     // setTimeout(testRPC, 5000);
   } catch (err) {
     console.warn('thirdPartyNode init Error:', err.message || err);
