@@ -66,6 +66,9 @@ async function initUpdateIPC() {
         setTestUpdateIndicator('Update verfügbar');
         window.ipc.send('update-shouldUpdate', true);
         actionsInput.value = 'Herunterladen';
+        actionsInput.onclick = function () {
+          window.ipc.send('start-download', true);
+        }
         $('#testUpdateIndicator').append(actionsInput)
         break;
       case 'starting_download':
@@ -812,9 +815,9 @@ const updaterInfo = () => {
     testUpdateIndicator.id = 'testUpdateIndicator';
     testUpdateIndicator.className = 'testUpdateIndicator'
     // testUpdateIndicator.innerText = 'Update: No status';
-    testUpdateIndicator.onclick = function () {
-      window.ipc.send('start-download', true);
-    }
+    // testUpdateIndicator.onclick = function () {
+    //   window.ipc.send('start-download', true);
+    // }
     // return testUpdateIndicator;
     // document.body.append(testUpdateIndicator);
     $('#main_header').append(testUpdateIndicator);
