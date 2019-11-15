@@ -9,6 +9,7 @@
 
 // Testing Playground
 document.addEventListener('DOMContentLoaded', async () => {
+  await initUpdateIPC();
   await waitForConversationController(); // Ensure we are ready for things.
 
   const number = textsecure.storage.get('companyNumber', null);
@@ -34,6 +35,104 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // await testProfile();
 });
+
+function setTestUpdateIndicator(msg) {
+  const indicator = document.getElementById('testUpdateIndicator');
+  if (!indicator) return;
+  indicator.innerText = msg;
+}
+
+async function initUpdateIPC() {
+  if (!window.ipc) throw new Error('initUpdateIPC missing window.ipc!');
+  window.ipc.on('update', (event, msg) => {
+    // console.log('BGTesting Update Msg', event, msg);
+    // window.ipc.send('update-test', { msg: 'derp' });
+    setTestUpdateIndicator(msg.status);
+    let actionsInput = document.createElement('input');
+    actionsInput.type = 'button';
+    actionsInput.id = 'actionsInput';
+    actionsInput.className = 'actionsInput';
+    switch (msg.status) {
+      case 'checking' :
+          const localStorageData = localStorage.getItem('existsUpdate')
+          const localStorageDataVersion = localStorage.getItem('existsUpdateVersion')
+          const localStorageDataFileName = localStorage.getItem('existsUpdateFilename')
+          window.ipc.send('checkUpdate', {localStorageData, localStorageDataVersion, localStorageDataFileName});
+        break;
+      case 'up-to-date':
+        $('#testUpdateIndicator').hide();
+        break;
+      case 'update_found':
+        setTestUpdateIndicator('Update found');
+        window.ipc.send('update-shouldUpdate', true);
+        actionsInput.value = 'Download';
+        $('#testUpdateIndicator').append(actionsInput)
+        break;
+      case 'starting_download':
+        setTestUpdateIndicator('Starting download');
+        break;
+      case 'dl_progress':
+        setTestUpdateIndicator('Download progress: ' + (msg.progress.percent * 100).toFixed(1) + '%');
+        // actionsInput.value = 'Cancel';
+        // $('#testUpdateIndicator').append(actionsInput)
+        break;
+      case 'download_finished':
+        localStorage.setItem('existsUpdate', msg.updateFilePath);
+        localStorage.setItem('existsUpdateVersion', msg.version);
+        localStorage.setItem('localStorageDataFileName', msg.fileName);
+        setTestUpdateIndicator('Download finished');
+        let acceptInstall = document.createElement('input');
+        acceptInstall.type = 'button';
+        acceptInstall.id = 'acceptInstall';
+        acceptInstall.value = 'Install';
+        acceptInstall.className = 'actionsInput';
+        acceptInstall.onclick = function () {
+          // window.ipc.send('shouldInstall', true);
+          window.ipc.send('startInstall', true);
+          localStorage.removeItem('existsUpdate');
+          localStorage.removeItem('existsUpdateVersion');
+          localStorage.removeItem('localStorageDataFileName');
+        }
+        let cancelInstall = document.createElement('input');
+        cancelInstall.type = 'button';
+        cancelInstall.id = 'acceptInstall';
+        cancelInstall.value = 'Later';
+        cancelInstall.className = 'actionsInput';
+        cancelInstall.onclick = function () {
+          $('#testUpdateIndicator').hide();
+          // window.ipc.send('shouldInstall', false);
+          window.ipc.send('startInstall', false);
+        }
+        $('#testUpdateIndicator').append(acceptInstall)
+        $('#testUpdateIndicator').append(cancelInstall)
+        break;
+      case 'initInstall':
+        setTestUpdateIndicator('Installation available');
+        let initInstall = document.createElement('input');
+        initInstall.type = 'button';
+        initInstall.id = 'acceptInstall';
+        initInstall.className = 'actionsInput';
+        initInstall.value = 'Install';
+        initInstall.onclick = function () {
+          window.ipc.send('startInstall', true);
+          localStorage.removeItem('existsUpdate');
+          localStorage.removeItem('existsUpdateVersion');
+          localStorage.removeItem('localStorageDataFileName');
+        }
+        let refuseInstall = document.createElement('input');
+        refuseInstall.type = 'button';
+        refuseInstall.id = 'acceptInstall';
+        refuseInstall.className = 'actionsInput';
+        refuseInstall.value = 'Later';
+        refuseInstall.onclick = function () {
+          window.ipc.send('startInstall', false);
+        }
+        $('#testUpdateIndicator').append(initInstall)
+        $('#testUpdateIndicator').append(refuseInstall)
+        break;
+    }
+  });
+}
 
 async function testProfile() {
   const server = getServer();
@@ -263,7 +362,7 @@ const ensureCompanyConversation = async company_id => {
   // await receiveCompanyText(company_id, welcomeText);
 };
 
-const updateConversation = async (id, data, type='company') => {
+const updateConversation = async (id, data, type = 'company') => {
   await waitForConversationController();
   const conversation = await getConversation(id, type);
   if (!conversation) return undefined;
@@ -278,7 +377,7 @@ const updateConversation = async (id, data, type='company') => {
   return conversation;
 };
 
-const getConversation = async (id, type='company') => {
+const getConversation = async (id, type = 'company') => {
   try {
     await waitForConversationController();
     const conversation = await ConversationController.get(id, type);
@@ -299,7 +398,7 @@ const ensurePersonIsKnownImpl = async (phoneNumber) => {
     let conversationName = 'User without data';
     if (client.name) {
       if (client.surname) {
-        conversationName =  client.name + ' ' + client.surname;
+        conversationName = client.name + ' ' + client.surname;
       } else {
         conversationName = client.name;
       }
@@ -339,7 +438,7 @@ const ensureConversation = async (phone_number, notUpdate = false) => {
     phone_number,
     'private'
   );
-  if(!notUpdate){
+  if (!notUpdate) {
     conversation.set({ active_at: Date.now() });
   }
   console.log('ensureConversation new', phone_number, conversation);
@@ -473,9 +572,9 @@ const xhrReq = (url, postdata, authHeader) => {
           reject(
             new Error(
               'Network request returned bad status: ' +
-                req.status +
-                ' ' +
-                req.response
+              req.status +
+              ' ' +
+              req.response
             )
           );
         }
@@ -693,7 +792,7 @@ const spamTickets = async company_id => {
 
 // blackboards
 const createCardBlackboard = async company_id => {
-  return (apiRequest('api/v1/admin/' + company_id +'/blackboard/dummy'));
+  return (apiRequest('api/v1/admin/' + company_id + '/blackboard/dummy'));
 };
 const getCardsBlackboard = async company_id => {
   return (await apiRequest('/api/v1/client/blackboard/list/' + company_id)).note;
@@ -706,6 +805,21 @@ const editCardsBlackboard = async (company_id, data) => {
   return (apiRequest('/api/v1/admin/' + company_id + '/blackboard/update', data));
 };
 // end blackboard
+
+const updaterInfo = () => {
+  if (!document.getElementById('testUpdateIndicator')) {
+    const testUpdateIndicator = document.createElement('div');
+    testUpdateIndicator.id = 'testUpdateIndicator';
+    testUpdateIndicator.className = 'testUpdateIndicator'
+    // testUpdateIndicator.innerText = 'Update: No status';
+    testUpdateIndicator.onclick = function () {
+      window.ipc.send('start-download', true);
+    }
+    // return testUpdateIndicator;
+    // document.body.append(testUpdateIndicator);
+    $('#main_header').append(testUpdateIndicator);
+  }
+}
 
 const exampleInfo = {
   name: 'Mega Corporate',
@@ -847,7 +961,7 @@ const createDeveloperInterface = () => {
           // ticketItem.innerHTML = JSON.stringify(ticket);
           ticketItem.innerHTML = `${ticket.uuid} ${ticket.state} ${
             ticket.client_uuid
-          }`;
+            }`;
 
           const detailsList = document.createElement('ul');
           const infoBtn = document.createElement('button');
@@ -958,7 +1072,6 @@ const createDeveloperInterface = () => {
   addCompanyInput.addEventListener('change', updateBtn);
   addCompanyInput.addEventListener('keyup', updateBtn);
   updateBtn();
-
   // Div for company input + btns
   const addCompanyDiv = document.createElement('div');
   addCompanyDiv.classList = 'addCompanyDivDev';
@@ -984,6 +1097,7 @@ const createDeveloperInterface = () => {
   addCompanyDiv.appendChild(contactList);
   devPanel.appendChild(phoneNumberDiv);
   devPanel.appendChild(divTicketsDev);
+  // devPanel.appendChild(testUpdateIndicator);
 };
 
 const readFileAsText = file =>
@@ -1227,7 +1341,7 @@ const draggableHelper = (
       let pos = JSON.parse(localStorage.getItem(posMemoryKey));
       if (pos === null) pos = getInitialPosition();
       setElementPosition(pos);
-    } catch (err) {}
+    } catch (err) { }
   };
   recallPosition();
 

@@ -13,14 +13,20 @@ import ProxyAgent from 'proxy-agent';
 import { FAILSAFE_SCHEMA, safeLoad } from 'js-yaml';
 import { gt } from 'semver';
 import { get as getFromConfig } from 'config';
-import { get, GotOptions, stream } from 'got';
-import { v4 as getGuid } from 'uuid';
+import got, { get, GotOptions, stream } from 'got';
+// import { v4 as getGuid } from 'uuid';
 import pify from 'pify';
 import mkdirp from 'mkdirp';
 import rimraf from 'rimraf';
 import { app, BrowserWindow, dialog } from 'electron';
+import path from 'path';
 
-import { getTempPath } from '../../app/attachments';
+// import { getTempPath } from '../../app/attachments';
+
+const TEMP_PATH = 'update';
+function getTempPath(userDataPath: string): string {
+  return path.join(userDataPath, TEMP_PATH);
+}
 
 // @ts-ignore
 import * as packageJson from '../../package.json';
@@ -92,7 +98,9 @@ export function validatePath(basePath: string, targetPath: string) {
 
 export async function downloadUpdate(
   fileName: string,
-  logger: LoggerType
+  logger: LoggerType,
+  progressCB?: (progress: got.Progress) => void
+  // cancelationRequestPromise?: Promise<boolean>
 ): Promise<string> {
   const baseUrl = getUpdatesBase();
   const updateFileUrl = `${baseUrl}/${fileName}`;
@@ -115,7 +123,17 @@ export async function downloadUpdate(
 
     logger.info(`downloadUpdate: Downloading ${updateFileUrl}`);
     const downloadStream = stream(updateFileUrl, getGotOptions());
+    // const downloadGot = got(updateFileUrl, getGotOptions());
+
     const writeStream = createWriteStream(targetUpdatePath);
+
+    // if (cancelationRequestPromise) {
+    //   cancelationRequestPromise.then((cancel) => {
+    //     if (cancel) {
+    //       downloadStream.cancel();
+    //     }
+    //   });
+    // }
 
     await new Promise((resolve, reject) => {
       downloadStream.on('error', error => {
@@ -124,6 +142,10 @@ export async function downloadUpdate(
       downloadStream.on('end', () => {
         resolve();
       });
+
+      if (progressCB) {
+        downloadStream.on('downloadProgress', progressCB);
+      }
 
       writeStream.on('error', error => {
         reject(error);
@@ -301,8 +323,10 @@ function getBaseTempDir() {
 
 export async function createTempDir() {
   const baseTempDir = getBaseTempDir();
-  const uniqueName = getGuid();
-  const targetDir = join(baseTempDir, uniqueName);
+  // const uniqueName = getGuid();
+  // const uniqueName = 'snowflake';
+  // const targetDir = join(baseTempDir, uniqueName);
+  const targetDir = baseTempDir;
   await mkdirpPromise(targetDir);
 
   return targetDir;

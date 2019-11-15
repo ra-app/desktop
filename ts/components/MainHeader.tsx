@@ -6,6 +6,7 @@ import { debounce } from 'lodash';
 import { cleanSearchTerm } from '../util/cleanSearchTerm';
 import { LocalizerType } from '../types/Util';
 declare var getXmlFile: any;
+declare var updaterInfo: any;
 export interface Props {
   searchTerm: string;
 
@@ -86,6 +87,10 @@ export class MainHeader extends React.Component<Props> {
   public async componentDidMount(){
     document.addEventListener('mousedown', this.handleClickOutside);
     this.getDataTocheck();
+  }
+  
+  public componentWillReceiveProps() {
+    updaterInfo();
   }
 
   public async getDataTocheck() {
@@ -214,7 +219,7 @@ export class MainHeader extends React.Component<Props> {
     const { openMenu, isAdmin } = this.state;
 
     return (
-      <div>
+      <div id="main_header">
         <div className="module-main-header__info">
           <img src="images/header-chat.png" alt="header chat" />
           <span>Kommunikation</span>
