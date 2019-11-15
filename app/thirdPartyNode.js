@@ -1,3 +1,6 @@
+
+const { app } = require('electron');
+
 const { ipcMain } = require('electron');
 
 const path = require('path');
@@ -5,7 +8,8 @@ const fs = require('fs');
 const parseStringPromise = require('xml2js').parseStringPromise;
 
 function getPath(...relativePath) {
-  return path.join(__dirname, 'third_party', ...relativePath);
+  // return path.join(__dirname, 'third_party', ...relativePath);
+  return path.join(app ? app.getPath('userData') : __dirname, 'third_party', ...relativePath);
 }
 
 function exists(fullPath) {
@@ -37,7 +41,9 @@ function ensureDirectoryStructure() {
   ];
   for (const folder of folders) {
     try {
-      fs.mkdirSync(getPath(folder), { recursive: true });
+      const path = getPath(folder);
+      console.log('thirdPartyNode ensureDirectoryStructure:', folder, path);
+      fs.mkdirSync(path, { recursive: true });
     } catch (err) {
       console.warn('thirdPartyNode ensureDirectoryStructure mkdirSync Error:', err.message || err);
     }
