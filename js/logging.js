@@ -11,6 +11,7 @@ const Privacy = require('./modules/privacy');
 
 const ipc = electron.ipcRenderer;
 
+window.ipc = ipc;
 // Default Bunyan levels: https://github.com/trentm/node-bunyan#levels
 // To make it easier to visually scan logs, we make all levels the same length
 const BLANK_LEVEL = '     ';
