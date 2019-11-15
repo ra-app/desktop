@@ -605,20 +605,23 @@ p.ticket-time {
     // width: 50%;
     min-width: 41%;
     padding: 20px;
+    width:100%;
+    max-width:100%;
+    text-align:center;
+    @include backgroudGradient;
     span {
-      color: $link-color;
       font-family: $poppins-semibold;
       font-size: 17px;
-    }
-    p {
-      margin: 0px;
-      font-size: 12px;
-      margin-top: 5px;
+      color: $color-white
     }
   }
   .divSearchContact {
     // width: 50%;
     padding: 27px;
+    display: flex;
+    .searchContact{
+      margin-top:8px;
+    }
     input {
       width: 240px;
       height: 30px;
@@ -630,6 +633,9 @@ p.ticket-time {
       padding-left: 40px;
       margin-right: 13px;
       outline: none;
+    }
+    .infoHeader {
+      margin-right: 30px;
     }
     button {
       @include backgroudGradient();
