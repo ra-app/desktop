@@ -91,7 +91,7 @@ async function checkDownloadAndInstall(
     const checkUpdatePromise = waitForMessage('checkUpdate');
     getMainWindow().webContents.send('update', { status: 'checking' });
     const checkUpdate = await checkUpdatePromise;
-    logger.info('checkUpdate', checkUpdate);
+    // logger.info('checkUpdate', checkUpdate);
     const shouldUsePrevious = checkUpdate.localStorageData !== undefined && typeof checkUpdate.localStorageData === 'string' && checkUpdate.localStorageData.indexOf(result.fileName) !== -1 && existsSync(checkUpdate.localStorageData);
     logger.info('checkDownloadAndInstall: Existing update', checkUpdate, shouldUsePrevious);
     if (shouldUsePrevious) {
@@ -229,25 +229,29 @@ const IS_EXE = /\.exe$/i;
 const IS_SIG = /\.sig$/i;
 async function deletePreviousInstallers(logger: LoggerType) {
   // return;
-  const userDataPath = path.join(app.getPath('userData'), 'update');
-  const files: Array<string> = await readdir(userDataPath);
-  await Promise.all(
-    files.map(async file => {
-      const isExe = IS_EXE.test(file);
-      const isSig = IS_SIG.test(file);
-      logger.info('deletePreviousInstallers', file, isExe, isSig);
-      if (!isExe && !isSig) {
-        return;
-      }
+  try {
+    const userDataPath = path.join(app.getPath('userData'), 'update');
+    const files: Array<string> = await readdir(userDataPath);
+    await Promise.all(
+      files.map(async file => {
+        const isExe = IS_EXE.test(file);
+        const isSig = IS_SIG.test(file);
+        logger.info('deletePreviousInstallers', file, isExe, isSig);
+        if (!isExe && !isSig) {
+          return;
+        }
 
-      const fullPath = join(userDataPath, file);
-      try {
-        await unlink(fullPath);
-      } catch (error) {
-        logger.error(`deletePreviousInstallers: couldn't delete file ${file}`);
-      }
-    })
-  );
+        const fullPath = join(userDataPath, file);
+        try {
+          await unlink(fullPath);
+        } catch (error) {
+          logger.error(`deletePreviousInstallers: couldn't delete file ${file}`);
+        }
+      })
+    );
+  } catch (err) {
+    logger.error('deletePreviousInstallers:', err);
+  }
 }
 
 async function verifyAndInstall(
