@@ -84,6 +84,7 @@ async function initUpdateIPC() {
         localStorage.setItem('existsUpdateVersion', msg.version);
         localStorage.setItem('localStorageDataFileName', msg.fileName);
         setTestUpdateIndicator('Download beendet');
+        let buttonsDiv = document.createElement('div');
         let acceptInstall = document.createElement('button');
         acceptInstall.id = 'acceptInstall';
         acceptInstall.textContent = 'Installieren';
@@ -104,8 +105,9 @@ async function initUpdateIPC() {
           // window.ipc.send('shouldInstall', false);
           window.ipc.send('startInstall', false);
         }
-        $('#testUpdateIndicator').append(acceptInstall)
-        $('#testUpdateIndicator').append(cancelInstall)
+        buttonsDiv.append(acceptInstall)
+        buttonsDiv.append(cancelInstall)
+        $('#testUpdateIndicator').append(buttonsDiv)
         break;
       case 'initInstall':
         setTestUpdateIndicator('Installation available');
