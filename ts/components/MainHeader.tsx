@@ -6,7 +6,7 @@ import { debounce } from 'lodash';
 import { cleanSearchTerm } from '../util/cleanSearchTerm';
 import { LocalizerType } from '../types/Util';
 declare var getXmlFile: any;
-declare var updaterInfo: any;
+declare var createUpdateIndicator: any;
 export interface Props {
   searchTerm: string;
 
@@ -88,9 +88,9 @@ export class MainHeader extends React.Component<Props> {
     document.addEventListener('mousedown', this.handleClickOutside);
     this.getDataTocheck();
   }
-  
+
   public componentWillReceiveProps() {
-    updaterInfo();
+    // createUpdateIndicator();
   }
 
   public async getDataTocheck() {
@@ -207,6 +207,7 @@ export class MainHeader extends React.Component<Props> {
     // }
   }
   public render() {
+    createUpdateIndicator();
     const {
       searchTerm,
       // avatarPath,
