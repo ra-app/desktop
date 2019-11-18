@@ -115,9 +115,10 @@ function localHandler(eventType, filename) {
 }
 
 function createDirectoryWatchers() {
-  fs.watch(getPath('inbox'), inboxHandler);
-  fs.watch(getPath('outbox'), outboxHandler);
-  fs.watch(getPath('discovery/local'), localHandler);
+  const opts = { recursive: false };
+  fs.watch(getPath('inbox'), opts, inboxHandler);
+  fs.watch(getPath('outbox'), opts, outboxHandler);
+  fs.watch(getPath('discovery/local'), opts, localHandler);
   // fs.watch(getPath('discovery'), fileHandler);
   // fs.watch(getPath('discovery/remote'), fileHandler);
   // fs.watch(getPath(''), fileHandler);
@@ -195,6 +196,7 @@ async function handleExistingOutboxFiles() {
       for (let file of files) {
         await sendOutboxFile(getPath('outbox', file), file);
       }
+      resolve();
     })
   });
 }
