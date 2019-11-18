@@ -726,6 +726,9 @@ $loading-height: 16px;
       float: left;
     }
   }
+  .stepEula {
+    padding: 0 !important;
+  }
   .content-column {
     padding: 10% 30px;
     max-width: 95%;
@@ -940,7 +943,7 @@ $debug: 0;
   .content-main {
     flex-grow: 2;
     &.content-main-eula {
-      max-width: 1500px;
+      /*max-width: 1500px;*/
       margin: 0 auto;
       max-height: 900px;
       & .content-center {

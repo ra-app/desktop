@@ -711,8 +711,8 @@
   </script>
 
   <script type='text/x-tmpl-mustache' id='install-flow-template'>
-    <div class='content-column'>
-      {{#isStepEula}}
+    {{#isStepEula}}
+    <div class='content-column stepEula'>
       <div class='content-header content-header-eula'>
         <div class='content-left'>
           <!-- <div class='content-holder'>{{EULATitle}}</div> -->
@@ -751,6 +751,9 @@
         <div class='content-holder'><span class='footer-copyright'>&copy; 2019 OfficeApp</span> | <span class='footer-version'>Desktop Version {{versionFooter}}</span></div>
       </div>
       {{/isStepEula}}
+      {{^isStepEula}}
+        <div class='content-column'>
+          {{/isStepEula}}
       {{#isStepSetupType}}
       <div class='content-row content-register-info'>
         <div class=''>
