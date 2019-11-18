@@ -28,7 +28,7 @@ const unlink = pify(unlinkCallback);
 let isChecking = false;
 const SECOND = 1000;
 const MINUTE = SECOND * 60;
-const INTERVAL = MINUTE * 30;
+const INTERVAL = MINUTE * 360;
 
 export async function start(
   getMainWindow: () => BrowserWindow,
