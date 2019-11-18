@@ -5,8 +5,10 @@ import { debounce } from 'lodash';
 
 import { cleanSearchTerm } from '../util/cleanSearchTerm';
 import { LocalizerType } from '../types/Util';
+import { BrowserWindow } from 'electron';
 declare var getXmlFile: any;
 declare var createUpdateIndicator: any;
+declare var CURRENT_VERSION: any;
 export interface Props {
   searchTerm: string;
 
@@ -22,6 +24,7 @@ export interface Props {
   verified: boolean;
   profileName?: string;
   avatarPath?: string;
+  window: BrowserWindow;
 
   i18n: LocalizerType;
   updateSearchTerm: (searchTerm: string) => void;
@@ -47,6 +50,7 @@ export class MainHeader extends React.Component<Props> {
     openMenu: false,
     isAdmin: true,
     hasContact: false,
+    isBeta: false,
   };
   private readonly updateSearchBound: (
     event: React.FormEvent<HTMLInputElement>
@@ -63,7 +67,7 @@ export class MainHeader extends React.Component<Props> {
   private readonly createGroupBound: () => void;
   private readonly inputRef: React.RefObject<HTMLInputElement>;
   private readonly debouncedSearch: (searchTerm: string) => void;
-  private readonly wrapperRef: any ;
+  private readonly wrapperRef: any;
   private readonly wrapperRefImage: any;
 
   constructor(props: Props) {
@@ -80,13 +84,14 @@ export class MainHeader extends React.Component<Props> {
     this.createGroupBound = this.createGroup.bind(this);
     this.inputRef = React.createRef();
     this.debouncedSearch = debounce(this.search.bind(this), 20);
-    this.wrapperRef  = React.createRef();
+    this.wrapperRef = React.createRef();
     this.wrapperRefImage = React.createRef();
     this.handleClickOutside = this.handleClickOutside.bind(this);
   }
-  public async componentDidMount(){
+  public async componentDidMount() {
     document.addEventListener('mousedown', this.handleClickOutside);
     this.getDataTocheck();
+    this.checkVersion();
   }
 
   public componentWillReceiveProps() {
@@ -96,24 +101,24 @@ export class MainHeader extends React.Component<Props> {
   public async getDataTocheck() {
     try {
       const contact = await getXmlFile();
-      this.setState({isAdmin: true});
+      this.setState({ isAdmin: true });
 
       if (contact === undefined || contact == null) {
-        this.setState({hasContact: false});
+        this.setState({ hasContact: false });
       } else {
-        this.setState({hasContact: true});
+        this.setState({ hasContact: true });
       }
     } catch (error) {
-      this.setState({isAdmin: false});
+      this.setState({ isAdmin: false });
     }
   }
-  public componentWillUnmount (){
+  public componentWillUnmount() {
     document.removeEventListener('mousedown', this.handleClickOutside);
   }
   public handleClickOutside(event: any) {
     const { openMenu } = this.state;
     if (openMenu && (this.wrapperRef && (!this.wrapperRef.current.contains(event.target) && !this.wrapperRefImage.current.contains(event.target)))) {
-      this.setState({openMenu: false});
+      this.setState({ openMenu: false });
     }
   }
   public search() {
@@ -180,32 +185,40 @@ export class MainHeader extends React.Component<Props> {
   }
   public showContacts() {
     // this.setState({openMenu: !this.state.openMenu});
-      const { appView } = window['owsDesktopApp'];
-      console.log('appView', appView);
-      this.setState({ openMenu: !this.state.openMenu });
-      appView.openContact();
+    const { appView } = window['owsDesktopApp'];
+    console.log('appView', appView);
+    this.setState({ openMenu: !this.state.openMenu });
+    appView.openContact();
   }
   public importAdmin() {
     // if (this.state.hasContact) {
-      const { appView } = window['owsDesktopApp'];
-      appView.openModalImport('admin');
-      this.setState({ openMenu: !this.state.openMenu });
+    const { appView } = window['owsDesktopApp'];
+    appView.openModalImport('admin');
+    this.setState({ openMenu: !this.state.openMenu });
     // }
   }
   public importKunde() {
     // if (this.state.hasContact) {
-      const { appView } = window['owsDesktopApp'];
-      appView.openModalImport('kunde');
-      this.setState({ openMenu: !this.state.openMenu });
+    const { appView } = window['owsDesktopApp'];
+    appView.openModalImport('kunde');
+    this.setState({ openMenu: !this.state.openMenu });
     // }
   }
   public createGroup() {
     // if (this.state.hasContact) {
-      const { appView } = window['owsDesktopApp']
-      appView.openModalImport('group');
-      this.setState({ openMenu: !this.state.openMenu })
+    const { appView } = window['owsDesktopApp']
+    appView.openModalImport('group');
+    this.setState({ openMenu: !this.state.openMenu })
     // }
   }
+
+  public checkVersion() {
+    // tslint:disable-next-line:no-console
+    if (CURRENT_VERSION.indexOf('beta') !== -1) {
+      this.setState({ isBeta: true });
+    }
+  }
+
   public render() {
     createUpdateIndicator();
     const {
@@ -217,25 +230,30 @@ export class MainHeader extends React.Component<Props> {
       // phoneNumber,
       // profileName,
     } = this.props;
-    const { openMenu, isAdmin } = this.state;
+    const { openMenu, isAdmin, isBeta } = this.state;
 
     return (
       <div id="main_header">
         <div className="module-main-header__info">
+          {isBeta && (
+            <div className="betaVersionText">
+              <span>VERSION: {CURRENT_VERSION}</span>
+            </div>
+          )}
           <img src="images/header-chat.png" alt="header chat" />
           <span>Kommunikation</span>
           {isAdmin && (
-          <img
-            src="images/icons/menu_over_blue_24x24.svg"
-            className="chat_menu"
-            alt="Cbat menu"
-            onClick={this.chatMenuBound}
-            id="openMenuChat"
-            ref={this.wrapperRefImage}
-          />
+            <img
+              src="images/icons/menu_over_blue_24x24.svg"
+              className="chat_menu"
+              alt="Cbat menu"
+              onClick={this.chatMenuBound}
+              id="openMenuChat"
+              ref={this.wrapperRefImage}
+            />
           )}
           {openMenu && (
-            <div className="menuChat"  ref={this.wrapperRef}>
+            <div className="menuChat" ref={this.wrapperRef}>
               <ul className="ulMenuChat">
                 {/* <li>
                   <span>Broadcast erstellen</span>
@@ -245,7 +263,7 @@ export class MainHeader extends React.Component<Props> {
                     alt="Create broadcast"
                   />
                 </li> */}
-                <li /*className={`${!this.state.hasContact && 'disabledLi'}`}*/  onClick={this.createGroupBound}>
+                <li /*className={`${!this.state.hasContact && 'disabledLi'}`}*/ onClick={this.createGroupBound}>
                   <span>Gruppe erstellen</span>
                   <img
                     src="images/icons/broadcast_einladen_35x35.svg"

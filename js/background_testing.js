@@ -267,6 +267,8 @@ const wrapFunctionForCaching = (func, maxAge = 60000) => {
 
 // ===
 
+const CURRENT_VERSION = window.getVersion();
+
 const API_URL =
   'https://luydm9sd26.execute-api.eu-central-1.amazonaws.com/latest/';
 // const API_URL = 'http://127.0.0.1:4000/';
