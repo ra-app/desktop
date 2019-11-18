@@ -4,7 +4,7 @@
   "description": "Private messaging from your desktop",
   "desktopName": "officeapp-desktop.desktop",
   "repository": "https://github.com/ra-app/desktop.git",
-  "version": "0.0.13-beta.1",
+  "version": "0.0.15-beta.1",
   "license": "GPL-3.0",
   "author": {
     "name": "RA-Micro",
@@ -116,7 +116,8 @@
     "to-arraybuffer": "1.0.1",
     "underscore": "1.9.0",
     "uuid": "3.3.2",
-    "websocket": "1.0.28"
+    "websocket": "1.0.28",
+    "xml2js": "^0.4.22"
   },
   "resolutions": {
     "fbjs/isomorphic-fetch/node-fetch": "https://github.com/scottnonnenberg-signal/node-fetch.git#3e5f51e08c647ee5f20c43b15cf2d352d61c36b4"

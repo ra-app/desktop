@@ -80,13 +80,14 @@
           if (this.$('#edit_company_data')) {
             this.$('#edit_company_data').remove();
           }
-          const edit = new Whisper.EditCompanyView({
-            model: conversation,
-            window: this.model.window,
-          });
-          let $el = this.$('.conversation-stack')[0];
-          $el = edit.$el;
-          $el.prependTo(this.el);
+          // const edit = new Whisper.EditCompanyView({
+          //   model: conversation,
+          //   window: this.model.window,
+          // });
+          // console.log(this.$('.edit-company-container')[0], "55555555555555555555555555555555555555555")
+          // let $el = this.$('.edit-company-container')[0];
+          // $el = edit.$el;
+          // $el.prependTo(this.el);
         }
         const id = `conversation-${conversation.cid}`;
         if (id !== this.el.firstChild.id) {

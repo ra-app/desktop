@@ -22,11 +22,15 @@
     },
     initialize() {
       this.render();
+      // eslint-disable-next-line func-names
+      this.$('img').on('error', function() {
+        $(this).attr('src', 'images/header-chat.png');
+      });
     },
 
     events: {
       'click #editName': 'editCompanyName',
-      'click #doneIcon': 'saveNewCompanyName',
+      'click #buttonSaveEditCompany': 'saveNewCompanyName',
       'click #editAvatar': 'editCompanyAvatar',
       'change #inputNewAvatar': 'onChooseAvatarFile',
     },
@@ -71,7 +75,8 @@
                 type: imageType.split('/')[1],
               };
               textsecure.storage.put('dataCompanyAvatar', dataCompanyAvatar);
-              setCompanyAvatar(company_id, dataCompanyAvatar);
+              this.$('#buttonSaveEditCompany').removeClass('disabled')
+              // setCompanyAvatar(company_id, dataCompanyAvatar);
             }, imageType, 1
           );
           // eslint-disable-next-line no-sequences
@@ -88,25 +93,28 @@
       textarea.className = 'editTextareaCompanyName'
       textarea.id = 'newCompanyName';
       textarea.placeholder = 'new company name';
-      textarea.innerHTML = this.model[0].company_name;
-
-      const doneIcon = document.createElement('img');
-      doneIcon.id = 'doneIcon';
-      doneIcon.src = 'images/icons/edit-blue.svg'
-      doneIcon.className = 'editIcon'
+      // textarea.innerHTML = this.model[0].company_name;
+      textarea.innerHTML = this.$('#spanCompanyName').text();
+      // const doneIcon = document.createElement('img');
+      // doneIcon.id = 'doneIcon';
+      // doneIcon.src = 'images/icons/edit-blue.svg'
+      // doneIcon.className = 'editIcon'
 
       settingEditName.append(textarea);
-      settingEditName.append(doneIcon);
-
+      // settingEditName.append(doneIcon);
+      this.$('#buttonSaveEditCompany').removeClass('disabled')
       this.$('#edit_company_data').append(settingEditName)
     },
     async saveNewCompanyName() {
       const company_id = textsecure.storage.get('companyNumber', null);
+      const dataCompanyAvatar = textsecure.storage.get('dataCompanyAvatar');
       const newName = this.$('#newCompanyName').val();
+      setCompanyAvatar(company_id, dataCompanyAvatar);
       await updateCompanyName(newName, company_id)
       await getCompany(company_id);
       this.$('#spanCompanyName').text(newName);
       this.$('#settingEditName').remove();
+      this.$('#buttonSaveEditCompany').addClass('disabled')
       this.$('#nameSection').show();
     },
   });

@@ -21,11 +21,47 @@
 .sortBy {
   margin-bottom: 10px;
 }
-
+.general-container{
+  display: flex;
+}
 .container-ticket {
   padding: 150px 21px 21px;
   cursor: pointer;
+  width: 70%;
 }
+.edit-company-container{
+  width:30%;
+  padding: 120px 0px 21px;
+  background: white;
+  & .companyAvatarContainer{
+    background: #b1c6de54;
+    text-align: center;
+    display: flex;
+    & .buttonEditCompany{
+      width: 20%;
+      text-align: center;
+      align-items: flex-end;
+      display: flex;
+      justify-content: center;
+    }
+    & .avatarCompanyContainer{
+      width: 80%;
+    }
+  }
+  & .containerDataEditCompany{
+    display: flex;
+    margin-top: 10px;
+    & .companyNameEdit{
+      width: 80%;
+      margin-left: 10px;
+    }
+    & .buttonEditCompany{
+      width:20%;
+      text-align: center;
+    }
+  }
+}
+
 .container-blackboard {
   // padding: 115px 21px 21px;
   padding: 76px 21px 0px;
@@ -605,20 +641,23 @@ p.ticket-time {
     // width: 50%;
     min-width: 41%;
     padding: 20px;
+    width:100%;
+    max-width:100%;
+    text-align:center;
+    @include backgroudGradient;
     span {
-      color: $link-color;
       font-family: $poppins-semibold;
       font-size: 17px;
-    }
-    p {
-      margin: 0px;
-      font-size: 12px;
-      margin-top: 5px;
+      color: $color-white
     }
   }
   .divSearchContact {
     // width: 50%;
     padding: 27px;
+    display: flex;
+    .searchContact{
+      margin-top:8px;
+    }
     input {
       width: 240px;
       height: 30px;
@@ -630,6 +669,9 @@ p.ticket-time {
       padding-left: 40px;
       margin-right: 13px;
       outline: none;
+    }
+    .infoHeader {
+      margin-right: 30px;
     }
     button {
       @include backgroudGradient();

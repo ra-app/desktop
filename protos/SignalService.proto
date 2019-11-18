@@ -12,6 +12,7 @@ message Envelope {
     PREKEY_BUNDLE       = 3;
     RECEIPT             = 5;
     UNIDENTIFIED_SENDER = 6;
+    // THIRD_PARTY         = 7;
   }
 
   optional Type   type            = 1;
@@ -33,6 +34,11 @@ message Content {
   optional NullMessage    nullMessage    = 4;
   optional ReceiptMessage receiptMessage = 5;
   optional TypingMessage  typingMessage  = 6;
+  optional ThirdPartyMessage  thirdPartyMessage  = 7;
+}
+
+message ThirdPartyMessage {
+  optional string data = 1;
 }
 
 message CallMessage {

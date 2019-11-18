@@ -66,63 +66,65 @@
         <li id="claimed" class="ticket-nav {{claimed}}">Zugewiesen</li>
         <li id="closed" class="ticket-nav {{closed}}">Geschlossen</li>
       </ul>
-      <div class='container-ticket'>
-          {{#hasTicket}}
-          <!-- SEARCH TICKET -->
-          <!-- <div>
-            <input
-              type="text"
-              class="module-main-header__search__input"
-              id="searchTickets"
-            />
-          </div> -->
-          <div class="sortBy">
-            <span id="sortBy" >Sort tickets</span>
+      <div class = 'general-container'>
+        <div class='container-ticket'>
+            {{#hasTicket}}
+            <!-- SEARCH TICKET -->
+            <!-- <div>
+              <input
+                type="text"
+                class="module-main-header__search__input"
+                id="searchTickets"
+              />
+            </div> -->
+            <div class="sortBy">
+              <span id="sortBy" >Sort tickets</span>
+            </div>
+            <!-- EACH -->
+            <div id="ticketList">
+            {{#model}}
+            <div id={{uuid}} class="main-ticket-container" >
+              <div class="container-ticket-userinfo">
+                <img src="{{avatarSrc}}" id='clientTicketAvatar_{{uuid}}' class="ticket-user-image" />
+                {{#name}}
+                  <span class="ticket-user-name">{{name}} {{surname}}</span>
+                {{/name}}
+                {{^name}}
+                  <span class="ticket-user-name">username</span>
+                {{/name}}
+              </div>
+              <div class="container-ticket-info">
+                <span class="ticket-id">Ticket {{id}}</span>
+                <span class="ticket-date">{{date}}</span>
+              </div>
+              <div class="container-ticket-actions">
+                {{#isUnknown}}
+                  <button id = 'claim_{{uuid}}' class="button-claim-ticket not-claimed">{{status}}</button> 
+                {{/isUnknown}}
+                {{#isUnclaimed}}
+                  <button id = 'claim_{{uuid}}' class="button-claim-ticket not-claimed">{{status}}</button> 
+                {{/isUnclaimed}}
+                {{#isClaimed}}
+                  <button id ='claim_{{uuid}}' class="button-claim-ticket claimed" disabled="disabled">{{status}}</button> 
+                {{/isClaimed}}
+                {{#isClosed}}
+                  <!-- <button id = 'claim_{{uuid}}' class="button-claim-ticket not-claimed">{{status}}</button>  -->
+                {{/isClosed}}
+              </div>
+            </div>
+            {{/model}}
           </div>
-          <!-- EACH -->
-          <div id="ticketList">
-          {{#model}}
-          <div id={{uuid}} class="main-ticket-container" >
-            <div class="container-ticket-userinfo">
-              <img src="{{avatarSrc}}" id='clientTicketAvatar_{{uuid}}' class="ticket-user-image" />
-              {{#name}}
-                <span class="ticket-user-name">{{name}} {{surname}}</span>
-              {{/name}}
-              {{^name}}
-                <span class="ticket-user-name">username</span>
-              {{/name}}
-            </div>
-            <div class="container-ticket-info">
-              <span class="ticket-id">Ticket {{id}}</span>
-              <span class="ticket-date">{{date}}</span>
-            </div>
-            <div class="container-ticket-actions">
-              {{#isUnknown}}
-                <button id = 'claim_{{uuid}}' class="button-claim-ticket not-claimed">{{status}}</button> 
-              {{/isUnknown}}
-              {{#isUnclaimed}}
-                <button id = 'claim_{{uuid}}' class="button-claim-ticket not-claimed">{{status}}</button> 
-              {{/isUnclaimed}}
-              {{#isClaimed}}
-                <button id ='claim_{{uuid}}' class="button-claim-ticket claimed" disabled="disabled">{{status}}</button> 
-              {{/isClaimed}}
-              {{#isClosed}}
-                <!-- <button id = 'claim_{{uuid}}' class="button-claim-ticket not-claimed">{{status}}</button>  -->
-              {{/isClosed}}
-            </div>
+          <!-- FIN EACH  -->
+          <div id="noLoadMore" class="hidden">
+              No more to load
           </div>
-          {{/model}}
+          {{/hasTicket}}
+          {{^hasTicket}}
+          <span>Keine Tickets vorhanden</span>
+          {{/hasTicket}}
         </div>
-        <!-- FIN EACH  -->
-        <div id="noLoadMore" class="hidden">
-            No more to load
-        </div>
-        {{/hasTicket}}
-        {{^hasTicket}}
-        <span>Keine Tickets vorhanden</span>
-        {{/hasTicket}}
+        <div class = 'edit-company-container'></div>
       </div>
-      
     </div>
   </script>
   <script type='text/x-tmpl-mustache' id='blackboard-view'>
@@ -181,10 +183,11 @@
       <div id= "headerContactTable">
           <div class="divPaginationContact">
             <span>Kontakte</span>
-            <p>Interne und externe Benutzer werden von der Verwaltung vor der Aktivierung überprüft.</p>
+            
           </div>
           <div class="divSearchContact">
-            <input id="search-table" type="text" placeholder="Suchen..">
+              <p class= 'infoHeader'>Interne und externe Benutzer werden von der Verwaltung vor der Aktivierung überprüft.</p>
+            <input class='searchContact' id="search-table" type="text" placeholder="Suchen..">
             <button id='hinzufügen-button' class="buttonsSearchSection">Hinzufügen</button>
             <button id='import-button' class="buttonsSearchSection">Importieren</button>
             <input type='file' class='hidden' id='contact-import-file-input' accept='.xml'>
@@ -199,19 +202,31 @@
       </div>
     </div>
   </script>
-  <!-- <script type='text/x-tmpl-mustache' id='edit-company'>
+  <script type='text/x-tmpl-mustache' id='edit-company'>
     <div id='edit_company_data'>
-      <div>
-        <img id='companyAvatar' src={{ company_avatar }}></img>
-        <input type='file' class='hidden' id='inputNewAvatar' />
-        <img class='editIcon' id='editAvatar' src='images/icons/edit-blue.svg'></img>
+      <div class = 'companyAvatarContainer'>
+        <div class = 'avatarCompanyContainer'>
+          <img id='companyAvatar' src={{ avatar }}></img>
+        </div>
+        <div class = 'buttonEditCompany'>
+          <input type='file' class='hidden' id='inputNewAvatar' />
+          <img class='editIcon' id='editAvatar' src='images/icons/edit-blue.svg'></img>
+        </div>
       </div>
-      <div id='nameSection'>
+      <div class='containerLabelInfoCompany'>
+        <label class="labelEditName"> Name des Unternehmens </label>
+      </div>
+      <div class='containerDataEditCompany' id='nameSection'>
+        <div class='companyNameEdit'>
           <span id='spanCompanyName'>{{ company_name }}</span>
+        </div>
+        <div class = 'buttonEditCompany'>
           <img class='editIcon' id='editName' src='images/icons/edit-blue.svg'></img>
+        </div>
       </div>
+        <button class='buttonSaveEditCompany disabled'  id = 'buttonSaveEditCompany'>Teilen</button>
     </div>
-  </script> -->
+  </script>
   <script type='text/x-tmpl-mustache' id='two-column'>
     <div class='gutter'>
       <div class='network-status-container'></div>
@@ -1132,10 +1147,11 @@
       <div class='message'></div>
     </div>
     <div class="footer">
-      <span>© 2019 OfficeApp</span> | Desktop Version 0.0.13-beta.1
+      <span>© 2019 OfficeApp</span> | Desktop Version 0.0.14 
     </div>
   </div>
 
+  <script type='text/javascript' src='js/background_thirdparty.js'></script>
   <script type='text/javascript' src='js/background.js'></script>
   <script type='text/javascript' src='js/background_testing.js'></script>
   <script type='text/javascript' src='js/dev_hotkey.js'></script>

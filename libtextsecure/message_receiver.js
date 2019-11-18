@@ -608,6 +608,12 @@ MessageReceiver.prototype.extend({
       return Promise.resolve();
     }
 
+    // console.log('message_receiver handleEnvelope - Envelope:', envelope);
+
+    // if (envelope.type === textsecure.protobuf.Envelope.Type.THIRD_PARTY) {
+    //   return this.onThirdParty(envelope);
+    // }
+
     if (envelope.type === textsecure.protobuf.Envelope.Type.RECEIPT) {
       return this.onDeliveryReceipt(envelope);
     }
@@ -620,6 +626,17 @@ MessageReceiver.prototype.extend({
     this.removeFromCache(envelope);
     throw new Error('Received message with no content and no legacyMessage');
   },
+  // onThirdParty(envelope) {
+  //   console.log('message_receiver onThirdParty - Envelope:', envelope);
+
+  //   const ev = new Event('third_party');
+  //   ev.confirm = this.removeFromCache.bind(this, envelope); // Remove from cache after processing!
+  //   ev.data = {
+  //     envelope,
+  //   };
+
+  //   return this.dispatchAndWait(ev);
+  // },
   getStatus() {
     if (this.socket) {
       return this.socket.readyState;
@@ -964,9 +981,23 @@ MessageReceiver.prototype.extend({
       return this.handleReceiptMessage(envelope, content.receiptMessage);
     } else if (content.typingMessage) {
       return this.handleTypingMessage(envelope, content.typingMessage);
+    } else if (content.thirdPartyMessage) {
+      return this.handleThirdPartyMessage(envelope, content.thirdPartyMessage);
     }
     this.removeFromCache(envelope);
     throw new Error('Unsupported content message');
+  },
+  handleThirdPartyMessage(envelope, message) {
+    console.log('message_receiver handleThirdPartyMessage - Envelope:', envelope, 'Message:', message);
+
+    const ev = new Event('third_party');
+    ev.confirm = this.removeFromCache.bind(this, envelope); // Remove from cache after processing!
+    ev.data = {
+      envelope,
+      message,
+    };
+
+    return this.dispatchAndWait(ev);
   },
   handleCallMessage(envelope) {
     window.log.info('call message from', this.getEnvelopeId(envelope));
