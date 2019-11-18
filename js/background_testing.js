@@ -36,10 +36,120 @@ document.addEventListener('DOMContentLoaded', async () => {
   // await testProfile();
 });
 
+// === UPDATER THINGS START ===
+const createUpdateIndicator = () => {
+  if (document.getElementById('testUpdateIndicator')) return;
+  const testUpdateIndicator = document.createElement('div');
+  testUpdateIndicator.id = 'testUpdateIndicator';
+  testUpdateIndicator.className = 'testUpdateIndicator';
+    $('#main_header').append(testUpdateIndicator);
+  if (lastSetUpdateDisplayState) setUpdateDisplayState(lastSetUpdateDisplayState);
+}
+
 function setTestUpdateIndicator(msg) {
   const indicator = document.getElementById('testUpdateIndicator');
   if (!indicator) return;
   indicator.innerText = msg;
+  $('#testUpdateIndicator').show();
+}
+
+function hideIndicator() {
+  $('#testUpdateIndicator').hide();
+}
+
+function setUpdateFound() {
+  const actionsInput = document.createElement('button');
+  actionsInput.type = 'button';
+  actionsInput.id = 'actionsInput';
+  actionsInput.className = 'actionsInput';
+  actionsInput.textContent = 'Herunterladen';
+  actionsInput.onclick = function () {
+    window.ipc.send('start-download', true);
+  }
+
+  setTestUpdateIndicator('Update verfügbar');
+  $('#testUpdateIndicator').append(actionsInput);
+  // window.ipc.send('update-shouldUpdate', true);
+}
+
+function setDownloadFinished() {
+  const acceptInstall = document.createElement('button');
+  acceptInstall.id = 'acceptInstall';
+  acceptInstall.textContent = 'Installieren';
+  acceptInstall.className = 'actionsInput';
+  acceptInstall.onclick = function () {
+    window.ipc.send('startInstall', true);
+    localStorage.removeItem('existsUpdate');
+    localStorage.removeItem('existsUpdateVersion');
+    localStorage.removeItem('localStorageDataFileName');
+  }
+
+  const cancelInstall = document.createElement('button');
+  cancelInstall.id = 'acceptInstall';
+  cancelInstall.textContent = 'Später installieren';
+  cancelInstall.className = 'actionsInput';
+  cancelInstall.onclick = function () {
+    hideIndicator();
+    window.ipc.send('startInstall', false);
+  }
+
+  const buttonsDiv = document.createElement('div');
+  buttonsDiv.append(acceptInstall);
+  buttonsDiv.append(cancelInstall);
+
+  setTestUpdateIndicator('Download beendet');
+  $('#testUpdateIndicator').append(buttonsDiv);
+}
+
+function setInitInstall() {
+  const initInstall = document.createElement('button');
+  initInstall.id = 'acceptInstall';
+  initInstall.className = 'actionsInput';
+  initInstall.value = 'Installieren';
+  initInstall.onclick = function () {
+    window.ipc.send('startInstall', true);
+    localStorage.removeItem('existsUpdate');
+    localStorage.removeItem('existsUpdateVersion');
+    localStorage.removeItem('localStorageDataFileName');
+  }
+
+  const refuseInstall = document.createElement('button');
+  refuseInstall.id = 'acceptInstall';
+  refuseInstall.className = 'actionsInput';
+  refuseInstall.textContent = 'Später installieren';
+  refuseInstall.onclick = function () {
+    window.ipc.send('startInstall', false);
+  }
+
+  setTestUpdateIndicator('Installation available');
+  $('#testUpdateIndicator').append(initInstall)
+  $('#testUpdateIndicator').append(refuseInstall)
+}
+
+let lastSetUpdateDisplayState = undefined;
+function setUpdateDisplayState(state) {
+  try {
+    lastSetUpdateDisplayState = state;
+    switch (state) {
+      case 'up-to-date':
+        hideIndicator();
+        break;
+      case 'update_found':
+        setUpdateFound();
+        break;
+      case 'starting_download':
+        setTestUpdateIndicator('Starte Download');
+        break;
+      case 'download_finished':
+        setDownloadFinished();
+        break;
+      case 'initInstall':
+        setInitInstall();
+        break;
+    }
+  } catch (err) {
+    console.warn('setUpdateDisplayState Error:', err, state);
+  }
 }
 
 async function initUpdateIPC() {
@@ -47,93 +157,29 @@ async function initUpdateIPC() {
   window.ipc.on('update', (event, msg) => {
     // console.log('BGTesting Update Msg', event, msg);
     // window.ipc.send('update-test', { msg: 'derp' });
-    setTestUpdateIndicator(msg.status);
-    let actionsInput = document.createElement('button');
-    actionsInput.type = 'button';
-    actionsInput.id = 'actionsInput';
-    actionsInput.className = 'actionsInput';
+    // setTestUpdateIndicator(msg.status);
+
     switch (msg.status) {
       case 'checking' :
-          const localStorageData = localStorage.getItem('existsUpdate')
-          const localStorageDataVersion = localStorage.getItem('existsUpdateVersion')
-          const localStorageDataFileName = localStorage.getItem('existsUpdateFilename')
-          window.ipc.send('checkUpdate', {localStorageData, localStorageDataVersion, localStorageDataFileName});
-        break;
-      case 'up-to-date':
-        $('#testUpdateIndicator').hide();
-        break;
-      case 'update_found':
-        setTestUpdateIndicator('Update verfügbar');
-        window.ipc.send('update-shouldUpdate', true);
-        actionsInput.textContent = 'Herunterladen';
-        actionsInput.onclick = function () {
-          window.ipc.send('start-download', true);
-        }
-        $('#testUpdateIndicator').append(actionsInput)
-        break;
-      case 'starting_download':
-        setTestUpdateIndicator('Starte Download');
+        const localStorageData = localStorage.getItem('existsUpdate')
+        const localStorageDataVersion = localStorage.getItem('existsUpdateVersion')
+        const localStorageDataFileName = localStorage.getItem('existsUpdateFilename')
+        window.ipc.send('checkUpdate', {localStorageData, localStorageDataVersion, localStorageDataFileName});
         break;
       case 'dl_progress':
         setTestUpdateIndicator('Download Fortschritt: ' + (msg.progress.percent * 100).toFixed(1) + '%');
-        // actionsInput.value = 'Cancel';
-        // $('#testUpdateIndicator').append(actionsInput)
         break;
       case 'download_finished':
         localStorage.setItem('existsUpdate', msg.updateFilePath);
         localStorage.setItem('existsUpdateVersion', msg.version);
         localStorage.setItem('localStorageDataFileName', msg.fileName);
-        setTestUpdateIndicator('Download beendet');
-        let buttonsDiv = document.createElement('div');
-        let acceptInstall = document.createElement('button');
-        acceptInstall.id = 'acceptInstall';
-        acceptInstall.textContent = 'Installieren';
-        acceptInstall.className = 'actionsInput';
-        acceptInstall.onclick = function () {
-          // window.ipc.send('shouldInstall', true);
-          window.ipc.send('startInstall', true);
-          localStorage.removeItem('existsUpdate');
-          localStorage.removeItem('existsUpdateVersion');
-          localStorage.removeItem('localStorageDataFileName');
-        }
-        let cancelInstall = document.createElement('button');
-        cancelInstall.id = 'acceptInstall';
-        cancelInstall.textContent = 'Später installieren';
-        cancelInstall.className = 'actionsInput';
-        cancelInstall.onclick = function () {
-          $('#testUpdateIndicator').hide();
-          // window.ipc.send('shouldInstall', false);
-          window.ipc.send('startInstall', false);
-        }
-        buttonsDiv.append(acceptInstall)
-        buttonsDiv.append(cancelInstall)
-        $('#testUpdateIndicator').append(buttonsDiv)
-        break;
-      case 'initInstall':
-        setTestUpdateIndicator('Installation available');
-        let initInstall = document.createElement('button');
-        initInstall.id = 'acceptInstall';
-        initInstall.className = 'actionsInput';
-        initInstall.value = 'Installieren';
-        initInstall.onclick = function () {
-          window.ipc.send('startInstall', true);
-          localStorage.removeItem('existsUpdate');
-          localStorage.removeItem('existsUpdateVersion');
-          localStorage.removeItem('localStorageDataFileName');
-        }
-        let refuseInstall = document.createElement('button');
-        refuseInstall.id = 'acceptInstall';
-        refuseInstall.className = 'actionsInput';
-        refuseInstall.textContent = 'Später installieren';
-        refuseInstall.onclick = function () {
-          window.ipc.send('startInstall', false);
-        }
-        $('#testUpdateIndicator').append(initInstall)
-        $('#testUpdateIndicator').append(refuseInstall)
         break;
     }
+
+    setUpdateDisplayState(msg.status);
   });
 }
+// === UPDATER THINGS END ===
 
 async function testProfile() {
   const server = getServer();
@@ -220,6 +266,8 @@ const wrapFunctionForCaching = (func, maxAge = 60000) => {
 
 
 // ===
+
+const CURRENT_VERSION = window.getVersion();
 
 const API_URL =
   'https://luydm9sd26.execute-api.eu-central-1.amazonaws.com/latest/';
@@ -807,20 +855,7 @@ const editCardsBlackboard = async (company_id, data) => {
 };
 // end blackboard
 
-const updaterInfo = () => {
-  if (!document.getElementById('testUpdateIndicator')) {
-    const testUpdateIndicator = document.createElement('div');
-    testUpdateIndicator.id = 'testUpdateIndicator';
-    testUpdateIndicator.className = 'testUpdateIndicator'
-    // testUpdateIndicator.innerText = 'Update: No status';
-    // testUpdateIndicator.onclick = function () {
-    //   window.ipc.send('start-download', true);
-    // }
-    // return testUpdateIndicator;
-    // document.body.append(testUpdateIndicator);
-    $('#main_header').append(testUpdateIndicator);
-  }
-}
+
 
 const exampleInfo = {
   name: 'Mega Corporate',

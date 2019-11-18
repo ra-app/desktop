@@ -100,6 +100,14 @@ a {
   color: $blue;
 }
 
+.betaVersionText {
+  position: absolute;
+  top: 0;
+  right: 50px;
+  color: red;
+  z-index: 2;
+}
+
 .file-input {
   position: relative;
   .choose-file {
