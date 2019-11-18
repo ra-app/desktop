@@ -689,6 +689,29 @@ MessageSender.prototype = {
     );
   },
 
+  sendThirdParty(recipientId, data, options) {
+    const myNumber = textsecure.storage.user.getNumber();
+    const myDevice = textsecure.storage.user.getDeviceId();
+    if (myNumber === recipientId && (myDevice === 1 || myDevice === '1')) {
+      return Promise.resolve();
+    }
+
+    const thirdPartyMessage = new textsecure.protobuf.ThirdPartyMessage();
+    thirdPartyMessage.data = data;
+
+    const contentMessage = new textsecure.protobuf.Content();
+    contentMessage.thirdPartyMessage = thirdPartyMessage;
+
+    const silent = true;
+    return this.sendIndividualProto(
+      recipientId,
+      contentMessage,
+      Date.now(),
+      silent,
+      options
+    );
+  },
+
   sendDeliveryReceipt(recipientId, timestamp, options) {
     const myNumber = textsecure.storage.user.getNumber();
     const myDevice = textsecure.storage.user.getDeviceId();
@@ -1304,6 +1327,7 @@ textsecure.MessageSender = function MessageSenderWrapper(username, password) {
   this.syncViewOnceOpen = sender.syncViewOnceOpen.bind(sender);
   this.uploadMessageAttachments = sender.uploadMessageAttachments.bind(sender); // Added
   this.queueJobForNumber = sender.queueJobForNumber.bind(sender); // Added
+  this.sendThirdParty = sender.sendThirdParty.bind(sender);
 };
 
 textsecure.MessageSender.prototype = {
