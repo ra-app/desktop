@@ -45,7 +45,7 @@ function ensureDirectoryStructure() {
       console.log('thirdPartyNode ensureDirectoryStructure:', folder, path);
       fs.mkdirSync(path, { recursive: true });
     } catch (err) {
-      console.warn('thirdPartyNode ensureDirectoryStructure mkdirSync Error:', err.message || err);
+      // console.warn('thirdPartyNode ensureDirectoryStructure mkdirSync Error:', err.message || err);
     }
   }
 }
@@ -156,7 +156,7 @@ function randomID() {
 
 async function handleInboxParcel(message) {
   console.log('InboxParcel', message);
-  fs.writeFileSync(getPath('inbox', randomID + '_' + message.filename), Buffer.from(message.content));
+  fs.writeFileSync(getPath('inbox', randomID() + '_' + message.filename), Buffer.from(message.content));
 }
 
 const thirdRPCTable = {
