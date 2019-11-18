@@ -109,8 +109,11 @@
       const company_id = textsecure.storage.get('companyNumber', null);
       const dataCompanyAvatar = textsecure.storage.get('dataCompanyAvatar');
       const newName = this.$('#newCompanyName').val();
+      console.log(newName, "NEW NAMEEEEEEEEEEEEEEEE")
       setCompanyAvatar(company_id, dataCompanyAvatar);
-      await updateCompanyName(newName, company_id)
+      if(newName !== undefined){
+        await updateCompanyName(newName, company_id)
+      }
       await getCompany(company_id);
       this.$('#spanCompanyName').text(newName);
       this.$('#settingEditName').remove();
