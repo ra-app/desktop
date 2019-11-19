@@ -178,7 +178,6 @@ p.ticket-time {
   background-color: $color-white;
   height: 100%;
   position: relative;
-  width:100%;
   .title-wrapper {
     height: 70px;
     @include backgroudGradient;
@@ -739,4 +738,17 @@ tbody#myTable tr {
 .divNoContacts {
   padding: 23px;
   font-size: 17px;
+}
+.group {
+  display: flex !important;
+  flex-direction: row;
+  & .conversation-header{
+    width: calc(100% - 300px);
+  }
+  & .edit-group-modal{
+    width:300px;
+  }
+  & .panel{
+    width: calc(100% - 300px);
+  }
 }
