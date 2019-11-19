@@ -178,6 +178,7 @@ p.ticket-time {
   background-color: $color-white;
   height: 100%;
   position: relative;
+  width:100%;
   .title-wrapper {
     height: 70px;
     @include backgroudGradient;
