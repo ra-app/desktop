@@ -2724,6 +2724,8 @@
     },
     closePanel() {
       document.getElementsByClassName('edit-group-modal')[0].remove();
+      document.getElementsByClassName('conversation-stack')[0].classList.add('width2Column');
+      document.getElementsByClassName('conversation-stack')[0].classList.remove('width3Column');
       dataUsersToInvitate = {};
     },
     showContactListPanel() {
