@@ -12,7 +12,7 @@
     className: 'edit-company',
     template: $('#edit-company').html(),
     render_attributes() {
-
+      console.log(this.model, "modellllllllllllllllllllllllllll")
       return {
         'send-message': i18n('sendMessage'),
         model: this.model,
@@ -119,6 +119,9 @@
       this.$('#settingEditName').remove();
       this.$('#buttonSaveEditCompany').addClass('disabled')
       this.$('#nameSection').show();
+      window.clearCache();
+      updateImagesByUrl(CENTRAL_IMG_ROOT + company_id);
+      // this.render();
     },
   });
 })();

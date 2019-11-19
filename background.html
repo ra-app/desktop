@@ -206,7 +206,7 @@
     <div id='edit_company_data'>
       <div class = 'companyAvatarContainer'>
         <div class = 'avatarCompanyContainer'>
-          <img id='companyAvatar' src={{ company_avatar }}></img>
+          <img id='companyAvatar' class='previewEditCompanyAvatar' src={{ company_avatar }}></img>
         </div>
         <div class = 'buttonEditCompany'>
           <input type='file' class='hidden' id='inputNewAvatar' />
@@ -334,6 +334,88 @@
     <div class="modalContact" id="modalContact">
       <div class="divModalHeader divModalInvitation" id="divModalHeader">
           <span class="titleSendInvitation">Benutzer einladen</span>
+        <img src="images/icons/x-contact-list.svg" class="imageClosePanel" id='imageClosePanel'>
+      </div>
+      <div class="mainInvitationDiv" id="divMainContentEdit">
+        {{ #isCreatingGroup }}
+        <textarea class="textareaSendeInvitation" id="textareaSendeInvitation" placeholder="Gruppenname"/>
+        {{ /isCreatingGroup }}
+        {{ #typeKunde }}
+          <textarea class="textareaSendeInvitation" id="textareaSendeInvitation" placeholder="Lass uns mit OfficeApp kommunizieren: http://officeapp.eu" />
+        {{ /typeKunde }}
+        {{ #typeAdmin }}
+          <textarea class="textareaSendeInvitation" id="textareaSendeInvitation" placeholder="Lass uns mit OfficeApp kommunizieren: http://officeapp.eu" />
+        {{ /typeAdmin }}
+        <div class="tab">
+          <!-- <button class="tablinks" id="filterAll">All</button>
+          {{ #typeAdmin }}
+            <button class="tablinks" id="filterUsers">Users</button>
+          {{ /typeAdmin }}
+          {{ #typeKunde }}
+            <button class="tablinks" id="filterAdmin">Admin</button>
+          {{ /typeKunde }} -->
+        </div>
+        <label class="labelInputInvitation">NAME HINZUFÜGEN</label>
+        <input type="text" id="searchContactInvitation" />
+        <img src="images/icons/icon-picture-add-200.svg" class="imagePlus" id="imagePlus" />
+      </div>
+      <div class="mainDivUserSendInvitation" id="userSendList">
+      </div>
+      <div class="errorMessageModal" id = 'errorMessage'></div>
+      {{ #typeKunde }}
+        <button class="buttonInviteContact disabled" id="buttonInviteContact"> Teilen </button>
+      {{ /typeKunde }}
+      {{ #typeAdmin }}
+        <button class="buttonInviteContact disabled" id="buttonInviteContact"> Teilen </button>
+      {{ /typeAdmin }}
+      {{ #isCreatingGroup }}
+        <button class="buttonInviteContact disabled" id="buttonCreateGroup"> Gruppe erstellen </button>
+      {{ /isCreatingGroup}}
+    </div>
+
+
+    <div class="modalContact hidden" id="modalSearchUsers">
+        <div class="divModalHeader divModalInvitation" id="divModalHeader">
+          <img src="images/icons/back_24x24.svg" class="imageGoBack" id="imageGoBack">
+          <span class="titleSendInvitation">Benutzer einladen</span>
+          <img src="images/icons/check_over_blue_24x24.svg" class="imageClosePanel" id="imageSendInvitation">
+        </div>
+        <input type='text' id='searchInput' class='searchInput' placeholder='{{searchPlaceholder}}' />
+        <div class="divNoContacts hidden" id="divNoContacts">
+            <p id="ptextNoContacts"></p>
+        </div>
+        <!-- <div class="mainInvitationDiv" id="divMainContentEdit">
+          <div class="tab">
+            <button class="tablinks" id="filterAll">All</button>
+            {{ #typeAdmin }}
+            <button class="tablinks" id="filterUsers">Users</button>
+          {{ /typeAdmin }}
+          {{ #typeKunde }}
+            <button class="tablinks" id="filterAdmin">Admin</button>
+          {{ /typeKunde }}
+          </div>
+        </div> -->
+        <div class="mainDivUserSendInvitation" id='mainDivUserSendInvitation'>
+            {{ #objectContact }}
+              <div class="userInvitation">
+                <img src="images/header-chat.png" />
+                <div>
+                  <span>{{name}} {{surname}}</span>
+                  <br>
+                  <span>{{phone}}</span>
+                </div>
+                <input type="checkbox" dataPhone={{phone}} id="checkbox-user-{{phone}}" class="contactListCheckbox" />
+              </div>
+            {{ /objectContact }}
+        </div>
+        
+      </div>
+  </script>
+
+  <script type='text/x-tmpl-mustache' id='edit-group-modal'>
+    <div class="modalContact" id="modalEditGROUP">
+      <div class="divModalHeader divModalInvitation" id="divModalHeader">
+          <span class="titleSendInvitation">Edit group</span>
         <img src="images/icons/x-contact-list.svg" class="imageClosePanel" id='imageClosePanel'>
       </div>
       <div class="mainInvitationDiv" id="divMainContentEdit">

@@ -436,6 +436,28 @@ ipc.on('show-window', () => {
   showWindow();
 });
 
+function clearCache() {
+  return new Promise((resolve, reject) => {
+    try {
+      session.defaultSession.clearCache(resolve);
+    } catch (err) {
+      reject(err);
+    }
+  });
+}
+
+ipc.on('clearCache', async () => {
+  try {
+    console.log('IPC ClearCache received.');
+    await clearCache();
+  } catch (err) {
+    console.warn('IPC ClearCache Error:', err.message);
+  }
+  if (mainWindow) {
+    mainWindow.webContents.send('clearedCache');
+  }
+});
+
 ipc.once('ready-for-updates', async () => {
   // First, install requested sticker pack
   if (process.argv.length > 1) {

@@ -1447,3 +1447,20 @@ const draggableHelper = (
   window.addEventListener('resize', animFrameDebounce(ensureVisible), false);
 };
 // === DRAGGABLE_HELPER END ===
+
+const CENTRAL_IMG_ROOT = 'https://luydm9sd26.execute-api.eu-central-1.amazonaws.com/latest/public/img/';
+function updateImagesByUrl(url) {
+  'use strict';
+
+  // https://luydm9sd26.execute-api.eu-central-1.amazonaws.com/latest/public/img/734754
+  const selector = 'img[src ^= "' + url + '"]';
+  const elems = document.querySelectorAll(selector);
+  const date = Date.now();
+  for (let elem of elems) {
+    try {
+      elem.src = url + '?ts=' + date;
+    } catch (err) {
+      console.warn('updateImagesByUrl Error:', err, url, elem);
+    }
+  }
+}
