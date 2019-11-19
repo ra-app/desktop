@@ -52,7 +52,8 @@ function ensureDirectoryStructure() {
 
 function getWatchEventDetails(base, eventType, filename) {
   const data = { fullPath: getPath(base, filename), created: false };
-  if (eventType === 'rename') data.created = exists(data.fullPath);
+  // if (eventType === 'rename') data.created = exists(data.fullPath);
+  data.created = exists(data.fullPath);
   return data;
 }
 
@@ -71,7 +72,11 @@ async function sendOutboxFile(fullPath, filename) {
   try {
     if (filename.indexOf('.xml') === -1) return;
 
-    if (fileLocks[fullPath]) return;
+    if (fileLocks[fullPath]) {
+      console.log('sendOutboxFile - Already handling', filename);
+      return;
+    }
+
     fileLocks[fullPath] = true;
     const content = fs.readFileSync(fullPath);
 
@@ -80,10 +85,12 @@ async function sendOutboxFile(fullPath, filename) {
     // console.log('CONTENT', content.toString());
     console.log('PARSED', JSON.stringify(parsed));
 
+    if (!parsed) { throw new Error('Parsed was null!'); }
+
     const destination = parsed.destination;
 
     if (!destination) { throw new Error('Missing destination!'); }
-    
+
     const response = await thirdIPC('outbox_file', destination, { content, filename });
     console.log('thirdPartyNode sendOutboxFile', fullPath, destination, content.toString(), response);
     if (response && response.success) {

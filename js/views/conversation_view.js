@@ -2723,7 +2723,7 @@
       // 'click #countryCode, #dialCode' : 'showCountries',
     },
     closePanel() {
-      document.getElementsByClassName('modal-importer')[0].remove();
+      document.getElementsByClassName('edit-group-modal')[0].remove();
       dataUsersToInvitate = {};
     },
     showContactListPanel() {
