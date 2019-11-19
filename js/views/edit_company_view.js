@@ -41,7 +41,7 @@
       const company_id = textsecure.storage.get('companyNumber', null)
       const fileField = this.$('#inputNewAvatar')[0].files[0];
       let base64 = '';
-      const imageType = this.$('#inputNewAvatar')[0].files[0].type;
+      const imageType = 'image/png' // this.$('#inputNewAvatar')[0].files[0].type;
       const width = 140;
       const height = 140;
       const fileName = this.$('#inputNewAvatar')[0].files[0].name;
