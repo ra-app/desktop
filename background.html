@@ -416,43 +416,39 @@
     <div class="modalContact" id="modalEditGROUP">
       <div class="divModalHeader divModalInvitation" id="divModalHeader">
           <span class="titleSendInvitation">Edit group</span>
-        <img src="images/icons/x-contact-list.svg" class="imageClosePanel" id='imageClosePanel'>
+          <img src="images/icons/x-contact-list.svg" class="imageClosePanel" id='imageClosePanel'>
       </div>
       <div class="mainInvitationDiv" id="divMainContentEdit">
-        {{ #isCreatingGroup }}
-        <textarea class="textareaSendeInvitation" id="textareaSendeInvitation" placeholder="Gruppenname"/>
-        {{ /isCreatingGroup }}
-        {{ #typeKunde }}
-          <textarea class="textareaSendeInvitation" id="textareaSendeInvitation" placeholder="Lass uns mit OfficeApp kommunizieren: http://officeapp.eu" />
-        {{ /typeKunde }}
-        {{ #typeAdmin }}
-          <textarea class="textareaSendeInvitation" id="textareaSendeInvitation" placeholder="Lass uns mit OfficeApp kommunizieren: http://officeapp.eu" />
-        {{ /typeAdmin }}
-        <div class="tab">
-          <!-- <button class="tablinks" id="filterAll">All</button>
-          {{ #typeAdmin }}
-            <button class="tablinks" id="filterUsers">Users</button>
-          {{ /typeAdmin }}
-          {{ #typeKunde }}
-            <button class="tablinks" id="filterAdmin">Admin</button>
-          {{ /typeKunde }} -->
+        <div class="avatarEditGroup" style="background-image: url(images/header-chat.png)"></div>
+        <div class='containerLabelInfoCompany'>
+            <label class="labelEditName"> Group name </label>
+          </div>
+          {{#isEditingName}}
+          <div class='containerEditGroup'>
+            <input type="text" id="editGroupNameInput" value = '{{ editGroupName }}' ></input>
+          </div>
+          {{/isEditingName}}
+          {{^isEditingName}}
+            <div class='containerDataEditGroup' id='nameSection'>
+              <div class='groupNameEdit'>
+                <span id='spanCompanyName'>{{ groupName }}</span>
+              </div>
+              <div class = 'buttonEditNameGroup'>
+                <img class='editIcon' id='editName' src='images/icons/edit-blue.svg'></img>
+              </div>
+            </div>
+          {{/isEditingName}}
+          
+        <div class="inviteUser">
+          <label class="labelInputInvitation">NAME HINZUFÜGEN</label>
+          <input type="text" id="searchContactInvitation" />
+          <img src="images/icons/icon-picture-add-200.svg" class="imagePlus" id="imagePlus" />
         </div>
-        <label class="labelInputInvitation">NAME HINZUFÜGEN</label>
-        <input type="text" id="searchContactInvitation" />
-        <img src="images/icons/icon-picture-add-200.svg" class="imagePlus" id="imagePlus" />
       </div>
       <div class="mainDivUserSendInvitation" id="userSendList">
       </div>
       <div class="errorMessageModal" id = 'errorMessage'></div>
-      {{ #typeKunde }}
-        <button class="buttonInviteContact disabled" id="buttonInviteContact"> Teilen </button>
-      {{ /typeKunde }}
-      {{ #typeAdmin }}
-        <button class="buttonInviteContact disabled" id="buttonInviteContact"> Teilen </button>
-      {{ /typeAdmin }}
-      {{ #isCreatingGroup }}
-        <button class="buttonInviteContact disabled" id="buttonCreateGroup"> Gruppe erstellen </button>
-      {{ /isCreatingGroup}}
+        <button class="buttonEditGroup" id="buttonEditGroup"> Speichern </button>
     </div>
 
 
@@ -466,17 +462,6 @@
         <div class="divNoContacts hidden" id="divNoContacts">
             <p id="ptextNoContacts"></p>
         </div>
-        <!-- <div class="mainInvitationDiv" id="divMainContentEdit">
-          <div class="tab">
-            <button class="tablinks" id="filterAll">All</button>
-            {{ #typeAdmin }}
-            <button class="tablinks" id="filterUsers">Users</button>
-          {{ /typeAdmin }}
-          {{ #typeKunde }}
-            <button class="tablinks" id="filterAdmin">Admin</button>
-          {{ /typeKunde }}
-          </div>
-        </div> -->
         <div class="mainDivUserSendInvitation" id='mainDivUserSendInvitation'>
             {{ #objectContact }}
               <div class="userInvitation">

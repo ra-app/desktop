@@ -55,7 +55,7 @@ interface Props {
 
 export class ConversationHeader extends React.Component<Props> {
   public showMenuBound: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  public openEditGroupBound : (event: React.MouseEvent<HTMLButtonElement>) => void;
+  public openEditGroupBound : () => void;
   public menuTriggerRef: React.RefObject<any>;
 
   public constructor(props: Props) {
@@ -72,10 +72,10 @@ export class ConversationHeader extends React.Component<Props> {
     }
   }
 
-  public openEditGroup(event: React.MouseEvent<HTMLButtonElement>) {
-    console.log(event,'open edit group');
+  public openEditGroup() {
     const { appView } = window['owsDesktopApp'];
-    appView.openModalEditGroup('group');
+    const { name, id } = this.props;
+    appView.openModalEditGroup('group', name, id);
   }
 
   public renderBackButton() {
