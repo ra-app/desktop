@@ -1,23 +1,15 @@
 .conversation-stack {
   overflow: auto !important;
 }
-.width2Column{
-  width: calc(100% - 300px);
-}
-.width3Column{
-  width: calc(100% - 600px);
-}
-.tickets-view{
-  width: 100%;
-}
+
 .conversation-stack,
 .new-conversation,
 .inbox,
 .gutter {
   height: 100%;
   overflow: hidden;
-  display: flex;
-  flex-direction: row;
+  // display: flex;
+  // flex-direction: row;
 }
 
 .expired {

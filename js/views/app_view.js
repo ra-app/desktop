@@ -279,10 +279,10 @@
         type: typeUser,
         admin_client: admin_client_data,
       });
-      document.getElementsByClassName('conversation-stack')[0].classList.remove('width2Column');
-      document.getElementsByClassName('conversation-stack')[0].classList.add('width3Column');
+      // document.getElementsByClassName('conversation-stack')[0].classList.remove('width2Column');
+      // document.getElementsByClassName('conversation-stack')[0].classList.add('width3Column');
       dialog.$el.insertAfter(
-        document.getElementsByClassName('conversation-stack')[0]
+        document.getElementsByClassName('conversation-header')[0]
       );
     },
   });
