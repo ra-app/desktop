@@ -935,7 +935,7 @@
       this.resetTMP();
     },
     searchPhones(e) {
-      var value = e.target.value;
+      var value = e.target.value.toLowerCase();
       $('#phone-list p').filter(function() {
         $(this).toggle(
           $(this)
