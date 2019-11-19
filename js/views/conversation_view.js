@@ -2619,4 +2619,274 @@
         window.Whisper.events.trigger('showOpenBlackboard', company_id);
       }
   });
+
+  Whisper.ModalEditGroup = Whisper.View.extend({
+    templateName: 'edit-group-modal',
+    className: 'edit-group-modal',
+    template: $('#edit-group-modal').html(),
+
+    initialize(options) {
+      if (options) {
+        // if (options.contact_data !== undefined) {
+          this.contactListXml = prepareDataXml(options.contact_data);
+          this.objectContact = [];
+          const myNumber = textsecure.storage.user.getNumber();
+          if (options.type === 'group') {
+            if(options.admin_client) {
+              if (options.admin_client.admins) {
+                for (let i = 0; i < options.admin_client.admins.length; i++) {
+                  const contact = options.admin_client.admins[i];
+                  if (contact.name !== null && myNumber !== contact.phone_number) {
+                    const tmpObj = {
+                      name: contact.name,
+                      surname: contact.surname,
+                      position: '',
+                      email: '',
+                      phone: contact.phone_number,
+                      ts: contact.ts_registration,
+                    }
+                    this.objectContact.push(tmpObj)
+                  }
+                }
+              }
+              if (options.admin_client.clients) {
+                for (let i = 0; i < options.admin_client.clients.length; i++) {
+                  const contact = options.admin_client.clients[i];
+                  if (contact.name !== null && myNumber !== contact.phone_number) {
+                    const tmpObj = {
+                      name: contact.name,
+                      surname: contact.surname,
+                      position: '',
+                      email: '',
+                      phone: contact.phone_number,
+                      ts: contact.ts_registration,
+                    }
+                    this.objectContact.push(tmpObj)
+                  }
+                }
+              }
+            }
+          } else {
+            for (let i = 0; i < this.contactListXml.children.length; i++) {
+              const contact = this.contactListXml.children.item(i);
+              const tmpObj = {
+                name: contact.getElementsByTagName('name')[0].textContent,
+                surname: contact.getElementsByTagName('surname')[0].textContent,
+                position: contact.getElementsByTagName('position')[0].textContent,
+                email: contact.getElementsByTagName('email')[0].textContent,
+                phone: contact.getElementsByTagName('phone')[0].textContent,
+                ts: contact.getElementsByTagName('ts')[0].textContent,
+              }
+              this.objectContact.push(tmpObj)
+            }
+          }
+          this.type = options.type;
+          console.log(this.type, "typeeeeeeeeeeeeeeeeeeeeee")
+          if (options.type === 'kunde') {
+            this.typeAdmin = true;
+            this.typeKunde = false;
+            this.isCreatingGroup = false;
+          } else if (options.type === 'admin') {
+            this.typeAdmin = false;
+            this.typeKunde = true;
+            this.isCreatingGroup = false;
+          }else if ( options.type === 'allUsers' || options.type === 'group'){
+            this.isCreatingGroup = true;
+            this.typeAdmin = false;
+            this.typeKunde = false;
+          }
+        // }
+      }
+      this.render();
+    },
+    render_attributes() {
+      // console.log('This model import contact view!!!! ', this.model)
+      return {
+        'searchPlaceholder': i18n('search'),
+        'send-message': i18n('sendMessage'),
+        typeAdmin: this.typeAdmin,
+        typeKunde: this.typeKunde,
+        objectContact: this.objectContact,
+        isCreatingGroup: this.isCreatingGroup,
+      };
+    },
+    events: {
+      'click #imageSendInvitation': 'sendDataToModal',
+      'click #imageClosePanel': 'closePanel',
+      'click  #imageGoBack': 'goBack',
+      'click #searchContactInvitation, #imagePlus': 'showContactListPanel',
+      'click .contactListCheckbox': 'checkBoxevent',
+      'click #buttonInviteContact': 'sendInvitations',
+      'click #buttonCreateGroup': 'createGroup',
+      'keyup #textareaSendeInvitation': 'enableCreateGroup',
+      'keyup #searchInput': 'searchContactList',
+      // 'click #countryCode, #dialCode' : 'showCountries',
+    },
+    closePanel() {
+      document.getElementsByClassName('modal-importer')[0].remove();
+      dataUsersToInvitate = {};
+    },
+    showContactListPanel() {
+      if (this.objectContact === undefined || this.objectContact.length === 0 ) {
+        // this.$('#ptextNoContacts').html = i18n('noContactsImported');
+        document.getElementById('ptextNoContacts').innerHTML = '';
+        document.getElementById('ptextNoContacts').innerHTML = i18n(
+          'noContactsImported'
+        );
+        this.$('#divNoContacts').removeClass('hidden');
+      }
+      this.$('#modalContact').addClass('hidden');
+      this.$('#modalSearchUsers').removeClass('hidden');
+    },
+    searchContactList(e) {
+      let value = e.target.value.toLowerCase();
+      $('#mainDivUserSendInvitation span').filter(function () {
+        $(this).toggle(
+          $(this)
+            .text()
+            .toLowerCase()
+            .indexOf(value) > -1
+        );
+      });
+    },
+    goBack(){
+      this.$('#modalContact').removeClass('hidden');
+      this.$('#modalSearchUsers').addClass('hidden');
+      this.$('#ptextNoContacts').innerText = '';
+      this.$('#divNoContacts').addClass('hidden');
+    },
+    sendDataToModal() {
+      this.$('#modalContact').removeClass('hidden');
+      this.$('#modalSearchUsers').addClass('hidden');
+      for (let i = 0; i < this.contactListXml.children.length; i++) {
+        const contact = this.contactListXml.children.item(i);
+        if (Object.keys(dataUsersToInvitate).length > 0) {
+          if (document.getElementById('buttonInviteContact')) {
+            document
+              .getElementById('buttonInviteContact')
+              .classList.remove('disabled');
+          }
+          if (document.getElementById('buttonCreateGroup')) {
+            document
+              .getElementById('buttonCreateGroup')
+              .classList.remove('disabled');
+          }
+        }
+        // eslint-disable-next-line no-loop-func
+        Object.keys(dataUsersToInvitate).forEach(element => {
+          const id = dataUsersToInvitate[element].userid;
+          if (id === contact.getElementsByTagName('phone')[0].textContent) {
+            const data = this.contactListXml;
+            const userDiv = document.createElement('div');
+            userDiv.classList.add('userInvitation');
+            userDiv.id = 'user' + id;
+            const avatarUser = document.createElement('img');
+            avatarUser.src = 'images/header-chat.png';
+            const divInfo = document.createElement('div');
+            const nameUser = document.createElement('span');
+            nameUser.textContent =
+              data.getElementsByTagName('name')[i].childNodes[0].nodeValue +
+              ' ' +
+              data.getElementsByTagName('surname')[i].childNodes[0].nodeValue;
+            const breakLine = document.createElement('br');
+            const tlfUser = document.createElement('span');
+            tlfUser.textContent = data.getElementsByTagName('phone')[
+              i
+            ].childNodes[0].nodeValue;
+            const removeUser = document.createElement('img');
+            removeUser.src = 'images/icons/x-contact-list.svg';
+            removeUser.className = 'imageCloseUser';
+            removeUser.onclick = () => {
+              document.getElementById('user' + id).remove();
+              delete dataUsersToInvitate[id];
+              if (Object.keys(dataUsersToInvitate).length === 0) {
+                if (document.getElementById('buttonInviteContact')) {
+                  document
+                    .getElementById('buttonInviteContact')
+                    .classList.add('disabled');
+                }
+                if (document.getElementById('buttonCreateGroup')) {
+                  document
+                    .getElementById('buttonCreateGroup')
+                    .classList.add('disabled');
+                }
+              }
+            };
+            divInfo.appendChild(nameUser);
+            divInfo.appendChild(breakLine);
+            divInfo.appendChild(tlfUser);
+            userDiv.appendChild(avatarUser);
+            userDiv.appendChild(divInfo);
+            userDiv.appendChild(removeUser);
+            document.getElementById('userSendList').appendChild(userDiv);
+          }
+        });
+      }
+    },
+    async createGroup() {
+      const usersForGroups = [];
+      const groupName = document.getElementById('textareaSendeInvitation')
+        .value;
+      const myNumber = textsecure.storage.user.getNumber();
+      Object.keys(dataUsersToInvitate).forEach(element => {
+        usersForGroups.push(dataUsersToInvitate[element].userid);
+      });
+      usersForGroups.push(myNumber);
+      if (groupName !== '') {
+        const company = await getCompany(
+          textsecure.storage.get('companyNumber', null)
+        );
+        await createGroup(`${company.name} - ${groupName}`, usersForGroups);
+        document.getElementsByClassName('modal-importer')[0].remove();
+        dataUsersToInvitate = {};
+      } else {
+        const message = 'Bitte Gruppenname eingeben';
+        this.$('#errorMessage').html('');
+        this.$('#errorMessage').append(message);
+      }
+    },
+    async sendInvitations(){
+      await parallel(1, Object.keys(dataUsersToInvitate), async (element) => {
+        if ( dataUsersToInvitate[element] !== undefined ){
+          const id = dataUsersToInvitate[element].userid;
+          const type = dataUsersToInvitate[element].position;
+          const companyNumber = textsecure.storage.get('companyNumber', null);
+          let data = {};
+          if (type === 'admin') {
+            data = {
+              isAdminInvite: true,
+              identifier: id,
+            };
+          } else {
+            data = {
+              isAdminInvite: false,
+              identifier: id,
+            };
+          }
+          const result = await createInvitation(companyNumber, data);
+          const dataSms = {
+            phone_number: id,
+            code: result.code,
+          }
+          sendSms(companyNumber, dataSms)
+  
+        }
+        
+      })
+      dataUsersToInvitate = {};
+      this.closePanel();
+    },
+    checkBoxevent(event) {
+      const id = event.target.attributes.dataPhone.nodeValue;
+      if (event.target.checked) {
+        dataUsersToInvitate[id] = {
+          userid: id,
+          position: this.type,
+        };
+      } else {
+        delete dataUsersToInvitate[id];
+      }
+    },
+  });
+
 })();

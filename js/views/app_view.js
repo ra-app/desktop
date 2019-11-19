@@ -255,5 +255,33 @@
         document.getElementsByClassName('network-status-container')[0]
       );
     },
+    async openModalEditGroup(typeUser) {
+      const companyNumber = textsecure.storage.get('companyNumber', null);
+      let admin_client_data = null;
+      if (typeUser === 'group') {
+        admin_client_data = await getClientAdminCompany(companyNumber);
+      }
+      const xml = await getXmlFile(companyNumber);
+      // const InvitationList = await getClientAdminCompany(companyNumber);
+      // console.log(InvitationList.admins, "55555555555555")
+      // if(xml && InvitationList){
+      //   localStorage.setItem('InvitationList',JSON.stringify(InvitationList));
+      //   if(typeUser === 'admin'){
+      //     xml.InvitationList = InvitationList.admins
+      //   }
+      //   if(typeUser === 'kunde'){
+      //     xml.InvitationList = InvitationList.clients
+      //   }
+      //   xml.type = typeUser;
+      // }
+      const dialog = new Whisper.ModalEditGroup({
+        contact_data: xml,
+        type: typeUser,
+        admin_client: admin_client_data,
+      });
+      dialog.$el.insertAfter(
+        document.getElementsByClassName('conversation-stack')[0]
+      );
+    },
   });
 })();

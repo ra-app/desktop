@@ -55,6 +55,7 @@ interface Props {
 
 export class ConversationHeader extends React.Component<Props> {
   public showMenuBound: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  public openEditGroupBound : (event: React.MouseEvent<HTMLButtonElement>) => void;
   public menuTriggerRef: React.RefObject<any>;
 
   public constructor(props: Props) {
@@ -62,12 +63,19 @@ export class ConversationHeader extends React.Component<Props> {
 
     this.menuTriggerRef = React.createRef();
     this.showMenuBound = this.showMenu.bind(this);
+    this.openEditGroupBound = this.openEditGroup.bind(this);
   }
 
   public showMenu(event: React.MouseEvent<HTMLButtonElement>) {
     if (this.menuTriggerRef.current) {
       this.menuTriggerRef.current.handleContextClick(event);
     }
+  }
+
+  public openEditGroup(event: React.MouseEvent<HTMLButtonElement>) {
+    console.log(event,'open edit group');
+    const { appView } = window['owsDesktopApp'];
+    appView.openModalEditGroup('group');
   }
 
   public renderBackButton() {
@@ -264,7 +272,9 @@ export class ConversationHeader extends React.Component<Props> {
         ) : !isCompany ? (
           <MenuItem onClick={onArchive}>{i18n('archiveConversation')}</MenuItem>
         ) : null}
-
+        {(isGroup) && (
+          <MenuItem onClick={this.openEditGroupBound}>Edit group</MenuItem>
+        )}
         {/* {!isCompany ? (
           <MenuItem onClick={onDeleteMessages}>
             {i18n('deleteMessages')}
