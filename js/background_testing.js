@@ -268,6 +268,9 @@ const wrapFunctionForCaching = (func, maxAge = 60000) => {
 // ===
 
 const CURRENT_VERSION = window.getVersion();
+async function COMPANY_ID () {
+  return textsecure.storage.get('companyNumber', null);
+}
 
 const API_URL =
   'https://luydm9sd26.execute-api.eu-central-1.amazonaws.com/latest/';

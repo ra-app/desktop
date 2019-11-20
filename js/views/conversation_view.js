@@ -128,12 +128,18 @@
         });
       });
       console.log(this.model, "modellllllllllllllllllllllllllllll")
-      const edit = new Whisper.EditCompanyView({
-        model: this.model,
-        window: this.model.window,
-      });
-      let $el = this.$('.edit-company-container')[0];
-      $el.append(edit.el);
+      if (options.editCompany) {
+        const edit = new Whisper.EditCompanyView({
+          model: this.model,
+          window: this.model.window,
+        });
+        let $el = this.$('.edit-company-container')[0];
+        $el.append(edit.el);
+      } else {
+        if (this.$('.edit-company-container')[0]) {
+          this.$('.edit-company-container')[0].remove();
+        }
+      }
     },
     async showInfoTicket(evt, element) {
       if (evt.target.className.indexOf('button-claim-ticket') === -1) {

@@ -29,7 +29,7 @@
   Whisper.ConversationStack = Whisper.View.extend({
     className: 'conversation-stack',
     lastConversation: null,
-    async open(conversation, isTicket) {
+    async open(conversation, isTicket, editCompany = null) {
       if (!isTicket) {
         const id = `conversation-${conversation.cid}`;
         if (id !== this.el.firstChild.id) {
@@ -108,6 +108,7 @@
             const view = new Whisper.TicketScreen({
               model: conversation,
               window: this.model.window,
+              editCompany: editCompany
             });
             // eslint-disable-next-line prefer-destructuring
             $el = view.$el;
@@ -192,7 +193,7 @@
 
       this.conversation_stack = new Whisper.ConversationStack({
         el: this.$('.conversation-stack'),
-        model: { window: options.window },
+        model: { window: options.window }
       });
 
       this.blackboard_stack = new Whisper.BlackboardStack({
@@ -463,8 +464,8 @@
         scrolling = false;
       }
     },
-    async openTicket(id, messageId = null, resetCall = null, type) {
-      console.log('open ticket', id, type);
+    async openTicket(id, messageId = null, resetCall = null, type, editCompany = null) {
+      console.log('open ticket', id, type, editCompany);
       this.$('.conversation-stack').on(
         'scroll',
         _.debounce(this.onTicketScroll.bind(this), 100)
@@ -525,7 +526,7 @@
           ];
         }
         console.log(ticketList.tickets, 'returnnnnnnnnnnnn');
-        this.conversation_stack.open(ticketList.tickets, isTicket);
+        this.conversation_stack.open(ticketList.tickets, isTicket, editCompany);
         this.focusConversation();
         // }
         this.tmpticketId = id;
