@@ -263,6 +263,11 @@
         admin_client_data = await getClientAdminCompany(companyNumber);
       }
       const xml = await getXmlFile(companyNumber);
+      await waitForConversationController();
+      let conversation = await ConversationController.getOrCreateAndWait(
+        id,
+        'group'
+      );
       // const InvitationList = await getClientAdminCompany(companyNumber);
       // console.log(InvitationList.admins, "55555555555555")
       // if(xml && InvitationList){
@@ -281,6 +286,7 @@
         admin_client: admin_client_data,
         group_name: name,
         group_id: id,
+        members: conversation.attributes.members,
       });
       document.getElementsByClassName('conversation-header')[0].classList.add('width3colum');
       document.getElementsByClassName('panel')[0].classList.add('width3colum');

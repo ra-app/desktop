@@ -451,6 +451,17 @@
         </div>
       </div>
       <div class="mainDivUserSendInvitation" id="userSendList">
+        {{ #renderUserGroup}}
+          <div class="userInvitation" id='{{id}}'>
+            <img src="images/header-chat.png">
+            <div>
+              <span>{{name}}</span>
+              <br>
+              <span>{{phone}}</span>
+            </div>
+            <!-- <img src="images/icons/x-contact-list.svg" dataPhone='{{id}}' class="imageCloseUser removeUserToGroup"> -->
+          </div>
+          {{ /renderUserGroup}}
       </div>
       <div class="errorMessageModal" id = 'errorMessage'></div>
         <button class="buttonEditGroup" id="buttonEditGroup"> Speichern </button>

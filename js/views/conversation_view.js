@@ -128,7 +128,6 @@
           $(this).attr('src', 'images/header-chat.png');
         });
       });
-      console.log(this.model, "modellllllllllllllllllllllllllllll")
       const edit = new Whisper.EditCompanyView({
         model: this.model,
         window: this.model.window,
@@ -2528,7 +2527,6 @@
 
         const id = event.currentTarget.id;
         this.currentId = id;
-        console.log('ID of click ========> ', id);
         this.isViewMode = true;
         this.isMultiViewMode = false;
         const data = {
@@ -2549,7 +2547,6 @@
         this.render();
       },
       openEditCard(id){
-        console.log('editing')
         if(document.getElementsByClassName('edit-card-blackboard')[0]){
           document.getElementsByClassName('edit-card-blackboard')[0].remove();
         }
@@ -2577,7 +2574,6 @@
         this.card_id = options.id;
         this.company_id = options.company_id;
         this.data_to_edit = options.data_to_edit;
-        console.log(this.data_to_edit, "dataaaaaaaaaaaaaaaaaaaaa");
         this.render();
       },
       events: {
@@ -2599,7 +2595,6 @@
           'title':title,
           'content':content
         };
-        console.log(company_id, data, "data to send")
         await editCardsBlackboard(company_id, data)
         this.closePanel();
         window.Whisper.events.trigger('showOpenBlackboard', company_id);
@@ -2614,7 +2609,6 @@
           'title':title,
           'content':content
         };
-        console.log(company_id, data, "data to send")
         await editCardsBlackboard(company_id, data)
         this.closePanel();
         window.Whisper.events.trigger('showOpenBlackboard', company_id);
@@ -2627,11 +2621,11 @@
     template: $('#edit-group-modal').html(),
 
     initialize(options) {
-      console.log('initialize', options)
       if (options) {
         // if (options.contact_data !== undefined) {
           this.contactListXml = prepareDataXml(options.contact_data);
           this.objectContact = [];
+          this.renderUserGroup =  [];
           const myNumber = textsecure.storage.user.getNumber();
           if (options.type === 'group') {
             if(options.admin_client) {
@@ -2677,11 +2671,23 @@
         }
         this.groupName = options.group_name;
         this.group_id = options.group_id;
+        this.members = options.members
+        // for (let i = 0; i < this.objectContact.length; i++) {
+          for (let f = 0; f < this.members.length; f++) {
+            // if(this.objectContact[i].phone == options.members[f]){
+              let id = this.members[f];
+              dataUsersToInvitate[id] = {
+                userid: id,
+                position: this.type,
+              };
+            // }
+          }
+        // }
       }
+      this.sendDataToModal();
       this.render();
     },
     render_attributes() {
-      // console.log('This model import contact view!!!! ', this.model)
       return {
         'searchPlaceholder': i18n('search'),
         'send-message': i18n('sendMessage'),
@@ -2691,7 +2697,8 @@
         isCreatingGroup: this.isCreatingGroup,
         isEditingName: this.isEditingName,
         groupName: this.groupName,
-        editGroupName: this.editGroupName
+        editGroupName: this.editGroupName,
+        renderUserGroup: this.renderUserGroup
       };
     },
     events: {
@@ -2703,7 +2710,8 @@
       'keyup #searchInput': 'searchContactList',
       'click  #editName': 'editNameGroup',
       'click #buttonEditGroup':  'saveEditGroup',
-      'click #closeEditName': 'closeEditName'
+      'click #closeEditName': 'closeEditName',
+      'click .removeUserToGroup': 'removeUserGroup'
       // 'click #countryCode, #dialCode' : 'showCountries',
     },
     closePanel() {
@@ -2750,82 +2758,85 @@
       this.render();
     },
     saveEditGroup(){
-      this.$('#editGroupNameInput').val();
       var nameEdit = this.groupName.split('-')
-      console.log(nameEdit[0], 'saveEditGroup')
-      const nameToUpdate = nameEdit[0] + ' - ' + this.$('#editGroupNameInput').val()
-      updateGroup(this.group_id, nameToUpdate);
+      let nameToUpdate = this.groupName
+      if(this.$('#editGroupNameInput').val() !== undefined){
+        nameToUpdate = nameEdit[0] + ' - ' + this.$('#editGroupNameInput').val()
+      }
+      console.log(this.members, "membersssssss")
+      let users =  []
+ 
+      Object.keys(dataUsersToInvitate).forEach(element => {
+        const id = dataUsersToInvitate[element].userid;
+          users.push(id);
+      })
+      console.log(users, "usersssssss")
+      updateGroup(this.group_id, nameToUpdate, users);
       this.closePanel();
     },
     sendDataToModal() {
+      console.log('sendDataToModal----------')
       this.$('#modalEditGROUP').removeClass('hidden');
       this.$('#modalSearchUsers').addClass('hidden');
-      for (let i = 0; i < this.contactListXml.children.length; i++) {
-        const contact = this.contactListXml.children.item(i);
-        if (Object.keys(dataUsersToInvitate).length > 0) {
-          if (document.getElementById('buttonInviteContact')) {
-            document
-              .getElementById('buttonInviteContact')
-              .classList.remove('disabled');
-          }
-          if (document.getElementById('buttonCreateGroup')) {
-            document
-              .getElementById('buttonCreateGroup')
-              .classList.remove('disabled');
-          }
+      this.renderUserGroup = [];
+      console.log(this.contactListXml.children.length, "lengthhhhhhhhhhhh")
+      if(this.contactListXml.children.length > 0){
+        for (let i = 0; i < this.contactListXml.children.length; i++) {
+          const contact = this.contactListXml.children.item(i);
+          Object.keys(dataUsersToInvitate).forEach(element => {
+            const id = dataUsersToInvitate[element].userid;
+            if (id === contact.getElementsByTagName('phone')[0].textContent) {
+              const data = this.contactListXml;
+              const tmpObj = {
+                name: data.getElementsByTagName('name')[i].childNodes[0].nodeValue + ' ' + data.getElementsByTagName('surname')[i].childNodes[0].nodeValue,
+                phone:   data.getElementsByTagName('phone')[i].childNodes[0].nodeValue,
+                id: data.getElementsByTagName('phone')[i].childNodes[0].nodeValue,
+              }
+              this.renderUserGroup.push(tmpObj)
+            }
+          });
         }
-        // eslint-disable-next-line no-loop-func
+      }else {
         Object.keys(dataUsersToInvitate).forEach(element => {
           const id = dataUsersToInvitate[element].userid;
-          if (id === contact.getElementsByTagName('phone')[0].textContent) {
-            const data = this.contactListXml;
-            const userDiv = document.createElement('div');
-            userDiv.classList.add('userInvitation');
-            userDiv.id = 'user' + id;
-            const avatarUser = document.createElement('img');
-            avatarUser.src = 'images/header-chat.png';
-            const divInfo = document.createElement('div');
-            const nameUser = document.createElement('span');
-            nameUser.textContent =
-              data.getElementsByTagName('name')[i].childNodes[0].nodeValue +
-              ' ' +
-              data.getElementsByTagName('surname')[i].childNodes[0].nodeValue;
-            const breakLine = document.createElement('br');
-            const tlfUser = document.createElement('span');
-            tlfUser.textContent = data.getElementsByTagName('phone')[
-              i
-            ].childNodes[0].nodeValue;
-            const removeUser = document.createElement('img');
-            removeUser.src = 'images/icons/x-contact-list.svg';
-            removeUser.className = 'imageCloseUser';
-            removeUser.onclick = () => {
-              document.getElementById('user' + id).remove();
-              delete dataUsersToInvitate[id];
-              if (Object.keys(dataUsersToInvitate).length === 0) {
-                if (document.getElementById('buttonInviteContact')) {
-                  document
-                    .getElementById('buttonInviteContact')
-                    .classList.add('disabled');
-                }
-                if (document.getElementById('buttonCreateGroup')) {
-                  document
-                    .getElementById('buttonCreateGroup')
-                    .classList.add('disabled');
+          let tmpObj = {}
+          if(id == getOwnNumber()){
+            tmpObj = {
+              name: 'You',
+              phone:   id,
+              id: id,
+            }
+          }else{
+            let foundUser = false
+            for (let i = 0; i < this.objectContact.length; i++) {
+              if(this.objectContact[i].phone == id){
+                foundUser = true
+                tmpObj = {
+                  name: this.objectContact[i].name,
+                  phone:   id,
+                  id: id,
                 }
               }
-            };
-            divInfo.appendChild(nameUser);
-            divInfo.appendChild(breakLine);
-            divInfo.appendChild(tlfUser);
-            userDiv.appendChild(avatarUser);
-            userDiv.appendChild(divInfo);
-            userDiv.appendChild(removeUser);
-            document.getElementById('userSendList').appendChild(userDiv);
+            }
+            if(!foundUser){
+              tmpObj = {
+                name: 'Unknow User',
+                phone:   id,
+                id: id,
+              }
+            }
           }
+          this.renderUserGroup.push(tmpObj)
         });
       }
+      this.render();
     },
+    removeUserGroup(event){
+      const id = event.target.attributes.dataPhone.nodeValue;
+      delete dataUsersToInvitate[id];
+      this.sendDataToModal()
 
+    },
     
     checkBoxevent(event) {
       const id = event.target.attributes.dataPhone.nodeValue;
