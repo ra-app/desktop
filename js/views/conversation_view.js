@@ -2516,7 +2516,7 @@
       events: {
         'click .card-blackboard': 'openDetailView',
         'click #imageGoBackBlackboard': 'backMultiView',
-        'click #openEditCard': 'openEditCard'
+        // 'click #openEditCard': 'openEditCard'
 
       },
       async openDetailView(event){
@@ -2542,6 +2542,9 @@
         const test = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig
         this.multiView.textlink = this.multiView.content.replace(test, '<a target=\'_blank\' rel=\'noopener noreferrer nofollow\' href=\'$1\'>$1</a>');
         this.render();
+        if(this.isAdmin){
+          this.openEditCard();
+        }
       },
       backMultiView(){
         this.isViewMode = false;
