@@ -147,6 +147,12 @@
                 <p class="contentCardBlackboard">{{content}}</p>
               </div>
             {{/model}}
+            {{#showAddNote}}
+            <div class = 'addMoreNotes' id = addMoreNote >
+                <p class="titleCardBlackboard">{{title}}</p>
+                <p class="contentCardBlackboard">+</p>
+              </div>
+            {{/showAddNote}}
           {{/isMultiViewMode}}
           {{#isViewMode}}
           {{#multiView}}

@@ -144,7 +144,6 @@
     className: 'blackboard-stack',
     lastConversation: null,
     openBlackboard(conversation, notes, isAdmin) {
-      console.log(notes, "notesssssssssssssssss")
       // isTicket = false;
       const id = `conversation-${conversation.cid}`;
       if (id !== this.el.firstChild.id) {
@@ -162,7 +161,6 @@
           if (this.$('.blackboard-view')) {
             this.$('.blackboard-view').remove();
           }
-          console.log(conversation, "conversationnnnnnnnnnnnnnnnnnnnn")
           const view = new Whisper.BlackboardScreen({
             model: notes,
             company_id: conversation,

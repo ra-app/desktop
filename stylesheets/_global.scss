@@ -2362,6 +2362,15 @@ input {
   justify-content: flex-start;
   flex-wrap: wrap;
   height: 100%;
+  & .addMoreNotes{
+    background: unset;
+    & .contentCardBlackboard{
+      color: white;
+      font-size: 250px;
+      padding-top: 64px;
+      height: -webkit-fill-available;
+    }
+  }
 }
 
 .flex-container > div {
@@ -2372,7 +2381,7 @@ input {
   height: 280px;
   overflow: hidden;
   font-size: 14px;
-  background-image: url(./../images/post-it.svg);
+  background-image: url(./../images/post-it-pin-new.svg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

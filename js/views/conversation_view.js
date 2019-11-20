@@ -2498,11 +2498,12 @@
     template: $('#blackboard-view').html(),
     render_attributes() {
       return {
-        model: this.model,
+        model: this.notes,
         isViewMode: this.isViewMode,
         isMultiViewMode: this.isMultiViewMode,
         multiView: this.multiView,
-        isAdmin: this.isAdmin
+        isAdmin: this.isAdmin,
+        showAddNote: this.showAddNote
       }
     },
       initialize(options) {
@@ -2511,15 +2512,29 @@
         this.currentId = null;
         this.company_id = options.company_id;
         this.isadmin = options.isAdmin;
+        this.notes = [];
+        this.emptyNotes = [];
+        this.showAddNote = false;
+        options.model.forEach(element => {
+          console.log(element, "element")
+          if(element.title !== '' && element.content !== ''){
+            this.notes.push(element)
+            this.countNotes +=1;
+          }else {
+            this.emptyNotes.push(element)
+            this.showAddNote = true
+          }
+        });
         this.render();
       },
       events: {
         'click .card-blackboard': 'openDetailView',
         'click #imageGoBackBlackboard': 'backMultiView',
         // 'click #openEditCard': 'openEditCard'
+        'click #addMoreNote': 'addMoreNotes'
 
       },
-      async openDetailView(event){
+      async openDetailView(event, sendid = null){
         try {
           const admins = await getAdminCompany( this.company_id)
           if(admins.success){
@@ -2530,8 +2545,12 @@
         } catch (error) {
           this.isAdmin = false
         }
-
-        const id = event.currentTarget.id;
+        let id = null
+        if(sendid !== null){
+          id = sendid
+        }else {
+          id = event.currentTarget.id;
+        }
         this.currentId = id;
         this.isViewMode = true;
         this.isMultiViewMode = false;
@@ -2545,6 +2564,12 @@
         if(this.isAdmin){
           this.openEditCard();
         }
+      },
+      addMoreNotes(){
+        let id = this.emptyNotes[0].id
+        this.notes.push(this.emptyNotes[0]);
+        this.emptyNotes.shift();
+        this.openDetailView(null, id)
       },
       backMultiView(){
         this.isViewMode = false;
