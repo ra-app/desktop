@@ -1733,7 +1733,9 @@ th.sorted.descending:after {
       .divUserPrev {
         margin-top: -13px;
         height: 45px;
-        padding: 8px 15px;
+        /*padding: 8px 15px;*/
+        padding: 0px 15px;
+        display: inline-flex;
         background: #b1c6de52 0% 0% no-repeat padding-box;
         img {
           height: 30px;
