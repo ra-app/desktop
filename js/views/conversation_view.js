@@ -25,6 +25,7 @@
   } = window.Signal.Migrations;
 
   let uuidtmp = '';
+  var dataUsersToInvitate = [];
 
   Whisper.ExpiredToast = Whisper.ToastView.extend({
     render_attributes() {
@@ -2632,6 +2633,7 @@
     template: $('#edit-group-modal').html(),
 
     initialize(options) {
+      console.log('initialize', options)
       if (options) {
         // if (options.contact_data !== undefined) {
           this.contactListXml = prepareDataXml(options.contact_data);
@@ -2672,36 +2674,15 @@
                 }
               }
             }
-          } else {
-            for (let i = 0; i < this.contactListXml.children.length; i++) {
-              const contact = this.contactListXml.children.item(i);
-              const tmpObj = {
-                name: contact.getElementsByTagName('name')[0].textContent,
-                surname: contact.getElementsByTagName('surname')[0].textContent,
-                position: contact.getElementsByTagName('position')[0].textContent,
-                email: contact.getElementsByTagName('email')[0].textContent,
-                phone: contact.getElementsByTagName('phone')[0].textContent,
-                ts: contact.getElementsByTagName('ts')[0].textContent,
-              }
-              this.objectContact.push(tmpObj)
-            }
-          }
-          this.type = options.type;
-          console.log(this.type, "typeeeeeeeeeeeeeeeeeeeeee")
-          if (options.type === 'kunde') {
-            this.typeAdmin = true;
-            this.typeKunde = false;
-            this.isCreatingGroup = false;
-          } else if (options.type === 'admin') {
-            this.typeAdmin = false;
-            this.typeKunde = true;
-            this.isCreatingGroup = false;
-          }else if ( options.type === 'allUsers' || options.type === 'group'){
-            this.isCreatingGroup = true;
-            this.typeAdmin = false;
-            this.typeKunde = false;
-          }
-        // }
+          } 
+        this.isEditingName= false;
+        this.editGroupName = '';
+        var nameEdit = options.group_name.split('-')
+        for (let index = 1; index < nameEdit.length; index++) {
+          this.editGroupName += nameEdit[index];
+        }
+        this.groupName = options.group_name;
+        this.group_id = options.group_id;
       }
       this.render();
     },
@@ -2714,6 +2695,9 @@
         typeKunde: this.typeKunde,
         objectContact: this.objectContact,
         isCreatingGroup: this.isCreatingGroup,
+        isEditingName: this.isEditingName,
+        groupName: this.groupName,
+        editGroupName: this.editGroupName
       };
     },
     events: {
@@ -2722,17 +2706,21 @@
       'click  #imageGoBack': 'goBack',
       'click #searchContactInvitation, #imagePlus': 'showContactListPanel',
       'click .contactListCheckbox': 'checkBoxevent',
-      'click #buttonInviteContact': 'sendInvitations',
-      'click #buttonCreateGroup': 'createGroup',
-      'keyup #textareaSendeInvitation': 'enableCreateGroup',
       'keyup #searchInput': 'searchContactList',
+      'click  #editName': 'editNameGroup',
+      'click #buttonEditGroup':  'saveEditGroup',
+      'click #closeEditName': 'closeEditName'
       // 'click #countryCode, #dialCode' : 'showCountries',
     },
     closePanel() {
       document.getElementsByClassName('edit-group-modal')[0].remove();
-      // document.getElementsByClassName('conversation-stack')[0].classList.add('width2Column');
-      // document.getElementsByClassName('conversation-stack')[0].classList.remove('width3Column');
+      document.getElementsByClassName('conversation-header')[0].classList.remove('width3colum');
+      document.getElementsByClassName('panel')[0].classList.remove('width3colum');
       dataUsersToInvitate = {};
+    },
+    closeEditName(){
+      this.isEditingName = false;
+      this.render();
     },
     showContactListPanel() {
       if (this.objectContact === undefined || this.objectContact.length === 0 ) {
@@ -2743,7 +2731,7 @@
         );
         this.$('#divNoContacts').removeClass('hidden');
       }
-      this.$('#modalContact').addClass('hidden');
+      this.$('#modalEditGROUP').addClass('hidden');
       this.$('#modalSearchUsers').removeClass('hidden');
     },
     searchContactList(e) {
@@ -2758,13 +2746,25 @@
       });
     },
     goBack(){
-      this.$('#modalContact').removeClass('hidden');
+      this.$('#modalEditGROUP').removeClass('hidden');
       this.$('#modalSearchUsers').addClass('hidden');
       this.$('#ptextNoContacts').innerText = '';
       this.$('#divNoContacts').addClass('hidden');
     },
+    editNameGroup(){
+      this.isEditingName = true;
+      this.render();
+    },
+    saveEditGroup(){
+      this.$('#editGroupNameInput').val();
+      var nameEdit = this.groupName.split('-')
+      console.log(nameEdit[0], 'saveEditGroup')
+      const nameToUpdate = nameEdit[0] + ' - ' + this.$('#editGroupNameInput').val()
+      updateGroup(this.group_id, nameToUpdate);
+      this.closePanel();
+    },
     sendDataToModal() {
-      this.$('#modalContact').removeClass('hidden');
+      this.$('#modalEditGROUP').removeClass('hidden');
       this.$('#modalSearchUsers').addClass('hidden');
       for (let i = 0; i < this.contactListXml.children.length; i++) {
         const contact = this.contactListXml.children.item(i);
@@ -2831,59 +2831,8 @@
         });
       }
     },
-    async createGroup() {
-      const usersForGroups = [];
-      const groupName = document.getElementById('textareaSendeInvitation')
-        .value;
-      const myNumber = textsecure.storage.user.getNumber();
-      Object.keys(dataUsersToInvitate).forEach(element => {
-        usersForGroups.push(dataUsersToInvitate[element].userid);
-      });
-      usersForGroups.push(myNumber);
-      if (groupName !== '') {
-        const company = await getCompany(
-          textsecure.storage.get('companyNumber', null)
-        );
-        await createGroup(`${company.name} - ${groupName}`, usersForGroups);
-        document.getElementsByClassName('modal-importer')[0].remove();
-        dataUsersToInvitate = {};
-      } else {
-        const message = 'Bitte Gruppenname eingeben';
-        this.$('#errorMessage').html('');
-        this.$('#errorMessage').append(message);
-      }
-    },
-    async sendInvitations(){
-      await parallel(1, Object.keys(dataUsersToInvitate), async (element) => {
-        if ( dataUsersToInvitate[element] !== undefined ){
-          const id = dataUsersToInvitate[element].userid;
-          const type = dataUsersToInvitate[element].position;
-          const companyNumber = textsecure.storage.get('companyNumber', null);
-          let data = {};
-          if (type === 'admin') {
-            data = {
-              isAdminInvite: true,
-              identifier: id,
-            };
-          } else {
-            data = {
-              isAdminInvite: false,
-              identifier: id,
-            };
-          }
-          const result = await createInvitation(companyNumber, data);
-          const dataSms = {
-            phone_number: id,
-            code: result.code,
-          }
-          sendSms(companyNumber, dataSms)
-  
-        }
-        
-      })
-      dataUsersToInvitate = {};
-      this.closePanel();
-    },
+
+    
     checkBoxevent(event) {
       const id = event.target.attributes.dataPhone.nodeValue;
       if (event.target.checked) {

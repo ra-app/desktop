@@ -255,7 +255,8 @@
         document.getElementsByClassName('network-status-container')[0]
       );
     },
-    async openModalEditGroup(typeUser) {
+    async openModalEditGroup(typeUser, name, id) {
+      if(document.getElementsByClassName('edit-group-modal').length === 0){
       const companyNumber = textsecure.storage.get('companyNumber', null);
       let admin_client_data = null;
       if (typeUser === 'group') {
@@ -278,12 +279,15 @@
         contact_data: xml,
         type: typeUser,
         admin_client: admin_client_data,
+        group_name: name,
+        group_id: id,
       });
-      // document.getElementsByClassName('conversation-stack')[0].classList.remove('width2Column');
-      // document.getElementsByClassName('conversation-stack')[0].classList.add('width3Column');
+      document.getElementsByClassName('conversation-header')[0].classList.add('width3colum');
+      document.getElementsByClassName('panel')[0].classList.add('width3colum');
       dialog.$el.insertAfter(
         document.getElementsByClassName('conversation-header')[0]
       );
+      }
     },
   });
 })();
