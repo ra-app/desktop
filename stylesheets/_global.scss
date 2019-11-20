@@ -2372,6 +2372,17 @@ input {
     text-align: center;
     }
   }
+  & .iconsEditDelete{
+    text-align: right;
+    margin-right: 5px;
+    padding-top: 3px;
+    & .editCardBlackboard{
+      width: 28px;
+    }
+    & .removeCardBlackboard{
+      width: 26px;
+    }
+  }
 }
 
 .flex-container > div {

@@ -2516,7 +2516,6 @@
         this.emptyNotes = [];
         this.showAddNote = false;
         options.model.forEach(element => {
-          console.log(element, "element")
           if(element.title !== '' && element.content !== ''){
             this.notes.push(element)
             this.countNotes +=1;
@@ -2531,7 +2530,10 @@
         'click .card-blackboard': 'openDetailView',
         'click #imageGoBackBlackboard': 'backMultiView',
         // 'click #openEditCard': 'openEditCard'
-        'click #addMoreNote': 'addMoreNotes'
+        'click #addMoreNote': 'addMoreNotes',
+        'click .editCardBlackboard': 'editCardIcon',
+        'click .removeCardBlackboard': 'removeCardIcon',
+        
 
       },
       async openDetailView(event, sendid = null){
@@ -2570,6 +2572,45 @@
         this.notes.push(this.emptyNotes[0]);
         this.emptyNotes.shift();
         this.openDetailView(null, id)
+      },
+      editCardIcon(event){
+        event.preventDefault();
+        event.stopPropagation();
+        const id = event.target.attributes.dataID.nodeValue;
+        this.openDetailView(null, id)
+      },
+      removeCardIcon(event){
+        event.preventDefault();
+        event.stopPropagation();
+        const id = event.target.attributes.dataID.nodeValue;
+        // this.openDetailView(null, id)
+        let indexToRemove = null
+        for (let index = 0; index < this.notes.length; index++) {
+          if(id == this.notes[index].id){
+            const tmpNewElement = {
+              id: this.notes[index].id,
+              title: "",
+              content: "",
+              company_id: this.notes[index].company_id,
+              ts_created: this.notes[index].ts_created
+            }
+            const data = {
+              'note_id':this.notes[index].id,
+              'title':'',
+              'content':''
+            }
+            this.updateCard(data, this.notes[index].company_id)
+            this.emptyNotes.push(tmpNewElement)
+            indexToRemove = index;
+          }
+          
+        }
+        this.notes.splice(indexToRemove,1);
+        indexToRemove = null;
+        this.render();
+      },
+      async updateCard(data, company_id){
+        await editCardsBlackboard(company_id, data)
       },
       backMultiView(){
         this.isViewMode = false;
@@ -2797,23 +2838,19 @@
       if(this.$('#editGroupNameInput').val() !== undefined){
         nameToUpdate = nameEdit[0] + ' - ' + this.$('#editGroupNameInput').val()
       }
-      console.log(this.members, "membersssssss")
       let users =  []
  
       Object.keys(dataUsersToInvitate).forEach(element => {
         const id = dataUsersToInvitate[element].userid;
           users.push(id);
       })
-      console.log(users, "usersssssss")
       updateGroup(this.group_id, nameToUpdate, users);
       this.closePanel();
     },
     sendDataToModal() {
-      console.log('sendDataToModal----------')
       this.$('#modalEditGROUP').removeClass('hidden');
       this.$('#modalSearchUsers').addClass('hidden');
       this.renderUserGroup = [];
-      console.log(this.contactListXml.children.length, "lengthhhhhhhhhhhh")
       if(this.contactListXml.children.length > 0){
         for (let i = 0; i < this.contactListXml.children.length; i++) {
           const contact = this.contactListXml.children.item(i);
