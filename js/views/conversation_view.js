@@ -2702,7 +2702,8 @@
       'click .contactListCheckbox': 'checkBoxevent',
       'keyup #searchInput': 'searchContactList',
       'click  #editName': 'editNameGroup',
-      'click #buttonEditGroup':  'saveEditGroup'
+      'click #buttonEditGroup':  'saveEditGroup',
+      'click #closeEditName': 'closeEditName'
       // 'click #countryCode, #dialCode' : 'showCountries',
     },
     closePanel() {
@@ -2710,6 +2711,10 @@
       document.getElementsByClassName('conversation-header')[0].classList.remove('width3colum');
       document.getElementsByClassName('panel')[0].classList.remove('width3colum');
       dataUsersToInvitate = {};
+    },
+    closeEditName(){
+      this.isEditingName = false;
+      this.render();
     },
     showContactListPanel() {
       if (this.objectContact === undefined || this.objectContact.length === 0 ) {

@@ -421,12 +421,17 @@
       <div class="mainInvitationDiv" id="divMainContentEdit">
         <div class="avatarEditGroup" style="background-image: url(images/header-chat.png)"></div>
         <div class='containerLabelInfoCompany'>
-            <label class="labelEditName"> Gruppenname </label>
+            <label class="labelEditNameGroup"> Gruppenname </label>
           </div>
           {{#isEditingName}}
-          <div class='containerEditGroup'>
-            <input type="text" id="editGroupNameInput" value = '{{ editGroupName }}' ></input>
-          </div>
+            <div class='containerDataEditGroup' id='nameSection'>
+              <div class='containerEditGroup'>
+                <input type="text" id="editGroupNameInput" value = '{{ editGroupName }}' ></input>
+              </div>
+              <div class = 'buttonEditNameGroup'>
+                <img class='closeEditNameGroup' id='closeEditName' src='images/icons/x-contact-list.svg'></img>
+              </div>
+            </div>
           {{/isEditingName}}
           {{^isEditingName}}
             <div class='containerDataEditGroup' id='nameSection'>

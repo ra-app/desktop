@@ -765,6 +765,7 @@ tbody#myTable tr {
     background-size: contain;
 }
 .containerEditGroup{
+  width: 90%;
   margin-bottom: 10px;
 }
 .buttonEditGroup{
@@ -788,5 +789,10 @@ tbody#myTable tr {
   }
   .buttonEditNameGroup{
     width:10%;
+  }
+  .closeEditNameGroup{
+    width:25px;
+    cursor: pointer;
+    margin-top:10px;
   }
 }

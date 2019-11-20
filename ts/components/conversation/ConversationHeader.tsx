@@ -273,7 +273,7 @@ export class ConversationHeader extends React.Component<Props> {
           <MenuItem onClick={onArchive}>{i18n('archiveConversation')}</MenuItem>
         ) : null}
         {(isGroup) && (
-          <MenuItem onClick={this.openEditGroupBound}>Edit group</MenuItem>
+          <MenuItem onClick={this.openEditGroupBound}>Gruppe bearbeiten</MenuItem>
         )}
         {/* {!isCompany ? (
           <MenuItem onClick={onDeleteMessages}>
