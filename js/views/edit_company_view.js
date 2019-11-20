@@ -33,9 +33,15 @@
       'click #buttonSaveEditCompany': 'saveNewCompanyName',
       'click #editAvatar': 'editCompanyAvatar',
       'change #inputNewAvatar': 'onChooseAvatarFile',
+      'click #closeEdit': 'closeEdit',
     },
     editCompanyAvatar() {
       this.$('#inputNewAvatar').click();
+    },
+    closeEdit() {
+      if (this.$('#edit-company-container')) {
+        document.getElementById('edit-company-container').remove();
+      }
     },
     async onChooseAvatarFile() {
       const company_id = textsecure.storage.get('companyNumber', null)

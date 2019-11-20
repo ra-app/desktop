@@ -2310,6 +2310,26 @@ input {
   cursor: pointer;
 }
 
+.editIcon {
+  width: 30px;
+  position: relative;
+  cursor: pointer;
+}
+
+.editIconAvatar {
+  top: 65px;
+  width: 30px;
+  position: relative;
+  cursor: pointer;
+}
+
+.closeIcon {
+  top: 5px;
+  width: 30px;
+  position: relative;
+  cursor: pointer;
+}
+
 .editTextareaCompanyName {
   resize: none;
   width: 100%;
