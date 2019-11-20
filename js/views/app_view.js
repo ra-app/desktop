@@ -202,7 +202,7 @@
     openTicket(id, messageId, editCompany = null) {
       if (id) {
         this.openInbox().then(() => {
-          this.inboxView.openTicket(id, messageId, null, null, editCompany);
+          this.inboxView.openTicket(id, messageId, null, undefined, editCompany);
         });
       }
     },

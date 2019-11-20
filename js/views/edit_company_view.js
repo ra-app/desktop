@@ -12,15 +12,14 @@
     className: 'edit-company',
     template: $('#edit-company').html(),
     render_attributes() {
-      console.log(this.model, "modellllllllllllllllllllllllllll")
       return {
         'send-message': i18n('sendMessage'),
-        model: this.model,
-        company_name: this.model[0].company_name,
+        company_name: this.company_name,
         company_avatar: getAvatar(textsecure.storage.get('companyNumber', null)),
       };
     },
-    initialize() {
+    initialize(options) {
+      this.company_name = options.company_name;
       this.render();
       // eslint-disable-next-line func-names
       this.$('img').on('error', function() {

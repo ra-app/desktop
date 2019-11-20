@@ -131,7 +131,7 @@
       console.log(this.model, "modellllllllllllllllllllllllllllll")
       if (options.editCompany) {
         const edit = new Whisper.EditCompanyView({
-          model: this.model,
+          company_name: this.model[0].company_name,
           window: this.model.window,
         });
         let $el = this.$('.edit-company-container')[0];

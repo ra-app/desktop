@@ -244,8 +244,8 @@
     events: {
       click: 'onClick',
       'click #unclaimed, #claimed, #closed': 'getTickets',
-      'click #sortBy' : 'sortTickets',
-      'keyup #searchTickets' : 'searchTickets',
+      'click #sortBy': 'sortTickets',
+      'keyup #searchTickets': 'searchTickets',
     },
     setupLeftPane() {
       this.leftPaneView = new Whisper.ReactWrapperView({
@@ -324,20 +324,20 @@
       this.conversation_stack.open(conversation);
       this.focusConversation();
     },
-    searchTickets (e) {
+    searchTickets(e) {
       let value = e.target.value.toLowerCase();
-      $('#ticketList>div').filter(function() {
+      $('#ticketList>div').filter(function () {
         $(this).toggle(
           $(this)
-          .text()
-          .toLowerCase()
-          .indexOf(value) > -1
-          );
-        });
+            .text()
+            .toLowerCase()
+            .indexOf(value) > -1
+        );
+      });
     },
-    sortTickets () {
+    sortTickets() {
       if (ticketList.tickets) {
-        if(this.sorted) {
+        if (this.sorted) {
           this.sorted = false;
           // this.$('#sortBy').text('newest');
         } else {
@@ -346,10 +346,10 @@
         }
         // tslint:disable-next-line:no-function-expression
         const secondThis = this;
-        ticketList.tickets.sort(function(a, b) {
+        ticketList.tickets.sort(function (a, b) {
           const aTime = secondThis.toTimestamp(a.date);
           const bTime = secondThis.toTimestamp(b.date);
-          if(!secondThis.sorted) {
+          if (!secondThis.sorted) {
             if (aTime > bTime) {
               return 1;
             }
@@ -370,10 +370,10 @@
         this.conversation_stack.open(ticketList.tickets, true);
       }
     },
-    toTimestamp(strDate){
+    toTimestamp(strDate) {
       var datum = Date.parse(strDate);
-      return datum/1000;
-     },
+      return datum / 1000;
+    },
     async getTickets(event) {
       if (!scrolling) {
         const ticketType = event.currentTarget.id;
@@ -473,11 +473,20 @@
       if (resetCall) {
         offsetTicket = 0;
       }
-      const data = {
-        limit: limitTicket,
-        offset: offsetTicket,
-        state: ticketState,
-      };
+      let data = []
+      if (!editCompany) {
+        data = {
+          limit: limitTicket,
+          offset: offsetTicket,
+          state: ticketState,
+        };
+      } else {
+        data = {
+          limit: 12,
+          offset: 0,
+          state: 1,
+        };
+      }
       offsetTicket = limitTicket + offsetTicket;
       try {
         ticketList = await getTicketsList(id, data);
@@ -489,7 +498,8 @@
           //   ticketList.tickets[index].avatarSrc = getAvatar(element.company_id);
           // });
           ticketList.tickets = this.changeListTicket(ticketList);
-        } else {
+        }
+        else {
           let tmpisClaimed = false;
           let tmpisUnclaimed = false;
           let tmpisClosed = false;
