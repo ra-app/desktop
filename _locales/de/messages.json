@@ -1923,7 +1923,7 @@
           "description": "Kontakt löschen modal"
       },
       "addContactModal":{
-        "message": "Benutzerdaten",
+        "message": "Benutzer hinzufügen",
         "description": "Benutzerdaten modal"
     },
     "extraInfoPhones":{
