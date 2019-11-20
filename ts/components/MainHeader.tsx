@@ -9,6 +9,7 @@ import { BrowserWindow } from 'electron';
 declare var getXmlFile: any;
 declare var createUpdateIndicator: any;
 declare var CURRENT_VERSION: any;
+declare var COMPANY_ID: any;
 export interface Props {
   searchTerm: string;
 
@@ -61,6 +62,7 @@ export class MainHeader extends React.Component<Props> {
   ) => void;
   private readonly setFocusBound: () => void;
   private readonly chatMenuBound: () => void;
+  private readonly openEditcompanyBound: () => void;
   private readonly showContactsBound: () => void;
   private readonly importAdminBound: () => void;
   private readonly importKundeBound: () => void;
@@ -78,6 +80,7 @@ export class MainHeader extends React.Component<Props> {
     this.handleKeyUpBound = this.handleKeyUp.bind(this);
     this.setFocusBound = this.setFocus.bind(this);
     this.chatMenuBound = this.chatMenu.bind(this);
+    this.openEditcompanyBound = this.openEditCompany.bind(this);
     this.showContactsBound = this.showContacts.bind(this);
     this.importAdminBound = this.importAdmin.bind(this);
     this.importKundeBound = this.importKunde.bind(this);
@@ -212,6 +215,14 @@ export class MainHeader extends React.Component<Props> {
     // }
   }
 
+  public async openEditCompany() {
+    // tslint:disable-next-line:variable-name
+    const company_id = await COMPANY_ID();
+    const { appView } = window['owsDesktopApp']
+    const editCompany = true;
+    appView.openTicket(company_id, null, editCompany);
+  }
+
   public checkVersion() {
     // tslint:disable-next-line:no-console
     if (CURRENT_VERSION.indexOf('beta') !== -1) {
@@ -240,7 +251,7 @@ export class MainHeader extends React.Component<Props> {
               <span>VERSION: {CURRENT_VERSION}</span>
             </div>
           )}
-          <img src="images/header-chat.png" alt="header chat" />
+          <img onClick={this.openEditcompanyBound} className="mainHeaderIcon" src="images/header-chat.png" alt="header chat" />
           <span>Kommunikation</span>
           {isAdmin && (
             <img

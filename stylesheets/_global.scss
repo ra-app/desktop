@@ -108,6 +108,10 @@ a {
   z-index: 2;
 }
 
+.mainHeaderIcon {
+  cursor: pointer;
+}
+
 .file-input {
   position: relative;
   .choose-file {
@@ -2261,7 +2265,7 @@ input {
   @include backgroudGradient();
   position: absolute;
   bottom: 15px;
-  left: 80%;
+  left: 84%;
   right: 0;
   color: white;
   border-radius: 20px;
@@ -2269,7 +2273,7 @@ input {
   padding: 9px;
   padding-left: 20px;
   padding-right: 20px;
-  min-width: 250px;
+  min-width: 200px;
   color: white;
 }
 .previewEditCompanyAvatar{
@@ -2303,6 +2307,26 @@ input {
 
 .editIcon {
   width: 30px;
+  cursor: pointer;
+}
+
+.editIcon {
+  width: 30px;
+  position: relative;
+  cursor: pointer;
+}
+
+.editIconAvatar {
+  top: 65px;
+  width: 30px;
+  position: relative;
+  cursor: pointer;
+}
+
+.closeIcon {
+  top: 5px;
+  width: 30px;
+  position: relative;
   cursor: pointer;
 }
 
@@ -2418,9 +2442,9 @@ input {
   }
 }
 .iconOpenBlackboard{
-  width: 30px;
+  width: 48px;
   position: absolute;
-  top: 13px;
+  top: 8px;
   right: 15px;
   cursor: pointer;
 }

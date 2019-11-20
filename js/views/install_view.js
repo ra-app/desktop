@@ -706,7 +706,7 @@
       const fileField = this.$('#inputAvatar')[0].files[0];
       // const base64 = await toBase64(fileField);
       let base64 = '';
-      const imageType = this.$('#inputAvatar')[0].files[0].type;
+      const imageType = 'image/png' // this.$('#inputAvatar')[0].files[0].type;
 
       const width = 80;
       const height = 80;
@@ -759,7 +759,7 @@
     async onChoseCompanyAvatar() {
       const fileField = this.$('#inputCompanyAvatar')[0].files[0];
       let base64 = '';
-      const imageType = this.$('#inputCompanyAvatar')[0].files[0].type;
+      const imageType = 'image/png' // this.$('#inputCompanyAvatar')[0].files[0].type;
       const width = 80;
       const height = 80;
       const fileName = this.$('#inputCompanyAvatar')[0].files[0].name;
@@ -935,7 +935,7 @@
       this.resetTMP();
     },
     searchPhones(e) {
-      var value = e.target.value;
+      var value = e.target.value.toLowerCase();
       $('#phone-list p').filter(function() {
         $(this).toggle(
           $(this)

@@ -128,12 +128,18 @@
           $(this).attr('src', 'images/header-chat.png');
         });
       });
+      if (options.editCompany) {
       const edit = new Whisper.EditCompanyView({
-        model: this.model,
+          company_name: this.model[0].company_name,
         window: this.model.window,
       });
       let $el = this.$('.edit-company-container')[0];
       $el.append(edit.el);
+      } else {
+        if (this.$('.edit-company-container')[0]) {
+          this.$('.edit-company-container')[0].remove();
+        }
+      }
     },
     async showInfoTicket(evt, element) {
       if (evt.target.className.indexOf('button-claim-ticket') === -1) {

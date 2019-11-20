@@ -199,10 +199,10 @@
         });
       }
     },
-    openTicket(id, messageId) {
+    openTicket(id, messageId, editCompany = null) {
       if (id) {
         this.openInbox().then(() => {
-          this.inboxView.openTicket(id, messageId, true);
+          this.inboxView.openTicket(id, messageId, null, undefined, editCompany);
         });
       }
     },

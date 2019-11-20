@@ -27,7 +27,7 @@
 .container-ticket {
   padding: 150px 21px 21px;
   cursor: pointer;
-  width: 70%;
+  width: 100%;
 }
 .edit-company-container{
   width:30%;
@@ -42,7 +42,7 @@
       width: 20%;
       text-align: center;
       align-items: flex-end;
-      display: flex;
+       /*display: flex;*/
       justify-content: center;
     }
     & .avatarCompanyContainer{

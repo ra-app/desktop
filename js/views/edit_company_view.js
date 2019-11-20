@@ -12,15 +12,14 @@
     className: 'edit-company',
     template: $('#edit-company').html(),
     render_attributes() {
-      console.log(this.model, "modellllllllllllllllllllllllllll")
       return {
         'send-message': i18n('sendMessage'),
-        model: this.model,
-        company_name: this.model[0].company_name,
+        company_name: this.company_name,
         company_avatar: getAvatar(textsecure.storage.get('companyNumber', null)),
       };
     },
-    initialize() {
+    initialize(options) {
+      this.company_name = options.company_name;
       this.render();
       // eslint-disable-next-line func-names
       this.$('img').on('error', function() {
@@ -33,15 +32,21 @@
       'click #buttonSaveEditCompany': 'saveNewCompanyName',
       'click #editAvatar': 'editCompanyAvatar',
       'change #inputNewAvatar': 'onChooseAvatarFile',
+      'click #closeEdit': 'closeEdit',
     },
     editCompanyAvatar() {
       this.$('#inputNewAvatar').click();
+    },
+    closeEdit() {
+      if (this.$('#edit-company-container')) {
+        document.getElementById('edit-company-container').remove();
+      }
     },
     async onChooseAvatarFile() {
       const company_id = textsecure.storage.get('companyNumber', null)
       const fileField = this.$('#inputNewAvatar')[0].files[0];
       let base64 = '';
-      const imageType = this.$('#inputNewAvatar')[0].files[0].type;
+      const imageType = 'image/png' // this.$('#inputNewAvatar')[0].files[0].type;
       const width = 140;
       const height = 140;
       const fileName = this.$('#inputNewAvatar')[0].files[0].name;
