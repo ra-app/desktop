@@ -2365,10 +2365,11 @@ input {
   & .addMoreNotes{
     background: unset;
     & .contentCardBlackboard{
-      color: white;
-      font-size: 250px;
-      padding-top: 64px;
-      height: -webkit-fill-available;
+      color: #999;
+    font-size: 115px;
+    padding-top: 64px;
+    height: -webkit-fill-available;
+    text-align: center;
     }
   }
 }
@@ -2427,7 +2428,7 @@ input {
  
   }
   &.oneCard{
-    background-image: url(./../images/post-it-open.svg);
+    background-image: url(./../images/post-it-pin-new.svg);
     width: 50%;
     height: calc(100% - 70px);
     margin: 0 auto;
