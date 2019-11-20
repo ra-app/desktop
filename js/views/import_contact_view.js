@@ -697,7 +697,7 @@
       buttonInviteContact.classList.add('buttonInviteContact');
       buttonInviteContact.classList.add('disabled');
       buttonInviteContact.id = 'buttonInviteContact';
-      buttonInviteContact.innerHTML = 'Teilen';
+      buttonInviteContact.innerHTML = 'Speichern';
       buttonInviteContact.onclick = () => {
         this.sendInvitationCall();
       };
