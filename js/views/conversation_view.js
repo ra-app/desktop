@@ -2597,7 +2597,8 @@
             const data = {
               'note_id':this.notes[index].id,
               'title':'',
-              'content':''
+              'content':'',
+              "note_type": "normal"
             }
             this.updateCard(data, this.notes[index].company_id)
             this.emptyNotes.push(tmpNewElement)
@@ -2650,6 +2651,19 @@
         this.company_id = options.company_id;
         this.data_to_edit = options.data_to_edit;
         this.render();
+        setTimeout(() => {
+          switch (options.data_to_edit.note_type) {
+            case 'normal':
+              this.$('#standardNote').prop("checked", true)
+              break;
+              case 'calender':
+                this.$('#KalenderNote').prop("checked", true)
+              break;
+          
+            default:
+              break;
+          }
+        }, 500);
       },
       events: {
         'click #EditCardClosePanel': 'closePanel',
@@ -2665,10 +2679,13 @@
         const content =  this.$('#textareaTextCard').val();
         const id = this.card_id;
         const company_id = this.company_id
+        const type = this.$('input[name=colors]:checked', '#myForm').val()
+        console.log(type, "my typeeeeeeeeeeeeeee")
         const data = {
           'note_id':id,
           'title':title,
-          'content':content
+          'content':content,
+          "note_type": type,
         };
         await editCardsBlackboard(company_id, data)
         this.closePanel();
@@ -2682,7 +2699,8 @@
         const data = {
           'note_id':id,
           'title':title,
-          'content':content
+          'content':content,
+          "note_type": "normal",
         };
         await editCardsBlackboard(company_id, data)
         this.closePanel();

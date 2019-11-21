@@ -124,7 +124,7 @@ export class Avatar extends React.Component<Props, State> {
   }
 
   public render() {
-    const { i18n, name, phoneNumber, profileName, size } = this.props;
+    const { i18n, name, phoneNumber, profileName, size, conversationType } = this.props;
     const { imageBroken, srcImage, loading } = this.state;
 
     // const hasImage = !noteToSelf && avatarPath && !imageBroken;
@@ -152,7 +152,8 @@ export class Avatar extends React.Component<Props, State> {
             src={srcImage}
           />
         ) : (
-          <img src="images/header-chat.png" alt="Default img" />
+          // tslint:disable-next-line:use-simple-attributes
+          <img  className={conversationType === 'company' ? 'companyAvatarDefault' : ''} src="images/header-chat.png" alt="Default img" />
         )}
       </div>
     );

@@ -1455,6 +1455,7 @@ const CENTRAL_IMG_ROOT = 'https://luydm9sd26.execute-api.eu-central-1.amazonaws.
 function updateImagesByUrl(url) {
   'use strict';
 
+  // for custom image
   // https://luydm9sd26.execute-api.eu-central-1.amazonaws.com/latest/public/img/734754
   const selector = 'img[src ^= "' + url + '"]';
   const elems = document.querySelectorAll(selector);
@@ -1462,6 +1463,16 @@ function updateImagesByUrl(url) {
   for (let elem of elems) {
     try {
       elem.src = url + '?ts=' + date;
+    } catch (err) {
+      console.warn('updateImagesByUrl Error:', err, url, elem);
+    }
+  }
+  // for default image
+  const defaultSelector = 'img[class ^= "companyAvatarDefault"]'
+  const elemsDefault = document.querySelectorAll(defaultSelector);
+  for (let elem of elemsDefault) {
+    try {
+      elem.src = url;
     } catch (err) {
       console.warn('updateImagesByUrl Error:', err, url, elem);
     }
