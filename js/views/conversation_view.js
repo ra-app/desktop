@@ -2597,7 +2597,8 @@
             const data = {
               'note_id':this.notes[index].id,
               'title':'',
-              'content':''
+              'content':'',
+              "note_type": "normal"
             }
             this.updateCard(data, this.notes[index].company_id)
             this.emptyNotes.push(tmpNewElement)
@@ -2668,7 +2669,8 @@
         const data = {
           'note_id':id,
           'title':title,
-          'content':content
+          'content':content,
+          "note_type": "normal",
         };
         await editCardsBlackboard(company_id, data)
         this.closePanel();
@@ -2682,7 +2684,8 @@
         const data = {
           'note_id':id,
           'title':title,
-          'content':content
+          'content':content,
+          "note_type": "normal",
         };
         await editCardsBlackboard(company_id, data)
         this.closePanel();
