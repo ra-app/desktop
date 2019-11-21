@@ -153,7 +153,7 @@ export class Avatar extends React.Component<Props, State> {
           />
         ) : (
           // tslint:disable-next-line:use-simple-attributes
-          <img  className={conversationType === 'company' ? 'companyAvatarDefault' : ''} src="images/header-chat.png" alt="Default img" />
+          <img  className={conversationType === 'company' ? 'companyAvatarDefault' : ''} src="images/firmen-logo.png" alt="Default img" />
         )}
       </div>
     );
