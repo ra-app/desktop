@@ -1727,6 +1727,9 @@
     template: $('#modal-importer').html(),
 
     initialize(options) {
+      if (document.getElementsByClassName('modal-importer')[0]) {
+        this.closePanel();
+      }
       if (options) {
         // if (options.contact_data !== undefined) {
           this.contactListXml = prepareDataXml(options.contact_data);

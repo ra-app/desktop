@@ -207,6 +207,7 @@
       }
     },
     openContact() {
+      console.log("ddddddddddddddddddddddddddd")
       // if (id) {
       this.openInbox().then(async () => {
         this.resetViews();
@@ -246,11 +247,13 @@
       //   }
       //   xml.type = typeUser;
       // }
+
       const dialog = new Whisper.ModalImport({
         contact_data: xml,
         type: typeUser,
         admin_client: admin_client_data,
       });
+      console.log('DIALOG', dialog)
       dialog.$el.insertBefore(
         document.getElementsByClassName('network-status-container')[0]
       );

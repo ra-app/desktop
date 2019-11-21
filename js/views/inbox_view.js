@@ -246,6 +246,10 @@
       'click #unclaimed, #claimed, #closed': 'getTickets',
       'click #sortBy': 'sortTickets',
       'keyup #searchTickets': 'searchTickets',
+      'click #add_group': 'addGroup',
+      'click #add_extern': 'addExtern',
+      'click #add_intern': 'addIntern',
+      'click #open_contact': 'showContacts',
     },
     setupLeftPane() {
       this.leftPaneView = new Whisper.ReactWrapperView({
@@ -255,6 +259,27 @@
 
       // Finally, add it to the DOM
       this.$('.left-pane-placeholder').append(this.leftPaneView.el);
+    },
+    addGroup(){
+      const appView = new Whisper.AppView({
+      });
+      appView.openModalImport('group');
+    },
+    addExtern(){
+      const appView = new Whisper.AppView({
+      });
+      appView.openModalImport('kunde');
+    },
+    addIntern(){
+      const appView = new Whisper.AppView({
+      });
+      appView.openModalImport('admin');
+    },
+    showContacts(){
+      // const appView = new Whisper.AppView({
+      //   el: $('body'),
+      // });
+      this.openContact();
     },
     startConnectionListener() {
       this.interval = setInterval(() => {
