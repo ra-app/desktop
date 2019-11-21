@@ -301,7 +301,7 @@ export class MainHeader extends React.Component<Props> {
                 </li>
 
                 <li onClick={this.showContactsBound}>
-                  <span>Kontaktliste</span>
+                  <span>Kontakte</span>
                   <img
                     src="images/icons/contact_list_35x35.svg"
                     className="imageLiChatMenu"

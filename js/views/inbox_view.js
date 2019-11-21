@@ -105,6 +105,9 @@
             if (this.$('.blackboard-view')) {
               this.$('.blackboard-view').remove();
             }
+            if(this.$('.group')){
+              this.$('.group').remove();
+            }
             const view = new Whisper.TicketScreen({
               model: conversation,
               window: this.model.window,
@@ -115,7 +118,7 @@
           }
           $el.prependTo(this.el);
         }
-
+  
         window.dispatchEvent(new Event('resize'));
       }
     },
@@ -244,6 +247,10 @@
       'click #unclaimed, #claimed, #closed': 'getTickets',
       'click #sortBy': 'sortTickets',
       'keyup #searchTickets': 'searchTickets',
+      'click #add_group': 'addGroup',
+      'click #add_extern': 'addExtern',
+      'click #add_intern': 'addIntern',
+      'click #open_contact': 'showContacts',
     },
     setupLeftPane() {
       this.leftPaneView = new Whisper.ReactWrapperView({
@@ -253,6 +260,31 @@
 
       // Finally, add it to the DOM
       this.$('.left-pane-placeholder').append(this.leftPaneView.el);
+    },
+    addGroup(){
+      // const appView = new Whisper.AppView({
+      // });
+      const { appView } = window['owsDesktopApp'];
+      appView.openModalImport('group');
+    },
+    addExtern(){
+      // const appView = new Whisper.AppView({
+      // });
+      const { appView } = window['owsDesktopApp'];
+      appView.openModalImport('kunde');
+    },
+    addIntern(){
+      // const appView = new Whisper.AppView({
+      // });
+      const { appView } = window['owsDesktopApp'];
+      appView.openModalImport('admin');
+    },
+    showContacts(){
+      const { appView } = window['owsDesktopApp'];
+      // const appView = new Whisper.AppView({
+      //   el: $('body'),
+      // });
+      appView.openContact();
     },
     startConnectionListener() {
       this.interval = setInterval(() => {

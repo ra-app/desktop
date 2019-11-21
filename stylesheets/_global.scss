@@ -1020,7 +1020,7 @@ $debug: 0;
 }
 
 .label-inputs {
-  color: $placeholder-color;
+  // color: $placeholder-color;
   text-transform: uppercase;
   @include font15-poppinsMedium;
 }
@@ -1357,7 +1357,7 @@ $debug: 0;
       width: 130px;
       text-align: left;
       letter-spacing: 0;
-      color: #b1bbc0;
+      // color: #b1bbc0;
       text-transform: uppercase;
       opacity: 1;
       font-weight: 500;
@@ -1395,7 +1395,7 @@ $debug: 0;
       width: 130px;
       text-align: left;
       letter-spacing: 0;
-      color: #b1bbc0;
+      // color: #b1bbc0;
       text-transform: uppercase;
       opacity: 1;
       font-weight: 500;
@@ -1409,7 +1409,7 @@ $debug: 0;
   .label-text {
     text-align: left;
     letter-spacing: 0;
-    color: #b1bbc0;
+    // color: #b1bbc0;
     text-transform: uppercase !important;
     opacity: 1;
     font-size: 15px;
@@ -1459,9 +1459,9 @@ $debug: 0;
       margin-right: 23px;
       cursor: pointer;
     }
-    span {
-      color: $placeholder-color;
-    }
+     /*span {
+       color: $placeholder-color;
+     }*/
   }
 
   #phone-number-input {
@@ -1477,7 +1477,7 @@ $debug: 0;
       top: -60px;
       font-weight: bold;
       width: 100%;
-      color: $placeholder-color;
+      // color: $placeholder-color;
       text-transform: uppercase;
       @include font15-poppinsMedium;
     }
@@ -1733,7 +1733,9 @@ th.sorted.descending:after {
       .divUserPrev {
         margin-top: -13px;
         height: 45px;
-        padding: 8px 15px;
+        /*padding: 8px 15px;*/
+        padding: 0px 15px;
+        display: inline-flex;
         background: #b1c6de52 0% 0% no-repeat padding-box;
         img {
           height: 30px;
@@ -1800,7 +1802,7 @@ th.sorted.descending:after {
         margin-right: 10px;
       }
       input[type='text']::placeholder {
-        color: #b1bbc0;
+        // color: #b1bbc0;
       }
     }
   }
@@ -1859,7 +1861,7 @@ th.sorted.descending:after {
     }
   }
   .divModalHeader{
-    height: 70px;
+    /*height: 70px;*/
     padding: 15px;
     position: relative;
     color: $color-white;
@@ -2207,7 +2209,7 @@ input {
     top: 10px;
   }
   .labelInputInvitation {
-    color: #b1bbc0;
+    // color: #b1bbc0;
     font-size: 13px;
   }
 }
@@ -2343,7 +2345,7 @@ input {
 .containerLabelInfoCompany{
   margin-top: 10px;
   .labelEditName{
-    color: #b1bbc0;
+    // color: #b1bbc0;
     font-size: 13px;
     text-transform: uppercase;
     margin-left: 5px;
@@ -2506,7 +2508,7 @@ input[type=number] {
   cursor: not-allowed;
 }
 .labelEditNameGroup{
-  color: #b1bbc0;
+  // color: #b1bbc0;
   font-size: 13px;
   text-transform: uppercase;
 }
