@@ -2319,10 +2319,15 @@ input {
 }
 
 .editIconAvatar {
-  top: 65px;
+  // top: 65px;
   width: 30px;
-  position: relative;
+  // position: relative;
   cursor: pointer;
+}
+
+.changeAvatar {
+  position: relative;
+  top: 65px;
 }
 
 .closeIcon {
