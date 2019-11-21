@@ -1151,7 +1151,7 @@
       await this.createAddPanel(xmlData);
     },
     searchCountry(e) {
-      var value = e.target.value;
+      var value = e.target.value.toLowerCase();
       $('#divCountries p').filter(function () {
         $(this).toggle(
           $(this)
