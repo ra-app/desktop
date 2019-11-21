@@ -61,7 +61,7 @@ export class MainHeader extends React.Component<Props> {
     event: React.KeyboardEvent<HTMLInputElement>
   ) => void;
   private readonly setFocusBound: () => void;
-  private readonly chatMenuBound: () => void;
+  // private readonly chatMenuBound: () => void;
   private readonly openEditcompanyBound: () => void;
   private readonly showContactsBound: () => void;
   private readonly importAdminBound: () => void;
@@ -70,7 +70,7 @@ export class MainHeader extends React.Component<Props> {
   private readonly inputRef: React.RefObject<HTMLInputElement>;
   private readonly debouncedSearch: (searchTerm: string) => void;
   private readonly wrapperRef: any;
-  private readonly wrapperRefImage: any;
+  // private readonly wrapperRefImage: any;
 
   constructor(props: Props) {
     super(props);
@@ -79,7 +79,7 @@ export class MainHeader extends React.Component<Props> {
     this.clearSearchBound = this.clearSearch.bind(this);
     this.handleKeyUpBound = this.handleKeyUp.bind(this);
     this.setFocusBound = this.setFocus.bind(this);
-    this.chatMenuBound = this.chatMenu.bind(this);
+    // this.chatMenuBound = this.chatMenu.bind(this);
     this.openEditcompanyBound = this.openEditCompany.bind(this);
     this.showContactsBound = this.showContacts.bind(this);
     this.importAdminBound = this.importAdmin.bind(this);
@@ -88,11 +88,11 @@ export class MainHeader extends React.Component<Props> {
     this.inputRef = React.createRef();
     this.debouncedSearch = debounce(this.search.bind(this), 20);
     this.wrapperRef = React.createRef();
-    this.wrapperRefImage = React.createRef();
-    this.handleClickOutside = this.handleClickOutside.bind(this);
+    // this.wrapperRefImage = React.createRef();
+    // this.handleClickOutside = this.handleClickOutside.bind(this);
   }
   public async componentDidMount() {
-    document.addEventListener('mousedown', this.handleClickOutside);
+    // document.addEventListener('mousedown', this.handleClickOutside);
     this.getDataTocheck();
     this.checkVersion();
   }
@@ -115,15 +115,15 @@ export class MainHeader extends React.Component<Props> {
       this.setState({ isAdmin: false });
     }
   }
-  public componentWillUnmount() {
-    document.removeEventListener('mousedown', this.handleClickOutside);
-  }
-  public handleClickOutside(event: any) {
-    const { openMenu } = this.state;
-    if (openMenu && (this.wrapperRef && (!this.wrapperRef.current.contains(event.target) && !this.wrapperRefImage.current.contains(event.target)))) {
-      this.setState({ openMenu: false });
-    }
-  }
+  // public componentWillUnmount() {
+  //   document.removeEventListener('mousedown', this.handleClickOutside);
+  // }
+  // public handleClickOutside(event: any) {
+  //   const { openMenu } = this.state;
+  //   if (openMenu && (this.wrapperRef && (!this.wrapperRef.current.contains(event.target) && !this.wrapperRefImage.current.contains(event.target)))) {
+  //     this.setState({ openMenu: false });
+  //   }
+  // }
   public search() {
     const { searchTerm, search, i18n, ourNumber, regionCode } = this.props;
     if (search) {
@@ -241,7 +241,7 @@ export class MainHeader extends React.Component<Props> {
       // phoneNumber,
       // profileName,
     } = this.props;
-    const { openMenu, isAdmin, isBeta } = this.state;
+    const { openMenu, /*isAdmin,*/ isBeta } = this.state;
 
     return (
       <div id="main_header">
@@ -253,7 +253,7 @@ export class MainHeader extends React.Component<Props> {
           )}
           <img onClick={this.openEditcompanyBound} className="mainHeaderIcon" src="images/header-chat.png" alt="header chat" />
           <span>Kommunikation</span>
-          {isAdmin && (
+          {/* {isAdmin && (
             <img
               src="images/icons/menu_over_blue_24x24.svg"
               className="chat_menu"
@@ -262,7 +262,7 @@ export class MainHeader extends React.Component<Props> {
               id="openMenuChat"
               ref={this.wrapperRefImage}
             />
-          )}
+          )} */}
           {openMenu && (
             <div className="menuChat" ref={this.wrapperRef}>
               <ul className="ulMenuChat">
