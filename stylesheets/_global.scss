@@ -1286,6 +1286,19 @@ $debug: 0;
     .labelPhone {
       top: -60px !important;
     }
+
+    .adviceVerification {
+      display: block;
+    height: 0px;
+    position: relative;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    text-transform: uppercase;
+    font-size: 13px !important;
+    // font-family: Poppins-Medium, "Helvetica Neue", "Source Sans Pro", "Source Han Sans SC", "Source Han Sans CN", "Hiragino Sans GB", "Hiragino Kaku Gothic", "Microsoft Yahei UI", Helvetica, Arial, sans-serif;
+    font-family: $poppins-semibold;
+    }
   }
   .eula-text {
     width: 100%;
