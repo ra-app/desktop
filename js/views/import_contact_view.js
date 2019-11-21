@@ -636,7 +636,7 @@
       const imageClosePanel = document.createElement('img');
       imageClosePanel.className = 'imageClosePanel';
       imageClosePanel.id = 'imageClosePanel';
-      imageClosePanel.src = 'images/icons/x-contact-list.svg';
+      imageClosePanel.src = 'images/icons/x_over_blue_24x24.svg';
       imageClosePanel.onclick = () => {
         dataUsersToInvitate = {};
         this.closeModal();
@@ -758,7 +758,7 @@
           'phone'
         )[0].childNodes[0].nodeValue;
         const removeUser = document.createElement('img');
-        removeUser.src = 'images/icons/x-contact-list.svg';
+        removeUser.src = 'images/icons/x_over_blue_24x24.svg';
         removeUser.className = 'imageCloseUser';
         removeUser.onclick = () => {
           document.getElementById('user' + id).remove();
@@ -846,7 +846,7 @@
       titleHeader.className = 'titleHeaderEdit';
       const imageClosePanel = document.createElement('img');
       imageClosePanel.className = 'imageClosePanel';
-      imageClosePanel.src = 'images/icons/x-contact-list.svg';
+      imageClosePanel.src = 'images/icons/x_over_blue_24x24.svg';
       imageClosePanel.onclick = () => {
         this.closeModal();
       };
@@ -903,7 +903,7 @@
       pUserPhone.className = 'titleHeaderEdit';
       const imageClosePanel = document.createElement('img');
       imageClosePanel.className = 'imageClosePanel';
-      imageClosePanel.src = 'images/icons/x-contact-list.svg';
+      imageClosePanel.src = 'images/icons/x_over_blue_24x24.svg';
       imageClosePanel.onclick = () => {
         this.closeModal();
       };
@@ -1151,7 +1151,7 @@
       await this.createAddPanel(xmlData);
     },
     searchCountry(e) {
-      var value = e.target.value;
+      var value = e.target.value.toLowerCase();
       $('#divCountries p').filter(function () {
         $(this).toggle(
           $(this)
@@ -1248,7 +1248,7 @@
       pUserPhone.className = 'titleHeaderEdit';
       const imageClosePanel = document.createElement('img');
       imageClosePanel.className = 'imageClosePanel';
-      imageClosePanel.src = 'images/icons/x-contact-list.svg';
+      imageClosePanel.src = 'images/icons/x_over_blue_24x24.svg';
       imageClosePanel.onclick = () => {
         this.closeModal();
       };
@@ -1898,7 +1898,7 @@
               i
             ].childNodes[0].nodeValue;
             const removeUser = document.createElement('img');
-            removeUser.src = 'images/icons/x-contact-list.svg';
+            removeUser.src = 'images/icons/x_over_blue_24x24.svg';
             removeUser.className = 'imageCloseUser';
             removeUser.onclick = () => {
               document.getElementById('user' + id).remove();

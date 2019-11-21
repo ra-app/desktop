@@ -113,6 +113,7 @@
       this.$('#edit_company_data').append(settingEditName)
     },
     async saveNewCompanyName() {
+      this.$('#buttonSaveEditCompany').addClass('disabled')
       const company_id = textsecure.storage.get('companyNumber', null);
       const newName = this.$('#newCompanyName').val();
       if(this.newAvatar) {
@@ -125,7 +126,6 @@
       await getCompany(company_id);
       this.$('#spanCompanyName').text(newName);
       this.$('#settingEditName').remove();
-      this.$('#buttonSaveEditCompany').addClass('disabled')
       this.$('#nameSection').show();
       window.clearCache();
       updateImagesByUrl(CENTRAL_IMG_ROOT + company_id);
