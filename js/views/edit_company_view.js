@@ -19,6 +19,7 @@
       };
     },
     initialize(options) {
+      this.newAvatar = false;
       this.company_name = options.company_name;
       this.render();
       // eslint-disable-next-line func-names
@@ -80,6 +81,7 @@
                 type: imageType.split('/')[1],
               };
               textsecure.storage.put('dataCompanyAvatar', dataCompanyAvatar);
+              this.newAvatar = true;
               this.$('#buttonSaveEditCompany').removeClass('disabled')
               // setCompanyAvatar(company_id, dataCompanyAvatar);
             }, imageType, 1
@@ -112,10 +114,11 @@
     },
     async saveNewCompanyName() {
       const company_id = textsecure.storage.get('companyNumber', null);
-      const dataCompanyAvatar = textsecure.storage.get('dataCompanyAvatar');
       const newName = this.$('#newCompanyName').val();
-      console.log(newName, "NEW NAMEEEEEEEEEEEEEEEE")
-      setCompanyAvatar(company_id, dataCompanyAvatar);
+      if(this.newAvatar) {
+        const dataCompanyAvatar = textsecure.storage.get('dataCompanyAvatar');
+        setCompanyAvatar(company_id, dataCompanyAvatar);
+      }
       if(newName !== undefined){
         await updateCompanyName(newName, company_id)
       }
