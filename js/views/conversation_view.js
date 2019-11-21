@@ -2668,11 +2668,15 @@
       events: {
         'click #EditCardClosePanel': 'closePanel',
         'click #sendEditCard': 'saveEditCard',
-        'click #removeCard': 'removeCard'
+        'click #cancelEditCard': 'cancelEditCard'
 
       },
       closePanel(){
         document.getElementsByClassName('edit-card-blackboard')[0].remove();
+      },
+      cancelEditCard(){
+        this.closePanel();
+        window.Whisper.events.trigger('showOpenBlackboard', this.company_id);
       },
       async saveEditCard(){
         const title =  this.$('#title-card').val();
@@ -2680,7 +2684,6 @@
         const id = this.card_id;
         const company_id = this.company_id
         const type = this.$('input[name=colors]:checked', '#myForm').val()
-        console.log(type, "my typeeeeeeeeeeeeeee")
         const data = {
           'note_id':id,
           'title':title,
