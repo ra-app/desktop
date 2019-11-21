@@ -42,6 +42,37 @@ type PropsHousekeeping = {
 type Props = PropsData & PropsHousekeeping;
 
 export class ConversationListItem extends React.PureComponent<Props> {
+  public state = {
+    lastUpdated: '',
+  };
+  private interval: any;
+
+  constructor(props: Props) {
+    super(props);
+
+    this.interval = null;
+  }
+  public componentDidMount() {
+    const updateImg = () => {
+      if (this.state.lastUpdated === 'images/icons/post-it-pin-icon-4.svg') {
+        this.setState({
+          lastUpdated: 'images/icons/post-it-pin-icon-red-corner.svg',
+        });
+      } else {
+        this.setState({
+          lastUpdated: 'images/icons/post-it-pin-icon-4.svg',
+        });
+      }
+    };
+    this.interval = setInterval(updateImg, 2000);
+  }
+
+  public componentWillUnmount() {
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
+  }
+
   public renderAvatar() {
     const {
       avatarPath,
@@ -112,12 +143,12 @@ export class ConversationListItem extends React.PureComponent<Props> {
           {isMe ? (
             i18n('noteToSelf')
           ) : (
-            <ContactName
-              phoneNumber={phoneNumber}
-              name={name}
-              profileName={profileName}
-            />
-          )}
+              <ContactName
+                phoneNumber={phoneNumber}
+                name={name}
+                profileName={profileName}
+              />
+            )}
         </div>
         <div
           className={classNames(
@@ -168,20 +199,20 @@ export class ConversationListItem extends React.PureComponent<Props> {
           {isTyping ? (
             <TypingAnimation i18n={i18n} />
           ) : (
-            <MessageBody
-              text={text}
-              disableJumbomoji={true}
-              disableLinks={true}
-              i18n={i18n}
-            />
-          )}
+              <MessageBody
+                text={text}
+                disableJumbomoji={true}
+                disableLinks={true}
+                i18n={i18n}
+              />
+            )}
         </div>
         {lastMessage && lastMessage.status ? (
           <div
             className={classNames(
               'module-conversation-list-item__message__status-icon',
               `module-conversation-list-item__message__status-icon--${
-                lastMessage.status
+              lastMessage.status
               }`
             )}
           />
@@ -189,7 +220,6 @@ export class ConversationListItem extends React.PureComponent<Props> {
       </div>
     );
   }
-
   public render() {
     const {
       unreadCount,
@@ -226,8 +256,8 @@ export class ConversationListItem extends React.PureComponent<Props> {
           {this.renderHeader()}
           {this.renderMessage()}
           {(this.props.type === 'company' && openBlackboard) && (
-            <div onClick = {(evt) => {evt.preventDefault(); evt.stopPropagation(); openBlackboard(id)}}>
-              <img className='iconOpenBlackboard' src='images/icons/post-it-pin-icon-4.svg' />
+            <div onClick={(evt) => { evt.preventDefault(); evt.stopPropagation(); openBlackboard(id) }}>
+              <img className='iconOpenBlackboard' src={this.state.lastUpdated} />
             </div>
           )}
         </div>
