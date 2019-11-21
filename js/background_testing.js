@@ -167,7 +167,7 @@ async function initUpdateIPC() {
         window.ipc.send('checkUpdate', {localStorageData, localStorageDataVersion, localStorageDataFileName});
         break;
       case 'dl_progress':
-        setTestUpdateIndicator('Download Fortschritt: ' + (msg.progress.percent * 100).toFixed(1) + '%');
+        setTestUpdateIndicator('Download-Prozess: ' + (msg.progress.percent * 100).toFixed(1) + '%');
         break;
       case 'download_finished':
         localStorage.setItem('existsUpdate', msg.updateFilePath);
