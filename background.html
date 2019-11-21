@@ -186,13 +186,12 @@
           <input maxlength='25' type='text' name='title card' value='{{{title}}}' id='title-card' autofocus />
           <label for='title-card' class="label-inputs code-label">Nachricht</label>
           <textarea class="textareaSendeInvitation" id="textareaTextCard" placeholder="Text">{{content}}</textarea>
-          <span>Select type</span>
+          <span>Notizentyp</span>
           <div class="RadioButtonType">
-              <form id="myForm">
-            <input type="radio" name="colors" id="standardNote" value='normal'>Standard
-            <br>
-            <input type="radio" name="colors" id="KalenderNote" value='calender'>Kalender
-              </form>
+              <select name = 'typeNoteOptions' id="typeNoteOptions">
+                <option value="normal">Standard</option>
+                <option value="calender">Kalender</option>
+              </select>
           </div>
           {{/model}}
           <button class="tablinks" id="sendEditCard">Speichern</button>
