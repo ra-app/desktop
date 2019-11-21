@@ -2366,6 +2366,7 @@ input {
   height: 100%;
   & .addMoreNotes{
     background: unset;
+    background-image: unset!important;
     & .contentCardBlackboard{
       color: #999;
     font-size: 115px;
@@ -2387,7 +2388,7 @@ input {
   }
 }
 
-.flex-container > div {
+.flex-container > div[dataType ="normal"] {
   margin-bottom: 5px;
   /* padding: 10px; */
   width: calc((100% / 5) - 10px);
@@ -2403,7 +2404,7 @@ input {
   margin-right: 5px;
   .titleCardBlackboard{
     max-width: 70%;
-    margin: 65px auto 5px auto;
+    margin: 10px auto 5px auto;
     font-weight: 300;
     color: $color-raapp-text;
     font-size: 16px;
@@ -2442,6 +2443,84 @@ input {
   }
   &.oneCard{
     background-image: url(./../images/post-it-pin-new.svg);
+    width: 50%;
+    height: calc(100% - 70px);
+    margin: 0 auto;
+    p.titleCardBlackboard {
+        max-width: 50% !important;
+        margin: 120px auto !important;
+        margin-bottom: 5px !important;
+    }
+    p.contentCardBlackboard{
+      max-width: calc(100% - 40px);
+      padding-left: 10px;
+      padding-right: 10px;
+      max-height: calc(100% - 280px);
+      -webkit-line-clamp: unset;
+      -webkit-box-orient: unset;
+      text-overflow: unset;
+      overflow: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+  }
+}
+
+.flex-container > div[dataType ="calender"] {
+  margin-bottom: 5px;
+  /* padding: 10px; */
+  width: calc((100% / 5) - 10px);
+  // height: 300px;
+  height: 280px;
+  overflow: hidden;
+  font-size: 14px;
+  background-image: url(./../images/post-it-pin-blue.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  text-align: center;
+  margin-right: 5px;
+  .titleCardBlackboard{
+    max-width: 70%;
+    margin: 10px auto 5px auto;
+    font-weight: 300;
+    color: $color-raapp-text;
+    font-size: 16px;
+    font-weight: bold;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 16px;    
+    max-height: 32px;     
+    -webkit-line-clamp: 2; /* Write the number of 
+                              lines you want to be 
+                              displayed */
+    -webkit-box-orient: vertical;
+  }
+
+  .contentCardBlackboard{
+    max-width: 70%;
+    margin: 0 auto;
+    color: $color-raapp-text;
+    text-align: left;
+    max-height: 113px;
+    overflow: hidden;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 16px;    
+    max-height: 143px;     
+    -webkit-line-clamp: 9; /* Write the number of 
+                              lines you want to be 
+                              displayed */
+    -webkit-box-orient: vertical;
+    word-break: break-word;
+ 
+  }
+  &.oneCard{
+    background-image: url(./../images/post-it-pin-blue.svg);
     width: 50%;
     height: calc(100% - 70px);
     margin: 0 auto;
