@@ -105,6 +105,9 @@
             if (this.$('.blackboard-view')) {
               this.$('.blackboard-view').remove();
             }
+            if(this.$('.group')){
+              this.$('.group').remove();
+            }
             const view = new Whisper.TicketScreen({
               model: conversation,
               window: this.model.window,
@@ -115,7 +118,7 @@
           }
           $el.prependTo(this.el);
         }
-
+  
         window.dispatchEvent(new Event('resize'));
       }
     },
@@ -261,25 +264,29 @@
       this.$('.left-pane-placeholder').append(this.leftPaneView.el);
     },
     addGroup(){
-      const appView = new Whisper.AppView({
-      });
+      // const appView = new Whisper.AppView({
+      // });
+      const { appView } = window['owsDesktopApp'];
       appView.openModalImport('group');
     },
     addExtern(){
-      const appView = new Whisper.AppView({
-      });
+      // const appView = new Whisper.AppView({
+      // });
+      const { appView } = window['owsDesktopApp'];
       appView.openModalImport('kunde');
     },
     addIntern(){
-      const appView = new Whisper.AppView({
-      });
+      // const appView = new Whisper.AppView({
+      // });
+      const { appView } = window['owsDesktopApp'];
       appView.openModalImport('admin');
     },
     showContacts(){
+      const { appView } = window['owsDesktopApp'];
       // const appView = new Whisper.AppView({
       //   el: $('body'),
       // });
-      this.openContact();
+      appView.openContact();
     },
     startConnectionListener() {
       this.interval = setInterval(() => {
