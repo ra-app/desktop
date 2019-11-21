@@ -41,6 +41,12 @@
             });
           let $el = this.$(`#${id}`);
           if ($el === null || $el.length === 0) {
+            if (this.$('.group')) {
+              this.$('.group').remove();
+            }
+            if (this.$('.private')) {
+              this.$('.private').remove();
+            }
             const view = new Whisper.ConversationView({
               model: conversation,
               window: this.model.window,
