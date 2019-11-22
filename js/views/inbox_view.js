@@ -40,10 +40,10 @@
               this.pause();
             });
           let $el = this.$(`#${id}`);
+          if (this.$('.group')) {
+            this.$('.group').remove();
+          }
           if ($el === null || $el.length === 0) {
-            if (this.$('.group')) {
-              this.$('.group').remove();
-            }
             if (this.$('.private')) {
               this.$('.private').remove();
             }

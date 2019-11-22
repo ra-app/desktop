@@ -43,35 +43,35 @@ type Props = PropsData & PropsHousekeeping;
 
 export class ConversationListItem extends React.PureComponent<Props> {
   public state = {
-    lastUpdated: '',
+    lastUpdated: 'images/icons/post-it-pin-icon-4.svg',
   };
-  private interval: any;
+  // private interval: any;
 
   constructor(props: Props) {
     super(props);
 
-    this.interval = null;
+    // this.interval = null;
   }
-  public componentDidMount() {
-    const updateImg = () => {
-      if (this.state.lastUpdated === 'images/icons/post-it-pin-icon-4.svg') {
-        this.setState({
-          lastUpdated: 'images/icons/post-it-pin-icon-red-corner.svg',
-        });
-      } else {
-        this.setState({
-          lastUpdated: 'images/icons/post-it-pin-icon-4.svg',
-        });
-      }
-    };
-    this.interval = setInterval(updateImg, 2000);
-  }
+  // public componentDidMount() {
+  //   const updateImg = () => {
+  //     if (this.state.lastUpdated === 'images/icons/post-it-pin-icon-4.svg') {
+  //       this.setState({
+  //         lastUpdated: 'images/icons/post-it-pin-icon-red-corner.svg',
+  //       });
+  //     } else {
+  //       this.setState({
+  //         lastUpdated: 'images/icons/post-it-pin-icon-4.svg',
+  //       });
+  //     }
+  //   };
+  //   this.interval = setInterval(updateImg, 2000);
+  // }
 
-  public componentWillUnmount() {
-    if (this.interval) {
-      clearInterval(this.interval);
-    }
-  }
+  // public componentWillUnmount() {
+  //   if (this.interval) {
+  //     clearInterval(this.interval);
+  //   }
+  // }
 
   public renderAvatar() {
     const {
