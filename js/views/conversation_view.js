@@ -2507,7 +2507,6 @@
       }
     },
     initialize(options) {
-    
       this.isMultiViewMode = true;
       this.isViewMode = false;
       this.currentId = null;
