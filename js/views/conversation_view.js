@@ -11,7 +11,7 @@
 */
 
 // eslint-disable-next-line func-names
-(function() {
+(function () {
   'use strict';
 
   window.Whisper = window.Whisper || {};
@@ -124,17 +124,17 @@
         this.$('#claim_' + element.uuid).click(() =>
           this.claimTicket(element.company_id, element.uuid)
         );
-        this.$('img').on('error', function() {
+        this.$('img').on('error', function () {
           $(this).attr('src', 'images/header-chat.png');
         });
       });
       if (options.editCompany) {
-      const edit = new Whisper.EditCompanyView({
+        const edit = new Whisper.EditCompanyView({
           company_name: this.model[0].company_name,
-        window: this.model.window,
-      });
-      let $el = this.$('.edit-company-container')[0];
-      $el.append(edit.el);
+          window: this.model.window,
+        });
+        let $el = this.$('.edit-company-container')[0];
+        $el.append(edit.el);
       } else {
         if (this.$('.edit-company-container')[0]) {
           this.$('.edit-company-container')[0].remove();
@@ -157,19 +157,19 @@
 
               const mainMssgDiv = `<div id="ticket_${
                 element.uuid
-              }" class="mainMssgDiv"></div>`;
+                }" class="mainMssgDiv"></div>`;
               this.$('#' + element.uuid).append(mainMssgDiv);
               ticketDETAIL.events.reverse().forEach(mssg => {
                 const mssgDiv = `<div class="received-message">
                                   <p class="mssgUsername">${
-                                    element.name ? element.name : 'username'
-                                  }</p>
+                  element.name ? element.name : 'username'
+                  }</p>
                                   <p class="ticket-message">${
-                                    JSON.parse(mssg.json).body
-                                  }</p>
+                  JSON.parse(mssg.json).body
+                  }</p>
                                   <p class="ticket-time">${
-                                    days[new Date(mssg.ts).getDay()]
-                                  } ${new Date(mssg.ts).getHours() -
+                  days[new Date(mssg.ts).getDay()]
+                  } ${new Date(mssg.ts).getHours() -
                   1}:${new Date(mssg.ts).getMinutes()}</p>
                                 </div>`;
                 this.$('#ticket_' + element.uuid).append(mssgDiv);
@@ -196,7 +196,7 @@
 
       if (client.name) {
         if (client.name && client.surname) {
-          conversationName =  client.name + ' ' + client.surname;
+          conversationName = client.name + ' ' + client.surname;
         } else {
           conversationName = client.name;
         }
@@ -2506,136 +2506,169 @@
         showAddNote: this.showAddNote
       }
     },
-      initialize(options) {
-        this.isMultiViewMode = true;
-        this.isViewMode = false;
-        this.currentId = null;
-        this.company_id = options.company_id;
-        this.isadmin = options.isAdmin;
-        this.notes = [];
-        this.emptyNotes = [];
-        this.showAddNote = false;
-        options.model.forEach(element => {
-          if(element.title !== '' && element.content !== ''){
-            this.notes.push(element)
-            this.countNotes +=1;
-          }else {
-            this.emptyNotes.push(element)
-            this.showAddNote = true
-          }
-        });
-        this.render();
-      },
-      events: {
-        'click .card-blackboard': 'openDetailView',
-        'click #imageGoBackBlackboard': 'backMultiView',
-        // 'click #openEditCard': 'openEditCard'
-        'click #addMoreNote': 'addMoreNotes',
-        'click .editCardBlackboard': 'editCardIcon',
-        'click .removeCardBlackboard': 'removeCardIcon',
-        
+    initialize(options) {
+      this.isMultiViewMode = true;
+      this.isViewMode = false;
+      this.currentId = null;
+      this.company_id = options.company_id;
+      this.isadmin = options.isAdmin;
+      this.notes = [];
+      this.emptyNotes = [];
+      this.showAddNote = false;
+      options.model.forEach(element => {
+        if (element.title !== '' && element.content !== '') {
+          this.notes.push(element)
+          this.countNotes += 1;
+        } else {
+          this.emptyNotes.push(element)
+          this.showAddNote = true
+        }
+      });
+      this.render();
+    },
+    events: {
+      'click .card-blackboard': 'openDetailView',
+      'click #imageGoBackBlackboard': 'backMultiView',
+      // 'click #openEditCard': 'openEditCard'
+      'click #addMoreNote': 'addMoreNotes',
+      'click .editCardBlackboard': 'editCardIcon',
+      'click .removeCardBlackboard': 'removeNoteModal',
 
-      },
-      async openDetailView(event, sendid = null){
-        try {
-          const admins = await getAdminCompany( this.company_id)
-          if(admins.success){
-            this.isAdmin = true;
-          }else {
-            this.isAdmin = false;
-          }
-        } catch (error) {
-          this.isAdmin = false
+
+    },
+    async openDetailView(event, sendid = null) {
+      try {
+        const admins = await getAdminCompany(this.company_id)
+        if (admins.success) {
+          this.isAdmin = true;
+        } else {
+          this.isAdmin = false;
         }
-        let id = null
-        if(sendid !== null){
-          id = sendid
-        }else {
-          id = event.currentTarget.id;
-        }
-        this.currentId = id;
-        this.isViewMode = true;
-        this.isMultiViewMode = false;
-        const data = {
-          'note_id':this.currentId,
-        }
-        this.multiView = await getIndividualCardBlackboard( this.company_id, data)
-        const test = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig
-        this.multiView.textlink = this.multiView.content.replace(test, '<a target=\'_blank\' rel=\'noopener noreferrer nofollow\' href=\'$1\'>$1</a>');
-        this.render();
-        if(this.isAdmin){
-          this.openEditCard();
-        }
-      },
-      addMoreNotes(){
-        let id = this.emptyNotes[0].id
-        this.notes.push(this.emptyNotes[0]);
-        this.emptyNotes.shift();
-        this.openDetailView(null, id)
-      },
-      editCardIcon(event){
-        event.preventDefault();
-        event.stopPropagation();
-        const id = event.target.attributes.dataID.nodeValue;
-        this.openDetailView(null, id)
-      },
-      removeCardIcon(event){
-        event.preventDefault();
-        event.stopPropagation();
-        const id = event.target.attributes.dataID.nodeValue;
-        // this.openDetailView(null, id)
-        let indexToRemove = null
-        for (let index = 0; index < this.notes.length; index++) {
-          if(id == this.notes[index].id){
-            const tmpNewElement = {
-              id: this.notes[index].id,
-              title: "",
-              content: "",
-              company_id: this.notes[index].company_id,
-              ts_created: this.notes[index].ts_created
-            }
-            const data = {
-              'note_id':this.notes[index].id,
-              'title':'',
-              'content':'',
-              "note_type": "normal"
-            }
-            this.updateCard(data, this.notes[index].company_id)
-            this.emptyNotes.push(tmpNewElement)
-            indexToRemove = index;
-          }
-          
-        }
-        this.notes.splice(indexToRemove,1);
-        indexToRemove = null;
-        this.render();
-      },
-      async updateCard(data, company_id){
-        await editCardsBlackboard(company_id, data)
-      },
-      backMultiView(){
-        this.isViewMode = false;
-        this.isMultiViewMode = true;
-        this.currentId = null;
-        if(document.getElementsByClassName('edit-card-blackboard')[0]){
-          document.getElementsByClassName('edit-card-blackboard')[0].remove();
-        }
-        this.render();
-      },
-      openEditCard(id){
-        if(document.getElementsByClassName('edit-card-blackboard')[0]){
-          document.getElementsByClassName('edit-card-blackboard')[0].remove();
-        }
-        const dialog = new Whisper.EditCardBlackboard({
-          id: this.currentId,
-          company_id: this.company_id,
-          data_to_edit: this.multiView
-        });
-        dialog.render();
-        dialog.$el.insertBefore(
-          document.getElementsByClassName('network-status-container')[0]
-        );
+      } catch (error) {
+        this.isAdmin = false
       }
+      let id = null
+      if (sendid !== null) {
+        id = sendid
+      } else {
+        id = event.currentTarget.id;
+      }
+      this.currentId = id;
+      this.isViewMode = true;
+      this.isMultiViewMode = false;
+      const data = {
+        'note_id': this.currentId,
+      }
+      this.multiView = await getIndividualCardBlackboard(this.company_id, data)
+      const test = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig
+      this.multiView.textlink = this.multiView.content.replace(test, '<a target=\'_blank\' rel=\'noopener noreferrer nofollow\' href=\'$1\'>$1</a>');
+      this.render();
+      if (this.isAdmin) {
+        this.openEditCard();
+      }
+    },
+    addMoreNotes() {
+      let id = this.emptyNotes[0].id
+      this.notes.push(this.emptyNotes[0]);
+      this.emptyNotes.shift();
+      this.openDetailView(null, id)
+    },
+    editCardIcon(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      const id = event.target.attributes.dataID.nodeValue;
+      this.openDetailView(null, id)
+    },
+    removeNoteModal(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      const id = event.target.attributes.dataID.nodeValue;
+      const modalDiv = document.createElement('div');
+      modalDiv.id = 'modalDiv';
+      modalDiv.className = 'modal';
+      const modalContent = document.createElement('div');
+      modalContent.className = 'modal-content';
+      const modalText = document.createElement('span');
+      modalContent.append(modalText)
+      modalDiv.append(modalContent);
+      $('body').append(modalDiv);
+      const secondThis = this;
+      const acceptButton = document.createElement('button');
+      acceptButton.id = 'acceptRemoveButton';
+      acceptButton.className = 'deleteNoteModalButton';
+      acceptButton.textContent = 'Löschen';
+      acceptButton.onclick = function () {
+        secondThis.removeCardIcon(id);
+      }
+      const cancelButton = document.createElement('button');
+      cancelButton.id = 'cancelRemoveButton';
+      cancelButton.className = 'deleteNoteModalButton';
+      cancelButton.textContent = 'Abbrechen';
+      cancelButton.onclick = function () {
+        $('#modalDiv').remove();
+      }
+      const actionsDiv = document.createElement('div');
+      actionsDiv.append(acceptButton);
+      actionsDiv.append(cancelButton);
+      modalContent.append(actionsDiv);
+      modalText.textContent = 'Sind Sie sicher, dass Sie diese Notiz löschen möchten?';
+    },
+    removeCardIcon(id) {
+      // this.openDetailView(null, id)
+      let indexToRemove = null
+      for (let index = 0; index < this.notes.length; index++) {
+        if (id == this.notes[index].id) {
+          const tmpNewElement = {
+            id: this.notes[index].id,
+            title: "",
+            content: "",
+            company_id: this.notes[index].company_id,
+            ts_created: this.notes[index].ts_created
+          }
+          const data = {
+            'note_id': this.notes[index].id,
+            'title': '',
+            'content': '',
+            "note_type": "normal"
+          }
+          this.updateCard(data, this.notes[index].company_id)
+          this.emptyNotes.push(tmpNewElement)
+          indexToRemove = index;
+        }
+      }
+      this.notes.splice(indexToRemove, 1);
+      indexToRemove = null;
+      if(this.$('#modalDiv')){
+        $('#modalDiv').remove();
+      }
+      this.render();
+    },
+    async updateCard(data, company_id) {
+      await editCardsBlackboard(company_id, data)
+    },
+    backMultiView() {
+      this.isViewMode = false;
+      this.isMultiViewMode = true;
+      this.currentId = null;
+      if (document.getElementsByClassName('edit-card-blackboard')[0]) {
+        document.getElementsByClassName('edit-card-blackboard')[0].remove();
+      }
+      this.render();
+    },
+    openEditCard(id) {
+      if (document.getElementsByClassName('edit-card-blackboard')[0]) {
+        document.getElementsByClassName('edit-card-blackboard')[0].remove();
+      }
+      const dialog = new Whisper.EditCardBlackboard({
+        id: this.currentId,
+        company_id: this.company_id,
+        data_to_edit: this.multiView
+      });
+      dialog.render();
+      dialog.$el.insertBefore(
+        document.getElementsByClassName('network-status-container')[0]
+      );
+    }
   });
   Whisper.EditCardBlackboard = Whisper.View.extend({
     templateName: 'edit-card-blackboard',
@@ -2644,68 +2677,68 @@
     render_attributes() {
       return {
         model: this.data_to_edit
-    }
-  },
-      initialize(options) {
-        this.card_id = options.id;
-        this.company_id = options.company_id;
-        this.data_to_edit = options.data_to_edit;
-        this.render();
-        setTimeout(() => {
-          switch (options.data_to_edit.note_type) {
-            case 'normal':
-              this.$('#standardNote').prop("checked", true)
-              break;
-              case 'calender':
-                this.$('#KalenderNote').prop("checked", true)
-              break;
-          
-            default:
-              break;
-          }
-        }, 500);
-      },
-      events: {
-        'click #EditCardClosePanel': 'closePanel',
-        'click #sendEditCard': 'saveEditCard',
-        'click #removeCard': 'removeCard'
-
-      },
-      closePanel(){
-        document.getElementsByClassName('edit-card-blackboard')[0].remove();
-      },
-      async saveEditCard(){
-        const title =  this.$('#title-card').val();
-        const content =  this.$('#textareaTextCard').val();
-        const id = this.card_id;
-        const company_id = this.company_id
-        const type = this.$('input[name=colors]:checked', '#myForm').val()
-        console.log(type, "my typeeeeeeeeeeeeeee")
-        const data = {
-          'note_id':id,
-          'title':title,
-          'content':content,
-          "note_type": type,
-        };
-        await editCardsBlackboard(company_id, data)
-        this.closePanel();
-        window.Whisper.events.trigger('showOpenBlackboard', company_id);
-      },
-      async removeCard(){
-        const title = '';
-        const content = '';
-        const id = this.card_id;
-        const company_id = this.company_id
-        const data = {
-          'note_id':id,
-          'title':title,
-          'content':content,
-          "note_type": "normal",
-        };
-        await editCardsBlackboard(company_id, data)
-        this.closePanel();
-        window.Whisper.events.trigger('showOpenBlackboard', company_id);
       }
+    },
+    initialize(options) {
+      this.card_id = options.id;
+      this.company_id = options.company_id;
+      this.data_to_edit = options.data_to_edit;
+      this.render();
+      setTimeout(() => {
+        switch (options.data_to_edit.note_type) {
+          case 'normal':
+            this.$('#standardNote').prop("checked", true)
+            break;
+          case 'calender':
+            this.$('#KalenderNote').prop("checked", true)
+            break;
+
+          default:
+            break;
+        }
+      }, 500);
+    },
+    events: {
+      'click #EditCardClosePanel': 'closePanel',
+      'click #sendEditCard': 'saveEditCard',
+      'click #removeCard': 'removeCard'
+
+    },
+    closePanel() {
+      document.getElementsByClassName('edit-card-blackboard')[0].remove();
+    },
+    async saveEditCard() {
+      const title = this.$('#title-card').val();
+      const content = this.$('#textareaTextCard').val();
+      const id = this.card_id;
+      const company_id = this.company_id
+      const type = this.$('input[name=colors]:checked', '#myForm').val()
+      console.log(type, "my typeeeeeeeeeeeeeee")
+      const data = {
+        'note_id': id,
+        'title': title,
+        'content': content,
+        "note_type": type,
+      };
+      await editCardsBlackboard(company_id, data)
+      this.closePanel();
+      window.Whisper.events.trigger('showOpenBlackboard', company_id);
+    },
+    async removeCard() {
+      const title = '';
+      const content = '';
+      const id = this.card_id;
+      const company_id = this.company_id
+      const data = {
+        'note_id': id,
+        'title': title,
+        'content': content,
+        "note_type": "normal",
+      };
+      await editCardsBlackboard(company_id, data)
+      this.closePanel();
+      window.Whisper.events.trigger('showOpenBlackboard', company_id);
+    }
   });
 
   Whisper.ModalEditGroup = Whisper.View.extend({
@@ -2716,47 +2749,47 @@
     initialize(options) {
       if (options) {
         // if (options.contact_data !== undefined) {
-          this.contactListXml = prepareDataXml(options.contact_data);
-          this.objectContact = [];
-          this.renderUserGroup =  [];
-          const myNumber = textsecure.storage.user.getNumber();
-          if (options.type === 'group') {
-            if(options.admin_client) {
-              if (options.admin_client.admins) {
-                for (let i = 0; i < options.admin_client.admins.length; i++) {
-                  const contact = options.admin_client.admins[i];
-                  if (contact.name !== null && myNumber !== contact.phone_number) {
-                    const tmpObj = {
-                      name: contact.name,
-                      surname: contact.surname,
-                      position: '',
-                      email: '',
-                      phone: contact.phone_number,
-                      ts: contact.ts_registration,
-                    }
-                    this.objectContact.push(tmpObj)
+        this.contactListXml = prepareDataXml(options.contact_data);
+        this.objectContact = [];
+        this.renderUserGroup = [];
+        const myNumber = textsecure.storage.user.getNumber();
+        if (options.type === 'group') {
+          if (options.admin_client) {
+            if (options.admin_client.admins) {
+              for (let i = 0; i < options.admin_client.admins.length; i++) {
+                const contact = options.admin_client.admins[i];
+                if (contact.name !== null && myNumber !== contact.phone_number) {
+                  const tmpObj = {
+                    name: contact.name,
+                    surname: contact.surname,
+                    position: '',
+                    email: '',
+                    phone: contact.phone_number,
+                    ts: contact.ts_registration,
                   }
-                }
-              }
-              if (options.admin_client.clients) {
-                for (let i = 0; i < options.admin_client.clients.length; i++) {
-                  const contact = options.admin_client.clients[i];
-                  if (contact.name !== null && myNumber !== contact.phone_number) {
-                    const tmpObj = {
-                      name: contact.name,
-                      surname: contact.surname,
-                      position: '',
-                      email: '',
-                      phone: contact.phone_number,
-                      ts: contact.ts_registration,
-                    }
-                    this.objectContact.push(tmpObj)
-                  }
+                  this.objectContact.push(tmpObj)
                 }
               }
             }
-          } 
-        this.isEditingName= false;
+            if (options.admin_client.clients) {
+              for (let i = 0; i < options.admin_client.clients.length; i++) {
+                const contact = options.admin_client.clients[i];
+                if (contact.name !== null && myNumber !== contact.phone_number) {
+                  const tmpObj = {
+                    name: contact.name,
+                    surname: contact.surname,
+                    position: '',
+                    email: '',
+                    phone: contact.phone_number,
+                    ts: contact.ts_registration,
+                  }
+                  this.objectContact.push(tmpObj)
+                }
+              }
+            }
+          }
+        }
+        this.isEditingName = false;
         this.editGroupName = '';
         var nameEdit = options.group_name.split('-')
         for (let index = 1; index < nameEdit.length; index++) {
@@ -2766,15 +2799,15 @@
         this.group_id = options.group_id;
         this.members = options.members
         // for (let i = 0; i < this.objectContact.length; i++) {
-          for (let f = 0; f < this.members.length; f++) {
-            // if(this.objectContact[i].phone == options.members[f]){
-              let id = this.members[f];
-              dataUsersToInvitate[id] = {
-                userid: id,
-                position: this.type,
-              };
-            // }
-          }
+        for (let f = 0; f < this.members.length; f++) {
+          // if(this.objectContact[i].phone == options.members[f]){
+          let id = this.members[f];
+          dataUsersToInvitate[id] = {
+            userid: id,
+            position: this.type,
+          };
+          // }
+        }
         // }
       }
       this.sendDataToModal();
@@ -2802,7 +2835,7 @@
       'click .contactListCheckbox': 'checkBoxevent',
       'keyup #searchInput': 'searchContactList',
       'click  #editName': 'editNameGroup',
-      'click #buttonEditGroup':  'saveEditGroup',
+      'click #buttonEditGroup': 'saveEditGroup',
       'click #closeEditName': 'closeEditName',
       'click .removeUserToGroup': 'removeUserGroup'
       // 'click #countryCode, #dialCode' : 'showCountries',
@@ -2813,12 +2846,12 @@
       document.getElementsByClassName('panel')[0].classList.remove('width3colum');
       dataUsersToInvitate = {};
     },
-    closeEditName(){
+    closeEditName() {
       this.isEditingName = false;
       this.render();
     },
     showContactListPanel() {
-      if (this.objectContact === undefined || this.objectContact.length === 0 ) {
+      if (this.objectContact === undefined || this.objectContact.length === 0) {
         // this.$('#ptextNoContacts').html = i18n('noContactsImported');
         document.getElementById('ptextNoContacts').innerHTML = '';
         document.getElementById('ptextNoContacts').innerHTML = i18n(
@@ -2840,27 +2873,27 @@
         );
       });
     },
-    goBack(){
+    goBack() {
       this.$('#modalEditGROUP').removeClass('hidden');
       this.$('#modalSearchUsers').addClass('hidden');
       this.$('#ptextNoContacts').innerText = '';
       this.$('#divNoContacts').addClass('hidden');
     },
-    editNameGroup(){
+    editNameGroup() {
       this.isEditingName = true;
       this.render();
     },
-    saveEditGroup(){
+    saveEditGroup() {
       var nameEdit = this.groupName.split('-')
       let nameToUpdate = this.groupName
-      if(this.$('#editGroupNameInput').val() !== undefined){
+      if (this.$('#editGroupNameInput').val() !== undefined) {
         nameToUpdate = nameEdit[0] + ' - ' + this.$('#editGroupNameInput').val()
       }
-      let users =  []
- 
+      let users = []
+
       Object.keys(dataUsersToInvitate).forEach(element => {
         const id = dataUsersToInvitate[element].userid;
-          users.push(id);
+        users.push(id);
       })
       updateGroup(this.group_id, nameToUpdate, users);
       this.closePanel();
@@ -2869,7 +2902,7 @@
       this.$('#modalEditGROUP').removeClass('hidden');
       this.$('#modalSearchUsers').addClass('hidden');
       this.renderUserGroup = [];
-      if(this.contactListXml.children.length > 0){
+      if (this.contactListXml.children.length > 0) {
         for (let i = 0; i < this.contactListXml.children.length; i++) {
           const contact = this.contactListXml.children.item(i);
           Object.keys(dataUsersToInvitate).forEach(element => {
@@ -2878,39 +2911,39 @@
               const data = this.contactListXml;
               const tmpObj = {
                 name: data.getElementsByTagName('name')[i].childNodes[0].nodeValue + ' ' + data.getElementsByTagName('surname')[i].childNodes[0].nodeValue,
-                phone:   data.getElementsByTagName('phone')[i].childNodes[0].nodeValue,
+                phone: data.getElementsByTagName('phone')[i].childNodes[0].nodeValue,
                 id: data.getElementsByTagName('phone')[i].childNodes[0].nodeValue,
               }
               this.renderUserGroup.push(tmpObj)
             }
           });
         }
-      }else {
+      } else {
         Object.keys(dataUsersToInvitate).forEach(element => {
           const id = dataUsersToInvitate[element].userid;
           let tmpObj = {}
-          if(id == getOwnNumber()){
+          if (id == getOwnNumber()) {
             tmpObj = {
               name: 'You',
-              phone:   id,
+              phone: id,
               id: id,
             }
-          }else{
+          } else {
             let foundUser = false
             for (let i = 0; i < this.objectContact.length; i++) {
-              if(this.objectContact[i].phone == id){
+              if (this.objectContact[i].phone == id) {
                 foundUser = true
                 tmpObj = {
                   name: this.objectContact[i].name,
-                  phone:   id,
+                  phone: id,
                   id: id,
                 }
               }
             }
-            if(!foundUser){
+            if (!foundUser) {
               tmpObj = {
                 name: 'Unknow User',
-                phone:   id,
+                phone: id,
                 id: id,
               }
             }
@@ -2920,13 +2953,13 @@
       }
       this.render();
     },
-    removeUserGroup(event){
+    removeUserGroup(event) {
       const id = event.target.attributes.dataPhone.nodeValue;
       delete dataUsersToInvitate[id];
       this.sendDataToModal()
 
     },
-    
+
     checkBoxevent(event) {
       const id = event.target.attributes.dataPhone.nodeValue;
       if (event.target.checked) {
