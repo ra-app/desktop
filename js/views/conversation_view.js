@@ -2507,11 +2507,12 @@
       }
     },
     initialize(options) {
+    
       this.isMultiViewMode = true;
       this.isViewMode = false;
       this.currentId = null;
       this.company_id = options.company_id;
-      this.isadmin = options.isAdmin;
+        this.isAdmin = options.isAdmin;
       this.notes = [];
       this.emptyNotes = [];
       this.showAddNote = false;
@@ -2696,24 +2697,38 @@
           default:
             break;
         }
-      }, 500);
+          this.enableDisableButton();
+        }, 100);
     },
     events: {
       'click #EditCardClosePanel': 'closePanel',
       'click #sendEditCard': 'saveEditCard',
-      'click #removeCard': 'removeCard'
+        'click #cancelEditCard': 'cancelEditCard',
+        'keyup #title-card, #textareaTextCard': 'enableDisableButton'
 
     },
     closePanel() {
       document.getElementsByClassName('edit-card-blackboard')[0].remove();
     },
-    async saveEditCard() {
+      cancelEditCard(){
+        this.closePanel();
+        window.Whisper.events.trigger('showOpenBlackboard', this.company_id);
+      },
+      enableDisableButton(){
+        const title =  this.$('#title-card').val();
+        const content =  this.$('#textareaTextCard').val();
+        if(title.length > 0 && content.length > 0){
+          this.$('#sendEditCard').removeClass('disabled')
+        }else {
+          this.$('#sendEditCard').addClass('disabled')
+        }
+      },
+      async saveEditCard(){
       const title = this.$('#title-card').val();
       const content = this.$('#textareaTextCard').val();
       const id = this.card_id;
       const company_id = this.company_id
-      const type = this.$('input[name=colors]:checked', '#myForm').val()
-      console.log(type, "my typeeeeeeeeeeeeeee")
+        const type =  this.$('input[name=colors]:checked', '#myForm').val()
       const data = {
         'note_id': id,
         'title': title,

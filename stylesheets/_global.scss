@@ -2419,7 +2419,7 @@ input {
   flex-direction: row;
   justify-content: flex-start;
   flex-wrap: wrap;
-  height: 100%;
+  height: auto;
   & .addMoreNotes{
     background: unset;
     background-image: unset!important;
@@ -2435,6 +2435,7 @@ input {
     text-align: right;
     margin-right: 5px;
     padding-top: 3px;
+    min-height: 34px;
     & .editCardBlackboard{
       width: 28px;
     }
@@ -2442,6 +2443,9 @@ input {
       width: 26px;
     }
   }
+}
+.flex-View{
+  height: 100%!important;
 }
 
 .flex-container > div[dataType ="normal"] {
@@ -2455,9 +2459,10 @@ input {
   background-image: url(./../images/post-it-pin-new.svg);
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: top;
   text-align: center;
   margin-right: 5px;
+  margin-bottom: 15px;
   .titleCardBlackboard{
     max-width: 70%;
     margin: 10px auto 5px auto;
@@ -2533,9 +2538,10 @@ input {
   background-image: url(./../images/post-it-pin-blue.svg);
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: top;
   text-align: center;
   margin-right: 5px;
+  margin-bottom: 15px;
   .titleCardBlackboard{
     max-width: 70%;
     margin: 10px auto 5px auto;
@@ -2646,4 +2652,31 @@ input[type=number] {
   // color: #b1bbc0;
   font-size: 13px;
   text-transform: uppercase;
+}
+.RadioButtonType{
+  margin-bottom: 15px;
+  margin-top: 15px;
+  .PreviewNotes{
+    display: flex;
+  }
+  #myForm{
+    display: flex;
+  }
+
+}
+.squareNormal{
+    height: 30px;
+    width: 30px;
+    // background-color: #ffe082;
+    background-image: url(./../images/post-it-pin-new.svg);
+    margin-left: 30px;
+}
+.squarecalender{
+    height: 30px;
+    width: 30px;
+    // background-color: #b2ffff;
+    background-image: url(./../images/post-it-pin-blue.svg);
+    margin-left: 55px;
+    margin-bottom: 10px;
+
 }
