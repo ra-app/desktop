@@ -2618,4 +2618,21 @@ input[type=number] {
 .RadioButtonType{
   margin-bottom: 15px;
   margin-top: 15px;
+  #myForm{
+    display: flex;
+  }
+}
+.squareNormal{
+    height: 30px;
+    width: 30px;
+    // background-color: #ffe082;
+    background-image: url(./../images/post-it-pin-new.svg);
+    margin-left: 10px;
+}
+.squarecalender{
+    height: 30px;
+    width: 30px;
+    // background-color: #b2ffff;
+    background-image: url(./../images/post-it-pin-blue.svg);
+    margin-left: 10px;
 }

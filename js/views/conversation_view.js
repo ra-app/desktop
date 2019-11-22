@@ -2653,7 +2653,17 @@
         this.data_to_edit = options.data_to_edit;
         this.render();
         setTimeout(() => {
-          $('[name=typeNoteOptions]').val( options.data_to_edit.note_type)
+          switch (options.data_to_edit.note_type) {
+            case 'normal':
+              this.$('#standardNote').prop("checked", true)
+              break;
+              case 'calender':
+                this.$('#KalenderNote').prop("checked", true)
+              break;
+          
+            default:
+              break;
+          }
         }, 100);
       },
       events: {
@@ -2674,7 +2684,7 @@
         const content =  this.$('#textareaTextCard').val();
         const id = this.card_id;
         const company_id = this.company_id
-        const type =  $('[name=typeNoteOptions]').val()
+        const type =  this.$('input[name=colors]:checked', '#myForm').val()
         const data = {
           'note_id':id,
           'title':title,

@@ -191,10 +191,11 @@
           <textarea class="textareaSendeInvitation" id="textareaTextCard" placeholder="Text">{{content}}</textarea>
           <span>Notizentyp</span>
           <div class="RadioButtonType">
-              <select name = 'typeNoteOptions' id="typeNoteOptions">
-                <option value="normal">Standard</option>
-                <option value="calender">Kalender</option>
-              </select>
+              <form id="myForm">
+                  <input type="radio" name="colors" id="standardNote" value='normal'>Standard <div class="squareNormal"></div>
+                  <br>
+                  <input type="radio" name="colors" id="KalenderNote" value='calender'>Kalender <div class="squarecalender"></div>
+              </form>
           </div>
           {{/model}}
           <button class="tablinks" id="sendEditCard">Speichern</button>
