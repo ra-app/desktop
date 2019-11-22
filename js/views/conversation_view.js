@@ -2507,11 +2507,12 @@
       }
     },
       initialize(options) {
+    
         this.isMultiViewMode = true;
         this.isViewMode = false;
         this.currentId = null;
         this.company_id = options.company_id;
-        this.isadmin = options.isAdmin;
+        this.isAdmin = options.isAdmin;
         this.notes = [];
         this.emptyNotes = [];
         this.showAddNote = false;
@@ -2524,6 +2525,7 @@
             this.showAddNote = true
           }
         });
+        console.log(options, "optionsssssssssssssssss")
         this.render();
       },
       events: {
