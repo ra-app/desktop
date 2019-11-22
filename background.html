@@ -143,8 +143,8 @@
         <span id="span-chat-name" class="blackBoardTitle">Pinnwand</span>
       </div>
       <div class='container-blackboard'>
-        <div class="flex-container">
-          {{#isMultiViewMode}}
+        {{#isMultiViewMode}}
+          <div class="flex-container">
             {{#model}}
               <div class = 'card-blackboard' id = {{id}} dataType='{{note_type}}' >
                 <div class = 'iconsEditDelete'>
@@ -163,18 +163,19 @@
                 <p class="contentCardBlackboard">+</p>
               </div>
             {{/showAddNote}}
+          </div>
           {{/isMultiViewMode}}
-          {{#isViewMode}}
+        {{#isViewMode}}
+          <div class= 'flex-container flex-View'>
           {{#multiView}}
             <div class = 'card-blackboard-multiview oneCard' dataType='{{note_type}}' id = {{id}}>
               <p class="titleCardBlackboard">{{title}}</p>
               <p class="contentCardBlackboard">{{{textlink}}}</p>
             </div>
             {{/multiView}}
+          </div>
           {{/isViewMode}}
-        </div>
       </div>
-    </div>
   </script>
   <script type='text/x-tmpl-mustache' id='edit-card-blackboard'>
     <div class="modalContact" id="modalContact">

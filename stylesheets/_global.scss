@@ -2381,7 +2381,7 @@ input {
   flex-direction: row;
   justify-content: flex-start;
   flex-wrap: wrap;
-  height: 100%;
+  height: auto;
   & .addMoreNotes{
     background: unset;
     background-image: unset!important;
@@ -2406,6 +2406,9 @@ input {
     }
   }
 }
+.flex-View{
+  height: 100%!important;
+}
 
 .flex-container > div[dataType ="normal"] {
   margin-bottom: 5px;
@@ -2421,6 +2424,7 @@ input {
   background-position: top;
   text-align: center;
   margin-right: 5px;
+  margin-bottom: 15px;
   .titleCardBlackboard{
     max-width: 70%;
     margin: 10px auto 5px auto;
@@ -2499,6 +2503,7 @@ input {
   background-position: top;
   text-align: center;
   margin-right: 5px;
+  margin-bottom: 15px;
   .titleCardBlackboard{
     max-width: 70%;
     margin: 10px auto 5px auto;
