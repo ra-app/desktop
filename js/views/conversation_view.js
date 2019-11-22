@@ -2664,12 +2664,14 @@
             default:
               break;
           }
+          this.enableDisableButton();
         }, 100);
       },
       events: {
         'click #EditCardClosePanel': 'closePanel',
         'click #sendEditCard': 'saveEditCard',
-        'click #cancelEditCard': 'cancelEditCard'
+        'click #cancelEditCard': 'cancelEditCard',
+        'keyup #title-card, #textareaTextCard': 'enableDisableButton'
 
       },
       closePanel(){
@@ -2678,6 +2680,15 @@
       cancelEditCard(){
         this.closePanel();
         window.Whisper.events.trigger('showOpenBlackboard', this.company_id);
+      },
+      enableDisableButton(){
+        const title =  this.$('#title-card').val();
+        const content =  this.$('#textareaTextCard').val();
+        if(title.length > 0 && content.length > 0){
+          this.$('#sendEditCard').removeClass('disabled')
+        }else {
+          this.$('#sendEditCard').addClass('disabled')
+        }
       },
       async saveEditCard(){
         const title =  this.$('#title-card').val();
