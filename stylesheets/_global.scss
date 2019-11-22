@@ -2427,8 +2427,11 @@ input {
       color: #999;
     font-size: 115px;
     padding-top: 64px;
-    height: -webkit-fill-available;
+    // height: -webkit-fill-available;
     text-align: center;
+    max-height: 250px !important;
+    line-height: 110px !important;
+    
     }
   }
   & .iconsEditDelete{

@@ -588,7 +588,7 @@
       }
     },
     async openBlackboard(id) {
-      const isAdmin = true;
+      let isAdmin = true;
       var notes = '';
       let admins = '';
       try {
@@ -601,18 +601,17 @@
             })
           }
           if (admins.success) {
-            this.isAdmin = true;
+            isAdmin = true;
           } else {
-            this.isAdmin = false;
+            isAdmin = false;
           }
         } catch (error) {
-          this.isAdmin = false;
+          isAdmin = false;
         }
         this.blackboard_stack.openBlackboard(id, notes, isAdmin);
       }
       catch (err) {
         console.warn('openTicker error', err);
-
       }
 
     },
