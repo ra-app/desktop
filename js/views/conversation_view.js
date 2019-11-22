@@ -2525,7 +2525,6 @@
             this.showAddNote = true
           }
         });
-        console.log(options, "optionsssssssssssssssss")
         this.render();
       },
       events: {
