@@ -257,6 +257,15 @@
       dialog.$el.insertBefore(
         document.getElementsByClassName('network-status-container')[0]
       );
+      if (typeUser === 'group') {
+        this.$('.titleSendInvitation')[0].textContent = 'Gruppe erstellen';
+      }
+      if (typeUser === 'kunde') {
+        this.$('.titleSendInvitation')[0].textContent = 'Externe Nutzer einladen';
+      }
+      if (typeUser === 'admin') {
+        this.$('.titleSendInvitation')[0].textContent = 'Interne Nutzer einladen';
+      }
     },
     async openModalEditGroup(typeUser, name, id) {
       if(document.getElementsByClassName('edit-group-modal').length === 0){
