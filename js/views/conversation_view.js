@@ -2609,6 +2609,7 @@
         $('#modalDiv').remove();
       }
       const actionsDiv = document.createElement('div');
+      actionsDiv.className = 'actionsDiv'
       actionsDiv.append(acceptButton);
       actionsDiv.append(cancelButton);
       modalContent.append(actionsDiv);

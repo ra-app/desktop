@@ -1694,6 +1694,7 @@ th.sorted.descending:after {
     position: absolute;
     // width: 25%;
     width: 400px;
+
   }
 }
 
@@ -1978,6 +1979,10 @@ th.sorted.descending:after {
   padding: 20px;
   border: 1px solid #888;
   width: 19%;
+  & .actionsDiv{
+    text-align: center;
+    margin-top: 20px;
+  }
 }
 
 .deleteNoteModalButton {
