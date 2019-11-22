@@ -111,7 +111,7 @@
             if (this.$('.blackboard-view')) {
               this.$('.blackboard-view').remove();
             }
-            if(this.$('.group')){
+            if (this.$('.group')) {
               this.$('.group').remove();
             }
             const view = new Whisper.TicketScreen({
@@ -124,7 +124,7 @@
           }
           $el.prependTo(this.el);
         }
-  
+
         window.dispatchEvent(new Event('resize'));
       }
     },
@@ -267,25 +267,25 @@
       // Finally, add it to the DOM
       this.$('.left-pane-placeholder').append(this.leftPaneView.el);
     },
-    addGroup(){
+    addGroup() {
       // const appView = new Whisper.AppView({
       // });
       const { appView } = window['owsDesktopApp'];
       appView.openModalImport('group');
     },
-    addExtern(){
+    addExtern() {
       // const appView = new Whisper.AppView({
       // });
       const { appView } = window['owsDesktopApp'];
       appView.openModalImport('kunde');
     },
-    addIntern(){
+    addIntern() {
       // const appView = new Whisper.AppView({
       // });
       const { appView } = window['owsDesktopApp'];
       appView.openModalImport('admin');
     },
-    showContacts(){
+    showContacts() {
       const { appView } = window['owsDesktopApp'];
       // const appView = new Whisper.AppView({
       //   el: $('body'),
@@ -410,7 +410,13 @@
       var datum = Date.parse(strDate);
       return datum / 1000;
     },
+    closePanel() {
+      document.getElementsByClassName('modal-importer')[0].remove();
+    },
     async getTickets(event) {
+      if (document.getElementsByClassName('modal-importer')[0]) {
+        this.closePanel();
+      }
       if (!scrolling) {
         const ticketType = event.currentTarget.id;
         let tmpTicketType = 1;
