@@ -148,9 +148,11 @@
             {{#model}}
               <div class = 'card-blackboard' id = {{id}} dataType='{{note_type}}' >
                 <div class = 'iconsEditDelete'>
+                    {{#isAdmin}}
                     <img src="images/icons/message_over_white_24x24 black.svg" dataID = '{{id}}' class="editCardBlackboard">
                     <img src="images/delete.svg" dataID = '{{id}}' class="removeCardBlackboard">
-                </div>
+                    {{/isAdmin}}
+                  </div>
                 <p class="titleCardBlackboard">{{title}}</p>
                 <p class="contentCardBlackboard">{{content}}</p>
               </div>
