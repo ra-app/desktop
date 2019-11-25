@@ -158,12 +158,10 @@
               </div>
             {{/model}}
             {{#showAddNote}}
-            {{#isAdmin}}
             <div class = 'addMoreNotes' id = 'addMoreNote' dataType='normal' >
               <p class="titleCardBlackboard">{{title}}</p>
               <p class="contentCardBlackboard">+</p>
             </div>
-            {{/isAdmin}}
             {{/showAddNote}}
           </div>
           {{/isMultiViewMode}}
@@ -182,7 +180,7 @@
   <script type='text/x-tmpl-mustache' id='edit-card-blackboard'>
     <div class="modalContact" id="modalContact">
       <div class="divModalHeader divModalInvitation" id="divModalHeader">
-          <span class="titleSendInvitation">Nachricht bearbeiten</span>
+          <span class="titleSendInvitation">Notiz bearbeiten</span>
         <!-- <img src="images/icons/x_over_blue_24x24.svg" class="imageClosePanel" id='EditCardClosePanel'> -->
       </div>
       <div class="mainInvitationDiv" id="divMainContentEdit">
