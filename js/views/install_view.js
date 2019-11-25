@@ -393,13 +393,12 @@
           
           await ensureCompanyConversation(result.info.company_number);
           // create default group exterm and interm
-          const members = [getOwnNumber()];
-          await updateGroup(result.info.company_number + '-intern', 'Intern', members);
+          // const members = [getOwnNumber()];
+          // await updateGroup(result.info.company_number + '-intern', 'Intern', members);
           // await updateGroup(result.info.company_number + '-extern', 'Extern', members);
           // end default group exterm and interm
         } else if (this.setupType === 'admin') {
           const codeCompany = textsecure.storage.get('codeCompany', false);
-          console.log(codeCompany, "codeeeeeeeeeeeeeeee")
           const userSetupInfo = textsecure.storage.get('userSetupInfo', null);
           const avatarInfo = await textsecure.storage.get('avatarInfo', null);
           const role = await textsecure.storage.get('role', null);
@@ -419,15 +418,15 @@
           const data = {
             name: userSetupInfo.name,
           };
-          // logic for create automatic group interm
-          if(role === 'admin'){
-            const admins = await getAdminCompany(codeCompany)
-            let members = [getOwnNumber()];
-            admins.admins.forEach(element => {
-              members.push(element.phone_number)
-            });
-            await updateGroup(codeCompany + '-intern', 'Intern', members);
-          }
+          // // logic for create automatic group interm
+          // if(role === 'admin'){
+          //   const admins = await getAdminCompany(codeCompany)
+          //   let members = [getOwnNumber()];
+          //   admins.admins.forEach(element => {
+          //     members.push(element.phone_number)
+          //   });
+          //   await updateGroup(codeCompany + '-intern', 'Intern', members);
+          // }
           await updateClient(data);
           await ensureCompanyConversation(codeCompany);
         }
