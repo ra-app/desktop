@@ -1,43 +1,293 @@
 {
-    "copyErrorAndQuit": {
-        "message": "Kopiera felmeddelande och avsluta",
-        "description": "Shown in the top-level error popup, allowing user to copy the error text and close the app"
+    "BranchOption1": {
+        "message": "Administration / Verwaltung / Bürowesen",
+        "description": "Branch option 1"
     },
-    "unknownGroup": {
-        "message": "Okänd grupp",
-        "description": "Shown as the name of a group if we don't have any information about it"
+    "BranchOption10": {
+        "message": "EDV / IT",
+        "description": "Branch option 1"
     },
-    "databaseError": {
-        "message": "Databasfel",
-        "description": "Shown in a popup if the database cannot start up properly"
+    "BranchOption11": {
+        "message": "Einkauf / Beschaffung",
+        "description": "Branch option 1"
     },
-    "deleteAndRestart": {
-        "message": "Radera all data och starta om",
-        "description": "Shown in a popup if the database cannot start up properly; allows user to dalete database and restart"
+    "BranchOption12": {
+        "message": "Elektro / Elektronikn",
+        "description": "Branch option 1"
     },
-    "mainMenuFile": {
-        "message": "&Arkiv",
-        "description": "The label that is used for the File menu in the program main menu. The '&' indicates that the following letter will be used as the keyboard 'shortcut letter' for accessing the menu with the Alt-<letter> combination."
+    "BranchOption13": {
+        "message": "Energiewirtschaft",
+        "description": "Branch option 1"
     },
-    "mainMenuEdit": {
-        "message": "&Redigera",
-        "description": "The label that is used for the Edit menu in the program main menu. The '&' indicates that the following letter will be used as the keyboard 'shortcut letter' for accessing the menu with the Alt-<letter> combination."
+    "BranchOption14": {
+        "message": "Finanzen",
+        "description": "Branch option 1"
     },
-    "mainMenuView": {
-        "message": "&Visa",
-        "description": "The label that is used for the View menu in the program main menu. The '&' indicates that the following letter will be used as the keyboard 'shortcut letter' for accessing the menu with the Alt-<letter> combination."
+    "BranchOption15": {
+        "message": "Forschung / Entwicklung / Wissenschaft",
+        "description": "Branch option 1"
     },
-    "mainMenuWindow": {
-        "message": "&Fönster",
-        "description": "The label that is used for the Window menu in the program main menu. The '&' indicates that the following letter will be used as the keyboard 'shortcut letter' for accessing the menu with the Alt-<letter> combination."
+    "BranchOption16": {
+        "message": "Gesundheitswesen / Soziales / Pflege",
+        "description": "Branch option 1"
     },
-    "mainMenuHelp": {
-        "message": "&Hjälp",
-        "description": "The label that is used for the Help menu in the program main menu. The '&' indicates that the following letter will be used as the keyboard 'shortcut letter' for accessing the menu with the Alt-<letter> combination."
+    "BranchOption17": {
+        "message": "Handel / Konsum",
+        "description": "Branch option 1"
     },
-    "mainMenuSettings": {
-        "message": "Inställningar",
-        "description": "The label that is used for the Preferences menu in the program main menu. This should be consistent with the standard naming for ‘Preferences’ on the operating system."
+    "BranchOption18": {
+        "message": "Handwerk",
+        "description": "Branch option 1"
+    },
+    "BranchOption19": {
+        "message": "Immobilien / Facility Management",
+        "description": "Branch option 1"
+    },
+    "BranchOption2": {
+        "message": "Automobil / Automobilzulieferer",
+        "description": "Branch option 1"
+    },
+    "BranchOption20": {
+        "message": "Industrie",
+        "description": "Branch option 1"
+    },
+    "BranchOption21": {
+        "message": "Internet / Multimedia",
+        "description": "Branch option 1"
+    },
+    "BranchOption22": {
+        "message": "Kunst / Kultur / Unterhaltung",
+        "description": "Branch option 1"
+    },
+    "BranchOption23": {
+        "message": "Marketing / Werbung / PR",
+        "description": "Branch option 1"
+    },
+    "BranchOption24": {
+        "message": "Marktforschunga",
+        "description": "Branch option 1"
+    },
+    "BranchOption25": {
+        "message": "Maschinen / Anlagenbau",
+        "description": "Branch option 1"
+    },
+    "BranchOption26": {
+        "message": "Medien",
+        "description": "Branch option 1"
+    },
+    "BranchOption27": {
+        "message": "Medizin / Pharma",
+        "description": "Branch option 1"
+    },
+    "BranchOption28": {
+        "message": "Medizintechnik",
+        "description": "Branch option 1"
+    },
+    "BranchOption29": {
+        "message": "Nahrungsmittel / Land / Forstwirtschaft",
+        "description": "Branch option 1"
+    },
+    "BranchOption3": {
+        "message": "Banken",
+        "description": "Branch option 1"
+    },
+    "BranchOption30": {
+        "message": "Personalwesen / Personalbeschaffung",
+        "description": "Branch option 1"
+    },
+    "BranchOption31": {
+        "message": "Rechtsberatung",
+        "description": "Branch option 1"
+    },
+    "BranchOption32": {
+        "message": "Seminar / Messeanbieter",
+        "description": "Branch option 1"
+    },
+    "BranchOption33": {
+        "message": "Sonstige Branchen",
+        "description": "Branch option 1"
+    },
+    "BranchOption34": {
+        "message": "Sport / Fitness / Beauty",
+        "description": "Branch option 1"
+    },
+    "BranchOption35": {
+        "message": "Steuerberatung / Wirtschaftsprüfung",
+        "description": "Branch option 1"
+    },
+    "BranchOption36": {
+        "message": "Telekommunikation",
+        "description": "Branch option 1"
+    },
+    "BranchOption37": {
+        "message": "Textilbranche",
+        "description": "Branch option 1"
+    },
+    "BranchOption38": {
+        "message": "Tourismus / Hotel / Gastronomie",
+        "description": "Branch option 1"
+    },
+    "BranchOption39": {
+        "message": "Vereine",
+        "description": "Branch option 1"
+    },
+    "BranchOption4": {
+        "message": "Baugewerbe / Architektur",
+        "description": "Branch option 1"
+    },
+    "BranchOption40": {
+        "message": "Verkehr / Transport / Logistik",
+        "description": "Branch option 1"
+    },
+    "BranchOption41": {
+        "message": "Versicherung",
+        "description": "Branch option 1"
+    },
+    "BranchOption42": {
+        "message": "Öffentliche Verwaltung",
+        "description": "Branch option 1"
+    },
+    "BranchOption5": {
+        "message": "Beratung / Consulting",
+        "description": "Branch option 1"
+    },
+    "BranchOption6": {
+        "message": "Bildung / Universität / FH / Schulen",
+        "description": "Branch option 1"
+    },
+    "BranchOption7": {
+        "message": "Chemie",
+        "description": "Branch option 1"
+    },
+    "BranchOption8": {
+        "message": "Dienstleistung",
+        "description": "Branch option 1"
+    },
+    "BranchOption9": {
+        "message": "Druck / Papier / Verpackung",
+        "description": "Branch option 1"
+    },
+    "BranchenTitle": {
+        "message": "Branchen",
+        "description": "Branchen title"
+    },
+    "Claimmed": {
+        "message": "Claimed",
+        "description": "Claimed ticket"
+    },
+    "Closed": {
+        "message": "Closed",
+        "description": "closed ticket"
+    },
+    "EmojiPicker--empty": {
+        "message": "No emoji found",
+        "description": "Shown in the emoji picker when a search yields 0 results."
+    },
+    "EmojiPicker--search-placeholder": {
+        "message": "Search Emoji",
+        "description": "Shown as a placeholder inside the emoji picker search field."
+    },
+    "EmojiPicker--skin-tone": {
+        "message": "Skin tone $tone$",
+        "placeholders": {
+            "status": {
+                "content": "$1",
+                "example": "2"
+            }
+        },
+        "description": "Shown as a tooltip over the emoji tone buttons."
+    },
+    "Message--from-me-unsupported-message": {
+        "message": "One of your devices sent a message that can't be processed or displayed because it uses a new OfficeApp feature."
+    },
+    "Message--from-me-unsupported-message-ask-to-resend": {
+        "message": "Future messages like this will be synchronized now that you are using an up-to-date version of OfficeApp."
+    },
+    "Message--tap-to-view--incoming": {
+        "message": "View Photo",
+        "description": "Text shown on messages with with individual timers, before user has viewed it"
+    },
+    "Message--tap-to-view--outgoing": {
+        "message": "Photo",
+        "description": "Text shown on outgoing messages with with individual timers (inaccessble)"
+    },
+    "Message--tap-to-view-expired": {
+        "message": "Viewed",
+        "description": "Text shown on messages with with individual timers, after user has viewed it"
+    },
+    "Message--unsupported-message": {
+        "message": "$contact$ sent you a message that can't be processed or displayed because it uses a new OfficeApp feature.",
+        "placeholders": {
+            "contact": {
+                "content": "$1",
+                "example": "Alice"
+            }
+        }
+    },
+    "Message--unsupported-message-ask-to-resend": {
+        "message": "You can ask $contact$ to re-send this message now that you are using an up-to-date version of OfficeApp.",
+        "placeholders": {
+            "contact": {
+                "content": "$1",
+                "example": "Alice"
+            }
+        }
+    },
+    "Message--update-signal": {
+        "message": "Update OfficeApp",
+        "description": "Text for a button which will take user to OfficeApp download page"
+    },
+    "PhonesTitle": {
+        "message": "Landesvorwahl",
+        "description": "Landesvorwahl title"
+    },
+    "Unclaimed": {
+        "message": "Claim",
+        "description": "Unclaimed ticket"
+    },
+    "Unknown": {
+        "message": "Unknown",
+        "description": "Unknown ticket"
+    },
+    "aboutSignalDesktop": {
+        "message": "Om OfficeApp Desktop",
+        "description": "Item under the Help menu, which opens a small about window"
+    },
+    "acceptEula": {
+        "message": "Accept EULA",
+        "description": "Text for Accept EULA checkbox"
+    },
+    "acceptNewKey": {
+        "message": "Godkänn",
+        "description": "Label for a button to accept a new safety number"
+    },
+    "aceptedInvitation": {
+        "message": "Accept",
+        "description": "Accept invitation button on import contact"
+    },
+    "addACaption": {
+        "message": "Lägg till en rubrik...",
+        "description": ""
+    },
+    "addContactModal": {
+        "message": "Benutzerdaten",
+        "description": "Benutzerdaten modal"
+    },
+    "address": {
+        "message": "adress",
+        "description": "Generic label shown if contact address has custom type but no label"
+    },
+    "adminButton": {
+        "message": "Admin",
+        "description": "Admin button on import contact"
+    },
+    "allowAccess": {
+        "message": "Tillåt åtkomst",
+        "description": "Button shown in popup asking to enable microphon/video permissions to send audio messages"
+    },
+    "androidMessageLengthWarning": {
+        "message": "Clientes de Android solo recibirán los primeros 2000 caracteres de este mensaje",
+        "description": "Warning that long messages could not get received completely by Android clients."
     },
     "appMenuHide": {
         "message": "Göm",
@@ -47,29 +297,377 @@
         "message": "Dölj andra",
         "description": "Application menu command to hide all other windows"
     },
-    "appMenuUnhide": {
-        "message": "Visa alla",
-        "description": "Application menu command to show all application windows"
-    },
     "appMenuQuit": {
         "message": "Stäng OfficeApp",
         "description": "Application menu command to close the application"
     },
-    "editMenuUndo": {
-        "message": "Ångra",
-        "description": "Edit menu command to remove recently-typed text"
+    "appMenuUnhide": {
+        "message": "Visa alla",
+        "description": "Application menu command to show all application windows"
     },
-    "editMenuRedo": {
-        "message": "Gör om",
-        "description": "Edit menu command to restore previously undone typed text"
+    "appTagLine": {
+        "message": "Modern secure communications... TODO",
+        "description": "Tagline of the OfficeApp application"
+    },
+    "appTagLineSecond": {
+        "message": "Customer Care Messenger System",
+        "description": "second Tagline of the OfficeApp application"
+    },
+    "archiveConversation": {
+        "message": "Arkivera konversation",
+        "description": "Shown in menu for conversation, and moves conversation out of main conversation list"
+    },
+    "archiveHelperText": {
+        "message": "Konversationerna här är arkiverade och kommer bara visas i inkorgen ifall nya meddelanden tas emot.",
+        "description": "Shown at the top of the archived converations list in the left pane"
+    },
+    "archivedConversations": {
+        "message": "Arkiverade konversationer",
+        "description": "Shown in place of the search box when showing archived conversation list"
+    },
+    "attemptingReconnection": {
+        "message": "Försöker återansluta om $reconnect_duration_in_seconds$  sekunder",
+        "description": "",
+        "placeholders": {
+            "reconnect_duration_in_seconds": {
+                "content": "$1",
+                "example": "10"
+            }
+        }
+    },
+    "audio": {
+        "message": "Ljud",
+        "description": "Shown in a quotation of a message containing an audio attachment if no text was originally provided with that attachment"
+    },
+    "audioNotificationDescription": {
+        "message": "Spela ljudavisering",
+        "description": "Description for audio notification setting"
+    },
+    "audioPermissionNeeded": {
+        "message": "Om du vill skicka röstmeddelanden måste OfficeApp Desktop ha tillgång till din mikrofon.",
+        "description": "Shown if the user attempts to send an audio message without audio permssions turned on"
+    },
+    "autoUpdateLaterButtonLabel": {
+        "message": "Senare",
+        "description": ""
+    },
+    "autoUpdateNewVersionInstructions": {
+        "message": "Vänligen starta om OfficeApp för att uppdatera",
+        "description": ""
+    },
+    "autoUpdateNewVersionMessage": {
+        "message": "Det finns en ny version av OfficeApp tillgänglig.",
+        "description": ""
+    },
+    "autoUpdateNewVersionTitle": {
+        "message": "Uppdatering för OfficeApp tillgänglig",
+        "description": ""
+    },
+    "autoUpdateRestartButtonLabel": {
+        "message": "Starta om OfficeApp",
+        "description": ""
+    },
+    "bankDetails": {
+        "message": "Bank details",
+        "description": "Title for company bank detail input"
+    },
+    "branch": {
+        "message": "Branch",
+        "description": "Label for company branch input"
+    },
+    "callPhone": {
+        "message": "Anrufen",
+        "description": "Label for phone verify call phone"
+    },
+    "cancel": {
+        "message": "Avbryt",
+        "description": ""
+    },
+    "cannotMixImageAdnNonImageAttachments": {
+        "message": "Du kan inte blanda bilagor som både är, och inte är, bilder i ett meddelande.",
+        "description": "An error popup when the user has attempted to add an attachment"
+    },
+    "cannotUpdate": {
+        "message": "Cannot Update",
+        "description": "Shown as the title of our update error dialogs on windows"
+    },
+    "cannotUpdateDetail": {
+        "message": "OfficeApp Desktop failed to update, but there is a new version available. Please go to https://signal.org/download and install the new version manually, then either contact support or file a bug about this problem.",
+        "description": "Shown if a general error happened while trying to install update package"
+    },
+    "changeLanguageMessage": {
+        "message": "Changing current language requires restarting the application, do you wish to do this now?",
+        "description": "Message for change language require restart message box"
+    },
+    "changeLanguageTitle": {
+        "message": "Changing language requires restart",
+        "description": "Title for change language requires restart message box"
+    },
+    "changedRecently": {
+        "message": "Ditt säkerhetsnummer med $name$ har nyligen ändrats. Detta kan betyda att någon försöker avlyssna konversationen eller att $name$ har ominstallerat OfficeApp.",
+        "description": "Shown on confirmation dialog when user attempts to send a message",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "Bob"
+            }
+        }
+    },
+    "changedRecentlyMultiple": {
+        "message": "Dina säkerhetsnummer med flera gruppmedlemmar har nyligen ändrats. Det kan innebära att någon försöker lyssna av din kommunikation eller att de bara installerat om OfficeApp.",
+        "description": "Shown on confirmation dialog when user attempts to send a message"
+    },
+    "changedRightAfterVerify": {
+        "message": "Säkerhetsnyckeln som du försöker verifiera har ändrats. Dubbelkolla ditt nya säkerhetsnummer med $name$. Kom ihåg, detta kan betyda att någon försöker komma åt din konversation eller att $name$ har ominstallerat OfficeApp.",
+        "description": "Shown on the safety number screen when the user has selected to verify/unverify a contact's safety number, and we immediately discover a safety number change",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "Bob"
+            }
+        }
+    },
+    "changedSinceVerified": {
+        "message": "Ditt säkerhetsnummer med $name$ har ändrats sen du senast verifierade. Detta kan betyda att någon försöker avlyssna din konversation eller att $name$ har ominstallerat OfficeApp.",
+        "description": "Shown on confirmation dialog when user attempts to send a message",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "Bob"
+            }
+        }
+    },
+    "changedSinceVerifiedMultiple": {
+        "message": "Dina säkerhetsnummer med flera gruppmedlemmar har ändrats sen du sist verifierade dem. Detta kan betyda att någon försöker lyssna av din kommunikation eller att de bara installerat om OfficeApp.",
+        "description": "Shown on confirmation dialog when user attempts to send a message"
+    },
+    "checkNetworkConnection": {
+        "message": "Kontrollera din nätverksanslutning.",
+        "description": "Obvious instructions for when a user's computer loses its network connection"
+    },
+    "chooseDeviceName": {
+        "message": "Välj enhetsnamn",
+        "description": "The header shown on the 'choose device name' screen in the device linking process"
+    },
+    "chooseDirectory": {
+        "message": "Välj mapp",
+        "description": "Button to allow the user to find a folder on disk"
+    },
+    "chooseFile": {
+        "message": "Välj fil",
+        "description": "Button to allow the user to find a file on disk"
+    },
+    "clearDataButton": {
+        "message": "Radera data",
+        "description": "Button in the settings dialog starting process to delete all data"
+    },
+    "clearDataExplanation": {
+        "message": "Detta kommer radera all data i applikationen, det tar bort alla meddelanden och sparad kontoinformation.",
+        "description": "Text describing what the clear data button will do."
+    },
+    "clearDataHeader": {
+        "message": "Rensa data",
+        "description": "Header in the settings dialog for the section dealing with data deletion"
+    },
+    "clickToSave": {
+        "message": "Klicka för att spara",
+        "description": "Hover text for attachment filenames"
+    },
+    "clientButton": {
+        "message": "Client",
+        "description": "Client button on import contact"
+    },
+    "closeTicket": {
+        "message": "Close ticket",
+        "description": "Chat menu close ticket"
+    },
+    "companyCode": {
+        "message": "Firmennummer",
+        "description": "Label for signup Buchungskreis input"
+    },
+    "companyDetails": {
+        "message": "Company details",
+        "description": "Title for company details entry"
+    },
+    "companyName": {
+        "message": "Company Name",
+        "description": "Label for company name input"
+    },
+    "companyRegistrationID": {
+        "message": "Commercial Register ID",
+        "description": "Label for commercial register id input"
+    },
+    "confirmation-dialog--Cancel": {
+        "message": "Cancel",
+        "description": "Appears on the cancel button in confirmation dialogs."
+    },
+    "connecting": {
+        "message": "Ansluter",
+        "description": "Displayed when the desktop client is currently connecting to the server."
+    },
+    "contactAvatarAlt": {
+        "message": "Avatar för kontakten $name$",
+        "description": "Used in the alt tag for the image avatar of a contact",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "John"
+            }
+        }
+    },
+    "contactImportTitle": {
+        "message": "Contacts syncronization",
+        "description": "Title for contacts import"
+    },
+    "contactsHeader": {
+        "message": "Kontakter",
+        "description": "Shown to separate the types of search results"
+    },
+    "continueButton": {
+        "message": "Continue",
+        "description": "Button label for continuing to next step"
+    },
+    "conversationsHeader": {
+        "message": "Konversationer",
+        "description": "Shown to separate the types of search results"
+    },
+    "copyErrorAndQuit": {
+        "message": "Kopiera felmeddelande och avsluta",
+        "description": "Shown in the top-level error popup, allowing user to copy the error text and close the app"
+    },
+    "countryCode": {
+        "message": "Country code",
+        "description": "Title for country code input"
+    },
+    "createGroup": {
+        "message": "Create group",
+        "description": "Create group menu item"
+    },
+    "dangerousFileType": {
+        "message": "Bilagor av denna typ tillåts inte på grund av säkerhetsskäl",
+        "description": "Shown in toast when user attempts to send .exe file, for example"
+    },
+    "databaseError": {
+        "message": "Databasfel",
+        "description": "Shown in a popup if the database cannot start up properly"
+    },
+    "debugLog": {
+        "message": "Felsökningslogg",
+        "description": "View menu item to open the debug log (title case)"
+    },
+    "debugLogError": {
+        "message": "Något gick fel med sändningen! Vänligen överväg att manuellt lägga till loggen till rapporten du skriver.",
+        "description": ""
+    },
+    "debugLogExplanation": {
+        "message": "Den här loggen kommer att bli postad publikt på internet så att våra medarbetare kan kolla igenom den. Du kan gå igenom och ändra på den innan du skickar in den.",
+        "description": ""
+    },
+    "delete": {
+        "message": "Radera",
+        "description": ""
+    },
+    "deleteAllDataBody": {
+        "message": "Du är på väg att radera alla denna applikations sparade kontoinformation, inklusive alla kontakter och alla meddelanden. Du kan länka till din mobila enhet igen, men det kommer inte återställa de raderade meddelandena.",
+        "description": "Text describing what exactly will happen if the user clicks the button to delete all data"
+    },
+    "deleteAllDataButton": {
+        "message": "Radera all data",
+        "description": "Text of the button that deletes all data"
+    },
+    "deleteAllDataHeader": {
+        "message": "Radera all data?",
+        "description": "Header of the full-screen delete data confirmation screen"
+    },
+    "deleteAllDataProgress": {
+        "message": "Kopplar bort och raderar all data",
+        "description": "Message shown to user when app is disconnected and data deleted"
+    },
+    "deleteAndRestart": {
+        "message": "Radera all data och starta om",
+        "description": "Shown in a popup if the database cannot start up properly; allows user to dalete database and restart"
+    },
+    "deleteContactModal": {
+        "message": "Kontakt löschen",
+        "description": "Kontakt löschen modal"
+    },
+    "deleteConversationConfirmation": {
+        "message": "Vill du radera denna konversation för alltid?",
+        "description": "Confirmation dialog text that asks the user if they really wish to delete the conversation. Answer buttons use the strings 'ok' and 'cancel'. The deletion is permanent, i.e. it cannot be undone."
+    },
+    "deleteMessage": {
+        "message": "Radera meddelande",
+        "description": "Shown on the drop-down menu for an individual message, deletes single message"
+    },
+    "deleteMessages": {
+        "message": "Radera meddelanden",
+        "description": "Menu item for deleting messages, title case."
+    },
+    "deleteThisMessage": {
+        "message": "Radera detta meddelande",
+        "description": ""
+    },
+    "deleteWarning": {
+        "message": "Är du säker? Om du klickar 'radera' så tas detta meddelande bort permanent, men bara från denna enhet.",
+        "description": ""
+    },
+    "deviceName": {
+        "message": "Enhetsnamn",
+        "description": "The label in settings panel shown for the user-provided name for this desktop instance"
+    },
+    "disableNotifications": {
+        "message": "Stäng av aviseringar",
+        "description": "Label for disabling notifications"
+    },
+    "disabledDisappearingMessages": {
+        "message": "$name$ stängde av att meddelanden försvinner.",
+        "description": "Displayed in the conversation list when the timer is turned off",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "John"
+            }
+        }
+    },
+    "disappearingMessages": {
+        "message": "Försvinnande meddelanden",
+        "description": "Conversation menu option to enable disappearing messages"
+    },
+    "disappearingMessagesDisabled": {
+        "message": "Försvinnande meddelanden inaktiverat",
+        "description": "Displayed in the left pane when the timer is turned off"
+    },
+    "disconnected": {
+        "message": "Frånkopplad",
+        "description": "Displayed when the desktop client cannot connect to the server."
+    },
+    "documents": {
+        "message": "Dokument",
+        "description": "Header of the secondary pane in the media gallery, showing every non-media attachment"
+    },
+    "documentsEmptyState": {
+        "message": "Du har inga dokument i denna konversation",
+        "description": "Message shown to user in the media gallery when there are no messages with document attachments (anything other than images or video)"
+    },
+    "downloadAttachment": {
+        "message": "Hämta bifogad fil",
+        "description": "Shown in a message's triple-dot menu if there isn't room for a dedicated download button"
+    },
+    "downloading": {
+        "message": "Laddar ner",
+        "description": "Shown in the message bubble while a long message attachment is being downloaded"
+    },
+    "editMenuCopy": {
+        "message": "Kopiera",
+        "description": "Edit menu command to add selected text to clipboard"
     },
     "editMenuCut": {
         "message": "Klipp ut",
         "description": "Edit menu command to remove selected text and add it to clipboard"
     },
-    "editMenuCopy": {
-        "message": "Kopiera",
-        "description": "Edit menu command to add selected text to clipboard"
+    "editMenuDelete": {
+        "message": "Radera",
+        "description": "Edit menu command to remove the selected text"
     },
     "editMenuPaste": {
         "message": "Klistra in",
@@ -79,9 +677,9 @@
         "message": "Klistra in och matcha stil",
         "description": "Edit menu command to insert text from clipboard at cursor location, taking only text and not style information"
     },
-    "editMenuDelete": {
-        "message": "Radera",
-        "description": "Edit menu command to remove the selected text"
+    "editMenuRedo": {
+        "message": "Gör om",
+        "description": "Edit menu command to restore previously undone typed text"
     },
     "editMenuSelectAll": {
         "message": "Markera alla",
@@ -95,1083 +693,93 @@
         "message": "Sluta prata",
         "description": "Edit menu item under 'speech' to stop dictation"
     },
-    "windowMenuClose": {
-        "message": "Stäng fönster",
-        "description": "Window menu command to close the current window"
-    },
-    "windowMenuMinimize": {
-        "message": "Minimera",
-        "description": "Window menu command to minimize the current window"
-    },
-    "windowMenuZoom": {
-        "message": "Zooma",
-        "description": "Window menu command to make the current window the size of the whole screen"
-    },
-    "windowMenuBringAllToFront": {
-        "message": "Ta fram alla",
-        "description": "Window menu command to bring all windows of current applicatinon to front"
-    },
-    "viewMenuResetZoom": {
-        "message": "Aktuella storlek",
-        "description": "View menu command to go back to the default zoom"
-    },
-    "viewMenuZoomIn": {
-        "message": "Zooma in",
-        "description": "View menu command to make everything bigger"
-    },
-    "viewMenuZoomOut": {
-        "message": "Zooma ut",
-        "description": "View menu command to make everything smaller"
-    },
-    "viewMenuToggleFullScreen": {
-        "message": "Slå av/på fullskärm",
-        "description": "View menu command to enter or leave Full Screen mode"
-    },
-    "viewMenuToggleDevTools": {
-        "message": "Slå på utvecklingsverktyg",
-        "description": "View menu command to show or hide the developer tools"
-    },
-    "menuSetupWithImport": {
-        "message": "Ställ in med import",
-        "description": "When the application is not yet set up, menu option to start up the import sequence"
-    },
-    "menuSetupAsNewDevice": {
-        "message": "Ställ in som ny enhet",
-        "description": "When the application is not yet set up, menu option to start up the set up as fresh device"
-    },
-    "menuSetupAsStandalone": {
-        "message": "Ställ in som fristående enhet",
-        "description": "Only available on development modes, menu option to open up the standalone device setup sequence"
-    },
-    "loading": {
-        "message": "Läser in...",
-        "description": "Message shown on the loading screen before we've loaded any messages"
-    },
-    "optimizingApplication": {
-        "message": "Optimerar applikationen...",
-        "description": "Message shown on the loading screen while we are doing application optimizations"
-    },
-    "migratingToSQLCipher": {
-        "message": "Optimerar meddelanden... $status$ klara.",
-        "description": "Message shown on the loading screen while we are doing application optimizations",
-        "placeholders": {
-            "status": {
-                "content": "$1",
-                "example": "45/200"
-            }
-        }
-    },
-    "archivedConversations": {
-        "message": "Arkiverade konversationer",
-        "description": "Shown in place of the search box when showing archived conversation list"
-    },
-    "archiveHelperText": {
-        "message": "Konversationerna här är arkiverade och kommer bara visas i inkorgen ifall nya meddelanden tas emot.",
-        "description": "Shown at the top of the archived converations list in the left pane"
-    },
-    "archiveConversation": {
-        "message": "Arkivera konversation",
-        "description": "Shown in menu for conversation, and moves conversation out of main conversation list"
-    },
-    "moveConversationToInbox": {
-        "message": "Flytta konversationen till Inkorg",
-        "description": "Undoes Archive Conversation action, and moves archived conversation back to the main conversation list"
-    },
-    "chooseDirectory": {
-        "message": "Välj mapp",
-        "description": "Button to allow the user to find a folder on disk"
-    },
-    "chooseFile": {
-        "message": "Välj fil",
-        "description": "Button to allow the user to find a file on disk"
-    },
-    "loadDataHeader": {
-        "message": "Läs in din data",
-        "description": "Header shown on the first screen in the data import process"
-    },
-    "loadDataDescription": {
-        "message": "Du har just gått igenom exporteringsprocessen och dina kontakter och meddelanden ligger nu på din dator. Vänligen välj mappen som innehåller din sparade data för OfficeApp.",
-        "description": "Introduction to the process of importing messages and contacts from disk"
-    },
-    "importChooserTitle": {
-        "message": "Välj mapp där exporterad data lagras",
-        "description": "Title of the popup window used to select data previously exported"
-    },
-    "importErrorHeader": {
-        "message": "Något gick fel!",
-        "description": "Header of the error screen after a failed import"
-    },
-    "importingHeader": {
-        "message": "Läser in kontakter och meddelanden",
-        "description": "Header of screen shown as data is import"
-    },
-    "importErrorFirst": {
-        "message": "Kontrollera att du valt rätt mapp som innehåller dina sparade OfficeApp-data. Dess namn borde börja med 'OfficeApp Export.' Du kan också spara en ny kopia av din data från Chrome-appen.",
-        "description": "Message shown if the import went wrong; first paragraph"
-    },
-    "importErrorSecond": {
-        "message": "Om dessa steg inte funkar för dig, vänligen skicka in en felsökningslogg (Visa -> Felsökningslogg) så att vi kan hjälpa dig migrera!",
-        "description": "Message shown if the import went wrong; second paragraph"
-    },
-    "importAgain": {
-        "message": "Välj mapp och försök igen",
-        "description": "Button shown if the user runs into an error during import, allowing them to start over"
-    },
-    "importCompleteHeader": {
-        "message": "Det funkade!",
-        "description": "Header shown on the screen at the end of a successful import process"
-    },
-    "importCompleteStartButton": {
-        "message": "Börja använd OfficeApp Desktop",
-        "description": "Button shown at end of successful import process, nothing left but a restart"
-    },
-    "importCompleteLinkButton": {
-        "message": "Länka denna enhet till din mobil",
-        "description": "Button shown at end of successful 'light' import process, so the standard linking process still needs to happen"
-    },
-    "selectedLocation": {
-        "message": "din valda plats",
-        "description": "Message shown as the export location if we didn't capture the target directory"
-    },
-    "upgradingDatabase": {
-        "message": "Uppgraderar databasen. Detta kan ta lite tid...",
-        "description": "Message shown on the loading screen when we're changing database structure on first run of a new version"
-    },
-    "loadingMessages": {
-        "message": "Läser in meddelanden. $count$ hittills...",
-        "description": "Message shown on the loading screen when we're catching up on the backlog of messages",
-        "placeholders": {
-            "count": {
-                "content": "$1",
-                "example": "5"
-            }
-        }
-    },
-    "me": {
-        "message": "Jag",
-        "description": "The label for yourself when shown in a group member list"
-    },
-    "view": {
-        "message": "Visa",
-        "description": "Used as a label on a button allowing user to see more information"
-    },
-    "youLeftTheGroup": {
-        "message": "Du lämnade gruppen",
-        "description": "Displayed when a user can't send a message because they have left the group"
-    },
-    "scrollDown": {
-        "message": "Rulla till botten av konversationen",
-        "description": "Alt text for button to take user down to bottom of conversation, shown when user scrolls up"
-    },
-    "messageBelow": {
-        "message": "Nytt meddelande nedanför",
-        "description": "Alt text for button to take user down to bottom of conversation with a new message out of screen"
-    },
-    "messagesBelow": {
-        "message": "Nya meddelanden nedanför",
-        "description": "Alt text for button to take user down to bottom of conversation with more than one message out of screen"
-    },
-    "unreadMessage": {
-        "message": "1 oläst meddelande",
-        "description": "Text for unread message separator, just one message"
-    },
-    "unreadMessages": {
-        "message": "$count$ olästa meddelanden",
-        "description": "Text for unread message separator, with count",
-        "placeholders": {
-            "count": {
-                "content": "$1",
-                "example": "5"
-            }
-        }
-    },
-    "youMarkedAsVerified": {
-        "message": "Du markerade ditt Säkerhetsnummer med $name$ som verifierat",
-        "description": "Shown in the conversation history when the user marks a contact as verified.",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "Bob"
-            }
-        }
-    },
-    "youMarkedAsNotVerified": {
-        "message": "Du markerade ditt Säkerhetsnummer med $name$ som inte verifierat",
-        "description": "Shown in the conversation history when the user marks a contact as not verified, whether on the Safety Number screen or by dismissing a banner or dialog.",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "Bob"
-            }
-        }
-    },
-    "youMarkedAsVerifiedOtherDevice": {
-        "message": "Du markerade ditt Säkerhetsnummer med $name$ som verifierat från en annan enhet",
-        "description": "Shown in the conversation history when we discover that the user marked a contact as verified on another device.",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "Bob"
-            }
-        }
-    },
-    "youMarkedAsNotVerifiedOtherDevice": {
-        "message": "Du markerade ditt Säkerhetsnummer med $name$ som inte verifierat från en annan enhet",
-        "description": "Shown in the conversation history when we discover that the user marked a contact as not verified on another device.",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "Bob"
-            }
-        }
-    },
-    "membersNeedingVerification": {
-        "message": "Dina säkerhetsnummer med dessa gruppmedlemmar har ändrats sen du senast verifierade. Klicka på en gruppmedlem för att se ditt nya säkerhetsnummer.",
-        "description": "When there are multiple previously-verified group members with safety number changes, a banner will be shown. The list of contacts with safety number changes is shown, and this text introduces that list."
-    },
-    "changedSinceVerifiedMultiple": {
-        "message": "Dina säkerhetsnummer med flera gruppmedlemmar har ändrats sen du sist verifierade dem. Detta kan betyda att någon försöker lyssna av din kommunikation eller att de bara installerat om OfficeApp.",
-        "description": "Shown on confirmation dialog when user attempts to send a message"
-    },
-    "changedSinceVerified": {
-        "message": "Ditt säkerhetsnummer med $name$ har ändrats sen du senast verifierade. Detta kan betyda att någon försöker avlyssna din konversation eller att $name$ har ominstallerat OfficeApp.",
-        "description": "Shown on confirmation dialog when user attempts to send a message",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "Bob"
-            }
-        }
-    },
-    "changedRightAfterVerify": {
-        "message": "Säkerhetsnyckeln som du försöker verifiera har ändrats. Dubbelkolla ditt nya säkerhetsnummer med $name$. Kom ihåg, detta kan betyda att någon försöker komma åt din konversation eller att $name$ har ominstallerat OfficeApp.",
-        "description": "Shown on the safety number screen when the user has selected to verify/unverify a contact's safety number, and we immediately discover a safety number change",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "Bob"
-            }
-        }
-    },
-    "changedRecentlyMultiple": {
-        "message": "Dina säkerhetsnummer med flera gruppmedlemmar har nyligen ändrats. Det kan innebära att någon försöker lyssna av din kommunikation eller att de bara installerat om OfficeApp.",
-        "description": "Shown on confirmation dialog when user attempts to send a message"
-    },
-    "changedRecently": {
-        "message": "Ditt säkerhetsnummer med $name$ har nyligen ändrats. Detta kan betyda att någon försöker avlyssna konversationen eller att $name$ har ominstallerat OfficeApp.",
-        "description": "Shown on confirmation dialog when user attempts to send a message",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "Bob"
-            }
-        }
-    },
-    "identityKeyErrorOnSend": {
-        "message": "Ditt säkerhetsnummer med $name$ har ändrats. Detta kan antingen betyda att någon försöker avlyssna din konversation eller att $name$ har ominstallerat OfficeApp. Du kanske vill verifiera det nya säkerhetsnumret med denna kontakt.",
-        "description": "Shown when user clicks on a failed recipient in the message detail view after an identity key change",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "Bob"
-            }
-        }
-    },
-    "sendAnyway": {
-        "message": "Skicka ändå",
-        "description": "Used on a warning dialog to make it clear that it might be risky to send the message."
-    },
-    "noLongerVerified": {
-        "message": "Your safety number with $name$ has changed and is no longer verified. Click to show.",
-        "description": "Shown in converation banner when user's safety number has changed, but they were previously verified.",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "Bob"
-            }
-        }
-    },
-    "multipleNoLongerVerified": {
-        "message": "Dina säkerhetsnycklar med flera medlemmar av den här gruppen har ändrats och är inte längre verifierade. Klicka för att visa.",
-        "description": "Shown in conversation banner when more than one group member's safety number has changed, but they were previously verified."
-    },
-    "debugLogExplanation": {
-        "message": "Den här loggen kommer att bli postad publikt på internet så att våra medarbetare kan kolla igenom den. Du kan gå igenom och ändra på den innan du skickar in den.",
-        "description": ""
-    },
-    "debugLogError": {
-        "message": "Något gick fel med sändningen! Vänligen överväg att manuellt lägga till loggen till rapporten du skriver.",
-        "description": ""
-    },
-    "reportIssue": {
-        "message": "Anmäl ett programfel",
-        "description": "Link to open the issue tracker"
-    },
-    "gotIt": {
-        "message": "Uppfattat!",
-        "description": "Label for a button that dismisses a dialog. The user clicks it to confirm that they understand the message in the dialog."
-    },
-    "submit": {
-        "message": "Skicka",
-        "description": ""
-    },
-    "acceptNewKey": {
-        "message": "Godkänn",
-        "description": "Label for a button to accept a new safety number"
-    },
-    "verify": {
-        "message": "Märk som verifierat",
-        "description": ""
-    },
-    "unverify": {
-        "message": "Markera som inte verifierad",
-        "description": ""
-    },
-    "isVerified": {
-        "message": "Du har verifierat ditt säkerhetsnummer med $name$.",
-        "description": "Summary state shown at top of the safety number screen if user has verified contact.",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "Bob"
-            }
-        }
-    },
-    "isNotVerified": {
-        "message": "Du har inte verifierat ditt säkerhetsnummer med $name$.",
-        "description": "Summary state shown at top of the safety number screen if user has not verified contact.",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "Bob"
-            }
-        }
-    },
-    "verified": {
-        "message": "Verifierat",
-        "description": ""
-    },
-    "newIdentity": {
-        "message": "Nytt säkerhetsnummer",
-        "description": "Header for a key change dialog"
-    },
-    "identityChanged": {
-        "message": "Ditt säkerhetsnummer med den här kontakten har ändrats. Detta kan antingen innebära att någon försöker avlyssna din kommunikation, eller att kontakten har ominstallerat OfficeApp. Du kan verifiera det nya säkerhetsnumret nedan.",
-        "description": ""
-    },
-    "incomingError": {
-        "message": "Fel med att hantera inkommande meddelande",
-        "description": ""
-    },
-    "media": {
-        "message": "Media",
-        "description": "Header of the default pane in the media gallery, showing images and videos"
-    },
-    "mediaEmptyState": {
-        "message": "Du har inga mediefiler i denna konversation",
-        "description": "Message shown to user in the media gallery when there are no messages with media attachments (images or video)"
-    },
-    "documents": {
-        "message": "Dokument",
-        "description": "Header of the secondary pane in the media gallery, showing every non-media attachment"
-    },
-    "documentsEmptyState": {
-        "message": "Du har inga dokument i denna konversation",
-        "description": "Message shown to user in the media gallery when there are no messages with document attachments (anything other than images or video)"
-    },
-    "today": {
-        "message": "Idag",
-        "description": "Section header in the media gallery"
-    },
-    "yesterday": {
-        "message": "Igår",
-        "description": "Section header in the media gallery"
-    },
-    "thisWeek": {
-        "message": "Denna vecka",
-        "description": "Section header in the media gallery"
-    },
-    "thisMonth": {
-        "message": "Denna månad",
-        "description": "Section header in the media gallery"
-    },
-    "unsupportedAttachment": {
-        "message": "Okänd filtyp på bilaga. Klicka för att spara.",
-        "description": "Displayed for incoming unsupported attachment"
-    },
-    "clickToSave": {
-        "message": "Klicka för att spara",
-        "description": "Hover text for attachment filenames"
-    },
-    "unnamedFile": {
-        "message": "Namnlös fil",
-        "description": "Hover text for attachment filenames"
-    },
-    "voiceMessage": {
-        "message": "Röstmeddelande",
-        "description": "Name for a voice message attachment"
-    },
-    "dangerousFileType": {
-        "message": "Bilagor av denna typ tillåts inte på grund av säkerhetsskäl",
-        "description": "Shown in toast when user attempts to send .exe file, for example"
-    },
-    "loadingPreview": {
-        "message": "Läser in förhandsvisning...",
-        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area"
-    },
-    "stagedPreviewThumbnail": {
-        "message": "Utkast av länkförhandsvisning i miniatyrbild för $domain$",
-        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area",
-        "placeholders": {
-            "path": {
-                "content": "$1",
-                "example": "instagram.com"
-            }
-        }
-    },
-    "previewThumbnail": {
-        "message": "Länkförhandsvisning i miniatyrbild för $domain$",
-        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area",
-        "placeholders": {
-            "path": {
-                "content": "$1",
-                "example": "instagram.com"
-            }
-        }
-    },
-    "stagedImageAttachment": {
-        "message": "Utkast till bildbilaga: $path$",
-        "description": "Alt text for staged attachments",
-        "placeholders": {
-            "path": {
-                "content": "$1",
-                "example": "dog.jpg"
-            }
-        }
-    },
-    "oneNonImageAtATimeToast": {
-        "message": "När man inkluderar bilagor som inte är bilder, är begränsningen en bilaga per meddelande.",
-        "description": "An error popup when the user has attempted to add an attachment"
-    },
-    "cannotMixImageAdnNonImageAttachments": {
-        "message": "Du kan inte blanda bilagor som både är, och inte är, bilder i ett meddelande.",
-        "description": "An error popup when the user has attempted to add an attachment"
-    },
-    "maximumAttachments": {
-        "message": "Du kan inte lägga till fler bilagor till det här meddelandet.",
-        "description": "An error popup when the user has attempted to add an attachment"
-    },
-    "fileSizeWarning": {
-        "message": "Tyvärr, filen du har valt överstiger maximalt tillåten filstorlek.",
-        "description": ""
-    },
-    "unableToLoadAttachment": {
-        "message": "Kunde inte läsa in vald bilaga",
-        "description": ""
-    },
-    "disconnected": {
-        "message": "Frånkopplad",
-        "description": "Displayed when the desktop client cannot connect to the server."
-    },
-    "connecting": {
-        "message": "Ansluter",
-        "description": "Displayed when the desktop client is currently connecting to the server."
-    },
-    "offline": {
-        "message": "Ej ansluten",
-        "description": "Displayed when the desktop client has no network connection."
-    },
-    "checkNetworkConnection": {
-        "message": "Kontrollera din nätverksanslutning.",
-        "description": "Obvious instructions for when a user's computer loses its network connection"
-    },
-    "attemptingReconnection": {
-        "message": "Försöker återansluta om $reconnect_duration_in_seconds$  sekunder",
-        "description": "",
-        "placeholders": {
-            "reconnect_duration_in_seconds": {
-                "content": "$1",
-                "example": "10"
-            }
-        }
-    },
-    "submitDebugLog": {
-        "message": "Loggfil för felsökning",
-        "description": "Menu item and header text for debug log modal (sentence case)"
-    },
-    "debugLog": {
-        "message": "Felsökningslogg",
-        "description": "View menu item to open the debug log (title case)"
-    },
-    "goToReleaseNotes": {
-        "message": "Gå till versionsanteckningar",
-        "description": ""
-    },
-    "goToForums": {
-        "message": "Gå till forumet",
-        "description": "Item under the Help menu, takes you to the forums"
-    },
-    "goToSupportPage": {
-        "message": "Gå till supportsidan",
-        "description": "Item under the Help menu, takes you to the support page"
-    },
-    "menuReportIssue": {
-        "message": "Rapportera ett fel",
-        "description": "Item under the Help menu, takes you to GitHub new issue form (title case)"
-    },
-    "signalDesktopPreferences": {
-        "message": "OfficeApp Desktops preferenser",
-        "description": "Title of the window that pops up with OfficeApp Desktop preferences in it"
-    },
-    "aboutSignalDesktop": {
-        "message": "Om OfficeApp Desktop",
-        "description": "Item under the Help menu, which opens a small about window"
-    },
-    "speech": {
-        "message": "Tal",
-        "description": "Item under the Edit menu, with 'start/stop speaking' items below it"
-    },
-    "show": {
-        "message": "Visa",
-        "description": "Command under Window menu, to show the window"
-    },
-    "hide": {
-        "message": "Göm",
-        "description": "Command in the tray icon menu, to hide the window"
-    },
-    "quit": {
-        "message": "Avsluta",
-        "description": "Command in the tray icon menu, to quit the application"
-    },
-    "signalDesktop": {
-        "message": "OfficeApp Desktop",
-        "description": "Tooltip for the tray icon"
-    },
-    "search": {
-        "message": "Sök",
-        "description": "Placeholder text in the search input"
-    },
-    "noSearchResults": {
-        "message": "Inga resultat för \"$searchTerm$\"",
-        "description": "Shown in the search left pane when no results were found",
-        "placeholders": {
-            "searchTerm": {
-                "content": "$1",
-                "example": "dog"
-            }
-        }
-    },
-    "conversationsHeader": {
-        "message": "Konversationer",
-        "description": "Shown to separate the types of search results"
-    },
-    "contactsHeader": {
-        "message": "Kontakter",
-        "description": "Shown to separate the types of search results"
-    },
-    "messagesHeader": {
-        "message": "Meddelanden",
-        "description": "Shown to separate the types of search results"
-    },
-    "welcomeToSignal": {
-        "message": "Välkommen till OfficeApp",
-        "description": ""
-    },
-    "selectAContact": {
-        "message": "Välj en kontakt eller grupp för att börja prata.",
-        "description": ""
-    },
-    "typingAlt": {
-        "message": "Skrivanimation för denna konversation",
-        "description": "Used as the 'title' attibute for the typing animation"
-    },
-    "contactAvatarAlt": {
-        "message": "Avatar för kontakten $name$",
-        "description": "Used in the alt tag for the image avatar of a contact",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "John"
-            }
-        }
-    },
-    "sendMessageToContact": {
-        "message": "Skicka meddelande",
-        "description": "Shown when you are sent a contact and that contact has a signal account"
-    },
-    "home": {
-        "message": "hem",
-        "description": "Shown on contact detail screen as a label for an address/phone/email"
-    },
-    "work": {
-        "message": "jobb",
-        "description": "Shown on contact detail screen as a label for an address/phone/email"
-    },
-    "mobile": {
-        "message": "mobil",
-        "description": "Shown on contact detail screen as a label for aa phone or email"
+    "editMenuUndo": {
+        "message": "Ångra",
+        "description": "Edit menu command to remove recently-typed text"
     },
     "email": {
         "message": "e-post",
         "description": "Generic label shown if contact email has custom type but no label"
     },
-    "phone": {
-        "message": "telefon",
-        "description": "Generic label shown if contact phone has custom type but no label"
-    },
-    "address": {
-        "message": "adress",
-        "description": "Generic label shown if contact address has custom type but no label"
-    },
-    "poBox": {
-        "message": "PO-låda",
-        "description": "When rendering an address, used to provide context to a post office box"
-    },
-    "downloading": {
-        "message": "Laddar ner",
-        "description": "Shown in the message bubble while a long message attachment is being downloaded"
-    },
-    "downloadAttachment": {
-        "message": "Hämta bifogad fil",
-        "description": "Shown in a message's triple-dot menu if there isn't room for a dedicated download button"
-    },
-    "replyToMessage": {
-        "message": "Svara på meddelande",
-        "description": "Shown in triple-dot menu next to message to allow user to start crafting a message with a quotation"
-    },
-    "originalMessageNotFound": {
-        "message": "Originalmeddelande hittades inte",
-        "description": "Shown in quote if reference message was not found as message was initially downloaded and processed"
-    },
-    "originalMessageNotAvailable": {
-        "message": "Originalmeddelande inte längre tillgängligt",
-        "description": "Shown in toast if user clicks on quote that references message no longer in database"
-    },
-    "messageFoundButNotLoaded": {
-        "message": "Originalmeddelande hittades, men lästes inte in. Skrolla upp för att läsa in det.",
-        "description": "Shown in toast if user clicks on quote references messages not loaded in view, but in database"
-    },
-    "voiceNoteMustBeOnlyAttachment": {
-        "message": "Ett röstmeddelande måste vara den enda bilagan till ett meddelande.",
-        "description": "Shown in toast if tries to record a voice note with any staged attachments"
-    },
-    "you": {
-        "message": "Du",
-        "description": "In Android theme, shown in quote if you or someone else replies to you"
-    },
-    "replyingTo": {
-        "message": "Svarar till $name$",
-        "description": "Shown in iOS theme when you or someone quotes to a message which is not from you",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "John"
-            }
-        }
-    },
-    "audioPermissionNeeded": {
-        "message": "Om du vill skicka röstmeddelanden måste OfficeApp Desktop ha tillgång till din mikrofon.",
-        "description": "Shown if the user attempts to send an audio message without audio permssions turned on"
-    },
-    "allowAccess": {
-        "message": "Tillåt åtkomst",
-        "description": "Button shown in popup asking to enable microphon/video permissions to send audio messages"
-    },
-    "showSettings": {
-        "message": "Visa inställningar",
-        "description": "A button shown in dialog requesting the user to turn on audio permissions"
-    },
-    "audio": {
-        "message": "Ljud",
-        "description": "Shown in a quotation of a message containing an audio attachment if no text was originally provided with that attachment"
-    },
-    "video": {
-        "message": "Video",
-        "description": "Shown in a quotation of a message containing a video if no text was originally provided with that video"
-    },
-    "photo": {
-        "message": "Foto",
-        "description": "Shown in a quotation of a message containing a photo if no text was originally provided with that image"
-    },
-    "cannotUpdate": {
-        "message": "Cannot Update",
-        "description": "Shown as the title of our update error dialogs on windows"
-    },
-    "cannotUpdateDetail": {
-        "message": "OfficeApp Desktop failed to update, but there is a new version available. Please go to https://signal.org/download and install the new version manually, then either contact support or file a bug about this problem.",
-        "description": "Shown if a general error happened while trying to install update package"
-    },
-    "readOnlyVolume": {
-        "message": "OfficeApp Desktop is likely in a macOS quarantine, and will not be able to auto-update. Please try moving OfficeApp.app to /Applications with Finder.",
-        "description": "Shown on MacOS if running on a read-only volume and we cannot update"
-    },
-    "ok": {
-        "message": "OK",
-        "description": ""
-    },
-    "cancel": {
-        "message": "Avbryt",
-        "description": ""
-    },
-    "failedToSend": {
-        "message": "Kunde inte skicka till vissa mottagare. Kontrollera din internetuppkoppling.",
-        "description": ""
-    },
     "error": {
         "message": "Fel",
         "description": ""
     },
-    "messageDetail": {
-        "message": "Meddelandedetaljer",
-        "description": ""
+    "eulaSubTitle": {
+        "message": "To continue, read and accept the terms and conditions",
+        "description": "Subtitle for EULA"
     },
-    "delete": {
-        "message": "Radera",
-        "description": ""
+    "eulaTitle": {
+        "message": "End-User License Agreement",
+        "description": "Title for EULA"
     },
-    "deleteWarning": {
-        "message": "Är du säker? Om du klickar 'radera' så tas detta meddelande bort permanent, men bara från denna enhet.",
-        "description": ""
+    "expiredWarning": {
+        "message": "Den här versionen av OfficeApp Desktop har utgått. Vänligen uppgradera till den senaste versionen för att fortsätta chatta.",
+        "description": "Warning notification that this version of the app has expired"
     },
-    "deleteThisMessage": {
-        "message": "Radera detta meddelande",
-        "description": ""
+    "extraInfoPhones": {
+        "message": "Landesvorwahl auswählen",
+        "description": "Landesvorwahl auswählen tittle"
     },
-    "from": {
-        "message": "Från",
-        "description": "Label for the sender of a message"
+    "extraInfoPhonesModal": {
+        "message": "Einrichtung neues OfA-Office",
+        "description": "Einrichtung neues OfA-Office tittle"
     },
-    "to": {
-        "message": "till",
-        "description": "Label for the receiver of a message"
-    },
-    "sent": {
-        "message": "Skickat",
-        "description": "Label for the time a message was sent"
-    },
-    "received": {
-        "message": "Mottagit",
-        "description": "Label for the time a message was received"
-    },
-    "sendMessage": {
-        "message": "Skicka ett meddelande",
-        "description": "Placeholder text in the message entry field"
-    },
-    "groupMembers": {
-        "message": "Gruppmedlemmar",
-        "description": ""
-    },
-    "showMembers": {
-        "message": "Visa medlemmar",
-        "description": ""
-    },
-    "resetSession": {
-        "message": "Återställ session",
-        "description": "This is a menu item for resetting the session, using the imperative case, as in a command."
-    },
-    "showSafetyNumber": {
-        "message": "Visa säkerhetsnummer",
-        "description": ""
-    },
-    "viewAllMedia": {
-        "message": "Visa alla media",
-        "description": "This is a menu item for viewing all media (images + video) in a conversation, using the imperative case, as in a command."
-    },
-    "verifyHelp": {
-        "message": "Om du vill verifiera krypteringen mellan dig och $name$, jämför siffrorna ovan med siffrorna på deras enhet.",
-        "description": "",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "John"
-            }
-        }
-    },
-    "theirIdentityUnknown": {
-        "message": "Du har inte utbytt några meddelanden med denna kontakt ännu. Ditt säkerhetsnummer med dem kommer att vara tillgängliga efter det första meddelandet.",
-        "description": ""
-    },
-    "moreInfo": {
-        "message": "Mer info...",
-        "description": "Shown on the drop-down menu for an individual message, takes you to message detail screen"
-    },
-    "retrySend": {
-        "message": "Skicka igen",
-        "description": "Shown on the drop-down menu for an indinvidaul message, but only if it is an outgoing message that failed to send"
-    },
-    "deleteMessage": {
-        "message": "Radera meddelande",
-        "description": "Shown on the drop-down menu for an individual message, deletes single message"
-    },
-    "deleteMessages": {
-        "message": "Radera meddelanden",
-        "description": "Menu item for deleting messages, title case."
-    },
-    "deleteConversationConfirmation": {
-        "message": "Vill du radera denna konversation för alltid?",
-        "description": "Confirmation dialog text that asks the user if they really wish to delete the conversation. Answer buttons use the strings 'ok' and 'cancel'. The deletion is permanent, i.e. it cannot be undone."
-    },
-    "sessionEnded": {
-        "message": "Återställning av säkerhetssession",
-        "description": "This is a past tense, informational message. In other words, your secure session has been reset."
-    },
-    "quoteThumbnailAlt": {
-        "message": "Miniatyr av bild för citerat meddelande",
-        "description": "Used in alt tag of thumbnail images inside of an embedded message quote"
-    },
-    "imageAttachmentAlt": {
-        "message": "Bild bifogat till meddelande",
-        "description": "Used in alt tag of image attachment"
-    },
-    "videoAttachmentAlt": {
-        "message": "Skärmbild av video bifogat till meddelande",
-        "description": "Used in alt tag of video attachment preview"
-    },
-    "lightboxImageAlt": {
-        "message": "Bild skickad i konversation",
-        "description": "Used in the alt tag for the image shown in a full-screen lightbox view"
-    },
-    "imageCaptionIconAlt": {
-        "message": "Ikon visandes att denna bild har en bildtext",
-        "description": "Used for the icon layered on top of an image in message bubbles"
-    },
-    "addACaption": {
-        "message": "Lägg till en rubrik...",
-        "description": ""
-    },
-    "save": {
-        "message": "Spara",
+    "failedToSend": {
+        "message": "Kunde inte skicka till vissa mottagare. Kontrollera din internetuppkoppling.",
         "description": ""
     },
     "fileIconAlt": {
         "message": "Filikon",
         "description": "Used in the media gallery documents tab to visually represent a file"
     },
-    "installWelcome": {
-        "message": "Välkommen till OfficeApp Desktop",
-        "description": "Welcome title on the install page"
-    },
-    "installTagline": {
-        "message": "Integritet är möjligt. OfficeApp gör det lätt.",
-        "description": "Tagline displayed under 'installWelcome' string on the install page"
-    },
-    "linkYourPhone": {
-        "message": "Länka din mobil till OfficeApp Desktop",
-        "description": "Shown on the front page when the application first starst, above the QR code"
-    },
-    "signalSettings": {
-        "message": "OfficeApp-inställningar",
-        "description": "Used in the guidance to help people find the 'link new device' area of their OfficeApp mobile app"
-    },
-    "linkedDevices": {
-        "message": "Länkade enheter",
-        "description": "Used in the guidance to help people find the 'link new device' area of their OfficeApp mobile app"
-    },
-    "plusButton": {
-        "message": "'+'-knappen",
-        "description": "The button used in OfficeApp Android to add a new linked device"
-    },
-    "linkNewDevice": {
-        "message": "Länka ny enhet",
-        "description": "The menu option shown in OfficeApp iOS to add a new linked device"
-    },
-    "deviceName": {
-        "message": "Enhetsnamn",
-        "description": "The label in settings panel shown for the user-provided name for this desktop instance"
-    },
-    "chooseDeviceName": {
-        "message": "Välj enhetsnamn",
-        "description": "The header shown on the 'choose device name' screen in the device linking process"
+    "fileSizeWarning": {
+        "message": "Tyvärr, filen du har valt överstiger maximalt tillåten filstorlek.",
+        "description": ""
     },
     "finishLinkingPhone": {
         "message": "Slutför länkning till mobil",
         "description": "The text on the button to finish the linking process, after choosing the device name"
     },
-    "initialSync": {
-        "message": "Synkroniserar kontakter och grupper",
-        "description": "Shown during initial link while contacts and groups are being pulled from mobile device"
-    },
-    "installConnectionFailed": {
-        "message": "Kunde inte kontakta servern.",
-        "description": "Displayed when we can't connect to the server."
-    },
-    "installTooManyDevices": {
-        "message": "Tyvärr har du för många enheter redan länkade. Försök att ta bort några.",
-        "description": ""
-    },
-    "settings": {
-        "message": "Inställningar",
-        "description": "Menu item and header for global settings"
-    },
-    "theme": {
-        "message": "Tema",
-        "description": "Header for theme settings"
-    },
-    "permissions": {
-        "message": "Behörigheter",
-        "description": "Header for permissions section of settings"
-    },
-    "mediaPermissionsDescription": {
-        "message": "Tillåt åtkomst till kameran och mikrofonen",
-        "description": "Description of the media permission description"
+    "from": {
+        "message": "Från",
+        "description": "Label for the sender of a message"
     },
     "general": {
         "message": "Generell",
         "description": "Header for general options on the settings screen"
     },
-    "spellCheckDescription": {
-        "message": "Slå på stavningskontroll för text som anges i meddelandefältet",
-        "description": "Description of the media permission description"
+    "goToForums": {
+        "message": "Gå till forumet",
+        "description": "Item under the Help menu, takes you to the forums"
     },
-    "clearDataHeader": {
-        "message": "Rensa data",
-        "description": "Header in the settings dialog for the section dealing with data deletion"
+    "goToReleaseNotes": {
+        "message": "Gå till versionsanteckningar",
+        "description": ""
     },
-    "clearDataExplanation": {
-        "message": "Detta kommer radera all data i applikationen, det tar bort alla meddelanden och sparad kontoinformation.",
-        "description": "Text describing what the clear data button will do."
+    "goToSupportPage": {
+        "message": "Gå till supportsidan",
+        "description": "Item under the Help menu, takes you to the support page"
     },
-    "clearDataButton": {
-        "message": "Radera data",
-        "description": "Button in the settings dialog starting process to delete all data"
+    "gotIt": {
+        "message": "Uppfattat!",
+        "description": "Label for a button that dismisses a dialog. The user clicks it to confirm that they understand the message in the dialog."
     },
-    "deleteAllDataHeader": {
-        "message": "Radera all data?",
-        "description": "Header of the full-screen delete data confirmation screen"
+    "groupMembers": {
+        "message": "Gruppmedlemmar",
+        "description": ""
     },
-    "deleteAllDataBody": {
-        "message": "Du är på väg att radera alla denna applikations sparade kontoinformation, inklusive alla kontakter och alla meddelanden. Du kan länka till din mobila enhet igen, men det kommer inte återställa de raderade meddelandena.",
-        "description": "Text describing what exactly will happen if the user clicks the button to delete all data"
+    "hide": {
+        "message": "Göm",
+        "description": "Command in the tray icon menu, to hide the window"
     },
-    "deleteAllDataButton": {
-        "message": "Radera all data",
-        "description": "Text of the button that deletes all data"
+    "hideMenuBar": {
+        "message": "Göm menyraden",
+        "description": "Label text for menu bar visibility setting"
     },
-    "deleteAllDataProgress": {
-        "message": "Kopplar bort och raderar all data",
-        "description": "Message shown to user when app is disconnected and data deleted"
-    },
-    "notifications": {
-        "message": "Aviseringar",
-        "description": "Header for notification settings"
-    },
-    "notificationSettingsDialog": {
-        "message": "När du får meddelanden, visa aviseringar som visar:",
-        "description": "Explain the purpose of the notification settings"
-    },
-    "disableNotifications": {
-        "message": "Stäng av aviseringar",
-        "description": "Label for disabling notifications"
-    },
-    "nameAndMessage": {
-        "message": "Både sändarens namn och meddelande",
-        "description": "Label for setting notifications to display name and message text"
-    },
-    "noNameOrMessage": {
-        "message": "Varken namn eller meddelande",
-        "description": "Label for setting notifications to display no name and no message text"
-    },
-    "nameOnly": {
-        "message": "Enbart sändarens namn",
-        "description": "Label for setting notifications to display sender name only"
-    },
-    "newMessage": {
-        "message": "Nytt meddelande",
-        "description": "Displayed in notifications for only 1 message"
-    },
-    "newMessages": {
-        "message": "Nya meddelanden",
-        "description": "Displayed in notifications for multiple messages"
-    },
-    "notificationMostRecentFrom": {
-        "message": "Nyligen från:",
-        "description": "Displayed in notifications when setting is 'name only' and more than one message is waiting"
-    },
-    "notificationFrom": {
-        "message": "Från:",
-        "description": "Displayed in notifications when setting is 'name only' and one message is waiting"
-    },
-    "notificationMostRecent": {
-        "message": "Nyligen:",
-        "description": "Displayed in notifications when setting is 'name and message' and more than one message is waiting"
-    },
-    "sendFailed": {
-        "message": "Att skicka meddelandet misslyckades",
-        "description": "Shown on outgoing message if it fails to send"
-    },
-    "showMore": {
-        "message": "Info",
-        "description": "Displays the details of a key change"
-    },
-    "showLess": {
-        "message": "Göm info",
-        "description": "Hides the details of a key change"
-    },
-    "learnMore": {
-        "message": "Lär dig mer om att verifiera säkerhetsnummer",
-        "description": "Text that links to a support article on verifying safety numbers"
-    },
-    "expiredWarning": {
-        "message": "Den här versionen av OfficeApp Desktop har utgått. Vänligen uppgradera till den senaste versionen för att fortsätta chatta.",
-        "description": "Warning notification that this version of the app has expired"
-    },
-    "upgrade": {
-        "message": "Uppgradera",
-        "description": "Label text for button to upgrade the app to the latest version"
-    },
-    "mediaMessage": {
-        "message": "Mediameddelande",
-        "description": "Description of a message that has an attachment and no text, displayed in the conversation list as a preview."
-    },
-    "unregisteredUser": {
-        "message": "Numret är inte registrerat",
-        "description": "Error message displayed when sending to an unregistered user."
-    },
-    "sync": {
-        "message": "Kontakter",
-        "description": "Label for contact and group sync settings"
-    },
-    "syncExplanation": {
-        "message": "Importera alla grupper och kontakter från OfficeApp på din mobil.",
-        "description": "Explanatory text for sync settings"
-    },
-    "lastSynced": {
-        "message": "Senaste import",
-        "description": "Label for date and time of last sync operation"
-    },
-    "syncNow": {
-        "message": "Importera nu",
-        "description": "Label for a button that syncs contacts and groups from your phone"
-    },
-    "syncing": {
-        "message": "Importerar...",
-        "description": "Label for a disabled sync button while sync is in progress."
-    },
-    "syncFailed": {
-        "message": "Importen misslyckades. Kontrollera att din dator och din telefon har en fungerande internetuppkoppling.",
-        "description": "Informational text displayed if a sync operation times out."
-    },
-    "timestamp_s": {
-        "message": "nyss",
-        "description": "Brief timestamp for messages sent less than a minute ago. Displayed in the conversation list and message bubble."
-    },
-    "timestamp_m": {
-        "message": "1 minut",
-        "description": "Brief timestamp for messages sent about one minute ago. Displayed in the conversation list and message bubble."
-    },
-    "timestamp_h": {
-        "message": "1 timme",
-        "description": "Brief timestamp for messages sent about one hour ago. Displayed in the conversation list and message bubble."
-    },
-    "hoursAgoShort": {
-        "message": "$hours$ h",
-        "description": "Even further contracted form of 'X hours ago' which works both for singular and plural, used in the left pane",
-        "placeholders": {
-            "hours": {
-                "content": "$1",
-                "example": "2"
-            }
-        }
+    "home": {
+        "message": "hem",
+        "description": "Shown on contact detail screen as a label for an address/phone/email"
     },
     "hoursAgo": {
         "message": "$hours$ t sen",
@@ -1183,299 +791,117 @@
             }
         }
     },
-    "minutesAgoShort": {
-        "message": "$minutes$ min",
-        "description": "Even further contracted form of 'X minutes ago' which works both for singular and plural, used in the left pane",
+    "hoursAgoShort": {
+        "message": "$hours$ h",
+        "description": "Even further contracted form of 'X hours ago' which works both for singular and plural, used in the left pane",
         "placeholders": {
-            "minutes": {
+            "hours": {
                 "content": "$1",
-                "example": "10"
+                "example": "2"
             }
         }
     },
-    "minutesAgo": {
-        "message": "$minutes$ minuter sedan",
-        "description": "Contracted form of 'X minutes ago' which works both for singular and plural",
-        "placeholders": {
-            "minutes": {
-                "content": "$1",
-                "example": "10"
-            }
-        }
+    "identityChanged": {
+        "message": "Ditt säkerhetsnummer med den här kontakten har ändrats. Detta kan antingen innebära att någon försöker avlyssna din kommunikation, eller att kontakten har ominstallerat OfficeApp. Du kan verifiera det nya säkerhetsnumret nedan.",
+        "description": ""
     },
-    "justNow": {
-        "message": "nyss",
-        "description": "Shown if a message is very recent, less than 60 seconds old"
-    },
-    "timestampFormat_M": {
-        "message": "D MMM",
-        "description": "Timestamp format string for displaying month and day (but not the year) of a date within the current year, ex: use 'MMM D' for 'Aug 8', or 'D MMM' for '8 Aug'."
-    },
-    "unblockToSend": {
-        "message": "Avblockera denna kontakt för att skicka meddelanden.",
-        "description": "Brief message shown when trying to message a blocked number"
-    },
-    "unblockGroupToSend": {
-        "message": "Avblockera denna grupp för att skicka meddelanden.",
-        "description": "Brief message shown when trying to message a blocked group"
-    },
-    "youChangedTheTimer": {
-        "message": "Du satte tiden för försvinnande meddelanden till $time$",
-        "description": "Message displayed when you change the message expiration timer in a conversation.",
-        "placeholders": {
-            "time": {
-                "content": "$1",
-                "example": "10m"
-            }
-        }
-    },
-    "timerSetOnSync": {
-        "message": "Uppdaterade tidsgränsen för försvinnande meddelanden till $time$",
-        "description": "Message displayed when timer is set on initial link of desktop device.",
-        "placeholders": {
-            "time": {
-                "content": "$1",
-                "example": "10m"
-            }
-        }
-    },
-    "theyChangedTheTimer": {
-        "message": "$name$ satte tiden för försvinnande meddelanden till $time$",
-        "description": "Message displayed when someone else changes the message expiration timer in a conversation.",
+    "identityKeyErrorOnSend": {
+        "message": "Ditt säkerhetsnummer med $name$ har ändrats. Detta kan antingen betyda att någon försöker avlyssna din konversation eller att $name$ har ominstallerat OfficeApp. Du kanske vill verifiera det nya säkerhetsnumret med denna kontakt.",
+        "description": "Shown when user clicks on a failed recipient in the message detail view after an identity key change",
         "placeholders": {
             "name": {
                 "content": "$1",
                 "example": "Bob"
-            },
-            "time": {
-                "content": "$2",
-                "example": "10m"
             }
         }
     },
-    "timerOption_0_seconds": {
-        "message": "av",
-        "description": "Label for option to turn off message expiration in the timer menu"
+    "imageAttachmentAlt": {
+        "message": "Bild bifogat till meddelande",
+        "description": "Used in alt tag of image attachment"
     },
-    "timerOption_5_seconds": {
-        "message": "5 sekunder",
-        "description": "Label for a selectable option in the message expiration timer menu"
+    "imageCaptionIconAlt": {
+        "message": "Ikon visandes att denna bild har en bildtext",
+        "description": "Used for the icon layered on top of an image in message bubbles"
     },
-    "timerOption_10_seconds": {
-        "message": "10 sekunder",
-        "description": "Label for a selectable option in the message expiration timer menu"
+    "imageFailedToLoad": {
+        "message": "Image failed to load",
+        "description": "When an image attachment is missing, this message is shown"
     },
-    "timerOption_30_seconds": {
-        "message": "30 sekunder",
-        "description": "Label for a selectable option in the message expiration timer menu"
+    "importAgain": {
+        "message": "Välj mapp och försök igen",
+        "description": "Button shown if the user runs into an error during import, allowing them to start over"
     },
-    "timerOption_1_minute": {
-        "message": "1 minut",
-        "description": "Label for a selectable option in the message expiration timer menu"
+    "importChooserTitle": {
+        "message": "Välj mapp där exporterad data lagras",
+        "description": "Title of the popup window used to select data previously exported"
     },
-    "timerOption_5_minutes": {
-        "message": "5 minuter",
-        "description": "Label for a selectable option in the message expiration timer menu"
+    "importCompleteHeader": {
+        "message": "Det funkade!",
+        "description": "Header shown on the screen at the end of a successful import process"
     },
-    "timerOption_30_minutes": {
-        "message": "30 minuter",
-        "description": "Label for a selectable option in the message expiration timer menu"
+    "importCompleteLinkButton": {
+        "message": "Länka denna enhet till din mobil",
+        "description": "Button shown at end of successful 'light' import process, so the standard linking process still needs to happen"
     },
-    "timerOption_1_hour": {
-        "message": "1 timme",
-        "description": "Label for a selectable option in the message expiration timer menu"
+    "importCompleteStartButton": {
+        "message": "Börja använd OfficeApp Desktop",
+        "description": "Button shown at end of successful import process, nothing left but a restart"
     },
-    "timerOption_6_hours": {
-        "message": "6 timmar",
-        "description": "Label for a selectable option in the message expiration timer menu"
+    "importErrorFirst": {
+        "message": "Kontrollera att du valt rätt mapp som innehåller dina sparade OfficeApp-data. Dess namn borde börja med 'OfficeApp Export.' Du kan också spara en ny kopia av din data från Chrome-appen.",
+        "description": "Message shown if the import went wrong; first paragraph"
     },
-    "timerOption_12_hours": {
-        "message": "12 timmar",
-        "description": "Label for a selectable option in the message expiration timer menu"
+    "importErrorHeader": {
+        "message": "Något gick fel!",
+        "description": "Header of the error screen after a failed import"
     },
-    "timerOption_1_day": {
-        "message": "1 dag",
-        "description": "Label for a selectable option in the message expiration timer menu"
+    "importErrorSecond": {
+        "message": "Om dessa steg inte funkar för dig, vänligen skicka in en felsökningslogg (Visa -> Felsökningslogg) så att vi kan hjälpa dig migrera!",
+        "description": "Message shown if the import went wrong; second paragraph"
     },
-    "timerOption_1_week": {
-        "message": "1 vecka",
-        "description": "Label for a selectable option in the message expiration timer menu"
+    "importingHeader": {
+        "message": "Läser in kontakter och meddelanden",
+        "description": "Header of screen shown as data is import"
     },
-    "disappearingMessages": {
-        "message": "Försvinnande meddelanden",
-        "description": "Conversation menu option to enable disappearing messages"
+    "imprint": {
+        "message": "Imprint",
+        "description": "Label for imprint input"
     },
-    "timerOption_0_seconds_abbreviated": {
-        "message": "av",
-        "description": "Short format indicating current timer setting in the conversation list snippet"
+    "incomingError": {
+        "message": "Fel med att hantera inkommande meddelande",
+        "description": ""
     },
-    "timerOption_5_seconds_abbreviated": {
-        "message": "5s",
-        "description": "Very short format indicating current timer setting in the conversation header"
+    "initialSync": {
+        "message": "Synkroniserar kontakter och grupper",
+        "description": "Shown during initial link while contacts and groups are being pulled from mobile device"
     },
-    "timerOption_10_seconds_abbreviated": {
-        "message": "10s",
-        "description": "Very short format indicating current timer setting in the conversation header"
+    "installConnectionFailed": {
+        "message": "Kunde inte kontakta servern.",
+        "description": "Displayed when we can't connect to the server."
     },
-    "timerOption_30_seconds_abbreviated": {
-        "message": "30s",
-        "description": "Very short format indicating current timer setting in the conversation header"
+    "installTagline": {
+        "message": "Integritet är möjligt. OfficeApp gör det lätt.",
+        "description": "Tagline displayed under 'installWelcome' string on the install page"
     },
-    "timerOption_1_minute_abbreviated": {
-        "message": "1m",
-        "description": "Very short format indicating current timer setting in the conversation header"
+    "installTooManyDevices": {
+        "message": "Tyvärr har du för många enheter redan länkade. Försök att ta bort några.",
+        "description": ""
     },
-    "timerOption_5_minutes_abbreviated": {
-        "message": "5m",
-        "description": "Very short format indicating current timer setting in the conversation header"
-    },
-    "timerOption_30_minutes_abbreviated": {
-        "message": "30m",
-        "description": "Very short format indicating current timer setting in the conversation header"
-    },
-    "timerOption_1_hour_abbreviated": {
-        "message": "1h",
-        "description": "Very short format indicating current timer setting in the conversation header"
-    },
-    "timerOption_6_hours_abbreviated": {
-        "message": "6h",
-        "description": "Very short format indicating current timer setting in the conversation header"
-    },
-    "timerOption_12_hours_abbreviated": {
-        "message": "12h",
-        "description": "Very short format indicating current timer setting in the conversation header"
-    },
-    "timerOption_1_day_abbreviated": {
-        "message": "1d",
-        "description": "Very short format indicating current timer setting in the conversation header"
-    },
-    "timerOption_1_week_abbreviated": {
-        "message": "1v",
-        "description": "Very short format indicating current timer setting in the conversation header"
-    },
-    "disappearingMessagesDisabled": {
-        "message": "Försvinnande meddelanden inaktiverat",
-        "description": "Displayed in the left pane when the timer is turned off"
-    },
-    "disabledDisappearingMessages": {
-        "message": "$name$ stängde av att meddelanden försvinner.",
-        "description": "Displayed in the conversation list when the timer is turned off",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "John"
-            }
-        }
-    },
-    "youDisabledDisappearingMessages": {
-        "message": "Du stängde av att meddelanden försvinner.",
-        "description": "Displayed in the conversation list when the timer is turned off"
-    },
-    "timerSetTo": {
-        "message": "Tidsgräns inställt till $time$",
-        "description": "Displayed in the conversation list when the timer is updated by some automatic action, or in the left pane",
-        "placeholders": {
-            "time": {
-                "content": "$1",
-                "example": "1w"
-            }
-        }
-    },
-    "audioNotificationDescription": {
-        "message": "Spela ljudavisering",
-        "description": "Description for audio notification setting"
-    },
-    "safetyNumberChanged": {
-        "message": "Säkerhetsnumret har ändrats",
-        "description": "A notification shown in the conversation when a contact reinstalls"
-    },
-    "safetyNumberChangedGroup": {
-        "message": "Säkerhetsnumret med $name$ har ändrats",
-        "description": "A notification shown in a group conversation when a contact reinstalls, showing the contact name",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "John"
-            }
-        }
-    },
-    "verifyNewNumber": {
-        "message": "Bekräfta säkerhetsnummer",
-        "description": "Label on button included with safety number change notification in the conversation"
-    },
-    "yourSafetyNumberWith": {
-        "message": "Ditt säkerhetsnummer med $name$:",
-        "description": "Heading for safety number view",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "John"
-            }
-        }
-    },
-    "themeLight": {
-        "message": "Ljust",
-        "description": "Label text for light theme (normal)"
-    },
-    "themeDark": {
-        "message": "Mörkt",
-        "description": "Label text for dark theme"
-    },
-    "noteToSelf": {
-        "message": "Notera till mig själv",
-        "description": "Name for the conversation with your own phone number"
-    },
-    "hideMenuBar": {
-        "message": "Göm menyraden",
-        "description": "Label text for menu bar visibility setting"
-    },
-    "startConversation": {
-        "message": "Starta en ny konversation…",
-        "description": "Label underneath number a user enters that is not an existing contact"
-    },
-    "newPhoneNumber": {
-        "message": "Ange ett telefonnummer för att lägga till en kontakt.",
-        "description": "Placeholder for adding a new number to a contact"
+    "installWelcome": {
+        "message": "Välkommen till OfficeApp Desktop",
+        "description": "Welcome title on the install page"
     },
     "invalidNumberError": {
         "message": "Felaktigt nummer",
         "description": "When a person inputs a number that is invalid"
     },
-    "unlinkedWarning": {
-        "message": "Länka om OfficeApp Desktop till din mobila enhet för att fortsätta skicka meddelanden.",
-        "description": ""
+    "invalidXML": {
+        "message": "Invalid XML file",
+        "description": "Text for invalid XML file"
     },
-    "unlinked": {
-        "message": "Olänkad",
-        "description": ""
-    },
-    "relink": {
-        "message": "Återkoppla",
-        "description": ""
-    },
-    "autoUpdateNewVersionTitle": {
-        "message": "Uppdatering för OfficeApp tillgänglig",
-        "description": ""
-    },
-    "autoUpdateNewVersionMessage": {
-        "message": "Det finns en ny version av OfficeApp tillgänglig.",
-        "description": ""
-    },
-    "autoUpdateNewVersionInstructions": {
-        "message": "Vänligen starta om OfficeApp för att uppdatera",
-        "description": ""
-    },
-    "autoUpdateRestartButtonLabel": {
-        "message": "Starta om OfficeApp",
-        "description": ""
-    },
-    "autoUpdateLaterButtonLabel": {
-        "message": "Senare",
-        "description": ""
-    },
-    "leftTheGroup": {
-        "message": "$name$ lämnade gruppen",
-        "description": "Shown in the conversation history when a single person leaves the group",
+    "isNotVerified": {
+        "message": "Du har inte verifierat ditt säkerhetsnummer med $name$.",
+        "description": "Summary state shown at top of the safety number screen if user has not verified contact.",
         "placeholders": {
             "name": {
                 "content": "$1",
@@ -1483,27 +909,13 @@
             }
         }
     },
-    "multipleLeftTheGroup": {
-        "message": "$name$ lämnade gruppen",
-        "description": "Shown in the conversation history when multiple people leave the group",
+    "isVerified": {
+        "message": "Du har verifierat ditt säkerhetsnummer med $name$.",
+        "description": "Summary state shown at top of the safety number screen if user has verified contact.",
         "placeholders": {
             "name": {
                 "content": "$1",
-                "example": "Alice, Bob"
-            }
-        }
-    },
-    "updatedTheGroup": {
-        "message": "Grupp uppdaterad",
-        "description": "Shown in the conversation history when someone updates the group"
-    },
-    "titleIsNow": {
-        "message": "Gruppnamnet är nu '$name$'",
-        "description": "Shown in the conversation history when someone changes the title of the group",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "Book Club"
+                "example": "Bob"
             }
         }
     },
@@ -1517,151 +929,81 @@
             }
         }
     },
-    "multipleJoinedTheGroup": {
-        "message": "$names$ gick med i gruppen",
-        "description": "Shown in the conversation history when more than one person joins the group",
+    "justNow": {
+        "message": "nyss",
+        "description": "Shown if a message is very recent, less than 60 seconds old"
+    },
+    "labelChangeLanguage": {
+        "message": "Change Language",
+        "description": "Label for Change Language menu entry"
+    },
+    "labelNo": {
+        "message": "No",
+        "description": "Label for No button"
+    },
+    "labelYes": {
+        "message": "Yes",
+        "description": "Label for Yes button"
+    },
+    "lastSynced": {
+        "message": "Senaste import",
+        "description": "Label for date and time of last sync operation"
+    },
+    "learnMore": {
+        "message": "Lär dig mer om att verifiera säkerhetsnummer",
+        "description": "Text that links to a support article on verifying safety numbers"
+    },
+    "leftTheGroup": {
+        "message": "$name$ lämnade gruppen",
+        "description": "Shown in the conversation history when a single person leaves the group",
         "placeholders": {
-            "names": {
+            "name": {
                 "content": "$1",
-                "example": "Alice, Bob"
+                "example": "Bob"
             }
         }
     },
-    "privacyPolicy": {
-        "message": "Licens- och sekretessvillkor",
-        "description": "Shown in the about box for the link to https://signal.org/legal"
+    "lightboxImageAlt": {
+        "message": "Bild skickad i konversation",
+        "description": "Used in the alt tag for the image shown in a full-screen lightbox view"
     },
-    "appTagLine": {
-        "message": "Modern secure communications... TODO",
-        "description": "Tagline of the OfficeApp application"
+    "linkNewDevice": {
+        "message": "Länka ny enhet",
+        "description": "The menu option shown in OfficeApp iOS to add a new linked device"
     },
-    "registerCompany": {
-        "message": "Company registration",
-        "description": "Header for company registration"
+    "linkYourPhone": {
+        "message": "Länka din mobil till OfficeApp Desktop",
+        "description": "Shown on the front page when the application first starst, above the QR code"
     },
-    "registerAdmin": {
-        "message": "Admin registration",
-        "description": "Header for admin registration"
+    "linkedDevices": {
+        "message": "Länkade enheter",
+        "description": "Used in the guidance to help people find the 'link new device' area of their OfficeApp mobile app"
     },
-    "welcomeCompany": {
-        "message": "Welcome to the OfficeApp. Please register your company here.",
-        "description": "Description for registering company"
+    "loadDataDescription": {
+        "message": "Du har just gått igenom exporteringsprocessen och dina kontakter och meddelanden ligger nu på din dator. Vänligen välj mappen som innehåller din sparade data för OfficeApp.",
+        "description": "Introduction to the process of importing messages and contacts from disk"
     },
-    "welcomeAdmin": {
-        "message": "Welcome to the OfficeApp. Please enter your code here.",
-        "description": "Description for registering admin"
+    "loadDataHeader": {
+        "message": "Läs in din data",
+        "description": "Header shown on the first screen in the data import process"
     },
-    "continueButton": {
-        "message": "Continue",
-        "description": "Button label for continuing to next step"
+    "loading": {
+        "message": "Läser in...",
+        "description": "Message shown on the loading screen before we've loaded any messages"
     },
-    "signupCode": {
-        "message": "Code",
-        "description": "Label for signup code input"
+    "loadingMessages": {
+        "message": "Läser in meddelanden. $count$ hittills...",
+        "description": "Message shown on the loading screen when we're catching up on the backlog of messages",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "5"
+            }
+        }
     },
-    "phoneSetupTitle": {
-        "message": "Telefonnummer",
-        "description": "Title for phone setup container"
-    },
-    "phoneSetupSubtitle": {
-        "message": "Bitte geben Sie Ihre Bürotelefonnummer ein. Sie werden angerufen und erhalten einen Verifikationscode. Dabei können Gebühren anfallen.",
-        "description": "Phone setup container subtitle"
-    },
-    "phoneNumber": {
-        "message": "IHRe Bürotelefonnummer",
-        "description": "Title for phone number input"
-    },
-    "verifyCode": {
-        "message": "Verifikationscode",
-        "description": "Title for verification code input"
-    },
-    "countryCode": {
-        "message": "Country code",
-        "description": "Title for country code input"
-    },
-    "verifyPhone": {
-        "message": "Starten",
-        "description": "Label for phone verify button"
-    },
-    "callPhone": {
-        "message": "Anrufen",
-        "description": "Label for phone verify call phone"
-    },
-    "sendSMSInstead": {
-        "message": "Mir Stattdessen eine SMS senden",
-        "description": "Text for requesting SMS instead of call"
-    },
-    "companyDetails": {
-        "message": "Company details",
-        "description": "Title for company details entry"
-    },
-    "taxNumber": {
-        "message": "Tax Number",
-        "description": "Label for tax number input"
-    },
-    "taxID": {
-        "message": "Tax ID",
-        "description": "Label for tax id input"
-    },
-    "companyRegistrationID": {
-        "message": "Commercial Register ID",
-        "description": "Label for commercial register id input"
-    },
-    "imprint": {
-        "message": "Imprint",
-        "description": "Label for imprint input"
-    },
-    "branch": {
-        "message": "Branch",
-        "description": "Label for company branch input"
-    },
-    "companyName": {
-        "message": "Company Name",
-        "description": "Label for company name input"
-    },
-    "userProfile": {
-        "message": "User profile",
-        "description": "Title for user profile setup"
-    },
-    "userName": {
-        "message": "User name",
-        "description": "Label for user name input"
-    },
-    "bankDetails": {
-        "message": "Bank details",
-        "description": "Title for company bank detail input"
-    },
-    "notNow": {
-        "message": "Not now",
-        "description": "Text for skipping actions for now"
-    },
-    "acceptEula": {
-        "message": "Accept EULA",
-        "description": "Text for Accept EULA checkbox"
-    },
-    "eulaTitle": {
-        "message": "End-User License Agreement",
-        "description": "Title for EULA"
-    },
-    "eulaSubTitle": {
-        "message": "To continue, read and accept the terms and conditions",
-        "description": "Subtitle for EULA"
-    },
-    "contactImportTitle": {
-        "message": "Contacts syncronization",
-        "description": "Title for contacts import"
-    },
-    "selectFileToUpload": {
-        "message": "Select file to upload",
-        "description": "Text for file upload input"
-    },
-    "noFileChosen": {
-        "message": "No file chosen",
-        "description": "Text for no file chosen"
-    },
-    "invalidXML": {
-        "message": "Invalid XML file",
-        "description": "Text for invalid XML file"
+    "loadingPreview": {
+        "message": "Läser in förhandsvisning...",
+        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area"
     },
     "locale.ar": {
         "message": "Arabic",
@@ -1839,24 +1181,1140 @@
         "message": "Chinese - Taiwan",
         "description": "Name for Chinese - Taiwan locale"
     },
-    "changeLanguageTitle": {
-        "message": "Changing language requires restart",
-        "description": "Title for change language requires restart message box"
+    "mainMenuEdit": {
+        "message": "&Redigera",
+        "description": "The label that is used for the Edit menu in the program main menu. The '&' indicates that the following letter will be used as the keyboard 'shortcut letter' for accessing the menu with the Alt-<letter> combination."
     },
-    "changeLanguageMessage": {
-        "message": "Changing current language requires restarting the application, do you wish to do this now?",
-        "description": "Message for change language require restart message box"
+    "mainMenuFile": {
+        "message": "&Arkiv",
+        "description": "The label that is used for the File menu in the program main menu. The '&' indicates that the following letter will be used as the keyboard 'shortcut letter' for accessing the menu with the Alt-<letter> combination."
     },
-    "labelYes": {
-        "message": "Yes",
-        "description": "Label for Yes button"
+    "mainMenuHelp": {
+        "message": "&Hjälp",
+        "description": "The label that is used for the Help menu in the program main menu. The '&' indicates that the following letter will be used as the keyboard 'shortcut letter' for accessing the menu with the Alt-<letter> combination."
     },
-    "labelNo": {
-        "message": "No",
-        "description": "Label for No button"
+    "mainMenuSettings": {
+        "message": "Inställningar",
+        "description": "The label that is used for the Preferences menu in the program main menu. This should be consistent with the standard naming for ‘Preferences’ on the operating system."
     },
-    "labelChangeLanguage": {
-        "message": "Change Language",
-        "description": "Label for Change Language menu entry"
+    "mainMenuView": {
+        "message": "&Visa",
+        "description": "The label that is used for the View menu in the program main menu. The '&' indicates that the following letter will be used as the keyboard 'shortcut letter' for accessing the menu with the Alt-<letter> combination."
+    },
+    "mainMenuWindow": {
+        "message": "&Fönster",
+        "description": "The label that is used for the Window menu in the program main menu. The '&' indicates that the following letter will be used as the keyboard 'shortcut letter' for accessing the menu with the Alt-<letter> combination."
+    },
+    "maximumAttachments": {
+        "message": "Du kan inte lägga till fler bilagor till det här meddelandet.",
+        "description": "An error popup when the user has attempted to add an attachment"
+    },
+    "me": {
+        "message": "Jag",
+        "description": "The label for yourself when shown in a group member list"
+    },
+    "media": {
+        "message": "Media",
+        "description": "Header of the default pane in the media gallery, showing images and videos"
+    },
+    "mediaEmptyState": {
+        "message": "Du har inga mediefiler i denna konversation",
+        "description": "Message shown to user in the media gallery when there are no messages with media attachments (images or video)"
+    },
+    "mediaMessage": {
+        "message": "Mediameddelande",
+        "description": "Description of a message that has an attachment and no text, displayed in the conversation list as a preview."
+    },
+    "mediaPermissionsDescription": {
+        "message": "Tillåt åtkomst till kameran och mikrofonen",
+        "description": "Description of the media permission description"
+    },
+    "membersNeedingVerification": {
+        "message": "Dina säkerhetsnummer med dessa gruppmedlemmar har ändrats sen du senast verifierade. Klicka på en gruppmedlem för att se ditt nya säkerhetsnummer.",
+        "description": "When there are multiple previously-verified group members with safety number changes, a banner will be shown. The list of contacts with safety number changes is shown, and this text introduces that list."
+    },
+    "menuReportIssue": {
+        "message": "Rapportera ett fel",
+        "description": "Item under the Help menu, takes you to GitHub new issue form (title case)"
+    },
+    "menuSetupAsNewDevice": {
+        "message": "Ställ in som ny enhet",
+        "description": "When the application is not yet set up, menu option to start up the set up as fresh device"
+    },
+    "menuSetupAsStandalone": {
+        "message": "Ställ in som fristående enhet",
+        "description": "Only available on development modes, menu option to open up the standalone device setup sequence"
+    },
+    "menuSetupWithImport": {
+        "message": "Ställ in med import",
+        "description": "When the application is not yet set up, menu option to start up the import sequence"
+    },
+    "message--getDescription--disappearing-photo": {
+        "message": "Disappearing photo",
+        "description": "Shown in notifications and in the left pane when a message is a disappearing photo."
+    },
+    "message--getDescription--unsupported-message": {
+        "message": "Unsupported message",
+        "description": "Shown in notifications and in the left pane when a message has features too new for this signal install."
+    },
+    "message--getNotificationText--stickers": {
+        "message": "Sticker message",
+        "description": "Shown in notifications and in the left pane instead of sticker image."
+    },
+    "messageBelow": {
+        "message": "Nytt meddelande nedanför",
+        "description": "Alt text for button to take user down to bottom of conversation with a new message out of screen"
+    },
+    "messageBodyTooLong": {
+        "message": "Message body is too long.",
+        "description": "Shown if the user tries to send more than 64kb of text"
+    },
+    "messageDetail": {
+        "message": "Meddelandedetaljer",
+        "description": ""
+    },
+    "messageFoundButNotLoaded": {
+        "message": "Originalmeddelande hittades, men lästes inte in. Skrolla upp för att läsa in det.",
+        "description": "Shown in toast if user clicks on quote references messages not loaded in view, but in database"
+    },
+    "messageImportContact": {
+        "message": "Bitte beachten Sie, dass beim Kontaktimport Ihre bereits vorhandenen Kontakte überschrieben werden. Möchten Sie fortfahren?",
+        "description": "Message to import new contact list"
+    },
+    "messagesBelow": {
+        "message": "Nya meddelanden nedanför",
+        "description": "Alt text for button to take user down to bottom of conversation with more than one message out of screen"
+    },
+    "messagesHeader": {
+        "message": "Meddelanden",
+        "description": "Shown to separate the types of search results"
+    },
+    "migratingToSQLCipher": {
+        "message": "Optimerar meddelanden... $status$ klara.",
+        "description": "Message shown on the loading screen while we are doing application optimizations",
+        "placeholders": {
+            "status": {
+                "content": "$1",
+                "example": "45/200"
+            }
+        }
+    },
+    "minutesAgo": {
+        "message": "$minutes$ minuter sedan",
+        "description": "Contracted form of 'X minutes ago' which works both for singular and plural",
+        "placeholders": {
+            "minutes": {
+                "content": "$1",
+                "example": "10"
+            }
+        }
+    },
+    "minutesAgoShort": {
+        "message": "$minutes$ min",
+        "description": "Even further contracted form of 'X minutes ago' which works both for singular and plural, used in the left pane",
+        "placeholders": {
+            "minutes": {
+                "content": "$1",
+                "example": "10"
+            }
+        }
+    },
+    "mobile": {
+        "message": "mobil",
+        "description": "Shown on contact detail screen as a label for aa phone or email"
+    },
+    "moreInfo": {
+        "message": "Mer info...",
+        "description": "Shown on the drop-down menu for an individual message, takes you to message detail screen"
+    },
+    "moveConversationToInbox": {
+        "message": "Flytta konversationen till Inkorg",
+        "description": "Undoes Archive Conversation action, and moves archived conversation back to the main conversation list"
+    },
+    "multipleJoinedTheGroup": {
+        "message": "$names$ gick med i gruppen",
+        "description": "Shown in the conversation history when more than one person joins the group",
+        "placeholders": {
+            "names": {
+                "content": "$1",
+                "example": "Alice, Bob"
+            }
+        }
+    },
+    "multipleLeftTheGroup": {
+        "message": "$name$ lämnade gruppen",
+        "description": "Shown in the conversation history when multiple people leave the group",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "Alice, Bob"
+            }
+        }
+    },
+    "multipleNoLongerVerified": {
+        "message": "Dina säkerhetsnycklar med flera medlemmar av den här gruppen har ändrats och är inte längre verifierade. Klicka för att visa.",
+        "description": "Shown in conversation banner when more than one group member's safety number has changed, but they were previously verified."
+    },
+    "nameAndMessage": {
+        "message": "Både sändarens namn och meddelande",
+        "description": "Label for setting notifications to display name and message text"
+    },
+    "nameOnly": {
+        "message": "Enbart sändarens namn",
+        "description": "Label for setting notifications to display sender name only"
+    },
+    "newIdentity": {
+        "message": "Nytt säkerhetsnummer",
+        "description": "Header for a key change dialog"
+    },
+    "newMessage": {
+        "message": "Nytt meddelande",
+        "description": "Displayed in notifications for only 1 message"
+    },
+    "newMessages": {
+        "message": "Nya meddelanden",
+        "description": "Displayed in notifications for multiple messages"
+    },
+    "newPhoneNumber": {
+        "message": "Ange ett telefonnummer för att lägga till en kontakt.",
+        "description": "Placeholder for adding a new number to a contact"
+    },
+    "noContactsImported": {
+        "message": "Sie haben keine Kontakte, bitte Kontaktliste importieren.",
+        "description": "No contacts imported"
+    },
+    "noFileChosen": {
+        "message": "No file chosen",
+        "description": "Text for no file chosen"
+    },
+    "noLongerVerified": {
+        "message": "Your safety number with $name$ has changed and is no longer verified. Click to show.",
+        "description": "Shown in converation banner when user's safety number has changed, but they were previously verified.",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "Bob"
+            }
+        }
+    },
+    "noNameOrMessage": {
+        "message": "Varken namn eller meddelande",
+        "description": "Label for setting notifications to display no name and no message text"
+    },
+    "noSearchResults": {
+        "message": "Inga resultat för \"$searchTerm$\"",
+        "description": "Shown in the search left pane when no results were found",
+        "placeholders": {
+            "searchTerm": {
+                "content": "$1",
+                "example": "dog"
+            }
+        }
+    },
+    "notNow": {
+        "message": "Not now",
+        "description": "Text for skipping actions for now"
+    },
+    "noteToSelf": {
+        "message": "Notera till mig själv",
+        "description": "Name for the conversation with your own phone number"
+    },
+    "notificationFrom": {
+        "message": "Från:",
+        "description": "Displayed in notifications when setting is 'name only' and one message is waiting"
+    },
+    "notificationMostRecent": {
+        "message": "Nyligen:",
+        "description": "Displayed in notifications when setting is 'name and message' and more than one message is waiting"
+    },
+    "notificationMostRecentFrom": {
+        "message": "Nyligen från:",
+        "description": "Displayed in notifications when setting is 'name only' and more than one message is waiting"
+    },
+    "notificationSettingsDialog": {
+        "message": "När du får meddelanden, visa aviseringar som visar:",
+        "description": "Explain the purpose of the notification settings"
+    },
+    "notifications": {
+        "message": "Aviseringar",
+        "description": "Header for notification settings"
+    },
+    "offline": {
+        "message": "Ej ansluten",
+        "description": "Displayed when the desktop client has no network connection."
+    },
+    "ok": {
+        "message": "OK",
+        "description": ""
+    },
+    "oneNonImageAtATimeToast": {
+        "message": "När man inkluderar bilagor som inte är bilder, är begränsningen en bilaga per meddelande.",
+        "description": "An error popup when the user has attempted to add an attachment"
+    },
+    "optimizingApplication": {
+        "message": "Optimerar applikationen...",
+        "description": "Message shown on the loading screen while we are doing application optimizations"
+    },
+    "or": {
+        "message": "oder",
+        "description": "oder option"
+    },
+    "originalMessageNotAvailable": {
+        "message": "Originalmeddelande inte längre tillgängligt",
+        "description": "Shown in toast if user clicks on quote that references message no longer in database"
+    },
+    "originalMessageNotFound": {
+        "message": "Originalmeddelande hittades inte",
+        "description": "Shown in quote if reference message was not found as message was initially downloaded and processed"
+    },
+    "permissions": {
+        "message": "Behörigheter",
+        "description": "Header for permissions section of settings"
+    },
+    "phone": {
+        "message": "telefon",
+        "description": "Generic label shown if contact phone has custom type but no label"
+    },
+    "phoneNumber": {
+        "message": "IHRe Bürotelefonnummer",
+        "description": "Title for phone number input"
+    },
+    "phoneSetupSubtitle": {
+        "message": "Bitte geben Sie Ihre Bürotelefonnummer ein. Sie werden angerufen und erhalten einen Verifikationscode. Dabei können Gebühren anfallen.",
+        "description": "Phone setup container subtitle"
+    },
+    "phoneSetupTitle": {
+        "message": "Telefonnummer",
+        "description": "Title for phone setup container"
+    },
+    "photo": {
+        "message": "Foto",
+        "description": "Shown in a quotation of a message containing a photo if no text was originally provided with that image"
+    },
+    "plusButton": {
+        "message": "'+'-knappen",
+        "description": "The button used in OfficeApp Android to add a new linked device"
+    },
+    "poBox": {
+        "message": "PO-låda",
+        "description": "When rendering an address, used to provide context to a post office box"
+    },
+    "previewThumbnail": {
+        "message": "Länkförhandsvisning i miniatyrbild för $domain$",
+        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "instagram.com"
+            }
+        }
+    },
+    "privacyPolicy": {
+        "message": "Licens- och sekretessvillkor",
+        "description": "Shown in the about box for the link to https://signal.org/legal"
+    },
+    "quit": {
+        "message": "Avsluta",
+        "description": "Command in the tray icon menu, to quit the application"
+    },
+    "quoteThumbnailAlt": {
+        "message": "Miniatyr av bild för citerat meddelande",
+        "description": "Used in alt tag of thumbnail images inside of an embedded message quote"
+    },
+    "readOnlyVolume": {
+        "message": "OfficeApp Desktop is likely in a macOS quarantine, and will not be able to auto-update. Please try moving OfficeApp.app to /Applications with Finder.",
+        "description": "Shown on MacOS if running on a read-only volume and we cannot update"
+    },
+    "received": {
+        "message": "Mottagit",
+        "description": "Label for the time a message was received"
+    },
+    "registerAdmin": {
+        "message": "Admin registration",
+        "description": "Header for admin registration"
+    },
+    "registerCompany": {
+        "message": "Company registration",
+        "description": "Header for company registration"
+    },
+    "relink": {
+        "message": "Återkoppla",
+        "description": ""
+    },
+    "replyToMessage": {
+        "message": "Svara på meddelande",
+        "description": "Shown in triple-dot menu next to message to allow user to start crafting a message with a quotation"
+    },
+    "replyingTo": {
+        "message": "Svarar till $name$",
+        "description": "Shown in iOS theme when you or someone quotes to a message which is not from you",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "John"
+            }
+        }
+    },
+    "reportIssue": {
+        "message": "Anmäl ett programfel",
+        "description": "Link to open the issue tracker"
+    },
+    "resetSession": {
+        "message": "Återställ session",
+        "description": "This is a menu item for resetting the session, using the imperative case, as in a command."
+    },
+    "retrySend": {
+        "message": "Skicka igen",
+        "description": "Shown on the drop-down menu for an indinvidaul message, but only if it is an outgoing message that failed to send"
+    },
+    "safetyNumberChanged": {
+        "message": "Säkerhetsnumret har ändrats",
+        "description": "A notification shown in the conversation when a contact reinstalls"
+    },
+    "safetyNumberChangedGroup": {
+        "message": "Säkerhetsnumret med $name$ har ändrats",
+        "description": "A notification shown in a group conversation when a contact reinstalls, showing the contact name",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "John"
+            }
+        }
+    },
+    "save": {
+        "message": "Spara",
+        "description": ""
+    },
+    "scrollDown": {
+        "message": "Rulla till botten av konversationen",
+        "description": "Alt text for button to take user down to bottom of conversation, shown when user scrolls up"
+    },
+    "search": {
+        "message": "Sök",
+        "description": "Placeholder text in the search input"
+    },
+    "searchForPeopleOrGroups": {
+        "message": "Enter name or number",
+        "description": "Placeholder text in the search input"
+    },
+    "selectAContact": {
+        "message": "Välj en kontakt eller grupp för att börja prata.",
+        "description": ""
+    },
+    "selectFileToUpload": {
+        "message": "Select file to upload",
+        "description": "Text for file upload input"
+    },
+    "selectedLocation": {
+        "message": "din valda plats",
+        "description": "Message shown as the export location if we didn't capture the target directory"
+    },
+    "sendAgainInvitation": {
+        "message": "Sent (send again)",
+        "description": "send again an invitation button on import contact"
+    },
+    "sendAnInvitation": {
+        "message": "Send an Invitation",
+        "description": "send an invitation button on import contact"
+    },
+    "sendAnyway": {
+        "message": "Skicka ändå",
+        "description": "Used on a warning dialog to make it clear that it might be risky to send the message."
+    },
+    "sendFailed": {
+        "message": "Att skicka meddelandet misslyckades",
+        "description": "Shown on outgoing message if it fails to send"
+    },
+    "sendMessage": {
+        "message": "Skicka ett meddelande",
+        "description": "Placeholder text in the message entry field"
+    },
+    "sendMessageToContact": {
+        "message": "Skicka meddelande",
+        "description": "Shown when you are sent a contact and that contact has a signal account"
+    },
+    "sendSMSInstead": {
+        "message": "Mir Stattdessen eine SMS senden",
+        "description": "Text for requesting SMS instead of call"
+    },
+    "sent": {
+        "message": "Skickat",
+        "description": "Label for the time a message was sent"
+    },
+    "sessionEnded": {
+        "message": "Återställning av säkerhetssession",
+        "description": "This is a past tense, informational message. In other words, your secure session has been reset."
+    },
+    "settings": {
+        "message": "Inställningar",
+        "description": "Menu item and header for global settings"
+    },
+    "show": {
+        "message": "Visa",
+        "description": "Command under Window menu, to show the window"
+    },
+    "showLess": {
+        "message": "Göm info",
+        "description": "Hides the details of a key change"
+    },
+    "showMembers": {
+        "message": "Visa medlemmar",
+        "description": ""
+    },
+    "showMore": {
+        "message": "Info",
+        "description": "Displays the details of a key change"
+    },
+    "showSafetyNumber": {
+        "message": "Visa säkerhetsnummer",
+        "description": ""
+    },
+    "showSettings": {
+        "message": "Visa inställningar",
+        "description": "A button shown in dialog requesting the user to turn on audio permissions"
+    },
+    "signalDesktop": {
+        "message": "OfficeApp Desktop",
+        "description": "Tooltip for the tray icon"
+    },
+    "signalDesktopPreferences": {
+        "message": "OfficeApp Desktops preferenser",
+        "description": "Title of the window that pops up with OfficeApp Desktop preferences in it"
+    },
+    "signalSettings": {
+        "message": "OfficeApp-inställningar",
+        "description": "Used in the guidance to help people find the 'link new device' area of their OfficeApp mobile app"
+    },
+    "signupCode": {
+        "message": "Code",
+        "description": "Label for signup code input"
+    },
+    "speech": {
+        "message": "Tal",
+        "description": "Item under the Edit menu, with 'start/stop speaking' items below it"
+    },
+    "spellCheck": {
+        "message": "Spell Check",
+        "description": "Description of the media permission description"
+    },
+    "spellCheckDescription": {
+        "message": "Slå på stavningskontroll för text som anges i meddelandefältet",
+        "description": "Description of the media permission description"
+    },
+    "stagedImageAttachment": {
+        "message": "Utkast till bildbilaga: $path$",
+        "description": "Alt text for staged attachments",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "dog.jpg"
+            }
+        }
+    },
+    "stagedPreviewThumbnail": {
+        "message": "Utkast av länkförhandsvisning i miniatyrbild för $domain$",
+        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "instagram.com"
+            }
+        }
+    },
+    "startConversation": {
+        "message": "Starta en ny konversation…",
+        "description": "Label underneath number a user enters that is not an existing contact"
+    },
+    "stickers--StickerManager--BlessedPacks": {
+        "message": "OfficeApp Artist Series",
+        "description": "Shown in the sticker pack manager above the default sticker packs."
+    },
+    "stickers--StickerManager--BlessedPacks--Empty": {
+        "message": "No OfficeApp Artist stickers available",
+        "description": "Shown in the sticker pack manager when there are no blessed sticker packs available."
+    },
+    "stickers--StickerManager--Install": {
+        "message": "Install",
+        "description": "Shown in the sticker pack manager next to sticker packs which can be installed."
+    },
+    "stickers--StickerManager--InstalledPacks": {
+        "message": "Installed Stickers",
+        "description": "Shown in the sticker pack manager above your installed sticker packs."
+    },
+    "stickers--StickerManager--InstalledPacks--Empty": {
+        "message": "No stickers installed",
+        "description": "Shown in the sticker pack manager when you don't have any installed sticker packs."
+    },
+    "stickers--StickerManager--Introduction--Body": {
+        "message": "Why use words when you can use stickers?",
+        "description": "Shown as the body on a tooltip when the user upgrades to a version of OfficeApp supporting stickers."
+    },
+    "stickers--StickerManager--Introduction--Title": {
+        "message": "Introducing Stickers",
+        "description": "Shown as the title on a tooltip when the user upgrades to a version of OfficeApp supporting stickers."
+    },
+    "stickers--StickerManager--ReceivedPacks": {
+        "message": "Stickers You Received",
+        "description": "Shown in the sticker pack manager above sticker packs which you have received in messages."
+    },
+    "stickers--StickerManager--ReceivedPacks--Empty": {
+        "message": "Stickers from incoming messages will appear here",
+        "description": "Shown in the sticker pack manager when you have not received any sticker packs in messages."
+    },
+    "stickers--StickerManager--Uninstall": {
+        "message": "Uninstall",
+        "description": "Shown in the sticker pack manager next to sticker packs which are already installed."
+    },
+    "stickers--StickerManager--UninstallWarning": {
+        "message": "You may not be able to re-install this sticker pack if you no longer have the source message.",
+        "description": "Shown in the sticker pack manager next to sticker packs which are already installed."
+    },
+    "stickers--StickerPicker--DownloadError": {
+        "message": "Some stickers could not be downloaded.",
+        "description": "Shown in the sticker picker when one or more stickers could not be downloaded."
+    },
+    "stickers--StickerPicker--DownloadPending": {
+        "message": "Installing sticker pack...",
+        "description": "Shown in the sticker picker when one or more stickers are still downloading."
+    },
+    "stickers--StickerPicker--Empty": {
+        "message": "No stickers found",
+        "description": "Shown in the sticker picker when there are no stickers to show."
+    },
+    "stickers--StickerPicker--Hint": {
+        "message": "New sticker packs from your messages are available to install",
+        "description": "Shown in the sticker picker the first time you have received new packs you can install."
+    },
+    "stickers--StickerPicker--NoPacks": {
+        "message": "No sticker packs found",
+        "description": "Shown in the sticker picker when there are no installed sticker packs."
+    },
+    "stickers--StickerPicker--NoRecents": {
+        "message": "Recently used stickers will appear here.",
+        "description": "Shown in the sticker picker when there are no recent stickers to show."
+    },
+    "stickers--StickerPreview--Error": {
+        "message": "Error opening sticker pack. Check your internet connection and try again.",
+        "description": "The message that appears in the sticker preview modal when there is an error."
+    },
+    "stickers--StickerPreview--Title": {
+        "message": "Sticker Pack",
+        "description": "The title that appears in the sticker pack preview modal."
+    },
+    "stickers--toast--InstallFailed": {
+        "message": "Sticker pack could not be installed",
+        "description": "Shown in a toast if the user attempts to install a sticker pack and it fails"
+    },
+    "submit": {
+        "message": "Skicka",
+        "description": ""
+    },
+    "submitDebugLog": {
+        "message": "Loggfil för felsökning",
+        "description": "Menu item and header text for debug log modal (sentence case)"
+    },
+    "sync": {
+        "message": "Kontakter",
+        "description": "Label for contact and group sync settings"
+    },
+    "syncExplanation": {
+        "message": "Importera alla grupper och kontakter från OfficeApp på din mobil.",
+        "description": "Explanatory text for sync settings"
+    },
+    "syncFailed": {
+        "message": "Importen misslyckades. Kontrollera att din dator och din telefon har en fungerande internetuppkoppling.",
+        "description": "Informational text displayed if a sync operation times out."
+    },
+    "syncNow": {
+        "message": "Importera nu",
+        "description": "Label for a button that syncs contacts and groups from your phone"
+    },
+    "syncing": {
+        "message": "Importerar...",
+        "description": "Label for a disabled sync button while sync is in progress."
+    },
+    "taxID": {
+        "message": "Tax ID",
+        "description": "Label for tax id input"
+    },
+    "taxNumber": {
+        "message": "Tax Number",
+        "description": "Label for tax number input"
+    },
+    "theirIdentityUnknown": {
+        "message": "Du har inte utbytt några meddelanden med denna kontakt ännu. Ditt säkerhetsnummer med dem kommer att vara tillgängliga efter det första meddelandet.",
+        "description": ""
+    },
+    "theme": {
+        "message": "Tema",
+        "description": "Header for theme settings"
+    },
+    "themeDark": {
+        "message": "Mörkt",
+        "description": "Label text for dark theme"
+    },
+    "themeLight": {
+        "message": "Ljust",
+        "description": "Label text for light theme (normal)"
+    },
+    "themeSystem": {
+        "message": "System",
+        "description": "Label text for system theme"
+    },
+    "theyChangedTheTimer": {
+        "message": "$name$ satte tiden för försvinnande meddelanden till $time$",
+        "description": "Message displayed when someone else changes the message expiration timer in a conversation.",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "Bob"
+            },
+            "time": {
+                "content": "$2",
+                "example": "10m"
+            }
+        }
+    },
+    "thisMonth": {
+        "message": "Denna månad",
+        "description": "Section header in the media gallery"
+    },
+    "thisWeek": {
+        "message": "Denna vecka",
+        "description": "Section header in the media gallery"
+    },
+    "timerOption_0_seconds": {
+        "message": "av",
+        "description": "Label for option to turn off message expiration in the timer menu"
+    },
+    "timerOption_0_seconds_abbreviated": {
+        "message": "av",
+        "description": "Short format indicating current timer setting in the conversation list snippet"
+    },
+    "timerOption_10_seconds": {
+        "message": "10 sekunder",
+        "description": "Label for a selectable option in the message expiration timer menu"
+    },
+    "timerOption_10_seconds_abbreviated": {
+        "message": "10s",
+        "description": "Very short format indicating current timer setting in the conversation header"
+    },
+    "timerOption_12_hours": {
+        "message": "12 timmar",
+        "description": "Label for a selectable option in the message expiration timer menu"
+    },
+    "timerOption_12_hours_abbreviated": {
+        "message": "12h",
+        "description": "Very short format indicating current timer setting in the conversation header"
+    },
+    "timerOption_1_day": {
+        "message": "1 dag",
+        "description": "Label for a selectable option in the message expiration timer menu"
+    },
+    "timerOption_1_day_abbreviated": {
+        "message": "1d",
+        "description": "Very short format indicating current timer setting in the conversation header"
+    },
+    "timerOption_1_hour": {
+        "message": "1 timme",
+        "description": "Label for a selectable option in the message expiration timer menu"
+    },
+    "timerOption_1_hour_abbreviated": {
+        "message": "1h",
+        "description": "Very short format indicating current timer setting in the conversation header"
+    },
+    "timerOption_1_minute": {
+        "message": "1 minut",
+        "description": "Label for a selectable option in the message expiration timer menu"
+    },
+    "timerOption_1_minute_abbreviated": {
+        "message": "1m",
+        "description": "Very short format indicating current timer setting in the conversation header"
+    },
+    "timerOption_1_week": {
+        "message": "1 vecka",
+        "description": "Label for a selectable option in the message expiration timer menu"
+    },
+    "timerOption_1_week_abbreviated": {
+        "message": "1v",
+        "description": "Very short format indicating current timer setting in the conversation header"
+    },
+    "timerOption_30_minutes": {
+        "message": "30 minuter",
+        "description": "Label for a selectable option in the message expiration timer menu"
+    },
+    "timerOption_30_minutes_abbreviated": {
+        "message": "30m",
+        "description": "Very short format indicating current timer setting in the conversation header"
+    },
+    "timerOption_30_seconds": {
+        "message": "30 sekunder",
+        "description": "Label for a selectable option in the message expiration timer menu"
+    },
+    "timerOption_30_seconds_abbreviated": {
+        "message": "30s",
+        "description": "Very short format indicating current timer setting in the conversation header"
+    },
+    "timerOption_5_minutes": {
+        "message": "5 minuter",
+        "description": "Label for a selectable option in the message expiration timer menu"
+    },
+    "timerOption_5_minutes_abbreviated": {
+        "message": "5m",
+        "description": "Very short format indicating current timer setting in the conversation header"
+    },
+    "timerOption_5_seconds": {
+        "message": "5 sekunder",
+        "description": "Label for a selectable option in the message expiration timer menu"
+    },
+    "timerOption_5_seconds_abbreviated": {
+        "message": "5s",
+        "description": "Very short format indicating current timer setting in the conversation header"
+    },
+    "timerOption_6_hours": {
+        "message": "6 timmar",
+        "description": "Label for a selectable option in the message expiration timer menu"
+    },
+    "timerOption_6_hours_abbreviated": {
+        "message": "6h",
+        "description": "Very short format indicating current timer setting in the conversation header"
+    },
+    "timerSetOnSync": {
+        "message": "Uppdaterade tidsgränsen för försvinnande meddelanden till $time$",
+        "description": "Message displayed when timer is set on initial link of desktop device.",
+        "placeholders": {
+            "time": {
+                "content": "$1",
+                "example": "10m"
+            }
+        }
+    },
+    "timerSetTo": {
+        "message": "Tidsgräns inställt till $time$",
+        "description": "Displayed in the conversation list when the timer is updated by some automatic action, or in the left pane",
+        "placeholders": {
+            "time": {
+                "content": "$1",
+                "example": "1w"
+            }
+        }
+    },
+    "timestampFormat_M": {
+        "message": "D MMM",
+        "description": "Timestamp format string for displaying month and day (but not the year) of a date within the current year, ex: use 'MMM D' for 'Aug 8', or 'D MMM' for '8 Aug'."
+    },
+    "timestamp_h": {
+        "message": "1 timme",
+        "description": "Brief timestamp for messages sent about one hour ago. Displayed in the conversation list and message bubble."
+    },
+    "timestamp_m": {
+        "message": "1 minut",
+        "description": "Brief timestamp for messages sent about one minute ago. Displayed in the conversation list and message bubble."
+    },
+    "timestamp_s": {
+        "message": "nyss",
+        "description": "Brief timestamp for messages sent less than a minute ago. Displayed in the conversation list and message bubble."
+    },
+    "titleIsNow": {
+        "message": "Gruppnamnet är nu '$name$'",
+        "description": "Shown in the conversation history when someone changes the title of the group",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "Book Club"
+            }
+        }
+    },
+    "to": {
+        "message": "till",
+        "description": "Label for the receiver of a message"
+    },
+    "today": {
+        "message": "Idag",
+        "description": "Section header in the media gallery"
+    },
+    "trayTooltip": {
+        "message": "OfficeApp Desktop",
+        "description": "Tooltip for the tray icon"
+    },
+    "typingAlt": {
+        "message": "Skrivanimation för denna konversation",
+        "description": "Used as the 'title' attibute for the typing animation"
+    },
+    "unableToLoadAttachment": {
+        "message": "Kunde inte läsa in vald bilaga",
+        "description": ""
+    },
+    "unblockGroupToSend": {
+        "message": "Avblockera denna grupp för att skicka meddelanden.",
+        "description": "Brief message shown when trying to message a blocked group"
+    },
+    "unblockToSend": {
+        "message": "Avblockera denna kontakt för att skicka meddelanden.",
+        "description": "Brief message shown when trying to message a blocked number"
+    },
+    "unknownGroup": {
+        "message": "Okänd grupp",
+        "description": "Shown as the name of a group if we don't have any information about it"
+    },
+    "unlinked": {
+        "message": "Olänkad",
+        "description": ""
+    },
+    "unlinkedWarning": {
+        "message": "Länka om OfficeApp Desktop till din mobila enhet för att fortsätta skicka meddelanden.",
+        "description": ""
+    },
+    "unnamedFile": {
+        "message": "Namnlös fil",
+        "description": "Hover text for attachment filenames"
+    },
+    "unreadMessage": {
+        "message": "1 oläst meddelande",
+        "description": "Text for unread message separator, just one message"
+    },
+    "unreadMessages": {
+        "message": "$count$ olästa meddelanden",
+        "description": "Text for unread message separator, with count",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "5"
+            }
+        }
+    },
+    "unregisteredUser": {
+        "message": "Numret är inte registrerat",
+        "description": "Error message displayed when sending to an unregistered user."
+    },
+    "unsupportedAttachment": {
+        "message": "Okänd filtyp på bilaga. Klicka för att spara.",
+        "description": "Displayed for incoming unsupported attachment"
+    },
+    "unsupportedFileType": {
+        "message": "Tipo de archivo no soportado",
+        "description": "Displayed for outgoing unsupported attachment"
+    },
+    "unverify": {
+        "message": "Markera som inte verifierad",
+        "description": ""
+    },
+    "updatedTheGroup": {
+        "message": "Grupp uppdaterad",
+        "description": "Shown in the conversation history when someone updates the group"
+    },
+    "upgrade": {
+        "message": "Uppgradera",
+        "description": "Label text for button to upgrade the app to the latest version"
+    },
+    "upgradingDatabase": {
+        "message": "Uppgraderar databasen. Detta kan ta lite tid...",
+        "description": "Message shown on the loading screen when we're changing database structure on first run of a new version"
+    },
+    "uploadAvatarText": {
+        "message": "Bitte Fügen SIE EIN Profilbild HINZU",
+        "description": "Upload user avatar"
+    },
+    "uploadCard": {
+        "message": "Upload commercial register entries to brands or identity documents to companies.",
+        "description": "Upload company card"
+    },
+    "uploadCompanyAvatarText": {
+        "message": "Bitte Fügen SIE EIN Profilbild Für das unternehmen HINZU",
+        "description": "Upload company avatar"
+    },
+    "userName": {
+        "message": "User name",
+        "description": "Label for user name input"
+    },
+    "userProfile": {
+        "message": "User profile",
+        "description": "Title for user profile setup"
+    },
+    "verified": {
+        "message": "Verifierat",
+        "description": ""
+    },
+    "verify": {
+        "message": "Märk som verifierat",
+        "description": ""
+    },
+    "verifyCode": {
+        "message": "Verifikationscode",
+        "description": "Title for verification code input"
+    },
+    "verifyHelp": {
+        "message": "Om du vill verifiera krypteringen mellan dig och $name$, jämför siffrorna ovan med siffrorna på deras enhet.",
+        "description": "",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "John"
+            }
+        }
+    },
+    "verifyNewNumber": {
+        "message": "Bekräfta säkerhetsnummer",
+        "description": "Label on button included with safety number change notification in the conversation"
+    },
+    "verifyPhone": {
+        "message": "Starten",
+        "description": "Label for phone verify button"
+    },
+    "video": {
+        "message": "Video",
+        "description": "Shown in a quotation of a message containing a video if no text was originally provided with that video"
+    },
+    "videoAttachmentAlt": {
+        "message": "Skärmbild av video bifogat till meddelande",
+        "description": "Used in alt tag of video attachment preview"
+    },
+    "videoScreenshotFailedToLoad": {
+        "message": "Video screenshot failed to load",
+        "description": "When a attachment video screenshot is missing, this message is shown"
+    },
+    "view": {
+        "message": "Visa",
+        "description": "Used as a label on a button allowing user to see more information"
+    },
+    "viewAllMedia": {
+        "message": "Visa alla media",
+        "description": "This is a menu item for viewing all media (images + video) in a conversation, using the imperative case, as in a command."
+    },
+    "viewMenuResetZoom": {
+        "message": "Aktuella storlek",
+        "description": "View menu command to go back to the default zoom"
+    },
+    "viewMenuToggleDevTools": {
+        "message": "Slå på utvecklingsverktyg",
+        "description": "View menu command to show or hide the developer tools"
+    },
+    "viewMenuToggleFullScreen": {
+        "message": "Slå av/på fullskärm",
+        "description": "View menu command to enter or leave Full Screen mode"
+    },
+    "viewMenuZoomIn": {
+        "message": "Zooma in",
+        "description": "View menu command to make everything bigger"
+    },
+    "viewMenuZoomOut": {
+        "message": "Zooma ut",
+        "description": "View menu command to make everything smaller"
+    },
+    "voiceMessage": {
+        "message": "Röstmeddelande",
+        "description": "Name for a voice message attachment"
+    },
+    "voiceNoteMustBeOnlyAttachment": {
+        "message": "Ett röstmeddelande måste vara den enda bilagan till ett meddelande.",
+        "description": "Shown in toast if tries to record a voice note with any staged attachments"
+    },
+    "welcomeAdmin": {
+        "message": "Welcome to the OfficeApp. Please enter your code here.",
+        "description": "Description for registering admin"
+    },
+    "welcomeCompany": {
+        "message": "Welcome to the OfficeApp. Please register your company here.",
+        "description": "Description for registering company"
+    },
+    "welcomeToSignal": {
+        "message": "Välkommen till OfficeApp",
+        "description": ""
+    },
+    "windowMenuBringAllToFront": {
+        "message": "Ta fram alla",
+        "description": "Window menu command to bring all windows of current applicatinon to front"
+    },
+    "windowMenuClose": {
+        "message": "Stäng fönster",
+        "description": "Window menu command to close the current window"
+    },
+    "windowMenuMinimize": {
+        "message": "Minimera",
+        "description": "Window menu command to minimize the current window"
+    },
+    "windowMenuZoom": {
+        "message": "Zooma",
+        "description": "Window menu command to make the current window the size of the whole screen"
+    },
+    "work": {
+        "message": "jobb",
+        "description": "Shown on contact detail screen as a label for an address/phone/email"
+    },
+    "yesterday": {
+        "message": "Igår",
+        "description": "Section header in the media gallery"
+    },
+    "you": {
+        "message": "Du",
+        "description": "In Android theme, shown in quote if you or someone else replies to you"
+    },
+    "youChangedTheTimer": {
+        "message": "Du satte tiden för försvinnande meddelanden till $time$",
+        "description": "Message displayed when you change the message expiration timer in a conversation.",
+        "placeholders": {
+            "time": {
+                "content": "$1",
+                "example": "10m"
+            }
+        }
+    },
+    "youDisabledDisappearingMessages": {
+        "message": "Du stängde av att meddelanden försvinner.",
+        "description": "Displayed in the conversation list when the timer is turned off"
+    },
+    "youLeftTheGroup": {
+        "message": "Du lämnade gruppen",
+        "description": "Displayed when a user can't send a message because they have left the group"
+    },
+    "youMarkedAsNotVerified": {
+        "message": "Du markerade ditt Säkerhetsnummer med $name$ som inte verifierat",
+        "description": "Shown in the conversation history when the user marks a contact as not verified, whether on the Safety Number screen or by dismissing a banner or dialog.",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "Bob"
+            }
+        }
+    },
+    "youMarkedAsNotVerifiedOtherDevice": {
+        "message": "Du markerade ditt Säkerhetsnummer med $name$ som inte verifierat från en annan enhet",
+        "description": "Shown in the conversation history when we discover that the user marked a contact as not verified on another device.",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "Bob"
+            }
+        }
+    },
+    "youMarkedAsVerified": {
+        "message": "Du markerade ditt Säkerhetsnummer med $name$ som verifierat",
+        "description": "Shown in the conversation history when the user marks a contact as verified.",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "Bob"
+            }
+        }
+    },
+    "youMarkedAsVerifiedOtherDevice": {
+        "message": "Du markerade ditt Säkerhetsnummer med $name$ som verifierat från en annan enhet",
+        "description": "Shown in the conversation history when we discover that the user marked a contact as verified on another device.",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "Bob"
+            }
+        }
+    },
+    "yourSafetyNumberWith": {
+        "message": "Ditt säkerhetsnummer med $name$:",
+        "description": "Heading for safety number view",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "John"
+            }
+        }
     }
 }

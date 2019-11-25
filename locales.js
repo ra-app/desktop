@@ -53,7 +53,11 @@ const loadLocales = async () => {
 
 const saveLocales = async () => {
   const promises = Object.keys(locales).map(async dir => {
-    return writeJson(`./_locales/${dir}/messages.json`, locales[dir]);
+    const sorted = Object.keys(locales[dir]).sort((a, b) => a < b ? -1 : a > b ? 1 : 0).reduce((arr, k) => {
+      arr[k] = locales[dir][k];
+      return arr;
+    }, {});
+    return writeJson(`./_locales/${dir}/messages.json`, sorted);
   });
   return Promise.all(promises);
 };
@@ -109,7 +113,7 @@ const missing = () => {
     merged = Object.assign({}, locales[locale], merged);
   });
   Object.keys(locales).forEach(locale => {
-    Object.assign({}, merged, locales[locale]);
+    locales[locale] = Object.assign({}, merged, locales[locale]);
   });
 }
 

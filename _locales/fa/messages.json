@@ -1,43 +1,293 @@
 {
-    "copyErrorAndQuit": {
-        "message": "Copy error and quit",
-        "description": "Shown in the top-level error popup, allowing user to copy the error text and close the app"
+    "BranchOption1": {
+        "message": "Administration / Verwaltung / Bürowesen",
+        "description": "Branch option 1"
     },
-    "unknownGroup": {
-        "message": "Unknown group",
-        "description": "Shown as the name of a group if we don't have any information about it"
+    "BranchOption10": {
+        "message": "EDV / IT",
+        "description": "Branch option 1"
     },
-    "databaseError": {
-        "message": "Database Error",
-        "description": "Shown in a popup if the database cannot start up properly"
+    "BranchOption11": {
+        "message": "Einkauf / Beschaffung",
+        "description": "Branch option 1"
     },
-    "deleteAndRestart": {
-        "message": "Delete all data and restart",
-        "description": "Shown in a popup if the database cannot start up properly; allows user to dalete database and restart"
+    "BranchOption12": {
+        "message": "Elektro / Elektronikn",
+        "description": "Branch option 1"
     },
-    "mainMenuFile": {
-        "message": "&فایل",
-        "description": "The label that is used for the File menu in the program main menu. The '&' indicates that the following letter will be used as the keyboard 'shortcut letter' for accessing the menu with the Alt-<letter> combination."
+    "BranchOption13": {
+        "message": "Energiewirtschaft",
+        "description": "Branch option 1"
     },
-    "mainMenuEdit": {
-        "message": "&ویرایش",
-        "description": "The label that is used for the Edit menu in the program main menu. The '&' indicates that the following letter will be used as the keyboard 'shortcut letter' for accessing the menu with the Alt-<letter> combination."
+    "BranchOption14": {
+        "message": "Finanzen",
+        "description": "Branch option 1"
     },
-    "mainMenuView": {
-        "message": "&نمایش",
-        "description": "The label that is used for the View menu in the program main menu. The '&' indicates that the following letter will be used as the keyboard 'shortcut letter' for accessing the menu with the Alt-<letter> combination."
+    "BranchOption15": {
+        "message": "Forschung / Entwicklung / Wissenschaft",
+        "description": "Branch option 1"
     },
-    "mainMenuWindow": {
-        "message": "&پنجره",
-        "description": "The label that is used for the Window menu in the program main menu. The '&' indicates that the following letter will be used as the keyboard 'shortcut letter' for accessing the menu with the Alt-<letter> combination."
+    "BranchOption16": {
+        "message": "Gesundheitswesen / Soziales / Pflege",
+        "description": "Branch option 1"
     },
-    "mainMenuHelp": {
-        "message": "&کمک",
-        "description": "The label that is used for the Help menu in the program main menu. The '&' indicates that the following letter will be used as the keyboard 'shortcut letter' for accessing the menu with the Alt-<letter> combination."
+    "BranchOption17": {
+        "message": "Handel / Konsum",
+        "description": "Branch option 1"
     },
-    "mainMenuSettings": {
-        "message": "ترجیحات",
-        "description": "The label that is used for the Preferences menu in the program main menu. This should be consistent with the standard naming for ‘Preferences’ on the operating system."
+    "BranchOption18": {
+        "message": "Handwerk",
+        "description": "Branch option 1"
+    },
+    "BranchOption19": {
+        "message": "Immobilien / Facility Management",
+        "description": "Branch option 1"
+    },
+    "BranchOption2": {
+        "message": "Automobil / Automobilzulieferer",
+        "description": "Branch option 1"
+    },
+    "BranchOption20": {
+        "message": "Industrie",
+        "description": "Branch option 1"
+    },
+    "BranchOption21": {
+        "message": "Internet / Multimedia",
+        "description": "Branch option 1"
+    },
+    "BranchOption22": {
+        "message": "Kunst / Kultur / Unterhaltung",
+        "description": "Branch option 1"
+    },
+    "BranchOption23": {
+        "message": "Marketing / Werbung / PR",
+        "description": "Branch option 1"
+    },
+    "BranchOption24": {
+        "message": "Marktforschunga",
+        "description": "Branch option 1"
+    },
+    "BranchOption25": {
+        "message": "Maschinen / Anlagenbau",
+        "description": "Branch option 1"
+    },
+    "BranchOption26": {
+        "message": "Medien",
+        "description": "Branch option 1"
+    },
+    "BranchOption27": {
+        "message": "Medizin / Pharma",
+        "description": "Branch option 1"
+    },
+    "BranchOption28": {
+        "message": "Medizintechnik",
+        "description": "Branch option 1"
+    },
+    "BranchOption29": {
+        "message": "Nahrungsmittel / Land / Forstwirtschaft",
+        "description": "Branch option 1"
+    },
+    "BranchOption3": {
+        "message": "Banken",
+        "description": "Branch option 1"
+    },
+    "BranchOption30": {
+        "message": "Personalwesen / Personalbeschaffung",
+        "description": "Branch option 1"
+    },
+    "BranchOption31": {
+        "message": "Rechtsberatung",
+        "description": "Branch option 1"
+    },
+    "BranchOption32": {
+        "message": "Seminar / Messeanbieter",
+        "description": "Branch option 1"
+    },
+    "BranchOption33": {
+        "message": "Sonstige Branchen",
+        "description": "Branch option 1"
+    },
+    "BranchOption34": {
+        "message": "Sport / Fitness / Beauty",
+        "description": "Branch option 1"
+    },
+    "BranchOption35": {
+        "message": "Steuerberatung / Wirtschaftsprüfung",
+        "description": "Branch option 1"
+    },
+    "BranchOption36": {
+        "message": "Telekommunikation",
+        "description": "Branch option 1"
+    },
+    "BranchOption37": {
+        "message": "Textilbranche",
+        "description": "Branch option 1"
+    },
+    "BranchOption38": {
+        "message": "Tourismus / Hotel / Gastronomie",
+        "description": "Branch option 1"
+    },
+    "BranchOption39": {
+        "message": "Vereine",
+        "description": "Branch option 1"
+    },
+    "BranchOption4": {
+        "message": "Baugewerbe / Architektur",
+        "description": "Branch option 1"
+    },
+    "BranchOption40": {
+        "message": "Verkehr / Transport / Logistik",
+        "description": "Branch option 1"
+    },
+    "BranchOption41": {
+        "message": "Versicherung",
+        "description": "Branch option 1"
+    },
+    "BranchOption42": {
+        "message": "Öffentliche Verwaltung",
+        "description": "Branch option 1"
+    },
+    "BranchOption5": {
+        "message": "Beratung / Consulting",
+        "description": "Branch option 1"
+    },
+    "BranchOption6": {
+        "message": "Bildung / Universität / FH / Schulen",
+        "description": "Branch option 1"
+    },
+    "BranchOption7": {
+        "message": "Chemie",
+        "description": "Branch option 1"
+    },
+    "BranchOption8": {
+        "message": "Dienstleistung",
+        "description": "Branch option 1"
+    },
+    "BranchOption9": {
+        "message": "Druck / Papier / Verpackung",
+        "description": "Branch option 1"
+    },
+    "BranchenTitle": {
+        "message": "Branchen",
+        "description": "Branchen title"
+    },
+    "Claimmed": {
+        "message": "Claimed",
+        "description": "Claimed ticket"
+    },
+    "Closed": {
+        "message": "Closed",
+        "description": "closed ticket"
+    },
+    "EmojiPicker--empty": {
+        "message": "No emoji found",
+        "description": "Shown in the emoji picker when a search yields 0 results."
+    },
+    "EmojiPicker--search-placeholder": {
+        "message": "Search Emoji",
+        "description": "Shown as a placeholder inside the emoji picker search field."
+    },
+    "EmojiPicker--skin-tone": {
+        "message": "Skin tone $tone$",
+        "placeholders": {
+            "status": {
+                "content": "$1",
+                "example": "2"
+            }
+        },
+        "description": "Shown as a tooltip over the emoji tone buttons."
+    },
+    "Message--from-me-unsupported-message": {
+        "message": "One of your devices sent a message that can't be processed or displayed because it uses a new OfficeApp feature."
+    },
+    "Message--from-me-unsupported-message-ask-to-resend": {
+        "message": "Future messages like this will be synchronized now that you are using an up-to-date version of OfficeApp."
+    },
+    "Message--tap-to-view--incoming": {
+        "message": "View Photo",
+        "description": "Text shown on messages with with individual timers, before user has viewed it"
+    },
+    "Message--tap-to-view--outgoing": {
+        "message": "Photo",
+        "description": "Text shown on outgoing messages with with individual timers (inaccessble)"
+    },
+    "Message--tap-to-view-expired": {
+        "message": "Viewed",
+        "description": "Text shown on messages with with individual timers, after user has viewed it"
+    },
+    "Message--unsupported-message": {
+        "message": "$contact$ sent you a message that can't be processed or displayed because it uses a new OfficeApp feature.",
+        "placeholders": {
+            "contact": {
+                "content": "$1",
+                "example": "Alice"
+            }
+        }
+    },
+    "Message--unsupported-message-ask-to-resend": {
+        "message": "You can ask $contact$ to re-send this message now that you are using an up-to-date version of OfficeApp.",
+        "placeholders": {
+            "contact": {
+                "content": "$1",
+                "example": "Alice"
+            }
+        }
+    },
+    "Message--update-signal": {
+        "message": "Update OfficeApp",
+        "description": "Text for a button which will take user to OfficeApp download page"
+    },
+    "PhonesTitle": {
+        "message": "Landesvorwahl",
+        "description": "Landesvorwahl title"
+    },
+    "Unclaimed": {
+        "message": "Claim",
+        "description": "Unclaimed ticket"
+    },
+    "Unknown": {
+        "message": "Unknown",
+        "description": "Unknown ticket"
+    },
+    "aboutSignalDesktop": {
+        "message": "درباره OfficeApp Desktop",
+        "description": "Item under the Help menu, which opens a small about window"
+    },
+    "acceptEula": {
+        "message": "Accept EULA",
+        "description": "Text for Accept EULA checkbox"
+    },
+    "acceptNewKey": {
+        "message": "تایید",
+        "description": "Label for a button to accept a new safety number"
+    },
+    "aceptedInvitation": {
+        "message": "Accept",
+        "description": "Accept invitation button on import contact"
+    },
+    "addACaption": {
+        "message": "یک عنوان اضافه کنید...",
+        "description": ""
+    },
+    "addContactModal": {
+        "message": "Benutzerdaten",
+        "description": "Benutzerdaten modal"
+    },
+    "address": {
+        "message": "آدرس",
+        "description": "Generic label shown if contact address has custom type but no label"
+    },
+    "adminButton": {
+        "message": "Admin",
+        "description": "Admin button on import contact"
+    },
+    "allowAccess": {
+        "message": "اجازه دسترسی بدهید",
+        "description": "Button shown in popup asking to enable microphon/video permissions to send audio messages"
+    },
+    "androidMessageLengthWarning": {
+        "message": "Clientes de Android solo recibirán los primeros 2000 caracteres de este mensaje",
+        "description": "Warning that long messages could not get received completely by Android clients."
     },
     "appMenuHide": {
         "message": "مخفی سازی",
@@ -47,29 +297,377 @@
         "message": "مخفی سازی سایرین",
         "description": "Application menu command to hide all other windows"
     },
-    "appMenuUnhide": {
-        "message": "نمایش همه",
-        "description": "Application menu command to show all application windows"
-    },
     "appMenuQuit": {
         "message": "خروج از OfficeApp",
         "description": "Application menu command to close the application"
     },
-    "editMenuUndo": {
-        "message": "لغو",
-        "description": "Edit menu command to remove recently-typed text"
+    "appMenuUnhide": {
+        "message": "نمایش همه",
+        "description": "Application menu command to show all application windows"
     },
-    "editMenuRedo": {
-        "message": "انجام دوباره",
-        "description": "Edit menu command to restore previously undone typed text"
+    "appTagLine": {
+        "message": "Modern secure communications... TODO",
+        "description": "Tagline of the OfficeApp application"
+    },
+    "appTagLineSecond": {
+        "message": "Customer Care Messenger System",
+        "description": "second Tagline of the OfficeApp application"
+    },
+    "archiveConversation": {
+        "message": "Archive Conversation",
+        "description": "Shown in menu for conversation, and moves conversation out of main conversation list"
+    },
+    "archiveHelperText": {
+        "message": "این مکالمه ها بایگانی شده اند و اگر پیام های جدید دریافت شوند فقط در صندوق به نمایش در می آیند.",
+        "description": "Shown at the top of the archived converations list in the left pane"
+    },
+    "archivedConversations": {
+        "message": "مکالمه های آرشیو شده",
+        "description": "Shown in place of the search box when showing archived conversation list"
+    },
+    "attemptingReconnection": {
+        "message": "Attempting reconnect in $reconnect_duration_in_seconds$ seconds",
+        "description": "",
+        "placeholders": {
+            "reconnect_duration_in_seconds": {
+                "content": "$1",
+                "example": "10"
+            }
+        }
+    },
+    "audio": {
+        "message": "صوت",
+        "description": "Shown in a quotation of a message containing an audio attachment if no text was originally provided with that attachment"
+    },
+    "audioNotificationDescription": {
+        "message": "Play audio notification",
+        "description": "Description for audio notification setting"
+    },
+    "audioPermissionNeeded": {
+        "message": "برای فرستادن پیام های صوتی، به OfficeApp Desktop اجازه دسترسی به میکروفون خود را بدهید.",
+        "description": "Shown if the user attempts to send an audio message without audio permssions turned on"
+    },
+    "autoUpdateLaterButtonLabel": {
+        "message": "بعدا",
+        "description": ""
+    },
+    "autoUpdateNewVersionInstructions": {
+        "message": "برای اعمال آپدیت ها OfficeApp را ری استارت کنید.",
+        "description": ""
+    },
+    "autoUpdateNewVersionMessage": {
+        "message": "نسخه جدیدی از OfficeApp در دسترس است.",
+        "description": ""
+    },
+    "autoUpdateNewVersionTitle": {
+        "message": "به‌روزرسانی OfficeApp در دسترس است",
+        "description": ""
+    },
+    "autoUpdateRestartButtonLabel": {
+        "message": "راه اندازی مجدد OfficeApp",
+        "description": ""
+    },
+    "bankDetails": {
+        "message": "Bank details",
+        "description": "Title for company bank detail input"
+    },
+    "branch": {
+        "message": "Branch",
+        "description": "Label for company branch input"
+    },
+    "callPhone": {
+        "message": "Anrufen",
+        "description": "Label for phone verify call phone"
+    },
+    "cancel": {
+        "message": "انصراف",
+        "description": ""
+    },
+    "cannotMixImageAdnNonImageAttachments": {
+        "message": "You cannot mix non-image and image attachments in one message.",
+        "description": "An error popup when the user has attempted to add an attachment"
+    },
+    "cannotUpdate": {
+        "message": "Cannot Update",
+        "description": "Shown as the title of our update error dialogs on windows"
+    },
+    "cannotUpdateDetail": {
+        "message": "OfficeApp Desktop failed to update, but there is a new version available. Please go to https://signal.org/download and install the new version manually, then either contact support or file a bug about this problem.",
+        "description": "Shown if a general error happened while trying to install update package"
+    },
+    "changeLanguageMessage": {
+        "message": "Changing current language requires restarting the application, do you wish to do this now?",
+        "description": "Message for change language require restart message box"
+    },
+    "changeLanguageTitle": {
+        "message": "Changing language requires restart",
+        "description": "Title for change language requires restart message box"
+    },
+    "changedRecently": {
+        "message": "شماره امن شما با $name$به تازگی تغییر یافته است.این امر بدین معناست که شخصی در تلاش برای رهگیری ارتباط شماست یا اینکه $name$بار دیگر OfficeApp را نصب کرده است.",
+        "description": "Shown on confirmation dialog when user attempts to send a message",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "Bob"
+            }
+        }
+    },
+    "changedRecentlyMultiple": {
+        "message": "کد امنیتی چند نفر از اعضای گروه اخیرآً تغییر کرده‌است. ممکن است معنایش این باشد که کسی دارد برای شنود ارتباطات شما تلاش می‌کند. امکان دیگر است که این اعضای گروه صرفاً OfficeApp را دوباره نصب کرده‌اند.",
+        "description": "Shown on confirmation dialog when user attempts to send a message"
+    },
+    "changedRightAfterVerify": {
+        "message": "شماره امنی که شما در تلاش برای تایید آن هستید تغییر کرده است. لطفا شماره امن جدید خود را با$name$بازبینی کنید. به یاد داشته باشید، این تغییر بدین معناست که شخصی در تلاش برای رهگیری ارتباط شماست و یا $name$مجددا OfficeApp را نصب کرده است.",
+        "description": "Shown on the safety number screen when the user has selected to verify/unverify a contact's safety number, and we immediately discover a safety number change",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "Bob"
+            }
+        }
+    },
+    "changedSinceVerified": {
+        "message": "شماره امن شما با $name$ بعد از آخرین تایید شما تغییر یافته است. این بدین معناست که شخصی در تلاش برای رهگیری ارتباط شماست و یا اینکه $name$به تازگی OfficeApp را مجددا نصب کرده است.",
+        "description": "Shown on confirmation dialog when user attempts to send a message",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "Bob"
+            }
+        }
+    },
+    "changedSinceVerifiedMultiple": {
+        "message": "کد امنیتی چند نفر از اعضای گروه از زمان آخریت تائید، تغییر کرده‌است. ممکن است معنایش این باشد که کسی دارد برای شنود ارتباطات شما تلاش می‌کند. امکان دیگر است که این اعضای گروه صرفاً OfficeApp را دوباره نصب کرده‌اند.",
+        "description": "Shown on confirmation dialog when user attempts to send a message"
+    },
+    "checkNetworkConnection": {
+        "message": "ارتباط شبکه خود را چک کنید.",
+        "description": "Obvious instructions for when a user's computer loses its network connection"
+    },
+    "chooseDeviceName": {
+        "message": "نام این دستگاه را انتخاب کنید",
+        "description": "The header shown on the 'choose device name' screen in the device linking process"
+    },
+    "chooseDirectory": {
+        "message": "انتخاب پوشه",
+        "description": "Button to allow the user to find a folder on disk"
+    },
+    "chooseFile": {
+        "message": "انتخاب فایل",
+        "description": "Button to allow the user to find a file on disk"
+    },
+    "clearDataButton": {
+        "message": "پاک کردن داده",
+        "description": "Button in the settings dialog starting process to delete all data"
+    },
+    "clearDataExplanation": {
+        "message": "این باعث می شود تمام داده های در برنامه پاک شوند، تمام پیام ها و اطلاعات ذخیره شده حساب کاربری از بین خواهند رفت.",
+        "description": "Text describing what the clear data button will do."
+    },
+    "clearDataHeader": {
+        "message": "پاک سازی داده",
+        "description": "Header in the settings dialog for the section dealing with data deletion"
+    },
+    "clickToSave": {
+        "message": "ذخیره",
+        "description": "Hover text for attachment filenames"
+    },
+    "clientButton": {
+        "message": "Client",
+        "description": "Client button on import contact"
+    },
+    "closeTicket": {
+        "message": "Close ticket",
+        "description": "Chat menu close ticket"
+    },
+    "companyCode": {
+        "message": "Firmennummer",
+        "description": "Label for signup Buchungskreis input"
+    },
+    "companyDetails": {
+        "message": "Company details",
+        "description": "Title for company details entry"
+    },
+    "companyName": {
+        "message": "Company Name",
+        "description": "Label for company name input"
+    },
+    "companyRegistrationID": {
+        "message": "Commercial Register ID",
+        "description": "Label for commercial register id input"
+    },
+    "confirmation-dialog--Cancel": {
+        "message": "Cancel",
+        "description": "Appears on the cancel button in confirmation dialogs."
+    },
+    "connecting": {
+        "message": "در حال اتصال",
+        "description": "Displayed when the desktop client is currently connecting to the server."
+    },
+    "contactAvatarAlt": {
+        "message": "آواتار متعلق به مخاطب $name$",
+        "description": "Used in the alt tag for the image avatar of a contact",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "John"
+            }
+        }
+    },
+    "contactImportTitle": {
+        "message": "Contacts syncronization",
+        "description": "Title for contacts import"
+    },
+    "contactsHeader": {
+        "message": "مخاطبین",
+        "description": "Shown to separate the types of search results"
+    },
+    "continueButton": {
+        "message": "Continue",
+        "description": "Button label for continuing to next step"
+    },
+    "conversationsHeader": {
+        "message": "مکالمه ها",
+        "description": "Shown to separate the types of search results"
+    },
+    "copyErrorAndQuit": {
+        "message": "Copy error and quit",
+        "description": "Shown in the top-level error popup, allowing user to copy the error text and close the app"
+    },
+    "countryCode": {
+        "message": "Country code",
+        "description": "Title for country code input"
+    },
+    "createGroup": {
+        "message": "Create group",
+        "description": "Create group menu item"
+    },
+    "dangerousFileType": {
+        "message": "نوع پیوست به دلایل امنیتی مجاز نیست.",
+        "description": "Shown in toast when user attempts to send .exe file, for example"
+    },
+    "databaseError": {
+        "message": "Database Error",
+        "description": "Shown in a popup if the database cannot start up properly"
+    },
+    "debugLog": {
+        "message": "گزارش خطا",
+        "description": "View menu item to open the debug log (title case)"
+    },
+    "debugLogError": {
+        "message": "خطایی با آپلود رخ داد! لطفا به صورت دستی لاگ را به باگی که میخواهید ثبت کنید بیافزایید.",
+        "description": ""
+    },
+    "debugLogExplanation": {
+        "message": "این گزارش برای بازنگری آنلاین ذخیره می‌شود. شما می‌توانید قبل از ارسال لینک، گزارش را بررسی و ویرایش کنید.",
+        "description": ""
+    },
+    "delete": {
+        "message": "پاک کن",
+        "description": ""
+    },
+    "deleteAllDataBody": {
+        "message": "شما در حال پاک کردن تمام اطلاعات ذخیره شده این حساب کاربری میباشید، این اطلاعات شامل تمام مخاطبین و پیام ها می باشد. شما همیشه میتوانید با موبایل خود آن را لینک کنید، اما این پیام های پاک شده را برنمی گرداند.",
+        "description": "Text describing what exactly will happen if the user clicks the button to delete all data"
+    },
+    "deleteAllDataButton": {
+        "message": "پاک کردن تمام داده ها",
+        "description": "Text of the button that deletes all data"
+    },
+    "deleteAllDataHeader": {
+        "message": "پاک کردن تمام داده ها؟",
+        "description": "Header of the full-screen delete data confirmation screen"
+    },
+    "deleteAllDataProgress": {
+        "message": "قطع اتصال و پاک کردن تمام داده ها",
+        "description": "Message shown to user when app is disconnected and data deleted"
+    },
+    "deleteAndRestart": {
+        "message": "Delete all data and restart",
+        "description": "Shown in a popup if the database cannot start up properly; allows user to dalete database and restart"
+    },
+    "deleteContactModal": {
+        "message": "Kontakt löschen",
+        "description": "Kontakt löschen modal"
+    },
+    "deleteConversationConfirmation": {
+        "message": "آیا می‌خواهید این گفتگو را برای همیشه حذف کنید؟",
+        "description": "Confirmation dialog text that asks the user if they really wish to delete the conversation. Answer buttons use the strings 'ok' and 'cancel'. The deletion is permanent, i.e. it cannot be undone."
+    },
+    "deleteMessage": {
+        "message": "حذف پیام",
+        "description": "Shown on the drop-down menu for an individual message, deletes single message"
+    },
+    "deleteMessages": {
+        "message": "حذف پیام‌ها",
+        "description": "Menu item for deleting messages, title case."
+    },
+    "deleteThisMessage": {
+        "message": "این پیام را حذف کن",
+        "description": ""
+    },
+    "deleteWarning": {
+        "message": "آیا مطمئن هستید؟ کلیک روی 'حذف' این پیام را برای همیشه از روی این دستگاه حذف خواهد کرد.",
+        "description": ""
+    },
+    "deviceName": {
+        "message": "نام دستگاه",
+        "description": "The label in settings panel shown for the user-provided name for this desktop instance"
+    },
+    "disableNotifications": {
+        "message": "آگاه‌سازی‌ها غیرفعال باشند",
+        "description": "Label for disabling notifications"
+    },
+    "disabledDisappearingMessages": {
+        "message": "$name$ پیام های نابود شونده را غیر فعال کرد",
+        "description": "Displayed in the conversation list when the timer is turned off",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "John"
+            }
+        }
+    },
+    "disappearingMessages": {
+        "message": "پیام‌های نابود شونده",
+        "description": "Conversation menu option to enable disappearing messages"
+    },
+    "disappearingMessagesDisabled": {
+        "message": "پیام های نابود شونده غیر فعال شدند",
+        "description": "Displayed in the left pane when the timer is turned off"
+    },
+    "disconnected": {
+        "message": "ارتباط قطع شد",
+        "description": "Displayed when the desktop client cannot connect to the server."
+    },
+    "documents": {
+        "message": "سند ها",
+        "description": "Header of the secondary pane in the media gallery, showing every non-media attachment"
+    },
+    "documentsEmptyState": {
+        "message": "شما در این مکالمه هیچ سندی ندارید",
+        "description": "Message shown to user in the media gallery when there are no messages with document attachments (anything other than images or video)"
+    },
+    "downloadAttachment": {
+        "message": "دانلود ضمیمه",
+        "description": "Shown in a message's triple-dot menu if there isn't room for a dedicated download button"
+    },
+    "downloading": {
+        "message": "در حال دانلود",
+        "description": "Shown in the message bubble while a long message attachment is being downloaded"
+    },
+    "editMenuCopy": {
+        "message": "کپی",
+        "description": "Edit menu command to add selected text to clipboard"
     },
     "editMenuCut": {
         "message": "برش",
         "description": "Edit menu command to remove selected text and add it to clipboard"
     },
-    "editMenuCopy": {
-        "message": "کپی",
-        "description": "Edit menu command to add selected text to clipboard"
+    "editMenuDelete": {
+        "message": "حذف",
+        "description": "Edit menu command to remove the selected text"
     },
     "editMenuPaste": {
         "message": "پیست",
@@ -79,9 +677,9 @@
         "message": "پیست و تطابق استایل",
         "description": "Edit menu command to insert text from clipboard at cursor location, taking only text and not style information"
     },
-    "editMenuDelete": {
-        "message": "حذف",
-        "description": "Edit menu command to remove the selected text"
+    "editMenuRedo": {
+        "message": "انجام دوباره",
+        "description": "Edit menu command to restore previously undone typed text"
     },
     "editMenuSelectAll": {
         "message": "انتخاب همه",
@@ -95,1083 +693,93 @@
         "message": "توقف صحبت",
         "description": "Edit menu item under 'speech' to stop dictation"
     },
-    "windowMenuClose": {
-        "message": "بستن پنجره",
-        "description": "Window menu command to close the current window"
-    },
-    "windowMenuMinimize": {
-        "message": "مینیمایز",
-        "description": "Window menu command to minimize the current window"
-    },
-    "windowMenuZoom": {
-        "message": "زوم",
-        "description": "Window menu command to make the current window the size of the whole screen"
-    },
-    "windowMenuBringAllToFront": {
-        "message": "همه را به جلو بیاور",
-        "description": "Window menu command to bring all windows of current applicatinon to front"
-    },
-    "viewMenuResetZoom": {
-        "message": "سایز واقعی",
-        "description": "View menu command to go back to the default zoom"
-    },
-    "viewMenuZoomIn": {
-        "message": "بزرگ نمایی",
-        "description": "View menu command to make everything bigger"
-    },
-    "viewMenuZoomOut": {
-        "message": "کوچک نمایی",
-        "description": "View menu command to make everything smaller"
-    },
-    "viewMenuToggleFullScreen": {
-        "message": "تاگل فول اسکرین",
-        "description": "View menu command to enter or leave Full Screen mode"
-    },
-    "viewMenuToggleDevTools": {
-        "message": "تاگل ابزار های توسعه دهنده",
-        "description": "View menu command to show or hide the developer tools"
-    },
-    "menuSetupWithImport": {
-        "message": "نصب با استفاده از ایمپورت",
-        "description": "When the application is not yet set up, menu option to start up the import sequence"
-    },
-    "menuSetupAsNewDevice": {
-        "message": "برپایی به عنوان یک دستگاه جدید",
-        "description": "When the application is not yet set up, menu option to start up the set up as fresh device"
-    },
-    "menuSetupAsStandalone": {
-        "message": "برپایی به عنوان یک دستگاه مستقل",
-        "description": "Only available on development modes, menu option to open up the standalone device setup sequence"
-    },
-    "loading": {
-        "message": "در حال بارگذاری...",
-        "description": "Message shown on the loading screen before we've loaded any messages"
-    },
-    "optimizingApplication": {
-        "message": "بهینه سازی برنامه...",
-        "description": "Message shown on the loading screen while we are doing application optimizations"
-    },
-    "migratingToSQLCipher": {
-        "message": "بهینه سازی برنامه ها... $status$ کامل شد.",
-        "description": "Message shown on the loading screen while we are doing application optimizations",
-        "placeholders": {
-            "status": {
-                "content": "$1",
-                "example": "45/200"
-            }
-        }
-    },
-    "archivedConversations": {
-        "message": "مکالمه های آرشیو شده",
-        "description": "Shown in place of the search box when showing archived conversation list"
-    },
-    "archiveHelperText": {
-        "message": "این مکالمه ها بایگانی شده اند و اگر پیام های جدید دریافت شوند فقط در صندوق به نمایش در می آیند.",
-        "description": "Shown at the top of the archived converations list in the left pane"
-    },
-    "archiveConversation": {
-        "message": "Archive Conversation",
-        "description": "Shown in menu for conversation, and moves conversation out of main conversation list"
-    },
-    "moveConversationToInbox": {
-        "message": "Move Conversation to Inbox",
-        "description": "Undoes Archive Conversation action, and moves archived conversation back to the main conversation list"
-    },
-    "chooseDirectory": {
-        "message": "انتخاب پوشه",
-        "description": "Button to allow the user to find a folder on disk"
-    },
-    "chooseFile": {
-        "message": "انتخاب فایل",
-        "description": "Button to allow the user to find a file on disk"
-    },
-    "loadDataHeader": {
-        "message": "بارگذاری داده هایتان",
-        "description": "Header shown on the first screen in the data import process"
-    },
-    "loadDataDescription": {
-        "message": "شما پروسه اکسپورت را انجام دادید، مخاطبین ، پیام های شما روی کامپیوتر شما آماده هستند. پوشه ای که شامل داده های  ذخیره شده OfficeApp شما می باشد را انتخاب کنید.",
-        "description": "Introduction to the process of importing messages and contacts from disk"
-    },
-    "importChooserTitle": {
-        "message": "انتخاب پوشه اطلاعات پشتیبان‌گیری",
-        "description": "Title of the popup window used to select data previously exported"
-    },
-    "importErrorHeader": {
-        "message": "خطایی رخ داد!",
-        "description": "Header of the error screen after a failed import"
-    },
-    "importingHeader": {
-        "message": "در حال بارگذاری مخاطب ها و پیام ها",
-        "description": "Header of screen shown as data is import"
-    },
-    "importErrorFirst": {
-        "message": "مطمئن شوید که دایرکتوری صحیح را که شامل داده های ذخیره شده OfficeApp شما می باشد را انتخاب کرده اید. نام آن باید با 'OfficeApp Export' آغاز شده باشد. شما همچنین میتوانید یک کپی جدید از داده های خود را از برنامه کروم ذخیره کنید.",
-        "description": "Message shown if the import went wrong; first paragraph"
-    },
-    "importErrorSecond": {
-        "message": "اگر این مراحل برای شما کار نمیکنند، لطفا یک گزارش خطاء (نمایش -> گزارش خطاء)  ثبت کنید تا بتوانیم برای جابجایی به شما کمک کنیم.",
-        "description": "Message shown if the import went wrong; second paragraph"
-    },
-    "importAgain": {
-        "message": "پوشه را انتخاب کنید و دوباره امتحان کنید",
-        "description": "Button shown if the user runs into an error during import, allowing them to start over"
-    },
-    "importCompleteHeader": {
-        "message": "موفقیت!",
-        "description": "Header shown on the screen at the end of a successful import process"
-    },
-    "importCompleteStartButton": {
-        "message": "شروع به استفاده از OfficeApp Desktop",
-        "description": "Button shown at end of successful import process, nothing left but a restart"
-    },
-    "importCompleteLinkButton": {
-        "message": "لینک کردن این دستگاه به موبایل",
-        "description": "Button shown at end of successful 'light' import process, so the standard linking process still needs to happen"
-    },
-    "selectedLocation": {
-        "message": "مکان انتخابی شما",
-        "description": "Message shown as the export location if we didn't capture the target directory"
-    },
-    "upgradingDatabase": {
-        "message": "در حال به‌روزرسانی پابگاه داده. ممکن است کمی طول بکشد...",
-        "description": "Message shown on the loading screen when we're changing database structure on first run of a new version"
-    },
-    "loadingMessages": {
-        "message": "در حال بارگذاری پیام‌ها. تاکنون $count$ ...",
-        "description": "Message shown on the loading screen when we're catching up on the backlog of messages",
-        "placeholders": {
-            "count": {
-                "content": "$1",
-                "example": "5"
-            }
-        }
-    },
-    "me": {
-        "message": "من",
-        "description": "The label for yourself when shown in a group member list"
-    },
-    "view": {
-        "message": "نمایش",
-        "description": "Used as a label on a button allowing user to see more information"
-    },
-    "youLeftTheGroup": {
-        "message": "شما گروه را ترک کرده اید",
-        "description": "Displayed when a user can't send a message because they have left the group"
-    },
-    "scrollDown": {
-        "message": "رفتن به پایین گفتگو",
-        "description": "Alt text for button to take user down to bottom of conversation, shown when user scrolls up"
-    },
-    "messageBelow": {
-        "message": "پیام جدید پایین",
-        "description": "Alt text for button to take user down to bottom of conversation with a new message out of screen"
-    },
-    "messagesBelow": {
-        "message": "پیام‌های جدید پایین",
-        "description": "Alt text for button to take user down to bottom of conversation with more than one message out of screen"
-    },
-    "unreadMessage": {
-        "message": "1 پیام خوانده نشده",
-        "description": "Text for unread message separator, just one message"
-    },
-    "unreadMessages": {
-        "message": "$count$ پیام خوانده نشده",
-        "description": "Text for unread message separator, with count",
-        "placeholders": {
-            "count": {
-                "content": "$1",
-                "example": "5"
-            }
-        }
-    },
-    "youMarkedAsVerified": {
-        "message": "شما کد امنیتی خود را با $name$ به عنوان تایید شده علامت زدید",
-        "description": "Shown in the conversation history when the user marks a contact as verified.",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "Bob"
-            }
-        }
-    },
-    "youMarkedAsNotVerified": {
-        "message": "شما کد امنیتی خود را با $name$ به عنوان تایید نشده علامت زدید",
-        "description": "Shown in the conversation history when the user marks a contact as not verified, whether on the Safety Number screen or by dismissing a banner or dialog.",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "Bob"
-            }
-        }
-    },
-    "youMarkedAsVerifiedOtherDevice": {
-        "message": "شما کد امنیتی خود را با $name$ به عنوان تایید شده از یک دستگاه دیگر علامت زدید",
-        "description": "Shown in the conversation history when we discover that the user marked a contact as verified on another device.",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "Bob"
-            }
-        }
-    },
-    "youMarkedAsNotVerifiedOtherDevice": {
-        "message": "شما کد امنیتی خود با $name$ را از یک دستگاه دیگر به عنوان تایید نشده علامت زدید",
-        "description": "Shown in the conversation history when we discover that the user marked a contact as not verified on another device.",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "Bob"
-            }
-        }
-    },
-    "membersNeedingVerification": {
-        "message": "کد امنیتی این اعضای گروه از آخرین باری که تأییدش کردید تغییر کرده‌است. یکی از اعضای گروه را انتخاب کنید تا کد امنیتی جدیدش را ببینید.",
-        "description": "When there are multiple previously-verified group members with safety number changes, a banner will be shown. The list of contacts with safety number changes is shown, and this text introduces that list."
-    },
-    "changedSinceVerifiedMultiple": {
-        "message": "کد امنیتی چند نفر از اعضای گروه از زمان آخریت تائید، تغییر کرده‌است. ممکن است معنایش این باشد که کسی دارد برای شنود ارتباطات شما تلاش می‌کند. امکان دیگر است که این اعضای گروه صرفاً OfficeApp را دوباره نصب کرده‌اند.",
-        "description": "Shown on confirmation dialog when user attempts to send a message"
-    },
-    "changedSinceVerified": {
-        "message": "شماره امن شما با $name$ بعد از آخرین تایید شما تغییر یافته است. این بدین معناست که شخصی در تلاش برای رهگیری ارتباط شماست و یا اینکه $name$به تازگی OfficeApp را مجددا نصب کرده است.",
-        "description": "Shown on confirmation dialog when user attempts to send a message",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "Bob"
-            }
-        }
-    },
-    "changedRightAfterVerify": {
-        "message": "شماره امنی که شما در تلاش برای تایید آن هستید تغییر کرده است. لطفا شماره امن جدید خود را با$name$بازبینی کنید. به یاد داشته باشید، این تغییر بدین معناست که شخصی در تلاش برای رهگیری ارتباط شماست و یا $name$مجددا OfficeApp را نصب کرده است.",
-        "description": "Shown on the safety number screen when the user has selected to verify/unverify a contact's safety number, and we immediately discover a safety number change",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "Bob"
-            }
-        }
-    },
-    "changedRecentlyMultiple": {
-        "message": "کد امنیتی چند نفر از اعضای گروه اخیرآً تغییر کرده‌است. ممکن است معنایش این باشد که کسی دارد برای شنود ارتباطات شما تلاش می‌کند. امکان دیگر است که این اعضای گروه صرفاً OfficeApp را دوباره نصب کرده‌اند.",
-        "description": "Shown on confirmation dialog when user attempts to send a message"
-    },
-    "changedRecently": {
-        "message": "شماره امن شما با $name$به تازگی تغییر یافته است.این امر بدین معناست که شخصی در تلاش برای رهگیری ارتباط شماست یا اینکه $name$بار دیگر OfficeApp را نصب کرده است.",
-        "description": "Shown on confirmation dialog when user attempts to send a message",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "Bob"
-            }
-        }
-    },
-    "identityKeyErrorOnSend": {
-        "message": "شماره امن شما با $name$ تغییر کرده است. این به این معناست که شخصی در تلاش برای رهگیری ارتباط شماست یا اینکه $name$مجددا OfficeApp را نصب کرده است. بهتر است شماره امن خود با این مخاطب را تایید کنید.",
-        "description": "Shown when user clicks on a failed recipient in the message detail view after an identity key change",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "Bob"
-            }
-        }
-    },
-    "sendAnyway": {
-        "message": "به هر حال بفرست",
-        "description": "Used on a warning dialog to make it clear that it might be risky to send the message."
-    },
-    "noLongerVerified": {
-        "message": "کد امنیتی $name$ تغییر کرده  و دیگر تأییدشده نیست. برای نمایشش کلیک کنید.",
-        "description": "Shown in converation banner when user's safety number has changed, but they were previously verified.",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "Bob"
-            }
-        }
-    },
-    "multipleNoLongerVerified": {
-        "message": "شماره امن شما با اعضای این گروه تغییر کرده است و دیگر تایید شده نیست. برای نمایش لمس کنید.",
-        "description": "Shown in conversation banner when more than one group member's safety number has changed, but they were previously verified."
-    },
-    "debugLogExplanation": {
-        "message": "این گزارش برای بازنگری آنلاین ذخیره می‌شود. شما می‌توانید قبل از ارسال لینک، گزارش را بررسی و ویرایش کنید.",
-        "description": ""
-    },
-    "debugLogError": {
-        "message": "خطایی با آپلود رخ داد! لطفا به صورت دستی لاگ را به باگی که میخواهید ثبت کنید بیافزایید.",
-        "description": ""
-    },
-    "reportIssue": {
-        "message": "گزارش مشکل",
-        "description": "Link to open the issue tracker"
-    },
-    "gotIt": {
-        "message": "فهمیدم!",
-        "description": "Label for a button that dismisses a dialog. The user clicks it to confirm that they understand the message in the dialog."
-    },
-    "submit": {
-        "message": "ارسال",
-        "description": ""
-    },
-    "acceptNewKey": {
-        "message": "تایید",
-        "description": "Label for a button to accept a new safety number"
-    },
-    "verify": {
-        "message": "علامت گذاری به عنوان تایید شده",
-        "description": ""
-    },
-    "unverify": {
-        "message": "علامت گذاری به عنوان تایید نشده",
-        "description": ""
-    },
-    "isVerified": {
-        "message": "کدِ امنیتیِ $name$ تأیید شد.",
-        "description": "Summary state shown at top of the safety number screen if user has verified contact.",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "Bob"
-            }
-        }
-    },
-    "isNotVerified": {
-        "message": "شما شماره امن خود با $name$را تایید نکرده اید.",
-        "description": "Summary state shown at top of the safety number screen if user has not verified contact.",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "Bob"
-            }
-        }
-    },
-    "verified": {
-        "message": "تایید شده",
-        "description": ""
-    },
-    "newIdentity": {
-        "message": "شماره‌ی امنیتی جدید",
-        "description": "Header for a key change dialog"
-    },
-    "identityChanged": {
-        "message": "شماره‌ی امنیتی این مخاطب تغییر کرده‌ است. این می‌تواند به این معنی باشد که کسی در حال نفوذ به ارتباط شما است و یا اینکه مخاطب شما OfficeApp را از نو نصب کرده و حالا شماره‌ی امنیتی جدیدی دارد.",
-        "description": ""
-    },
-    "incomingError": {
-        "message": "خطا در کنترل پیام دریافتی",
-        "description": ""
-    },
-    "media": {
-        "message": "مدیا",
-        "description": "Header of the default pane in the media gallery, showing images and videos"
-    },
-    "mediaEmptyState": {
-        "message": "شما در این مکالمه هیچ نوع مدیا ندارید",
-        "description": "Message shown to user in the media gallery when there are no messages with media attachments (images or video)"
-    },
-    "documents": {
-        "message": "سند ها",
-        "description": "Header of the secondary pane in the media gallery, showing every non-media attachment"
-    },
-    "documentsEmptyState": {
-        "message": "شما در این مکالمه هیچ سندی ندارید",
-        "description": "Message shown to user in the media gallery when there are no messages with document attachments (anything other than images or video)"
-    },
-    "today": {
-        "message": "امروز",
-        "description": "Section header in the media gallery"
-    },
-    "yesterday": {
-        "message": "دیروز",
-        "description": "Section header in the media gallery"
-    },
-    "thisWeek": {
-        "message": "این هفته",
-        "description": "Section header in the media gallery"
-    },
-    "thisMonth": {
-        "message": "این ماه",
-        "description": "Section header in the media gallery"
-    },
-    "unsupportedAttachment": {
-        "message": "این نوع ضمیمه پشتیبانی نمی‌شود. برای ذخیره کلیک کنید.",
-        "description": "Displayed for incoming unsupported attachment"
-    },
-    "clickToSave": {
-        "message": "ذخیره",
-        "description": "Hover text for attachment filenames"
-    },
-    "unnamedFile": {
-        "message": "فایل بی‌نام",
-        "description": "Hover text for attachment filenames"
-    },
-    "voiceMessage": {
-        "message": "پیام صوتی",
-        "description": "Name for a voice message attachment"
-    },
-    "dangerousFileType": {
-        "message": "نوع پیوست به دلایل امنیتی مجاز نیست.",
-        "description": "Shown in toast when user attempts to send .exe file, for example"
-    },
-    "loadingPreview": {
-        "message": "Loading Preview...",
-        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area"
-    },
-    "stagedPreviewThumbnail": {
-        "message": "Draft thumbnail link preview for $domain$",
-        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area",
-        "placeholders": {
-            "path": {
-                "content": "$1",
-                "example": "instagram.com"
-            }
-        }
-    },
-    "previewThumbnail": {
-        "message": "Thumbnail link preview for $domain$",
-        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area",
-        "placeholders": {
-            "path": {
-                "content": "$1",
-                "example": "instagram.com"
-            }
-        }
-    },
-    "stagedImageAttachment": {
-        "message": "Draft image attachment: $path$",
-        "description": "Alt text for staged attachments",
-        "placeholders": {
-            "path": {
-                "content": "$1",
-                "example": "dog.jpg"
-            }
-        }
-    },
-    "oneNonImageAtATimeToast": {
-        "message": "When including a non-image attachment, the limit is one attachment per message.",
-        "description": "An error popup when the user has attempted to add an attachment"
-    },
-    "cannotMixImageAdnNonImageAttachments": {
-        "message": "You cannot mix non-image and image attachments in one message.",
-        "description": "An error popup when the user has attempted to add an attachment"
-    },
-    "maximumAttachments": {
-        "message": "You cannot add any more attachments to this message.",
-        "description": "An error popup when the user has attempted to add an attachment"
-    },
-    "fileSizeWarning": {
-        "message": "متاسفانه حجم فایل انتخاب شده از حداکثر طول پیام بیشتر است.",
-        "description": ""
-    },
-    "unableToLoadAttachment": {
-        "message": "ناتوانی در بارگذاری پیوست انتخابی.",
-        "description": ""
-    },
-    "disconnected": {
-        "message": "ارتباط قطع شد",
-        "description": "Displayed when the desktop client cannot connect to the server."
-    },
-    "connecting": {
-        "message": "در حال اتصال",
-        "description": "Displayed when the desktop client is currently connecting to the server."
-    },
-    "offline": {
-        "message": "آفلاین",
-        "description": "Displayed when the desktop client has no network connection."
-    },
-    "checkNetworkConnection": {
-        "message": "ارتباط شبکه خود را چک کنید.",
-        "description": "Obvious instructions for when a user's computer loses its network connection"
-    },
-    "attemptingReconnection": {
-        "message": "Attempting reconnect in $reconnect_duration_in_seconds$ seconds",
-        "description": "",
-        "placeholders": {
-            "reconnect_duration_in_seconds": {
-                "content": "$1",
-                "example": "10"
-            }
-        }
-    },
-    "submitDebugLog": {
-        "message": "گزارش خطاء",
-        "description": "Menu item and header text for debug log modal (sentence case)"
-    },
-    "debugLog": {
-        "message": "گزارش خطا",
-        "description": "View menu item to open the debug log (title case)"
-    },
-    "goToReleaseNotes": {
-        "message": "رفتن به یادداشت های ریلیز",
-        "description": ""
-    },
-    "goToForums": {
-        "message": "رفتن به انجمن ها",
-        "description": "Item under the Help menu, takes you to the forums"
-    },
-    "goToSupportPage": {
-        "message": "رفتن به صفحه پشتیبانی",
-        "description": "Item under the Help menu, takes you to the support page"
-    },
-    "menuReportIssue": {
-        "message": "گزارش مشکل",
-        "description": "Item under the Help menu, takes you to GitHub new issue form (title case)"
-    },
-    "signalDesktopPreferences": {
-        "message": "ترجیحات OfficeApp Desktop",
-        "description": "Title of the window that pops up with OfficeApp Desktop preferences in it"
-    },
-    "aboutSignalDesktop": {
-        "message": "درباره OfficeApp Desktop",
-        "description": "Item under the Help menu, which opens a small about window"
-    },
-    "speech": {
-        "message": "صحبت",
-        "description": "Item under the Edit menu, with 'start/stop speaking' items below it"
-    },
-    "show": {
-        "message": "نمایش",
-        "description": "Command under Window menu, to show the window"
-    },
-    "hide": {
-        "message": "مخفی سازی",
-        "description": "Command in the tray icon menu, to hide the window"
-    },
-    "quit": {
-        "message": "خروج",
-        "description": "Command in the tray icon menu, to quit the application"
-    },
-    "signalDesktop": {
-        "message": "OfficeApp Desktop",
-        "description": "Tooltip for the tray icon"
-    },
-    "search": {
-        "message": "جستجو",
-        "description": "Placeholder text in the search input"
-    },
-    "noSearchResults": {
-        "message": "No results for \"$searchTerm$\"",
-        "description": "Shown in the search left pane when no results were found",
-        "placeholders": {
-            "searchTerm": {
-                "content": "$1",
-                "example": "dog"
-            }
-        }
-    },
-    "conversationsHeader": {
-        "message": "مکالمه ها",
-        "description": "Shown to separate the types of search results"
-    },
-    "contactsHeader": {
-        "message": "مخاطبین",
-        "description": "Shown to separate the types of search results"
-    },
-    "messagesHeader": {
-        "message": "پیام ها",
-        "description": "Shown to separate the types of search results"
-    },
-    "welcomeToSignal": {
-        "message": "به OfficeApp خوش‌آمدید",
-        "description": ""
-    },
-    "selectAContact": {
-        "message": "برای شروع چت یک مخاطب یا گروه را انتخاب کنید.",
-        "description": ""
-    },
-    "typingAlt": {
-        "message": "در حال تایپ انیمیشن برای این مکالمه",
-        "description": "Used as the 'title' attibute for the typing animation"
-    },
-    "contactAvatarAlt": {
-        "message": "آواتار متعلق به مخاطب $name$",
-        "description": "Used in the alt tag for the image avatar of a contact",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "John"
-            }
-        }
-    },
-    "sendMessageToContact": {
-        "message": "فرستادن پیام",
-        "description": "Shown when you are sent a contact and that contact has a signal account"
-    },
-    "home": {
-        "message": "خانه",
-        "description": "Shown on contact detail screen as a label for an address/phone/email"
-    },
-    "work": {
-        "message": "کار",
-        "description": "Shown on contact detail screen as a label for an address/phone/email"
-    },
-    "mobile": {
-        "message": "موبایل",
-        "description": "Shown on contact detail screen as a label for aa phone or email"
+    "editMenuUndo": {
+        "message": "لغو",
+        "description": "Edit menu command to remove recently-typed text"
     },
     "email": {
         "message": "ایمیل",
         "description": "Generic label shown if contact email has custom type but no label"
     },
-    "phone": {
-        "message": "تلفن",
-        "description": "Generic label shown if contact phone has custom type but no label"
-    },
-    "address": {
-        "message": "آدرس",
-        "description": "Generic label shown if contact address has custom type but no label"
-    },
-    "poBox": {
-        "message": "صندوق پست",
-        "description": "When rendering an address, used to provide context to a post office box"
-    },
-    "downloading": {
-        "message": "در حال دانلود",
-        "description": "Shown in the message bubble while a long message attachment is being downloaded"
-    },
-    "downloadAttachment": {
-        "message": "دانلود ضمیمه",
-        "description": "Shown in a message's triple-dot menu if there isn't room for a dedicated download button"
-    },
-    "replyToMessage": {
-        "message": "پاسخ به پیام",
-        "description": "Shown in triple-dot menu next to message to allow user to start crafting a message with a quotation"
-    },
-    "originalMessageNotFound": {
-        "message": "پیام اصلی پیدا نشد",
-        "description": "Shown in quote if reference message was not found as message was initially downloaded and processed"
-    },
-    "originalMessageNotAvailable": {
-        "message": "پیام اصلی دیگر در دسترس نیست",
-        "description": "Shown in toast if user clicks on quote that references message no longer in database"
-    },
-    "messageFoundButNotLoaded": {
-        "message": "پیام اصلی پیدا شد، اما بارگذاری نشد. برای بارگذاری به سمت بالا حرکت کنید",
-        "description": "Shown in toast if user clicks on quote references messages not loaded in view, but in database"
-    },
-    "voiceNoteMustBeOnlyAttachment": {
-        "message": "A voice note must be the only attachment included in a message.",
-        "description": "Shown in toast if tries to record a voice note with any staged attachments"
-    },
-    "you": {
-        "message": "شما",
-        "description": "In Android theme, shown in quote if you or someone else replies to you"
-    },
-    "replyingTo": {
-        "message": "پاسخ به $name$",
-        "description": "Shown in iOS theme when you or someone quotes to a message which is not from you",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "John"
-            }
-        }
-    },
-    "audioPermissionNeeded": {
-        "message": "برای فرستادن پیام های صوتی، به OfficeApp Desktop اجازه دسترسی به میکروفون خود را بدهید.",
-        "description": "Shown if the user attempts to send an audio message without audio permssions turned on"
-    },
-    "allowAccess": {
-        "message": "اجازه دسترسی بدهید",
-        "description": "Button shown in popup asking to enable microphon/video permissions to send audio messages"
-    },
-    "showSettings": {
-        "message": "نمایش تنظیمات",
-        "description": "A button shown in dialog requesting the user to turn on audio permissions"
-    },
-    "audio": {
-        "message": "صوت",
-        "description": "Shown in a quotation of a message containing an audio attachment if no text was originally provided with that attachment"
-    },
-    "video": {
-        "message": "ویدیو",
-        "description": "Shown in a quotation of a message containing a video if no text was originally provided with that video"
-    },
-    "photo": {
-        "message": "تصویر",
-        "description": "Shown in a quotation of a message containing a photo if no text was originally provided with that image"
-    },
-    "cannotUpdate": {
-        "message": "Cannot Update",
-        "description": "Shown as the title of our update error dialogs on windows"
-    },
-    "cannotUpdateDetail": {
-        "message": "OfficeApp Desktop failed to update, but there is a new version available. Please go to https://signal.org/download and install the new version manually, then either contact support or file a bug about this problem.",
-        "description": "Shown if a general error happened while trying to install update package"
-    },
-    "readOnlyVolume": {
-        "message": "OfficeApp Desktop is likely in a macOS quarantine, and will not be able to auto-update. Please try moving OfficeApp.app to /Applications with Finder.",
-        "description": "Shown on MacOS if running on a read-only volume and we cannot update"
-    },
-    "ok": {
-        "message": "باشه",
-        "description": ""
-    },
-    "cancel": {
-        "message": "انصراف",
-        "description": ""
-    },
-    "failedToSend": {
-        "message": "ارسال به برخی مخاطبین ناموفق بود. اتصال شبکه‌ی خود را بررسی کنید.",
-        "description": ""
-    },
     "error": {
         "message": "خطا",
         "description": ""
     },
-    "messageDetail": {
-        "message": "جزئیات پیام",
-        "description": ""
+    "eulaSubTitle": {
+        "message": "To continue, read and accept the terms and conditions",
+        "description": "Subtitle for EULA"
     },
-    "delete": {
-        "message": "پاک کن",
-        "description": ""
+    "eulaTitle": {
+        "message": "End-User License Agreement",
+        "description": "Title for EULA"
     },
-    "deleteWarning": {
-        "message": "آیا مطمئن هستید؟ کلیک روی 'حذف' این پیام را برای همیشه از روی این دستگاه حذف خواهد کرد.",
-        "description": ""
+    "expiredWarning": {
+        "message": "این نسخه‌ی OfficeApp قدیمی است. برای ارسال پیام لطفا آن را به آخرین نسخه ارتقاء دهید.",
+        "description": "Warning notification that this version of the app has expired"
     },
-    "deleteThisMessage": {
-        "message": "این پیام را حذف کن",
-        "description": ""
+    "extraInfoPhones": {
+        "message": "Landesvorwahl auswählen",
+        "description": "Landesvorwahl auswählen tittle"
     },
-    "from": {
-        "message": "از",
-        "description": "Label for the sender of a message"
+    "extraInfoPhonesModal": {
+        "message": "Einrichtung neues OfA-Office",
+        "description": "Einrichtung neues OfA-Office tittle"
     },
-    "to": {
-        "message": "to",
-        "description": "Label for the receiver of a message"
-    },
-    "sent": {
-        "message": "ارسال شد",
-        "description": "Label for the time a message was sent"
-    },
-    "received": {
-        "message": "دریافت شد",
-        "description": "Label for the time a message was received"
-    },
-    "sendMessage": {
-        "message": "ارسال پیام",
-        "description": "Placeholder text in the message entry field"
-    },
-    "groupMembers": {
-        "message": "اعضای گروه",
-        "description": ""
-    },
-    "showMembers": {
-        "message": "نمایش اعضا",
-        "description": ""
-    },
-    "resetSession": {
-        "message": "ایجاد جلسه‌ی امن جدید",
-        "description": "This is a menu item for resetting the session, using the imperative case, as in a command."
-    },
-    "showSafetyNumber": {
-        "message": "دیدن شماره امنیتی",
-        "description": ""
-    },
-    "viewAllMedia": {
-        "message": "دیدن تمام مدیا",
-        "description": "This is a menu item for viewing all media (images + video) in a conversation, using the imperative case, as in a command."
-    },
-    "verifyHelp": {
-        "message": "اگر تمایل به تائید امنیت رمزنگاری نقطه-به-نقطه با $name$ هستید، شماره‌ بالا را با شماره نمایش‌یافته در دستگاه مخاطب مقایسه کنید.",
-        "description": "",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "John"
-            }
-        }
-    },
-    "theirIdentityUnknown": {
-        "message": "شما هنوز هیچ پیامی با این مخاطب تبادل نکرده‌اید. شماره‌ی امنیتی پس از ارسال و یا دریافت اولین پیام در دسترس خواهد بود.",
-        "description": ""
-    },
-    "moreInfo": {
-        "message": "اطلاعات بیشتر...",
-        "description": "Shown on the drop-down menu for an individual message, takes you to message detail screen"
-    },
-    "retrySend": {
-        "message": "ارسال دوباره",
-        "description": "Shown on the drop-down menu for an indinvidaul message, but only if it is an outgoing message that failed to send"
-    },
-    "deleteMessage": {
-        "message": "حذف پیام",
-        "description": "Shown on the drop-down menu for an individual message, deletes single message"
-    },
-    "deleteMessages": {
-        "message": "حذف پیام‌ها",
-        "description": "Menu item for deleting messages, title case."
-    },
-    "deleteConversationConfirmation": {
-        "message": "آیا می‌خواهید این گفتگو را برای همیشه حذف کنید؟",
-        "description": "Confirmation dialog text that asks the user if they really wish to delete the conversation. Answer buttons use the strings 'ok' and 'cancel'. The deletion is permanent, i.e. it cannot be undone."
-    },
-    "sessionEnded": {
-        "message": "جلسه‌ی امن از نو ایجاد شد",
-        "description": "This is a past tense, informational message. In other words, your secure session has been reset."
-    },
-    "quoteThumbnailAlt": {
-        "message": "تامبنیل تصویر از پیام نقل قول شده",
-        "description": "Used in alt tag of thumbnail images inside of an embedded message quote"
-    },
-    "imageAttachmentAlt": {
-        "message": "تصویر پیوست شده به پیام",
-        "description": "Used in alt tag of image attachment"
-    },
-    "videoAttachmentAlt": {
-        "message": "اسکرین شات ویدیو پیوست شده به پیام",
-        "description": "Used in alt tag of video attachment preview"
-    },
-    "lightboxImageAlt": {
-        "message": "تصویر در مکالمه فرستاده شد",
-        "description": "Used in the alt tag for the image shown in a full-screen lightbox view"
-    },
-    "imageCaptionIconAlt": {
-        "message": "آیکون نشان می‌دهد که این تصویر دارای یک عنوان است",
-        "description": "Used for the icon layered on top of an image in message bubbles"
-    },
-    "addACaption": {
-        "message": "یک عنوان اضافه کنید...",
-        "description": ""
-    },
-    "save": {
-        "message": "ذخیره",
+    "failedToSend": {
+        "message": "ارسال به برخی مخاطبین ناموفق بود. اتصال شبکه‌ی خود را بررسی کنید.",
         "description": ""
     },
     "fileIconAlt": {
         "message": "آیکون فایل",
         "description": "Used in the media gallery documents tab to visually represent a file"
     },
-    "installWelcome": {
-        "message": "به OfficeApp Desktop خوش‌آمدید",
-        "description": "Welcome title on the install page"
-    },
-    "installTagline": {
-        "message": "حفظ حریم خصوصی ممکن است. OfficeApp این کار را راحت‌تر میکند.",
-        "description": "Tagline displayed under 'installWelcome' string on the install page"
-    },
-    "linkYourPhone": {
-        "message": "موبایل خود را به OfficeApp Desktop لینک کنید",
-        "description": "Shown on the front page when the application first starst, above the QR code"
-    },
-    "signalSettings": {
-        "message": "تنظیمات OfficeApp",
-        "description": "Used in the guidance to help people find the 'link new device' area of their OfficeApp mobile app"
-    },
-    "linkedDevices": {
-        "message": "دستگاه های متصل شده",
-        "description": "Used in the guidance to help people find the 'link new device' area of their OfficeApp mobile app"
-    },
-    "plusButton": {
-        "message": "دکمه '+'",
-        "description": "The button used in OfficeApp Android to add a new linked device"
-    },
-    "linkNewDevice": {
-        "message": "لینک کردن دستگاه جدید",
-        "description": "The menu option shown in OfficeApp iOS to add a new linked device"
-    },
-    "deviceName": {
-        "message": "نام دستگاه",
-        "description": "The label in settings panel shown for the user-provided name for this desktop instance"
-    },
-    "chooseDeviceName": {
-        "message": "نام این دستگاه را انتخاب کنید",
-        "description": "The header shown on the 'choose device name' screen in the device linking process"
+    "fileSizeWarning": {
+        "message": "متاسفانه حجم فایل انتخاب شده از حداکثر طول پیام بیشتر است.",
+        "description": ""
     },
     "finishLinkingPhone": {
         "message": "پایان لینک کردن گوشی",
         "description": "The text on the button to finish the linking process, after choosing the device name"
     },
-    "initialSync": {
-        "message": "هماهنگ سازی مخاطبین و گروه ها",
-        "description": "Shown during initial link while contacts and groups are being pulled from mobile device"
-    },
-    "installConnectionFailed": {
-        "message": "برقراری ارتباط با سرور ناموفق بود.",
-        "description": "Displayed when we can't connect to the server."
-    },
-    "installTooManyDevices": {
-        "message": "متاسفانه دستگاه‌های زیادی را به حسابتان متصل کرده‌اید. تعدادی را حذف کنید.",
-        "description": ""
-    },
-    "settings": {
-        "message": "تنظیمات",
-        "description": "Menu item and header for global settings"
-    },
-    "theme": {
-        "message": "تم",
-        "description": "Header for theme settings"
-    },
-    "permissions": {
-        "message": "دسترسی ها",
-        "description": "Header for permissions section of settings"
-    },
-    "mediaPermissionsDescription": {
-        "message": "اجازه دسترسی به دوربین و میکروفون",
-        "description": "Description of the media permission description"
+    "from": {
+        "message": "از",
+        "description": "Label for the sender of a message"
     },
     "general": {
         "message": "عمومی",
         "description": "Header for general options on the settings screen"
     },
-    "spellCheckDescription": {
-        "message": "فعال سازی کنترل املاء متن وارد شده در باکس پیام نویسی",
-        "description": "Description of the media permission description"
+    "goToForums": {
+        "message": "رفتن به انجمن ها",
+        "description": "Item under the Help menu, takes you to the forums"
     },
-    "clearDataHeader": {
-        "message": "پاک سازی داده",
-        "description": "Header in the settings dialog for the section dealing with data deletion"
+    "goToReleaseNotes": {
+        "message": "رفتن به یادداشت های ریلیز",
+        "description": ""
     },
-    "clearDataExplanation": {
-        "message": "این باعث می شود تمام داده های در برنامه پاک شوند، تمام پیام ها و اطلاعات ذخیره شده حساب کاربری از بین خواهند رفت.",
-        "description": "Text describing what the clear data button will do."
+    "goToSupportPage": {
+        "message": "رفتن به صفحه پشتیبانی",
+        "description": "Item under the Help menu, takes you to the support page"
     },
-    "clearDataButton": {
-        "message": "پاک کردن داده",
-        "description": "Button in the settings dialog starting process to delete all data"
+    "gotIt": {
+        "message": "فهمیدم!",
+        "description": "Label for a button that dismisses a dialog. The user clicks it to confirm that they understand the message in the dialog."
     },
-    "deleteAllDataHeader": {
-        "message": "پاک کردن تمام داده ها؟",
-        "description": "Header of the full-screen delete data confirmation screen"
+    "groupMembers": {
+        "message": "اعضای گروه",
+        "description": ""
     },
-    "deleteAllDataBody": {
-        "message": "شما در حال پاک کردن تمام اطلاعات ذخیره شده این حساب کاربری میباشید، این اطلاعات شامل تمام مخاطبین و پیام ها می باشد. شما همیشه میتوانید با موبایل خود آن را لینک کنید، اما این پیام های پاک شده را برنمی گرداند.",
-        "description": "Text describing what exactly will happen if the user clicks the button to delete all data"
+    "hide": {
+        "message": "مخفی سازی",
+        "description": "Command in the tray icon menu, to hide the window"
     },
-    "deleteAllDataButton": {
-        "message": "پاک کردن تمام داده ها",
-        "description": "Text of the button that deletes all data"
+    "hideMenuBar": {
+        "message": "پنهان کردن نوار منو",
+        "description": "Label text for menu bar visibility setting"
     },
-    "deleteAllDataProgress": {
-        "message": "قطع اتصال و پاک کردن تمام داده ها",
-        "description": "Message shown to user when app is disconnected and data deleted"
-    },
-    "notifications": {
-        "message": "آگاه‌سازی‌ها",
-        "description": "Header for notification settings"
-    },
-    "notificationSettingsDialog": {
-        "message": "هنگام دریافت پیام, این جزئیات را نمایش بده:",
-        "description": "Explain the purpose of the notification settings"
-    },
-    "disableNotifications": {
-        "message": "آگاه‌سازی‌ها غیرفعال باشند",
-        "description": "Label for disabling notifications"
-    },
-    "nameAndMessage": {
-        "message": "هم نام و هم متن پیام",
-        "description": "Label for setting notifications to display name and message text"
-    },
-    "noNameOrMessage": {
-        "message": "نه نام و نه متن پیام",
-        "description": "Label for setting notifications to display no name and no message text"
-    },
-    "nameOnly": {
-        "message": "فقط نام فرستنده",
-        "description": "Label for setting notifications to display sender name only"
-    },
-    "newMessage": {
-        "message": "پیام جدید",
-        "description": "Displayed in notifications for only 1 message"
-    },
-    "newMessages": {
-        "message": "پیام‌های جدید",
-        "description": "Displayed in notifications for multiple messages"
-    },
-    "notificationMostRecentFrom": {
-        "message": "جدید ترین از:",
-        "description": "Displayed in notifications when setting is 'name only' and more than one message is waiting"
-    },
-    "notificationFrom": {
-        "message": "از:",
-        "description": "Displayed in notifications when setting is 'name only' and one message is waiting"
-    },
-    "notificationMostRecent": {
-        "message": "جدید ترین:",
-        "description": "Displayed in notifications when setting is 'name and message' and more than one message is waiting"
-    },
-    "sendFailed": {
-        "message": "ارسال ناموفق بود",
-        "description": "Shown on outgoing message if it fails to send"
-    },
-    "showMore": {
-        "message": "جزئیات",
-        "description": "Displays the details of a key change"
-    },
-    "showLess": {
-        "message": "جزئیات را پنهان کن",
-        "description": "Hides the details of a key change"
-    },
-    "learnMore": {
-        "message": "درباره‌ی شماره‌ی امنیتی بیشتر بدانید",
-        "description": "Text that links to a support article on verifying safety numbers"
-    },
-    "expiredWarning": {
-        "message": "این نسخه‌ی OfficeApp قدیمی است. برای ارسال پیام لطفا آن را به آخرین نسخه ارتقاء دهید.",
-        "description": "Warning notification that this version of the app has expired"
-    },
-    "upgrade": {
-        "message": "ارتقاء",
-        "description": "Label text for button to upgrade the app to the latest version"
-    },
-    "mediaMessage": {
-        "message": "پیام رسانه‌ای",
-        "description": "Description of a message that has an attachment and no text, displayed in the conversation list as a preview."
-    },
-    "unregisteredUser": {
-        "message": "این شماره ثبت نشده است!",
-        "description": "Error message displayed when sending to an unregistered user."
-    },
-    "sync": {
-        "message": "مخاطب‌ها",
-        "description": "Label for contact and group sync settings"
-    },
-    "syncExplanation": {
-        "message": "واردسازی لیست تمام گروه‌ها و مخاطب‌های OfficeApp از گوشی موبایل شما.",
-        "description": "Explanatory text for sync settings"
-    },
-    "lastSynced": {
-        "message": "آخرین واردسازی ",
-        "description": "Label for date and time of last sync operation"
-    },
-    "syncNow": {
-        "message": "انجام واردسازی",
-        "description": "Label for a button that syncs contacts and groups from your phone"
-    },
-    "syncing": {
-        "message": "در حال واردسازی...",
-        "description": "Label for a disabled sync button while sync is in progress."
-    },
-    "syncFailed": {
-        "message": "واردسازی با خطا مواجه شد! لطفا مطمئن شوید که کامپیوتر و موبایل شما به اینترنت متصل هستند.",
-        "description": "Informational text displayed if a sync operation times out."
-    },
-    "timestamp_s": {
-        "message": "همین حالا",
-        "description": "Brief timestamp for messages sent less than a minute ago. Displayed in the conversation list and message bubble."
-    },
-    "timestamp_m": {
-        "message": "1 دقیقه",
-        "description": "Brief timestamp for messages sent about one minute ago. Displayed in the conversation list and message bubble."
-    },
-    "timestamp_h": {
-        "message": "1 ساعت",
-        "description": "Brief timestamp for messages sent about one hour ago. Displayed in the conversation list and message bubble."
-    },
-    "hoursAgoShort": {
-        "message": "$hours$ساعت",
-        "description": "Even further contracted form of 'X hours ago' which works both for singular and plural, used in the left pane",
-        "placeholders": {
-            "hours": {
-                "content": "$1",
-                "example": "2"
-            }
-        }
+    "home": {
+        "message": "خانه",
+        "description": "Shown on contact detail screen as a label for an address/phone/email"
     },
     "hoursAgo": {
         "message": "$hours$ ساعت پیش",
@@ -1183,299 +791,117 @@
             }
         }
     },
-    "minutesAgoShort": {
-        "message": "$minutes$ دقیقه",
-        "description": "Even further contracted form of 'X minutes ago' which works both for singular and plural, used in the left pane",
+    "hoursAgoShort": {
+        "message": "$hours$ساعت",
+        "description": "Even further contracted form of 'X hours ago' which works both for singular and plural, used in the left pane",
         "placeholders": {
-            "minutes": {
+            "hours": {
                 "content": "$1",
-                "example": "10"
+                "example": "2"
             }
         }
     },
-    "minutesAgo": {
-        "message": "$minutes$دقیقه پیش",
-        "description": "Contracted form of 'X minutes ago' which works both for singular and plural",
-        "placeholders": {
-            "minutes": {
-                "content": "$1",
-                "example": "10"
-            }
-        }
+    "identityChanged": {
+        "message": "شماره‌ی امنیتی این مخاطب تغییر کرده‌ است. این می‌تواند به این معنی باشد که کسی در حال نفوذ به ارتباط شما است و یا اینکه مخاطب شما OfficeApp را از نو نصب کرده و حالا شماره‌ی امنیتی جدیدی دارد.",
+        "description": ""
     },
-    "justNow": {
-        "message": "اکنون",
-        "description": "Shown if a message is very recent, less than 60 seconds old"
-    },
-    "timestampFormat_M": {
-        "message": "D MMM",
-        "description": "Timestamp format string for displaying month and day (but not the year) of a date within the current year, ex: use 'MMM D' for 'Aug 8', or 'D MMM' for '8 Aug'."
-    },
-    "unblockToSend": {
-        "message": "برای ارسال پیام،‌ ابتدا این مخاطب را از مسدود بودن درآورید!",
-        "description": "Brief message shown when trying to message a blocked number"
-    },
-    "unblockGroupToSend": {
-        "message": "برای ارسال پیام در گروه، آن را رفع انسداد کنید.",
-        "description": "Brief message shown when trying to message a blocked group"
-    },
-    "youChangedTheTimer": {
-        "message": "شما پیام تایمر پیام نابود شونده را روی $time$ تنظیم کردید",
-        "description": "Message displayed when you change the message expiration timer in a conversation.",
-        "placeholders": {
-            "time": {
-                "content": "$1",
-                "example": "10m"
-            }
-        }
-    },
-    "timerSetOnSync": {
-        "message": "تایمر پیام نابود شونده به $time$ آپدیت شد",
-        "description": "Message displayed when timer is set on initial link of desktop device.",
-        "placeholders": {
-            "time": {
-                "content": "$1",
-                "example": "10m"
-            }
-        }
-    },
-    "theyChangedTheTimer": {
-        "message": "$name$ تایمر پیام نابود شونده را روی $time$ تنظیم کرد",
-        "description": "Message displayed when someone else changes the message expiration timer in a conversation.",
+    "identityKeyErrorOnSend": {
+        "message": "شماره امن شما با $name$ تغییر کرده است. این به این معناست که شخصی در تلاش برای رهگیری ارتباط شماست یا اینکه $name$مجددا OfficeApp را نصب کرده است. بهتر است شماره امن خود با این مخاطب را تایید کنید.",
+        "description": "Shown when user clicks on a failed recipient in the message detail view after an identity key change",
         "placeholders": {
             "name": {
                 "content": "$1",
                 "example": "Bob"
-            },
-            "time": {
-                "content": "$2",
-                "example": "10m"
             }
         }
     },
-    "timerOption_0_seconds": {
-        "message": "خاموش",
-        "description": "Label for option to turn off message expiration in the timer menu"
+    "imageAttachmentAlt": {
+        "message": "تصویر پیوست شده به پیام",
+        "description": "Used in alt tag of image attachment"
     },
-    "timerOption_5_seconds": {
-        "message": "5 ثانیه",
-        "description": "Label for a selectable option in the message expiration timer menu"
+    "imageCaptionIconAlt": {
+        "message": "آیکون نشان می‌دهد که این تصویر دارای یک عنوان است",
+        "description": "Used for the icon layered on top of an image in message bubbles"
     },
-    "timerOption_10_seconds": {
-        "message": "10 ثانیه",
-        "description": "Label for a selectable option in the message expiration timer menu"
+    "imageFailedToLoad": {
+        "message": "Image failed to load",
+        "description": "When an image attachment is missing, this message is shown"
     },
-    "timerOption_30_seconds": {
-        "message": "30 ثانیه",
-        "description": "Label for a selectable option in the message expiration timer menu"
+    "importAgain": {
+        "message": "پوشه را انتخاب کنید و دوباره امتحان کنید",
+        "description": "Button shown if the user runs into an error during import, allowing them to start over"
     },
-    "timerOption_1_minute": {
-        "message": "1 دقیقه",
-        "description": "Label for a selectable option in the message expiration timer menu"
+    "importChooserTitle": {
+        "message": "انتخاب پوشه اطلاعات پشتیبان‌گیری",
+        "description": "Title of the popup window used to select data previously exported"
     },
-    "timerOption_5_minutes": {
-        "message": "5 دقیقه",
-        "description": "Label for a selectable option in the message expiration timer menu"
+    "importCompleteHeader": {
+        "message": "موفقیت!",
+        "description": "Header shown on the screen at the end of a successful import process"
     },
-    "timerOption_30_minutes": {
-        "message": "30 دقیقه",
-        "description": "Label for a selectable option in the message expiration timer menu"
+    "importCompleteLinkButton": {
+        "message": "لینک کردن این دستگاه به موبایل",
+        "description": "Button shown at end of successful 'light' import process, so the standard linking process still needs to happen"
     },
-    "timerOption_1_hour": {
-        "message": "1 ساعت",
-        "description": "Label for a selectable option in the message expiration timer menu"
+    "importCompleteStartButton": {
+        "message": "شروع به استفاده از OfficeApp Desktop",
+        "description": "Button shown at end of successful import process, nothing left but a restart"
     },
-    "timerOption_6_hours": {
-        "message": "6 ساعت",
-        "description": "Label for a selectable option in the message expiration timer menu"
+    "importErrorFirst": {
+        "message": "مطمئن شوید که دایرکتوری صحیح را که شامل داده های ذخیره شده OfficeApp شما می باشد را انتخاب کرده اید. نام آن باید با 'OfficeApp Export' آغاز شده باشد. شما همچنین میتوانید یک کپی جدید از داده های خود را از برنامه کروم ذخیره کنید.",
+        "description": "Message shown if the import went wrong; first paragraph"
     },
-    "timerOption_12_hours": {
-        "message": "12 ساعت",
-        "description": "Label for a selectable option in the message expiration timer menu"
+    "importErrorHeader": {
+        "message": "خطایی رخ داد!",
+        "description": "Header of the error screen after a failed import"
     },
-    "timerOption_1_day": {
-        "message": "1 روز",
-        "description": "Label for a selectable option in the message expiration timer menu"
+    "importErrorSecond": {
+        "message": "اگر این مراحل برای شما کار نمیکنند، لطفا یک گزارش خطاء (نمایش -> گزارش خطاء)  ثبت کنید تا بتوانیم برای جابجایی به شما کمک کنیم.",
+        "description": "Message shown if the import went wrong; second paragraph"
     },
-    "timerOption_1_week": {
-        "message": "1 هفته",
-        "description": "Label for a selectable option in the message expiration timer menu"
+    "importingHeader": {
+        "message": "در حال بارگذاری مخاطب ها و پیام ها",
+        "description": "Header of screen shown as data is import"
     },
-    "disappearingMessages": {
-        "message": "پیام‌های نابود شونده",
-        "description": "Conversation menu option to enable disappearing messages"
+    "imprint": {
+        "message": "Imprint",
+        "description": "Label for imprint input"
     },
-    "timerOption_0_seconds_abbreviated": {
-        "message": "خاموش",
-        "description": "Short format indicating current timer setting in the conversation list snippet"
+    "incomingError": {
+        "message": "خطا در کنترل پیام دریافتی",
+        "description": ""
     },
-    "timerOption_5_seconds_abbreviated": {
-        "message": "5 ثانیه",
-        "description": "Very short format indicating current timer setting in the conversation header"
+    "initialSync": {
+        "message": "هماهنگ سازی مخاطبین و گروه ها",
+        "description": "Shown during initial link while contacts and groups are being pulled from mobile device"
     },
-    "timerOption_10_seconds_abbreviated": {
-        "message": "10 ثانیه",
-        "description": "Very short format indicating current timer setting in the conversation header"
+    "installConnectionFailed": {
+        "message": "برقراری ارتباط با سرور ناموفق بود.",
+        "description": "Displayed when we can't connect to the server."
     },
-    "timerOption_30_seconds_abbreviated": {
-        "message": "30 ثانیه",
-        "description": "Very short format indicating current timer setting in the conversation header"
+    "installTagline": {
+        "message": "حفظ حریم خصوصی ممکن است. OfficeApp این کار را راحت‌تر میکند.",
+        "description": "Tagline displayed under 'installWelcome' string on the install page"
     },
-    "timerOption_1_minute_abbreviated": {
-        "message": "1 دقیقه",
-        "description": "Very short format indicating current timer setting in the conversation header"
+    "installTooManyDevices": {
+        "message": "متاسفانه دستگاه‌های زیادی را به حسابتان متصل کرده‌اید. تعدادی را حذف کنید.",
+        "description": ""
     },
-    "timerOption_5_minutes_abbreviated": {
-        "message": "5 دقیقه",
-        "description": "Very short format indicating current timer setting in the conversation header"
-    },
-    "timerOption_30_minutes_abbreviated": {
-        "message": "30 دقیقه",
-        "description": "Very short format indicating current timer setting in the conversation header"
-    },
-    "timerOption_1_hour_abbreviated": {
-        "message": "1 ساعت",
-        "description": "Very short format indicating current timer setting in the conversation header"
-    },
-    "timerOption_6_hours_abbreviated": {
-        "message": "6 ساعت",
-        "description": "Very short format indicating current timer setting in the conversation header"
-    },
-    "timerOption_12_hours_abbreviated": {
-        "message": "12 ساعت",
-        "description": "Very short format indicating current timer setting in the conversation header"
-    },
-    "timerOption_1_day_abbreviated": {
-        "message": "1 روز",
-        "description": "Very short format indicating current timer setting in the conversation header"
-    },
-    "timerOption_1_week_abbreviated": {
-        "message": "1 هفته",
-        "description": "Very short format indicating current timer setting in the conversation header"
-    },
-    "disappearingMessagesDisabled": {
-        "message": "پیام های نابود شونده غیر فعال شدند",
-        "description": "Displayed in the left pane when the timer is turned off"
-    },
-    "disabledDisappearingMessages": {
-        "message": "$name$ پیام های نابود شونده را غیر فعال کرد",
-        "description": "Displayed in the conversation list when the timer is turned off",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "John"
-            }
-        }
-    },
-    "youDisabledDisappearingMessages": {
-        "message": "شما پیام های نابود شونده را غیر فعال کردید",
-        "description": "Displayed in the conversation list when the timer is turned off"
-    },
-    "timerSetTo": {
-        "message": "تایمر روی $time$ تنظیم شد",
-        "description": "Displayed in the conversation list when the timer is updated by some automatic action, or in the left pane",
-        "placeholders": {
-            "time": {
-                "content": "$1",
-                "example": "1w"
-            }
-        }
-    },
-    "audioNotificationDescription": {
-        "message": "Play audio notification",
-        "description": "Description for audio notification setting"
-    },
-    "safetyNumberChanged": {
-        "message": "شماره امنیتی تغییر یافته است",
-        "description": "A notification shown in the conversation when a contact reinstalls"
-    },
-    "safetyNumberChangedGroup": {
-        "message": "شماره امنیتی $name$ تغییر کرده است",
-        "description": "A notification shown in a group conversation when a contact reinstalls, showing the contact name",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "John"
-            }
-        }
-    },
-    "verifyNewNumber": {
-        "message": "تایید شماره امنیتی",
-        "description": "Label on button included with safety number change notification in the conversation"
-    },
-    "yourSafetyNumberWith": {
-        "message": "شماره امنیتی شما با $name$:",
-        "description": "Heading for safety number view",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "John"
-            }
-        }
-    },
-    "themeLight": {
-        "message": "روشن",
-        "description": "Label text for light theme (normal)"
-    },
-    "themeDark": {
-        "message": "تاریک",
-        "description": "Label text for dark theme"
-    },
-    "noteToSelf": {
-        "message": "Note to Self",
-        "description": "Name for the conversation with your own phone number"
-    },
-    "hideMenuBar": {
-        "message": "پنهان کردن نوار منو",
-        "description": "Label text for menu bar visibility setting"
-    },
-    "startConversation": {
-        "message": "Start new conversation…",
-        "description": "Label underneath number a user enters that is not an existing contact"
-    },
-    "newPhoneNumber": {
-        "message": "Enter a phone number to add a contact.",
-        "description": "Placeholder for adding a new number to a contact"
+    "installWelcome": {
+        "message": "به OfficeApp Desktop خوش‌آمدید",
+        "description": "Welcome title on the install page"
     },
     "invalidNumberError": {
         "message": "شماره نامعتبر",
         "description": "When a person inputs a number that is invalid"
     },
-    "unlinkedWarning": {
-        "message": "برای ادامه‌ی استفاده از ‌OfficeApp Desktop، دوباره این برنامه را به OfficeApp موبایل خود متصل نمایید.",
-        "description": ""
+    "invalidXML": {
+        "message": "Invalid XML file",
+        "description": "Text for invalid XML file"
     },
-    "unlinked": {
-        "message": "Unlinked",
-        "description": ""
-    },
-    "relink": {
-        "message": "Relink",
-        "description": ""
-    },
-    "autoUpdateNewVersionTitle": {
-        "message": "به‌روزرسانی OfficeApp در دسترس است",
-        "description": ""
-    },
-    "autoUpdateNewVersionMessage": {
-        "message": "نسخه جدیدی از OfficeApp در دسترس است.",
-        "description": ""
-    },
-    "autoUpdateNewVersionInstructions": {
-        "message": "برای اعمال آپدیت ها OfficeApp را ری استارت کنید.",
-        "description": ""
-    },
-    "autoUpdateRestartButtonLabel": {
-        "message": "راه اندازی مجدد OfficeApp",
-        "description": ""
-    },
-    "autoUpdateLaterButtonLabel": {
-        "message": "بعدا",
-        "description": ""
-    },
-    "leftTheGroup": {
-        "message": "$name$ گروه را ترک کرد",
-        "description": "Shown in the conversation history when a single person leaves the group",
+    "isNotVerified": {
+        "message": "شما شماره امن خود با $name$را تایید نکرده اید.",
+        "description": "Summary state shown at top of the safety number screen if user has not verified contact.",
         "placeholders": {
             "name": {
                 "content": "$1",
@@ -1483,27 +909,13 @@
             }
         }
     },
-    "multipleLeftTheGroup": {
-        "message": "$name$ گروه را ترک کرد",
-        "description": "Shown in the conversation history when multiple people leave the group",
+    "isVerified": {
+        "message": "کدِ امنیتیِ $name$ تأیید شد.",
+        "description": "Summary state shown at top of the safety number screen if user has verified contact.",
         "placeholders": {
             "name": {
                 "content": "$1",
-                "example": "Alice, Bob"
-            }
-        }
-    },
-    "updatedTheGroup": {
-        "message": "گروه آپدیت شد",
-        "description": "Shown in the conversation history when someone updates the group"
-    },
-    "titleIsNow": {
-        "message": "در حال حاضر عنوان '$name$' می باشد",
-        "description": "Shown in the conversation history when someone changes the title of the group",
-        "placeholders": {
-            "name": {
-                "content": "$1",
-                "example": "Book Club"
+                "example": "Bob"
             }
         }
     },
@@ -1517,151 +929,81 @@
             }
         }
     },
-    "multipleJoinedTheGroup": {
-        "message": "$names$ عضو گروه شد",
-        "description": "Shown in the conversation history when more than one person joins the group",
+    "justNow": {
+        "message": "اکنون",
+        "description": "Shown if a message is very recent, less than 60 seconds old"
+    },
+    "labelChangeLanguage": {
+        "message": "Change Language",
+        "description": "Label for Change Language menu entry"
+    },
+    "labelNo": {
+        "message": "No",
+        "description": "Label for No button"
+    },
+    "labelYes": {
+        "message": "Yes",
+        "description": "Label for Yes button"
+    },
+    "lastSynced": {
+        "message": "آخرین واردسازی ",
+        "description": "Label for date and time of last sync operation"
+    },
+    "learnMore": {
+        "message": "درباره‌ی شماره‌ی امنیتی بیشتر بدانید",
+        "description": "Text that links to a support article on verifying safety numbers"
+    },
+    "leftTheGroup": {
+        "message": "$name$ گروه را ترک کرد",
+        "description": "Shown in the conversation history when a single person leaves the group",
         "placeholders": {
-            "names": {
+            "name": {
                 "content": "$1",
-                "example": "Alice, Bob"
+                "example": "Bob"
             }
         }
     },
-    "privacyPolicy": {
-        "message": "شرایط و سیاست های حفظ حریم خصوصی",
-        "description": "Shown in the about box for the link to https://signal.org/legal"
+    "lightboxImageAlt": {
+        "message": "تصویر در مکالمه فرستاده شد",
+        "description": "Used in the alt tag for the image shown in a full-screen lightbox view"
     },
-    "appTagLine": {
-        "message": "Modern secure communications... TODO",
-        "description": "Tagline of the OfficeApp application"
+    "linkNewDevice": {
+        "message": "لینک کردن دستگاه جدید",
+        "description": "The menu option shown in OfficeApp iOS to add a new linked device"
     },
-    "registerCompany": {
-        "message": "Company registration",
-        "description": "Header for company registration"
+    "linkYourPhone": {
+        "message": "موبایل خود را به OfficeApp Desktop لینک کنید",
+        "description": "Shown on the front page when the application first starst, above the QR code"
     },
-    "registerAdmin": {
-        "message": "Admin registration",
-        "description": "Header for admin registration"
+    "linkedDevices": {
+        "message": "دستگاه های متصل شده",
+        "description": "Used in the guidance to help people find the 'link new device' area of their OfficeApp mobile app"
     },
-    "welcomeCompany": {
-        "message": "Welcome to the OfficeApp. Please register your company here.",
-        "description": "Description for registering company"
+    "loadDataDescription": {
+        "message": "شما پروسه اکسپورت را انجام دادید، مخاطبین ، پیام های شما روی کامپیوتر شما آماده هستند. پوشه ای که شامل داده های  ذخیره شده OfficeApp شما می باشد را انتخاب کنید.",
+        "description": "Introduction to the process of importing messages and contacts from disk"
     },
-    "welcomeAdmin": {
-        "message": "Welcome to the OfficeApp. Please enter your code here.",
-        "description": "Description for registering admin"
+    "loadDataHeader": {
+        "message": "بارگذاری داده هایتان",
+        "description": "Header shown on the first screen in the data import process"
     },
-    "continueButton": {
-        "message": "Continue",
-        "description": "Button label for continuing to next step"
+    "loading": {
+        "message": "در حال بارگذاری...",
+        "description": "Message shown on the loading screen before we've loaded any messages"
     },
-    "signupCode": {
-        "message": "Code",
-        "description": "Label for signup code input"
+    "loadingMessages": {
+        "message": "در حال بارگذاری پیام‌ها. تاکنون $count$ ...",
+        "description": "Message shown on the loading screen when we're catching up on the backlog of messages",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "5"
+            }
+        }
     },
-    "phoneSetupTitle": {
-        "message": "Telefonnummer",
-        "description": "Title for phone setup container"
-    },
-    "phoneSetupSubtitle": {
-        "message": "Bitte geben Sie Ihre Bürotelefonnummer ein. Sie werden angerufen und erhalten einen Verifikationscode. Dabei können Gebühren anfallen.",
-        "description": "Phone setup container subtitle"
-    },
-    "phoneNumber": {
-        "message": "IHRe Bürotelefonnummer",
-        "description": "Title for phone number input"
-    },
-    "verifyCode": {
-        "message": "Verifikationscode",
-        "description": "Title for verification code input"
-    },
-    "countryCode": {
-        "message": "Country code",
-        "description": "Title for country code input"
-    },
-    "verifyPhone": {
-        "message": "Starten",
-        "description": "Label for phone verify button"
-    },
-    "callPhone": {
-        "message": "Anrufen",
-        "description": "Label for phone verify call phone"
-    },
-    "sendSMSInstead": {
-        "message": "Mir Stattdessen eine SMS senden",
-        "description": "Text for requesting SMS instead of call"
-    },
-    "companyDetails": {
-        "message": "Company details",
-        "description": "Title for company details entry"
-    },
-    "taxNumber": {
-        "message": "Tax Number",
-        "description": "Label for tax number input"
-    },
-    "taxID": {
-        "message": "Tax ID",
-        "description": "Label for tax id input"
-    },
-    "companyRegistrationID": {
-        "message": "Commercial Register ID",
-        "description": "Label for commercial register id input"
-    },
-    "imprint": {
-        "message": "Imprint",
-        "description": "Label for imprint input"
-    },
-    "branch": {
-        "message": "Branch",
-        "description": "Label for company branch input"
-    },
-    "companyName": {
-        "message": "Company Name",
-        "description": "Label for company name input"
-    },
-    "userProfile": {
-        "message": "User profile",
-        "description": "Title for user profile setup"
-    },
-    "userName": {
-        "message": "User name",
-        "description": "Label for user name input"
-    },
-    "bankDetails": {
-        "message": "Bank details",
-        "description": "Title for company bank detail input"
-    },
-    "notNow": {
-        "message": "Not now",
-        "description": "Text for skipping actions for now"
-    },
-    "acceptEula": {
-        "message": "Accept EULA",
-        "description": "Text for Accept EULA checkbox"
-    },
-    "eulaTitle": {
-        "message": "End-User License Agreement",
-        "description": "Title for EULA"
-    },
-    "eulaSubTitle": {
-        "message": "To continue, read and accept the terms and conditions",
-        "description": "Subtitle for EULA"
-    },
-    "contactImportTitle": {
-        "message": "Contacts syncronization",
-        "description": "Title for contacts import"
-    },
-    "selectFileToUpload": {
-        "message": "Select file to upload",
-        "description": "Text for file upload input"
-    },
-    "noFileChosen": {
-        "message": "No file chosen",
-        "description": "Text for no file chosen"
-    },
-    "invalidXML": {
-        "message": "Invalid XML file",
-        "description": "Text for invalid XML file"
+    "loadingPreview": {
+        "message": "Loading Preview...",
+        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area"
     },
     "locale.ar": {
         "message": "Arabic",
@@ -1839,24 +1181,1140 @@
         "message": "Chinese - Taiwan",
         "description": "Name for Chinese - Taiwan locale"
     },
-    "changeLanguageTitle": {
-        "message": "Changing language requires restart",
-        "description": "Title for change language requires restart message box"
+    "mainMenuEdit": {
+        "message": "&ویرایش",
+        "description": "The label that is used for the Edit menu in the program main menu. The '&' indicates that the following letter will be used as the keyboard 'shortcut letter' for accessing the menu with the Alt-<letter> combination."
     },
-    "changeLanguageMessage": {
-        "message": "Changing current language requires restarting the application, do you wish to do this now?",
-        "description": "Message for change language require restart message box"
+    "mainMenuFile": {
+        "message": "&فایل",
+        "description": "The label that is used for the File menu in the program main menu. The '&' indicates that the following letter will be used as the keyboard 'shortcut letter' for accessing the menu with the Alt-<letter> combination."
     },
-    "labelYes": {
-        "message": "Yes",
-        "description": "Label for Yes button"
+    "mainMenuHelp": {
+        "message": "&کمک",
+        "description": "The label that is used for the Help menu in the program main menu. The '&' indicates that the following letter will be used as the keyboard 'shortcut letter' for accessing the menu with the Alt-<letter> combination."
     },
-    "labelNo": {
-        "message": "No",
-        "description": "Label for No button"
+    "mainMenuSettings": {
+        "message": "ترجیحات",
+        "description": "The label that is used for the Preferences menu in the program main menu. This should be consistent with the standard naming for ‘Preferences’ on the operating system."
     },
-    "labelChangeLanguage": {
-        "message": "Change Language",
-        "description": "Label for Change Language menu entry"
+    "mainMenuView": {
+        "message": "&نمایش",
+        "description": "The label that is used for the View menu in the program main menu. The '&' indicates that the following letter will be used as the keyboard 'shortcut letter' for accessing the menu with the Alt-<letter> combination."
+    },
+    "mainMenuWindow": {
+        "message": "&پنجره",
+        "description": "The label that is used for the Window menu in the program main menu. The '&' indicates that the following letter will be used as the keyboard 'shortcut letter' for accessing the menu with the Alt-<letter> combination."
+    },
+    "maximumAttachments": {
+        "message": "You cannot add any more attachments to this message.",
+        "description": "An error popup when the user has attempted to add an attachment"
+    },
+    "me": {
+        "message": "من",
+        "description": "The label for yourself when shown in a group member list"
+    },
+    "media": {
+        "message": "مدیا",
+        "description": "Header of the default pane in the media gallery, showing images and videos"
+    },
+    "mediaEmptyState": {
+        "message": "شما در این مکالمه هیچ نوع مدیا ندارید",
+        "description": "Message shown to user in the media gallery when there are no messages with media attachments (images or video)"
+    },
+    "mediaMessage": {
+        "message": "پیام رسانه‌ای",
+        "description": "Description of a message that has an attachment and no text, displayed in the conversation list as a preview."
+    },
+    "mediaPermissionsDescription": {
+        "message": "اجازه دسترسی به دوربین و میکروفون",
+        "description": "Description of the media permission description"
+    },
+    "membersNeedingVerification": {
+        "message": "کد امنیتی این اعضای گروه از آخرین باری که تأییدش کردید تغییر کرده‌است. یکی از اعضای گروه را انتخاب کنید تا کد امنیتی جدیدش را ببینید.",
+        "description": "When there are multiple previously-verified group members with safety number changes, a banner will be shown. The list of contacts with safety number changes is shown, and this text introduces that list."
+    },
+    "menuReportIssue": {
+        "message": "گزارش مشکل",
+        "description": "Item under the Help menu, takes you to GitHub new issue form (title case)"
+    },
+    "menuSetupAsNewDevice": {
+        "message": "برپایی به عنوان یک دستگاه جدید",
+        "description": "When the application is not yet set up, menu option to start up the set up as fresh device"
+    },
+    "menuSetupAsStandalone": {
+        "message": "برپایی به عنوان یک دستگاه مستقل",
+        "description": "Only available on development modes, menu option to open up the standalone device setup sequence"
+    },
+    "menuSetupWithImport": {
+        "message": "نصب با استفاده از ایمپورت",
+        "description": "When the application is not yet set up, menu option to start up the import sequence"
+    },
+    "message--getDescription--disappearing-photo": {
+        "message": "Disappearing photo",
+        "description": "Shown in notifications and in the left pane when a message is a disappearing photo."
+    },
+    "message--getDescription--unsupported-message": {
+        "message": "Unsupported message",
+        "description": "Shown in notifications and in the left pane when a message has features too new for this signal install."
+    },
+    "message--getNotificationText--stickers": {
+        "message": "Sticker message",
+        "description": "Shown in notifications and in the left pane instead of sticker image."
+    },
+    "messageBelow": {
+        "message": "پیام جدید پایین",
+        "description": "Alt text for button to take user down to bottom of conversation with a new message out of screen"
+    },
+    "messageBodyTooLong": {
+        "message": "Message body is too long.",
+        "description": "Shown if the user tries to send more than 64kb of text"
+    },
+    "messageDetail": {
+        "message": "جزئیات پیام",
+        "description": ""
+    },
+    "messageFoundButNotLoaded": {
+        "message": "پیام اصلی پیدا شد، اما بارگذاری نشد. برای بارگذاری به سمت بالا حرکت کنید",
+        "description": "Shown in toast if user clicks on quote references messages not loaded in view, but in database"
+    },
+    "messageImportContact": {
+        "message": "Bitte beachten Sie, dass beim Kontaktimport Ihre bereits vorhandenen Kontakte überschrieben werden. Möchten Sie fortfahren?",
+        "description": "Message to import new contact list"
+    },
+    "messagesBelow": {
+        "message": "پیام‌های جدید پایین",
+        "description": "Alt text for button to take user down to bottom of conversation with more than one message out of screen"
+    },
+    "messagesHeader": {
+        "message": "پیام ها",
+        "description": "Shown to separate the types of search results"
+    },
+    "migratingToSQLCipher": {
+        "message": "بهینه سازی برنامه ها... $status$ کامل شد.",
+        "description": "Message shown on the loading screen while we are doing application optimizations",
+        "placeholders": {
+            "status": {
+                "content": "$1",
+                "example": "45/200"
+            }
+        }
+    },
+    "minutesAgo": {
+        "message": "$minutes$دقیقه پیش",
+        "description": "Contracted form of 'X minutes ago' which works both for singular and plural",
+        "placeholders": {
+            "minutes": {
+                "content": "$1",
+                "example": "10"
+            }
+        }
+    },
+    "minutesAgoShort": {
+        "message": "$minutes$ دقیقه",
+        "description": "Even further contracted form of 'X minutes ago' which works both for singular and plural, used in the left pane",
+        "placeholders": {
+            "minutes": {
+                "content": "$1",
+                "example": "10"
+            }
+        }
+    },
+    "mobile": {
+        "message": "موبایل",
+        "description": "Shown on contact detail screen as a label for aa phone or email"
+    },
+    "moreInfo": {
+        "message": "اطلاعات بیشتر...",
+        "description": "Shown on the drop-down menu for an individual message, takes you to message detail screen"
+    },
+    "moveConversationToInbox": {
+        "message": "Move Conversation to Inbox",
+        "description": "Undoes Archive Conversation action, and moves archived conversation back to the main conversation list"
+    },
+    "multipleJoinedTheGroup": {
+        "message": "$names$ عضو گروه شد",
+        "description": "Shown in the conversation history when more than one person joins the group",
+        "placeholders": {
+            "names": {
+                "content": "$1",
+                "example": "Alice, Bob"
+            }
+        }
+    },
+    "multipleLeftTheGroup": {
+        "message": "$name$ گروه را ترک کرد",
+        "description": "Shown in the conversation history when multiple people leave the group",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "Alice, Bob"
+            }
+        }
+    },
+    "multipleNoLongerVerified": {
+        "message": "شماره امن شما با اعضای این گروه تغییر کرده است و دیگر تایید شده نیست. برای نمایش لمس کنید.",
+        "description": "Shown in conversation banner when more than one group member's safety number has changed, but they were previously verified."
+    },
+    "nameAndMessage": {
+        "message": "هم نام و هم متن پیام",
+        "description": "Label for setting notifications to display name and message text"
+    },
+    "nameOnly": {
+        "message": "فقط نام فرستنده",
+        "description": "Label for setting notifications to display sender name only"
+    },
+    "newIdentity": {
+        "message": "شماره‌ی امنیتی جدید",
+        "description": "Header for a key change dialog"
+    },
+    "newMessage": {
+        "message": "پیام جدید",
+        "description": "Displayed in notifications for only 1 message"
+    },
+    "newMessages": {
+        "message": "پیام‌های جدید",
+        "description": "Displayed in notifications for multiple messages"
+    },
+    "newPhoneNumber": {
+        "message": "Enter a phone number to add a contact.",
+        "description": "Placeholder for adding a new number to a contact"
+    },
+    "noContactsImported": {
+        "message": "Sie haben keine Kontakte, bitte Kontaktliste importieren.",
+        "description": "No contacts imported"
+    },
+    "noFileChosen": {
+        "message": "No file chosen",
+        "description": "Text for no file chosen"
+    },
+    "noLongerVerified": {
+        "message": "کد امنیتی $name$ تغییر کرده  و دیگر تأییدشده نیست. برای نمایشش کلیک کنید.",
+        "description": "Shown in converation banner when user's safety number has changed, but they were previously verified.",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "Bob"
+            }
+        }
+    },
+    "noNameOrMessage": {
+        "message": "نه نام و نه متن پیام",
+        "description": "Label for setting notifications to display no name and no message text"
+    },
+    "noSearchResults": {
+        "message": "No results for \"$searchTerm$\"",
+        "description": "Shown in the search left pane when no results were found",
+        "placeholders": {
+            "searchTerm": {
+                "content": "$1",
+                "example": "dog"
+            }
+        }
+    },
+    "notNow": {
+        "message": "Not now",
+        "description": "Text for skipping actions for now"
+    },
+    "noteToSelf": {
+        "message": "Note to Self",
+        "description": "Name for the conversation with your own phone number"
+    },
+    "notificationFrom": {
+        "message": "از:",
+        "description": "Displayed in notifications when setting is 'name only' and one message is waiting"
+    },
+    "notificationMostRecent": {
+        "message": "جدید ترین:",
+        "description": "Displayed in notifications when setting is 'name and message' and more than one message is waiting"
+    },
+    "notificationMostRecentFrom": {
+        "message": "جدید ترین از:",
+        "description": "Displayed in notifications when setting is 'name only' and more than one message is waiting"
+    },
+    "notificationSettingsDialog": {
+        "message": "هنگام دریافت پیام, این جزئیات را نمایش بده:",
+        "description": "Explain the purpose of the notification settings"
+    },
+    "notifications": {
+        "message": "آگاه‌سازی‌ها",
+        "description": "Header for notification settings"
+    },
+    "offline": {
+        "message": "آفلاین",
+        "description": "Displayed when the desktop client has no network connection."
+    },
+    "ok": {
+        "message": "باشه",
+        "description": ""
+    },
+    "oneNonImageAtATimeToast": {
+        "message": "When including a non-image attachment, the limit is one attachment per message.",
+        "description": "An error popup when the user has attempted to add an attachment"
+    },
+    "optimizingApplication": {
+        "message": "بهینه سازی برنامه...",
+        "description": "Message shown on the loading screen while we are doing application optimizations"
+    },
+    "or": {
+        "message": "oder",
+        "description": "oder option"
+    },
+    "originalMessageNotAvailable": {
+        "message": "پیام اصلی دیگر در دسترس نیست",
+        "description": "Shown in toast if user clicks on quote that references message no longer in database"
+    },
+    "originalMessageNotFound": {
+        "message": "پیام اصلی پیدا نشد",
+        "description": "Shown in quote if reference message was not found as message was initially downloaded and processed"
+    },
+    "permissions": {
+        "message": "دسترسی ها",
+        "description": "Header for permissions section of settings"
+    },
+    "phone": {
+        "message": "تلفن",
+        "description": "Generic label shown if contact phone has custom type but no label"
+    },
+    "phoneNumber": {
+        "message": "IHRe Bürotelefonnummer",
+        "description": "Title for phone number input"
+    },
+    "phoneSetupSubtitle": {
+        "message": "Bitte geben Sie Ihre Bürotelefonnummer ein. Sie werden angerufen und erhalten einen Verifikationscode. Dabei können Gebühren anfallen.",
+        "description": "Phone setup container subtitle"
+    },
+    "phoneSetupTitle": {
+        "message": "Telefonnummer",
+        "description": "Title for phone setup container"
+    },
+    "photo": {
+        "message": "تصویر",
+        "description": "Shown in a quotation of a message containing a photo if no text was originally provided with that image"
+    },
+    "plusButton": {
+        "message": "دکمه '+'",
+        "description": "The button used in OfficeApp Android to add a new linked device"
+    },
+    "poBox": {
+        "message": "صندوق پست",
+        "description": "When rendering an address, used to provide context to a post office box"
+    },
+    "previewThumbnail": {
+        "message": "Thumbnail link preview for $domain$",
+        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "instagram.com"
+            }
+        }
+    },
+    "privacyPolicy": {
+        "message": "شرایط و سیاست های حفظ حریم خصوصی",
+        "description": "Shown in the about box for the link to https://signal.org/legal"
+    },
+    "quit": {
+        "message": "خروج",
+        "description": "Command in the tray icon menu, to quit the application"
+    },
+    "quoteThumbnailAlt": {
+        "message": "تامبنیل تصویر از پیام نقل قول شده",
+        "description": "Used in alt tag of thumbnail images inside of an embedded message quote"
+    },
+    "readOnlyVolume": {
+        "message": "OfficeApp Desktop is likely in a macOS quarantine, and will not be able to auto-update. Please try moving OfficeApp.app to /Applications with Finder.",
+        "description": "Shown on MacOS if running on a read-only volume and we cannot update"
+    },
+    "received": {
+        "message": "دریافت شد",
+        "description": "Label for the time a message was received"
+    },
+    "registerAdmin": {
+        "message": "Admin registration",
+        "description": "Header for admin registration"
+    },
+    "registerCompany": {
+        "message": "Company registration",
+        "description": "Header for company registration"
+    },
+    "relink": {
+        "message": "Relink",
+        "description": ""
+    },
+    "replyToMessage": {
+        "message": "پاسخ به پیام",
+        "description": "Shown in triple-dot menu next to message to allow user to start crafting a message with a quotation"
+    },
+    "replyingTo": {
+        "message": "پاسخ به $name$",
+        "description": "Shown in iOS theme when you or someone quotes to a message which is not from you",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "John"
+            }
+        }
+    },
+    "reportIssue": {
+        "message": "گزارش مشکل",
+        "description": "Link to open the issue tracker"
+    },
+    "resetSession": {
+        "message": "ایجاد جلسه‌ی امن جدید",
+        "description": "This is a menu item for resetting the session, using the imperative case, as in a command."
+    },
+    "retrySend": {
+        "message": "ارسال دوباره",
+        "description": "Shown on the drop-down menu for an indinvidaul message, but only if it is an outgoing message that failed to send"
+    },
+    "safetyNumberChanged": {
+        "message": "شماره امنیتی تغییر یافته است",
+        "description": "A notification shown in the conversation when a contact reinstalls"
+    },
+    "safetyNumberChangedGroup": {
+        "message": "شماره امنیتی $name$ تغییر کرده است",
+        "description": "A notification shown in a group conversation when a contact reinstalls, showing the contact name",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "John"
+            }
+        }
+    },
+    "save": {
+        "message": "ذخیره",
+        "description": ""
+    },
+    "scrollDown": {
+        "message": "رفتن به پایین گفتگو",
+        "description": "Alt text for button to take user down to bottom of conversation, shown when user scrolls up"
+    },
+    "search": {
+        "message": "جستجو",
+        "description": "Placeholder text in the search input"
+    },
+    "searchForPeopleOrGroups": {
+        "message": "Enter name or number",
+        "description": "Placeholder text in the search input"
+    },
+    "selectAContact": {
+        "message": "برای شروع چت یک مخاطب یا گروه را انتخاب کنید.",
+        "description": ""
+    },
+    "selectFileToUpload": {
+        "message": "Select file to upload",
+        "description": "Text for file upload input"
+    },
+    "selectedLocation": {
+        "message": "مکان انتخابی شما",
+        "description": "Message shown as the export location if we didn't capture the target directory"
+    },
+    "sendAgainInvitation": {
+        "message": "Sent (send again)",
+        "description": "send again an invitation button on import contact"
+    },
+    "sendAnInvitation": {
+        "message": "Send an Invitation",
+        "description": "send an invitation button on import contact"
+    },
+    "sendAnyway": {
+        "message": "به هر حال بفرست",
+        "description": "Used on a warning dialog to make it clear that it might be risky to send the message."
+    },
+    "sendFailed": {
+        "message": "ارسال ناموفق بود",
+        "description": "Shown on outgoing message if it fails to send"
+    },
+    "sendMessage": {
+        "message": "ارسال پیام",
+        "description": "Placeholder text in the message entry field"
+    },
+    "sendMessageToContact": {
+        "message": "فرستادن پیام",
+        "description": "Shown when you are sent a contact and that contact has a signal account"
+    },
+    "sendSMSInstead": {
+        "message": "Mir Stattdessen eine SMS senden",
+        "description": "Text for requesting SMS instead of call"
+    },
+    "sent": {
+        "message": "ارسال شد",
+        "description": "Label for the time a message was sent"
+    },
+    "sessionEnded": {
+        "message": "جلسه‌ی امن از نو ایجاد شد",
+        "description": "This is a past tense, informational message. In other words, your secure session has been reset."
+    },
+    "settings": {
+        "message": "تنظیمات",
+        "description": "Menu item and header for global settings"
+    },
+    "show": {
+        "message": "نمایش",
+        "description": "Command under Window menu, to show the window"
+    },
+    "showLess": {
+        "message": "جزئیات را پنهان کن",
+        "description": "Hides the details of a key change"
+    },
+    "showMembers": {
+        "message": "نمایش اعضا",
+        "description": ""
+    },
+    "showMore": {
+        "message": "جزئیات",
+        "description": "Displays the details of a key change"
+    },
+    "showSafetyNumber": {
+        "message": "دیدن شماره امنیتی",
+        "description": ""
+    },
+    "showSettings": {
+        "message": "نمایش تنظیمات",
+        "description": "A button shown in dialog requesting the user to turn on audio permissions"
+    },
+    "signalDesktop": {
+        "message": "OfficeApp Desktop",
+        "description": "Tooltip for the tray icon"
+    },
+    "signalDesktopPreferences": {
+        "message": "ترجیحات OfficeApp Desktop",
+        "description": "Title of the window that pops up with OfficeApp Desktop preferences in it"
+    },
+    "signalSettings": {
+        "message": "تنظیمات OfficeApp",
+        "description": "Used in the guidance to help people find the 'link new device' area of their OfficeApp mobile app"
+    },
+    "signupCode": {
+        "message": "Code",
+        "description": "Label for signup code input"
+    },
+    "speech": {
+        "message": "صحبت",
+        "description": "Item under the Edit menu, with 'start/stop speaking' items below it"
+    },
+    "spellCheck": {
+        "message": "Spell Check",
+        "description": "Description of the media permission description"
+    },
+    "spellCheckDescription": {
+        "message": "فعال سازی کنترل املاء متن وارد شده در باکس پیام نویسی",
+        "description": "Description of the media permission description"
+    },
+    "stagedImageAttachment": {
+        "message": "Draft image attachment: $path$",
+        "description": "Alt text for staged attachments",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "dog.jpg"
+            }
+        }
+    },
+    "stagedPreviewThumbnail": {
+        "message": "Draft thumbnail link preview for $domain$",
+        "description": "Shown while OfficeApp Desktop is fetching metadata for a url in composition area",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "instagram.com"
+            }
+        }
+    },
+    "startConversation": {
+        "message": "Start new conversation…",
+        "description": "Label underneath number a user enters that is not an existing contact"
+    },
+    "stickers--StickerManager--BlessedPacks": {
+        "message": "OfficeApp Artist Series",
+        "description": "Shown in the sticker pack manager above the default sticker packs."
+    },
+    "stickers--StickerManager--BlessedPacks--Empty": {
+        "message": "No OfficeApp Artist stickers available",
+        "description": "Shown in the sticker pack manager when there are no blessed sticker packs available."
+    },
+    "stickers--StickerManager--Install": {
+        "message": "Install",
+        "description": "Shown in the sticker pack manager next to sticker packs which can be installed."
+    },
+    "stickers--StickerManager--InstalledPacks": {
+        "message": "Installed Stickers",
+        "description": "Shown in the sticker pack manager above your installed sticker packs."
+    },
+    "stickers--StickerManager--InstalledPacks--Empty": {
+        "message": "No stickers installed",
+        "description": "Shown in the sticker pack manager when you don't have any installed sticker packs."
+    },
+    "stickers--StickerManager--Introduction--Body": {
+        "message": "Why use words when you can use stickers?",
+        "description": "Shown as the body on a tooltip when the user upgrades to a version of OfficeApp supporting stickers."
+    },
+    "stickers--StickerManager--Introduction--Title": {
+        "message": "Introducing Stickers",
+        "description": "Shown as the title on a tooltip when the user upgrades to a version of OfficeApp supporting stickers."
+    },
+    "stickers--StickerManager--ReceivedPacks": {
+        "message": "Stickers You Received",
+        "description": "Shown in the sticker pack manager above sticker packs which you have received in messages."
+    },
+    "stickers--StickerManager--ReceivedPacks--Empty": {
+        "message": "Stickers from incoming messages will appear here",
+        "description": "Shown in the sticker pack manager when you have not received any sticker packs in messages."
+    },
+    "stickers--StickerManager--Uninstall": {
+        "message": "Uninstall",
+        "description": "Shown in the sticker pack manager next to sticker packs which are already installed."
+    },
+    "stickers--StickerManager--UninstallWarning": {
+        "message": "You may not be able to re-install this sticker pack if you no longer have the source message.",
+        "description": "Shown in the sticker pack manager next to sticker packs which are already installed."
+    },
+    "stickers--StickerPicker--DownloadError": {
+        "message": "Some stickers could not be downloaded.",
+        "description": "Shown in the sticker picker when one or more stickers could not be downloaded."
+    },
+    "stickers--StickerPicker--DownloadPending": {
+        "message": "Installing sticker pack...",
+        "description": "Shown in the sticker picker when one or more stickers are still downloading."
+    },
+    "stickers--StickerPicker--Empty": {
+        "message": "No stickers found",
+        "description": "Shown in the sticker picker when there are no stickers to show."
+    },
+    "stickers--StickerPicker--Hint": {
+        "message": "New sticker packs from your messages are available to install",
+        "description": "Shown in the sticker picker the first time you have received new packs you can install."
+    },
+    "stickers--StickerPicker--NoPacks": {
+        "message": "No sticker packs found",
+        "description": "Shown in the sticker picker when there are no installed sticker packs."
+    },
+    "stickers--StickerPicker--NoRecents": {
+        "message": "Recently used stickers will appear here.",
+        "description": "Shown in the sticker picker when there are no recent stickers to show."
+    },
+    "stickers--StickerPreview--Error": {
+        "message": "Error opening sticker pack. Check your internet connection and try again.",
+        "description": "The message that appears in the sticker preview modal when there is an error."
+    },
+    "stickers--StickerPreview--Title": {
+        "message": "Sticker Pack",
+        "description": "The title that appears in the sticker pack preview modal."
+    },
+    "stickers--toast--InstallFailed": {
+        "message": "Sticker pack could not be installed",
+        "description": "Shown in a toast if the user attempts to install a sticker pack and it fails"
+    },
+    "submit": {
+        "message": "ارسال",
+        "description": ""
+    },
+    "submitDebugLog": {
+        "message": "گزارش خطاء",
+        "description": "Menu item and header text for debug log modal (sentence case)"
+    },
+    "sync": {
+        "message": "مخاطب‌ها",
+        "description": "Label for contact and group sync settings"
+    },
+    "syncExplanation": {
+        "message": "واردسازی لیست تمام گروه‌ها و مخاطب‌های OfficeApp از گوشی موبایل شما.",
+        "description": "Explanatory text for sync settings"
+    },
+    "syncFailed": {
+        "message": "واردسازی با خطا مواجه شد! لطفا مطمئن شوید که کامپیوتر و موبایل شما به اینترنت متصل هستند.",
+        "description": "Informational text displayed if a sync operation times out."
+    },
+    "syncNow": {
+        "message": "انجام واردسازی",
+        "description": "Label for a button that syncs contacts and groups from your phone"
+    },
+    "syncing": {
+        "message": "در حال واردسازی...",
+        "description": "Label for a disabled sync button while sync is in progress."
+    },
+    "taxID": {
+        "message": "Tax ID",
+        "description": "Label for tax id input"
+    },
+    "taxNumber": {
+        "message": "Tax Number",
+        "description": "Label for tax number input"
+    },
+    "theirIdentityUnknown": {
+        "message": "شما هنوز هیچ پیامی با این مخاطب تبادل نکرده‌اید. شماره‌ی امنیتی پس از ارسال و یا دریافت اولین پیام در دسترس خواهد بود.",
+        "description": ""
+    },
+    "theme": {
+        "message": "تم",
+        "description": "Header for theme settings"
+    },
+    "themeDark": {
+        "message": "تاریک",
+        "description": "Label text for dark theme"
+    },
+    "themeLight": {
+        "message": "روشن",
+        "description": "Label text for light theme (normal)"
+    },
+    "themeSystem": {
+        "message": "System",
+        "description": "Label text for system theme"
+    },
+    "theyChangedTheTimer": {
+        "message": "$name$ تایمر پیام نابود شونده را روی $time$ تنظیم کرد",
+        "description": "Message displayed when someone else changes the message expiration timer in a conversation.",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "Bob"
+            },
+            "time": {
+                "content": "$2",
+                "example": "10m"
+            }
+        }
+    },
+    "thisMonth": {
+        "message": "این ماه",
+        "description": "Section header in the media gallery"
+    },
+    "thisWeek": {
+        "message": "این هفته",
+        "description": "Section header in the media gallery"
+    },
+    "timerOption_0_seconds": {
+        "message": "خاموش",
+        "description": "Label for option to turn off message expiration in the timer menu"
+    },
+    "timerOption_0_seconds_abbreviated": {
+        "message": "خاموش",
+        "description": "Short format indicating current timer setting in the conversation list snippet"
+    },
+    "timerOption_10_seconds": {
+        "message": "10 ثانیه",
+        "description": "Label for a selectable option in the message expiration timer menu"
+    },
+    "timerOption_10_seconds_abbreviated": {
+        "message": "10 ثانیه",
+        "description": "Very short format indicating current timer setting in the conversation header"
+    },
+    "timerOption_12_hours": {
+        "message": "12 ساعت",
+        "description": "Label for a selectable option in the message expiration timer menu"
+    },
+    "timerOption_12_hours_abbreviated": {
+        "message": "12 ساعت",
+        "description": "Very short format indicating current timer setting in the conversation header"
+    },
+    "timerOption_1_day": {
+        "message": "1 روز",
+        "description": "Label for a selectable option in the message expiration timer menu"
+    },
+    "timerOption_1_day_abbreviated": {
+        "message": "1 روز",
+        "description": "Very short format indicating current timer setting in the conversation header"
+    },
+    "timerOption_1_hour": {
+        "message": "1 ساعت",
+        "description": "Label for a selectable option in the message expiration timer menu"
+    },
+    "timerOption_1_hour_abbreviated": {
+        "message": "1 ساعت",
+        "description": "Very short format indicating current timer setting in the conversation header"
+    },
+    "timerOption_1_minute": {
+        "message": "1 دقیقه",
+        "description": "Label for a selectable option in the message expiration timer menu"
+    },
+    "timerOption_1_minute_abbreviated": {
+        "message": "1 دقیقه",
+        "description": "Very short format indicating current timer setting in the conversation header"
+    },
+    "timerOption_1_week": {
+        "message": "1 هفته",
+        "description": "Label for a selectable option in the message expiration timer menu"
+    },
+    "timerOption_1_week_abbreviated": {
+        "message": "1 هفته",
+        "description": "Very short format indicating current timer setting in the conversation header"
+    },
+    "timerOption_30_minutes": {
+        "message": "30 دقیقه",
+        "description": "Label for a selectable option in the message expiration timer menu"
+    },
+    "timerOption_30_minutes_abbreviated": {
+        "message": "30 دقیقه",
+        "description": "Very short format indicating current timer setting in the conversation header"
+    },
+    "timerOption_30_seconds": {
+        "message": "30 ثانیه",
+        "description": "Label for a selectable option in the message expiration timer menu"
+    },
+    "timerOption_30_seconds_abbreviated": {
+        "message": "30 ثانیه",
+        "description": "Very short format indicating current timer setting in the conversation header"
+    },
+    "timerOption_5_minutes": {
+        "message": "5 دقیقه",
+        "description": "Label for a selectable option in the message expiration timer menu"
+    },
+    "timerOption_5_minutes_abbreviated": {
+        "message": "5 دقیقه",
+        "description": "Very short format indicating current timer setting in the conversation header"
+    },
+    "timerOption_5_seconds": {
+        "message": "5 ثانیه",
+        "description": "Label for a selectable option in the message expiration timer menu"
+    },
+    "timerOption_5_seconds_abbreviated": {
+        "message": "5 ثانیه",
+        "description": "Very short format indicating current timer setting in the conversation header"
+    },
+    "timerOption_6_hours": {
+        "message": "6 ساعت",
+        "description": "Label for a selectable option in the message expiration timer menu"
+    },
+    "timerOption_6_hours_abbreviated": {
+        "message": "6 ساعت",
+        "description": "Very short format indicating current timer setting in the conversation header"
+    },
+    "timerSetOnSync": {
+        "message": "تایمر پیام نابود شونده به $time$ آپدیت شد",
+        "description": "Message displayed when timer is set on initial link of desktop device.",
+        "placeholders": {
+            "time": {
+                "content": "$1",
+                "example": "10m"
+            }
+        }
+    },
+    "timerSetTo": {
+        "message": "تایمر روی $time$ تنظیم شد",
+        "description": "Displayed in the conversation list when the timer is updated by some automatic action, or in the left pane",
+        "placeholders": {
+            "time": {
+                "content": "$1",
+                "example": "1w"
+            }
+        }
+    },
+    "timestampFormat_M": {
+        "message": "D MMM",
+        "description": "Timestamp format string for displaying month and day (but not the year) of a date within the current year, ex: use 'MMM D' for 'Aug 8', or 'D MMM' for '8 Aug'."
+    },
+    "timestamp_h": {
+        "message": "1 ساعت",
+        "description": "Brief timestamp for messages sent about one hour ago. Displayed in the conversation list and message bubble."
+    },
+    "timestamp_m": {
+        "message": "1 دقیقه",
+        "description": "Brief timestamp for messages sent about one minute ago. Displayed in the conversation list and message bubble."
+    },
+    "timestamp_s": {
+        "message": "همین حالا",
+        "description": "Brief timestamp for messages sent less than a minute ago. Displayed in the conversation list and message bubble."
+    },
+    "titleIsNow": {
+        "message": "در حال حاضر عنوان '$name$' می باشد",
+        "description": "Shown in the conversation history when someone changes the title of the group",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "Book Club"
+            }
+        }
+    },
+    "to": {
+        "message": "to",
+        "description": "Label for the receiver of a message"
+    },
+    "today": {
+        "message": "امروز",
+        "description": "Section header in the media gallery"
+    },
+    "trayTooltip": {
+        "message": "OfficeApp Desktop",
+        "description": "Tooltip for the tray icon"
+    },
+    "typingAlt": {
+        "message": "در حال تایپ انیمیشن برای این مکالمه",
+        "description": "Used as the 'title' attibute for the typing animation"
+    },
+    "unableToLoadAttachment": {
+        "message": "ناتوانی در بارگذاری پیوست انتخابی.",
+        "description": ""
+    },
+    "unblockGroupToSend": {
+        "message": "برای ارسال پیام در گروه، آن را رفع انسداد کنید.",
+        "description": "Brief message shown when trying to message a blocked group"
+    },
+    "unblockToSend": {
+        "message": "برای ارسال پیام،‌ ابتدا این مخاطب را از مسدود بودن درآورید!",
+        "description": "Brief message shown when trying to message a blocked number"
+    },
+    "unknownGroup": {
+        "message": "Unknown group",
+        "description": "Shown as the name of a group if we don't have any information about it"
+    },
+    "unlinked": {
+        "message": "Unlinked",
+        "description": ""
+    },
+    "unlinkedWarning": {
+        "message": "برای ادامه‌ی استفاده از ‌OfficeApp Desktop، دوباره این برنامه را به OfficeApp موبایل خود متصل نمایید.",
+        "description": ""
+    },
+    "unnamedFile": {
+        "message": "فایل بی‌نام",
+        "description": "Hover text for attachment filenames"
+    },
+    "unreadMessage": {
+        "message": "1 پیام خوانده نشده",
+        "description": "Text for unread message separator, just one message"
+    },
+    "unreadMessages": {
+        "message": "$count$ پیام خوانده نشده",
+        "description": "Text for unread message separator, with count",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "5"
+            }
+        }
+    },
+    "unregisteredUser": {
+        "message": "این شماره ثبت نشده است!",
+        "description": "Error message displayed when sending to an unregistered user."
+    },
+    "unsupportedAttachment": {
+        "message": "این نوع ضمیمه پشتیبانی نمی‌شود. برای ذخیره کلیک کنید.",
+        "description": "Displayed for incoming unsupported attachment"
+    },
+    "unsupportedFileType": {
+        "message": "Tipo de archivo no soportado",
+        "description": "Displayed for outgoing unsupported attachment"
+    },
+    "unverify": {
+        "message": "علامت گذاری به عنوان تایید نشده",
+        "description": ""
+    },
+    "updatedTheGroup": {
+        "message": "گروه آپدیت شد",
+        "description": "Shown in the conversation history when someone updates the group"
+    },
+    "upgrade": {
+        "message": "ارتقاء",
+        "description": "Label text for button to upgrade the app to the latest version"
+    },
+    "upgradingDatabase": {
+        "message": "در حال به‌روزرسانی پابگاه داده. ممکن است کمی طول بکشد...",
+        "description": "Message shown on the loading screen when we're changing database structure on first run of a new version"
+    },
+    "uploadAvatarText": {
+        "message": "Bitte Fügen SIE EIN Profilbild HINZU",
+        "description": "Upload user avatar"
+    },
+    "uploadCard": {
+        "message": "Upload commercial register entries to brands or identity documents to companies.",
+        "description": "Upload company card"
+    },
+    "uploadCompanyAvatarText": {
+        "message": "Bitte Fügen SIE EIN Profilbild Für das unternehmen HINZU",
+        "description": "Upload company avatar"
+    },
+    "userName": {
+        "message": "User name",
+        "description": "Label for user name input"
+    },
+    "userProfile": {
+        "message": "User profile",
+        "description": "Title for user profile setup"
+    },
+    "verified": {
+        "message": "تایید شده",
+        "description": ""
+    },
+    "verify": {
+        "message": "علامت گذاری به عنوان تایید شده",
+        "description": ""
+    },
+    "verifyCode": {
+        "message": "Verifikationscode",
+        "description": "Title for verification code input"
+    },
+    "verifyHelp": {
+        "message": "اگر تمایل به تائید امنیت رمزنگاری نقطه-به-نقطه با $name$ هستید، شماره‌ بالا را با شماره نمایش‌یافته در دستگاه مخاطب مقایسه کنید.",
+        "description": "",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "John"
+            }
+        }
+    },
+    "verifyNewNumber": {
+        "message": "تایید شماره امنیتی",
+        "description": "Label on button included with safety number change notification in the conversation"
+    },
+    "verifyPhone": {
+        "message": "Starten",
+        "description": "Label for phone verify button"
+    },
+    "video": {
+        "message": "ویدیو",
+        "description": "Shown in a quotation of a message containing a video if no text was originally provided with that video"
+    },
+    "videoAttachmentAlt": {
+        "message": "اسکرین شات ویدیو پیوست شده به پیام",
+        "description": "Used in alt tag of video attachment preview"
+    },
+    "videoScreenshotFailedToLoad": {
+        "message": "Video screenshot failed to load",
+        "description": "When a attachment video screenshot is missing, this message is shown"
+    },
+    "view": {
+        "message": "نمایش",
+        "description": "Used as a label on a button allowing user to see more information"
+    },
+    "viewAllMedia": {
+        "message": "دیدن تمام مدیا",
+        "description": "This is a menu item for viewing all media (images + video) in a conversation, using the imperative case, as in a command."
+    },
+    "viewMenuResetZoom": {
+        "message": "سایز واقعی",
+        "description": "View menu command to go back to the default zoom"
+    },
+    "viewMenuToggleDevTools": {
+        "message": "تاگل ابزار های توسعه دهنده",
+        "description": "View menu command to show or hide the developer tools"
+    },
+    "viewMenuToggleFullScreen": {
+        "message": "تاگل فول اسکرین",
+        "description": "View menu command to enter or leave Full Screen mode"
+    },
+    "viewMenuZoomIn": {
+        "message": "بزرگ نمایی",
+        "description": "View menu command to make everything bigger"
+    },
+    "viewMenuZoomOut": {
+        "message": "کوچک نمایی",
+        "description": "View menu command to make everything smaller"
+    },
+    "voiceMessage": {
+        "message": "پیام صوتی",
+        "description": "Name for a voice message attachment"
+    },
+    "voiceNoteMustBeOnlyAttachment": {
+        "message": "A voice note must be the only attachment included in a message.",
+        "description": "Shown in toast if tries to record a voice note with any staged attachments"
+    },
+    "welcomeAdmin": {
+        "message": "Welcome to the OfficeApp. Please enter your code here.",
+        "description": "Description for registering admin"
+    },
+    "welcomeCompany": {
+        "message": "Welcome to the OfficeApp. Please register your company here.",
+        "description": "Description for registering company"
+    },
+    "welcomeToSignal": {
+        "message": "به OfficeApp خوش‌آمدید",
+        "description": ""
+    },
+    "windowMenuBringAllToFront": {
+        "message": "همه را به جلو بیاور",
+        "description": "Window menu command to bring all windows of current applicatinon to front"
+    },
+    "windowMenuClose": {
+        "message": "بستن پنجره",
+        "description": "Window menu command to close the current window"
+    },
+    "windowMenuMinimize": {
+        "message": "مینیمایز",
+        "description": "Window menu command to minimize the current window"
+    },
+    "windowMenuZoom": {
+        "message": "زوم",
+        "description": "Window menu command to make the current window the size of the whole screen"
+    },
+    "work": {
+        "message": "کار",
+        "description": "Shown on contact detail screen as a label for an address/phone/email"
+    },
+    "yesterday": {
+        "message": "دیروز",
+        "description": "Section header in the media gallery"
+    },
+    "you": {
+        "message": "شما",
+        "description": "In Android theme, shown in quote if you or someone else replies to you"
+    },
+    "youChangedTheTimer": {
+        "message": "شما پیام تایمر پیام نابود شونده را روی $time$ تنظیم کردید",
+        "description": "Message displayed when you change the message expiration timer in a conversation.",
+        "placeholders": {
+            "time": {
+                "content": "$1",
+                "example": "10m"
+            }
+        }
+    },
+    "youDisabledDisappearingMessages": {
+        "message": "شما پیام های نابود شونده را غیر فعال کردید",
+        "description": "Displayed in the conversation list when the timer is turned off"
+    },
+    "youLeftTheGroup": {
+        "message": "شما گروه را ترک کرده اید",
+        "description": "Displayed when a user can't send a message because they have left the group"
+    },
+    "youMarkedAsNotVerified": {
+        "message": "شما کد امنیتی خود را با $name$ به عنوان تایید نشده علامت زدید",
+        "description": "Shown in the conversation history when the user marks a contact as not verified, whether on the Safety Number screen or by dismissing a banner or dialog.",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "Bob"
+            }
+        }
+    },
+    "youMarkedAsNotVerifiedOtherDevice": {
+        "message": "شما کد امنیتی خود با $name$ را از یک دستگاه دیگر به عنوان تایید نشده علامت زدید",
+        "description": "Shown in the conversation history when we discover that the user marked a contact as not verified on another device.",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "Bob"
+            }
+        }
+    },
+    "youMarkedAsVerified": {
+        "message": "شما کد امنیتی خود را با $name$ به عنوان تایید شده علامت زدید",
+        "description": "Shown in the conversation history when the user marks a contact as verified.",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "Bob"
+            }
+        }
+    },
+    "youMarkedAsVerifiedOtherDevice": {
+        "message": "شما کد امنیتی خود را با $name$ به عنوان تایید شده از یک دستگاه دیگر علامت زدید",
+        "description": "Shown in the conversation history when we discover that the user marked a contact as verified on another device.",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "Bob"
+            }
+        }
+    },
+    "yourSafetyNumberWith": {
+        "message": "شماره امنیتی شما با $name$:",
+        "description": "Heading for safety number view",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "John"
+            }
+        }
     }
 }
