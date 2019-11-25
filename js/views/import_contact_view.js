@@ -969,12 +969,14 @@
 
         document.getElementById(`buttonSendInvitation-${id}`).innerText = i18n('sendAgainInvitation')
         if(type === 'admin'){
-          document.getElementById(`admin-${id}`).checkeds = true;
-          document.getElementById(`admin-${id}`).setAttribute('checked', 'checked')
+          // document.getElementById(`admin-${id}`).checkeds = true;
+          // document.getElementById(`admin-${id}`).setAttribute('checked', 'checked')
+          document.getElementById('selectUserType-'+id).value = "admin"
         }
         if (type === 'kunde') {
-          document.getElementById(`kunde-${id}`).checked = true;
-          document.getElementById(`kunde-${id}`).setAttribute('checked', 'checked')
+          // document.getElementById(`kunde-${id}`).checked = true;
+          // document.getElementById(`kunde-${id}`).setAttribute('checked', 'checked')
+          document.getElementById('selectUserType-'+id).value = "client"
         }
       })
       dataUsersToInvitate = {};
