@@ -1522,5 +1522,201 @@
     "invalidXML": {
         "message": "Invalid XML file",
         "description": "Text for invalid XML file"
+    },
+    "locale.ar": {
+        "message": "Arabic",
+        "description": "Name for Arabic locale"
+    },
+    "locale.bg": {
+        "message": "Bulgarian",
+        "description": "Name for Bulgarian locale"
+    },
+    "locale.ca": {
+        "message": "Catalan",
+        "description": "Name for Catalan locale"
+    },
+    "locale.cs": {
+        "message": "Czech",
+        "description": "Name for Czech locale"
+    },
+    "locale.da": {
+        "message": "Danish",
+        "description": "Name for Danish locale"
+    },
+    "locale.de": {
+        "message": "German",
+        "description": "Name for German locale"
+    },
+    "locale.el": {
+        "message": "Greek",
+        "description": "Name for Greek locale"
+    },
+    "locale.en": {
+        "message": "English",
+        "description": "Name for English locale"
+    },
+    "locale.es": {
+        "message": "Spanish",
+        "description": "Name for Spanish locale"
+    },
+    "locale.et": {
+        "message": "Estonian",
+        "description": "Name for Estonian locale"
+    },
+    "locale.fa": {
+        "message": "Farsi",
+        "description": "Name for Farsi locale"
+    },
+    "locale.fi": {
+        "message": "Finnish",
+        "description": "Name for Finnish locale"
+    },
+    "locale.fr": {
+        "message": "French",
+        "description": "Name for French locale"
+    },
+    "locale.he": {
+        "message": "Hebrew",
+        "description": "Name for Hebrew locale"
+    },
+    "locale.hi": {
+        "message": "Hindi",
+        "description": "Name for Hindi locale"
+    },
+    "locale.hr": {
+        "message": "Croatian",
+        "description": "Name for Croatian locale"
+    },
+    "locale.hu": {
+        "message": "Hungarian",
+        "description": "Name for Hungarian locale"
+    },
+    "locale.id": {
+        "message": "Indonesian",
+        "description": "Name for Indonesian locale"
+    },
+    "locale.it": {
+        "message": "Italian",
+        "description": "Name for Italian locale"
+    },
+    "locale.ja": {
+        "message": "Japanese",
+        "description": "Name for Japanese locale"
+    },
+    "locale.km": {
+        "message": "Khmer",
+        "description": "Name for Khmer locale"
+    },
+    "locale.kn": {
+        "message": "Kannada",
+        "description": "Name for Kannada locale"
+    },
+    "locale.ko": {
+        "message": "Korean",
+        "description": "Name for Korean locale"
+    },
+    "locale.lt": {
+        "message": "Lithuanian",
+        "description": "Name for Lithuanian locale"
+    },
+    "locale.mk": {
+        "message": "Macedonia",
+        "description": "Name for Macedonia locale"
+    },
+    "locale.nb": {
+        "message": "Norwegian",
+        "description": "Name for Norwegian locale"
+    },
+    "locale.nl": {
+        "message": "Dutch",
+        "description": "Name for Dutch locale"
+    },
+    "locale.nn": {
+        "message": "Norwegian",
+        "description": "Name for Norwegian locale"
+    },
+    "locale.pl": {
+        "message": "Polish",
+        "description": "Name for Polish locale"
+    },
+    "locale.pt_BR": {
+        "message": "Portuguese - Brazil",
+        "description": "Name for Portuguese - Brazil locale"
+    },
+    "locale.pt_PT": {
+        "message": "Portuguese - Portugal",
+        "description": "Name for Portuguese - Portugal locale"
+    },
+    "locale.ro": {
+        "message": "Romanian",
+        "description": "Name for Romanian locale"
+    },
+    "locale.ru": {
+        "message": "Russian",
+        "description": "Name for Russian locale"
+    },
+    "locale.sk": {
+        "message": "Slovak",
+        "description": "Name for Slovak locale"
+    },
+    "locale.sl": {
+        "message": "Slovenian",
+        "description": "Name for Slovenian locale"
+    },
+    "locale.sq": {
+        "message": "Albanian",
+        "description": "Name for Albanian locale"
+    },
+    "locale.sr": {
+        "message": "Serbian",
+        "description": "Name for Serbian locale"
+    },
+    "locale.sv": {
+        "message": "Swedish",
+        "description": "Name for Swedish locale"
+    },
+    "locale.th": {
+        "message": "Thai",
+        "description": "Name for Thai locale"
+    },
+    "locale.tr": {
+        "message": "Turkish",
+        "description": "Name for Turkish locale"
+    },
+    "locale.uk": {
+        "message": "Ukrainian",
+        "description": "Name for Ukrainian locale"
+    },
+    "locale.vi": {
+        "message": "Vietnamese",
+        "description": "Name for Vietnamese locale"
+    },
+    "locale.zh_CN": {
+        "message": "Chinese - China",
+        "description": "Name for Chinese - China locale"
+    },
+    "locale.zh_TW": {
+        "message": "Chinese - Taiwan",
+        "description": "Name for Chinese - Taiwan locale"
+    },
+    "changeLanguageTitle": {
+        "message": "Changing language requires restart",
+        "description": "Title for change language requires restart message box"
+    },
+    "changeLanguageMessage": {
+        "message": "Changing current language requires restarting the application, do you wish to do this now?",
+        "description": "Message for change language require restart message box"
+    },
+    "labelYes": {
+        "message": "Yes",
+        "description": "Label for Yes button"
+    },
+    "labelNo": {
+        "message": "No",
+        "description": "Label for No button"
+    },
+    "labelChangeLanguage": {
+        "message": "Change Language",
+        "description": "Label for Change Language menu entry"
     }
 }

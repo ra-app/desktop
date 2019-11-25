@@ -4,10 +4,20 @@ const _ = require('lodash');
 
 function normalizeLocaleName(locale) {
   if (/^en-/.test(locale)) {
-    return 'de';
+    return 'en';
   }
 
   return locale;
+}
+
+const availableLocales = [
+  'ar', 'bg', 'ca', 'cs', 'da', 'de', 'el', 'en', 'es', 'et', 'fa', 'fi', 'fr', 'he', 'hi',
+  'hr', 'hu', 'id', 'it', 'ja', 'km', 'kn', 'ko', 'lt', 'mk', 'nb', 'nl', 'nn', 'pl', 'pt_BR',
+  'pt_PT', 'ro', 'ru', 'sk', 'sl', 'sq', 'sr', 'sv', 'th', 'tr', 'uk', 'vi', 'zh_CN', 'zh_TW',
+];
+
+function getAvailableLocales() {
+  return availableLocales;
 }
 
 function getLocaleMessages(locale) {
@@ -33,10 +43,10 @@ function load({ appLocale, logger } = {}) {
     throw new TypeError('`logger.error` is required');
   }
 
-  const english = getLocaleMessages('de');
+  const english = getLocaleMessages('en');
 
   // Load locale - if we can't load messages for the current locale, we
-  // default to 'de'
+  // default to 'en'
   //
   // possible locales:
   // https://github.com/electron/electron/blob/master/docs/api/locales.md
@@ -54,7 +64,7 @@ function load({ appLocale, logger } = {}) {
     );
     logger.error('Falling back to en locale');
 
-    localeName = 'de';
+    localeName = 'en';
     messages = english;
   }
 
@@ -66,4 +76,5 @@ function load({ appLocale, logger } = {}) {
 
 module.exports = {
   load,
+  getAvailableLocales,
 };

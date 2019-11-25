@@ -1,4 +1,5 @@
 const { isString } = require('lodash');
+const { getAvailableLocales } = require('./locale');
 
 exports.createTemplate = (options, messages) => {
   if (!isString(options.platform)) {
@@ -18,6 +19,7 @@ exports.createTemplate = (options, messages) => {
     showAbout,
     showDebugLog,
     showSettings,
+    changeLanguage
   } = options;
 
   const template = [
@@ -113,6 +115,16 @@ exports.createTemplate = (options, messages) => {
         {
           role: 'toggledevtools',
           label: messages.viewMenuToggleDevTools.message,
+        },
+        {
+          label: messages.labelChangeLanguage.message,
+          submenu: getAvailableLocales().map(locale => {
+            return {
+              label: messages[`locale.${locale}`].message,
+              id: locale,
+              click: changeLanguage,
+            };
+          }).sort((a, b) => a.label.localeCompare(b.label)),
         },
       ],
     },
