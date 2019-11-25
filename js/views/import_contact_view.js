@@ -845,7 +845,7 @@
       buttonInviteContact.classList.add('buttonInviteContact');
       buttonInviteContact.classList.add('disabled');
       buttonInviteContact.id = 'buttonInviteContact';
-      buttonInviteContact.innerHTML = 'Speichern';
+      buttonInviteContact.innerHTML = 'Jetzt senden';
       buttonInviteContact.onclick = () => {
         this.sendInvitationCall();
       };
