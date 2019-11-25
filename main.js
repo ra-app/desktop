@@ -694,7 +694,7 @@ app.on('ready', async () => {
   logger.info(`starting version ${packageJson.version}`);
 
   if (!locale) {
-    const appLocale = process.env.NODE_ENV === 'test' ? 'en' : app.getLocale();
+    const appLocale = getPreferredLocale(userConfig); // process.env.NODE_ENV === 'test' ? 'en' : app.getLocale();
     locale = loadLocale({ appLocale, logger });
   }
 
@@ -776,6 +776,35 @@ app.on('ready', async () => {
   setupMenu();
 });
 
+function getPreferredLocale() {
+  const preferred = userConfig.get('preferred_locale');
+  if (!preferred) return 'de'; // we default to german
+  return preferred;
+}
+
+function setPreferredLocale(preferred) {
+  const current = getPreferredLocale();
+  if (current !== preferred) {
+    userConfig.set('preferred_locale', preferred);
+  }
+  return current !== preferred;
+}
+
+async function changeLanguage(item, window) {
+  if (!setPreferredLocale(item.id)) return;
+  const response = await electron.dialog.showMessageBox(window, {
+    type: 'question',
+    title: locale.messages.changeLanguageTitle.message, // 'Changing language requires restart',
+    message: locale.messages.changeLanguageMessage.message, // 'Changing current language requires restarting the application, do you wish to do this now?',
+    buttons: [locale.messages.labelNo.message, locale.messages.labelYes.message],
+    defaultId: 1,
+  });
+  if (response === 1) {
+    app.relaunch();
+    app.quit();
+  }
+}
+
 function setupMenu(options) {
   const { platform } = process;
   const menuOptions = Object.assign({}, options, {
@@ -792,6 +821,7 @@ function setupMenu(options) {
     setupWithImport,
     setupAsNewDevice,
     setupAsStandalone,
+    changeLanguage,
   });
   const template = createTemplate(menuOptions, locale.messages);
   const menu = Menu.buildFromTemplate(template);
