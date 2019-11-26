@@ -268,6 +268,7 @@
       }
     },
     async openModalEditGroup(typeUser, name, id) {
+      console.log("holaaaaaaaaaaaaaaaaaaaaa")
       if(document.getElementsByClassName('edit-group-modal').length === 0){
       const companyNumber = textsecure.storage.get('companyNumber', null);
       let admin_client_data = null;

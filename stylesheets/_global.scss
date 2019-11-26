@@ -1875,7 +1875,7 @@ th.sorted.descending:after {
     }
   }
   .divModalHeader{
-    /*height: 70px;*/
+    min-height: 70px;
     padding: 15px;
     position: relative;
     color: $color-white;
@@ -2544,7 +2544,7 @@ input {
   height: 280px;
   overflow: hidden;
   font-size: 14px;
-  background-image: url(./../images/post-it-pin-blue.svg);
+  background-image: url(./../images/post-it-pin-blue-no-line.svg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
@@ -2591,7 +2591,7 @@ input {
  
   }
   &.oneCard{
-    background-image: url(./../images/post-it-pin-blue.svg);
+    background-image: url(./../images/post-it-pin-blue-no-line.svg);
     width: 50%;
     height: calc(100% - 70px);
     margin: 0 auto;
@@ -2679,13 +2679,15 @@ input[type=number] {
     // background-color: #ffe082;
     background-image: url(./../images/post-it-pin-new.svg);
     margin-left: 30px;
+    cursor: pointer;
 }
 .squarecalender{
     height: 30px;
     width: 30px;
     // background-color: #b2ffff;
-    background-image: url(./../images/post-it-pin-blue.svg);
+    background-image: url(./../images/post-it-pin-blue-no-line.svg);
     margin-left: 55px;
     margin-bottom: 10px;
+    cursor: pointer;
 
 }

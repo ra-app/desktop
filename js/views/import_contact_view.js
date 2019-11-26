@@ -316,28 +316,58 @@
               this.$('#sendMultipleInvitations').prop('disabled', true);
             }
             // add element to object
+            const getSelect = document.getElementById('selectUserType-' + id);
             if (checkbox.checked) {
-              if (document.getElementById('kunde-' + id).checked) {
-                dataUsersToInvitate[id] = {
-                  userid: id,
-                  cell: contact.outerHTML,
-                  position: 'kunde',
-                };
-              } else if (document.getElementById('admin-' + id).checked) {
-                dataUsersToInvitate[id] = {
-                  userid: id,
-                  cell: contact.outerHTML,
-                  position: 'admin',
-                };
-              } else if (document.getElementById('none-' + id).checked) {
-                dataUsersToInvitate[id] = {
-                  userid: id,
-                  cell: contact.outerHTML,
-                  position: 'none',
-                };
+              const value =  getSelect.options[getSelect.selectedIndex].value;
+              getSelect.setAttribute('disabled', true);
+              switch (value) {
+                case 'admin':
+                  dataUsersToInvitate[id] = {
+                    userid: id,
+                    cell: contact.outerHTML,
+                    position: 'admin',
+                  };
+                break;
+                case 'client':
+                  dataUsersToInvitate[id] = {
+                    userid: id,
+                    cell: contact.outerHTML,
+                    position: 'kunde',
+                  };
+                break;
+                case 'none':
+                  dataUsersToInvitate[id] = {
+                    userid: id,
+                    cell: contact.outerHTML,
+                    position: 'none',
+                  };
+                break;
+              
+                default:
+                  break;
               }
+              // if (document.getElementById('kunde-' + id).checked) {
+              //   dataUsersToInvitate[id] = {
+              //     userid: id,
+              //     cell: contact.outerHTML,
+              //     position: 'kunde',
+              //   };
+              // } else if (document.getElementById('admin-' + id).checked) {
+              //   dataUsersToInvitate[id] = {
+              //     userid: id,
+              //     cell: contact.outerHTML,
+              //     position: 'admin',
+              //   };
+              // } else if (document.getElementById('none-' + id).checked) {
+              //   dataUsersToInvitate[id] = {
+              //     userid: id,
+              //     cell: contact.outerHTML,
+              //     position: 'none',
+              //   };
+              // }
             } else {
               delete dataUsersToInvitate[id];
+              getSelect.removeAttribute('disabled');
             }
           });
           cellTd.appendChild(checkbox);
@@ -346,160 +376,251 @@
         // eslint-disable-next-line no-case-declarations
         case 'type':
           console.log(userType, "usertypeeeeeeeeeeeeeeeeee")
-          const spanSwitchKunde = document.createElement('span');
-          spanSwitchKunde.className = 'spanSwitch';
-          spanSwitchKunde.innerText = 'Extern';
-
-          const divSwitch = document.createElement('div');
-          divSwitch.className = 'switch-toggle switch-3 switch-candy';
-
-          const inputKunde = document.createElement('input');
-          inputKunde.type = 'radio';
-          inputKunde.name = `state-d-${id}`;
-          inputKunde.id = `kunde-${id}`;
-
-          if (userType === 'client') {
-            inputKunde.checked = true;
-            inputKunde.setAttribute('checked', 'checked');
+          const array = ["none", "Intern","Exterm"];
+          const selectList = document.createElement("select");
+          selectList.id = `selectUserType-${id}`;
+          for (var i = 0; i < array.length; i++) {
+            var option = document.createElement("option");
+            switch (array[i]) {
+              case 'none':
+                option.value = 'none';
+                if(userType == 'none'){
+                  option.selected = true;
+                }
+                break;
+              case 'Intern':
+                option.value = 'admin';
+                if(userType == 'admin'){
+                  option.selected = true;
+                }
+                break;
+              case 'Exterm':
+                option.value = 'client';
+                if(userType == 'client'){
+                  option.selected = true;
+                }
+                break;
+              default:
+                break;
+            }
+            option.text = array[i];
+            selectList.appendChild(option);
           }
-
-          const labelKunde = document.createElement('label');
-          labelKunde.setAttribute('for', `kunde-${id}`);
-          labelKunde.innerHTML = '&nbsp;';
-
-          const inputNone = document.createElement('input');
-          inputNone.type = 'radio';
-          inputNone.name = `state-d-${id}`;
-          inputNone.id = `none-${id}`;
-          if (userType == 'none') {
-            inputNone.checked = true;
-            inputNone.setAttribute('checked', 'checked');
+          if(userType !== 'none'){
+            selectList.disabled = true;
           }
-
-          const labelNone = document.createElement('label');
-          labelNone.setAttribute('for', `none-${id}`);
-          labelNone.innerHTML = '&nbsp;';
-
-          const inputAdmin = document.createElement('input');
-          inputAdmin.type = 'radio';
-          inputAdmin.name = `state-d-${id}`;
-          inputAdmin.id = `admin-${id}`;
-
-          if (userType == 'admin') {
-            inputAdmin.checked = true;
-            inputAdmin.setAttribute('checked', 'checked');
-          }
-          const labelAdmin = document.createElement('label');
-          labelAdmin.setAttribute('for', `admin-${id}`);
-          labelAdmin.innerHTML = '&nbsp;';
-
-          const aLabel = document.createElement('a');
-
-          const spanSwitchAdmin = document.createElement('span');
-          spanSwitchAdmin.className = 'spanSwitch admin';
-          spanSwitchAdmin.innerText = 'Intern';
-          if (hasInvitation.found && hasInvitation.accepted) {
-            inputAdmin.setAttribute('disabled', true);
-            inputNone.setAttribute('disabled', true);
-            inputKunde.setAttribute('disabled', true);
-            inputKunde.disabled = true;
-            inputAdmin.disabled = true;
-            inputNone.disabled = true;
-          }
-
-          divSwitch.appendChild(inputKunde);
-          divSwitch.appendChild(labelKunde);
-          divSwitch.appendChild(inputNone);
-          divSwitch.appendChild(labelNone);
-          divSwitch.appendChild(inputAdmin);
-          divSwitch.appendChild(labelAdmin);
-          divSwitch.appendChild(aLabel);
-
-          cellTd.appendChild(spanSwitchKunde);
-          cellTd.appendChild(divSwitch);
-          cellTd.appendChild(spanSwitchAdmin);
+          selectList.addEventListener('input', (event) => {
+            console.log(event, "eventttttttttttttttttttttt")
+            switch (event.target.value) {
+              case 'admin':
+                dataUsersToUpdate[id] = {
+                  position: 'admin',
+                  userid: id,
+                  cell: contact.outerHTML,
+                };
+                if (this.$('input:checkbox:checked').length <= 1) {
+                  document.getElementById(`checkbox-${id}`).disabled = false;
+                  document.getElementById(`buttonSendInvitation-${id}`).disabled = false;
+                  document.getElementById(`buttonSendInvitation-${id}`).classList.remove('disabled');
+                  document.getElementById(`buttonSendInvitation-${id}`).classList.remove('none');
+                }
+                break;
+              case 'client':
+                dataUsersToUpdate[id] = {
+                  position: 'kunde',
+                  userid: id,
+                  cell: contact.outerHTML,
+                };
+                if (this.$('input:checkbox:checked').length <= 1) {
+                  document.getElementById( `buttonSendInvitation-${id}`).disabled = false;
+                  document.getElementById(`checkbox-${id}`).disabled = false;
+                  document.getElementById(`buttonSendInvitation-${id}`).classList.remove('disabled');
+                  document.getElementById(`buttonSendInvitation-${id}`).classList.remove('none');
+                }
+                break;
+                case 'none':
+                  dataUsersToUpdate[id] = {
+                    position: 'none',
+                    userid: id,
+                    cell: contact.outerHTML,
+                  };
+                  document.getElementById(
+                    `buttonSendInvitation-${id}`
+                  ).disabled = true;
+                  document.getElementById(`checkbox-${id}`).disabled = true;
+                  document.getElementById(`checkbox-${id}`).checked = false;
+                  document.getElementById(`buttonSendInvitation-${id}`).classList.add('disabled');
+                  document.getElementById(`buttonSendInvitation-${id}`).classList.add('none');
+                break;
+            
+              default:
+                break;
+            }
+            dataUsersToUpdate[id] = {
+              position: 'kunde',
+              userid: id,
+              cell: contact.outerHTML,
+            };
+          })
           cellTd.setAttribute('data-sort-value', userType)
+          cellTd.appendChild(selectList);
 
-          inputKunde.addEventListener('click', () => {
-            if (inputKunde.checked) {
-              cellTd.setAttribute('data-sort-value', 'client')
-              dataUsersToUpdate[id] = {
-                position: 'kunde',
-                userid: id,
-                cell: contact.outerHTML,
-              };
-              document.getElementById(`admin-${id}`).checked = false;
-              document.getElementById(`none-${id}`).checked = false;
-              document.getElementById(`admin-${id}`).removeAttribute('cheked');
-              document.getElementById(`none-${id}`).removeAttribute('cheked');
 
-              if (this.$('input:checkbox:checked').length <= 1) {
-                document.getElementById(
-                  `buttonSendInvitation-${id}`
-                ).disabled = false;
-                document.getElementById(`checkbox-${id}`).disabled = false;
-                document
-                  .getElementById(`buttonSendInvitation-${id}`)
-                  .classList.remove('disabled');
-                document
-                  .getElementById(`buttonSendInvitation-${id}`)
-                  .classList.remove('none');
-              }
-            }
-          });
-          inputNone.addEventListener('click', () => {
-            if (inputNone.checked) {
-              cellTd.setAttribute('data-sort-value', 'none')
-              dataUsersToUpdate[id] = {
-                position: 'none',
-                userid: id,
-                cell: contact.outerHTML,
-              };
-              document.getElementById(`admin-${id}`).checked = false;
-              document.getElementById(`kunde-${id}`).checked = false;
-              document.getElementById(`admin-${id}`).removeAttribute('cheked');
-              document.getElementById(`kunde-${id}`).removeAttribute('cheked');
 
-              document.getElementById(
-                `buttonSendInvitation-${id}`
-              ).disabled = true;
-              document.getElementById(`checkbox-${id}`).disabled = true;
-              document.getElementById(`checkbox-${id}`).checked = false;
-              document
-                .getElementById(`buttonSendInvitation-${id}`)
-                .classList.add('disabled');
-              document
-                .getElementById(`buttonSendInvitation-${id}`)
-                .classList.add('none');
-            }
-          });
-          inputAdmin.addEventListener('click', () => {
-            if (inputAdmin.checked) {
-              cellTd.setAttribute('data-sort-value', 'admin')
-              dataUsersToUpdate[id] = {
-                position: 'admin',
-                userid: id,
-                cell: contact.outerHTML,
-              };
-              document.getElementById(`kunde-${id}`).checked = false;
-              document.getElementById(`none-${id}`).checked = false;
-              document.getElementById(`kunde-${id}`).removeAttribute('cheked');
-              document.getElementById(`none-${id}`).removeAttribute('cheked');
-              if (this.$('input:checkbox:checked').length <= 1) {
-                document.getElementById(`checkbox-${id}`).disabled = false;
-                document.getElementById(
-                  `buttonSendInvitation-${id}`
-                ).disabled = false;
-                document
-                  .getElementById(`buttonSendInvitation-${id}`)
-                  .classList.remove('disabled');
-                document
-                  .getElementById(`buttonSendInvitation-${id}`)
-                  .classList.remove('none');
-              }
-            }
-            // console.log('dataUsersToUpdate ===> ', dataUsersToUpdate)
-          });
+          // const spanSwitchKunde = document.createElement('span');
+          // spanSwitchKunde.className = 'spanSwitch';
+          // spanSwitchKunde.innerText = 'Extern';
+
+          // const divSwitch = document.createElement('div');
+          // divSwitch.className = 'switch-toggle switch-3 switch-candy';
+
+          // const inputKunde = document.createElement('input');
+          // inputKunde.type = 'radio';
+          // inputKunde.name = `state-d-${id}`;
+          // inputKunde.id = `kunde-${id}`;
+
+          // if (userType === 'client') {
+          //   inputKunde.checked = true;
+          //   inputKunde.setAttribute('checked', 'checked');
+          // }
+
+          // const labelKunde = document.createElement('label');
+          // labelKunde.setAttribute('for', `kunde-${id}`);
+          // labelKunde.innerHTML = '&nbsp;';
+
+          // const inputNone = document.createElement('input');
+          // inputNone.type = 'radio';
+          // inputNone.name = `state-d-${id}`;
+          // inputNone.id = `none-${id}`;
+          // if (userType == 'none') {
+          //   inputNone.checked = true;
+          //   inputNone.setAttribute('checked', 'checked');
+          // }
+
+          // const labelNone = document.createElement('label');
+          // labelNone.setAttribute('for', `none-${id}`);
+          // labelNone.innerHTML = '&nbsp;';
+
+          // const inputAdmin = document.createElement('input');
+          // inputAdmin.type = 'radio';
+          // inputAdmin.name = `state-d-${id}`;
+          // inputAdmin.id = `admin-${id}`;
+
+          // if (userType == 'admin') {
+          //   inputAdmin.checked = true;
+          //   inputAdmin.setAttribute('checked', 'checked');
+          // }
+          // const labelAdmin = document.createElement('label');
+          // labelAdmin.setAttribute('for', `admin-${id}`);
+          // labelAdmin.innerHTML = '&nbsp;';
+
+          // const aLabel = document.createElement('a');
+
+          // const spanSwitchAdmin = document.createElement('span');
+          // spanSwitchAdmin.className = 'spanSwitch admin';
+          // spanSwitchAdmin.innerText = 'Intern';
+          // if (hasInvitation.found && hasInvitation.accepted) {
+          //   inputAdmin.setAttribute('disabled', true);
+          //   inputNone.setAttribute('disabled', true);
+          //   inputKunde.setAttribute('disabled', true);
+          //   inputKunde.disabled = true;
+          //   inputAdmin.disabled = true;
+          //   inputNone.disabled = true;
+          // }
+
+          // divSwitch.appendChild(inputKunde);
+          // divSwitch.appendChild(labelKunde);
+          // divSwitch.appendChild(inputNone);
+          // divSwitch.appendChild(labelNone);
+          // divSwitch.appendChild(inputAdmin);
+          // divSwitch.appendChild(labelAdmin);
+          // divSwitch.appendChild(aLabel);
+
+          // cellTd.appendChild(spanSwitchKunde);
+          // cellTd.appendChild(divSwitch);
+          // cellTd.appendChild(spanSwitchAdmin);
+          // cellTd.setAttribute('data-sort-value', userType)
+
+          // inputKunde.addEventListener('click', () => {
+          //   if (inputKunde.checked) {
+          //     cellTd.setAttribute('data-sort-value', 'client')
+          //     dataUsersToUpdate[id] = {
+          //       position: 'kunde',
+          //       userid: id,
+          //       cell: contact.outerHTML,
+          //     };
+          //     document.getElementById(`admin-${id}`).checked = false;
+          //     document.getElementById(`none-${id}`).checked = false;
+          //     document.getElementById(`admin-${id}`).removeAttribute('cheked');
+          //     document.getElementById(`none-${id}`).removeAttribute('cheked');
+
+          //     if (this.$('input:checkbox:checked').length <= 1) {
+          //       document.getElementById(
+          //         `buttonSendInvitation-${id}`
+          //       ).disabled = false;
+          //       document.getElementById(`checkbox-${id}`).disabled = false;
+          //       document
+          //         .getElementById(`buttonSendInvitation-${id}`)
+          //         .classList.remove('disabled');
+          //       document
+          //         .getElementById(`buttonSendInvitation-${id}`)
+          //         .classList.remove('none');
+          //     }
+          //   }
+          // });
+          // inputNone.addEventListener('click', () => {
+          //   if (inputNone.checked) {
+          //     cellTd.setAttribute('data-sort-value', 'none')
+          //     dataUsersToUpdate[id] = {
+          //       position: 'none',
+          //       userid: id,
+          //       cell: contact.outerHTML,
+          //     };
+          //     document.getElementById(`admin-${id}`).checked = false;
+          //     document.getElementById(`kunde-${id}`).checked = false;
+          //     document.getElementById(`admin-${id}`).removeAttribute('cheked');
+          //     document.getElementById(`kunde-${id}`).removeAttribute('cheked');
+
+          //     document.getElementById(
+          //       `buttonSendInvitation-${id}`
+          //     ).disabled = true;
+          //     document.getElementById(`checkbox-${id}`).disabled = true;
+          //     document.getElementById(`checkbox-${id}`).checked = false;
+          //     document
+          //       .getElementById(`buttonSendInvitation-${id}`)
+          //       .classList.add('disabled');
+          //     document
+          //       .getElementById(`buttonSendInvitation-${id}`)
+          //       .classList.add('none');
+          //   }
+          // });
+          // inputAdmin.addEventListener('click', () => {
+          //   if (inputAdmin.checked) {
+          //     cellTd.setAttribute('data-sort-value', 'admin')
+          //     dataUsersToUpdate[id] = {
+          //       position: 'admin',
+          //       userid: id,
+          //       cell: contact.outerHTML,
+          //     };
+          //     document.getElementById(`kunde-${id}`).checked = false;
+          //     document.getElementById(`none-${id}`).checked = false;
+          //     document.getElementById(`kunde-${id}`).removeAttribute('cheked');
+          //     document.getElementById(`none-${id}`).removeAttribute('cheked');
+          //     if (this.$('input:checkbox:checked').length <= 1) {
+          //       document.getElementById(`checkbox-${id}`).disabled = false;
+          //       document.getElementById(
+          //         `buttonSendInvitation-${id}`
+          //       ).disabled = false;
+          //       document
+          //         .getElementById(`buttonSendInvitation-${id}`)
+          //         .classList.remove('disabled');
+          //       document
+          //         .getElementById(`buttonSendInvitation-${id}`)
+          //         .classList.remove('none');
+          //     }
+          //   }
+          //   // console.log('dataUsersToUpdate ===> ', dataUsersToUpdate)
+          // });
           break;
         // eslint-disable-next-line no-case-declarations
         case 'status':
@@ -523,25 +644,52 @@
             button.disabled = true;
           }
           button.onclick = () => {
-            if (document.getElementById('kunde-' + id).checked) {
-              dataUsersToInvitate[id] = {
-                userid: id,
-                cell: contact.outerHTML,
-                position: 'kunde',
-              };
-            } else if (document.getElementById('admin-' + id).checked) {
-              dataUsersToInvitate[id] = {
-                userid: id,
-                cell: contact.outerHTML,
-                position: 'admin',
-              };
-            } else if (document.getElementById('none-' + id).checked) {
-              dataUsersToInvitate[id] = {
-                userid: id,
-                cell: contact.outerHTML,
-                position: 'none',
-              };
+            const getSelect = document.getElementById('selectUserType-' + id);
+            const value =  getSelect.options[getSelect.selectedIndex].value;
+            switch (value) {
+              case 'admin':
+                dataUsersToInvitate[id] = {
+                  userid: id,
+                  cell: contact.outerHTML,
+                  position: 'admin',
+                };
+              break;
+              case 'client':
+                dataUsersToInvitate[id] = {
+                  userid: id,
+                  cell: contact.outerHTML,
+                  position: 'kunde',
+                };
+              break;
+              case 'none':
+                dataUsersToInvitate[id] = {
+                  userid: id,
+                  cell: contact.outerHTML,
+                  position: 'none',
+                };
+              break;
+              default:
+                break;
             }
+            // if (document.getElementById('kunde-' + id).checked) {
+            //   dataUsersToInvitate[id] = {
+            //     userid: id,
+            //     cell: contact.outerHTML,
+            //     position: 'kunde',
+            //   };
+            // } else if (document.getElementById('admin-' + id).checked) {
+            //   dataUsersToInvitate[id] = {
+            //     userid: id,
+            //     cell: contact.outerHTML,
+            //     position: 'admin',
+            //   };
+            // } else if (document.getElementById('none-' + id).checked) {
+            //   dataUsersToInvitate[id] = {
+            //     userid: id,
+            //     cell: contact.outerHTML,
+            //     position: 'none',
+            //   };
+            // }
             this.sendInvitation();
           };
           cellTd.appendChild(button);
@@ -697,7 +845,7 @@
       buttonInviteContact.classList.add('buttonInviteContact');
       buttonInviteContact.classList.add('disabled');
       buttonInviteContact.id = 'buttonInviteContact';
-      buttonInviteContact.innerHTML = 'Speichern';
+      buttonInviteContact.innerHTML = 'Jetzt senden';
       buttonInviteContact.onclick = () => {
         this.sendInvitationCall();
       };
@@ -821,12 +969,14 @@
 
         document.getElementById(`buttonSendInvitation-${id}`).innerText = i18n('sendAgainInvitation')
         if(type === 'admin'){
-          document.getElementById(`admin-${id}`).checkeds = true;
-          document.getElementById(`admin-${id}`).setAttribute('checked', 'checked')
+          // document.getElementById(`admin-${id}`).checkeds = true;
+          // document.getElementById(`admin-${id}`).setAttribute('checked', 'checked')
+          document.getElementById('selectUserType-'+id).value = "admin"
         }
         if (type === 'kunde') {
-          document.getElementById(`kunde-${id}`).checked = true;
-          document.getElementById(`kunde-${id}`).setAttribute('checked', 'checked')
+          // document.getElementById(`kunde-${id}`).checked = true;
+          // document.getElementById(`kunde-${id}`).setAttribute('checked', 'checked')
+          document.getElementById('selectUserType-'+id).value = "client"
         }
       })
       dataUsersToInvitate = {};

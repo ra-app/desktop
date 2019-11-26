@@ -23,6 +23,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
+  // const r = await updateGroup('1574679325588-6395822', 'testing02 - tttttttt', ['+34000000006', '+34000000004', '+34000000005']);
+  // const r = await updateGroup('666666-admins', 'testing02 - tttttttt', ['+34000000006', '+34000000004', '+34000000005']);
+  // console.log('GROUP TEST', r);
+
   // await ensureConversation('+34000000003');
 
   // await addAllCompanies();

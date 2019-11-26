@@ -86,6 +86,7 @@
     template: $('#tickets-view').html(),
     render_attributes() {
       if (this.model[0].hasTicket) {
+        console.log(this.model, "modellllllllllllllll")
         return {
           'send-message': i18n('sendMessage'),
           model: this.model,
@@ -409,6 +410,7 @@
     },
 
     setupHeader() {
+      console.log(this.model.attributes, 'setupHeader')
       const getHeaderProps = () => {
         const uuid = this.model.attributes.ticket_uuid;
         const company_id = this.model.attributes.company_id;
@@ -419,7 +421,8 @@
         const expirationSettingName = expireTimer
           ? Whisper.ExpirationTimerOptions.getName(expireTimer || 0)
           : null;
-
+        const group_id = this.model.attributes.id;
+        const group_name = this.model.attributes.name;
         return {
           id: this.model.id,
           name: this.model.getName(),
@@ -467,6 +470,10 @@
           onArchive: () => {
             this.unload('archive');
             this.model.setArchived(true);
+          },
+           openEditGroup: ()=> {
+            const { appView } = window['owsDesktopApp'];
+            appView.openModalEditGroup('group', group_name, group_id);
           },
           closeTicket: async () => {
             await closeTicket(company_id + '', uuid);
@@ -2703,12 +2710,21 @@
     events: {
       'click #EditCardClosePanel': 'closePanel',
       'click #sendEditCard': 'saveEditCard',
-        'click #cancelEditCard': 'cancelEditCard',
-        'keyup #title-card, #textareaTextCard': 'enableDisableButton'
+      'click #cancelEditCard': 'cancelEditCard',
+      'keyup #title-card, #textareaTextCard': 'enableDisableButton',
+      'click #squareNormalPreview, #squarecalenderPreview': 'selectTypeNote'
 
     },
     closePanel() {
       document.getElementsByClassName('edit-card-blackboard')[0].remove();
+    },
+    selectTypeNote(event){
+      const id = event.currentTarget.id;
+      if(id === 'squarecalenderPreview'){
+        this.$('#KalenderNote').click();
+      }else if(id === 'squareNormalPreview'){
+        this.$('#standardNote').click();
+      }
     },
       cancelEditCard(){
         this.closePanel();
@@ -2763,6 +2779,7 @@
 
     initialize(options) {
       if (options) {
+        console.log(options.group_id.includes('-intern'),options, "optionssssssssss")
         // if (options.contact_data !== undefined) {
         this.contactListXml = prepareDataXml(options.contact_data);
         this.objectContact = [];
@@ -2825,6 +2842,10 @@
         }
         // }
       }
+      this.canEditName = true
+      if(this.group_id.includes('-intern')){
+        this.canEditName = false;
+      }
       this.sendDataToModal();
       this.render();
     },
@@ -2839,7 +2860,8 @@
         isEditingName: this.isEditingName,
         groupName: this.groupName,
         editGroupName: this.editGroupName,
-        renderUserGroup: this.renderUserGroup
+        renderUserGroup: this.renderUserGroup,
+        canEditName: this.canEditName,
       };
     },
     events: {

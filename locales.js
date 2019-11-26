@@ -102,6 +102,17 @@ const replace = async () => {
   });
 };
 
+const missing = () => {
+  let merged = {};
+  merged = Object.assign({}, locales['en']);
+  Object.keys(locales).forEach(locale => {
+    merged = Object.assign({}, locales[locale], merged);
+  });
+  Object.keys(locales).forEach(locale => {
+    Object.assign({}, merged, locales[locale]);
+  });
+}
+
 const actions = {
   add,
   del,
@@ -110,6 +121,7 @@ const actions = {
   quit() {
     process.exit();
   },
+  missing,
 };
 
 const main_loop = async () => {
