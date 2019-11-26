@@ -14,10 +14,12 @@
   let limitTicket = 12;
   let offsetTicket = 0;
   let ticketList = [];
+  let intervalNewTickets = null;
   let tmpticketId = '';
   let ticketState = 1;
   let scrolling = false;
   let sorted = false;
+  let gotTicketsAt = Date.now();
   window.Whisper = window.Whisper || {};
 
   Whisper.StickerPackInstallFailedToast = Whisper.ToastView.extend({
@@ -446,13 +448,15 @@
     },
     changeListTicket(list, id = null) {
       const arrayList = list.tickets;
+      console.log('changeListTicket', list, id);
+      if (!arrayList) throw new Error('changeListTicket missing tickets!');
       list.tickets.forEach((element, index) => {
         arrayList[index].date = new Date(element.ts_created)
           .toUTCString()
           .split('GMT')[0];
         arrayList[index].hasTicket = true;
         arrayList[index].company_name = list.company_name;
-        if(id !== null || id !== undefined) {
+        if (id !== null || id !== undefined) {
           arrayList[index].company_avatar = getAvatar(id);
         }
         arrayList[index].avatarSrc = getAvatar(element.client_uuid);
@@ -509,6 +513,32 @@
         scrolling = false;
       }
     },
+    async getNewTickets(id, ticketList) {
+      if(!document.getElementsByClassName('tickets-view')[0]) {
+        clearInterval(intervalNewTickets);
+      }
+      console.log('getNewTicketsgetNewTickets', ticketList);
+
+      let ts;
+      if (ticketList.tickets && ticketList.tickets.length > 0 && ticketList.tickets[0].ts_created) ts = new Date(ticketList.tickets[0].ts_created).getTime();
+      else ts = gotTicketsAt;
+
+      const data = {
+        ts: ts,
+        state: ticketState,
+      }
+      const newTickets = await get_since(id, data);
+      console.log('getNewTickets newTickets', newTickets);
+      if(newTickets && newTickets.tickets) {
+        const temporal = this.changeListTicket(newTickets);
+        temporal.forEach(element => {
+          ticketList.tickets.unshift(element);
+        });
+        const isTicket = true;
+        this.conversation_stack.open(ticketList.tickets, isTicket);
+      };
+      console.log('new ticket listtt',ticketList.tickets);
+    },
     async openTicket(id, messageId = null, resetCall = null, type, editCompany = null) {
       console.log('open ticket', id, type, editCompany);
       this.$('.conversation-stack').on(
@@ -534,10 +564,16 @@
       }
       offsetTicket = limitTicket + offsetTicket;
       try {
+        gotTicketsAt = Date.now();
         ticketList = await getTicketsList(id, data);
         const isTicket = true;
         // if(this.tmpticketId !== id){
         // this.conversation_stack.open(tickets, isTicket, clientDetails);
+        if(intervalNewTickets !== null) {
+          clearInterval(intervalNewTickets);
+        }
+        intervalNewTickets = setInterval(this.getNewTickets.bind(this, id, ticketList), 10000);
+        // this.getNewTickets(id, ticketList);
         if (ticketList.tickets) {
           // ticketList.tickets.forEach((element, index) => {
           //   ticketList.tickets[index].avatarSrc = getAvatar(element.company_id);
@@ -585,6 +621,7 @@
         console.log(ticketList, 'returnnnnnnnnnnnn');
         this.conversation_stack.open(ticketList.tickets, isTicket, editCompany);
         this.focusConversation();
+        ticketList.tickets = [];
         // }
         this.tmpticketId = id;
       } catch (err) {
