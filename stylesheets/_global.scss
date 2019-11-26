@@ -2540,25 +2540,24 @@ input {
 
 .flex-container > div[dataType ="calender"] {
   margin-bottom: 5px;
-  /* padding: 10px; */
   width: calc((100% / 5) - 10px);
-  // height: 300px;
+  line-height: 20px;
   height: 280px;
   overflow: hidden;
   font-size: 14px;
-  background-image: url(./../images/post-it-pin-blue-no-line.svg);
+  background-image: url(./../images/post-it-pin-blue.svg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
-  text-align: center;
+  text-align: center; 
   margin-right: 5px;
   margin-bottom: 15px;
   .titleCardBlackboard{
     max-width: 70%;
-    margin: 10px auto 5px auto;
+    margin: 4px auto 3px auto;
     font-weight: 300;
     color: $color-raapp-text;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
 
     overflow: hidden;
@@ -2580,7 +2579,7 @@ input {
     max-height: 113px;
     overflow: hidden;
 
-    overflow: hidden;
+    line-height: 19.5px;
     text-overflow: ellipsis;
     display: -webkit-box;
     line-height: 16px;    
@@ -2593,20 +2592,23 @@ input {
  
   }
   &.oneCard{
-    background-image: url(./../images/post-it-pin-blue-no-line.svg);
+    background-image: url(./../images/post-it-pin-blue.svg);
     width: 50%;
     height: calc(100% - 70px);
+    background-size: 100%;
     margin: 0 auto;
     p.titleCardBlackboard {
         max-width: 50% !important;
-        margin: 120px auto !important;
-        margin-bottom: 5px !important;
+        margin: 70px auto !important;
+        margin-bottom: 16px !important;
     }
     p.contentCardBlackboard{
+      line-height: 48px;
       max-width: calc(100% - 40px);
       padding-left: 10px;
       padding-right: 10px;
-      max-height: calc(100% - 280px);
+      max-height: calc(100% - 150px);
+      // max-height: calc(100% - 280px);
       -webkit-line-clamp: unset;
       -webkit-box-orient: unset;
       text-overflow: unset;
@@ -2687,7 +2689,7 @@ input[type=number] {
     height: 30px;
     width: 30px;
     // background-color: #b2ffff;
-    background-image: url(./../images/post-it-pin-blue-no-line.svg);
+    background-image: url(./../images/post-it-pin-blue.svg);
     margin-left: 55px;
     margin-bottom: 10px;
     cursor: pointer;
