@@ -95,6 +95,7 @@
           claimed: this.model[0].isClaimed,
           unclaimed: this.model[0].isUnclaimed,
           closed: this.model[0].isClosed,
+          avatarSrc: this.model[0].company_avatar,
         };
       } else {
         if (
@@ -113,6 +114,7 @@
         claimed: this.model[0].isClaimed,
         unclaimed: this.model[0].isUnclaimed,
         closed: this.model[0].isClosed,
+        avatarSrc: this.model[0].avatarSrc,
       };
     },
 

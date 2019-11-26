@@ -16,6 +16,8 @@ interface Props {
   profileName?: string;
   size: number;
   rawPhoneNumber?: string;
+  onclick?: () => void;
+  className?: string;
 }
 
 interface State {
@@ -137,7 +139,8 @@ export class Avatar extends React.Component<Props, State> {
 
     return (
       <div
-        className={classNames(
+        onClick={this.props.onclick}
+        className={this.props.className ? this.props.className : classNames(
           'module-avatar',
           `module-avatar--${size}`,
           !imageBroken ? 'module-avatar--with-image' : 'module-avatar--no-image'
@@ -146,7 +149,9 @@ export class Avatar extends React.Component<Props, State> {
       >
         {!imageBroken && !loading ? (
           // this.renderImage()
+          // tslint:disable-next-line:use-simple-attributes
           <img
+            className={this.props.className ? this.props.className : ''}
             onError={this.handleImageErrorBound}
             alt={i18n('contactAvatarAlt', [title])}
             src={srcImage}
