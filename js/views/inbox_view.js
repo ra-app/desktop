@@ -444,7 +444,7 @@
         }
       }
     },
-    changeListTicket(list) {
+    changeListTicket(list, id = null) {
       const arrayList = list.tickets;
       list.tickets.forEach((element, index) => {
         arrayList[index].date = new Date(element.ts_created)
@@ -452,6 +452,9 @@
           .split('GMT')[0];
         arrayList[index].hasTicket = true;
         arrayList[index].company_name = list.company_name;
+        if(id !== null || id !== undefined) {
+          arrayList[index].company_avatar = getAvatar(id);
+        }
         arrayList[index].avatarSrc = getAvatar(element.client_uuid);
         console.log('Element state !!!! ', element.state);
         switch (element.state) {
@@ -539,7 +542,7 @@
           // ticketList.tickets.forEach((element, index) => {
           //   ticketList.tickets[index].avatarSrc = getAvatar(element.company_id);
           // });
-          ticketList.tickets = this.changeListTicket(ticketList);
+          ticketList.tickets = this.changeListTicket(ticketList, id);
         }
         else {
           let tmpisClaimed = false;
@@ -567,6 +570,7 @@
                 break;
             }
           }
+          // ticketList.tickets[index].avatarSrc = getAvatar(element.company_id);
           ticketList.tickets = [
             {
               hasTicket: false,
@@ -574,10 +578,11 @@
               isClaimed: tmpisClaimed,
               isUnclaimed: tmpisUnclaimed,
               isClosed: tmpisClosed,
+              avatarSrc: getAvatar(id),
             },
           ];
         }
-        console.log(ticketList.tickets, 'returnnnnnnnnnnnn');
+        console.log(ticketList, 'returnnnnnnnnnnnn');
         this.conversation_stack.open(ticketList.tickets, isTicket, editCompany);
         this.focusConversation();
         // }

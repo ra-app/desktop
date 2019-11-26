@@ -1,7 +1,7 @@
 import React from 'react';
 import { debounce } from 'lodash';
 
-// import { Avatar } from './Avatar';
+import { Avatar } from './Avatar';
 
 import { cleanSearchTerm } from '../util/cleanSearchTerm';
 import { LocalizerType } from '../types/Util';
@@ -19,6 +19,7 @@ export interface Props {
 
   // For display
   phoneNumber: string;
+  rawPhoneNumber: string;
   isMe: boolean;
   name?: string;
   color: string;
@@ -52,6 +53,7 @@ export class MainHeader extends React.Component<Props> {
     isAdmin: true,
     hasContact: false,
     isBeta: false,
+    companyID: '',
   };
   private readonly updateSearchBound: (
     event: React.FormEvent<HTMLInputElement>
@@ -90,7 +92,14 @@ export class MainHeader extends React.Component<Props> {
     this.wrapperRef = React.createRef();
     // this.wrapperRefImage = React.createRef();
     // this.handleClickOutside = this.handleClickOutside.bind(this);
+    this.getCOmpanyID();
   }
+
+  public async getCOmpanyID() {
+    const companyID = await COMPANY_ID();
+    this.setState({ companyID: companyID });
+  }
+
   public async componentDidMount() {
     // document.addEventListener('mousedown', this.handleClickOutside);
     this.getDataTocheck();
@@ -230,18 +239,43 @@ export class MainHeader extends React.Component<Props> {
     }
   }
 
+  public renderAvatar() {
+    const {
+      avatarPath,
+      color,
+      i18n,
+      isMe,
+      name,
+      profileName,
+      rawPhoneNumber,
+    } = this.props;
+    const { companyID } = this.state;
+
+    return (
+      <Avatar
+        onclick={this.openEditcompanyBound}
+        avatarPath={avatarPath}
+        color={color}
+        noteToSelf={isMe}
+        conversationType={'company'}
+        i18n={i18n}
+        name={name}
+        phoneNumber={companyID}
+        profileName={profileName}
+        size={48}
+        rawPhoneNumber={rawPhoneNumber}
+        className="mainHeaderIcon"
+      />
+    );
+  }
+
   public render() {
     createUpdateIndicator();
     const {
       searchTerm,
-      // avatarPath,
       i18n,
-      // color,
-      // name,
-      // phoneNumber,
-      // profileName,
     } = this.props;
-    const { openMenu, /*isAdmin,*/ isBeta } = this.state;
+    const { openMenu, /*isAdmin,*/ isBeta, companyID } = this.state;
 
     return (
       <div id="main_header">
@@ -251,7 +285,11 @@ export class MainHeader extends React.Component<Props> {
               <span>VERSION: {CURRENT_VERSION}</span>
             </div>
           )}
-          <img onClick={this.openEditcompanyBound} className="mainHeaderIcon" src="images/header-chat.png" alt="header chat" />
+          {companyID !== '' ? (
+            this.renderAvatar()
+          ) : (
+            <img onClick={this.openEditcompanyBound} className="mainHeaderIcon" src="images/header-chat.png" alt="header chat" />
+          )}
           <span>Kommunikation</span>
           {/* {isAdmin && (
             <img
