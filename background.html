@@ -465,7 +465,7 @@
                 <input type="text" id="editGroupNameInput" value = '{{ editGroupName }}' ></input>
               </div>
               <div class = 'buttonEditNameGroup'>
-                <img class='closeEditNameGroup' id='closeEditName' src='images/icons/x_over_blue_24x24.svg'></img>
+                  <img class='closeEditNameGroup' id='closeEditName' src='images/icons/x_over_blue_24x24.svg'></img>
               </div>
             </div>
           {{/isEditingName}}
@@ -475,7 +475,9 @@
                 <span id='spanCompanyName'>{{ groupName }}</span>
               </div>
               <div class = 'buttonEditNameGroup'>
+                  {{#canEditName}}
                 <img class='editIcon' id='editName' src='images/icons/edit-blue.svg'></img>
+                {{/canEditName}}
               </div>
             </div>
           {{/isEditingName}}
