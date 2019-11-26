@@ -2710,12 +2710,21 @@
     events: {
       'click #EditCardClosePanel': 'closePanel',
       'click #sendEditCard': 'saveEditCard',
-        'click #cancelEditCard': 'cancelEditCard',
-        'keyup #title-card, #textareaTextCard': 'enableDisableButton'
+      'click #cancelEditCard': 'cancelEditCard',
+      'keyup #title-card, #textareaTextCard': 'enableDisableButton',
+      'click #squareNormalPreview, #squarecalenderPreview': 'selectTypeNote'
 
     },
     closePanel() {
       document.getElementsByClassName('edit-card-blackboard')[0].remove();
+    },
+    selectTypeNote(event){
+      const id = event.currentTarget.id;
+      if(id === 'squarecalenderPreview'){
+        this.$('#KalenderNote').click();
+      }else if(id === 'squareNormalPreview'){
+        this.$('#standardNote').click();
+      }
     },
       cancelEditCard(){
         this.closePanel();

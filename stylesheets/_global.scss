@@ -2679,6 +2679,7 @@ input[type=number] {
     // background-color: #ffe082;
     background-image: url(./../images/post-it-pin-new.svg);
     margin-left: 30px;
+    cursor: pointer;
 }
 .squarecalender{
     height: 30px;
@@ -2687,5 +2688,6 @@ input[type=number] {
     background-image: url(./../images/post-it-pin-blue-no-line.svg);
     margin-left: 55px;
     margin-bottom: 10px;
+    cursor: pointer;
 
 }
