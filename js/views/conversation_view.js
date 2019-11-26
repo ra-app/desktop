@@ -86,7 +86,6 @@
     template: $('#tickets-view').html(),
     render_attributes() {
       if (this.model[0].hasTicket) {
-        console.log(this.model, "modellllllllllllllll")
         return {
           'send-message': i18n('sendMessage'),
           model: this.model,

@@ -36,6 +36,7 @@ window.getNodeVersion = () => config.node_version;
 window.getHostName = () => config.hostname;
 window.getServerTrustRoot = () => config.serverTrustRoot;
 window.isBehindProxy = () => Boolean(config.proxyUrl);
+window.getpreferredLocale = () => config.locale;
 
 function setSystemTheme() {
   window.systemTheme = systemPreferences.isDarkMode() ? 'dark' : 'light';
