@@ -160,10 +160,12 @@
               </div>
             {{/model}}
             {{#showAddNote}}
+            {{#isAdmin}}
             <div class = 'addMoreNotes' id = 'addMoreNote' dataType='normal' >
               <p class="titleCardBlackboard">{{title}}</p>
               <p class="contentCardBlackboard">+</p>
             </div>
+            {{/isAdmin}}
             {{/showAddNote}}
           </div>
           {{/isMultiViewMode}}
