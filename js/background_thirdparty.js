@@ -1,3 +1,16 @@
+// Attempt to set version for initial loading screen ASAP
+function trySetVersion() {
+  try {
+    const version = window.getVersion();
+    const elem = document.getElementById('versionHTML');
+    // console.log('trySetVersion', version, elem);
+    elem.innerText = version;
+  } catch (err) {
+    console.warn('trySetVersion failed', err);
+  }
+}
+document.addEventListener('DOMContentLoaded', trySetVersion);
+
 async function handleThirdPartyEvent(event) {
   try {
     const { data, confirm } = event;
