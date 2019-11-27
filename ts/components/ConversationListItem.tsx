@@ -43,7 +43,7 @@ type Props = PropsData & PropsHousekeeping;
 
 export class ConversationListItem extends React.PureComponent<Props> {
   public state = {
-    lastUpdated: 'images/icons/post-it-pin-icon-4.svg',
+    lastUpdated: 'images/icons/post-it-pin-icon.svg',
   };
   // private interval: any;
 
@@ -54,13 +54,13 @@ export class ConversationListItem extends React.PureComponent<Props> {
   }
   // public componentDidMount() {
   //   const updateImg = () => {
-  //     if (this.state.lastUpdated === 'images/icons/post-it-pin-icon-4.svg') {
+  //     if (this.state.lastUpdated === 'images/icons/post-it-pin-icon.svg') {
   //       this.setState({
   //         lastUpdated: 'images/icons/post-it-pin-icon-red-corner.svg',
   //       });
   //     } else {
   //       this.setState({
-  //         lastUpdated: 'images/icons/post-it-pin-icon-4.svg',
+  //         lastUpdated: 'images/icons/post-it-pin-icon.svg',
   //       });
   //     }
   //   };

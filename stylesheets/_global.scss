@@ -2466,7 +2466,7 @@ input {
   height: 280px;
   overflow: hidden;
   font-size: 14px;
-  background-image: url(./../images/post-it-pin-new.svg);
+  background-image: url(./../images/post-it-pin-flat.svg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
@@ -2513,7 +2513,7 @@ input {
  
   }
   &.oneCard{
-    background-image: url(./../images/post-it-pin-new.svg);
+    background-image: url(./../images/post-it-pin-flat.svg);
     width: 50%;
     height: calc(100% - 70px);
     margin: 0 auto;
@@ -2545,7 +2545,7 @@ input {
   height: 280px;
   overflow: hidden;
   font-size: 14px;
-  background-image: url(./../images/post-it-pin-blue.svg);
+  background-image: url(./../images/post-it-pin-blue-lines.svg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
@@ -2592,7 +2592,7 @@ input {
  
   }
   &.oneCard{
-    background-image: url(./../images/post-it-pin-blue.svg);
+    background-image: url(./../images/post-it-pin-blue-lines.svg);
     width: 50%;
     height: calc(100% - 70px);
     background-size: 100%;
@@ -2681,7 +2681,7 @@ input[type=number] {
     height: 30px;
     width: 30px;
     // background-color: #ffe082;
-    background-image: url(./../images/post-it-pin-new.svg);
+    background-image: url(./../images/post-it-pin-flat.svg);
     margin-left: 30px;
     cursor: pointer;
 }
@@ -2689,7 +2689,7 @@ input[type=number] {
     height: 30px;
     width: 30px;
     // background-color: #b2ffff;
-    background-image: url(./../images/post-it-pin-blue.svg);
+    background-image: url(./../images/post-it-pin-blue-lines.svg);
     margin-left: 55px;
     margin-bottom: 10px;
     cursor: pointer;
