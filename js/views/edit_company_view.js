@@ -106,6 +106,15 @@
       // doneIcon.id = 'doneIcon';
       // doneIcon.src = 'images/icons/edit-blue.svg'
       // doneIcon.className = 'editIcon'
+      textarea.onkeyup = (evt) => {
+        const nameCompany = evt.target.value
+        console.log(evt.target.value.length)
+        if(nameCompany.length > 0){
+          this.$('#buttonSaveEditCompany').removeClass('disabled')
+        }else {
+          this.$('#buttonSaveEditCompany').addClass('disabled')
+        }
+      }
 
       settingEditName.append(textarea);
       // settingEditName.append(doneIcon);
@@ -128,7 +137,9 @@
       this.$('#settingEditName').remove();
       this.$('#nameSection').show();
       window.clearCache();
-      updateImagesByUrl(CENTRAL_IMG_ROOT + company_id);
+      if(this.newAvatar) {
+        updateImagesByUrl(CENTRAL_IMG_ROOT + company_id);
+      }
       // this.render();
     },
   });
