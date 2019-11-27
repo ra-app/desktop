@@ -56,6 +56,10 @@ export class ConversationListItem extends React.PureComponent<Props> {
     document.addEventListener('notificationNote', () => this.addNotification());
   }
   public componentWillUnmount() {
+   this.cleanMyInterval();
+  }
+  public cleanMyInterval() {
+    console.log('cleaningggggggggggg')
     if (this.interval) {
       clearInterval(this.interval);
     }
@@ -259,7 +263,7 @@ export class ConversationListItem extends React.PureComponent<Props> {
           {this.renderHeader()}
           {this.renderMessage()}
           {(this.props.type === 'company' && openBlackboard) && (
-            <div onClick={(evt) => { evt.preventDefault(); evt.stopPropagation(); openBlackboard(id); if (this.interval) {clearInterval(this.interval);} }}>
+            <div onClick={(evt) => { evt.preventDefault(); evt.stopPropagation(); openBlackboard(id); this.cleanMyInterval()}}>
               <img className='iconOpenBlackboard' src={this.state.lastUpdated} />
             </div>
           )}
