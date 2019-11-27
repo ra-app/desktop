@@ -62,6 +62,9 @@ export class ConversationListItem extends React.PureComponent<Props> {
     console.log('cleaningggggggggggg')
     if (this.interval) {
       clearInterval(this.interval);
+      this.setState({
+        lastUpdated: 'images/icons/post-it-pin-icon.svg',
+      });
     }
   }
   public addNotification() {
