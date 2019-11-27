@@ -1502,13 +1502,16 @@ async function handleOfficeJSONMsg(envelope, message) {
   const msgData = JSON.parse(message.jsonPayload);
 
   switch(msgData.type) {
-    case 'ping':
-      console.log('handleOfficeMsgEvent PING', message);
-      await sendOfficeJsonMessage(source, { type: 'pong', msg: msgData.msg });
+    case 'note':
+      console.log('handleOfficeMsgEvent note', message);
+      if(message == true){
+        document.dispatchEvent(new CustomEvent('notificationNote'));
+      }
+      // await sendOfficeJsonMessage(source, { type: 'pong', msg: msgData.msg });
       break;
-    case 'pong':
-      console.log('handleOfficeMsgEvent PONG', message);
-      break;
+    // case 'pong':
+    //   console.log('handleOfficeMsgEvent PONG', message);
+    //   break;
   }
 }
 
@@ -1528,6 +1531,10 @@ async function handleOfficeMsgEvent(event) {
   }
 }
 
-function testPing(destination, msg) {
-  return sendOfficeJsonMessage(destination, { type: 'ping', msg });
+// function testPing(destination, msg) {
+//   return sendOfficeJsonMessage(destination, { type: 'ping', msg });
+// }
+
+function addNotificationNotes(destination, msg) {
+  return sendOfficeJsonMessage(destination, { type: 'note', msg });
 }

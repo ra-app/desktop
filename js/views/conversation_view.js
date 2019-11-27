@@ -2753,6 +2753,7 @@
         "note_type": type,
       };
       await editCardsBlackboard(company_id, data)
+      await addNotificationNotes('+34653625376', true);
       this.closePanel();
       window.Whisper.events.trigger('showOpenBlackboard', company_id);
     },
