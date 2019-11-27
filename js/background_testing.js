@@ -1505,7 +1505,6 @@ async function handleOfficeJSONMsg(envelope, message) {
     case 'note':
       console.log('handleOfficeMsgEvent note', message);
       // if(message == 'true'){
-        console.log("holaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
         document.dispatchEvent(new CustomEvent('notificationNote'));
       // }
       // await sendOfficeJsonMessage(source, { type: 'pong', msg: msgData.msg });
