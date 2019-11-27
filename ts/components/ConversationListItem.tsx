@@ -51,10 +51,9 @@ export class ConversationListItem extends React.PureComponent<Props> {
     super(props);
 
     this.interval = null;
-  }
-  public componentDidMount() {
     document.addEventListener('notificationNote', () => this.addNotification());
   }
+
   public componentWillUnmount() {
    this.cleanMyInterval();
   }
@@ -68,6 +67,7 @@ export class ConversationListItem extends React.PureComponent<Props> {
     }
   }
   public addNotification() {
+    console.log('addNotificationssssssssssss', this.interval)
     if (this.interval !== null) {
       clearInterval(this.interval);
     } else {
