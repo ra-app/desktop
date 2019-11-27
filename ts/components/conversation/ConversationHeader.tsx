@@ -4,12 +4,12 @@ import classNames from 'classnames';
 import { Emojify } from './Emojify';
 import { Avatar } from '../Avatar';
 import { LocalizerType } from '../../types/Util';
-import {
-  ContextMenu,
-  ContextMenuTrigger,
-  MenuItem,
-  // SubMenu,
-} from 'react-contextmenu';
+// import {
+//   ContextMenu,
+//   // ContextMenuTrigger,
+//   MenuItem,
+//   // SubMenu,
+// } from 'react-contextmenu';
 
 interface TimerOption {
   name: string;
@@ -49,13 +49,17 @@ interface Props {
 
   onArchive: () => void;
   onMoveToInbox: () => void;
-  openEditGroup: () => void;
-
   i18n: LocalizerType;
 }
 
 export class ConversationHeader extends React.Component<Props> {
-  public showMenuBound: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  public state = {
+    openMenu: false,
+  };
+  public wrapperRef: any;
+  public wrapperRefImage: any;
+  public showMenuBound: () => void;
+  public openEditGroupBound: () => void;
   public menuTriggerRef: React.RefObject<any>;
 
   public constructor(props: Props) {
@@ -63,17 +67,35 @@ export class ConversationHeader extends React.Component<Props> {
 
     this.menuTriggerRef = React.createRef();
     this.showMenuBound = this.showMenu.bind(this);
+    this.openEditGroupBound = this.openEditGroup.bind(this);
+    this.wrapperRef = React.createRef();
+    this.wrapperRefImage = React.createRef();
+    this.handleClickOutside = this.handleClickOutside.bind(this);
   }
 
-  public showMenu(event: React.MouseEvent<HTMLButtonElement>) {
-    event.preventDefault();
-    event.stopPropagation();
-    if (this.menuTriggerRef.current) {
-      this.menuTriggerRef.current.handleContextClick(event);
+  public componentDidMount() {
+    document.addEventListener('mousedown', this.handleClickOutside);
+  }
+
+  public componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickOutside);
+  }
+  public handleClickOutside(event: any) {
+    const { openMenu } = this.state;
+    if (openMenu && (this.wrapperRef && (!this.wrapperRef.current.contains(event.target)))) {
+      this.setState({ openMenu: false });
     }
   }
 
+  public showMenu() {
+    this.setState({ openMenu: !this.state.openMenu });
+  }
 
+  public openEditGroup() {
+    const { appView } = window['owsDesktopApp'];
+    const { name, id } = this.props;
+    appView.openModalEditGroup('group', name, id);
+  }
 
   public renderBackButton() {
     const { onGoBack, showBackButton } = this.props;
@@ -179,45 +201,53 @@ export class ConversationHeader extends React.Component<Props> {
     );
   }
 
-  public renderGear(triggerId: string) {
-    const { showBackButton } = this.props;
-
+  public renderGear() {
+    // const { showBackButton } = this.props;
     return (
-      <ContextMenuTrigger id={triggerId} ref={this.menuTriggerRef}>
-        {/* <button
-          onClick={this.showMenuBound}
-          className={classNames(
-            'module-conversation-header__gear-icon',
-            showBackButton
-              ? null
-              : 'module-conversation-header__gear-icon--show'
-          )}
-          disabled={showBackButton}
-        /> */}
-        <button
-          onClick={this.showMenuBound}
-          className="chat_menu"
-          disabled={showBackButton}
-        >
+    //   <ContextMenuTrigger id={triggerId} ref={this.menuTriggerRef}>
+    //   {/* <button
+    //     onClick={this.showMenuBound}
+    //     className={classNames(
+    //       'module-conversation-header__gear-icon',
+    //       showBackButton
+    //         ? null
+    //         : 'module-conversation-header__gear-icon--show'
+    //     )}
+    //     disabled={showBackButton}
+    //   /> */}
+    //   <button
+    //     onClick={this.showMenuBound}
+    //     className="chat_menu"
+    //     disabled={showBackButton}
+    //   >
+    //     <img
+    //       src="images/icons/menu_over_blue_24x24.svg"
+    //       className="chat_menu"
+    //       alt="Chat menu"
+    //     />
+    //   </button>
+    // </ContextMenuTrigger>
+      <div className="menuButton">
+        <span onClick={this.showMenuBound}>
           <img
+            style={{ height: 30 }}
             src="images/icons/menu_over_blue_24x24.svg"
             className="chat_menu"
             alt="Chat menu"
           />
-        </button>
-      </ContextMenuTrigger>
+        </span>
+      </div>
     );
   }
 
-  public renderMenu(triggerId: string) {
-    console.log(triggerId, "ffffffffffffffffff")
+  public renderMenu(/*triggerId: string*/) {
     const {
       i18n,
       // isMe,
       isGroup,
       isArchived,
       isClosed,
-      // onDeleteMessages,
+      // // onDeleteMessages,
       closeTicket,
       // onResetSession,
       // onSetDisappearingMessages,
@@ -226,73 +256,100 @@ export class ConversationHeader extends React.Component<Props> {
       // onShowSafetyNumber,
       onArchive,
       onMoveToInbox,
-      openEditGroup,
-      // timerOptions,
+      // // timerOptions,
       isCompany,
     } = this.props;
 
     // const disappearingTitle = i18n('disappearingMessages') as any;
 
     return (
-      <ContextMenu id={triggerId}>
-        {/* {!isCompany ? (
-          <SubMenu title={disappearingTitle}>
-            {(timerOptions || []).map(item => (
-              <MenuItem
-                key={item.value}
-                onClick={() => {
-                  onSetDisappearingMessages(item.value);
-                }}
-              >
-                {item.name}
-              </MenuItem>
-            ))}
-          </SubMenu>
-        ) : null} */}
-        {/* <MenuItem onClick={onShowAllMedia}>{i18n('viewAllMedia')}</MenuItem> */}
-        {/* {isGroup ? (
-          <MenuItem onClick={onShowGroupMembers}>
-            {i18n('showMembers')}
-          </MenuItem>
-        ) : null} */}
-        {/* {!isGroup && !isMe && !isCompany ? (
-          <MenuItem onClick={onShowSafetyNumber}>
-            {i18n('showSafetyNumber')}
-          </MenuItem>
-        ) : null} */}
-        {/* {!isGroup && !isCompany ? (
-          <MenuItem onClick={onResetSession}>{i18n('resetSession')}</MenuItem>
-        ) : null} */}
+      // <ContextMenu id={triggerId}>
+      //   {/* {!isCompany ? (
+      //     <SubMenu title={disappearingTitle}>
+      //       {(timerOptions || []).map(item => (
+      //         <MenuItem
+      //           key={item.value}
+      //           onClick={() => {
+      //             onSetDisappearingMessages(item.value);
+      //           }}
+      //         >
+      //           {item.name}
+      //         </MenuItem>
+      //       ))}
+      //     </SubMenu>
+      //   ) : null} */}
+      //   {/* <MenuItem onClick={onShowAllMedia}>{i18n('viewAllMedia')}</MenuItem> */}
+      //   {/* {isGroup ? (
+      //     <MenuItem onClick={onShowGroupMembers}>
+      //       {i18n('showMembers')}
+      //     </MenuItem>
+      //   ) : null} */}
+      //   {/* {!isGroup && !isMe && !isCompany ? (
+      //     <MenuItem onClick={onShowSafetyNumber}>
+      //       {i18n('showSafetyNumber')}
+      //     </MenuItem>
+      //   ) : null} */}
+      //   {/* {!isGroup && !isCompany ? (
+      //     <MenuItem onClick={onResetSession}>{i18n('resetSession')}</MenuItem>
+      //   ) : null} */}
 
-        {isArchived ? (
-          <MenuItem onClick={onMoveToInbox}>
-            {i18n('moveConversationToInbox')}
-          </MenuItem>
-        ) : !isCompany ? (
-          <MenuItem onClick={onArchive}>{i18n('archiveConversation')}</MenuItem>
-        ) : null}
-        {(isGroup) ? (
-          <MenuItem onClick={openEditGroup}>Gruppe bearbeiten</MenuItem>
-        ) : null}
-        {/* {!isCompany ? (
-          <MenuItem onClick={onDeleteMessages}>
-            {i18n('deleteMessages')}
-          </MenuItem>
-        ) : null} */}
-        {(!isCompany && !isClosed) && !isGroup ? (
-          <MenuItem>
-            <MenuItem onClick={closeTicket}>{i18n('closeTicket')}</MenuItem>
-          </MenuItem>
-        ) : null}
-      </ContextMenu>
+      //   {isArchived ? (
+      //     <MenuItem onClick={onMoveToInbox}>
+      //       {i18n('moveConversationToInbox')}
+      //     </MenuItem>
+      //   ) : !isCompany ? (
+      //     <MenuItem onClick={onArchive}>{i18n('archiveConversation')}</MenuItem>
+      //   ) : null}
+      //   {(isGroup) && (
+      //     <MenuItem onClick={this.openEditGroupBound}>Gruppe bearbeiten</MenuItem>
+      //   )}
+      //   {/* {!isCompany ? (
+      //     <MenuItem onClick={onDeleteMessages}>
+      //       {i18n('deleteMessages')}
+      //     </MenuItem>
+      //   ) : null} */}
+      //   {(!isCompany && !isClosed) && !isGroup ? (
+      //     <MenuItem>
+      //       <MenuItem onClick={closeTicket}>{i18n('closeTicket')}</MenuItem>
+      //     </MenuItem>
+      //   ) : null}
+      // </ContextMenu>
+      <div className="module-main-header__info" style={{padding: 0}}>
+        <div className="menuChat" ref={this.wrapperRef}>
+          <ul className="ulMenuChat">
+            {isArchived ? (
+              <li onClick={onMoveToInbox}>
+                <span>
+                  {i18n('moveConversationToInbox')}
+                </span>
+              </li>
+            ) : !isCompany && (
+              <li onClick={onArchive}>
+                {i18n('archiveConversation')}
+              </li>
+            )}
+            {(isGroup) && (
+              <li>
+                <span onClick={this.openEditGroupBound}>Gruppe bearbeiten</span>
+              </li>
+            )}
+            {(!isCompany && !isClosed) && !isGroup && (
+              <li onClick={closeTicket}>
+                <span>
+                  {i18n('closeTicket')}
+                </span>
+              </li>
+            )}
+          </ul>
+        </div>
+      </div>
     );
   }
 
   public render() {
-    const { id } = this.props;
-    console.log(this.props, "propssssssssssssssssss")
-    const triggerId = `conversation-${id}`;
-
+    // const { id } = this.props;
+    // console.log(this.props, "propssssssssssssssssss")
+    // const triggerId = `conversation-${id}`;
     return (
       <div className="module-conversation-header">
         {this.renderBackButton()}
@@ -303,8 +360,13 @@ export class ConversationHeader extends React.Component<Props> {
           </div>
         </div>
         {this.renderExpirationLength()}
-        {this.renderGear(triggerId)}
-        {this.renderMenu(triggerId)}
+        {/* {this.renderGear(triggerId)}
+        {this.renderMenu(triggerId)} */}
+        {!this.state.openMenu ? (
+          this.renderGear()
+        ) : (
+          this.renderMenu()
+        )}
       </div>
     );
   }
