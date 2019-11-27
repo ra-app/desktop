@@ -54,7 +54,7 @@ export class Avatar extends React.Component<Props, State> {
       const clientUuid = getClientInfo.uuid;
       avatar =  API_URL + 'public/img/' + clientUuid;
     }
-    const result = await await fetch(avatar);
+    const result =  await fetch(avatar);
     this.setState({ srcImage: result.url, loading: false });
   }
   public handleImageError() {
