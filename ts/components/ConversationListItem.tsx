@@ -59,7 +59,6 @@ export class ConversationListItem extends React.PureComponent<Props> {
    this.cleanMyInterval();
   }
   public cleanMyInterval() {
-    console.log('cleaningggggggggggg')
     if (this.interval) {
       clearInterval(this.interval);
       this.setState({
