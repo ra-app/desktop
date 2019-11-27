@@ -2753,9 +2753,22 @@
         "note_type": type,
       };
       await editCardsBlackboard(company_id, data)
-      await addNotificationNotes('+34653625376', true);
+      this.sendNotificationBlackboard()
       this.closePanel();
       window.Whisper.events.trigger('showOpenBlackboard', company_id);
+    },
+    async sendNotificationBlackboard(){
+      const companyUsers = await getClientAdminCompany(company_id)
+      companyUsers.admins.forEach(element => {
+        if(element.phone_number !== textsecure.storage.user.getNumber()) {
+          await addNotificationNotes(element.phone_number, true);
+        }
+      });
+      companyUsers.clients.forEach(element => {
+        if(element.phone_number !== textsecure.storage.user.getNumber()) {
+          await addNotificationNotes(element.phone_number, true);
+        }
+      });
     },
     async removeCard() {
       const title = '';
