@@ -2753,21 +2753,21 @@
         "note_type": type,
       };
       await editCardsBlackboard(company_id, data)
-      this.sendNotificationBlackboard()
+      this.sendNotificationBlackboard(company_id)
       this.closePanel();
       window.Whisper.events.trigger('showOpenBlackboard', company_id);
     },
-    async sendNotificationBlackboard(){
-      const companyUsers = await getClientAdminCompany(company_id)
+    async sendNotificationBlackboard(company_id) {
+      const companyUsers = await getClientAdminCompany(company_id);
+      const me = await textsecure.storage.user.getNumber();
       companyUsers.admins.forEach(element => {
-        if(element.phone_number !== textsecure.storage.user.getNumber()) {
-          await addNotificationNotes(element.phone_number, true);
+        if(element.phone_number !== me){
+          addNotificationNotes(element.phone_number, true);
         }
+ 
       });
       companyUsers.clients.forEach(element => {
-        if(element.phone_number !== textsecure.storage.user.getNumber()) {
-          await addNotificationNotes(element.phone_number, true);
-        }
+          addNotificationNotes(element.phone_number, true);
       });
     },
     async removeCard() {
