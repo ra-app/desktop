@@ -45,33 +45,36 @@ export class ConversationListItem extends React.PureComponent<Props> {
   public state = {
     lastUpdated: 'images/icons/post-it-pin-icon.svg',
   };
-  // private interval: any;
+  private interval: any;
 
   constructor(props: Props) {
     super(props);
 
-    // this.interval = null;
+    this.interval = null;
   }
-  // public componentDidMount() {
-  //   const updateImg = () => {
-  //     if (this.state.lastUpdated === 'images/icons/post-it-pin-icon.svg') {
-  //       this.setState({
-  //         lastUpdated: 'images/icons/post-it-pin-icon-red-corner.svg',
-  //       });
-  //     } else {
-  //       this.setState({
-  //         lastUpdated: 'images/icons/post-it-pin-icon.svg',
-  //       });
-  //     }
-  //   };
-  //   this.interval = setInterval(updateImg, 2000);
-  // }
+  public componentDidMount() {
+    document.addEventListener('notificationNote', () => this.addNotification());
+  }
+  public componentWillUnmount() {
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
+  }
+  public addNotification() {
+    this.interval = setInterval(() => {this.updateImg(); }, 2000);
+  }
 
-  // public componentWillUnmount() {
-  //   if (this.interval) {
-  //     clearInterval(this.interval);
-  //   }
-  // }
+  public updateImg ()  {
+    if (this.state.lastUpdated === 'images/icons/post-it-pin-icon.svg') {
+      this.setState({
+        lastUpdated: 'images/icons/post-it-pin-icon-red-corner.svg',
+      });
+    } else {
+      this.setState({
+        lastUpdated: 'images/icons/post-it-pin-icon.svg',
+      });
+    }
+  }
 
   public renderAvatar() {
     const {

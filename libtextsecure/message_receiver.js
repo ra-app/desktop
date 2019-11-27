@@ -990,7 +990,7 @@ MessageReceiver.prototype.extend({
     throw new Error('Unsupported content message');
   },
   handleThirdPartyMessage(envelope, message) {
-    console.log('message_receiver handleThirdPartyMessage - Envelope:', envelope, 'Message:', message);
+    // console.log('message_receiver handleThirdPartyMessage - Envelope:', envelope, 'Message:', message);
 
     const ev = new Event('third_party');
     ev.confirm = this.removeFromCache.bind(this, envelope); // Remove from cache after processing!
@@ -1002,7 +1002,7 @@ MessageReceiver.prototype.extend({
     return this.dispatchAndWait(ev);
   },
   handleOfficeMessage(envelope, message) {
-    console.log('message_receiver handleOfficeMessage - Envelope:', envelope, 'Message:', message);
+    // console.log('message_receiver handleOfficeMessage - Envelope:', envelope, 'Message:', message);
 
     const ev = new Event('office_msg');
     ev.confirm = this.removeFromCache.bind(this, envelope); // Remove from cache after processing!
