@@ -40,6 +40,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   // await testProfile();
 
   // await testPing('+34653625376', 'DERP');
+
+  // document.addEventListener('derp', (event) => console.log('DERP EVENT', event));
+  // document.dispatchEvent(new CustomEvent('derp', { detail: 'lolololo' }));
 });
 
 // === UPDATER THINGS START ===
