@@ -451,16 +451,16 @@
       console.log('changeListTicket', list, id);
       if (!arrayList) throw new Error('changeListTicket missing tickets!');
       list.tickets.forEach((element, index) => {
-        arrayList[index].date = new Date(element.ts_created)
-          .toUTCString()
-          .split('GMT')[0];
+        // arrayList[index].date = new Date(element.ts_created)
+        //   .toUTCString()
+        //   .split('GMT')[0];
+        arrayList[index].date = this.setDate(element.ts_created)
         arrayList[index].hasTicket = true;
         arrayList[index].company_name = list.company_name;
         if (id !== null || id !== undefined) {
           arrayList[index].company_avatar = getAvatar(id);
         }
         arrayList[index].avatarSrc = getAvatar(element.client_uuid);
-        console.log('Element state !!!! ', element.state);
         switch (element.state) {
           case 0:
             arrayList[index].status = i18n('Unknown');
@@ -496,6 +496,14 @@
       });
 
       return arrayList;
+    },
+    setDate(date){
+      const language = window.getpreferredLocale()
+      var d = new Date(date);
+      const  options = { weekday: "long", year: "numeric", month: "short",  
+      day: "numeric", hour: 'numeric', minute:'numeric', second:'numeric' }; 
+      const  n = d.toLocaleDateString(language, options);
+      return n;
     },
     onTicketScroll(evt) {
       scrolling = true;

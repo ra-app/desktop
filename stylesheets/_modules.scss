@@ -2327,6 +2327,7 @@
   .module-main-header__info {
     position: fixed;
     width: calc(100% - 300px);
+    user-select: none;
     z-index: 9;
     img {
       float: unset;

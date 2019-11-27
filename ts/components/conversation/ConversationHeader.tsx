@@ -49,13 +49,13 @@ interface Props {
 
   onArchive: () => void;
   onMoveToInbox: () => void;
+  openEditGroup: () => void;
 
   i18n: LocalizerType;
 }
 
 export class ConversationHeader extends React.Component<Props> {
   public showMenuBound: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  public openEditGroupBound : () => void;
   public menuTriggerRef: React.RefObject<any>;
 
   public constructor(props: Props) {
@@ -63,20 +63,17 @@ export class ConversationHeader extends React.Component<Props> {
 
     this.menuTriggerRef = React.createRef();
     this.showMenuBound = this.showMenu.bind(this);
-    this.openEditGroupBound = this.openEditGroup.bind(this);
   }
 
   public showMenu(event: React.MouseEvent<HTMLButtonElement>) {
+    event.preventDefault();
+    event.stopPropagation();
     if (this.menuTriggerRef.current) {
       this.menuTriggerRef.current.handleContextClick(event);
     }
   }
 
-  public openEditGroup() {
-    const { appView } = window['owsDesktopApp'];
-    const { name, id } = this.props;
-    appView.openModalEditGroup('group', name, id);
-  }
+
 
   public renderBackButton() {
     const { onGoBack, showBackButton } = this.props;
@@ -213,6 +210,7 @@ export class ConversationHeader extends React.Component<Props> {
   }
 
   public renderMenu(triggerId: string) {
+    console.log(triggerId, "ffffffffffffffffff")
     const {
       i18n,
       // isMe,
@@ -228,6 +226,7 @@ export class ConversationHeader extends React.Component<Props> {
       // onShowSafetyNumber,
       onArchive,
       onMoveToInbox,
+      openEditGroup,
       // timerOptions,
       isCompany,
     } = this.props;
@@ -272,9 +271,9 @@ export class ConversationHeader extends React.Component<Props> {
         ) : !isCompany ? (
           <MenuItem onClick={onArchive}>{i18n('archiveConversation')}</MenuItem>
         ) : null}
-        {(isGroup) && (
-          <MenuItem onClick={this.openEditGroupBound}>Gruppe bearbeiten</MenuItem>
-        )}
+        {(isGroup) ? (
+          <MenuItem onClick={openEditGroup}>Gruppe bearbeiten</MenuItem>
+        ) : null}
         {/* {!isCompany ? (
           <MenuItem onClick={onDeleteMessages}>
             {i18n('deleteMessages')}
@@ -291,6 +290,7 @@ export class ConversationHeader extends React.Component<Props> {
 
   public render() {
     const { id } = this.props;
+    console.log(this.props, "propssssssssssssssssss")
     const triggerId = `conversation-${id}`;
 
     return (

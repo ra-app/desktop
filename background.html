@@ -160,10 +160,12 @@
               </div>
             {{/model}}
             {{#showAddNote}}
+            {{#isAdmin}}
             <div class = 'addMoreNotes' id = 'addMoreNote' dataType='normal' >
               <p class="titleCardBlackboard">{{title}}</p>
               <p class="contentCardBlackboard">+</p>
             </div>
+            {{/isAdmin}}
             {{/showAddNote}}
           </div>
           {{/isMultiViewMode}}
@@ -194,8 +196,8 @@
           <span>Notizentyp</span>
           <div class="RadioButtonType">
             <div class="PreviewNotes">
-              <div class="squareNormal"></div>
-              <div class="squarecalender"></div>
+              <div class="squareNormal" id='squareNormalPreview'></div>
+              <div class="squarecalender" id='squarecalenderPreview'></div>
             </div>
               <form id="myForm">
                   <input type="radio" name="colors" id="standardNote" value='normal'>Standard 
@@ -465,7 +467,7 @@
                 <input type="text" id="editGroupNameInput" value = '{{ editGroupName }}' ></input>
               </div>
               <div class = 'buttonEditNameGroup'>
-                <img class='closeEditNameGroup' id='closeEditName' src='images/icons/x_over_blue_24x24.svg'></img>
+                  <img class='closeEditNameGroup' id='closeEditName' src='images/icons/x_over_blue_24x24.svg'></img>
               </div>
             </div>
           {{/isEditingName}}
@@ -475,7 +477,9 @@
                 <span id='spanCompanyName'>{{ groupName }}</span>
               </div>
               <div class = 'buttonEditNameGroup'>
+                  {{#canEditName}}
                 <img class='editIcon' id='editName' src='images/icons/edit-blue.svg'></img>
+                {{/canEditName}}
               </div>
             </div>
           {{/isEditingName}}
@@ -1267,7 +1271,7 @@
       <div class='message'></div>
     </div>
     <div class="footer">
-      <span>© 2019 OfficeApp</span> | Desktop Version 0.0.14
+      <span>© 2019 OfficeApp</span> | Desktop Version <span id="versionHTML"></span>
     </div>
   </div>
 
