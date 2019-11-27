@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // await testProfile();
 
-  await testPing('+34653625376', 'DERP');
+  // await testPing('+34653625376', 'DERP');
 });
 
 // === UPDATER THINGS START ===
@@ -1494,23 +1494,29 @@ async function sendOfficeJsonMessage(destination, data) {
   console.log('sendOfficeJsonMessage', destination, data, r);
 }
 
+async function handleOfficeJSONMsg(envelope, message) {
+  const source = envelope.source;
+  const msgData = JSON.parse(message.jsonPayload);
+
+  switch(msgData.type) {
+    case 'ping':
+      console.log('handleOfficeMsgEvent PING', message);
+      await sendOfficeJsonMessage(source, { type: 'pong', msg: msgData.msg });
+      break;
+    case 'pong':
+      console.log('handleOfficeMsgEvent PONG', message);
+      break;
+  }
+}
+
 async function handleOfficeMsgEvent(event) {
   try {
     const { data, confirm } = event;
     const { envelope, message } = data;
-    console.log('handleOfficeMsgEvent', envelope, message);
+    // console.log('handleOfficeMsgEvent', envelope, message);
 
-    if (message.jsonPayload) {
-      const msgData = JSON.parse(message.jsonPayload);
-      switch(msgData.type) {
-        case 'ping':
-          console.log('handleOfficeMsgEvent PING', message);
-          await sendOfficeJsonMessage(envelope.source, { type: 'pong', msg: msgData.msg });
-          break;
-        case 'pong':
-          console.log('handleOfficeMsgEvent PONG', message);
-          break;
-      }
+    if (message.type === 1 && message.jsonPayload) {
+      await handleOfficeJSONMsg(envelope, message)
     }
 
     confirm();
