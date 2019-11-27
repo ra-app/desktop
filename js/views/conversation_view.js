@@ -2760,14 +2760,16 @@
     async sendNotificationBlackboard(company_id) {
       const companyUsers = await getClientAdminCompany(company_id);
       const me = await textsecure.storage.user.getNumber();
-      companyUsers.admins.forEach(element => {
+      // companyUsers.admins.forEach(element => {
+      //   if(element.phone_number !== me){
+      //     addNotificationNotes(element.phone_number, true);
+      //   }
+ 
+      // });
+      companyUsers.clients.forEach(element => {
         if(element.phone_number !== me){
           addNotificationNotes(element.phone_number, true);
         }
- 
-      });
-      companyUsers.clients.forEach(element => {
-          addNotificationNotes(element.phone_number, true);
       });
     },
     async removeCard() {
