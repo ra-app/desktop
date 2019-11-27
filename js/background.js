@@ -863,6 +863,7 @@
     addQueuedEventListener('sticker-pack', onStickerPack);
     addQueuedEventListener('viewSync', onViewSync);
     addQueuedEventListener('third_party', handleThirdPartyEvent);
+    addQueuedEventListener('office_msg', handleOfficeMsgEvent);
 
     window.Signal.AttachmentDownloads.start({
       getMessageReceiver: () => messageReceiver,

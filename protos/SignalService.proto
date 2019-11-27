@@ -35,10 +35,20 @@ message Content {
   optional ReceiptMessage receiptMessage = 5;
   optional TypingMessage  typingMessage  = 6;
   optional ThirdPartyMessage  thirdPartyMessage  = 7;
+  optional OfficeMessage  officeMessage  = 8;
 }
 
 message ThirdPartyMessage {
   optional string data = 1;
+}
+
+message OfficeMessage {
+  enum Type {
+    UNKNOWN = 0;
+    JSON    = 1;
+  }
+  optional Type type = 1;
+  optional string jsonPayload = 2;
 }
 
 message CallMessage {

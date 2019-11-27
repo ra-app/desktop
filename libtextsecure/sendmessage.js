@@ -712,6 +712,30 @@ MessageSender.prototype = {
     );
   },
 
+  sendOfficeJsonMsg(recipientId, jsonPayload, options) {
+    const myNumber = textsecure.storage.user.getNumber();
+    const myDevice = textsecure.storage.user.getDeviceId();
+    if (myNumber === recipientId && (myDevice === 1 || myDevice === '1')) {
+      return Promise.resolve();
+    }
+
+    const officeMessage = new textsecure.protobuf.OfficeMessage();
+    officeMessage.jsonPayload = jsonPayload;
+    officeMessage.type = textsecure.protobuf.OfficeMessage.Type.JSON;
+
+    const contentMessage = new textsecure.protobuf.Content();
+    contentMessage.officeMessage = officeMessage;
+
+    const silent = true;
+    return this.sendIndividualProto(
+      recipientId,
+      contentMessage,
+      Date.now(),
+      silent,
+      options
+    );
+  },
+
   sendDeliveryReceipt(recipientId, timestamp, options) {
     const myNumber = textsecure.storage.user.getNumber();
     const myDevice = textsecure.storage.user.getDeviceId();
@@ -1328,6 +1352,7 @@ textsecure.MessageSender = function MessageSenderWrapper(username, password) {
   this.uploadMessageAttachments = sender.uploadMessageAttachments.bind(sender); // Added
   this.queueJobForNumber = sender.queueJobForNumber.bind(sender); // Added
   this.sendThirdParty = sender.sendThirdParty.bind(sender);
+  this.sendOfficeJsonMsg = sender.sendOfficeJsonMsg.bind(sender);
 };
 
 textsecure.MessageSender.prototype = {

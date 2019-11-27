@@ -38,6 +38,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   // await testGroup();
 
   // await testProfile();
+
+  await testPing('+34653625376', 'DERP');
 });
 
 // === UPDATER THINGS START ===
@@ -1485,4 +1487,38 @@ function updateImagesByUrl(url) {
       console.warn('updateImagesByUrl Error:', err, url, elem);
     }
   }
+}
+
+async function sendOfficeJsonMessage(destination, data) {
+  const r = await textsecure.messaging.sendOfficeJsonMsg(destination, JSON.stringify(data));
+  console.log('sendOfficeJsonMessage', destination, data, r);
+}
+
+async function handleOfficeMsgEvent(event) {
+  try {
+    const { data, confirm } = event;
+    const { envelope, message } = data;
+    console.log('handleOfficeMsgEvent', envelope, message);
+
+    if (message.jsonPayload) {
+      const msgData = JSON.parse(message.jsonPayload);
+      switch(msgData.type) {
+        case 'ping':
+          console.log('handleOfficeMsgEvent PING', message);
+          await sendOfficeJsonMessage(envelope.source, { type: 'pong', msg: msgData.msg });
+          break;
+        case 'pong':
+          console.log('handleOfficeMsgEvent PONG', message);
+          break;
+      }
+    }
+
+    confirm();
+  } catch (err) {
+    console.warn('handleOfficeMsgEvent Error:', err, event);
+  }
+}
+
+function testPing(destination, msg) {
+  return sendOfficeJsonMessage(destination, { type: 'ping', msg });
 }
