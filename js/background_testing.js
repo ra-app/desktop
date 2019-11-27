@@ -824,6 +824,10 @@ const getTicketsList = async (company_id, data) => {
   return apiRequest('api/v1/admin/' + company_id + '/tickets/get', data);
 };
 
+const get_since = async (company_id, data) => {
+  return apiRequest('api/v1/admin/' + company_id + '/tickets/get_since', data);
+};
+
 const updateContact = async (company_id, contacts_data) => {
   return apiRequest(
     'api/v1/admin/' + company_id + '/contacts/update',
