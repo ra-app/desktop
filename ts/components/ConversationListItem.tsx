@@ -263,7 +263,7 @@ export class ConversationListItem extends React.PureComponent<Props> {
           {this.renderHeader()}
           {this.renderMessage()}
           {(this.props.type === 'company' && openBlackboard) && (
-            <div onClick={(evt) => { evt.preventDefault(); evt.stopPropagation(); openBlackboard(id); this.cleanMyInterval()}}>
+            <div onClick={(evt) => { evt.preventDefault(); evt.stopPropagation(); this.cleanMyInterval(); openBlackboard(id); }}>
               <img className='iconOpenBlackboard' src={this.state.lastUpdated} />
             </div>
           )}
