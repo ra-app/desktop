@@ -717,8 +717,8 @@
       let base64 = '';
       const imageType = 'image/png' // this.$('#inputAvatar')[0].files[0].type;
 
-      const width = 80;
-      const height = 80;
+      const width = 140;
+      const height = 140;
       const fileName = this.$('#inputAvatar')[0].files[0].name;
       const reader = new FileReader();
       reader.readAsDataURL(fileField);
@@ -733,7 +733,7 @@
           elem.height = height;
           const ctx = elem.getContext('2d');
           // img.width and img.height will contain the original dimensions
-          ctx.drawImage(img, 0, 0, width, height);
+          ctx.drawImage(img, ((img.naturalWidth/2)-(300/2)), ((img.naturalHeight/2)-(300/2)), 300, 300, 0, 0,width, height);
           ctx.canvas.toBlob(
             async blob => {
               base64 = new File([blob], fileName, {
@@ -769,8 +769,8 @@
       const fileField = this.$('#inputCompanyAvatar')[0].files[0];
       let base64 = '';
       const imageType = 'image/png' // this.$('#inputCompanyAvatar')[0].files[0].type;
-      const width = 80;
-      const height = 80;
+      const width = 140;
+      const height = 140;
       const fileName = this.$('#inputCompanyAvatar')[0].files[0].name;
       const reader = new FileReader();
       reader.readAsDataURL(fileField);
@@ -784,7 +784,7 @@
           elem.height = height;
           const ctx = elem.getContext('2d');
           // img.width and img.height will contain the original dimensions
-          ctx.drawImage(img, 0, 0, width, height);
+          ctx.drawImage(img, ((img.naturalWidth/2)-(300/2)), ((img.naturalHeight/2)-(300/2)), 300, 300, 0, 0,width, height);
           ctx.canvas.toBlob(
             async blob => {
               base64 = new File([blob], fileName, {
