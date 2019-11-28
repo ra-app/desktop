@@ -58,7 +58,6 @@ export class ConversationListItem extends React.PureComponent<Props> {
    this.cleanMyInterval();
   }
   public cleanMyInterval() {
-    console.log("cleaningggggggggggggggggg", this.interval)
     if (this.interval) {
       clearInterval(this.interval);
        this.setState({
@@ -67,7 +66,6 @@ export class ConversationListItem extends React.PureComponent<Props> {
     }
   }
   public addNotification() {
-    console.log('addNotificationssssssssssss', this.interval)
     if (this.interval !== null) {
       clearInterval(this.interval);
     } else {
