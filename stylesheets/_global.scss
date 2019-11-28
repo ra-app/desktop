@@ -2443,7 +2443,7 @@ input {
     max-height: 250px !important;
     line-height: 110px !important;
     text-align: center !important;
-    
+
     }
   }
   & .iconsEditDelete{
@@ -2490,10 +2490,10 @@ input {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    line-height: 16px;    
-    max-height: 32px;     
-    -webkit-line-clamp: 2; /* Write the number of 
-                              lines you want to be 
+    line-height: 16px;
+    max-height: 32px;
+    -webkit-line-clamp: 2; /* Write the number of
+                              lines you want to be
                               displayed */
     -webkit-box-orient: vertical;
   }
@@ -2509,14 +2509,15 @@ input {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    line-height: 20px;    
-    max-height: 143px;     
-    -webkit-line-clamp: 9; /* Write the number of 
-                              lines you want to be 
+    line-height: 20px;
+    max-height: 143px;
+    white-space: pre-wrap;
+    -webkit-line-clamp: 9; /* Write the number of
+                              lines you want to be
                               displayed */
     -webkit-box-orient: vertical;
     word-break: break-word;
- 
+
   }
   &.oneCard{
     background-image: url(./../images/post-it-pin-flat.svg);
@@ -2529,7 +2530,7 @@ input {
         margin-bottom: 5px !important;
     }
     p.contentCardBlackboard{
-      text-decoration: underline;
+      // text-decoration: underline;
       max-width: calc(100% - 40px);
       padding-left: 10px;
       padding-right: 10px;
@@ -2556,7 +2557,7 @@ input {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
-  text-align: center; 
+  text-align: center;
   margin-right: 5px;
   margin-bottom: 15px;
   .titleCardBlackboard{
@@ -2564,16 +2565,16 @@ input {
     margin: 4px auto 7px auto;
     font-weight: 300;
     color: $color-raapp-text;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
 
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    line-height: 16px;    
-    max-height: 32px;     
-    -webkit-line-clamp: 2; /* Write the number of 
-                              lines you want to be 
+    line-height: 16px;
+    max-height: 32px;
+    -webkit-line-clamp: 2; /* Write the number of
+                              lines you want to be
                               displayed */
     -webkit-box-orient: vertical;
   }
@@ -2589,14 +2590,14 @@ input {
     line-height: 19.5px;
     text-overflow: ellipsis;
     display: -webkit-box;
-    line-height: 20px;    
-    max-height: 143px;     
-    -webkit-line-clamp: 9; /* Write the number of 
-                              lines you want to be 
+    line-height: 20px;
+    max-height: 143px;
+    -webkit-line-clamp: 9; /* Write the number of
+                              lines you want to be
                               displayed */
     -webkit-box-orient: vertical;
     word-break: break-word;
- 
+
   }
   &.oneCard{
     background-image: url(  ./../images/post-it-pin-blue-lines.svg);

@@ -28,6 +28,7 @@ interface State {
 
 export class Avatar extends React.Component<Props, State> {
   public handleImageErrorBound: () => void;
+  private isDead: Boolean = true;
 
   public constructor(props: Props) {
     super(props);
@@ -39,23 +40,48 @@ export class Avatar extends React.Component<Props, State> {
       srcImage: '',
       loading: true,
     };
+  }
+
+  public componentDidMount() {
+    this.isDead = false;
     this.getImage();
   }
 
-  public async getImage() {
-    const { phoneNumber, rawPhoneNumber, conversationType } = this.props;
-    const API_URL =
-      'https://luydm9sd26.execute-api.eu-central-1.amazonaws.com/latest/';
-    let avatar = '';
-    if (conversationType === 'company') {
-      avatar = API_URL + 'public/img/' + phoneNumber;
-    } else if (conversationType === 'direct') {
-      const getClientInfo = await getClientPhone(rawPhoneNumber);
-      const clientUuid = getClientInfo.uuid;
-      avatar =  API_URL + 'public/img/' + clientUuid;
+  public componentWillUnmount() {
+    this.isDead = true;
+  }
+
+  public componentDidUpdate(prevProps: any) {
+    if (prevProps.rawPhoneNumber !== this.props.rawPhoneNumber) {
+      this.getImage();
     }
-    const result =  await fetch(avatar);
-    this.setState({ srcImage: result.url, loading: false });
+  }
+
+  public async getImage() {
+    try {
+      if (this.isDead) return;
+      const { phoneNumber, rawPhoneNumber, conversationType } = this.props;
+      const API_URL =
+        'https://luydm9sd26.execute-api.eu-central-1.amazonaws.com/latest/';
+      let avatar;
+      if (conversationType === 'company') {
+        avatar = API_URL + 'public/img/' + phoneNumber;
+      } else if (conversationType === 'direct') {
+        if (rawPhoneNumber) {
+          const getClientInfo = await getClientPhone(rawPhoneNumber);
+          const clientUuid = getClientInfo.uuid;
+          avatar = API_URL + 'public/img/' + clientUuid;
+        }
+      }
+
+      if (this.isDead) return;
+      if (this.state.srcImage !== avatar) {
+        if (avatar) this.setState({ srcImage: avatar, loading: false, imageBroken: false });
+        else this.handleImageError();
+      }
+    } catch (err) {
+      console.warn('getImage Error:', err, this.props);
+    }
   }
   public handleImageError() {
     // tslint:disable-next-line no-console
@@ -74,7 +100,7 @@ export class Avatar extends React.Component<Props, State> {
 
     const title = `${name || phoneNumber}${
       !name && profileName ? ` ~${profileName}` : ''
-    }`;
+      }`;
 
     return (
       <img
@@ -132,7 +158,7 @@ export class Avatar extends React.Component<Props, State> {
     // const hasImage = !noteToSelf && avatarPath && !imageBroken;
     const title = `${name || phoneNumber}${
       !name && profileName ? ` ~${profileName}` : ''
-    }`;
+      }`;
     if (size !== 28 && size !== 36 && size !== 48 && size !== 80) {
       throw new Error(`Size ${size} is not supported!`);
     }
@@ -157,9 +183,9 @@ export class Avatar extends React.Component<Props, State> {
             src={srcImage}
           />
         ) : (
-          // tslint:disable-next-line:use-simple-attributes
-          <img  className={conversationType === 'company' ? 'companyAvatarDefault' : ''} src="images/firmen-logo.png" alt="Default img" />
-        )}
+            // tslint:disable-next-line:use-simple-attributes
+            <img className={conversationType === 'company' ? 'companyAvatarDefault' : ''} src="images/firmen-logo.png" alt="Default img" />
+          )}
       </div>
     );
   }
