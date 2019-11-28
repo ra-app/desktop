@@ -2579,16 +2579,24 @@ input {
     height: 585px;
     margin: 0 auto;
     p.titleCardBlackboard {
-        max-width: 50% !important;
-        margin: 120px auto !important;
-        margin-bottom: 5px !important;
+        // max-width: 50% !important;
+        // margin: 120px auto !important;
+        // margin-bottom: 5px !important;
+         // max-width: 50% !important;
+         margin: 60px auto !important;
+         // margin-bottom: 16px !important;
+         margin-bottom: 7px !important;
     }
     p.contentCardBlackboard{
-      // text-decoration: underline;
-      max-width: calc(100% - 40px);
+      line-height: 43px;
+      // max-width: calc(100% - 40px);
+      max-width: calc(100% - 65px);
+
       padding-left: 10px;
       padding-right: 10px;
-      max-height: calc(100% - 280px);
+      // max-height: calc(100% - 150px);
+      max-height: 388px;
+      // max-height: calc(100% - 280px);
       -webkit-line-clamp: unset;
       -webkit-box-orient: unset;
       text-overflow: unset;
