@@ -2575,6 +2575,12 @@
       this.multiView = await getIndividualCardBlackboard(this.company_id, data)
       const test = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig
       this.multiView.textlink = this.multiView.content.replace(test, '<a target=\'_blank\' rel=\'noopener noreferrer nofollow\' href=\'$1\'>$1</a>');
+      console.log(this.multiView, "dddddddddddddddddddd");
+      if(this.multiView.note_type == 'normal'){
+        this.multiView.isNoteNormal = true
+      }else {
+        this.multiView.isNoteNormal = false
+      }
       this.render();
       if (this.isAdmin) {
         this.openEditCard();
@@ -2673,6 +2679,7 @@
       if (document.getElementsByClassName('edit-card-blackboard')[0]) {
         document.getElementsByClassName('edit-card-blackboard')[0].remove();
       }
+      console.log(this.multiView, "11111111111111111111111111111111")
       const dialog = new Whisper.EditCardBlackboard({
         id: this.currentId,
         company_id: this.company_id,
