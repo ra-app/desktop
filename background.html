@@ -149,14 +149,24 @@
           <div class="flex-container">
             {{#model}}
               <div class = 'card-blackboard' id = {{id}} dataType='{{note_type}}' >
-                <div class = 'iconsEditDelete'>
-                    {{#isAdmin}}
-                    <img src="images/icons/message_over_white_24x24 black.svg" dataID = '{{id}}' class="editCardBlackboard">
-                    <img src="images/delete.svg" dataID = '{{id}}' class="removeCardBlackboard">
-                    {{/isAdmin}}
-                  </div>
-                <p class="titleCardBlackboard">{{title}}</p>
-                <p class="contentCardBlackboard">{{content}}</p>
+                {{#isNoteNormal}}
+                <img src="images/post-it-pin-flat.svg" class="imagePostIt">
+                {{/isNoteNormal}}
+
+                {{^isNoteNormal}}
+                  <img src="images/post-it-pin-blue-lines.svg" class="imagePostIt">
+                {{/isNoteNormal}}
+                <div class="divContentPostIt">
+
+                  <div class = 'iconsEditDelete'>
+                      {{#isAdmin}}
+                      <img src="images/icons/message_over_white_24x24 black.svg" dataID = '{{id}}' class="editCardBlackboard">
+                      <img src="images/delete.svg" dataID = '{{id}}' class="removeCardBlackboard">
+                      {{/isAdmin}}
+                    </div>
+                  <p class="titleCardBlackboard">{{title}}</p>
+                  <p class="contentCardBlackboard">{{content}}</p>
+                </div>
               </div>
             {{/model}}
             {{#showAddNote}}
@@ -173,8 +183,17 @@
           <div class= 'flex-container flex-View'>
           {{#multiView}}
             <div class = 'card-blackboard-multiview oneCard' dataType='{{note_type}}' id = {{id}}>
-              <p class="titleCardBlackboard">{{title}}</p>
-              <p class="contentCardBlackboard">{{{textlink}}}</p>
+                {{#isNoteNormal}}
+                  <img src="images/post-it-pin-flat.svg" class="imagePostItOneCard">
+                {{/isNoteNormal}}
+                {{^isNoteNormal}}
+                  <img src="images/post-it-pin-blue-lines.svg" class="imagePostItOneCard">
+                {{/isNoteNormal}}
+
+                <div class="contentPostItOneCard">
+                  <p class="titleCardBlackboard">{{title}}</p>
+                  <p class="contentCardBlackboard">{{{textlink}}}</p>
+                </div>
             </div>
             {{/multiView}}
           </div>
