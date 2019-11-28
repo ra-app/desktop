@@ -2529,7 +2529,6 @@
         }else {
           element['isNoteNormal'] = false
         }
-        console.log(element, "elemetttttttttt")
         if (element.title !== '' && element.content !== '') {
           this.notes.push(element)
           this.countNotes += 1;
