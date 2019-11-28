@@ -376,7 +376,7 @@
         // eslint-disable-next-line no-case-declarations
         case 'type':
           console.log(userType, "usertypeeeeeeeeeeeeeeeeee")
-          const array = ["none", "Intern","Exterm"];
+          const array = ["none", "Intern","Extern"];
           const selectList = document.createElement("select");
           selectList.id = `selectUserType-${id}`;
           for (var i = 0; i < array.length; i++) {
@@ -394,7 +394,7 @@
                   option.selected = true;
                 }
                 break;
-              case 'Exterm':
+              case 'Extern':
                 option.value = 'client';
                 if(userType == 'client'){
                   option.selected = true;
