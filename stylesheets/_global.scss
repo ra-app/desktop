@@ -809,12 +809,13 @@ $debug: 0;
       & .flyout {
         position: absolute;
         width: 450px;
-        height: 160px;
+        height: 100px;
         overflow: hidden;
         z-index: 10000;
         display: none;
         background: $color-gray-02;
         margin-top: 10px;
+        font-size: 14px;
     }
       & .readMore:hover + .flyout {
         display: block;
