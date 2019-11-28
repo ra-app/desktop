@@ -2524,6 +2524,12 @@
       this.emptyNotes = [];
       this.showAddNote = false;
       options.model.forEach(element => {
+        if(element.note_type == 'normal'){
+          element['isNoteNormal'] = true
+        }else {
+          element['isNoteNormal'] = false
+        }
+        console.log(element, "elemetttttttttt")
         if (element.title !== '' && element.content !== '') {
           this.notes.push(element)
           this.countNotes += 1;
