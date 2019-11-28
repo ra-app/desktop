@@ -799,9 +799,26 @@ $debug: 0;
     flex-direction: column;
     .titleOutside{
       width: 450px;
-    text-align: left;
-    max-width: 450px;
-    margin-bottom: 20px;
+      text-align: left;
+      max-width: 450px;
+      margin-bottom: 20px;
+      & .readMore{
+        width:20px;
+        cursor: help;
+      }
+      & .flyout {
+        position: absolute;
+        width: 450px;
+        height: 160px;
+        overflow: hidden;
+        z-index: 10000;
+        display: none;
+        background: $color-gray-02;
+        margin-top: 10px;
+    }
+      & .readMore:hover + .flyout {
+        display: block;
+      }
     }
   }
   .content-main-footer {
