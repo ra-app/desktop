@@ -59,11 +59,12 @@
         // eslint-disable-next-line no-unused-expressions
         (img.onload = () => {
           const elem = document.createElement('canvas');
-          elem.width = width;
-          elem.height = height;
+           elem.width = width;
+           elem.height = height;
           const ctx = elem.getContext('2d');
+
           // img.width and img.height will contain the original dimensions
-          ctx.drawImage(img, 0, 0, width, height);
+          ctx.drawImage(img, ((img.naturalWidth/2)-(300/2)), ((img.naturalHeight/2)-(300/2)), 300, 300, 0, 0,width, height);
           ctx.canvas.toBlob(
             async blob => {
               base64 = new File([blob], fileName, {

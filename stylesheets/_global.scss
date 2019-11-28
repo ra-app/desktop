@@ -2707,3 +2707,33 @@ input[type=number] {
     cursor: pointer;
 
 }
+
+
+
+.img-container-background {
+  height: 48px;
+  width: 48px;
+  overflow: hidden;
+  display:block;
+  background: #000;
+  display: table;  
+  position: relative;
+  border-radius: 50%
+
+}
+
+.img-container {  
+  height: 48px;
+  width: 100%;
+  display: table-cell;  
+  vertical-align: middle;
+  text-align: center;
+}
+
+.img-container img {
+  margin: auto;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+}
