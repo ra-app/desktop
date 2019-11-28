@@ -1676,217 +1676,141 @@
         "description": "Text for invalid XML file"
     },
     "BranchOption1": {
-        "message": "Administration / Verwaltung / Bürowesen",
-          "description": "Branch option 1"
-      },
+        "message": "Bildung",
+        "description": "Branch option 1"
+    },
     "BranchOption2": {
-        "message": "Automobil / Automobilzulieferer",
-          "description": "Branch option 1"
-      },
+        "message": "Kinder-/Jugend Schule",
+        "description": "Branch option 1"
+    },
     "BranchOption3": {
-        "message": "Banken",
-          "description": "Branch option 1"
-      },
+        "message": "Erwachsenen-Schule",
+        "description": "Branch option 1"
+    },
     "BranchOption4": {
-        "message": "Baugewerbe / Architektur",
-          "description": "Branch option 1"
-      },
+        "message": "Universität",
+        "description": "Branch option 1"
+    },
     "BranchOption5": {
-        "message": "Beratung / Consulting",
-          "description": "Branch option 1"
-      },
+        "message": "Kfz Fahrschule",
+        "description": "Branch option 1"
+    },
     "BranchOption6": {
-        "message": "Bildung / Universität / FH / Schulen",
-          "description": "Branch option 1"
-      },
+        "message": "Boots-Fahrschule",
+        "description": "Branch option 1"
+    },
     "BranchOption7": {
-        "message": "Chemie",
-          "description": "Branch option 1"
-      },
+        "message": "Flug-Schule",
+        "description": "Branch option 1"
+    },
     "BranchOption8": {
-        "message": "Dienstleistung",
-          "description": "Branch option 1"
-      },
+        "message": "Kindergarten/Vorschule",
+        "description": "Branch option 1"
+    },
     "BranchOption9": {
-        "message": "Druck / Papier / Verpackung",
-          "description": "Branch option 1"
-      },
+        "message": "Sonstige Ausbildung",
+        "description": "Branch option 1"
+    },
     "BranchOption10": {
-        "message": "EDV / IT",
-          "description": "Branch option 1"
-      },
+        "message": "Recht",
+        "description": "Branch option 1"
+    },
     "BranchOption11": {
-        "message": "Einkauf / Beschaffung",
-          "description": "Branch option 1"
-      },
+        "message": "Rechtsanwalt",
+        "description": "Branch option 1"
+    },
     "BranchOption12": {
-        "message": "Elektro / Elektronikn",
-          "description": "Branch option 1"
-      },
+        "message": "Sonstige Rechtsprodukte",
+        "description": "Branch option 1"
+    },
     "BranchOption13": {
-        "message": "Energiewirtschaft",
-          "description": "Branch option 1"
-      },
+        "message": "Medizin / Therapie",
+        "description": "Branch option 1"
+    },
     "BranchOption14": {
-        "message": "Finanzen",
-          "description": "Branch option 1"
-      },
+        "message": "Humanmedizin",
+        "description": "Branch option 1"
+    },
     "BranchOption15": {
-        "message": "Forschung / Entwicklung / Wissenschaft",
-          "description": "Branch option 1"
-      },
+        "message": "Zahnmedizin",
+        "description": "Branch option 1"
+    },
     "BranchOption16": {
-        "message": "Gesundheitswesen / Soziales / Pflege",
-          "description": "Branch option 1"
-      },
+        "message": "Tiermedizin",
+        "description": "Branch option 1"
+    },
     "BranchOption17": {
-        "message": "Handel / Konsum",
-          "description": "Branch option 1"
-      },
+        "message": "Psychologie",
+        "description": "Branch option 1"
+    },
     "BranchOption18": {
-        "message": "Handwerk",
-          "description": "Branch option 1"
-      },
+        "message": "Psychotherapie",
+        "description": "Branch option 1"
+    },
     "BranchOption19": {
-        "message": "Immobilien / Facility Management",
-          "description": "Branch option 1"
-      },
+        "message": "Coachingds",
+        "description": "Branch option 1"
+    },
     "BranchOption20": {
-        "message": "Industrie",
-          "description": "Branch option 1"
-      },
+        "message": "Handwerk",
+        "description": "Branch option 1"
+    },
     "BranchOption21": {
-        "message": "Internet / Multimedia",
-          "description": "Branch option 1"
-      },
+        "message": "Computer / Software",
+        "description": "Branch option 1"
+    },
     "BranchOption22": {
-        "message": "Kunst / Kultur / Unterhaltung",
-          "description": "Branch option 1"
-      },
+        "message": "Seelsorge / Kirche",
+        "description": "Branch option 1"
+    },
     "BranchOption23": {
-        "message": "Marketing / Werbung / PR",
-          "description": "Branch option 1"
-      },
-    "BranchOption24": {
-        "message": "Marktforschunga",
-          "description": "Branch option 1"
-      },
-    "BranchOption25": {
-        "message": "Maschinen / Anlagenbau",
-          "description": "Branch option 1"
-      },
-    "BranchOption26": {
-        "message": "Medien",
-          "description": "Branch option 1"
-      },
-    "BranchOption27": {
-        "message": "Medizin / Pharma",
-          "description": "Branch option 1"
-      },
-    "BranchOption28": {
-        "message": "Medizintechnik",
-          "description": "Branch option 1"
-      },
-    "BranchOption29": {
-        "message": "Nahrungsmittel / Land / Forstwirtschaft",
-          "description": "Branch option 1"
-      },
-    "BranchOption30": {
-        "message": "Personalwesen / Personalbeschaffung",
-          "description": "Branch option 1"
-      },
-    "BranchOption31": {
-        "message": "Rechtsberatung",
-          "description": "Branch option 1"
-      },
-    "BranchOption32": {
-        "message": "Seminar / Messeanbieter",
-          "description": "Branch option 1"
-      },
-    "BranchOption33": {
-        "message": "Sonstige Branchen",
-          "description": "Branch option 1"
-      },
-    "BranchOption34": {
-        "message": "Sport / Fitness / Beauty",
-          "description": "Branch option 1"
-      },
-    "BranchOption35": {
-        "message": "Steuerberatung / Wirtschaftsprüfung",
-          "description": "Branch option 1"
-      },
-    "BranchOption36": {
-        "message": "Telekommunikation",
-          "description": "Branch option 1"
-      },
-    "BranchOption37": {
-        "message": "Textilbranche",
-          "description": "Branch option 1"
-      },
-    "BranchOption38": {
-        "message": "Tourismus / Hotel / Gastronomie",
-          "description": "Branch option 1"
-      },
-    "BranchOption39": {
-        "message": "Vereine",
-          "description": "Branch option 1"
-      },
-    "BranchOption40": {
-        "message": "Verkehr / Transport / Logistik",
-          "description": "Branch option 1"
-      },
-    "BranchOption41": {
-        "message": "Versicherung",
-          "description": "Branch option 1"
-      },
-    "BranchOption42": {
-        "message": "Öffentliche Verwaltung",
-          "description": "Branch option 1"
-      },
+        "message": "Steuern",
+        "description": "Branch option 1"
+    },
     "BranchenTitle": {
         "message": "Branchen",
-          "description": "Branchen title"
-      },
+        "description": "Branchen title"
+    },
     "PhonesTitle": {
         "message": "Landesvorwahl",
-          "description": "Landesvorwahl title"
-      },
+        "description": "Landesvorwahl title"
+    },
     "Claimmed": {
         "message": "Übernommen",
         "description": "übernommen ticket"
-      },
+    },
     "Unknown": {
         "message": "Unbekannt",
         "description": "unbekannt ticket"
-      },
+    },
     "Unclaimed": {
         "message": "Übernehmen",
         "description": "offen ticket"
-      },
+    },
     "Closed": {
         "message": "wieder öffnen",
         "description": "closed ticket"
-      },
-      "uploadCard": {
+    },
+    "uploadCard": {
         "message": "Handeslregisterauszüge oder Gewerbeanmeldungen hochladen",
         "description": "Upload company card"
-      },
+    },
     "sendAnInvitation": {
         "message": "Einladung senden",
         "description": "Senden Sie eine Einladungsschaltfläche beim Importieren des Kontakts"
-      },
+    },
     "sendAgainInvitation": {
         "message": "Gesendet (neu senden)",
         "description": "Senden Sie erneut eine Einladungsschaltfläche zum Importieren des Kontakts"
-      },
+    },
     "aceptedInvitation": {
         "message": "Akzeptiert",
         "description": "Akzeptieren Sie die Einladungsschaltfläche beim Importieren des Kontakts"
-      },
+    },
     "clientButton": {
         "message": "Kunde",
         "description": "Client button on import contact"
-      },
+    },
     "adminButton": {
         "message": "Admin",
         "description": "Admin button on import contact"
@@ -1900,25 +1824,25 @@
         "description": "Upload user avatar"
     },
     "closeTicket": {
-          "message": "Ticket schließen",
-          "description": "Chat menu close ticket"
-      },
+        "message": "Ticket schließen",
+        "description": "Chat menu close ticket"
+    },
     "noContactsImported": {
         "message": "Keine Kontakte",
         "description": "No contacts imported"
-      },
-      "messageImportContact": {
-          "message": "Bitte beachten Sie, dass beim Kontaktimport Ihre bereits vorhandenen Kontakte überschrieben werden. Möchten Sie fortfahren?",
-          "description": "Message to import new contact list"
-      },
+    },
+    "messageImportContact": {
+        "message": "Bitte beachten Sie, dass beim Kontaktimport Ihre bereits vorhandenen Kontakte überschrieben werden. Möchten Sie fortfahren?",
+        "description": "Message to import new contact list"
+    },
     "createGroup": {
         "message": "Create group",
         "description": "Create group menu item"
-      },
+    },
     "deleteContactModal": {
-          "message": "Kontakt löschen",
-          "description": "Kontakt löschen modal"
-      },
+        "message": "Kontakt löschen",
+        "description": "Kontakt löschen modal"
+    },
     "addContactModal": {
         "message": "Benutzer hinzufügen",
         "description": "Benutzerdaten modal"
