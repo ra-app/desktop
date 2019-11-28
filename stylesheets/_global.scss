@@ -2466,7 +2466,8 @@ input {
 .flex-container > div[dataType ="normal"] {
   margin-bottom: 5px;
   /* padding: 10px; */
-  width: calc((100% / 5) - 10px);
+  // width: calc((100% / 5) - 10px);
+  width: 257px;
   // height: 300px;
   height: 280px;
   overflow: hidden;
@@ -2480,7 +2481,7 @@ input {
   margin-bottom: 15px;
   .titleCardBlackboard{
     max-width: 70%;
-    margin: 10px auto 5px auto;
+    margin: 4px auto 6px auto;
     font-weight: 300;
     color: $color-raapp-text;
     font-size: 16px;
@@ -2498,7 +2499,7 @@ input {
   }
 
   .contentCardBlackboard{
-    max-width: 70%;
+    max-width: 90%;
     margin: 0 auto;
     color: $color-raapp-text;
     text-align: left;
@@ -2508,7 +2509,7 @@ input {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    line-height: 16px;    
+    line-height: 20px;    
     max-height: 143px;     
     -webkit-line-clamp: 9; /* Write the number of 
                               lines you want to be 
@@ -2545,7 +2546,8 @@ input {
 
 .flex-container > div[dataType ="calender"] {
   margin-bottom: 5px;
-  width: calc((100% / 5) - 10px);
+  // width: calc((100% / 5) - 10px);
+  width: 257px;
   line-height: 20px;
   height: 280px;
   overflow: hidden;
@@ -2559,7 +2561,7 @@ input {
   margin-bottom: 15px;
   .titleCardBlackboard{
     max-width: 70%;
-    margin: 4px auto 3px auto;
+    margin: 4px auto 7px auto;
     font-weight: 300;
     color: $color-raapp-text;
     font-size: 20px;
@@ -2577,7 +2579,7 @@ input {
   }
 
   .contentCardBlackboard{
-    max-width: 70%;
+    max-width: 90%;
     margin: 0 auto;
     color: $color-raapp-text;
     text-align: left;
@@ -2587,7 +2589,7 @@ input {
     line-height: 19.5px;
     text-overflow: ellipsis;
     display: -webkit-box;
-    line-height: 16px;    
+    line-height: 20px;    
     max-height: 143px;     
     -webkit-line-clamp: 9; /* Write the number of 
                               lines you want to be 
