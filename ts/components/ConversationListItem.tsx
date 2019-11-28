@@ -46,29 +46,32 @@ export class ConversationListItem extends React.PureComponent<Props> {
     lastUpdated: 'images/icons/post-it-pin-icon.svg',
   };
   private interval: any;
+  private _boundaddNotification: any;
 
   constructor(props: Props) {
     super(props);
 
     this.interval = null;
-    document.addEventListener('notificationNote', () => this.addNotification());
+    this._boundaddNotification = this.addNotification.bind(this);
+    document.addEventListener('notificationNote', this._boundaddNotification);
   }
 
   public componentWillUnmount() {
    this.cleanMyInterval();
+   document.removeEventListener('notificationNote', this._boundaddNotification);
   }
+
   public cleanMyInterval() {
     if (this.interval) {
       clearInterval(this.interval);
-       this.setState({
+      this.setState({
         lastUpdated: 'images/icons/post-it-pin-icon.svg',
       });
+      this.interval = null;
     }
   }
   public addNotification() {
-    if (this.interval !== null) {
-      clearInterval(this.interval);
-    } else {
+    if (!this.interval) {
       this.interval = setInterval(() => {this.updateImg(); }, 2000);
     }
   }
