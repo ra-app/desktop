@@ -1764,7 +1764,7 @@
         "description": "Name for Macedonia locale"
     },
     "locale.nb": {
-        "message": "Norwegian",
+        "message": "Norwegian bokmål",
         "description": "Name for Norwegian locale"
     },
     "locale.nl": {
@@ -1772,7 +1772,7 @@
         "description": "Name for Dutch locale"
     },
     "locale.nn": {
-        "message": "Norwegian",
+        "message": "Norwegian nynorsk",
         "description": "Name for Norwegian locale"
     },
     "locale.pl": {

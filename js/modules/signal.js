@@ -84,7 +84,7 @@ const {
   createStickerPreviewModal,
 } = require('../../ts/state/roots/createStickerPreviewModal');
 
-const { createStore } = require('../../ts/state/createStore');
+const { createStore, rawCreateStore } = require('../../ts/state/createStore');
 const conversationsDuck = require('../../ts/state/ducks/conversations');
 const emojisDuck = require('../../ts/state/ducks/emojis');
 const itemsDuck = require('../../ts/state/ducks/items');
@@ -304,6 +304,7 @@ exports.setup = (options = {}) => {
   const State = {
     bindActionCreators,
     createStore,
+    rawCreateStore,
     Roots,
     Ducks,
   };

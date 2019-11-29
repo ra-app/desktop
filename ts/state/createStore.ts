@@ -31,3 +31,5 @@ const enhancer = applyMiddleware.apply(null, middlewareList);
 
 export const createStore = (initialState: any) =>
   reduxCreateStore(reducer, initialState, enhancer);
+
+export const rawCreateStore = reduxCreateStore;

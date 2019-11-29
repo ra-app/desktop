@@ -43,6 +43,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // document.addEventListener('derp', (event) => console.log('DERP EVENT', event));
   // document.dispatchEvent(new CustomEvent('derp', { detail: 'lolololo' }));
+
+  // fetchCompanyInfo(587756);
+  // getCompanyTickets(587756);
 });
 
 // === UPDATER THINGS START ===

@@ -2055,17 +2055,17 @@
     "description": "Name for Macedonia locale"
   },
   "locale.nb": {
-    "message": "Norwegian",
+    "message": "Norwegian bokmål",
     "description": "Name for Norwegian locale"
-  },
-  "locale.nl": {
+},
+"locale.nl": {
     "message": "Dutch",
     "description": "Name for Dutch locale"
-  },
-  "locale.nn": {
-    "message": "Norwegian",
+},
+"locale.nn": {
+    "message": "Norwegian nynorsk",
     "description": "Name for Norwegian locale"
-  },
+},
   "locale.pl": {
     "message": "Polish",
     "description": "Name for Polish locale"
