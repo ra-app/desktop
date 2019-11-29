@@ -626,10 +626,9 @@
             },
           ];
         }
-        console.log(ticketList, 'returnnnnnnnnnnnn');
         this.conversation_stack.open(ticketList.tickets, isTicket, editCompany);
         this.focusConversation();
-        ticketList.tickets = [];
+        // ticketList.tickets = [];
         // }
         this.tmpticketId = id;
       } catch (err) {

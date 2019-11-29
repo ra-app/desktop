@@ -81,13 +81,14 @@
                 id="searchTickets"
               />
             </div> -->
-            <!-- <div class="sortBy">
+            <div class="sortBy">
               <span id="sortBy" >Tickets sortieren</span>
-            </div> -->
+            </div>
             <!-- EACH -->
             <div id="ticketList">
             {{#model}}
             <div id={{uuid}} class="main-ticket-container" >
+              {{#client_uuid}}
               <div class="container-ticket-userinfo">
                 <img src="{{avatarSrc}}" id='clientTicketAvatar_{{uuid}}' class="ticket-user-image" />
                 {{#name}}
@@ -115,6 +116,7 @@
                   <!-- <button id = 'claim_{{uuid}}' class="button-claim-ticket not-claimed">{{status}}</button>  -->
                 {{/isClosed}}
               </div>
+              {{/client_uuid}}
             </div>
             {{/model}}
           </div>
