@@ -90,9 +90,9 @@
       //   finished loading. So if we were near the bottom before, we _need_ to be
       //   at the bottom again. So we scroll to the bottom.
       console.log('Scroll to bottom if needed', this.atBottom())
-      if (this.atBottom()) {
+      // if (this.atBottom()) {
         this.scrollToBottom();
-      }
+      // }
     },
     scrollToBottom() {
       console.log('Scroll to bottom', this.el.scrollHeight)
