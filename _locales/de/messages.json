@@ -2032,19 +2032,19 @@
         "description": "Name for Chinese - Taiwan locale"
     },
     "changeLanguageTitle": {
-        "message": "Changing language requires restart",
+        "message": "Sprachwechsel erfordert Neustart",
         "description": "Title for change language requires restart message box"
     },
     "changeLanguageMessage": {
-        "message": "Changing current language requires restarting the application, do you wish to do this now?",
+        "message": "Das Ändern der aktuellen Sprache erfordert einen Neustart der Applikation, möchten Sie dies jetzt tun?",
         "description": "Message for change language require restart message box"
     },
     "labelYes": {
-        "message": "Yes",
+        "message": "Ja",
         "description": "Label for Yes button"
     },
     "labelNo": {
-        "message": "No",
+        "message": "Nein",
         "description": "Label for No button"
     },
     "labelChangeLanguage": {
