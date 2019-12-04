@@ -2410,8 +2410,12 @@
   position: relative;
 }
 
+.divSearchBarTicket{
+  margin-bottom: 20px;
+}
 .module-main-header__search__input {
-  height: 28px;
+  height: 35px;
+  outline: 0;
   width: 100%;
   box-shadow: 0px 3px 6px #00000029;
   border-radius: 19px;

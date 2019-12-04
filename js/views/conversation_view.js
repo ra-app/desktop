@@ -95,6 +95,7 @@
           unclaimed: this.model[0].isUnclaimed,
           closed: this.model[0].isClosed,
           avatarSrc: this.model[0].company_avatar,
+          searchText: i18n('search')
         };
       } else {
         if (
