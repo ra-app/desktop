@@ -21,7 +21,7 @@ async function handleThirdPartyEvent(event) {
 
     switch(msgData.type) {
       case 'parcel':
-        await thirdIPC('inboxParcel', msgData.payload);
+        await thirdIPC('inboxParcel', msgData.payload, envelope.source);
         break;
     }
 
@@ -31,9 +31,11 @@ async function handleThirdPartyEvent(event) {
   }
 }
 
-async function sendThirdPartyMsg(destination, data) {
+async function sendThirdPartyMsg(destination, raw) {
+  const data = (typeof raw === 'object') ? JSON.stringify(raw) : raw;
   const r = await textsecure.messaging.sendThirdParty(destination, data);
   console.log('sendThirdPartyMsg', destination, data, r);
+  return r;
 }
 
 // document.addEventListener('DOMContentLoaded', async () => {
@@ -48,8 +50,9 @@ async function sendThirdPartyMsg(destination, data) {
 
 async function handleOutboxFile(destination, message) {
   console.log('HandleOutboxFile:', message);
-  await sendThirdPartyMsg(destination, JSON.stringify({ type: 'parcel', payload: message }));
-  return { success: true };
+  // const response = await sendThirdPartyMsg(destination, JSON.stringify({ type: 'parcel', payload: message }));
+  const response = await sendThirdPartyMsg(destination, { type: 'parcel', payload: message });
+  return { success: true, response }; // TODO: Check for errors in sending message?
 }
 
 function thirdIPC(type, ...args) {

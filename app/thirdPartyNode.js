@@ -66,11 +66,17 @@ function inboxHandler(eventType, filename) {
   }
 }
 
-const fileLocks = {};
+async function extractInfoFromXML(xmlContent) {
+  const parsed = await parseStringPromise(xmlContent, { strict: false, normalizeTags: true, trim: true, normalize: true });
+  // console.log('PARSED', JSON.stringify(parsed));
+  if (!parsed) { throw new Error('Parsed was null!'); }
+  return { destination: parsed.destination }
+}
 
+const fileLocks = {};
 async function sendOutboxFile(fullPath, filename) {
   try {
-    if (filename.indexOf('.xml') === -1) return;
+    if (filename.indexOf('.xml') === -1 && filename.indexOf('.json') === -1) return;
 
     if (fileLocks[fullPath]) {
       console.log('sendOutboxFile - Already handling', filename);
@@ -80,14 +86,17 @@ async function sendOutboxFile(fullPath, filename) {
     fileLocks[fullPath] = true;
     const content = fs.readFileSync(fullPath);
 
-    const parsed = await parseStringPromise(content, { strict: false, normalizeTags: true, trim: true, normalize: true });
+    let destination;
 
-    // console.log('CONTENT', content.toString());
-    console.log('PARSED', JSON.stringify(parsed));
-
-    if (!parsed) { throw new Error('Parsed was null!'); }
-
-    const destination = parsed.destination;
+    if (filename.indexOf('.xml') !== -1) {
+      const info = await extractInfoFromXML(content);
+      destination = info.destination;
+    } else if (filename.indexOf('.json') !== -1) {
+      const info = JSON.parse(content);
+      destination = info.destination;
+    } else {
+      throw new Error('Invalid file extension!');
+    }
 
     if (!destination) { throw new Error('Missing destination!'); }
 
@@ -162,9 +171,10 @@ function randomID() {
   return Math.floor(Math.random() * 9999) + '_' + Date.now();
 }
 
-async function handleInboxParcel(message) {
-  console.log('InboxParcel', message);
-  fs.writeFileSync(getPath('inbox', randomID() + '_' + message.filename), Buffer.from(message.content));
+async function handleInboxParcel(message, sourceAddr) {
+  console.log('InboxParcel', message, sourceAddr);
+  // fs.writeFileSync(getPath('inbox', randomID() + '_' + sourceAddr + '_' + message.filename), Buffer.from(message.content));
+  fs.writeFileSync(getPath('inbox', Date.now() + '_' + sourceAddr + '_' + message.filename), Buffer.from(message.content));
 }
 
 const thirdRPCTable = {
