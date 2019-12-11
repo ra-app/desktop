@@ -28,9 +28,15 @@ function deleteFile(fullPath) {
   }
 }
 
+function getExtension(path) {
+  const n = path.split('.');
+  return n[n.length - 1];
+}
+
 module.exports = {
   randomID,
   getPath,
   exists,
   deleteFile,
+  getExtension,
 };

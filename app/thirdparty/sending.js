@@ -2,7 +2,7 @@ const fs = require('fs');
 const parseStringPromise = require('xml2js').parseStringPromise;
 
 const { thirdIPC } = require('./ipc');
-const { deleteFile } = require('./util');
+const { deleteFile, exists, getExtension } = require('./util');
 
 function findTagInXML(tag, parsedXML) {
   if (typeof parsedXML === 'object') {
@@ -38,10 +38,22 @@ async function extractInfoFromXML(xmlContent) {
   return info;
 }
 
+function writeSendError(fullPath, error) {
+  try {
+    fs.writeFileSync(fullPath + '.error', JSON.stringify({
+      rawError: error,
+      ts: Date.now(),
+    }, null, 2), { flag: 'w' });
+  } catch (err) {
+    console.error('thirdPartyNode writeSendError Error:', err);
+  }
+}
+
 const fileLocks = {};
 async function sendOutboxFile(fullPath, filename) {
   try {
-    if (filename.indexOf('.xml') === -1 && filename.indexOf('.json') === -1) return;
+    const ext = getExtension(filename);
+    if (ext !== 'xml' && ext !== 'json') return;
 
     if (fileLocks[fullPath]) {
       console.log('sendOutboxFile - Already handling', filename);
@@ -51,27 +63,31 @@ async function sendOutboxFile(fullPath, filename) {
     fileLocks[fullPath] = true;
     const content = fs.readFileSync(fullPath);
 
-    let destination;
+    if (content) {
+      let destination;
 
-    if (filename.indexOf('.xml') !== -1) {
-      const info = await extractInfoFromXML(content);
-      destination = info.destination;
-    } else if (filename.indexOf('.json') !== -1) {
-      const info = JSON.parse(content);
-      destination = info.destination;
-    } else {
-      throw new Error('Invalid file extension!');
-    }
+      if (ext === 'xml') {
+        const info = await extractInfoFromXML(content);
+        destination = info.destination;
+      } else if (ext === 'json') {
+        const info = JSON.parse(content);
+        destination = info.destination;
+      } else {
+        throw new Error('Invalid file extension!');
+      }
 
-    if (!destination) { throw new Error('Missing destination!'); }
+      if (!destination) { throw new Error('Missing destination!'); }
 
-    const response = await thirdIPC('outbox_file', destination, { content, filename });
-    console.log('thirdPartyNode sendOutboxFile', fullPath, destination, content.toString(), response);
-    if (response && response.success) {
-      deleteFile(fullPath);
+      const response = await thirdIPC('outbox_file', destination, { content, filename });
+      console.log('thirdPartyNode sendOutboxFile', fullPath, destination, content.toString(), response);
+      if (response && response.success) {
+        deleteFile(fullPath);
+        if (exists(fullPath + '.error')) deleteFile(fullPath + '.error');
+      }
     }
   } catch (err) {
     console.warn('thirdPartyNode sendOutboxFile Error:', err.message || err, fullPath);
+    writeSendError(fullPath, err);
   }
   fileLocks[fullPath] = false;
 }
