@@ -23,9 +23,12 @@ async function handleThirdPartyEvent(event) {
       case 'parcel':
         await thirdIPC('inboxParcel', msgData.payload, envelope.source);
         break;
+      default:
+        console.warn('handleThirdPartyEvent - Unknown message type', msgData,type);
+        break;
     }
 
-    confirm();
+    confirm(); // Inform signal that message was handled correctly, safe to remove from queue.
   } catch (err) {
     console.warn('handleThirdPartyEvent Error:', err, event);
   }
