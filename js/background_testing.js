@@ -7,6 +7,19 @@
 
 /* eslint strict: ["error", "global"] */
 
+// Attempt to set version for initial loading screen ASAP
+function trySetVersion() {
+  try {
+    const version = window.getVersion();
+    const elem = document.getElementById('versionHTML');
+    // console.log('trySetVersion', version, elem);
+    elem.innerText = version;
+  } catch (err) {
+    console.warn('trySetVersion failed', err);
+  }
+}
+document.addEventListener('DOMContentLoaded', trySetVersion);
+
 // Testing Playground
 document.addEventListener('DOMContentLoaded', async () => {
   await initUpdateIPC();

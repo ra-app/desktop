@@ -64,6 +64,10 @@ function waitForWindowReady(window) {
 //   }
 // }
 
+function getMetaInfo() {
+  return thirdIPC('getMetaInfo');
+}
+
 module.exports = {
   thirdIPC,
   ipcSend,
@@ -72,4 +76,5 @@ module.exports = {
   waitForWindowReady,
   // testRPC,
   thirdRPCTable,
+  getMetaInfo,
 };

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const parseStringPromise = require('xml2js').parseStringPromise;
 
-const { thirdIPC } = require('./ipc');
+const { thirdIPC, getMetaInfo } = require('./ipc');
 const { deleteFile, exists, getExtension } = require('./util');
 
 function findTagInXML(tag, parsedXML) {
@@ -15,22 +15,50 @@ function findTagInXML(tag, parsedXML) {
   }
 }
 
+function ParcelMetaToInfo(parcelMeta) {
+  const info = {};
+  if (parcelMeta.destination && parcelMeta.destination.length > 0) info.destination = parcelMeta.destination[0];
+  if (parcelMeta.origin && parcelMeta.origin.length > 0) info.origin = parcelMeta.origin[0];
+  if (parcelMeta.type && parcelMeta.type.length > 0) info.type = parcelMeta.type[0];
+
+  if (parcelMeta.labels && parcelMeta.labels.length > 0) {
+    info.labels = {};
+    parcelMeta.labels.forEach((labels) => {
+      if (labels.label && labels.label.length > 0) {
+        labels.label.forEach((label) => {
+          info.labels[label['KEY']] = label['_'];
+        })
+      }
+    });
+  }
+
+  if (parcelMeta.files && parcelMeta.files.length > 0) {
+    info.files = {};
+    parcelMeta.files.forEach((files) => {
+      if (files.file_name && files.file_name.length > 0) {
+        files.file_name.forEach((file) => {
+          let MD5;
+          if (file['MD5_HASH'] && file['MD5_HASH'].length > 0) MD5 = file['MD5_HASH'][0];
+          info.files[file['_']] = { MD5 };
+        })
+      }
+    });
+  }
+  return info;
+}
+
 async function extractInfoFromXML(xmlContent) {
-  const parsed = await parseStringPromise(xmlContent, { strict: false, normalizeTags: true, trim: true, normalize: true });
+  const parsed = await parseStringPromise(xmlContent, { strict: false, normalizeTags: true, trim: true, normalize: true, stripPrefix: true, mergeAttrs: true });
   // console.log('PARSED', JSON.stringify(parsed));
   if (!parsed) { throw new Error('Parsed was null!'); }
-  const info = {};
-
+  
+  let info = {};
   let parcelMeta;
   if (parsed.destination) {
     // Test raw xml
     info.destination = parsed.destination;
   } else if (parcelMeta = findTagInXML('parcel_meta', parsed)) {
-    // Handle proper Parcel_Meta struct
-    // TODO: extract and check other infos, that origin tag is present and matches, etc
-    console.log('PARCEL META', parcelMeta);
-    info.destination = parcelMeta.destination[0];
-    // info.type = parcelMeta.type[0];
+    info = ParcelMetaToInfo(parcelMeta);
   } else {
     throw new Error('Bad XML!');
   }
@@ -41,7 +69,7 @@ async function extractInfoFromXML(xmlContent) {
 function writeSendError(fullPath, error) {
   try {
     fs.writeFileSync(fullPath + '.error', JSON.stringify({
-      rawError: error,
+      error: error,
       ts: Date.now(),
     }, null, 2), { flag: 'w' });
   } catch (err) {
@@ -64,21 +92,26 @@ async function sendOutboxFile(fullPath, filename) {
     const content = fs.readFileSync(fullPath);
 
     if (content) {
-      let destination;
+      let info;
 
       if (ext === 'xml') {
-        const info = await extractInfoFromXML(content);
-        destination = info.destination;
+        info = await extractInfoFromXML(content);
       } else if (ext === 'json') {
-        const info = JSON.parse(content);
-        destination = info.destination;
+        info = JSON.parse(content);
       } else {
         throw new Error('Invalid file extension!');
       }
 
+      const destination = info.destination;
       if (!destination) { throw new Error('Missing destination!'); }
 
-      const response = await thirdIPC('outbox_file', destination, { content, filename });
+      // For now only check for mismatch if origin is specified, for old xml and simple json
+      if (info.origin) {
+        const metaInfo = await getMetaInfo();
+        if (info.origin !== metaInfo.ownPhoneNumber) throw new Error('Origin mismatch!');
+      }
+
+      const response = await thirdIPC('outbox_file', destination, { content, filename, info });
       console.log('thirdPartyNode sendOutboxFile', fullPath, destination, content.toString(), response);
       if (response && response.success) {
         deleteFile(fullPath);
@@ -86,7 +119,7 @@ async function sendOutboxFile(fullPath, filename) {
       }
     }
   } catch (err) {
-    console.warn('thirdPartyNode sendOutboxFile Error:', err.message || err, fullPath);
+    console.warn('thirdPartyNode sendOutboxFile Error:', err, fullPath);
     writeSendError(fullPath, err);
   }
   fileLocks[fullPath] = false;

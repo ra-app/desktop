@@ -2,6 +2,25 @@ const { app } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
+try {
+  // https://stackoverflow.com/questions/18391212/is-it-not-possible-to-stringify-an-error-using-json-stringify
+  if (!('toJSON' in Error.prototype)) {
+    Object.defineProperty(Error.prototype, 'toJSON', {
+      value: function () {
+        var alt = {};
+        Object.getOwnPropertyNames(this).forEach(function (key) {
+          alt[key] = this[key];
+        }, this);
+        return alt;
+      },
+      configurable: true,
+      writable: true
+    });
+  }
+} catch (err) {
+  console.warn('ThirdPartyNode util toJSON error:', err);
+}
+
 function randomID() {
   return Math.floor(Math.random() * 9999) + '_' + Date.now();
 }
