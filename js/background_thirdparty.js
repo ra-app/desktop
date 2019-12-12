@@ -18,6 +18,35 @@ async function getThirdPartyMetaInfo() {
   };
 }
 
+async function createAttachmentPointer(buffer) {
+  const file = { data: buffer, size: buffer.byteLength || buffer.length };
+  const res = await textsecure.messaging.makeAttachmentPointer(file, false);
+  console.log('createAttachmentPointer', file, res);
+  return res;
+}
+
+async function handleAttachmentPointer(attachment) {
+  // const res = await window.getReceiver().handleAttachment(attachment);
+  const res = await window.getReceiver().downloadAttachment(attachment);
+  console.log('handleAttachmentPointer', attachment, res);
+  return res;
+}
+
+async function deleteAttachmentPointer(attachment) {
+  const res = await window.getReceiver().deleteAttachment(attachment);
+  console.log('deleteAttachmentPointer', attachment, res);
+  return res;
+}
+
+setTimeout(async () => {
+  const attachment = await createAttachmentPointer(new ArrayBuffer(1024));
+  const dl = await handleAttachmentPointer(attachment);
+  console.log('TEST', dl);
+  const dl2 = await handleAttachmentPointer(attachment);
+  console.log('TEST 2', dl2);
+  // const del = await deleteAttachmentPointer(attachment);
+}, 5000);
+
 // === IPC/RPC Sys Start ===
 
 function thirdIPC(type, ...args) {

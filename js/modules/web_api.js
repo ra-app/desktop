@@ -400,6 +400,7 @@ const URL_CALLS = {
   signed: 'v2/keys/signed',
   setProfile: 'v1/profile/name',
   getAvatarUploadForm: 'v1/profile/form/avatar',
+  attachmentSigned: 'v1/attachments',
 };
 
 module.exports = {
@@ -445,6 +446,7 @@ function initialize({
     return {
       confirmCode,
       getAttachment,
+      delAttachment,
       getAvatar,
       getDevices,
       getKeysForNumber,
@@ -898,6 +900,16 @@ function initialize({
       });
     }
 
+    // async function delAttachment(id) {
+    //   // This is going to the CDN, not the service, so we use _outerAjax
+    //   return _outerAjax(`${cdnUrl}/attachments/${id}`, {
+    //     certificateAuthority,
+    //     proxyUrl,
+    //     timeout: 0,
+    //     type: 'DELETE',
+    //   });
+    // }
+
     async function putToCDN(response, encryptedBin, path = '') {
       const {
         key,
@@ -960,6 +972,35 @@ function initialize({
           'Content-Length': contentLength,
         },
         processData: false,
+      });
+
+      return attachmentIdString;
+    }
+
+    async function delAttachment(id) {
+      const response = await _ajax({
+        call: 'attachmentSigned',
+        httpType: 'DELETE',
+        responseType: 'json',
+        urlParameters: '/' + id,
+      });
+
+      console.log('delAttachment RESPONSE', response);
+
+      // const id = response.location.match(/\/(\d*?)\?X/)[1];
+      const cred = response.location.match(/X-Amz-Credential=(.*?)%/)[1];
+      const sig = response.location.match(/X-Amz-Signature=(.*?)$/)[1];
+
+      // ${cdnUrl}/attachments/
+      await _outerAjax(response.location, {
+      // await _outerAjax(`${cdnUrl}/attachments/${id}`, {
+        // certificateAuthority,
+        proxyUrl,
+        timeout: 0,
+        type: 'DELETE',
+        headers: {
+          'Authorization': 'AWS ' + cred + ':' + sig,
+        },
       });
 
       return attachmentIdString;

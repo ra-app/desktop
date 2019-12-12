@@ -1353,6 +1353,7 @@ textsecure.MessageSender = function MessageSenderWrapper(username, password) {
   this.queueJobForNumber = sender.queueJobForNumber.bind(sender); // Added
   this.sendThirdParty = sender.sendThirdParty.bind(sender);
   this.sendOfficeJsonMsg = sender.sendOfficeJsonMsg.bind(sender);
+  this.makeAttachmentPointer = sender.makeAttachmentPointer.bind(sender);
 };
 
 textsecure.MessageSender.prototype = {

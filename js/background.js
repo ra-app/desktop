@@ -174,6 +174,9 @@
     }
     return -1;
   };
+  window.getReceiver = () => {
+    return messageReceiver;
+  };
   Whisper.events = _.clone(Backbone.Events);
   let accountManager;
   window.getAccountManager = () => {
