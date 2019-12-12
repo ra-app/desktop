@@ -700,6 +700,10 @@ const apiRequest = async (call, data = undefined) => {
   return res;
 };
 
+const getCompaniesForMe = async () => {
+  return apiRequest('api/v1/client/companies');
+};
+
 const createCompany = async info => {
   const res = await apiRequest('api/v1/companies/register', info);
   console.log('CreateCompany', info, res);

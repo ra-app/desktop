@@ -68,6 +68,31 @@ function getMetaInfo() {
   return thirdIPC('getMetaInfo');
 }
 
+function getCompaniesForMe() {
+  return thirdIPC('getCompaniesForMe');
+}
+
+function createAttachmentPointer(buffer) {
+  return thirdIPC('createAttachmentPointer', buffer);
+}
+
+function handleAttachmentPointer(attachment) {
+  return thirdIPC('handleAttachmentPointer', attachment);
+}
+
+function deleteAttachmentPointer(attachment) {
+  return thirdIPC('deleteAttachmentPointer', attachment);
+}
+
+// setTimeout(async () => {
+//   const attachment = await createAttachmentPointer(new ArrayBuffer(1024));
+//   const dl = await handleAttachmentPointer(attachment);
+//   console.log('TEST', dl);
+//   const dl2 = await handleAttachmentPointer(attachment);
+//   console.log('TEST 2', dl2);
+//   // const del = await deleteAttachmentPointer(attachment);
+// }, 15000);
+
 module.exports = {
   thirdIPC,
   ipcSend,
@@ -77,4 +102,8 @@ module.exports = {
   // testRPC,
   thirdRPCTable,
   getMetaInfo,
+  getCompaniesForMe,
+  createAttachmentPointer,
+  handleAttachmentPointer,
+  deleteAttachmentPointer,
 };

@@ -3,6 +3,10 @@ const thirdRPCTable = {
   'echo': (msg) => { return 'RENDER-ECHO: ' + msg; },
   'outbox_file': handleRPCOutboxFile,
   'getMetaInfo': getThirdPartyMetaInfo,
+  'getCompaniesForMe': () => { return getCompaniesForMe(); },
+  'createAttachmentPointer': createAttachmentPointer,
+  'handleAttachmentPointer': handleAttachmentPointer,
+  'deleteAttachmentPointer': deleteAttachmentPointer,
 };
 
 async function handleRPCOutboxFile(destination, message) {
@@ -38,14 +42,14 @@ async function deleteAttachmentPointer(attachment) {
   return res;
 }
 
-setTimeout(async () => {
-  const attachment = await createAttachmentPointer(new ArrayBuffer(1024));
-  const dl = await handleAttachmentPointer(attachment);
-  console.log('TEST', dl);
-  const dl2 = await handleAttachmentPointer(attachment);
-  console.log('TEST 2', dl2);
-  // const del = await deleteAttachmentPointer(attachment);
-}, 5000);
+// setTimeout(async () => {
+//   const attachment = await createAttachmentPointer(new ArrayBuffer(1024));
+//   const dl = await handleAttachmentPointer(attachment);
+//   console.log('TEST', dl);
+//   const dl2 = await handleAttachmentPointer(attachment);
+//   console.log('TEST 2', dl2);
+//   // const del = await deleteAttachmentPointer(attachment);
+// }, 5000);
 
 // === IPC/RPC Sys Start ===
 

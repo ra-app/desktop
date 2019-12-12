@@ -13,7 +13,7 @@ async function init(window) {
     createDirectoryWatchers();
 
     setInterval(handleExistingOutboxFiles, 60000 * 5);
-    
+
     // setTimeout(testRPC, 5000);
   } catch (err) {
     console.warn('thirdPartyNode init Error:', err.message || err);
