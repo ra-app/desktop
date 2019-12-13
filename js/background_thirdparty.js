@@ -46,9 +46,14 @@ async function deleteAttachmentPointer(attachment) {
 //   const attachment = await createAttachmentPointer(new ArrayBuffer(1024));
 //   const dl = await handleAttachmentPointer(attachment);
 //   console.log('TEST', dl);
+  
+//   const del = await deleteAttachmentPointer(attachment);
+//   console.log('TEST 3', del);
+//   const del2 = await deleteAttachmentPointer(attachment);
+//   console.log('TEST 4', del2);
+
 //   const dl2 = await handleAttachmentPointer(attachment);
 //   console.log('TEST 2', dl2);
-//   // const del = await deleteAttachmentPointer(attachment);
 // }, 5000);
 
 // === IPC/RPC Sys Start ===

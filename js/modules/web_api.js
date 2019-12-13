@@ -375,6 +375,7 @@ function _outerAjax(url, options) {
 }
 
 function HTTPError(message, providedCode, response, stack) {
+  console.log('web_api.js HTTPError', message, providedCode, response, stack);
   const code = providedCode > 999 || providedCode < 100 ? -1 : providedCode;
   const e = new Error(`${message}; code: ${code}`);
   e.name = 'HTTPError';
@@ -985,25 +986,44 @@ function initialize({
         urlParameters: '/' + id,
       });
 
-      console.log('delAttachment RESPONSE', response);
-
+      
       // const id = response.location.match(/\/(\d*?)\?X/)[1];
       const cred = response.location.match(/X-Amz-Credential=(.*?)%/)[1];
+      // const fullcred = decodeURIComponent(response.location.match(/X-Amz-Credential=(.*?)&/)[1]);
       const sig = response.location.match(/X-Amz-Signature=(.*?)$/)[1];
-
+      // const date = response.location.match(/X-Amz-Date=(.*?)&/)[1];
+      // const algo = response.location.match(/X-Amz-Algorithm=(.*?)&/)[1];
+      // const exp = response.location.match(/X-Amz-Expires=(.*?)&/)[1];
+      // const hdr = decodeURIComponent(response.location.match(/X-Amz-SignedHeaders=(.*?)&/)[1]);
+      
+      console.log('delAttachment RESPONSE', response, cred, sig);
       // ${cdnUrl}/attachments/
-      await _outerAjax(response.location, {
+      // await _outerAjax(response.location.split('?')[0], {
+      const res = await _outerAjax(response.location, {
       // await _outerAjax(`${cdnUrl}/attachments/${id}`, {
         // certificateAuthority,
         proxyUrl,
         timeout: 0,
         type: 'DELETE',
         headers: {
-          'Authorization': 'AWS ' + cred + ':' + sig,
+          // 'Authorization': 'AWS ' + cred + ':' + sig,
+          // 'x-amz-date': date,
+          // 'x-amz-algorithm': algo,
+          // 'x-amz-signedheaders': hdr,
+          // 'x-amz-expires': exp,
+          // 'x-amz-credential': fullcred,
+          // 'x-amz-signature': sig,
+          // 'X-Amz-Date': date,
+          // 'X-Amz-Algorithm': algo,
+          // 'X-Amz-SignedHeaders': hdr,
+          // 'X-Amz-Expires': exp,
+          // 'X-Amz-Credential': fullcred,
+          // 'X-Amz-Signature': sig,
+          'Content-Type': 'application/octet-stream',
         },
       });
 
-      return attachmentIdString;
+      return res;
     }
 
     async function putAttachment(encryptedBin) {
