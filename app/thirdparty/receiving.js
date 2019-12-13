@@ -4,7 +4,7 @@ const { getPath } = require('./util');
 const { handleAttachmentPointer, deleteAttachmentPointer } = require('./ipc');
 
 async function handleInboxParcel(message, sourceAddr) {
-  console.log('InboxParcel', message, sourceAddr);
+  // console.log('InboxParcel', message, sourceAddr);
   // fs.writeFileSync(getPath('inbox', randomID() + '_' + sourceAddr + '_' + message.filename), Buffer.from(message.content));
 
   let data;

@@ -9,33 +9,33 @@ function getWatchEventDetails(base, eventType, filename) {
   return data;
 }
 
-function inboxHandler(eventType, filename) {
-  try {
-    const { fullPath, created } = getWatchEventDetails('inbox', eventType, filename);
-    console.log('inboxHandler', eventType, filename, fullPath, created);
-  } catch (err) {
-    console.warn('thirdPartyNode inboxHandler Error:', err.message || err, eventType, filename);
-  }
-}
+// function inboxHandler(eventType, filename) {
+//   try {
+//     const { fullPath, created } = getWatchEventDetails('inbox', eventType, filename);
+//     console.log('inboxHandler', eventType, filename, fullPath, created);
+//   } catch (err) {
+//     console.warn('thirdPartyNode inboxHandler Error:', err.message || err, eventType, filename);
+//   }
+// }
 
 function outboxHandler(eventType, filename) {
   try {
     const { fullPath, created } = getWatchEventDetails('outbox', eventType, filename);
-    console.log('outboxHandler', eventType, filename, fullPath, created);
+    // console.log('outboxHandler', eventType, filename, fullPath, created);
     if (created) sendOutboxFile(fullPath, filename);
   } catch (err) {
     console.warn('thirdPartyNode outboxHandler Error:', err.message || err, eventType, filename);
   }
 }
 
-function localHandler(eventType, filename) {
-  try {
-    const { fullPath, created } = getWatchEventDetails('discovery/local', eventType, filename);
-    console.log('localHandler', eventType, filename, fullPath, created);
-  } catch (err) {
-    console.warn('thirdPartyNode localHandler Error:', err.message || err, eventType, filename);
-  }
-}
+// function localHandler(eventType, filename) {
+//   try {
+//     const { fullPath, created } = getWatchEventDetails('discovery/local', eventType, filename);
+//     console.log('localHandler', eventType, filename, fullPath, created);
+//   } catch (err) {
+//     console.warn('thirdPartyNode localHandler Error:', err.message || err, eventType, filename);
+//   }
+// }
 
 function ensureDirectoryStructure() {
   const folders = [
@@ -49,7 +49,7 @@ function ensureDirectoryStructure() {
   for (const folder of folders) {
     try {
       const path = getPath(folder);
-      console.log('thirdPartyNode ensureDirectoryStructure:', folder, path);
+      // console.log('thirdPartyNode ensureDirectoryStructure:', folder, path);
       fs.mkdirSync(path, { recursive: true });
     } catch (err) {
       // console.warn('thirdPartyNode ensureDirectoryStructure mkdirSync Error:', err.message || err);
@@ -59,9 +59,9 @@ function ensureDirectoryStructure() {
 
 function createDirectoryWatchers() {
   const opts = { recursive: false };
-  fs.watch(getPath('inbox'), opts, inboxHandler);
+  // fs.watch(getPath('inbox'), opts, inboxHandler);
   fs.watch(getPath('outbox'), opts, outboxHandler);
-  fs.watch(getPath('discovery/local'), opts, localHandler);
+  // fs.watch(getPath('discovery/local'), opts, localHandler);
   // fs.watch(getPath('discovery'), fileHandler);
   // fs.watch(getPath('discovery/remote'), fileHandler);
   // fs.watch(getPath(''), fileHandler);

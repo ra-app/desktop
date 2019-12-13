@@ -156,7 +156,7 @@ function _createSocket(url, { certificateAuthority, proxyUrl }) {
   }
 
   // eslint-disable-next-line new-cap
-  return new WebSocket(url, null, null, null, requestOptions);
+  return new WebSocket(url, null, null, null, requestOptions, { maxReceivedFrameSize: 2000000 }); // , maxReceivedMessageSize: 2000000 });
 }
 
 const FIVE_MINUTES = 1000 * 60 * 5;

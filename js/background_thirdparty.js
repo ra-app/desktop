@@ -133,16 +133,22 @@ async function handleThirdPartyEvent(event) {
   try {
     const { data, confirm } = event;
     const { envelope, message } = data;
-    console.log('handleThirdPartyEvent', envelope, message);
+    // console.log('handleThirdPartyEvent', envelope, message);
 
-    const msgData = JSON.parse(message.data);
+    let msgData;
+    try {
+      msgData = JSON.parse(message.data);
+    } catch(err) {
+      console.warn('handleThirdPartyEvent Error parsing json:', err);
+      return confirm(); // No need to return bad messages.
+    }
 
     switch(msgData.type) {
       case 'parcel':
         await thirdIPC('inboxParcel', msgData.payload, envelope.source);
         break;
       default:
-        console.warn('handleThirdPartyEvent - Unknown message type', msgData,type);
+        console.warn('handleThirdPartyEvent - Unknown message type', msgData.type);
         break;
     }
 
@@ -156,7 +162,7 @@ async function sendThirdPartyMsg(destination, raw) {
   const data = (typeof raw === 'object') ? JSON.stringify(raw) : raw;
   try {
     const r = await textsecure.messaging.sendThirdParty(destination, data, {});
-    console.log('sendThirdPartyMsg', destination, {data, r});
+    // console.log('sendThirdPartyMsg', destination, {data, r});
     return r;
   } catch (err) {
     // console.warn('derp', err);
