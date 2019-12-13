@@ -10,7 +10,7 @@ const thirdRPCTable = {
 };
 
 async function handleRPCOutboxFile(destination, message) {
-  console.log('handleRPCOutboxFile:', message);
+  // console.log('handleRPCOutboxFile:', message);
   // const result = await sendThirdPartyMsg(destination, JSON.stringify({ type: 'parcel', payload: message }));
   const result = await sendThirdPartyMsg(destination, { type: 'parcel', payload: message });
   return { success: true, result }; // TODO: Check for errors in sending message?
@@ -23,26 +23,26 @@ async function getThirdPartyMetaInfo() {
 }
 
 async function createAttachmentPointer(buffer) {
-  console.log('createAttachmentPointer buffer', buffer);
+  // console.log('createAttachmentPointer buffer', buffer);
   // if (!(buffer instanceof ArrayBuffer)) buffer = new Uint8Array(buffer).buffer;
   const file = { data: buffer, size: buffer.byteLength };
   const res = await textsecure.messaging.makeAttachmentPointer(file, false);
-  console.log('createAttachmentPointer', file, res);
+  // console.log('createAttachmentPointer', file, res);
   return res;
 }
 
 async function handleAttachmentPointer(attachment) {
   // const res = await window.getReceiver().handleAttachment(attachment);
-  console.log('handleAttachmentPointer attachment', attachment);
+  // console.log('handleAttachmentPointer attachment', attachment);
   const res = await window.getReceiver().downloadAttachment(attachment);
-  console.log('handleAttachmentPointer res', res);
+  // console.log('handleAttachmentPointer res', res);
   return res;
 }
 
 async function deleteAttachmentPointer(attachment) {
-  console.log('deleteAttachmentPointer attachment', attachment);
+  // console.log('deleteAttachmentPointer attachment', attachment);
   const res = await window.getReceiver().deleteAttachment(attachment);
-  console.log('deleteAttachmentPointer res', res);
+  // console.log('deleteAttachmentPointer res', res);
   return res;
 }
 
@@ -68,7 +68,7 @@ function thirdIPC(type, ...args) {
     try {
       window.ipc.once(ID, (event, result) => {
         result = JSON.parse(result);
-        console.log('RESULT', ID, event, result);
+        // console.log('RESULT', ID, event, result);
         if (result.error) reject(result.error);
         else resolve(result.data);
       });
@@ -80,16 +80,16 @@ function thirdIPC(type, ...args) {
 }
 
 window.ipc.on('third_ipc', async (event, ID, type, ...args) => {
-  console.log('THIRDRPC', event, ID, type, args);
+  // console.log('THIRDRPC', event, ID, type, args);
   const result = { error: undefined, data: undefined };
   try {
     result.data = await thirdRPCTable[type](...args);
   } catch (err) {
     console.warn('ThirdIPC Render Handler Error:', err, event, ID, type, args);
     result.error = err.message || err;
-    result.data = undefined;
   }
   window.ipc.send(ID, JSON.stringify(result));
+  // window.ipc.send(ID, result);
 });
 
 try {
@@ -154,9 +154,22 @@ async function handleThirdPartyEvent(event) {
 
 async function sendThirdPartyMsg(destination, raw) {
   const data = (typeof raw === 'object') ? JSON.stringify(raw) : raw;
-  const r = await textsecure.messaging.sendThirdParty(destination, data);
-  console.log('sendThirdPartyMsg', destination, data, r);
-  return r;
+  try {
+    const r = await textsecure.messaging.sendThirdParty(destination, data, {});
+    console.log('sendThirdPartyMsg', destination, data, r);
+    return r;
+  } catch (err) {
+    // console.warn('derp', err);
+    if (err.errors && err.errors.length > 0 && err.errors[0].name === 'OutgoingIdentityKeyError') {  
+      await resetSession(destination);
+      return sendThirdPartyMsg(destination, raw);
+    }
+    throw err;
+  }
 }
 
+async function resetSession(destination) {
+  await textsecure.storage.protocol.removeIdentityKey(destination);
+  // return await textsecure.messaging.resetSession(destination, Date.now(), {});
+}
 // === ThirdParty Signal Message Handling End ===

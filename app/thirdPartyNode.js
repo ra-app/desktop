@@ -1,6 +1,10 @@
-const { initRPC, thirdRPCTable, waitForWindowReady } = require('./thirdparty/ipc');
+const { initRPC, thirdRPCTable, waitForWindowReady, getMetaInfo } = require('./thirdparty/ipc');
 const { ensureDirectoryStructure, createDirectoryWatchers, handleExistingOutboxFiles } = require('./thirdparty/watch');
 const { handleInboxParcel } = require('./thirdparty/receiving');
+
+// async function writeMetaFiles() {
+//   const data = await getMetaInfo();
+// }
 
 async function init(window) {
   try {

@@ -1,7 +1,8 @@
 const fs = require('fs');
 const parseStringPromise = require('xml2js').parseStringPromise;
+const StreamZip = require('node-stream-zip');
 
-const { thirdIPC, getMetaInfo } = require('./ipc');
+const { thirdIPC, getMetaInfo, createAttachmentPointer, deleteAttachmentPointer } = require('./ipc');
 const { deleteFile, exists, getExtension } = require('./util');
 
 function findTagInXML(tag, parsedXML) {
@@ -66,6 +67,25 @@ async function extractInfoFromXML(xmlContent) {
   return info;
 }
 
+function extractInfoFromZip(filename) {
+  return new Promise((resolve, reject) => {
+    const zip = new StreamZip({
+      file: filename,
+      storeEntries: true
+    });
+    
+    // Handle errors
+    zip.on('error', reject);
+
+    zip.on('ready', () => {
+      try {
+        const data = zip.entryDataSync('parcel.xml');
+        resolve(extractInfoFromXML(data));  
+      } catch (err) { reject(err); }
+    });
+  });
+}
+
 function writeSendError(fullPath, error) {
   try {
     fs.writeFileSync(fullPath + '.error', JSON.stringify({
@@ -79,9 +99,10 @@ function writeSendError(fullPath, error) {
 
 const fileLocks = {};
 async function sendOutboxFile(fullPath, filename) {
+  let attachment;
   try {
     const ext = getExtension(filename);
-    if (ext !== 'xml' && ext !== 'json') return;
+    if (ext !== 'xml' && ext !== 'json' && ext !== 'zip' && ext !== 'ofa') return;
 
     if (fileLocks[fullPath]) {
       console.log('sendOutboxFile - Already handling', filename);
@@ -98,6 +119,8 @@ async function sendOutboxFile(fullPath, filename) {
         info = await extractInfoFromXML(content);
       } else if (ext === 'json') {
         info = JSON.parse(content);
+      } else if (ext === 'zip' || ext === 'ofa') {
+        info = await extractInfoFromZip(fullPath);
       } else {
         throw new Error('Invalid file extension!');
       }
@@ -111,8 +134,16 @@ async function sendOutboxFile(fullPath, filename) {
         if (info.origin !== metaInfo.ownPhoneNumber) throw new Error('Origin mismatch!');
       }
 
-      const response = await thirdIPC('outbox_file', destination, { content, filename, info });
-      console.log('thirdPartyNode sendOutboxFile', fullPath, destination, content.toString(), response);
+      const data = { filename, info };
+
+      const SIZE_LIMIT = 1024 * 1024 * 3; // 3 MB
+      // const SIZE_LIMIT = 1024 * 15; // 15 KB
+      console.log('SIZE', content.byteLength, SIZE_LIMIT, content.byteLength >= SIZE_LIMIT);
+      if (content.byteLength >= SIZE_LIMIT) attachment = data.attachment = await createAttachmentPointer(content);
+      else data.content = content;
+
+      const response = await thirdIPC('outbox_file', destination, data);
+      console.log('thirdPartyNode sendOutboxFile', fullPath, destination, response);
       if (response && response.success) {
         deleteFile(fullPath);
         if (exists(fullPath + '.error')) deleteFile(fullPath + '.error');
@@ -121,6 +152,13 @@ async function sendOutboxFile(fullPath, filename) {
   } catch (err) {
     console.warn('thirdPartyNode sendOutboxFile Error:', err, fullPath);
     writeSendError(fullPath, err);
+    if (attachment) { // Cleanup dangling attachment?
+      try {
+        await deleteAttachmentPointer(attachment);
+      } catch (err) {
+        console.warn('thirdPartyNode sendOutboxFile deleteAttachmentPointer Error:', err, attachment);
+      }
+    }
   }
   fileLocks[fullPath] = false;
 }
