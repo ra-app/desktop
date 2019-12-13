@@ -21,6 +21,20 @@ try {
   console.warn('ThirdPartyNode util toJSON error:', err);
 }
 
+try {
+  if (!('toJSON' in ArrayBuffer.prototype)) {
+    Object.defineProperty(ArrayBuffer.prototype, 'toJSON', {
+      value: function () {
+        return Array.from(new Uint8Array(this));
+      },
+      configurable: true,
+      writable: true
+    });
+  }
+} catch (err) {
+  console.warn('ThirdPartyNode util toJSON error:', err);
+}
+
 function randomID() {
   return Math.floor(Math.random() * 9999) + '_' + Date.now();
 }

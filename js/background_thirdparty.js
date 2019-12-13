@@ -23,7 +23,9 @@ async function getThirdPartyMetaInfo() {
 }
 
 async function createAttachmentPointer(buffer) {
-  const file = { data: buffer, size: buffer.byteLength || buffer.length };
+  console.log('createAttachmentPointer buffer', buffer);
+  // if (!(buffer instanceof ArrayBuffer)) buffer = new Uint8Array(buffer).buffer;
+  const file = { data: buffer, size: buffer.byteLength };
   const res = await textsecure.messaging.makeAttachmentPointer(file, false);
   console.log('createAttachmentPointer', file, res);
   return res;
@@ -31,14 +33,16 @@ async function createAttachmentPointer(buffer) {
 
 async function handleAttachmentPointer(attachment) {
   // const res = await window.getReceiver().handleAttachment(attachment);
+  console.log('handleAttachmentPointer attachment', attachment);
   const res = await window.getReceiver().downloadAttachment(attachment);
-  console.log('handleAttachmentPointer', attachment, res);
+  console.log('handleAttachmentPointer res', res);
   return res;
 }
 
 async function deleteAttachmentPointer(attachment) {
+  console.log('deleteAttachmentPointer attachment', attachment);
   const res = await window.getReceiver().deleteAttachment(attachment);
-  console.log('deleteAttachmentPointer', attachment, res);
+  console.log('deleteAttachmentPointer res', res);
   return res;
 }
 
@@ -63,6 +67,7 @@ function thirdIPC(type, ...args) {
   return new Promise((resolve, reject) => {
     try {
       window.ipc.once(ID, (event, result) => {
+        result = JSON.parse(result);
         console.log('RESULT', ID, event, result);
         if (result.error) reject(result.error);
         else resolve(result.data);
@@ -84,8 +89,41 @@ window.ipc.on('third_ipc', async (event, ID, type, ...args) => {
     result.error = err.message || err;
     result.data = undefined;
   }
-  window.ipc.send(ID, result);
+  window.ipc.send(ID, JSON.stringify(result));
 });
+
+try {
+  // https://stackoverflow.com/questions/18391212/is-it-not-possible-to-stringify-an-error-using-json-stringify
+  if (!('toJSON' in Error.prototype)) {
+    Object.defineProperty(Error.prototype, 'toJSON', {
+      value: function () {
+        var alt = {};
+        Object.getOwnPropertyNames(this).forEach(function (key) {
+          alt[key] = this[key];
+        }, this);
+        return alt;
+      },
+      configurable: true,
+      writable: true
+    });
+  }
+} catch (err) {
+  console.warn('background_thirdparty toJSON error:', err);
+}
+
+try {
+  if (!('toJSON' in ArrayBuffer.prototype)) {
+    Object.defineProperty(ArrayBuffer.prototype, 'toJSON', {
+      value: function () {
+        return Array.from(new Uint8Array(this));
+      },
+      configurable: true,
+      writable: true
+    });
+  }
+} catch (err) {
+  console.warn('background_thirdparty toJSON error:', err);
+}
 
 // === IPC/RPC Sys End ===
 

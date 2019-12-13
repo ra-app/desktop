@@ -5,6 +5,7 @@ function thirdIPC(type, ...args) {
   return new Promise((resolve, reject) => {
     try {
       ipcOnce(ID, (event, result) => {
+        result = JSON.parse(result);
         console.log('RESULT', ID, event, result);
         if (result.error) reject(result.error);
         else resolve(result.data);
@@ -45,7 +46,7 @@ function initRPC(window) {
       result.error = err.message || err;
       result.data = undefined;
     }
-    ipcSend(ID, result);
+    ipcSend(ID, JSON.stringify(result));
   });
 }
 
@@ -73,7 +74,7 @@ function getCompaniesForMe() {
 }
 
 function createAttachmentPointer(buffer) {
-  return thirdIPC('createAttachmentPointer', buffer);
+  return thirdIPC('createAttachmentPointer', new Uint8Array(buffer));
 }
 
 function handleAttachmentPointer(attachment) {
@@ -85,12 +86,19 @@ function deleteAttachmentPointer(attachment) {
 }
 
 // setTimeout(async () => {
-//   const attachment = await createAttachmentPointer(new ArrayBuffer(1024));
-//   const dl = await handleAttachmentPointer(attachment);
-//   console.log('TEST', dl);
-//   const dl2 = await handleAttachmentPointer(attachment);
-//   console.log('TEST 2', dl2);
-//   // const del = await deleteAttachmentPointer(attachment);
+//   try {
+//     const attachment = await createAttachmentPointer(new ArrayBuffer(1024));
+//     const dl = await handleAttachmentPointer(attachment);
+//     console.log('TEST', dl);
+//     const dl2 = await handleAttachmentPointer(attachment);
+//     console.log('TEST 2', dl2);
+//     const del = await deleteAttachmentPointer(attachment);
+//     console.log('TEST 3', del);
+//     const dl3 = await handleAttachmentPointer(attachment);
+//     console.log('TEST 4', dl3);
+//   } catch (err) {
+//     console.warn('Error', err);
+//   }
 // }, 15000);
 
 module.exports = {

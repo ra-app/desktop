@@ -996,7 +996,7 @@ function initialize({
       // const exp = response.location.match(/X-Amz-Expires=(.*?)&/)[1];
       // const hdr = decodeURIComponent(response.location.match(/X-Amz-SignedHeaders=(.*?)&/)[1]);
       
-      console.log('delAttachment RESPONSE', response, cred, sig);
+      // console.log('delAttachment RESPONSE', response, cred, sig);
       // ${cdnUrl}/attachments/
       // await _outerAjax(response.location.split('?')[0], {
       const res = await _outerAjax(response.location, {
