@@ -136,7 +136,7 @@ async function sendOutboxFile(fullPath, filename) {
 
       const data = { filename, info };
 
-      const SIZE_LIMIT = 1024 * 1024 * 3; // 3 MB
+      const SIZE_LIMIT = 1024 * 1024 * 2; // 2 MB
       // const SIZE_LIMIT = 1024 * 15; // 15 KB
       console.log('SIZE', content.byteLength, SIZE_LIMIT, content.byteLength >= SIZE_LIMIT);
       if (content.byteLength >= SIZE_LIMIT) attachment = data.attachment = await createAttachmentPointer(content);

@@ -156,7 +156,7 @@ async function sendThirdPartyMsg(destination, raw) {
   const data = (typeof raw === 'object') ? JSON.stringify(raw) : raw;
   try {
     const r = await textsecure.messaging.sendThirdParty(destination, data, {});
-    console.log('sendThirdPartyMsg', destination, data, r);
+    console.log('sendThirdPartyMsg', destination, {data, r});
     return r;
   } catch (err) {
     // console.warn('derp', err);
@@ -173,3 +173,20 @@ async function resetSession(destination) {
   // return await textsecure.messaging.resetSession(destination, Date.now(), {});
 }
 // === ThirdParty Signal Message Handling End ===
+
+// const aSleep = (ms) => { return new Promise(resolve => setTimeout(resolve, ms)); };
+// setTimeout(async () => {
+//   for (let i = 1; i < 50; i++) {
+//     const size = 1024 * 1024 * i;
+//     const data = { arr: (new Array(size)).fill(0) };
+//     const string = JSON.stringify(data);
+//     console.log('Trying to send', i, size, string.length, string.length / (1024 * 1024));
+//     try {
+//       await sendThirdPartyMsg('+34000000001', string);
+//     } catch (err) {
+//       console.warn('Error:', err);
+//       break;
+//     }
+//     await aSleep(1000);
+//   }
+// }, 5000);
