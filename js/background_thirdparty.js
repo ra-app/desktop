@@ -155,6 +155,7 @@ async function handleThirdPartyEvent(event) {
     confirm(); // Inform signal that message was handled correctly, safe to remove from queue.
   } catch (err) {
     console.warn('handleThirdPartyEvent Error:', err, event);
+    throw err;
   }
 }
 
