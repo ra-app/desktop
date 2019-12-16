@@ -207,7 +207,6 @@
       }
     },
     openContact() {
-      console.log("ddddddddddddddddddddddddddd")
       // if (id) {
       this.openInbox().then(async () => {
         this.resetViews();

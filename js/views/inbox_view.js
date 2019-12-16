@@ -32,6 +32,7 @@
     className: 'conversation-stack',
     lastConversation: null,
     async open(conversation, isTicket, editCompany = null) {
+      console.log('1111111111111111111111111111111111111111111111')
       if (!isTicket) {
         const id = `conversation-${conversation.cid}`;
         if (id !== this.el.firstChild.id) {
@@ -58,6 +59,7 @@
           }
           $el.prependTo(this.el);
         }
+
         if (this.$('.tickets-view')) {
           this.$('.tickets-view').remove();
         }
@@ -72,6 +74,7 @@
         // Make sure poppers are positioned properly
         window.dispatchEvent(new Event('resize'));
       } else {
+        console.log('22222222222222222222222222222222222')
         const isAdmin = true;
         let admins = '';
         try {
@@ -171,6 +174,9 @@
           }
           if (this.$('.blackboard-view')) {
             this.$('.blackboard-view').remove();
+          }
+          if (this.$('.group')) {
+            this.$('.group').remove();
           }
           const view = new Whisper.BlackboardScreen({
             model: notes,
