@@ -802,24 +802,31 @@ $debug: 0;
       text-align: left;
       max-width: 450px;
       margin-bottom: 20px;
-      & .readMore{
-        width:20px;
-        cursor: help;
-      }
-      & .flyout {
-        position: absolute;
-        width: 450px;
-        height: 100px;
-        overflow: hidden;
-        z-index: 10000;
-        display: none;
-        background: $color-gray-02;
-        margin-top: 10px;
-        font-size: 14px;
+    //   & .readMore{
+    //     width:20px;
+    //     cursor: help;
+    //   }
+    //   & .flyout {
+    //     position: absolute;
+    //     width: 450px;
+    //     height: 100px;
+    //     overflow: hidden;
+    //     z-index: 10000;
+    //     display: none;
+    //     background: $color-gray-02;
+    //     margin-top: 10px;
+    //     font-size: 14px;
+    // }
+    //   & .readMore:hover + .flyout {
+    //     display: block;
+    //   }
     }
-      & .readMore:hover + .flyout {
-        display: block;
-      }
+    .contentOutside{
+      width: 450px;
+      text-align: center;
+      max-width: 450px;
+      margin-top: 20px;
+      font-size: 13px;
     }
   }
   .content-main-footer {
