@@ -120,19 +120,6 @@
           }
           tableRow.appendChild(cellTd);
         }
-        // for (let j = 0; j < headerTexts.length; j++) {
-        //   const cellTd = document.createElement('td');
-        //   if (contact.getElementsByTagName(headerTexts[j])[0]) {
-        //     const cell = contact.getElementsByTagName(headerTexts[j])[0].textContent;
-        //     const cellTdContent = document.createTextNode(cell);
-        //     cellTd.appendChild(cellTdContent);
-        //   } else {
-        //     const id = contact.getElementsByTagName('phone')[0].textContent;
-        //     this.appendElemtns(j, cellTd, id, contact)
-
-        //   }
-        //   tableRow.appendChild(cellTd);
-        // }
       }
       //Append content
       table.appendChild(tbody);
@@ -375,7 +362,6 @@
         }
         // eslint-disable-next-line no-case-declarations
         case 'type':
-          console.log(userType, "usertypeeeeeeeeeeeeeeeeee")
           const array = ["none", "Intern","Extern"];
           const selectList = document.createElement("select");
           selectList.id = `selectUserType-${id}`;
@@ -946,7 +932,6 @@
       await parallel(1, Object.keys(dataUsersToInvitate), async element => {
         const id = dataUsersToInvitate[element].userid;
         const type = dataUsersToInvitate[element].position;
-        console.log(type, )
         const companyNumber = textsecure.storage.get('companyNumber', null);
         let data = {};
         if (type === 'admin') {
@@ -981,6 +966,7 @@
       })
       dataUsersToInvitate = {};
       this.closeModal();
+      localStorage.removeItem('InvitationList');
     },
     async removeContact(id) {
       this.openModal('remove');
