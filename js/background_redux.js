@@ -13,6 +13,7 @@ const LOCALSTORAGE_ITEM = 'ofa_redux_state';
 const SET_TICKET_DATA = 'SET_TICKET_DATA';
 const SET_TICKETS_DATA = 'SET_TICKETS_DATA';
 const SET_COMPANY_INFO = 'SET_COMPANY_INFO';
+const SET_COMPANY_TICKETS_SINCE_TS = 'SET_COMPANY_TICKETS_SINCE_TS';
 
 // Actions
 function setTicketDataDispatch(data) {
@@ -27,6 +28,10 @@ function setCompanyInfoDispatch(info) {
   return ofaDispatch({ type: SET_COMPANY_INFO, info });
 }
 
+function setCompanyTicketsSinceTSDispatch(company_number, ts) {
+  return ofaDispatch({ type: SET_COMPANY_TICKETS_SINCE_TS, company_number, ts });
+}
+
 // API Calls
 async function fetchCompanyInfo(company_id) {
   const info = await getCompany(company_id);
@@ -36,18 +41,22 @@ async function fetchCompanyInfo(company_id) {
 // Reducers
 function setTicketDataReducer(state, action) {
   const data = action.data;
-  if (!state.companies[data.company_id]) state.companies[data.company_id] = {};
-  if (!state.companies[data.company_id].tickets) state.companies[data.company_id].tickets = {};
-  state.companies[data.company_id].tickets[data.uuid] = data;
+  if (data) {
+    if (!state.companies[data.company_id]) state.companies[data.company_id] = {};
+    if (!state.companies[data.company_id].tickets) state.companies[data.company_id].tickets = {};
+    state.companies[data.company_id].tickets[data.uuid] = data;
+  }
   return state;
 }
 
 function setTicketsDataReducer(state, action) {
-  for (let i = 0; i < action.dataArr.length; i++) {
-    const ticket = action.dataArr[i];
-    if (!state.companies[ticket.company_id]) state.companies[ticket.company_id] = {};
-    if (!state.companies[ticket.company_id].tickets) state.companies[ticket.company_id].tickets = {};
-    state.companies[ticket.company_id].tickets[ticket.uuid] = ticket;
+  if (action.dataArr && action.dataArr.length) {
+    for (let i = 0; i < action.dataArr.length; i++) {
+      const ticket = action.dataArr[i];
+      if (!state.companies[ticket.company_id]) state.companies[ticket.company_id] = {};
+      if (!state.companies[ticket.company_id].tickets) state.companies[ticket.company_id].tickets = {};
+      state.companies[ticket.company_id].tickets[ticket.uuid] = ticket;
+    }
   }
   return state;
 }
@@ -58,10 +67,17 @@ function setCompanyInfoReducer(state, action) {
   return state;
 }
 
+function setCompanyTicketsSinceTsReducer(state, action) {
+  if (!state.companies[action.company_number]) state.companies[action.company_number] = {};
+  state.companies[action.company_number].ticketsSinceTs = action.ts;
+  return state;
+}
+
 const reducerDict = {
   SET_TICKET_DATA: setTicketDataReducer,
   SET_TICKETS_DATA: setTicketsDataReducer,
   SET_COMPANY_INFO: setCompanyInfoReducer,
+  SET_COMPANY_TICKETS_SINCE_TS: setCompanyTicketsSinceTsReducer,
 };
 
 function stateReducer(state, action) {
@@ -74,7 +90,6 @@ function stateReducer(state, action) {
   } else {
     // throw new Error('Unknown Action Type ' + action.type);
     console.warn('StateReducer Unknown Action Type:', action);
-    return state;
   }
 
   return state;
@@ -130,9 +145,16 @@ function getOfaState() {
   return store.getState();
 }
 
+function getCompanyTickets(company_id) {
+  const state = getOfaState();
+  return state.companies[company_id] ? Object.values(state.companies[company_id].tickets) : [];
+}
+
 function getCompanyTicketsByState(company_id, ticket_state) {
   const state = getOfaState();
   const tickets = [];
+
+  if (!state.companies[company_id] || !state.companies[company_id].tickets) return [];
 
   const uuids = Object.keys(state.companies[company_id].tickets);
   for (let i = 0; i < uuids.length; i++) {
@@ -144,6 +166,17 @@ function getCompanyTicketsByState(company_id, ticket_state) {
   return tickets;
 }
 
-async function getCompanyTickets(company_id, options = { state: 1, offset: 0, limit: 10 }) {
+async function dispatchGetCompanyTickets(company_id, options = { state: 1, offset: 0, limit: 10 }) {
   return setTicketsDataDispatch((await getTicketsList(company_id, options)).tickets);
+}
+
+async function dispatchGetTicketsSince(company_id) {
+  const state = getOfaState();
+  const company = state.companies[company_id];
+  let sinceTS = 1276505834832; // Really old value for safety!
+  if (company && company.ticketsSinceTs) sinceTS = company.ticketsSinceTs;
+
+  const now = Date.now();
+  await setTicketsDataDispatch((await get_since(company_id, { ts: sinceTS })).tickets);
+  await setCompanyTicketsSinceTSDispatch(company_id, now);
 }
