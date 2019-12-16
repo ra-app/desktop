@@ -7,6 +7,19 @@
 
 /* eslint strict: ["error", "global"] */
 
+// Attempt to set version for initial loading screen ASAP
+function trySetVersion() {
+  try {
+    const version = window.getVersion();
+    const elem = document.getElementById('versionHTML');
+    // console.log('trySetVersion', version, elem);
+    elem.innerText = version;
+  } catch (err) {
+    console.warn('trySetVersion failed', err);
+  }
+}
+document.addEventListener('DOMContentLoaded', trySetVersion);
+
 // Testing Playground
 document.addEventListener('DOMContentLoaded', async () => {
   await initUpdateIPC();
@@ -685,6 +698,10 @@ const apiRequest = async (call, data = undefined) => {
     throw new Error('Request Failed! ' + res.error);
   if (!res.success) throw new Error('Request Failed!');
   return res;
+};
+
+const getCompaniesForMe = async () => {
+  return apiRequest('api/v1/client/companies');
 };
 
 const createCompany = async info => {

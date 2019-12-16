@@ -1306,6 +1306,9 @@ MessageReceiver.prototype.extend({
       data: window.Signal.Crypto.typedArrayToArrayBuffer(typedArray),
     };
   },
+  async deleteAttachment(attachment) {
+    return await this.server.delAttachment(attachment.id);
+  },
   handleAttachment(attachment) {
     const cleaned = this.cleanAttachment(attachment);
     return this.downloadAttachment(cleaned);
@@ -1518,6 +1521,9 @@ textsecure.MessageReceiver = function MessageReceiverWrapper(
     messageReceiver
   );
   this.stopProcessing = messageReceiver.stopProcessing.bind(messageReceiver);
+
+  // this.handleAttachment = messageReceiver.handleAttachment.bind(messageReceiver);
+  this.deleteAttachment = messageReceiver.deleteAttachment.bind(messageReceiver);
 
   messageReceiver.connect();
 };

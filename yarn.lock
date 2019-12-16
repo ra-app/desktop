@@ -6452,6 +6452,11 @@ node-sass@4.9.3:
     stdout-stream "^1.4.0"
     "true-case-path" "^1.0.2"
 
+node-stream-zip@^1.8.2:
+  version "1.8.2"
+  resolved "https://registry.yarnpkg.com/node-stream-zip/-/node-stream-zip-1.8.2.tgz#1f79e30ab3ff54cbda312cd3a9f0030b15bb3f53"
+  integrity sha512-zwP2F/R28Oqtl0gOLItk5QjJ6jEU8XO4kaUMgeqvCyXPgdCZlm8T/5qLMiNy+moJCBCiMQAaX7aVMRhT0t2vkQ==
+
 "nopt@2 || 3", nopt@^3.0.1, nopt@~3.0.6:
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/nopt/-/nopt-3.0.6.tgz#c6465dbf08abcd4db359317f79ac68a646b28ff9"
