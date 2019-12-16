@@ -2814,40 +2814,16 @@
         this.contactListXml = prepareDataXml(options.contact_data);
         this.objectContact = [];
         this.renderUserGroup = [];
-        const myNumber = textsecure.storage.user.getNumber();
+        this.canEditName = true;
         if (options.type === 'group') {
           if (options.admin_client) {
-            if (options.admin_client.admins) {
-              for (let i = 0; i < options.admin_client.admins.length; i++) {
-                const contact = options.admin_client.admins[i];
-                if (contact.name !== null && myNumber !== contact.phone_number) {
-                  const tmpObj = {
-                    name: contact.name,
-                    surname: contact.surname,
-                    position: '',
-                    email: '',
-                    phone: contact.phone_number,
-                    ts: contact.ts_registration,
-                  }
-                  this.objectContact.push(tmpObj)
-                }
-              }
+            if(options.group_id.includes('-intern')){
+              this.prepareUserInviteGroup(options, 'intern');
             }
-            if (options.admin_client.clients) {
-              for (let i = 0; i < options.admin_client.clients.length; i++) {
-                const contact = options.admin_client.clients[i];
-                if (contact.name !== null && myNumber !== contact.phone_number) {
-                  const tmpObj = {
-                    name: contact.name,
-                    surname: contact.surname,
-                    position: '',
-                    email: '',
-                    phone: contact.phone_number,
-                    ts: contact.ts_registration,
-                  }
-                  this.objectContact.push(tmpObj)
-                }
-              }
+            else if(options.group_id.includes('-extern')){
+              this.prepareUserInviteGroup(options, 'extern');
+            } else{
+              this.prepareUserInviteGroup(options, 'regular');
             }
           }
         }
@@ -2860,21 +2836,13 @@
         this.groupName = options.group_name;
         this.group_id = options.group_id;
         this.members = options.members
-        // for (let i = 0; i < this.objectContact.length; i++) {
         for (let f = 0; f < this.members.length; f++) {
-          // if(this.objectContact[i].phone == options.members[f]){
           let id = this.members[f];
           dataUsersToInvitate[id] = {
             userid: id,
             position: this.type,
           };
-          // }
         }
-        // }
-      }
-      this.canEditName = true
-      if(this.group_id.includes('-intern')){
-        this.canEditName = false;
       }
       this.sendDataToModal();
       this.render();
@@ -2906,6 +2874,80 @@
       'click #closeEditName': 'closeEditName',
       'click .removeUserToGroup': 'removeUserGroup'
       // 'click #countryCode, #dialCode' : 'showCountries',
+    },
+    prepareUserInviteGroup(options, groupType){
+      const myNumber = textsecure.storage.user.getNumber();
+      if(groupType == 'regular'){
+        this.canEditName = true;
+        if (options.admin_client.admins) {
+          for (let i = 0; i < options.admin_client.admins.length; i++) {
+            const contact = options.admin_client.admins[i];
+            if (contact.name !== null && myNumber !== contact.phone_number) {
+              const tmpObj = {
+                name: contact.name,
+                surname: contact.surname,
+                position: '',
+                email: '',
+                phone: contact.phone_number,
+                ts: contact.ts_registration,
+              }
+              this.objectContact.push(tmpObj)
+            }
+          }
+        }
+        if (options.admin_client.clients) {
+          for (let i = 0; i < options.admin_client.clients.length; i++) {
+            const contact = options.admin_client.clients[i];
+            if (contact.name !== null && myNumber !== contact.phone_number) {
+              const tmpObj = {
+                name: contact.name,
+                surname: contact.surname,
+                position: '',
+                email: '',
+                phone: contact.phone_number,
+                ts: contact.ts_registration,
+              }
+              this.objectContact.push(tmpObj)
+            }
+          }
+        }
+      }else if(groupType == 'intern'){
+        this.canEditName = false;
+        if (options.admin_client.admins) {
+          for (let i = 0; i < options.admin_client.admins.length; i++) {
+            const contact = options.admin_client.admins[i];
+            if (contact.name !== null && myNumber !== contact.phone_number) {
+              const tmpObj = {
+                name: contact.name,
+                surname: contact.surname,
+                position: '',
+                email: '',
+                phone: contact.phone_number,
+                ts: contact.ts_registration,
+              }
+              this.objectContact.push(tmpObj)
+            }
+          }
+        }
+      } else if(groupType == 'extern'){
+        this.canEditName = false;
+        if (options.admin_client.clients) {
+          for (let i = 0; i < options.admin_client.clients.length; i++) {
+            const contact = options.admin_client.clients[i];
+            if (contact.name !== null && myNumber !== contact.phone_number) {
+              const tmpObj = {
+                name: contact.name,
+                surname: contact.surname,
+                position: '',
+                email: '',
+                phone: contact.phone_number,
+                ts: contact.ts_registration,
+              }
+              this.objectContact.push(tmpObj)
+            }
+          }
+        }
+      }
     },
     closePanel() {
       document.getElementsByClassName('edit-group-modal')[0].remove();
