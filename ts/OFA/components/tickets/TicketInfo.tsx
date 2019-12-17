@@ -26,7 +26,7 @@ export default class TicketInfo extends React.Component<Props, State> {
         uuid,
         profile_picture,
         surname,
-        ts_created,
+        // ts_created,
         state,
       }
     } = this.props;
@@ -44,10 +44,10 @@ export default class TicketInfo extends React.Component<Props, State> {
         </div>
         <div className="container-ticket-info">
           <span className="ticket-id">Ticket {uuid}</span>
-          <span className="ticket-date">${
+          {/* <span className="ticket-date">${
                   days[new Date(mssg.ts).getDay()]
                   } ${new Date(mssg.ts).getHours() -
-                  1}:${new Date(mssg.ts).getMinutes()}</span>
+                  1}:${new Date(mssg.ts).getMinutes()}</span> */}
         </div>
 
         <div className="container-ticket-actions">
