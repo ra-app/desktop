@@ -100,7 +100,7 @@ const mapStateToProp = (state: any, props: Props): Props => {
   const company_id = props.company_id;
 
   let tickets: Array<any> = [];
-  if (state.tickets && state.tickets[company_id]) {
+  if (state.tickets && state.tickets[company_id] && state.tickets[company_id].tickets) {
     tickets = Object.values(state.tickets[company_id].tickets);
   }
 

@@ -17,14 +17,49 @@ export default class TicketInfo extends React.Component<Props, State> {
   }
 
   public render() {
-    const { ticket } = this.props;
-    const { showMoreInfo } = this.state;
+    console.log('TICKET PROPSSSS', this.props);
+    const {
+      ticket: {
+        uuid,
+        profile_picture,
+        surname,
+        ts_created,
+        state,
+      }
+    } = this.props;
+    // const { showMoreInfo } = this.state;
 
     return (
-      <div>
-        <h1>IMMA TICKET</h1>
+      <div className="main-ticket-container">
+        <div className="container-ticket-userinfo">
+          <img src={profile_picture} id={`clientTicketAvatar_${uuid}`} alt={`clientTicketAvatar_${uuid}`} className="ticket-user-image" />
+          <span className="ticket-user-name">{name} {surname}</span>
+          {/* <span class="ticket-user-name">username</span> */}
+        </div>
+        <div className="container-ticket-info">
+          <span className="ticket-id">Ticket {uuid}</span>
+          <span className="ticket-date">{ts_created}</span>
+        </div>
+
+        <div className="container-ticket-actions">
+          {/* {{#isUnknown}} */}
+          <button id={`claim_${uuid}`} className="button-claim-ticket not-claimed">{state}</button>
+          {/* {{/isUnknown}} */}
+          {/* {{#isUnclaimed}} */}
+          {/* <button id={`claim_${uuid}`} className="button-claim-ticket not-claimed">{{ status }}</button> */}
+          {/* {{/isUnclaimed}} */}
+          {/* {{#isClaimed}} */}
+          {/* <button id={`claim_${uuid}`} className="button-claim-ticket claimed" disabled="disabled">{{ status }}</button> */}
+          {/* {{/isClaimed}} */}
+          {/* {{#isClosed}} */}
+          {/* <!-- <button id='claim_{{uuid}}' className="button-claim-ticket not-claimed">{{ status }}</button>  --> */}
+          {/* {{/isClosed}} */}
+        </div>
+
+
+        {/* <h1>IMMA TICKET</h1>
         <div>{ticket.uuid}</div>
-        {showMoreInfo}
+        {showMoreInfo} */}
       </div>
     );
   }
