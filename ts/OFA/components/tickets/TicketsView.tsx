@@ -69,9 +69,10 @@ export class TicketsView extends React.Component<Props, State> {
           {/* <li id="unclaimed" className="ticket-nav {{unclaimed}}">Nicht zugewiesen</li>
           <li id="claimed" className="ticket-nav {{claimed}}">Zugewiesen</li>
           <li id="closed" className="ticket-nav {{closed}}">Geschlossen</li> */}
-          <li id="unclaimed" className="ticket-nav" onClick={() => this.setStateFilter(1)}>Nicht zugewiesen</li>
-          <li id="claimed" className="ticket-nav" onClick={() => this.setStateFilter(2)}>Zugewiesen</li>
-          <li id="closed" className="ticket-nav" onClick={() => this.setStateFilter(3)}>Geschlossen</li>
+          {/* className={stateFilter=== 1 ? 'true ticket-nav':'ticket-nav'} */}
+          <li id="unclaimed" className={`ticket-nav ${stateFilter === 1 && 'true'}`} onClick={() => this.setStateFilter(1)}>Nicht zugewiesen</li>
+          <li id="claimed" className={`ticket-nav ${stateFilter === 2 && 'true'}`} onClick={() => this.setStateFilter(2)}>Zugewiesen</li>
+          <li id="closed" className={`ticket-nav ${stateFilter === 3 && 'true'}`} onClick={() => this.setStateFilter(3)}>Geschlossen</li>
           <li id="add_group" className="ticket-nav">Gruppe erstellen</li>
           <li id="add_extern" className="ticket-nav">Externe Nutzer einladen</li>
           <li id="add_intern" className="ticket-nav">Interne Nutzer einladen</li>
