@@ -4,18 +4,23 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { setCompanyTicketsSinceTs, setTicketsData } from '../../store/tickets/actions';
+import { setCompanyInfo } from '../../store/companyInfo/actions';
 import { Ticket } from '../../store/tickets/types';
+import { CompanyInfo } from '../../store/companyInfo/types';
 import TicketInfo from './TicketInfo';
 
 // External API
 declare const get_since: any;
+declare const getCompanyRaw: any;
 
 interface Props {
   company_id: number;
   tickets: Array<any>;
   lastSinceTs: number;
+  companyInfo: CompanyInfo;
   setTickets(tickets: Array<Ticket>): any;
   setSinceTs(companyId: number, ts: number): any;
+  setCompanyInfo(companyInfo: CompanyInfo): any;
 }
 
 // tslint:disable-next-line:no-empty-interface
@@ -33,6 +38,8 @@ export class TicketsView extends React.Component<Props, State> {
   public componentDidMount() {
     this.callSince();
     this.updateTicketsInterval = setInterval(this.callSince.bind(this), 60000);
+
+    this.fetchCompanyInfoIfMissing(this.props.company_id);
   }
 
   public componentWillUnmount() {
@@ -50,19 +57,28 @@ export class TicketsView extends React.Component<Props, State> {
     }
   }
 
+  public async fetchCompanyInfoIfMissing(companyId: number) {
+    if (this.props.companyInfo == null) {
+      const res = await getCompanyRaw(companyId);
+      if (res.success) {
+        this.props.setCompanyInfo(res.company);
+      }
+    }
+  }
+
   public setStateFilter(newStateFilter: number) {
     this.setState({ stateFilter: newStateFilter});
   }
 
   public render() {
-    const { tickets } = this.props;
+    const { tickets, companyInfo } = this.props;
     const { stateFilter } = this.state;
 
     return (
       <div className="content">
         <div className="module-main-header__info">
           <img src="{{avatarSrc}}" alt="header chat" />
-          <span id="span-chat-name">Test</span>
+          <span id="span-chat-name">{companyInfo ? companyInfo.name : 'Unknow'}</span>
         </div>
         {/* Navigation tabs */}
         <ul className="ulNavigationTickets">
@@ -111,13 +127,16 @@ const mapStateToProp = (state: any, props: Props): Props => {
     lastSinceTs = state.tickets[company_id].ticketsSinceTs;
   }
 
-  return { tickets, lastSinceTs } as Props;
+  const companyInfo = state.companyInfo[company_id];
+
+  return { tickets, lastSinceTs, companyInfo } as Props;
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     setTickets: (tickets: Array<Ticket>) => dispatch(setTicketsData(tickets)),
     setSinceTs: (companyId: number, ts: number) => dispatch(setCompanyTicketsSinceTs(companyId, ts)),
+    setCompanyInfo: (info: CompanyInfo) => dispatch(setCompanyInfo(info)),
   };
 };
 
