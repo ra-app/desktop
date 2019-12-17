@@ -32,7 +32,7 @@
     className: 'conversation-stack',
     lastConversation: null,
     async open(conversation, isTicket, editCompany = null) {
-      console.log('1111111111111111111111111111111111111111111111')
+      console.log('1111111111111111111111111111111111111111111111', conversation)
       if (!isTicket) {
         const id = `conversation-${conversation.cid}`;
         if (id !== this.el.firstChild.id) {
@@ -119,13 +119,23 @@
             if (this.$('.group')) {
               this.$('.group').remove();
             }
-            const view = new Whisper.TicketScreen({
-              model: conversation,
-              window: this.model.window,
-              editCompany: editCompany
-            });
+            // const view = new Whisper.TicketScreen({
+            //   model: conversation,
+            //   window: this.model.window,
+            //   editCompany: editCompany
+            // });
+
+            // const view = React.createElement(window.OFA.TestComponent);
+            const elem = document.createElement('div');
+            elem.id = id;
+
+            // const view = new window.OFA.TestComponent();
+            // ReactDOM.render(view, elem);
+            window.OFA.wrapWithReduxStoreOnElem(elem, window.OFA.TicketsView, { company_id: conversation.id });
+            // console.log('TEST COMPONENT', view, elem);
+
             // eslint-disable-next-line prefer-destructuring
-            $el = view.$el;
+            $el = $(elem); // view.$el;
           }
           $el.prependTo(this.el);
         }
@@ -258,9 +268,9 @@
     },
     events: {
       click: 'onClick',
-      'click #unclaimed, #claimed, #closed': 'getTickets',
-      'click #sortBy': 'sortTickets',
-      'keyup #searchTickets': 'searchTickets',
+      // 'click #unclaimed, #claimed, #closed': 'getTickets',
+      // 'click #sortBy': 'sortTickets',
+      // 'keyup #searchTickets': 'searchTickets',
       'click #add_group': 'addGroup',
       'click #add_extern': 'addExtern',
       'click #add_intern': 'addIntern',
@@ -379,41 +389,41 @@
         );
       });
     },
-    sortTickets() {
-      if (ticketList.tickets) {
-        if (this.sorted) {
-          this.sorted = false;
-          // this.$('#sortBy').text('newest');
-        } else {
-          this.sorted = true;
-          // this.$('#sortBy').text('oldest');
-        }
-        // tslint:disable-next-line:no-function-expression
-        const secondThis = this;
-        ticketList.tickets.sort(function (a, b) {
-          const aTime = secondThis.toTimestamp(a.date);
-          const bTime = secondThis.toTimestamp(b.date);
-          if (!secondThis.sorted) {
-            if (aTime > bTime) {
-              return 1;
-            }
-            if (aTime < bTime) {
-              return -1;
-            }
-          } else {
-            if (aTime > bTime) {
-              return -1;
-            }
-            if (aTime < bTime) {
-              return 1;
-            }
-          }
-          // a must be equal to b
-          return 0;
-        });
-        this.conversation_stack.open(ticketList.tickets, true);
-      }
-    },
+    // sortTickets() {
+    //   if (ticketList.tickets) {
+    //     // if (this.sorted) {
+    //     //   this.sorted = false;
+    //     //   // this.$('#sortBy').text('newest');
+    //     // } else {
+    //     //   this.sorted = true;
+    //     //   // this.$('#sortBy').text('oldest');
+    //     // }
+    //     // // tslint:disable-next-line:no-function-expression
+    //     // const secondThis = this;
+    //     // ticketList.tickets.sort(function (a, b) {
+    //     //   const aTime = secondThis.toTimestamp(a.date);
+    //     //   const bTime = secondThis.toTimestamp(b.date);
+    //     //   if (!secondThis.sorted) {
+    //     //     if (aTime > bTime) {
+    //     //       return 1;
+    //     //     }
+    //     //     if (aTime < bTime) {
+    //     //       return -1;
+    //     //     }
+    //     //   } else {
+    //     //     if (aTime > bTime) {
+    //     //       return -1;
+    //     //     }
+    //     //     if (aTime < bTime) {
+    //     //       return 1;
+    //     //     }
+    //     //   }
+    //     //   // a must be equal to b
+    //     //   return 0;
+    //     // });
+    //     this.conversation_stack.open(ticketList.tickets, true);
+    //   }
+    // },
     toTimestamp(strDate) {
       var datum = Date.parse(strDate);
       return datum / 1000;
@@ -527,112 +537,113 @@
         scrolling = false;
       }
     },
-    async getNewTickets(id, ticketList) {
-      if(!document.getElementsByClassName('tickets-view')[0]) {
-        clearInterval(intervalNewTickets);
-      }
-      console.log('getNewTicketsgetNewTickets', ticketList);
+    // async getNewTickets(id, ticketList) {
+    //   if(!document.getElementsByClassName('tickets-view')[0]) {
+    //     clearInterval(intervalNewTickets);
+    //   }
+    //   console.log('getNewTicketsgetNewTickets', ticketList);
 
-      let ts;
-      if (ticketList.tickets && ticketList.tickets.length > 0 && ticketList.tickets[0].ts_created) ts = new Date(ticketList.tickets[0].ts_created).getTime();
-      else ts = gotTicketsAt;
+    //   let ts;
+    //   if (ticketList.tickets && ticketList.tickets.length > 0 && ticketList.tickets[0].ts_created) ts = new Date(ticketList.tickets[0].ts_created).getTime();
+    //   else ts = gotTicketsAt;
 
-      const data = {
-        ts: ts,
-        state: ticketState,
-      }
-      const newTickets = await get_since(id, data);
-      console.log('getNewTickets newTickets', newTickets);
-      if(newTickets && newTickets.tickets) {
-        const temporal = this.changeListTicket(newTickets);
-        temporal.forEach(element => {
-          ticketList.tickets.unshift(element);
-        });
-        const isTicket = true;
-        this.conversation_stack.open(ticketList.tickets, isTicket);
-      };
-      console.log('new ticket listtt',ticketList.tickets);
-    },
+    //   const data = {
+    //     ts: ts,
+    //     state: ticketState,
+    //   }
+    //   const newTickets = await get_since(id, data);
+    //   console.log('getNewTickets newTickets', newTickets);
+    //   if(newTickets && newTickets.tickets) {
+    //     const temporal = this.changeListTicket(newTickets);
+    //     temporal.forEach(element => {
+    //       ticketList.tickets.unshift(element);
+    //     });
+    //     const isTicket = true;
+    //     this.conversation_stack.open(ticketList.tickets, isTicket);
+    //   };
+    //   console.log('new ticket listtt',ticketList.tickets);
+    // },
     async openTicket(id, messageId = null, resetCall = null, type, editCompany = null) {
       console.log('open ticket', id, type, editCompany);
       this.$('.conversation-stack').on(
         'scroll',
         _.debounce(this.onTicketScroll.bind(this), 100)
       );
-      if (resetCall) {
-        offsetTicket = 0;
-      }
-      let data = []
-      if (!editCompany) {
-        data = {
-          limit: limitTicket,
-          offset: offsetTicket,
-          state: ticketState,
-        };
-      } else {
-        data = {
-          limit: 12,
-          offset: 0,
-          state: 1,
-        };
-      }
-      offsetTicket = limitTicket + offsetTicket;
+      // if (resetCall) {
+      //   offsetTicket = 0;
+      // }
+      // let data = []
+      // if (!editCompany) {
+      //   data = {
+      //     limit: limitTicket,
+      //     offset: offsetTicket,
+      //     state: ticketState,
+      //   };
+      // } else {
+      //   data = {
+      //     limit: 12,
+      //     offset: 0,
+      //     state: 1,
+      //   };
+      // }
+      // offsetTicket = limitTicket + offsetTicket;
       try {
-        gotTicketsAt = Date.now();
-        ticketList = await getTicketsList(id, data);
+        // gotTicketsAt = Date.now();
+        // ticketList = await getTicketsList(id, data);
         const isTicket = true;
         // if(this.tmpticketId !== id){
         // this.conversation_stack.open(tickets, isTicket, clientDetails);
-        if(intervalNewTickets !== null) {
-          clearInterval(intervalNewTickets);
-        }
-        intervalNewTickets = setInterval(this.getNewTickets.bind(this, id, ticketList), 10000);
-        // this.getNewTickets(id, ticketList);
-        if (ticketList.tickets) {
-          // ticketList.tickets.forEach((element, index) => {
-          //   ticketList.tickets[index].avatarSrc = getAvatar(element.company_id);
-          // });
-          ticketList.tickets = this.changeListTicket(ticketList, id);
-        }
-        else {
-          let tmpisClaimed = false;
-          let tmpisUnclaimed = false;
-          let tmpisClosed = false;
-          if (type) {
-            switch (type) {
-              case 'claimed':
-                tmpisClaimed = true;
-                tmpisUnclaimed = false;
-                tmpisClosed = false;
-                break;
-              case 'unclaimed':
-                tmpisClaimed = false;
-                tmpisUnclaimed = true;
-                tmpisClosed = false;
-                break;
-              case 'closed':
-                tmpisClaimed = false;
-                tmpisUnclaimed = false;
-                tmpisClosed = true;
-                break;
+        // if(intervalNewTickets !== null) {
+        //   clearInterval(intervalNewTickets);
+        // }
+        // intervalNewTickets = setInterval(this.getNewTickets.bind(this, id, ticketList), 10000);
+        // // this.getNewTickets(id, ticketList);
+        // if (ticketList.tickets) {
+        //   // ticketList.tickets.forEach((element, index) => {
+        //   //   ticketList.tickets[index].avatarSrc = getAvatar(element.company_id);
+        //   // });
+        //   ticketList.tickets = this.changeListTicket(ticketList, id);
+        // }
+        // else {
+        //   let tmpisClaimed = false;
+        //   let tmpisUnclaimed = false;
+        //   let tmpisClosed = false;
+        //   if (type) {
+        //     switch (type) {
+        //       case 'claimed':
+        //         tmpisClaimed = true;
+        //         tmpisUnclaimed = false;
+        //         tmpisClosed = false;
+        //         break;
+        //       case 'unclaimed':
+        //         tmpisClaimed = false;
+        //         tmpisUnclaimed = true;
+        //         tmpisClosed = false;
+        //         break;
+        //       case 'closed':
+        //         tmpisClaimed = false;
+        //         tmpisUnclaimed = false;
+        //         tmpisClosed = true;
+        //         break;
 
-              default:
-                break;
-            }
-          }
-          // ticketList.tickets[index].avatarSrc = getAvatar(element.company_id);
-          ticketList.tickets = [
-            {
-              hasTicket: false,
-              company_name: ticketList.company_name,
-              isClaimed: tmpisClaimed,
-              isUnclaimed: tmpisUnclaimed,
-              isClosed: tmpisClosed,
-              avatarSrc: getAvatar(id),
-            },
-          ];
-        }
-        this.conversation_stack.open(ticketList.tickets, isTicket, editCompany);
+        //       default:
+        //         break;
+        //     }
+        //   }
+        //   // ticketList.tickets[index].avatarSrc = getAvatar(element.company_id);
+        //   ticketList.tickets = [
+        //     {
+        //       hasTicket: false,
+        //       company_name: ticketList.company_name,
+        //       isClaimed: tmpisClaimed,
+        //       isUnclaimed: tmpisUnclaimed,
+        //       isClosed: tmpisClosed,
+        //       avatarSrc: getAvatar(id),
+        //     },
+        //   ];
+        // }
+        // this.conversation_stack.open(ticketList.tickets, isTicket, editCompany);
+        this.conversation_stack.open({ id: id, cid: id }, isTicket, editCompany);
         this.focusConversation();
         // ticketList.tickets = [];
         // }
@@ -671,33 +682,33 @@
 
     },
 
-    async loadMoreTickets() {
-      const data = {
-        limit: limitTicket,
-        offset: offsetTicket,
-        state: ticketState,
-      };
-      offsetTicket = limitTicket + offsetTicket;
-      try {
-        let moreTicketList = await getTicketsList(
-          this.tmpticketId,
-          data,
-          ticketState
-        );
-        // if(moreTicketList.length == limitTicket){
-        let moreTicketList1 = this.changeListTicket(moreTicketList);
-        moreTicketList1.forEach(element => {
-          ticketList.tickets.push(element);
-        });
-        const isTicket = true;
-        this.conversation_stack.open(ticketList.tickets, isTicket);
-        scrolling = false;
-      } catch (err) {
-        console.warn('openTicker error', err);
-        const messageId = null;
-        this.openConversation(this.tmpticketId, messageId);
-      }
-    },
+    // async loadMoreTickets() {
+    //   const data = {
+    //     limit: limitTicket,
+    //     offset: offsetTicket,
+    //     state: ticketState,
+    //   };
+    //   offsetTicket = limitTicket + offsetTicket;
+    //   try {
+    //     let moreTicketList = await getTicketsList(
+    //       this.tmpticketId,
+    //       data,
+    //       ticketState
+    //     );
+    //     // if(moreTicketList.length == limitTicket){
+    //     let moreTicketList1 = this.changeListTicket(moreTicketList);
+    //     moreTicketList1.forEach(element => {
+    //       ticketList.tickets.push(element);
+    //     });
+    //     const isTicket = true;
+    //     this.conversation_stack.open(ticketList.tickets, isTicket);
+    //     scrolling = false;
+    //   } catch (err) {
+    //     console.warn('openTicker error', err);
+    //     const messageId = null;
+    //     this.openConversation(this.tmpticketId, messageId);
+    //   }
+    // },
     closeRecording(e) {
       if (e && this.$(e.target).closest('.capture-audio').length > 0) {
         return;

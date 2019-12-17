@@ -327,6 +327,8 @@ window.Signal = Signal.setup({
   logger: window.log,
 });
 
+window.OFA = require('./js/modules/OFA');
+
 // Pulling these in separately since they access filesystem, electron
 window.Signal.Backup = require('./js/modules/backup');
 window.Signal.Debug = require('./js/modules/debug');
