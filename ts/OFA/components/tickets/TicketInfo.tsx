@@ -13,8 +13,11 @@ interface State {
 export default class TicketInfo extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = { showMoreInfo: false };
+    this.state = {
+      showMoreInfo: false,
+    };
   }
+
 
   public render() {
     console.log('TICKET PROPSSSS', this.props);
@@ -33,33 +36,33 @@ export default class TicketInfo extends React.Component<Props, State> {
       <div className="main-ticket-container">
         <div className="container-ticket-userinfo">
           <img src={profile_picture} id={`clientTicketAvatar_${uuid}`} alt={`clientTicketAvatar_${uuid}`} className="ticket-user-image" />
-          <span className="ticket-user-name">{name} {surname}</span>
-          {/* <span class="ticket-user-name">username</span> */}
+          {name ? (
+            <span className="ticket-user-name">{name} {surname}</span>
+          ) : (
+            <span className="ticket-user-name">username</span>
+          )}
         </div>
         <div className="container-ticket-info">
           <span className="ticket-id">Ticket {uuid}</span>
-          <span className="ticket-date">{ts_created}</span>
+          <span className="ticket-date">${
+                  days[new Date(mssg.ts).getDay()]
+                  } ${new Date(mssg.ts).getHours() -
+                  1}:${new Date(mssg.ts).getMinutes()}</span>
         </div>
 
         <div className="container-ticket-actions">
-          {/* {{#isUnknown}} */}
-          <button id={`claim_${uuid}`} className="button-claim-ticket not-claimed">{state}</button>
-          {/* {{/isUnknown}} */}
-          {/* {{#isUnclaimed}} */}
-          {/* <button id={`claim_${uuid}`} className="button-claim-ticket not-claimed">{{ status }}</button> */}
-          {/* {{/isUnclaimed}} */}
-          {/* {{#isClaimed}} */}
-          {/* <button id={`claim_${uuid}`} className="button-claim-ticket claimed" disabled="disabled">{{ status }}</button> */}
-          {/* {{/isClaimed}} */}
-          {/* {{#isClosed}} */}
-          {/* <!-- <button id='claim_{{uuid}}' className="button-claim-ticket not-claimed">{{ status }}</button>  --> */}
-          {/* {{/isClosed}} */}
+          {/* commented because there is the same in the ternary condition right now */}
+          {/* {state === 1 && (
+            <button id={`claim_${uuid}`} className="button-claim-ticket not-claimed">Übernehmen</button>
+          )} */}
+          {state === 2 ? (
+            <button id={`claim_${uuid}`} className="button-claim-ticket claimed" disabled={true}>Übernommen</button>
+          ) : (
+            // can be unknown, unclaim or close
+            <button id={`claim_${uuid}`} className="button-claim-ticket not-claimed">Übernehmen</button>
+          )}
         </div>
-
-
-        {/* <h1>IMMA TICKET</h1>
-        <div>{ticket.uuid}</div>
-        {showMoreInfo} */}
+        {/* {showMoreInfo} */}
       </div>
     );
   }
