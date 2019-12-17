@@ -1,3 +1,5 @@
+// tslint:disable:react-a11y-event-has-role
+
 import React from 'react';
 import { connect } from 'react-redux';
 
@@ -17,12 +19,15 @@ interface Props {
 }
 
 // tslint:disable-next-line:no-empty-interface
-interface State {}
+interface State {
+  stateFilter: number | null;
+}
 
 export class TicketsView extends React.Component<Props, State> {
   private updateTicketsInterval: NodeJS.Timeout | null = null;
   constructor(props: Props) {
     super(props);
+    this.state = { stateFilter: 1 };
   }
 
   public componentDidMount() {
@@ -45,15 +50,46 @@ export class TicketsView extends React.Component<Props, State> {
     }
   }
 
+  public setStateFilter(newStateFilter: number) {
+    this.setState({ stateFilter: newStateFilter});
+  }
+
   public render() {
     const { tickets } = this.props;
+    const { stateFilter } = this.state;
 
     return (
-      <div>
-        <h1>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHh</h1>
-        {tickets.map((ticket, _) => {
-          return (<TicketInfo key={ticket.uuid} ticket={ticket} />);
-        })}
+      <div className="content">
+        <div className="module-main-header__info">
+          <img src="{{avatarSrc}}" alt="header chat" />
+          <span id="span-chat-name">Test</span>
+        </div>
+        {/* Navigation tabs */}
+        <ul className="ulNavigationTickets">
+          {/* <li id="unclaimed" className="ticket-nav {{unclaimed}}">Nicht zugewiesen</li>
+          <li id="claimed" className="ticket-nav {{claimed}}">Zugewiesen</li>
+          <li id="closed" className="ticket-nav {{closed}}">Geschlossen</li> */}
+          <li id="unclaimed" className="ticket-nav" onClick={() => this.setStateFilter(1)}>Nicht zugewiesen</li>
+          <li id="claimed" className="ticket-nav" onClick={() => this.setStateFilter(2)}>Zugewiesen</li>
+          <li id="closed" className="ticket-nav" onClick={() => this.setStateFilter(3)}>Geschlossen</li>
+          <li id="add_group" className="ticket-nav">Gruppe erstellen</li>
+          <li id="add_extern" className="ticket-nav">Externe Nutzer einladen</li>
+          <li id="add_intern" className="ticket-nav">Interne Nutzer einladen</li>
+          <li id="open_contact" className="ticket-nav">Kontakte</li>
+        </ul>
+        <div className="general-container">
+          <div className="container-ticket">
+            <div id="ticketList">
+              {tickets.map((ticket, _) => {
+                if (stateFilter !== null && ticket.state !== stateFilter) {
+                  return;
+                }
+
+                return (<TicketInfo key={ticket.uuid} ticket={ticket} />);
+              })}
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
