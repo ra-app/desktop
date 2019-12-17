@@ -1346,7 +1346,7 @@
         }
       } else if (!this.isHidden() && window.isFocused()) {
         // The conversation is visible and in focus
-        this.markRead();
+        // this.markRead();
 
         // When we're scrolled up and we don't already have a last seen indicator
         //   we add a new one.
