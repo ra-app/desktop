@@ -812,6 +812,10 @@ const getCompany = async number => {
   return company;
 };
 
+const getCompanyRaw = async number => {
+  return (await apiRequest('api/v1/companies/' + number));
+};
+
 const getClientByPhone = async (company_id, number) => {
   return (await apiRequest(
     '/api/v1/admin/' + company_id + '/clients/getbyphone/' + number
