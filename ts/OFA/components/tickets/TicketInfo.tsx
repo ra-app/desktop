@@ -1,11 +1,10 @@
 import React from 'react';
 import { Ticket } from '../../store/tickets/types';
-import { Avatar } from '../avatar/Avatar';
+import Avatar from '../avatar/Avatar';
 declare var claimTicket: any;
 declare var getClientByPhone: any;
 declare var ensureConversation: any;
 declare var getTicketDetails: any;
-
 interface Props {
   ticket: Ticket;
 }

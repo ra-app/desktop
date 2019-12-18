@@ -8,6 +8,7 @@ import { setCompanyInfo } from '../../store/companyInfo/actions';
 import { Ticket } from '../../store/tickets/types';
 import { CompanyInfo } from '../../store/companyInfo/types';
 import TicketInfo from './TicketInfo';
+import Avatar from '../avatar/Avatar';
 
 // External API
 declare const get_since: any;
@@ -43,7 +44,6 @@ export class TicketsView extends React.Component<Props, State> {
   }
 
   public componentWillUnmount() {
-    console.log('unmountttttttttttttttt')
     if (this.updateTicketsInterval !== null) {
       clearInterval(this.updateTicketsInterval);
       this.updateTicketsInterval = null;
@@ -81,7 +81,7 @@ export class TicketsView extends React.Component<Props, State> {
     return (
       <div className="content">
         <div className="module-main-header__info">
-          <img src="{{avatarSrc}}" alt="header chat" />
+          <Avatar id={companyInfo.company_number.toString()} avatarSrc={companyInfo.company_avatar} />
           <span id="span-chat-name">{companyInfo ? companyInfo.name : 'Unknow'}</span>
         </div>
         {/* Navigation tabs */}
