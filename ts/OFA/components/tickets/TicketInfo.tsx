@@ -1,6 +1,6 @@
 import React from 'react';
 import { Ticket } from '../../store/tickets/types';
-import { Avatar } from '../avatar/Avatar';
+import Avatar from '../avatar/Avatar';
 interface Props {
   ticket: Ticket;
 }

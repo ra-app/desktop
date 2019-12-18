@@ -10,7 +10,8 @@ interface State {
     imageBroken: boolean;
 }
 
-export class Avatar extends React.Component<Props, State> {
+// tslint:disable-next-line:no-default-export
+export default class Avatar extends React.Component<Props, State> {
     public handleImageErrorBound: () => void;
 
     public constructor(props: Props) {
