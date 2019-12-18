@@ -12,7 +12,7 @@ import TicketInfo from './TicketInfo';
 // External API
 declare const get_since: any;
 declare const getCompanyRaw: any;
-
+declare var getAvatar: any;
 interface Props {
   company_id: number;
   tickets: Array<any>;
@@ -43,11 +43,13 @@ export class TicketsView extends React.Component<Props, State> {
   }
 
   public componentWillUnmount() {
+    console.log('unmountttttttttttttttt')
     if (this.updateTicketsInterval !== null) {
       clearInterval(this.updateTicketsInterval);
       this.updateTicketsInterval = null;
     }
   }
+
 
   public async callSince() {
     const res = await get_since(this.props.company_id, { ts: this.props.lastSinceTs });
@@ -114,12 +116,17 @@ export class TicketsView extends React.Component<Props, State> {
 
 const mapStateToProp = (state: any, props: Props): Props => {
   const company_id = props.company_id;
-
   let tickets: Array<any> = [];
   if (state.tickets && state.tickets[company_id] && state.tickets[company_id].tickets) {
     tickets = Object.values(state.tickets[company_id].tickets);
   }
-
+  // save avatar on storage
+  if (tickets.length > 0) {
+    tickets.forEach(element => {
+      element.profile_picture = getAvatar(element.client_uuid);
+    });
+  }
+  // sort ticket
   tickets = tickets.sort((a, b) => (new Date(b.ts_created)).getTime() - (new Date(a.ts_created)).getTime());
 
   let lastSinceTs: number = 1276505834832;
