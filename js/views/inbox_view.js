@@ -128,6 +128,7 @@
             // const view = React.createElement(window.OFA.TestComponent);
             const elem = document.createElement('div');
             elem.id = id;
+            elem.className = 'tickets-view';
 
             // const view = new window.OFA.TestComponent();
             // ReactDOM.render(view, elem);
