@@ -1,6 +1,6 @@
 // tslint:disable:react-a11y-event-has-role
 
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { setCompanyTicketsSinceTs, setTicketsData } from '../../store/tickets/actions';
@@ -9,19 +9,27 @@ import { Ticket } from '../../store/tickets/types';
 import { CompanyInfo } from '../../store/companyInfo/types';
 import TicketInfo from './TicketInfo';
 import Avatar from '../avatar/Avatar';
+import { BrowserWindow } from 'electron';
 
 // External API
 declare const get_since: any;
 declare const getCompanyRaw: any;
 declare var getAvatar: any;
+
 interface Props {
   company_id: number;
   tickets: Array<any>;
   lastSinceTs: number;
   companyInfo: CompanyInfo;
+  window: BrowserWindow;
   setTickets(tickets: Array<Ticket>): any;
   setSinceTs(companyId: number, ts: number): any;
   setCompanyInfo(companyInfo: CompanyInfo): any;
+}
+declare global {
+  interface Window {
+    owsDesktopApp: any;
+  }
 }
 
 // tslint:disable-next-line:no-empty-interface
@@ -50,7 +58,6 @@ export class TicketsView extends React.Component<Props, State> {
     }
   }
 
-
   public async callSince() {
     const res = await get_since(this.props.company_id, { ts: this.props.lastSinceTs });
     if (res.success) {
@@ -74,6 +81,25 @@ export class TicketsView extends React.Component<Props, State> {
     this.setState({ stateFilter: newStateFilter});
   }
 
+  public openContactList() {
+    const { appView } = window.owsDesktopApp;
+    appView.openContact();
+  }
+
+  public createGroup() {
+    const { appView } = window.owsDesktopApp;
+    appView.openModalImport('group');
+  }
+
+  public importAdmin() {
+    const { appView } = window.owsDesktopApp;
+    appView.openModalImport('admin');
+  }
+  public importKunde() {
+    const { appView } = window.owsDesktopApp;
+    appView.openModalImport('kunde');
+  }
+
   public render() {
     const { tickets, companyInfo } = this.props;
     const { stateFilter } = this.state;
@@ -81,22 +107,21 @@ export class TicketsView extends React.Component<Props, State> {
     return (
       <div className="content">
         <div className="module-main-header__info">
-          <Avatar id={companyInfo.company_number.toString()} avatarSrc={companyInfo.company_avatar} />
-          <span id="span-chat-name">{companyInfo ? companyInfo.name : 'Unknow'}</span>
+          {companyInfo && (
+            <Fragment>
+              <Avatar id={companyInfo.company_number.toString()} avatarSrc={companyInfo.company_avatar} />
+              <span id="span-chat-name">{companyInfo ? companyInfo.name : 'Unknow'}</span>
+            </Fragment>
+          )}
         </div>
-        {/* Navigation tabs */}
         <ul className="ulNavigationTickets">
-          {/* <li id="unclaimed" className="ticket-nav {{unclaimed}}">Nicht zugewiesen</li>
-          <li id="claimed" className="ticket-nav {{claimed}}">Zugewiesen</li>
-          <li id="closed" className="ticket-nav {{closed}}">Geschlossen</li> */}
-          {/* className={stateFilter=== 1 ? 'true ticket-nav':'ticket-nav'} */}
           <li id="unclaimed" className={`ticket-nav ${stateFilter === 1 && 'true'}`} onClick={() => this.setStateFilter(1)}>Nicht zugewiesen</li>
           <li id="claimed" className={`ticket-nav ${stateFilter === 2 && 'true'}`} onClick={() => this.setStateFilter(2)}>Zugewiesen</li>
           <li id="closed" className={`ticket-nav ${stateFilter === 3 && 'true'}`} onClick={() => this.setStateFilter(3)}>Geschlossen</li>
-          <li id="add_group" className="ticket-nav">Gruppe erstellen</li>
-          <li id="add_extern" className="ticket-nav">Externe Nutzer einladen</li>
-          <li id="add_intern" className="ticket-nav">Interne Nutzer einladen</li>
-          <li id="open_contact" className="ticket-nav">Kontakte</li>
+          <li id="add_group" className="ticket-nav" onClick={() => this.createGroup()}>Gruppe erstellen</li>
+          <li id="add_extern" className="ticket-nav" onClick={() => this.importKunde()}>Externe Nutzer einladen</li>
+          <li id="add_intern" className="ticket-nav" onClick={() => this.importAdmin()}>Interne Nutzer einladen</li>
+          <li id="open_contact" className="ticket-nav" onClick={() => this.openContactList()}>Kontakte</li>
         </ul>
         <div className="general-container">
           <div className="container-ticket">
