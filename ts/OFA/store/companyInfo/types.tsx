@@ -5,6 +5,7 @@ export interface CompanyInfo {
   company_number: number;
   active: boolean;
   business: string;
+  company_avatar: string;
 }
 
 export interface CompanyInfoState {

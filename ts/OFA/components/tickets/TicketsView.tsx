@@ -63,7 +63,9 @@ export class TicketsView extends React.Component<Props, State> {
     if (this.props.companyInfo == null) {
       const res = await getCompanyRaw(companyId);
       if (res.success) {
-        this.props.setCompanyInfo(res.company);
+        const company = res.company;
+        company.company_avatar = getAvatar(companyId);
+        this.props.setCompanyInfo(company);
       }
     }
   }
@@ -135,6 +137,7 @@ const mapStateToProp = (state: any, props: Props): Props => {
   }
 
   const companyInfo = state.companyInfo[company_id];
+
 
   return { tickets, lastSinceTs, companyInfo } as Props;
 };
