@@ -1,6 +1,5 @@
 import React from 'react';
 import { Ticket } from '../../store/tickets/types';
-// declare var getAvatar: any;
 
 interface Props {
   ticket: Ticket;
@@ -45,19 +44,20 @@ export default class TicketInfo extends React.Component<Props, State> {
     const {
       ticket: {
         uuid,
-        client_uuid,
+        // client_uuid,
         name,
         surname,
-        // profile_picture,
+        profile_picture,
         ts_created,
         state,
       }
     } = this.props;
     // const { showMoreInfo } = this.state;
+
     return (
       <div className="main-ticket-container">
         <div className="container-ticket-userinfo">
-          {/* <img src='images/header-chat.png' id={`clientTicketAvatar_${uuid}`} alt={`clientTicketAvatar_${uuid}`} className="ticket-user-image" /> */}
+          <img src={profile_picture} id={`clientTicketAvatar_${uuid}`} alt={`clientTicketAvatar_${uuid}`} className="ticket-user-image" />
           {name ? (
             <span className="ticket-user-name">{name} {surname}</span>
           ) : (
