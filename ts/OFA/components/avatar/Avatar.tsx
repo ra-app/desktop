@@ -44,7 +44,7 @@ export class Avatar extends React.Component<Props, State> {
                 <img
                     onError={this.handleImageErrorBound}
                     alt={`avatar_${id}`}
-                    src={imageBroken ? 'images/header-chat.png' : avatarSrc}
+                    src={imageBroken ? 'images/firmen-logo.png' : avatarSrc}
                 />
             </div>
         );
