@@ -60,7 +60,8 @@
           $el.prependTo(this.el);
         }
 
-        if (this.$('.tickets-view')) {
+        if (document.getElementsByClassName('tickets-view').length !==0) {
+          ReactDOM.unmountComponentAtNode(document.getElementsByClassName('tickets-view')[0])
           this.$('.tickets-view').remove();
         }
         if (this.$('.blackboard-view')) {
@@ -74,7 +75,6 @@
         // Make sure poppers are positioned properly
         window.dispatchEvent(new Event('resize'));
       } else {
-        console.log('22222222222222222222222222222222222')
         const isAdmin = true;
         let admins = '';
         try {
@@ -110,7 +110,8 @@
             });
           let $el = this.$(`#${id}`);
           if ($el === null || $el.length === 0) {
-            if (this.$('.tickets-view')) {
+            if (document.getElementsByClassName('tickets-view').length !==0) {
+              ReactDOM.unmountComponentAtNode(document.getElementsByClassName('tickets-view')[0])
               this.$('.tickets-view').remove();
             }
             if (this.$('.blackboard-view')) {
