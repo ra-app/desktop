@@ -43,7 +43,6 @@ export class TicketsView extends React.Component<Props, State> {
   }
 
   public componentWillUnmount() {
-    console.log('unmountttttttttttttttt')
     if (this.updateTicketsInterval !== null) {
       clearInterval(this.updateTicketsInterval);
       this.updateTicketsInterval = null;
