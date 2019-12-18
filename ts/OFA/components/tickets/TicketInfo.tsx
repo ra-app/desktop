@@ -27,17 +27,13 @@ export default class TicketInfo extends React.Component<Props, State> {
   public setDate(date: string) {
     const language = window.getpreferredLocale();
     const d = new Date(date);
-    const  options = { weekday: 'long', year: 'numeric', month: 'short',
-    day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+    const options = {
+      weekday: 'long', year: 'numeric', month: 'short',
+      day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'
+    };
 
     return d.toLocaleDateString(language, options);
   }
-
-  // if (id !== null || id !== undefined) {
-  //   arrayList[index].company_avatar = getAvatar(id);
-  // }
-  // arrayList[index].avatarSrc = getAvatar(element.client_uuid);
-
 
   public render() {
     // console.log('TICKET PROPSSSS', this.props);
@@ -57,20 +53,14 @@ export default class TicketInfo extends React.Component<Props, State> {
     return (
       <div className="main-ticket-container">
         <div className="container-ticket-userinfo">
-          {/* <img src={profile_picture} id={`clientTicketAvatar_${uuid}`} alt={`clientTicketAvatar_${uuid}`} className="ticket-user-image" /> */}
           <Avatar
             avatarSrc={profile_picture}
             id={client_uuid}
-            />
-          {name ? (
-            <span className="ticket-user-name">{name} {surname}</span>
-          ) : (
-              <span className="ticket-user-name">username</span>
-            )}
+          />
+          <span className="ticket-user-name"> {name ? `${name} ${surname}` : 'username'}</span>
         </div>
         <div className="container-ticket-info">
           <span className="ticket-id">Ticket </span>
-          {/* <span className="ticket-id">Ticket {uuid}</span> */}
           <span className="ticket-date">
             {this.setDate(ts_created)}
           </span>
