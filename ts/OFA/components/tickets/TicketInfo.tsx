@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
 import { Ticket } from '../../store/tickets/types';
+import {  setTicketData } from '../../store/tickets/actions';
 import Avatar from '../avatar/Avatar';
 declare var claimTicket: any;
 declare var getClientByPhone: any;
@@ -7,6 +9,7 @@ declare var ensureConversation: any;
 declare var getTicketDetails: any;
 interface Props {
   ticket: Ticket;
+  setTicket(ticket: Ticket): any;
 }
 
 interface State {
@@ -22,7 +25,7 @@ declare global {
 }
 
 // tslint:disable-next-line:no-default-export
-export default class TicketInfo extends React.Component<Props, State> {
+export  class TicketInfo extends React.Component<Props, State> {
   public mapTicketMessages: any;
   constructor(props: Props) {
     super(props);
@@ -45,6 +48,7 @@ export default class TicketInfo extends React.Component<Props, State> {
   }
 
   public async claimTicket(company_id: number, uuid: string) {
+    const tmpTicket = this.props.ticket;
     const phoneNumber = await claimTicket(company_id, uuid);
     const client = await getClientByPhone(company_id, phoneNumber);
     const conversation = await ensureConversation(phoneNumber);
@@ -79,6 +83,8 @@ export default class TicketInfo extends React.Component<Props, State> {
     conversation.sendMessage(message);
     window.Whisper.events.trigger('showConversation', phoneNumber);
     $(`#${uuid}`).remove();
+    tmpTicket.state = 2;
+    this.props.setTicket(tmpTicket);
   }
 
   public async showInfoTicket(/*evt: any,*/ ticket: Ticket) {
@@ -182,3 +188,12 @@ export default class TicketInfo extends React.Component<Props, State> {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    setTicket: (ticket: Ticket) => dispatch(setTicketData(ticket)),
+  };
+};
+
+// tslint:disable-next-line:no-default-export
+export default connect(null, mapDispatchToProps)(TicketInfo);
