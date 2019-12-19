@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Ticket } from '../../store/tickets/types';
 import Avatar from '../avatar/Avatar';
 declare var claimTicket: any;
@@ -11,6 +11,7 @@ interface Props {
 
 interface State {
   showMoreInfo: boolean;
+  loading: boolean;
 }
 
 declare global {
@@ -22,12 +23,15 @@ declare global {
 
 // tslint:disable-next-line:no-default-export
 export default class TicketInfo extends React.Component<Props, State> {
+  public mapTicketMessages: any;
   constructor(props: Props) {
     super(props);
     this.state = {
       showMoreInfo: false,
+      loading: true,
     };
   }
+
 
   public setDate(date: string) {
     const language = window.getpreferredLocale();
@@ -77,6 +81,25 @@ export default class TicketInfo extends React.Component<Props, State> {
     $(`#${uuid}`).remove();
   }
 
+  public async showInfoTicket(/*evt: any,*/ ticket: Ticket) {
+    // if (evt.target.className.indexOf('button-claim-ticket') === -1) {
+    if (this.state.showMoreInfo) {
+      this.setState({ showMoreInfo: false });
+    } else {
+      try {
+        const ticketDETAIL = await getTicketDetails(
+          ticket.company_id,
+          ticket.uuid
+        );
+        this.mapTicketMessages = ticketDETAIL.events.reverse();
+        this.setState({ showMoreInfo: true, loading: false });
+      } catch (e) {
+        console.warn('Error getting ticket info', e);
+      }
+    }
+    // }
+  }
+
   public render() {
     console.log('TICKET PROPSSSS', this.props);
     const {
@@ -91,7 +114,7 @@ export default class TicketInfo extends React.Component<Props, State> {
         state,
       }
     } = this.props;
-    // const { showMoreInfo } = this.state;
+    const { showMoreInfo } = this.state;
 
     return (
       <div className="main-ticket-container">
@@ -102,7 +125,8 @@ export default class TicketInfo extends React.Component<Props, State> {
           />
           <span className="ticket-user-name"> {name ? `${name} ${surname}` : 'username'}</span>
         </div>
-        <div className="container-ticket-info">
+        {/* tslint:disable-next-line:react-a11y-event-has-role */}
+        <div className="container-ticket-info" onClick={() => this.showInfoTicket(/*event,*/ this.props.ticket)}>
           <span className="ticket-id">Ticket </span>
           <span className="ticket-date">
             {this.setDate(ts_created)}
@@ -133,7 +157,27 @@ export default class TicketInfo extends React.Component<Props, State> {
               </button>
             )}
         </div>
-        {/* {showMoreInfo} */}
+        {showMoreInfo && (
+          <div id={`ticket_${uuid}`} className="mainMssgDiv">
+            <div className="ticket-message">
+              <p className="mssgUsername">
+                {name ? name : 'username'}
+              </p>
+              {this.mapTicketMessages.map((message: any) => {
+                // tslint:disable-next-line:jsx-key
+                return (
+                  // tslint:disable-next-line:jsx-key
+                  <Fragment key={message.id}>
+                    <p className="ticket-message">
+                      {JSON.parse(message.json).body}
+                      {this.setDate(message.ts)}
+                    </p>
+                  </Fragment>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
     );
   }

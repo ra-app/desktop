@@ -166,6 +166,13 @@ img.ticket-user-image {
   background: #f5f5f5;
   padding: 22px;
 }
+.ticket-message {
+  background: #d9ecec;
+  padding: 10px;
+  border-radius: 10px;
+  position: relative;
+  margin-bottom: 10px;
+}
 .received-message {
   background: #d9ecec;
   max-width: calc(100% / 3);
