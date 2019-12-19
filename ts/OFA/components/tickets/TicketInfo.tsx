@@ -25,8 +25,9 @@ declare global {
 }
 
 // tslint:disable-next-line:no-default-export
-export  class TicketInfo extends React.Component<Props, State> {
-  public mapTicketMessages: any;
+export class TicketInfo extends React.Component<Props, State> {
+  private mapTicketMessages: Array<string> = [];
+  private displayName: string = 'username';
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -35,6 +36,23 @@ export  class TicketInfo extends React.Component<Props, State> {
     };
   }
 
+  public componentDidMount() {
+    const {
+      ticket: {
+        name,
+        surname,
+      },
+    } = this.props;
+
+    if (name) {
+      if (name && surname) {
+        // tslint:disable-next-line:prefer-template
+        this.displayName = name + ' ' + surname;
+      } else {
+        this.displayName = name;
+      }
+    }
+  }
 
   public setDate(date: string) {
     const language = window.getpreferredLocale();
@@ -47,10 +65,10 @@ export  class TicketInfo extends React.Component<Props, State> {
     return d.toLocaleDateString(language, options);
   }
 
-  public async claimTicket(company_id: number, uuid: string) {
+  public async claimTicket(companyID: number, uuid: string) {
     const tmpTicket = this.props.ticket;
-    const phoneNumber = await claimTicket(company_id, uuid);
-    const client = await getClientByPhone(company_id, phoneNumber);
+    const phoneNumber = await claimTicket(companyID, uuid);
+    const client = await getClientByPhone(companyID, phoneNumber);
     const conversation = await ensureConversation(phoneNumber);
 
     let conversationName = 'User without data';
@@ -69,12 +87,12 @@ export  class TicketInfo extends React.Component<Props, State> {
     conversation.set({
       name: conversationName,
       ticket_uuid: uuid,
-      company_id: company_id,
+      company_id: companyID,
       isClosed: false,
       isArchived: false,
     });
     // send event ticket
-    const ticketDETAIL = await getTicketDetails(company_id, uuid);
+    const ticketDETAIL = await getTicketDetails(companyID, uuid);
     let message = '[![TICKETMSG]!]';
     ticketDETAIL.events.reverse().forEach((mssg: { json: string }) => {
       // tslint:disable-next-line:prefer-template
@@ -87,40 +105,37 @@ export  class TicketInfo extends React.Component<Props, State> {
     this.props.setTicket(tmpTicket);
   }
 
-  public async showInfoTicket(/*evt: any,*/ ticket: Ticket) {
-    // if (evt.target.className.indexOf('button-claim-ticket') === -1) {
+  public async showInfoTicket(ticket: Ticket) {
     if (this.state.showMoreInfo) {
-      this.setState({ showMoreInfo: false });
+      this.setState({ showMoreInfo: false, loading: true });
     } else {
+      this.setState({ showMoreInfo: true });
       try {
         const ticketDETAIL = await getTicketDetails(
           ticket.company_id,
           ticket.uuid
         );
         this.mapTicketMessages = ticketDETAIL.events.reverse();
-        this.setState({ showMoreInfo: true, loading: false });
+        this.setState({ loading: false });
       } catch (e) {
         console.warn('Error getting ticket info', e);
       }
     }
-    // }
   }
 
   public render() {
-    console.log('TICKET PROPSSSS', this.props);
+    // console.log('TICKET PROPSSSS', this.props);
     const {
       ticket: {
         uuid,
         company_id,
         client_uuid,
-        name,
-        surname,
         profile_picture,
         ts_created,
         state,
       }
     } = this.props;
-    const { showMoreInfo } = this.state;
+    const { showMoreInfo, loading } = this.state;
 
     return (
       <div className="main-ticket-container">
@@ -129,10 +144,10 @@ export  class TicketInfo extends React.Component<Props, State> {
             avatarSrc={profile_picture}
             id={client_uuid}
           />
-          <span className="ticket-user-name"> {name ? `${name} ${surname}` : 'username'}</span>
+          <span className="ticket-user-name"> {this.displayName}</span>
         </div>
         {/* tslint:disable-next-line:react-a11y-event-has-role */}
-        <div className="container-ticket-info" onClick={() => this.showInfoTicket(/*event,*/ this.props.ticket)}>
+        <div className="container-ticket-info" onClick={() => this.showInfoTicket(this.props.ticket)}>
           <span className="ticket-id">Ticket </span>
           <span className="ticket-date">
             {this.setDate(ts_created)}
@@ -165,23 +180,28 @@ export  class TicketInfo extends React.Component<Props, State> {
         </div>
         {showMoreInfo && (
           <div id={`ticket_${uuid}`} className="mainMssgDiv">
-            <div className="ticket-message">
-              <p className="mssgUsername">
-                {name ? name : 'username'}
-              </p>
-              {this.mapTicketMessages.map((message: any) => {
-                // tslint:disable-next-line:jsx-key
-                return (
-                  // tslint:disable-next-line:jsx-key
-                  <Fragment key={message.id}>
-                    <p className="ticket-message">
-                      {JSON.parse(message.json).body}
-                      {this.setDate(message.ts)}
+            {loading ? (
+              <Fragment>
+                <img className="isLoading" src="images/spinner-56.svg" alt="loading content" />
+              </Fragment>
+            ) : (
+                <Fragment>
+                  <div className="ticket-message">
+                    <p className="mssgUsername">
+                      {this.displayName}
                     </p>
-                  </Fragment>
-                );
-              })}
-            </div>
+                    {this.mapTicketMessages.map((message: any) => {
+                      return (
+                        <Fragment key={message.id}>
+                          <p className="ticket-message">
+                            {JSON.parse(message.json).body} - {this.setDate(message.ts)}
+                          </p>
+                        </Fragment>
+                      );
+                    })}
+                  </div>
+                </Fragment>
+              )}
           </div>
         )}
       </div>
