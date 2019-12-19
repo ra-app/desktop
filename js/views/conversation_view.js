@@ -2814,7 +2814,7 @@
         this.contactListXml = prepareDataXml(options.contact_data);
         this.objectContact = [];
         this.renderUserGroup = [];
-        this.canEditName = true;
+        this.canEdit = true;
         if (options.type === 'group') {
           if (options.admin_client) {
             if(options.group_id.includes('-intern')){
@@ -2859,7 +2859,7 @@
         groupName: this.groupName,
         editGroupName: this.editGroupName,
         renderUserGroup: this.renderUserGroup,
-        canEditName: this.canEditName,
+        canEdit: this.canEdit,
       };
     },
     events: {
@@ -2878,7 +2878,7 @@
     prepareUserInviteGroup(options, groupType){
       const myNumber = textsecure.storage.user.getNumber();
       if(groupType == 'regular'){
-        this.canEditName = true;
+        this.canEdit = true;
         if (options.admin_client.admins) {
           for (let i = 0; i < options.admin_client.admins.length; i++) {
             const contact = options.admin_client.admins[i];
@@ -2912,7 +2912,7 @@
           }
         }
       }else if(groupType == 'intern'){
-        this.canEditName = false;
+        this.canEdit = false;
         if (options.admin_client.admins) {
           for (let i = 0; i < options.admin_client.admins.length; i++) {
             const contact = options.admin_client.admins[i];
@@ -2930,7 +2930,7 @@
           }
         }
       } else if(groupType == 'extern'){
-        this.canEditName = false;
+        this.canEdit = false;
         if (options.admin_client.clients) {
           for (let i = 0; i < options.admin_client.clients.length; i++) {
             const contact = options.admin_client.clients[i];

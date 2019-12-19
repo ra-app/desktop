@@ -499,18 +499,19 @@
                 <span id='spanCompanyName'>{{ groupName }}</span>
               </div>
               <div class = 'buttonEditNameGroup'>
-                  {{#canEditName}}
+                  {{#canEdit}}
                 <img class='editIcon' id='editName' src='images/icons/edit-blue.svg'></img>
-                {{/canEditName}}
+                {{/canEdit}}
               </div>
             </div>
           {{/isEditingName}}
-          
+          {{#canEdit}}
         <div class="inviteUser">
           <label class="labelInputInvitation">NAME HINZUFÜGEN</label>
           <input type="text" id="searchContactInvitation" />
           <img src="images/icons/icon-picture-add-200.svg" class="imagePlus" id="imagePlus" />
         </div>
+        {{/canEdit}}
       </div>
       <div class="mainDivUserSendInvitation" id="userSendList">
         {{ #renderUserGroup}}
