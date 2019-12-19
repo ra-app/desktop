@@ -35,13 +35,16 @@ declare global {
 // tslint:disable-next-line:no-empty-interface
 interface State {
   stateFilter: number | null;
+  searchString: string;
 }
 
 export class TicketsView extends React.Component<Props, State> {
   private updateTicketsInterval: NodeJS.Timeout | null = null;
   constructor(props: Props) {
     super(props);
-    this.state = { stateFilter: 1 };
+    this.state = { stateFilter: 1,
+                    searchString: '',
+                  };
   }
 
   public componentDidMount() {
@@ -95,14 +98,20 @@ export class TicketsView extends React.Component<Props, State> {
     const { appView } = window.owsDesktopApp;
     appView.openModalImport('admin');
   }
+
   public importKunde() {
     const { appView } = window.owsDesktopApp;
     appView.openModalImport('kunde');
   }
 
+  public handleChange(event: any) {
+    // grab value form input box
+    this.setState({searchString: event.target.value});
+  }
+
   public render() {
     const { tickets, companyInfo } = this.props;
-    const { stateFilter } = this.state;
+    const { stateFilter, searchString } = this.state;
 
     return (
       <div className="content">
@@ -123,12 +132,28 @@ export class TicketsView extends React.Component<Props, State> {
           <li id="add_intern" className="ticket-nav" onClick={() => this.importAdmin()}>Interne Nutzer einladen</li>
           <li id="open_contact" className="ticket-nav" onClick={() => this.openContactList()}>Kontakte</li>
         </ul>
+        <div className="searchContainer">
+          <div className="search">
+            <input type="text" className="module-main-header__search__input" value={searchString} onChange={evt => this.handleChange(evt)} placeholder="Search..." />
+          </div>
+          <div className="sort">
+            <span>Sort</span>
+          </div>
+        </div>
         <div className="general-container">
           <div className="container-ticket">
             <div id="ticketList">
               {tickets.map((ticket, _) => {
                 if (stateFilter !== null && ticket.state !== stateFilter) {
                   return;
+                }
+                if (searchString.length > 0) {
+                  if (ticket.name === null) {
+                    return;
+                  }
+                  if (!ticket.name.toLowerCase().match(searchString.toLowerCase()) && !ticket.surname.toLowerCase().match(searchString.toLowerCase())) {
+                    return;
+                  }
                 }
 
                 return (<TicketInfo key={ticket.uuid} ticket={ticket} />);

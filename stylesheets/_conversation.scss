@@ -25,9 +25,25 @@
   display: flex;
 }
 .container-ticket {
-  padding: 150px 21px 21px;
+  padding: 190px 21px 21px;
   cursor: pointer;
   width: 100%;
+}
+.searchContainer{
+  display: flex;
+  position: fixed;
+  top: 120px;
+  z-index: 9;
+  padding: 10px 0px 10p;
+  width: calc(100% - 300px);
+  padding-left: 22px;
+  padding-right: 26px;
+  height: 60px;
+  padding-top: 10px;
+  background: #f5f5f5;
+  .search{
+    width:40%;
+  }
 }
 .edit-company-container{
   width:30%;
