@@ -8,6 +8,7 @@ import { setCompanyInfo } from '../../store/companyInfo/actions';
 import { Ticket } from '../../store/tickets/types';
 import { CompanyInfo } from '../../store/companyInfo/types';
 import TicketInfo from './TicketInfo';
+import EditCompany from '../editCompany/EditCompany';
 import Avatar from '../avatar/Avatar';
 import { BrowserWindow } from 'electron';
 
@@ -36,6 +37,7 @@ declare global {
 interface State {
   stateFilter: number | null;
   searchString: string;
+  sortType: string;
 }
 
 export class TicketsView extends React.Component<Props, State> {
@@ -44,6 +46,7 @@ export class TicketsView extends React.Component<Props, State> {
     super(props);
     this.state = { stateFilter: 1,
                     searchString: '',
+                    sortType: 'asc',
                   };
   }
 
@@ -109,9 +112,13 @@ export class TicketsView extends React.Component<Props, State> {
     this.setState({searchString: event.target.value});
   }
 
+  public setSortTicket(newSortType: any) {
+    this.setState({sortType: newSortType});
+  }
+
   public render() {
     const { tickets, companyInfo } = this.props;
-    const { stateFilter, searchString } = this.state;
+    const { stateFilter, searchString, sortType } = this.state;
 
     return (
       <div className="content">
@@ -133,11 +140,20 @@ export class TicketsView extends React.Component<Props, State> {
           <li id="open_contact" className="ticket-nav" onClick={() => this.openContactList()}>Kontakte</li>
         </ul>
         <div className="searchContainer">
+          <div className="sort">
+            {sortType === 'asc' && (
+              <span  onClick={() => this.setSortTicket('desc')}>
+                <img className="orderTicketIcon" src="images/icons/order-down.svg" alt="order tickets" />
+              </span>
+            )}
+            {sortType === 'desc' && (
+              <span  onClick={() => this.setSortTicket('asc')}>
+                <img className="orderTicketIcon" src="images/icons/order-up.svg" alt="order tickets"/>
+              </span>
+            )}
+          </div>
           <div className="search">
             <input type="text" className="module-main-header__search__input" value={searchString} onChange={evt => this.handleChange(evt)} placeholder="Search..." />
-          </div>
-          <div className="sort">
-            <span>Sort</span>
           </div>
         </div>
         <div className="general-container">
@@ -160,6 +176,8 @@ export class TicketsView extends React.Component<Props, State> {
               })}
             </div>
           </div>
+          {/* Edit company */}
+          <EditCompany info={companyInfo} />
         </div>
       </div>
     );
