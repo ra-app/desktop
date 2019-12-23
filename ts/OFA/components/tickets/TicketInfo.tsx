@@ -27,31 +27,12 @@ declare global {
 // tslint:disable-next-line:no-default-export
 export class TicketInfo extends React.Component<Props, State> {
   private mapTicketMessages: Array<string> = [];
-  private displayName: string = 'username';
   constructor(props: Props) {
     super(props);
     this.state = {
       showMoreInfo: false,
       loading: true,
     };
-  }
-
-  public componentDidMount() {
-    const {
-      ticket: {
-        name,
-        surname,
-      },
-    } = this.props;
-
-    if (name) {
-      if (name && surname) {
-        // tslint:disable-next-line:prefer-template
-        this.displayName = name + ' ' + surname;
-      } else {
-        this.displayName = name;
-      }
-    }
   }
 
   public setDate(date: string) {
@@ -124,7 +105,7 @@ export class TicketInfo extends React.Component<Props, State> {
   }
 
   public render() {
-    // console.log('TICKET PROPSSSS', this.props);
+    // console.log('TICKET PROPSSSSz', this.props);
     const {
       ticket: {
         uuid,
@@ -132,10 +113,21 @@ export class TicketInfo extends React.Component<Props, State> {
         client_uuid,
         profile_picture,
         ts_created,
+        name,
+        surname,
         state,
-      }
+      },
     } = this.props;
+    let displayName = 'username';
     const { showMoreInfo, loading } = this.state;
+    if (name) {
+      if (name && surname) {
+        // tslint:disable-next-line:prefer-template
+        displayName = name + ' ' + surname;
+      } else {
+        displayName = name;
+      }
+    }
 
     return (
       <div className="main-ticket-container">
@@ -144,7 +136,7 @@ export class TicketInfo extends React.Component<Props, State> {
             avatarSrc={profile_picture}
             id={client_uuid}
           />
-          <span className="ticket-user-name"> {this.displayName}</span>
+          <span className="ticket-user-name"> {displayName}</span>
         </div>
         {/* tslint:disable-next-line:react-a11y-event-has-role */}
         <div className="container-ticket-info" onClick={() => this.showInfoTicket(this.props.ticket)}>
@@ -188,7 +180,7 @@ export class TicketInfo extends React.Component<Props, State> {
                 <Fragment>
                   <div className="ticket-message">
                     <p className="mssgUsername">
-                      {this.displayName}
+                      {displayName}
                     </p>
                     {this.mapTicketMessages.map((message: any) => {
                       return (
