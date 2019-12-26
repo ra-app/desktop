@@ -162,7 +162,7 @@ export class TicketInfo extends React.Component<Props, State> {
           ) : (
             <Fragment>
               {state === 1 || state === 0 ? (
-                <button 
+                <button
                   id={`claim_${uuid}`}
                   className="button-claim-ticket not-claimed"
                   onClick={() => this.claimTicket(company_id, uuid)}
