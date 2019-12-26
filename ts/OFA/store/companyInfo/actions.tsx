@@ -1,4 +1,4 @@
-import { CompanyInfo, SET_COMPANY_INFO, SetCompanyInfoAction } from './types';
+import { CompanyInfo, SET_COMPANY_AVATAR, SET_COMPANY_INFO, SetCompanyAvatar, SetCompanyInfoAction } from './types';
 
 export function setCompanyInfo(info: CompanyInfo): SetCompanyInfoAction {
   return {
@@ -6,3 +6,12 @@ export function setCompanyInfo(info: CompanyInfo): SetCompanyInfoAction {
     info: info,
   };
 }
+
+export function setCompanyAvatar(companyNumber: number, src: string): SetCompanyAvatar {
+  return {
+    type: SET_COMPANY_AVATAR,
+    src: src,
+    company_number: companyNumber,
+  };
+}
+
