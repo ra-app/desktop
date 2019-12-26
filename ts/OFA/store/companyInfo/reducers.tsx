@@ -33,16 +33,15 @@ function setCompanyInfoReducer(state: CompanyInfoState, action: SetCompanyInfoAc
 }
 
 function setAvatarDataReducer(state: CompanyInfoState, action: SetCompanyAvatar): CompanyInfoState {
-  const data = action.src;
-  console.log(action, "dataaaaaaaaaa");
+  const data = action;
   if (data) {
-  //   if (!state[data.company_id]) {
-  //     state[data.company_id] = {} as CompanyTickets;
-  //   }
-  //   if (!state[data.company_id].tickets) {
-  //     state[data.company_id].tickets = {};
-  //   }
-  //   state[data.company_id].tickets[data.uuid] = data;
+    if (!state[data.company_number]) {
+      state[data.company_number] = {} as CompanyInfo;
+    }
+    if (!state[data.company_number].company_avatar) {
+      state[data.company_number].company_avatar = '';
+    }
+    state[data.company_number].company_avatar = data.src;
   }
 
   return state;

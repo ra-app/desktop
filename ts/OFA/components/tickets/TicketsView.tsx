@@ -8,7 +8,7 @@ import { setCompanyInfo } from '../../store/companyInfo/actions';
 import { Ticket } from '../../store/tickets/types';
 import { CompanyInfo } from '../../store/companyInfo/types';
 import TicketInfo from './TicketInfo';
-// import EditCompany from '../editCompany/EditCompany';
+import EditCompany from '../editCompany/EditCompany';
 import Avatar from '../avatar/Avatar';
 import { BrowserWindow } from 'electron';
 
@@ -186,7 +186,7 @@ export class TicketsView extends React.Component<Props, State> {
             </div>
           </div>
           {/* Edit company */}
-          {/* <EditCompany info={companyInfo} /> */}
+          <EditCompany info={companyInfo} />
         </div>
       </div>
     );
