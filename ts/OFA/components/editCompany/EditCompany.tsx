@@ -93,7 +93,7 @@ export  class EditCompany extends React.Component<Props, State> {
           }, imageType, 1
         );
       }),
-        (reader.onerror = error => console.log(error));
+        (reader.onerror = error => console.warn(error));
     };
   }
 
