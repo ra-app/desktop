@@ -11,6 +11,7 @@ declare var setCompanyAvatar: any;
 declare var toBase64: any;
 interface Props {
   info: CompanyInfo;
+  closeEdit: any;
   setAvatar(companyNumber: number, src: string): any;
 }
 
@@ -114,7 +115,7 @@ export  class EditCompany extends React.Component<Props, State> {
   }
 
   public closeEdit() {
-    console.log('CLOSEEE');
+    this.props.closeEdit();
   }
 
   public render() {

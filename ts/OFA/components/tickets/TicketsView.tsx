@@ -40,31 +40,41 @@ interface State {
   stateFilter: number | null;
   searchString: string;
   sortType: string;
+  openEditCompany: boolean;
 }
 
 export class TicketsView extends React.Component<Props, State> {
   private updateTicketsInterval: NodeJS.Timeout | null = null;
+  private _isMounted: boolean = false;
+  private _boundOpenEditCompany: any;
   constructor(props: Props) {
     super(props);
     this.state = { stateFilter: 1,
                     searchString: '',
                     sortType: 'asc',
+                    openEditCompany: false,
                   };
   }
 
   public componentDidMount() {
+    this._isMounted = true;
     const { company_id, lastOrderTicket } = this.props;
+    this._boundOpenEditCompany = this.openEditCompany.bind(this);
+    document.addEventListener('openEditCompanyEvent', this._boundOpenEditCompany);
     this.callSince();
     this.updateTicketsInterval = setInterval(this.callSince.bind(this), 60000);
     this.getSortTicketInfo(company_id, lastOrderTicket);
     this.fetchCompanyInfoIfMissing(company_id);
+
   }
 
   public componentWillUnmount() {
+    this._isMounted = false;
     if (this.updateTicketsInterval !== null) {
       clearInterval(this.updateTicketsInterval);
       this.updateTicketsInterval = null;
     }
+    document.removeEventListener('openEditCompanyEvent', this._boundOpenEditCompany);
   }
 
   public async callSince() {
@@ -125,9 +135,21 @@ export class TicketsView extends React.Component<Props, State> {
     this.setState({sortType: newSortType});
   }
 
+  public openEditCompany() {
+    if (this._isMounted) {
+      if (!this.state.openEditCompany) {
+        this.setState({openEditCompany: true});
+      }
+    }
+  }
+
+  public closeEditCompany() {
+    this.setState({openEditCompany: false});
+  }
+
   public render() {
     const { tickets, companyInfo } = this.props;
-    const { stateFilter, searchString, sortType } = this.state;
+    const { stateFilter, searchString, sortType, openEditCompany } = this.state;
 
     return (
       <div className="content">
@@ -186,7 +208,9 @@ export class TicketsView extends React.Component<Props, State> {
             </div>
           </div>
           {/* Edit company */}
-          <EditCompany info={companyInfo} />
+          {openEditCompany && (
+            <EditCompany info={companyInfo} closeEdit={() => this.closeEditCompany()} />
+          )}
         </div>
       </div>
     );

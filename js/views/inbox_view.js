@@ -88,9 +88,9 @@
           this.isAdmin = false;
         }
         if (isAdmin) {
-          if (this.$('#edit_company_data')) {
-            this.$('#edit_company_data').remove();
-          }
+          // if (this.$('#edit_company_data')) {
+          //   this.$('#edit_company_data').remove();
+          // }
           // const edit = new Whisper.EditCompanyView({
           //   model: conversation,
           //   window: this.model.window,
@@ -133,7 +133,7 @@
 
             // const view = new window.OFA.TestComponent();
             // ReactDOM.render(view, elem);
-            window.OFA.wrapWithReduxStoreOnElem(elem, window.OFA.TicketsView, { company_id: conversation.id });
+            window.OFA.wrapWithReduxStoreOnElem(elem, window.OFA.TicketsView, { company_id: conversation.id, edit_company: editCompany });
             // console.log('TEST COMPONENT', view, elem);
 
             // eslint-disable-next-line prefer-destructuring

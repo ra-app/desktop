@@ -230,6 +230,9 @@ export class MainHeader extends React.Component<Props> {
     const { appView } = window['owsDesktopApp']
     const editCompany = true;
     appView.openTicket(company_id, null, editCompany);
+    setTimeout(() => {
+      document.dispatchEvent(new CustomEvent('openEditCompanyEvent'));
+    }, 1000);
   }
 
   public checkVersion() {
