@@ -19,6 +19,7 @@ interface State {
   editingCompanyName: boolean;
   companyNameValue: string;
   companyAvatarValue: any;
+  displayedAvatar: string;
   disabledSaveCompany: boolean;
 }
 // tslint:disable-next-line:no-default-export
@@ -30,6 +31,7 @@ export  class EditCompany extends React.Component<Props, State> {
       editingCompanyName: false,
       companyNameValue: this.props.info.name,
       companyAvatarValue: { data: null, type: null },
+      displayedAvatar: this.props.info.company_avatar,
       disabledSaveCompany: true,
     };
   }
@@ -81,13 +83,13 @@ export  class EditCompany extends React.Component<Props, State> {
               lastModified: Date.now(),
             });
             base64 = await toBase64(base64);
+            this.setState({ displayedAvatar: base64 });
             base64 = base64.split(',')[1];
             const dataCompanyAvatar = {
               data: base64,
               type: imageType.split('/')[1],
             };
             this.setState({ disabledSaveCompany: false, companyAvatarValue: dataCompanyAvatar });
-            console.log('YYYYYYY', this.state);
           }, imageType, 1
         );
       }),
@@ -119,13 +121,8 @@ export  class EditCompany extends React.Component<Props, State> {
   }
 
   public render() {
-    const {
-      info: {
-        company_avatar,
-        company_number,
-        name,
-      },
-    } = this.props;
+    const { displayedAvatar, companyNameValue, editingCompanyName, disabledSaveCompany } = this.state;
+    const { info: { company_number, name } } = this.props;
 
     return (
       <Fragment>
@@ -133,7 +130,7 @@ export  class EditCompany extends React.Component<Props, State> {
           <div className="companyAvatarContainer">
             <div className="avatarCompanyContainer">
               {/* tslint:disable-next-line:use-simple-attributes */}
-              <Avatar avatarSrc={company_avatar} id={`companyAvatar-${company_number}`} size={100}/>
+              <Avatar avatarSrc={displayedAvatar} id={`companyAvatar-${company_number}`} size={100} />
             </div>
             <div className="buttonEditCompany">
               <div>
@@ -148,8 +145,8 @@ export  class EditCompany extends React.Component<Props, State> {
           <div className="containerLabelInfoCompany">
             <label className="labelEditName">Name des Unternehmens</label>
           </div>
-          {this.state.editingCompanyName ? (
-            <input id="companyNameInput" onChange={e => this.updatingCompanyName(e)} value={this.state.companyNameValue} />
+          {editingCompanyName ? (
+            <input id="companyNameInput" onChange={e => this.updatingCompanyName(e)} value={companyNameValue} />
           ) : (
               <div className="containerDataEditCompany" id="nameSection">
                 <div className="companyNameEdit">
@@ -162,8 +159,8 @@ export  class EditCompany extends React.Component<Props, State> {
               </div>
             )}
           <button
-            className={`buttonSaveEditCompany ${this.state.disabledSaveCompany && 'disabled'}`}
-            disabled={this.state.disabledSaveCompany}
+            className={`buttonSaveEditCompany ${disabledSaveCompany && 'disabled'}`}
+            disabled={disabledSaveCompany}
             id="buttonSaveEditCompany"
             onClick={() => this.updateCompanyInfo()}
           >

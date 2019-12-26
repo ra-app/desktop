@@ -2,7 +2,6 @@
 
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-
 import { setCompanyTicketsOrder, setCompanyTicketsSinceTs, setTicketsData } from '../../store/tickets/actions';
 import { setCompanyInfo } from '../../store/companyInfo/actions';
 import { Ticket } from '../../store/tickets/types';
