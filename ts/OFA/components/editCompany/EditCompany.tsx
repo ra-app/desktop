@@ -82,6 +82,7 @@ export default class EditCompany extends React.Component<Props, State> {
               type: imageType.split('/')[1],
             };
             this.setState({ disabledSaveCompany: false, companyAvatarValue: dataCompanyAvatar });
+            console.log('YYYYYYY', this.state);
           }, imageType, 1
         );
       }),
@@ -123,7 +124,8 @@ export default class EditCompany extends React.Component<Props, State> {
         <div id="edit_company_data" className="edit-company-container">
           <div className="companyAvatarContainer">
             <div className="avatarCompanyContainer">
-              <Avatar avatarSrc={company_avatar} id={`companyAvatar-${company_number}`} />
+              {/* tslint:disable-next-line:use-simple-attributes */}
+              <Avatar avatarSrc={company_avatar} id={`companyAvatar-${company_number}`} size={100}/>
             </div>
             <div className="buttonEditCompany">
               <div>

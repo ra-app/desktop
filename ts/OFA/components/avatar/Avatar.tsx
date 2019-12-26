@@ -4,6 +4,7 @@ import classNames from 'classnames';
 interface Props {
     avatarSrc: string;
     id: string;
+    size?: number;
 }
 
 interface State {
@@ -30,14 +31,14 @@ export default class Avatar extends React.Component<Props, State> {
     }
 
     public render() {
-        const { id, avatarSrc } = this.props;
+        const { id, avatarSrc, size } = this.props;
         const { imageBroken } = this.state;
 
         return (
             <div
                 className={classNames(
                     'module-avatar',
-                    'module-avatar--48',
+                    size ? `module-avatar--${size}` : 'module-avatar--48',
                     !imageBroken ? 'module-avatar--with-image' : 'module-avatar--no-image'
                 )}
             >
