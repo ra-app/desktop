@@ -207,7 +207,7 @@ export class TicketsView extends React.Component<Props, State> {
             </div>
           </div>
           {/* Edit company */}
-          {openEditCompany && (
+          {(openEditCompany && companyInfo) && (
             <EditCompany info={companyInfo} closeEdit={() => this.closeEditCompany()} />
           )}
         </div>

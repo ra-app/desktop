@@ -232,7 +232,7 @@ export class MainHeader extends React.Component<Props> {
     appView.openTicket(company_id, null, editCompany);
     setTimeout(() => {
       document.dispatchEvent(new CustomEvent('openEditCompanyEvent'));
-    }, 1000);
+    }, 500);
   }
 
   public checkVersion() {
