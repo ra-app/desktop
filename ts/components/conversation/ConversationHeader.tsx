@@ -371,8 +371,7 @@ export class ConversationHeader extends React.Component<Props> {
 
   public render() {
     // const { id } = this.props;
-    console.log(this.props, "propssssssssssssssssss")
-  
+
     // const triggerId = `conversation-${id}`;
     return (
       <div className="module-conversation-header">
