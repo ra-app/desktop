@@ -7,7 +7,7 @@ export function setCompanyInfo(info: CompanyInfo): SetCompanyInfoAction {
   };
 }
 
-export function setCompanyAvatar(companyNumber: number, src: string): SetCompanyAvatar {
+export function setCompanyAvatarSrc(companyNumber: number, src: string): SetCompanyAvatar {
   return {
     type: SET_COMPANY_AVATAR,
     src: src,

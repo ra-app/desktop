@@ -1,13 +1,17 @@
 import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
+
 import Avatar from '../avatar/Avatar';
 import { CompanyInfo } from '../../store/companyInfo/types';
+import { setCompanyAvatarSrc } from '../../store/companyInfo/actions';
 declare var updateCompanyName: any;
 declare var setCompanyAvatar: any;
-declare var updateImagesByUrl: any;
-declare var CENTRAL_IMG_ROOT: string;
+// declare var updateImagesByUrl: any;
+// declare var CENTRAL_IMG_ROOT: string;
 declare var toBase64: any;
 interface Props {
   info: CompanyInfo;
+  setAvatar(companyNumber: number, src: string): any;
 }
 
 interface State {
@@ -18,7 +22,7 @@ interface State {
   disabledSaveCompany: boolean;
 }
 // tslint:disable-next-line:no-default-export
-export default class EditCompany extends React.Component<Props, State> {
+export  class EditCompany extends React.Component<Props, State> {
   // newAvatar: boolean;
   constructor(props: Props) {
     super(props);
@@ -96,13 +100,16 @@ export default class EditCompany extends React.Component<Props, State> {
     // double check before to upload the compan
     const companyID = this.props.info.company_number;
     const companyName = this.props.info.name;
+    const date = Date.now();
+    const companyAvatar = this.props.info.company_avatar ;
+    const src = `${companyAvatar}?ts=${date}`;
     if (!this.state.disabledSaveCompany) {
       if (this.state.companyNameValue !== companyName) {
         await updateCompanyName(this.state.companyNameValue, companyID);
       }
       if (this.state.companyAvatarValue.data !== null) {
         setCompanyAvatar(companyID, this.state.companyAvatarValue);
-        updateImagesByUrl(CENTRAL_IMG_ROOT + companyID);
+        this.props.setAvatar(companyID, src);
       }
       this.setState({ disabledSaveCompany: true });
     }
@@ -163,3 +170,11 @@ export default class EditCompany extends React.Component<Props, State> {
     );
   }
 }
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    setAvatar: (companyNumber: number, src: string) => dispatch(setCompanyAvatarSrc(companyNumber, src)),
+
+  };
+};
+// tslint:disable-next-line:no-default-export
+export default connect(null, mapDispatchToProps)(EditCompany);
