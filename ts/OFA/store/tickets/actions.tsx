@@ -1,4 +1,4 @@
-import { SET_COMPANY_TICKETS_SINCE_TS, SET_TICKET_DATA, SET_TICKETS_DATA, SetCompanyTicketsSinceTs, SetTicketDataAction, SetTicketsDataAction, Ticket } from './types';
+import { SET_COMPANY_TICKETS_ORDER, SET_COMPANY_TICKETS_SINCE_TS, SET_TICKET_DATA, SET_TICKETS_DATA, SetCompanyTicketsOrder, SetCompanyTicketsSinceTs, SetTicketDataAction, SetTicketsDataAction, Ticket } from './types';
 
 export function setTicketData(ticket: Ticket): SetTicketDataAction {
   return {
@@ -18,6 +18,14 @@ export function setCompanyTicketsSinceTs(companyNumber: number, ts: number): Set
   return {
     type: SET_COMPANY_TICKETS_SINCE_TS,
     ts: ts,
+    company_number: companyNumber,
+  };
+}
+
+export function setCompanyTicketsOrder(companyNumber: number, order: string): SetCompanyTicketsOrder {
+  return {
+    type: SET_COMPANY_TICKETS_ORDER,
+    order: order,
     company_number: companyNumber,
   };
 }

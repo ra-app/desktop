@@ -497,14 +497,21 @@
           },
         };
       };
-      this.titleView = new Whisper.ReactWrapperView({
-        className: 'title-wrapper',
-        Component: window.Signal.Components.ConversationHeader,
-        props: getHeaderProps(this.model),
-      });
+      const elem = document.createElement('div');
+      elem.className = 'title-wrappe';
+      const tmpProps = getHeaderProps(this.model)
+      tmpProps.company_id = this.model.attributes.company_id
+      tmpProps.uuid = this.model.attributes.ticket_uuid
+      tmpProps.i18n = window.i18n;
+      // this.titleView = new Whisper.ReactWrapperView({
+      //   className: 'title-wrapper',
+      //   Component: window.Signal.Components.ConversationHeader,
+      //   props: getHeaderProps(this.model),
+      // });
+      window.OFA.wrapWithReduxStoreOnElem(elem, window.OFA.ConversationHeader, tmpProps);
       this.updateHeader = () => this.titleView.update(getHeaderProps());
       this.listenTo(this.model, 'change', this.updateHeader);
-      this.$('.conversation-header').append(this.titleView.el);
+      this.$('.conversation-header').append(elem);
     },
 
     setupCompositionArea() {

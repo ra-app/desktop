@@ -2,10 +2,12 @@ export const SET_TICKET_DATA = 'SET_TICKET_DATA';
 export const SET_TICKETS_DATA = 'SET_TICKETS_DATA';
 // export const SET_COMPANY_INFO = 'SET_COMPANY_INFO';
 export const SET_COMPANY_TICKETS_SINCE_TS = 'SET_COMPANY_TICKETS_SINCE_TS';
+export const SET_COMPANY_TICKETS_ORDER = 'SET_COMPANY_TICKETS_ORDER';
 
 export interface CompanyTickets {
   tickets: Record<string, Ticket>;
   ticketsSinceTs: number;
+  orderTicket: string;
 }
 
 export interface TicketState {
@@ -41,5 +43,10 @@ export interface SetCompanyTicketsSinceTs {
   ts: number;
   company_number: number;
 }
+export interface SetCompanyTicketsOrder {
+  type: typeof SET_COMPANY_TICKETS_ORDER;
+  order: string;
+  company_number: number;
+}
 
-export type TicketActionTypes = SetTicketDataAction | SetTicketsDataAction | SetCompanyTicketsSinceTs;
+export type TicketActionTypes = SetTicketDataAction | SetTicketsDataAction | SetCompanyTicketsSinceTs | SetCompanyTicketsOrder;

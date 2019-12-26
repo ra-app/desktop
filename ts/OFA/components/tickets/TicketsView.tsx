@@ -3,12 +3,12 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import { setCompanyTicketsSinceTs, setTicketsData } from '../../store/tickets/actions';
+import { setCompanyTicketsOrder, setCompanyTicketsSinceTs, setTicketsData } from '../../store/tickets/actions';
 import { setCompanyInfo } from '../../store/companyInfo/actions';
 import { Ticket } from '../../store/tickets/types';
 import { CompanyInfo } from '../../store/companyInfo/types';
 import TicketInfo from './TicketInfo';
-import EditCompany from '../editCompany/EditCompany';
+// import EditCompany from '../editCompany/EditCompany';
 import Avatar from '../avatar/Avatar';
 import { BrowserWindow } from 'electron';
 
@@ -21,10 +21,12 @@ interface Props {
   company_id: number;
   tickets: Array<any>;
   lastSinceTs: number;
+  lastOrderTicket: string;
   companyInfo: CompanyInfo;
   window: BrowserWindow;
   setTickets(tickets: Array<Ticket>): any;
   setSinceTs(companyId: number, ts: number): any;
+  setOrder(companyId: number, order: string): any;
   setCompanyInfo(companyInfo: CompanyInfo): any;
 }
 declare global {
@@ -51,10 +53,11 @@ export class TicketsView extends React.Component<Props, State> {
   }
 
   public componentDidMount() {
+    const { company_id, lastOrderTicket } = this.props;
     this.callSince();
     this.updateTicketsInterval = setInterval(this.callSince.bind(this), 60000);
-
-    this.fetchCompanyInfoIfMissing(this.props.company_id);
+    this.getSortTicketInfo(company_id, lastOrderTicket);
+    this.fetchCompanyInfoIfMissing(company_id);
   }
 
   public componentWillUnmount() {
@@ -81,6 +84,11 @@ export class TicketsView extends React.Component<Props, State> {
         this.props.setCompanyInfo(company);
       }
     }
+  }
+
+  public getSortTicketInfo(companyId: number, lastOrderTicket: string) {
+    this.setState({sortType: lastOrderTicket});
+    this.props.setOrder(companyId, lastOrderTicket);
   }
 
   public setStateFilter(newStateFilter: number) {
@@ -113,6 +121,7 @@ export class TicketsView extends React.Component<Props, State> {
   }
 
   public setSortTicket(newSortType: any) {
+    this.props.setOrder(this.props.company_id, newSortType);
     this.setState({sortType: newSortType});
   }
 
@@ -177,7 +186,7 @@ export class TicketsView extends React.Component<Props, State> {
             </div>
           </div>
           {/* Edit company */}
-          <EditCompany info={companyInfo} />
+          {/* <EditCompany info={companyInfo} /> */}
         </div>
       </div>
     );
@@ -197,7 +206,17 @@ const mapStateToProp = (state: any, props: Props): Props => {
     });
   }
   // sort ticket
-  tickets = tickets.sort((a, b) => (new Date(b.ts_created)).getTime() - (new Date(a.ts_created)).getTime());
+  let lastOrderTicket: string = 'asc';
+  if (state.tickets && state.tickets[company_id] && state.tickets[company_id].orderTicket) {
+    lastOrderTicket = state.tickets[company_id].orderTicket;
+    if (state.tickets[company_id].orderTicket === 'asc') {
+      tickets = tickets.sort((a, b) => (new Date(b.ts_created)).getTime() - (new Date(a.ts_created)).getTime());
+    } else if (state.tickets[company_id].orderTicket === 'desc') {
+      tickets = tickets.sort((a, b) => (new Date(a.ts_created)).getTime() - (new Date(b.ts_created)).getTime());
+    }
+  } else {
+    tickets = tickets.sort((a, b) => (new Date(b.ts_created)).getTime() - (new Date(a.ts_created)).getTime());
+  }
 
   let lastSinceTs: number = 1276505834832;
   if (state.tickets && state.tickets[company_id]) {
@@ -207,13 +226,14 @@ const mapStateToProp = (state: any, props: Props): Props => {
   const companyInfo = state.companyInfo[company_id];
 
 
-  return { tickets, lastSinceTs, companyInfo } as Props;
+  return { tickets, lastSinceTs, companyInfo, lastOrderTicket } as Props;
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     setTickets: (tickets: Array<Ticket>) => dispatch(setTicketsData(tickets)),
     setSinceTs: (companyId: number, ts: number) => dispatch(setCompanyTicketsSinceTs(companyId, ts)),
+    setOrder: (companyId: number, order: string) => dispatch(setCompanyTicketsOrder(companyId, order)),
     setCompanyInfo: (info: CompanyInfo) => dispatch(setCompanyInfo(info)),
   };
 };

@@ -1,4 +1,4 @@
-import { CompanyTickets, SET_COMPANY_TICKETS_SINCE_TS, SET_TICKET_DATA, SET_TICKETS_DATA, SetCompanyTicketsSinceTs, SetTicketDataAction, SetTicketsDataAction, TicketActionTypes, TicketState } from './types';
+import { CompanyTickets, SET_COMPANY_TICKETS_ORDER, SET_COMPANY_TICKETS_SINCE_TS, SET_TICKET_DATA, SET_TICKETS_DATA, SetCompanyTicketsOrder, SetCompanyTicketsSinceTs, SetTicketDataAction, SetTicketsDataAction, TicketActionTypes, TicketState } from './types';
 
 const initialState: TicketState = {};
 
@@ -21,6 +21,9 @@ export function ticketReducer(
     case SET_COMPANY_TICKETS_SINCE_TS:
         clonedState = setCompanyTicketsSinceTsReducer(clonedState, action);
         break;
+    case SET_COMPANY_TICKETS_ORDER:
+      clonedState = setCompanyTicketsOrderReducer(clonedState, action);
+      break;
     default:
   }
 
@@ -72,3 +75,13 @@ function setCompanyTicketsSinceTsReducer(state: TicketState, action: SetCompanyT
 
   return state;
 }
+
+function setCompanyTicketsOrderReducer(state: TicketState, action: SetCompanyTicketsOrder): TicketState {
+  if (!state[action.company_number]) {
+    state[action.company_number] = {} as CompanyTickets;
+  }
+  state[action.company_number].orderTicket = action.order;
+
+  return state;
+}
+

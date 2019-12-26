@@ -1,16 +1,25 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import {  setTicketData } from '../../OFA/store/tickets/actions';
+import { Ticket } from '../../OFA/store/tickets/types';
 import classNames from 'classnames';
 
 import { Emojify } from './Emojify';
 import { Avatar } from '../Avatar';
 import { LocalizerType } from '../../types/Util';
+import { BrowserWindow } from 'electron';
 // import {
 //   ContextMenu,
 //   // ContextMenuTrigger,
 //   MenuItem,
 //   // SubMenu,
 // } from 'react-contextmenu';
-
+declare global {
+  interface Window {
+    i18n: any;
+  }
+}
 interface TimerOption {
   name: string;
   value: number;
@@ -25,7 +34,8 @@ interface Props {
   profileName?: string;
   color: string;
   avatarPath?: string;
-
+  company_id: number;
+  uuid: number;
   isVerified: boolean;
   isMe: boolean;
   isGroup: boolean;
@@ -38,6 +48,7 @@ interface Props {
   timerOptions: Array<TimerOption>;
 
   onSetDisappearingMessages: (seconds: number) => void;
+  setTicket: (ticket: Ticket) => any;
   // onDeleteMessages: () => void;
   onResetSession: () => void;
   closeTicket: () => void;
@@ -49,7 +60,12 @@ interface Props {
 
   onArchive: () => void;
   onMoveToInbox: () => void;
+
   i18n: LocalizerType;
+
+
+  ticket: Ticket;
+  window: BrowserWindow;
 }
 
 export class ConversationHeader extends React.Component<Props> {
@@ -95,6 +111,13 @@ export class ConversationHeader extends React.Component<Props> {
     const { appView } = window['owsDesktopApp'];
     const { name, id } = this.props;
     appView.openModalEditGroup('group', name, id);
+  }
+
+  public closeTicket() {
+    const tmpTicket = this.props.ticket;
+    tmpTicket.state = 3;
+    this.props.setTicket(tmpTicket);
+    this.props.closeTicket();
   }
 
   public renderBackButton() {
@@ -248,7 +271,7 @@ export class ConversationHeader extends React.Component<Props> {
       isArchived,
       isClosed,
       // // onDeleteMessages,
-      closeTicket,
+      // closeTicket,
       // onResetSession,
       // onSetDisappearingMessages,
       // onShowAllMedia,
@@ -334,7 +357,7 @@ export class ConversationHeader extends React.Component<Props> {
               </li>
             )}
             {(!isCompany && !isClosed) && !isGroup && (
-              <li onClick={closeTicket}>
+              <li onClick={()=>this.closeTicket()}>
                 <span>
                   {i18n('closeTicket')}
                 </span>
@@ -348,7 +371,8 @@ export class ConversationHeader extends React.Component<Props> {
 
   public render() {
     // const { id } = this.props;
-    // console.log(this.props, "propssssssssssssssssss")
+    console.log(this.props, "propssssssssssssssssss")
+  
     // const triggerId = `conversation-${id}`;
     return (
       <div className="module-conversation-header">
@@ -371,3 +395,26 @@ export class ConversationHeader extends React.Component<Props> {
     );
   }
 }
+
+const mapStateToProp = (state: any, props: Props): Props => {
+  let ticket:  Ticket | Array<any> = [] ;
+  if (!props.isGroup && !props.isCompany) {
+  const company_id = props.company_id;
+  const uuid = props.uuid;
+  if (state.tickets && state.tickets[company_id] && state.tickets[company_id].tickets) {
+    ticket = state.tickets[company_id].tickets[uuid];
+  }
+
+}
+
+  return { ticket } as Props;
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    setTicket: (ticket: Ticket) => dispatch(setTicketData(ticket)),
+  };
+};
+
+// tslint:disable-next-line:no-default-export
+export default connect(mapStateToProp, mapDispatchToProps)(ConversationHeader);

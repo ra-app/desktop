@@ -160,14 +160,19 @@ export class TicketInfo extends React.Component<Props, State> {
               Übernommen
             </button>
           ) : (
-              // can be unknown, unclaim or close
-              <button
-                id={`claim_${uuid}`}
-                className="button-claim-ticket not-claimed"
-                onClick={() => this.claimTicket(company_id, uuid)}
-              >
-                Übernehmen
-              </button>
+            <Fragment>
+              {state === 1 || state === 0 ? (
+                <button
+                  id={`claim_${uuid}`}
+                  className="button-claim-ticket not-claimed"
+                  onClick={() => this.claimTicket(company_id, uuid)}
+                >
+                  Übernehmen
+                </button>
+              ) : (
+                null
+              )}
+            </Fragment>
             )}
         </div>
         {showMoreInfo && (
