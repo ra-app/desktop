@@ -13,15 +13,19 @@ interface State {
 
 // tslint:disable-next-line:no-default-export
 export default class Avatar extends React.Component<Props, State> {
-    public handleImageErrorBound: () => void;
 
     public constructor(props: Props) {
         super(props);
-
-        this.handleImageErrorBound = this.handleImageError.bind(this);
         this.state = {
             imageBroken: false,
         };
+    }
+
+    public componentDidUpdate (nextProps: Props) {
+        // check src and update onerror state
+        if (nextProps.avatarSrc !== this.props.avatarSrc) {
+            this.setState({imageBroken: false});
+        }
     }
 
     public handleImageError() {
@@ -29,6 +33,7 @@ export default class Avatar extends React.Component<Props, State> {
             imageBroken: true,
         });
     }
+
 
     public render() {
         const { id, avatarSrc, size } = this.props;
@@ -44,7 +49,7 @@ export default class Avatar extends React.Component<Props, State> {
             >
                 {/* tslint:disable-next-line:use-simple-attributes */}
                 <img
-                    onError={this.handleImageErrorBound}
+                    onError={() => this.handleImageError()}
                     alt={`avatar_${id}`}
                     src={imageBroken ? 'images/firmen-logo.png' : avatarSrc}
                 />
