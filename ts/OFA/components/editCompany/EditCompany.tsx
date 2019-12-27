@@ -144,7 +144,7 @@ export  class EditCompany extends React.Component<Props, State> {
           <div className="companyAvatarContainer">
             <div className="avatarCompanyContainer">
               {/* tslint:disable-next-line:use-simple-attributes */}
-              <Avatar avatarSrc={displayedAvatar} id={`companyAvatar-${company_number}`} size={100} />
+              <Avatar avatarSrc={displayedAvatar} id={`companyAvatar-${company_number}`} size={120} />
             </div>
             <div className="buttonEditCompany">
               <div>
