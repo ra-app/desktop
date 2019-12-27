@@ -6,8 +6,8 @@ import { CompanyInfo } from '../../store/companyInfo/types';
 import { setCompanyAvatarSrc } from '../../store/companyInfo/actions';
 declare var updateCompanyName: any;
 declare var setCompanyAvatar: any;
-// declare var updateImagesByUrl: any;
-// declare var CENTRAL_IMG_ROOT: string;
+declare var updateImagesByUrl: any;
+declare var CENTRAL_IMG_ROOT: string;
 declare var toBase64: any;
 interface Props {
   info: CompanyInfo;
@@ -115,6 +115,7 @@ export  class EditCompany extends React.Component<Props, State> {
         this.props.setAvatar(companyID, src);
       }
       this.setState({ disabledSaveCompany: true });
+          updateImagesByUrl(CENTRAL_IMG_ROOT + companyID);
     }
   }
 
