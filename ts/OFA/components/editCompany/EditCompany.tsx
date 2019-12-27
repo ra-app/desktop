@@ -103,7 +103,9 @@ export  class EditCompany extends React.Component<Props, State> {
     const companyName = this.props.info.name;
     const date = Date.now();
     const companyAvatar = this.props.info.company_avatar ;
-    const src = `${companyAvatar}?ts=${date}`;
+
+    // const src = `${companyAvatar}?ts=${date}`;
+    const src = this.updateQueryStringParameter(companyAvatar, 'ts', date);
     if (!this.state.disabledSaveCompany) {
       if (this.state.companyNameValue !== companyName) {
         await updateCompanyName(this.state.companyNameValue, companyID);
@@ -113,6 +115,18 @@ export  class EditCompany extends React.Component<Props, State> {
         this.props.setAvatar(companyID, src);
       }
       this.setState({ disabledSaveCompany: true });
+    }
+  }
+
+  public updateQueryStringParameter(uri: string, key: string, value: number) {
+    const re = new RegExp(`([?&])${key}=.*?(&|$)`);
+    const separator = uri.indexOf('?') !== -1 ? '&' : '?';
+    if (uri.match(re)) {
+      // console.log('replaceeeeeeeeeeeeeeeeee')
+      return uri.replace(re, `$1${key}=${value}$2`);
+    } else {
+      // console.log('normallllllllllll')
+      return `${uri}${separator}${key}=${value}`;
     }
   }
 
