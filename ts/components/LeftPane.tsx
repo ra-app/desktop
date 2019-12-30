@@ -10,7 +10,7 @@ import {
   SearchResults,
 } from './SearchResults';
 import { LocalizerType } from '../types/Util';
-
+declare var get_role: any;
 export interface Props {
   conversations?: Array<ConversationListItemPropsType>;
   archivedConversations?: Array<ConversationListItemPropsType>;
@@ -45,6 +45,16 @@ type RowRendererParamsType = {
 };
 
 export class LeftPane extends React.Component<Props> {
+  public role: any;
+  constructor(props: Props) {
+    super(props);
+    this.getRole();
+  }
+  public getRole = async () => {
+    this.role = await get_role();
+    console.log('ROLEEEEEE', this.role);
+  }
+
   public renderRow = ({
     index,
     key,
@@ -78,7 +88,6 @@ export class LeftPane extends React.Component<Props> {
     }
 
     const isAdmin = true;
-
     const conversation = showArchived
       ? archivedConversations[index]
       : conversations[index];

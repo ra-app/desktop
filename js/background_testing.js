@@ -297,6 +297,11 @@ async function COMPANY_ID () {
   return textsecure.storage.get('companyNumber', null);
 }
 
+async function get_role () {
+  return textsecure.storage.get('role', null);
+}
+
+
 const API_URL =
   'https://luydm9sd26.execute-api.eu-central-1.amazonaws.com/latest/';
 // const API_URL = 'http://127.0.0.1:4000/';
