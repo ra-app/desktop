@@ -119,7 +119,7 @@ export  class EditCompany extends React.Component<Props, State> {
         await setCompanyAvatar(companyID, this.state.companyAvatarValue);
         this.props.setAvatar(companyID, src);
       }
-      this.setState({ disabledSaveCompany: true });
+      this.setState({ disabledSaveCompany: true, editingCompanyName: false });
 
       // need to new store on left panel
       updateImagesByUrl(CENTRAL_IMG_ROOT + companyID);
