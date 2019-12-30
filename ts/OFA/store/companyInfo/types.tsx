@@ -1,5 +1,7 @@
 export const SET_COMPANY_INFO = 'SET_COMPANY_INFO';
 export const SET_COMPANY_AVATAR = 'SET_COMPANY_AVATAR';
+export const SET_COMPANY_NAME = 'SET_COMPANY_NAME';
+
 
 export interface CompanyInfo {
   name: string;
@@ -23,4 +25,11 @@ export interface SetCompanyAvatar {
   src: string;
   company_number: number;
 }
-export type CompanyInfoActionTypes = SetCompanyInfoAction | SetCompanyAvatar;
+
+export interface SetCompanyName {
+  type: typeof SET_COMPANY_NAME;
+  name: string;
+  company_number: number;
+}
+
+export type CompanyInfoActionTypes = SetCompanyInfoAction | SetCompanyAvatar | SetCompanyName;

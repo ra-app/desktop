@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 
 import Avatar from '../avatar/Avatar';
 import { CompanyInfo } from '../../store/companyInfo/types';
-import { setCompanyAvatarSrc } from '../../store/companyInfo/actions';
+import { setCompanyAvatarSrc, setCompanyName } from '../../store/companyInfo/actions';
 declare var updateCompanyName: any;
+declare var getCompany: any;
 declare var setCompanyAvatar: any;
 declare var updateImagesByUrl: any;
 declare var CENTRAL_IMG_ROOT: string;
@@ -13,6 +14,7 @@ interface Props {
   info: CompanyInfo;
   closeEdit: any;
   setAvatar(companyNumber: number, src: string): any;
+  setNameStore(companyNumber: number, name: string): any
 }
 
 interface State {
@@ -109,13 +111,18 @@ export  class EditCompany extends React.Component<Props, State> {
     if (!this.state.disabledSaveCompany) {
       if (this.state.companyNameValue !== companyName) {
         await updateCompanyName(this.state.companyNameValue, companyID);
+        this.props.setNameStore(companyID, this.state.companyNameValue);
+        await getCompany(companyID);
+        $('#spanCompanyName').text(this.state.companyNameValue);
       }
       if (this.state.companyAvatarValue.data !== null) {
         await setCompanyAvatar(companyID, this.state.companyAvatarValue);
         this.props.setAvatar(companyID, src);
       }
       this.setState({ disabledSaveCompany: true });
-          updateImagesByUrl(CENTRAL_IMG_ROOT + companyID);
+
+      // need to new store on left panel
+      updateImagesByUrl(CENTRAL_IMG_ROOT + companyID);
     }
   }
 
@@ -189,6 +196,7 @@ export  class EditCompany extends React.Component<Props, State> {
 const mapDispatchToProps = (dispatch: any) => {
   return {
     setAvatar: (companyNumber: number, src: string) => dispatch(setCompanyAvatarSrc(companyNumber, src)),
+    setNameStore: (companyNumber: number, name: string) => dispatch(setCompanyName(companyNumber, name)),
 
   };
 };
