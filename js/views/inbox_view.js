@@ -592,6 +592,7 @@
       try {
         // gotTicketsAt = Date.now();
         // ticketList = await getTicketsList(id, data);
+        await getAdminCompany(id);
         const isTicket = true;
         // if(this.tmpticketId !== id){
         // this.conversation_stack.open(tickets, isTicket, clientDetails);
