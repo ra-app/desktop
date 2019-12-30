@@ -111,7 +111,7 @@ export  class EditCompany extends React.Component<Props, State> {
         await updateCompanyName(this.state.companyNameValue, companyID);
       }
       if (this.state.companyAvatarValue.data !== null) {
-        setCompanyAvatar(companyID, this.state.companyAvatarValue);
+        await setCompanyAvatar(companyID, this.state.companyAvatarValue);
         this.props.setAvatar(companyID, src);
       }
       this.setState({ disabledSaveCompany: true });
