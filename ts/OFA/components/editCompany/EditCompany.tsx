@@ -130,10 +130,8 @@ export  class EditCompany extends React.Component<Props, State> {
     const re = new RegExp(`([?&])${key}=.*?(&|$)`);
     const separator = uri.indexOf('?') !== -1 ? '&' : '?';
     if (uri.match(re)) {
-      // console.log('replaceeeeeeeeeeeeeeeeee')
       return uri.replace(re, `$1${key}=${value}$2`);
     } else {
-      // console.log('normallllllllllll')
       return `${uri}${separator}${key}=${value}`;
     }
   }
