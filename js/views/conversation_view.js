@@ -487,8 +487,12 @@
             conversation.sendMessage(message);
             conversation.sendMessage(messageLine);
             closeTicketBySignal(external_number, true);
-            console.log("closeticketsssssssssssº")
             this.model.setClosed(true);
+            setTimeout(() => {
+              this.unload('archive');
+              this.model.setArchived(true);
+              document.removeEventListener('closeTicketSignal', this.closeTicketSignalFunction);
+            }, 300);
             this.updateCompose();
           },
           closeTicketSignalFunction(){
@@ -496,11 +500,6 @@
             this.model.setClosed(true);
             this.updateCompose();
 
-            setTimeout(() => {
-              this.unload('archive');
-              this.model.setArchived(true);
-              document.removeEventListener('closeTicketSignal', this.closeTicketSignalFunction);
-            }, 300);
           },
           onMoveToInbox: () => {
             this.model.setArchived(false);
