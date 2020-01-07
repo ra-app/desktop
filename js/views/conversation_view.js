@@ -415,7 +415,7 @@
       console.log(this.model, 'setupHeader')
       const getHeaderProps = () => {
         const uuid = this.model.attributes.ticket_uuid;
-        const cid = this.model.attributes.cid;
+        const cid = this.model.cid;
         const company_id = this.model.attributes.company_id;
         const external_number = this.model.attributes.id;
         const message = '[![TICKETMSG]!] Dieses Ticket wurde geschlossen';
