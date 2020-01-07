@@ -247,6 +247,7 @@
       //     this.model.setClosed(false);
       // }
       const closed = this.model.get('isClosed');
+      console.log(this.model, "updateeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
       const composer = this.$('.message_composer');
       if (composer) {
         closed ? composer.hide() : composer.show();
@@ -484,7 +485,7 @@
             // });
             conversation.sendMessage(message);
             conversation.sendMessage(messageLine);
-            closeTicketBySignal(external_number, this.model);
+            closeTicketBySignal(external_number, true);
             this.model.setClosed(true);
             setTimeout(() => {
               this.unload('archive');
