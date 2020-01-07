@@ -382,8 +382,8 @@
 
       this.$('.send-message').focus(this.focusBottomBar.bind(this));
       this.$('.send-message').blur(this.unfocusBottomBar.bind(this));
-      this._boundCloseTicketSignal = () => this.closeTicketSignalFunction.bind(this);
-      document.addEventListener('closeTicketSignal', this._boundCloseTicketSignal);
+      // this._boundCloseTicketSignal = () => this.closeTicketSignalFunction.bind(this);
+      document.addEventListener('closeTicketSignal', this.closeTicketSignalFunction);
       this.setupHeader();
       this.setupCompositionArea();
       this.updateCompose();
@@ -499,7 +499,7 @@
             setTimeout(() => {
               this.unload('archive');
               this.model.setArchived(true);
-              document.removeEventListener('closeTicketSignal', this._boundCloseTicketSignal);
+              document.removeEventListener('closeTicketSignal', this.closeTicketSignalFunction);
             }, 300);
           },
           onMoveToInbox: () => {
