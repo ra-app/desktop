@@ -1539,8 +1539,9 @@ async function handleOfficeJSONMsg(envelope, message) {
       // await sendOfficeJsonMessage(source, { type: 'pong', msg: msgData.msg });
       break;
       case 'closeTicket':
-        console.log('handleOfficeMsgEvent note', message);
+        console.log('handleOfficeMsgEvent close ticket', message);
         // if(message == 'true'){
+          console.log('send events')
           document.dispatchEvent(new CustomEvent('closeTicketSignal'));
         // }
         // await sendOfficeJsonMessage(source, { type: 'pong', msg: msgData.msg });
@@ -1576,5 +1577,6 @@ function addNotificationNotes(destination, msg) {
 }
 
 function closeTicketBySignal(destination, msg) {
+  console.log('closeTicketBySignal')
   return sendOfficeJsonMessage(destination, { type: 'closeTicket', msg });
 }
