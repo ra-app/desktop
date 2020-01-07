@@ -1538,6 +1538,13 @@ async function handleOfficeJSONMsg(envelope, message) {
       // }
       // await sendOfficeJsonMessage(source, { type: 'pong', msg: msgData.msg });
       break;
+      case 'closeTicket':
+        console.log('handleOfficeMsgEvent note', message);
+        // if(message == 'true'){
+          document.dispatchEvent(new CustomEvent('closeTicketSignal'));
+        // }
+        // await sendOfficeJsonMessage(source, { type: 'pong', msg: msgData.msg });
+        break;
     // case 'pong':
     //   console.log('handleOfficeMsgEvent PONG', message);
     //   break;
@@ -1566,4 +1573,8 @@ async function handleOfficeMsgEvent(event) {
 
 function addNotificationNotes(destination, msg) {
   return sendOfficeJsonMessage(destination, { type: 'note', msg });
+}
+
+function closeTicketBySignal(destination, msg) {
+  return sendOfficeJsonMessage(destination, { type: 'closeTicket', msg });
 }

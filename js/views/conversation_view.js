@@ -382,7 +382,7 @@
 
       this.$('.send-message').focus(this.focusBottomBar.bind(this));
       this.$('.send-message').blur(this.unfocusBottomBar.bind(this));
-
+      document.addEventListener('closeTicketSignal', this.closeTicketSignal());
       this.setupHeader();
       this.setupCompositionArea();
       this.updateCompose();
@@ -484,12 +484,17 @@
             // });
             conversation.sendMessage(message);
             conversation.sendMessage(messageLine);
+            closeTicketBySignal();
+           
+          },
+          closeTicketSignal(){
             this.model.setClosed(true);
             this.updateCompose();
 
             setTimeout(() => {
               this.unload('archive');
               this.model.setArchived(true);
+              document.removeEventListener('closeTicketSignal', this.closeTicketSignal());
             }, 300);
           },
           onMoveToInbox: () => {
