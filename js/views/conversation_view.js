@@ -382,8 +382,6 @@
 
       this.$('.send-message').focus(this.focusBottomBar.bind(this));
       this.$('.send-message').blur(this.unfocusBottomBar.bind(this));
-      // this._boundCloseTicketSignal = () => this.closeTicketSignalFunction.bind(this);
-      document.addEventListener('closeTicketSignal', this.closeTicketSignalFunction);
       this.setupHeader();
       this.setupCompositionArea();
       this.updateCompose();
@@ -494,12 +492,6 @@
               document.removeEventListener('closeTicketSignal', this.closeTicketSignalFunction);
             }, 300);
             this.updateCompose();
-          },
-          closeTicketSignalFunction(){
-            console.log("closeticketsssssssssssº")
-            this.model.setClosed(true);
-            this.updateCompose();
-
           },
           onMoveToInbox: () => {
             this.model.setArchived(false);

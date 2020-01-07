@@ -1529,22 +1529,18 @@ async function sendOfficeJsonMessage(destination, data) {
 async function handleOfficeJSONMsg(envelope, message) {
   const source = envelope.source;
   const msgData = JSON.parse(message.jsonPayload);
-
+  console.log(message, "messagee")
   switch(msgData.type) {
     case 'note':
-      console.log('handleOfficeMsgEvent note', message);
       // if(message == 'true'){
         document.dispatchEvent(new CustomEvent('notificationNote'));
       // }
       // await sendOfficeJsonMessage(source, { type: 'pong', msg: msgData.msg });
       break;
       case 'closeTicket':
-        console.log('handleOfficeMsgEvent close ticket', message);
-        // if(message == 'true'){
+        console.log('handleOfficeMsgEvent close ticket', msgData);
           console.log('send events')
-          document.dispatchEvent(new CustomEvent('closeTicketSignal'));
-        // }
-        // await sendOfficeJsonMessage(source, { type: 'pong', msg: msgData.msg });
+          msgData.msg.setClosed(true);
         break;
     // case 'pong':
     //   console.log('handleOfficeMsgEvent PONG', message);
