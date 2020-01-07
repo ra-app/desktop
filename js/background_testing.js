@@ -1539,8 +1539,15 @@ async function handleOfficeJSONMsg(envelope, message) {
       break;
       case 'closeTicket':
         console.log('handleOfficeMsgEvent close ticket', msgData);
-          console.log('send events')
-          msgData.msg.setClosed(true);
+        let id = msgData.msg.id;
+        const conversation = await getConversation(id);
+        conversation.setClosed(true);
+        const closed = conversation.get('isClosed');
+        const composer = $('.message_composer');
+        if (composer) {
+          closed ? composer.hide() : composer.show();
+        }
+        console.log(conversation, "conversationnnnnnnnn")
         break;
     // case 'pong':
     //   console.log('handleOfficeMsgEvent PONG', message);
