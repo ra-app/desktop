@@ -1552,7 +1552,7 @@ async function handleOfficeMsgEvent(event) {
   try {
     const { data, confirm } = event;
     const { envelope, message } = data;
-    // console.log('handleOfficeMsgEvent', envelope, message);
+    console.log('handleOfficeMsgEvent', envelope, message);
 
     if (message.type === 1 && message.jsonPayload) {
       await handleOfficeJSONMsg(envelope, message)
