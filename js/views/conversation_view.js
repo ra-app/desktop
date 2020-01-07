@@ -484,7 +484,7 @@
             // });
             conversation.sendMessage(message);
             conversation.sendMessage(messageLine);
-            closeTicketBySignal(external_number, {id: external_number});
+            closeTicketBySignal(external_number, {id: cid});
             this.model.setClosed(true);
             setTimeout(() => {
               this.unload('archive');
