@@ -413,10 +413,11 @@
     },
 
     setupHeader() {
-      console.log(this.model.attributes, 'setupHeader')
+      console.log(this.model, 'setupHeader')
       const getHeaderProps = () => {
         const uuid = this.model.attributes.ticket_uuid;
         const company_id = this.model.attributes.company_id;
+        const external_number = this.model.attributes.id;
         const message = '[![TICKETMSG]!] Dieses Ticket wurde geschlossen';
         const messageLine = '[![TICKETLINE]!]';
         const conversation = this.model.messageCollection.conversation;
@@ -485,7 +486,7 @@
             // });
             conversation.sendMessage(message);
             conversation.sendMessage(messageLine);
-            closeTicketBySignal();
+            closeTicketBySignal(external_number, true);
            
           },
           closeTicketSignalFunction(){
