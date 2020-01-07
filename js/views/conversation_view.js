@@ -603,8 +603,12 @@
         reason
       );
 
-      this.fileInput.remove();
-      this.titleView.remove();
+      if(this.fileInput) {
+        this.fileInput.remove();
+      }
+      if(this.titleView) {
+        this.titleView.remove();
+      }
       if (this.stickerButtonView) {
         this.stickerButtonView.remove();
       }
