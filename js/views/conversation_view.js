@@ -487,7 +487,7 @@
             conversation.sendMessage(message);
             conversation.sendMessage(messageLine);
             console.log('YYYY', cid)
-            closeTicketBySignal(external_number, {id: id});
+            closeTicketBySignal(external_number, {id: external_number});
             this.model.setClosed(true);
             setTimeout(() => {
               this.unload('archive');
