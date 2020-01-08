@@ -80,155 +80,155 @@
     className: 'conversation-loading-screen',
   });
 
-  Whisper.TicketScreen = Whisper.View.extend({
-    templateName: 'tickets-view',
-    className: 'tickets-view',
-    template: $('#tickets-view').html(),
-    render_attributes() {
-      if (this.model[0].hasTicket) {
-        return {
-          'send-message': i18n('sendMessage'),
-          model: this.model,
-          title: this.model[0].company_name,
-          hasTicket: this.model[0].hasTicket,
-          claimed: this.model[0].isClaimed,
-          unclaimed: this.model[0].isUnclaimed,
-          closed: this.model[0].isClosed,
-          avatarSrc: this.model[0].company_avatar,
-          searchText: i18n('search')
-        };
-      } else {
-        if (
-          !this.model[0].hasTicket &&
-          !this.model[0].isClaimed &&
-          !this.model[0].isUnclaimed &&
-          !this.model[0].isClosed
-        ) {
-          this.model[0].isUnclaimed = true;
-        }
-      }
-      return {
-        'send-message': i18n('sendMessage'),
-        model: this.model,
-        title: this.model[0].company_name,
-        claimed: this.model[0].isClaimed,
-        unclaimed: this.model[0].isUnclaimed,
-        closed: this.model[0].isClosed,
-        avatarSrc: this.model[0].avatarSrc,
-      };
-    },
+  // Whisper.TicketScreen = Whisper.View.extend({
+  //   templateName: 'tickets-view',
+  //   className: 'tickets-view',
+  //   template: $('#tickets-view').html(),
+  //   render_attributes() {
+  //     if (this.model[0].hasTicket) {
+  //       return {
+  //         'send-message': i18n('sendMessage'),
+  //         model: this.model,
+  //         title: this.model[0].company_name,
+  //         hasTicket: this.model[0].hasTicket,
+  //         claimed: this.model[0].isClaimed,
+  //         unclaimed: this.model[0].isUnclaimed,
+  //         closed: this.model[0].isClosed,
+  //         avatarSrc: this.model[0].company_avatar,
+  //         searchText: i18n('search')
+  //       };
+  //     } else {
+  //       if (
+  //         !this.model[0].hasTicket &&
+  //         !this.model[0].isClaimed &&
+  //         !this.model[0].isUnclaimed &&
+  //         !this.model[0].isClosed
+  //       ) {
+  //         this.model[0].isUnclaimed = true;
+  //       }
+  //     }
+  //     return {
+  //       'send-message': i18n('sendMessage'),
+  //       model: this.model,
+  //       title: this.model[0].company_name,
+  //       claimed: this.model[0].isClaimed,
+  //       unclaimed: this.model[0].isUnclaimed,
+  //       closed: this.model[0].isClosed,
+  //       avatarSrc: this.model[0].avatarSrc,
+  //     };
+  //   },
 
-    initialize(options) {
-      this.render();
-      this.model.forEach((element, index) => {
-        this.$('#' + element.uuid).click(evt =>
-          this.showInfoTicket(evt, element)
-        );
-        this.$('#claim_' + element.uuid).click(() =>
-          this.claimTicket(element.company_id, element.uuid)
-        );
-        this.$('img').on('error', function () {
-          $(this).attr('src', 'images/header-chat.png');
-        });
-      });
-      if (options.editCompany) {
-        const edit = new Whisper.EditCompanyView({
-          company_name: this.model[0].company_name,
-          window: this.model.window,
-        });
-        let $el = this.$('.edit-company-container')[0];
-        $el.append(edit.el);
-      } else {
-        if (this.$('.edit-company-container')[0]) {
-          this.$('.edit-company-container')[0].remove();
-        }
-      }
-    },
-    async showInfoTicket(evt, element) {
-      if (evt.target.className.indexOf('button-claim-ticket') === -1) {
-        if (this.uuidtmp !== element.uuid) {
-          try {
-            const ticketDETAIL = await getTicketDetails(
-              element.company_id,
-              element.uuid
-            );
-            const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-            if (ticketDETAIL) {
-              if (this.$('#ticket_' + this.uuidtmp)) {
-                this.$('#ticket_' + this.uuidtmp).remove();
-              }
+  //   initialize(options) {
+  //     this.render();
+  //     this.model.forEach((element, index) => {
+  //       this.$('#' + element.uuid).click(evt =>
+  //         this.showInfoTicket(evt, element)
+  //       );
+  //       this.$('#claim_' + element.uuid).click(() =>
+  //         this.claimTicket(element.company_id, element.uuid)
+  //       );
+  //       this.$('img').on('error', function () {
+  //         $(this).attr('src', 'images/header-chat.png');
+  //       });
+  //     });
+  //     if (options.editCompany) {
+  //       const edit = new Whisper.EditCompanyView({
+  //         company_name: this.model[0].company_name,
+  //         window: this.model.window,
+  //       });
+  //       let $el = this.$('.edit-company-container')[0];
+  //       $el.append(edit.el);
+  //     } else {
+  //       if (this.$('.edit-company-container')[0]) {
+  //         this.$('.edit-company-container')[0].remove();
+  //       }
+  //     }
+  //   },
+  //   async showInfoTicket(evt, element) {
+  //     if (evt.target.className.indexOf('button-claim-ticket') === -1) {
+  //       if (this.uuidtmp !== element.uuid) {
+  //         try {
+  //           const ticketDETAIL = await getTicketDetails(
+  //             element.company_id,
+  //             element.uuid
+  //           );
+  //           const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+  //           if (ticketDETAIL) {
+  //             if (this.$('#ticket_' + this.uuidtmp)) {
+  //               this.$('#ticket_' + this.uuidtmp).remove();
+  //             }
 
-              const mainMssgDiv = `<div id="ticket_${
-                element.uuid
-                }" class="mainMssgDiv"></div>`;
-              this.$('#' + element.uuid).append(mainMssgDiv);
-              ticketDETAIL.events.reverse().forEach(mssg => {
-                const mssgDiv = `<div class="received-message">
-                                  <p class="mssgUsername">${
-                  element.name ? element.name : 'username'
-                  }</p>
-                                  <p class="ticket-message">${
-                  JSON.parse(mssg.json).body
-                  }</p>
-                                  <p class="ticket-time">${
-                  days[new Date(mssg.ts).getDay()]
-                  } ${new Date(mssg.ts).getHours() -
-                  1}:${new Date(mssg.ts).getMinutes()}</p>
-                                </div>`;
-                this.$('#ticket_' + element.uuid).append(mssgDiv);
-              });
-            }
-          } catch (e) {
-            console.warn('Error getting ticket info', e);
-          }
-          this.uuidtmp = element.uuid;
-        } else {
-          if (this.$('#ticket_' + element.uuid)) {
-            this.$('#ticket_' + element.uuid).remove();
-            this.uuidtmp = '';
-          }
-        }
-      }
-    },
-    async claimTicket(company_id, uuid) {
-      const phone_number = await claimTicket(company_id, uuid);
-      const client = await getClientByPhone(company_id, phone_number);
-      const conversation = await ensureConversation(phone_number);
+  //             const mainMssgDiv = `<div id="ticket_${
+  //               element.uuid
+  //               }" class="mainMssgDiv"></div>`;
+  //             this.$('#' + element.uuid).append(mainMssgDiv);
+  //             ticketDETAIL.events.reverse().forEach(mssg => {
+  //               const mssgDiv = `<div class="received-message">
+  //                                 <p class="mssgUsername">${
+  //                 element.name ? element.name : 'username'
+  //                 }</p>
+  //                                 <p class="ticket-message">${
+  //                 JSON.parse(mssg.json).body
+  //                 }</p>
+  //                                 <p class="ticket-time">${
+  //                 days[new Date(mssg.ts).getDay()]
+  //                 } ${new Date(mssg.ts).getHours() -
+  //                 1}:${new Date(mssg.ts).getMinutes()}</p>
+  //                               </div>`;
+  //               this.$('#ticket_' + element.uuid).append(mssgDiv);
+  //             });
+  //           }
+  //         } catch (e) {
+  //           console.warn('Error getting ticket info', e);
+  //         }
+  //         this.uuidtmp = element.uuid;
+  //       } else {
+  //         if (this.$('#ticket_' + element.uuid)) {
+  //           this.$('#ticket_' + element.uuid).remove();
+  //           this.uuidtmp = '';
+  //         }
+  //       }
+  //     }
+  //   },
+  //   async claimTicket(company_id, uuid) {
+  //     const phone_number = await claimTicket(company_id, uuid);
+  //     const client = await getClientByPhone(company_id, phone_number);
+  //     const conversation = await ensureConversation(phone_number);
       
-      let conversationName = 'User without data';
+  //     let conversationName = 'User without data';
 
-      if (client.name) {
-        if (client.name && client.surname) {
-          conversationName = client.name + ' ' + client.surname;
-        } else {
-          conversationName = client.name;
-        }
-      } else if (client.email) {
-        conversationName = client.email;
-      }
+  //     if (client.name) {
+  //       if (client.name && client.surname) {
+  //         conversationName = client.name + ' ' + client.surname;
+  //       } else {
+  //         conversationName = client.name;
+  //       }
+  //     } else if (client.email) {
+  //       conversationName = client.email;
+  //     }
       
-      conversation.set({
-        name: conversationName,
-        ticket_uuid: uuid,
-        company_id: company_id,
-        isClosed: false,
-        isArchived: false,
-      });
-      // send event ticket
-      const ticketDETAIL = await getTicketDetails(company_id, uuid);
-      let message = '[![TICKETMSG]!]';
-      ticketDETAIL.events.reverse().forEach(mssg => {
-        message = message + '\n ' + JSON.parse(mssg.json).body;
-      });
-      // console.log('PPPPPP', phone_number, this.model);
-      // openTicketBySignal(external_number, {id: ourNumber})
-      conversation.sendMessage(message);
-      // window.Whisper.events.trigger('showConversation', phone_number);
-      this.$(`#${uuid}`).remove();
-      // this.model[0].setClosed(false);
-      // this.updateCompose();
-    },
-  });
+  //     conversation.set({
+  //       name: conversationName,
+  //       ticket_uuid: uuid,
+  //       company_id: company_id,
+  //       isClosed: false,
+  //       isArchived: false,
+  //     });
+  //     // send event ticket
+  //     const ticketDETAIL = await getTicketDetails(company_id, uuid);
+  //     let message = '[![TICKETMSG]!]';
+  //     ticketDETAIL.events.reverse().forEach(mssg => {
+  //       message = message + '\n ' + JSON.parse(mssg.json).body;
+  //     });
+  //     // console.log('PPPPPP', phone_number, this.model);
+  //     // openTicketBySignal(external_number, {id: ourNumber})
+  //     conversation.sendMessage(message);
+  //     // window.Whisper.events.trigger('showConversation', phone_number);
+  //     this.$(`#${uuid}`).remove();
+  //     // this.model[0].setClosed(false);
+  //     // this.updateCompose();
+  //   },
+  // });
 
   Whisper.ConversationView = Whisper.View.extend({
     className() {
