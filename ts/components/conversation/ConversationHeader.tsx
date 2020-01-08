@@ -272,7 +272,6 @@ export class ConversationHeader extends React.Component<Props> {
   }
 
   public renderMenu(/*triggerId: string*/) {
-    console.log('AQUI', this.isAdmin);
     const {
       i18n,
       // isMe,
