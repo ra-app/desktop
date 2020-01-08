@@ -7,6 +7,8 @@ declare var claimTicket: any;
 declare var getClientByPhone: any;
 declare var ensureConversation: any;
 declare var getTicketDetails: any;
+declare var openTicketBySignal: any;
+declare var getOwnNumber: any;
 interface Props {
   ticket: Ticket;
   setTicket(ticket: Ticket): any;
@@ -51,7 +53,6 @@ export class TicketInfo extends React.Component<Props, State> {
     const phoneNumber = await claimTicket(companyID, uuid);
     const client = await getClientByPhone(companyID, phoneNumber);
     const conversation = await ensureConversation(phoneNumber);
-
     let conversationName = 'User without data';
 
     if (client.name) {
@@ -75,6 +76,8 @@ export class TicketInfo extends React.Component<Props, State> {
     // send event ticket
     const ticketDETAIL = await getTicketDetails(companyID, uuid);
     let message = '[![TICKETMSG]!]';
+    const ownNumber = await getOwnNumber();
+    openTicketBySignal(phoneNumber, {id: ownNumber});
     ticketDETAIL.events.reverse().forEach((mssg: { json: string }) => {
       // tslint:disable-next-line:prefer-template
       message = message + '\n ' + JSON.parse(mssg.json).body;

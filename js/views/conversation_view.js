@@ -194,7 +194,7 @@
       const phone_number = await claimTicket(company_id, uuid);
       const client = await getClientByPhone(company_id, phone_number);
       const conversation = await ensureConversation(phone_number);
-
+      
       let conversationName = 'User without data';
 
       if (client.name) {
@@ -206,7 +206,7 @@
       } else if (client.email) {
         conversationName = client.email;
       }
-
+      
       conversation.set({
         name: conversationName,
         ticket_uuid: uuid,
@@ -220,8 +220,10 @@
       ticketDETAIL.events.reverse().forEach(mssg => {
         message = message + '\n ' + JSON.parse(mssg.json).body;
       });
+      // console.log('PPPPPP', phone_number, this.model);
+      // openTicketBySignal(external_number, {id: ourNumber})
       conversation.sendMessage(message);
-      window.Whisper.events.trigger('showConversation', phone_number);
+      // window.Whisper.events.trigger('showConversation', phone_number);
       this.$(`#${uuid}`).remove();
       // this.model[0].setClosed(false);
       // this.updateCompose();
