@@ -249,7 +249,6 @@
       //     this.model.setClosed(false);
       // }
       const closed = this.model.get('isClosed');
-      console.log(this.model, "updateeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
       const composer = this.$('.message_composer');
       if (composer) {
         closed ? composer.hide() : composer.show();

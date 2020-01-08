@@ -67,7 +67,7 @@ const createUpdateIndicator = () => {
   const testUpdateIndicator = document.createElement('div');
   testUpdateIndicator.id = 'testUpdateIndicator';
   testUpdateIndicator.className = 'testUpdateIndicator';
-    $('#main_header').append(testUpdateIndicator);
+  $('#main_header').append(testUpdateIndicator);
   if (lastSetUpdateDisplayState) setUpdateDisplayState(lastSetUpdateDisplayState);
 }
 
@@ -185,11 +185,11 @@ async function initUpdateIPC() {
     // setTestUpdateIndicator(msg.status);
 
     switch (msg.status) {
-      case 'checking' :
+      case 'checking':
         const localStorageData = localStorage.getItem('existsUpdate')
         const localStorageDataVersion = localStorage.getItem('existsUpdateVersion')
         const localStorageDataFileName = localStorage.getItem('existsUpdateFilename')
-        window.ipc.send('checkUpdate', {localStorageData, localStorageDataVersion, localStorageDataFileName});
+        window.ipc.send('checkUpdate', { localStorageData, localStorageDataVersion, localStorageDataFileName });
         break;
       case 'dl_progress':
         setTestUpdateIndicator('Download-Prozess: ' + (msg.progress.percent * 100).toFixed(1) + '%');
@@ -293,11 +293,11 @@ const wrapFunctionForCaching = (func, maxAge = 60000) => {
 // ===
 
 const CURRENT_VERSION = window.getVersion();
-async function COMPANY_ID () {
+async function COMPANY_ID() {
   return textsecure.storage.get('companyNumber', null);
 }
 
-async function get_role () {
+async function get_role() {
   return textsecure.storage.get('role', null);
 }
 
@@ -1530,21 +1530,22 @@ async function handleOfficeJSONMsg(envelope, message) {
   const source = envelope.source;
   const msgData = JSON.parse(message.jsonPayload);
   console.log(message, "messagee")
-  switch(msgData.type) {
+  let id = null;
+  switch (msgData.type) {
     case 'note':
       // if(message == 'true'){
-        document.dispatchEvent(new CustomEvent('notificationNote'));
+      document.dispatchEvent(new CustomEvent('notificationNote'));
       // }
       // await sendOfficeJsonMessage(source, { type: 'pong', msg: msgData.msg });
       break;
-      case 'closeTicket':
-        let id = msgData.msg.id;
-        this.setOpenCloseTicketExternalSignal(id, true)
-        break;
-        case 'openTicket':
-          let id = msgData.msg.id;
-          this.setOpenCloseTicketExternalSignal(id, false)
-          break;
+    case 'closeTicket':
+      id = msgData.msg.id;
+      setOpenCloseTicketExternalSignal(id, true)
+      break;
+    case 'openTicket':
+      id = msgData.msg.id;
+      setOpenCloseTicketExternalSignal(id, false)
+      break;
     // case 'pong':
     //   console.log('handleOfficeMsgEvent PONG', message);
     //   break;
@@ -1570,7 +1571,7 @@ async function handleOfficeMsgEvent(event) {
 // function testPing(destination, msg) {
 //   return sendOfficeJsonMessage(destination, { type: 'ping', msg });
 // }
-async  function setOpenCloseTicketExternalSignal(id, state){
+async function setOpenCloseTicketExternalSignal(id, state) {
   const conversation = await getConversation(id);
   conversation.setClosed(state);
   const closed = conversation.get('isClosed');
