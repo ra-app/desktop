@@ -1,20 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import {  setTicketData } from '../../OFA/store/tickets/actions';
+import { setTicketData } from '../../OFA/store/tickets/actions';
 import { Ticket } from '../../OFA/store/tickets/types';
 import classNames from 'classnames';
-
 import { Emojify } from './Emojify';
 import { Avatar } from '../Avatar';
 import { LocalizerType } from '../../types/Util';
 import { BrowserWindow } from 'electron';
-// import {
-//   ContextMenu,
-//   // ContextMenuTrigger,
-//   MenuItem,
-//   // SubMenu,
-// } from 'react-contextmenu';
+
 declare var isAdmin: any;
 declare global {
   interface Window {
@@ -29,7 +23,6 @@ interface TimerOption {
 interface Props {
   id: string;
   name?: string;
-
   rawPhoneNumber?: string;
   phoneNumber: string;
   profileName?: string;
@@ -43,28 +36,22 @@ interface Props {
   isArchived: boolean;
   isClosed: boolean;
   isCompany: boolean;
-
   expirationSettingName?: string;
   showBackButton: boolean;
   timerOptions: Array<TimerOption>;
 
   onSetDisappearingMessages: (seconds: number) => void;
   setTicket: (ticket: Ticket) => any;
-  // onDeleteMessages: () => void;
   onResetSession: () => void;
   closeTicket: () => void;
-
   onShowSafetyNumber: () => void;
   onShowAllMedia: () => void;
   onShowGroupMembers: () => void;
   onGoBack: () => void;
-
   onArchive: () => void;
   onMoveToInbox: () => void;
 
   i18n: LocalizerType;
-
-
   ticket: Ticket;
   window: BrowserWindow;
 }
@@ -82,7 +69,6 @@ export class ConversationHeader extends React.Component<Props> {
 
   public constructor(props: Props) {
     super(props);
-
     this.menuTriggerRef = React.createRef();
     this.showMenuBound = this.showMenu.bind(this);
     this.openEditGroupBound = this.openEditGroup.bind(this);
@@ -146,11 +132,9 @@ export class ConversationHeader extends React.Component<Props> {
   public renderTitle() {
     const {
       name,
-      // phoneNumber,
       i18n,
       isMe,
       profileName,
-      // isVerified,
     } = this.props;
 
     if (isMe) {
@@ -164,20 +148,11 @@ export class ConversationHeader extends React.Component<Props> {
     return (
       <div className="module-conversation-header__title">
         {name ? <Emojify text={name} /> : null}
-        {/* {name && phoneNumber ? ' · ' : null} */}
-        {/* {phoneNumber ? phoneNumber : null}{' '} */}
         {profileName && !name ? (
           <span className="module-conversation-header__title__profile-name">
             ~<Emojify text={profileName} />
           </span>
         ) : null}
-        {/* {isVerified ? ' · ' : null}
-        {isVerified ? (
-          <span>
-            <span className="module-conversation-header__title__verified-icon" />
-            {i18n('verified')}
-          </span>
-        ) : null} */}
       </div>
     );
   }
@@ -217,7 +192,6 @@ export class ConversationHeader extends React.Component<Props> {
 
   public renderExpirationLength() {
     const { expirationSettingName } = this.props;
-
     if (!expirationSettingName) {
       return null;
     }
@@ -233,31 +207,7 @@ export class ConversationHeader extends React.Component<Props> {
   }
 
   public renderGear() {
-    // const { showBackButton } = this.props;
     return (
-    //   <ContextMenuTrigger id={triggerId} ref={this.menuTriggerRef}>
-    //   {/* <button
-    //     onClick={this.showMenuBound}
-    //     className={classNames(
-    //       'module-conversation-header__gear-icon',
-    //       showBackButton
-    //         ? null
-    //         : 'module-conversation-header__gear-icon--show'
-    //     )}
-    //     disabled={showBackButton}
-    //   /> */}
-    //   <button
-    //     onClick={this.showMenuBound}
-    //     className="chat_menu"
-    //     disabled={showBackButton}
-    //   >
-    //     <img
-    //       src="images/icons/menu_over_blue_24x24.svg"
-    //       className="chat_menu"
-    //       alt="Chat menu"
-    //     />
-    //   </button>
-    // </ContextMenuTrigger>
       <div className="menuButton">
         <span onClick={this.showMenuBound}>
           <img
@@ -271,81 +221,19 @@ export class ConversationHeader extends React.Component<Props> {
     );
   }
 
-  public renderMenu(/*triggerId: string*/) {
+  public renderMenu() {
     const {
       i18n,
-      // isMe,
       isGroup,
       isArchived,
       isClosed,
-      // // onDeleteMessages,
-      // closeTicket,
-      // onResetSession,
-      // onSetDisappearingMessages,
-      // onShowAllMedia,
-      // onShowGroupMembers,
-      // onShowSafetyNumber,
       onArchive,
       onMoveToInbox,
-      // // timerOptions,
       isCompany,
     } = this.props;
 
-    // const disappearingTitle = i18n('disappearingMessages') as any;
-
     return (
-      // <ContextMenu id={triggerId}>
-      //   {/* {!isCompany ? (
-      //     <SubMenu title={disappearingTitle}>
-      //       {(timerOptions || []).map(item => (
-      //         <MenuItem
-      //           key={item.value}
-      //           onClick={() => {
-      //             onSetDisappearingMessages(item.value);
-      //           }}
-      //         >
-      //           {item.name}
-      //         </MenuItem>
-      //       ))}
-      //     </SubMenu>
-      //   ) : null} */}
-      //   {/* <MenuItem onClick={onShowAllMedia}>{i18n('viewAllMedia')}</MenuItem> */}
-      //   {/* {isGroup ? (
-      //     <MenuItem onClick={onShowGroupMembers}>
-      //       {i18n('showMembers')}
-      //     </MenuItem>
-      //   ) : null} */}
-      //   {/* {!isGroup && !isMe && !isCompany ? (
-      //     <MenuItem onClick={onShowSafetyNumber}>
-      //       {i18n('showSafetyNumber')}
-      //     </MenuItem>
-      //   ) : null} */}
-      //   {/* {!isGroup && !isCompany ? (
-      //     <MenuItem onClick={onResetSession}>{i18n('resetSession')}</MenuItem>
-      //   ) : null} */}
-
-      //   {isArchived ? (
-      //     <MenuItem onClick={onMoveToInbox}>
-      //       {i18n('moveConversationToInbox')}
-      //     </MenuItem>
-      //   ) : !isCompany ? (
-      //     <MenuItem onClick={onArchive}>{i18n('archiveConversation')}</MenuItem>
-      //   ) : null}
-      //   {(isGroup) && (
-      //     <MenuItem onClick={this.openEditGroupBound}>Gruppe bearbeiten</MenuItem>
-      //   )}
-      //   {/* {!isCompany ? (
-      //     <MenuItem onClick={onDeleteMessages}>
-      //       {i18n('deleteMessages')}
-      //     </MenuItem>
-      //   ) : null} */}
-      //   {(!isCompany && !isClosed) && !isGroup ? (
-      //     <MenuItem>
-      //       <MenuItem onClick={closeTicket}>{i18n('closeTicket')}</MenuItem>
-      //     </MenuItem>
-      //   ) : null}
-      // </ContextMenu>
-      <div className="module-main-header__info" style={{padding: 0}}>
+      <div className="module-main-header__info" style={{ padding: 0 }}>
         <div className="menuChat" ref={this.wrapperRef}>
           <ul className="ulMenuChat">
             {isArchived ? (
@@ -365,7 +253,7 @@ export class ConversationHeader extends React.Component<Props> {
               </li>
             )}
             {((!isCompany && !isClosed) && !isGroup) && this.isAdmin && (
-              <li onClick={()=>this.closeTicket()}>
+              <li onClick={() => this.closeTicket()}>
                 <span>
                   {i18n('closeTicket')}
                 </span>
@@ -378,9 +266,7 @@ export class ConversationHeader extends React.Component<Props> {
   }
 
   public render() {
-    // const { id } = this.props;
 
-    // const triggerId = `conversation-${id}`;
     return (
       <div className="module-conversation-header">
         {this.renderBackButton()}
@@ -391,28 +277,26 @@ export class ConversationHeader extends React.Component<Props> {
           </div>
         </div>
         {this.renderExpirationLength()}
-        {/* {this.renderGear(triggerId)}
-        {this.renderMenu(triggerId)} */}
         {!this.state.openMenu ? (
           this.renderGear()
         ) : (
-          this.renderMenu()
-        )}
+            this.renderMenu()
+          )}
       </div>
     );
   }
 }
 
 const mapStateToProp = (state: any, props: Props): Props => {
-  let ticket:  Ticket | Array<any> = [] ;
+  let ticket: Ticket | Array<any> = [];
   if (!props.isGroup && !props.isCompany) {
-  const company_id = props.company_id;
-  const uuid = props.uuid;
-  if (state.tickets && state.tickets[company_id] && state.tickets[company_id].tickets) {
-    ticket = state.tickets[company_id].tickets[uuid];
-  }
+    const company_id = props.company_id;
+    const uuid = props.uuid;
+    if (state.tickets && state.tickets[company_id] && state.tickets[company_id].tickets) {
+      ticket = state.tickets[company_id].tickets[uuid];
+    }
 
-}
+  }
 
   return { ticket } as Props;
 };
