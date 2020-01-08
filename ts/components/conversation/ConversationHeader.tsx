@@ -15,6 +15,7 @@ import { BrowserWindow } from 'electron';
 //   MenuItem,
 //   // SubMenu,
 // } from 'react-contextmenu';
+declare var isAdmin: any;
 declare global {
   interface Window {
     i18n: any;
@@ -77,6 +78,7 @@ export class ConversationHeader extends React.Component<Props> {
   public showMenuBound: () => void;
   public openEditGroupBound: () => void;
   public menuTriggerRef: React.RefObject<any>;
+  public isAdmin: boolean = false;
 
   public constructor(props: Props) {
     super(props);
@@ -91,11 +93,17 @@ export class ConversationHeader extends React.Component<Props> {
 
   public componentDidMount() {
     document.addEventListener('mousedown', this.handleClickOutside);
+    this.checkIsAdmin();
   }
 
   public componentWillUnmount() {
     document.removeEventListener('mousedown', this.handleClickOutside);
   }
+
+  public async checkIsAdmin() {
+    this.isAdmin = await isAdmin(this.props.company_id);
+  }
+
   public handleClickOutside(event: any) {
     const { openMenu } = this.state;
     if (openMenu && (this.wrapperRef && (!this.wrapperRef.current.contains(event.target)))) {
@@ -264,6 +272,7 @@ export class ConversationHeader extends React.Component<Props> {
   }
 
   public renderMenu(/*triggerId: string*/) {
+    console.log('AQUI', this.isAdmin);
     const {
       i18n,
       // isMe,

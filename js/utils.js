@@ -108,3 +108,21 @@ async function getListInvitation() {
   }
   return JSON.parse(invitationList);
 }
+
+// ******************** GLOBAL FUNCTIONS *******************************
+
+async function isAdmin(company_id) {
+  try {
+    const admins = await getAdminCompany(company_id);
+    let admin = null;
+    if (admins.success) {
+      admin = true;
+    } else {
+      admin = false;
+    }
+    return admin;
+  } catch (error) {
+    admin = false
+    return admin;
+  }
+}
