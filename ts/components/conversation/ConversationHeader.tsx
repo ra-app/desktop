@@ -10,6 +10,7 @@ import { LocalizerType } from '../../types/Util';
 import { BrowserWindow } from 'electron';
 
 declare var isAdmin: any;
+declare var COMPANY_ID: any;
 declare global {
   interface Window {
     i18n: any;
@@ -59,6 +60,7 @@ interface Props {
 export class ConversationHeader extends React.Component<Props> {
   public state = {
     openMenu: false,
+    showGear: true,
   };
   public wrapperRef: any;
   public wrapperRefImage: any;
@@ -79,15 +81,19 @@ export class ConversationHeader extends React.Component<Props> {
 
   public componentDidMount() {
     document.addEventListener('mousedown', this.handleClickOutside);
-    this.checkIsAdmin();
+    this.checkInfo();
   }
 
   public componentWillUnmount() {
     document.removeEventListener('mousedown', this.handleClickOutside);
   }
 
-  public async checkIsAdmin() {
-    this.isAdmin = await isAdmin(this.props.company_id);
+  public async checkInfo() {
+    const companyID = await COMPANY_ID();
+    // function to check if the user is admin
+    this.isAdmin = await isAdmin(companyID);
+    // function to check if is a group conversation and the user is not admin (hide options button)
+    this.showGear();
   }
 
   public handleClickOutside(event: any) {
@@ -99,6 +105,15 @@ export class ConversationHeader extends React.Component<Props> {
 
   public showMenu() {
     this.setState({ openMenu: !this.state.openMenu });
+  }
+
+  public showGear() {
+    const { isGroup } = this.props;
+    if (isGroup && !this.isAdmin) {
+      this.setState({ showGear: false });
+    } else {
+      this.setState({ showGear: true });
+    }
   }
 
   public openEditGroup() {
@@ -207,18 +222,22 @@ export class ConversationHeader extends React.Component<Props> {
   }
 
   public renderGear() {
-    return (
-      <div className="menuButton">
-        <span onClick={this.showMenuBound}>
-          <img
-            style={{ height: 30 }}
-            src="images/icons/menu_over_blue_24x24.svg"
-            className="chat_menu"
-            alt="Chat menu"
-          />
-        </span>
-      </div>
-    );
+    if (this.state.showGear) {
+      return (
+        <div className="menuButton">
+          <span onClick={this.showMenuBound}>
+            <img
+              style={{ height: 30 }}
+              src="images/icons/menu_over_blue_24x24.svg"
+              className="chat_menu"
+              alt="Chat menu"
+            />
+          </span>
+        </div>
+      );
+    } else {
+      return null;
+    }
   }
 
   public renderMenu() {

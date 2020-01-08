@@ -112,9 +112,9 @@ async function getListInvitation() {
 // ******************** GLOBAL FUNCTIONS *******************************
 
 async function isAdmin(company_id) {
+  let admin = null;
   try {
     const admins = await getAdminCompany(company_id);
-    let admin = null;
     if (admins.success) {
       admin = true;
     } else {
