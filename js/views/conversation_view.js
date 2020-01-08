@@ -416,6 +416,7 @@
       const getHeaderProps = () => {
         const uuid = this.model.attributes.ticket_uuid;
         const cid = this.model.cid;
+        const ourNumber = this.model.ourNumber;
         const company_id = this.model.attributes.company_id;
         const external_number = this.model.attributes.id;
         const message = '[![TICKETMSG]!] Dieses Ticket wurde geschlossen';
@@ -486,8 +487,7 @@
             // });
             conversation.sendMessage(message);
             conversation.sendMessage(messageLine);
-            console.log('YYYY', cid)
-            closeTicketBySignal(external_number, {id: external_number});
+            closeTicketBySignal(external_number, {id: ourNumber});
             this.model.setClosed(true);
             setTimeout(() => {
               this.unload('archive');
