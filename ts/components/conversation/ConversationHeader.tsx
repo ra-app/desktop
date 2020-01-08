@@ -365,7 +365,7 @@ export class ConversationHeader extends React.Component<Props> {
                 <span onClick={this.openEditGroupBound}>Gruppe bearbeiten</span>
               </li>
             )}
-            {(!isCompany && !isClosed) && !isGroup && (
+            {((!isCompany && !isClosed) && !isGroup) && this.isAdmin && (
               <li onClick={()=>this.closeTicket()}>
                 <span>
                   {i18n('closeTicket')}
