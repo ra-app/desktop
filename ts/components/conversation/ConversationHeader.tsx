@@ -108,8 +108,8 @@ export class ConversationHeader extends React.Component<Props> {
   }
 
   public showGear() {
-    const { isGroup } = this.props;
-    if (isGroup && !this.isAdmin) {
+    const { isGroup, isCompany } = this.props;
+    if (!this.isAdmin && (isCompany || isGroup )) {
       this.setState({ showGear: false });
     } else {
       this.setState({ showGear: true });
@@ -241,6 +241,7 @@ export class ConversationHeader extends React.Component<Props> {
   }
 
   public renderMenu() {
+    console.log(this.props, "propssssssssssssssss")
     const {
       i18n,
       isGroup,
