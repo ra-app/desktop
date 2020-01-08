@@ -1538,17 +1538,13 @@ async function handleOfficeJSONMsg(envelope, message) {
       // await sendOfficeJsonMessage(source, { type: 'pong', msg: msgData.msg });
       break;
       case 'closeTicket':
-        console.log('handleOfficeMsgEvent close ticket', msgData);
         let id = msgData.msg.id;
-        const conversation = await getConversation(id);
-        conversation.setClosed(true);
-        const closed = conversation.get('isClosed');
-        const composer = $('.message_composer');
-        if (composer) {
-          closed ? composer.hide() : composer.show();
-        }
-        console.log(conversation, "conversationnnnnnnnn")
+        this.setOpenCloseTicketExternalSignal(id, true)
         break;
+        case 'openTicket':
+          let id = msgData.msg.id;
+          this.setOpenCloseTicketExternalSignal(id, false)
+          break;
     // case 'pong':
     //   console.log('handleOfficeMsgEvent PONG', message);
     //   break;
@@ -1574,7 +1570,15 @@ async function handleOfficeMsgEvent(event) {
 // function testPing(destination, msg) {
 //   return sendOfficeJsonMessage(destination, { type: 'ping', msg });
 // }
-
+async  function setOpenCloseTicketExternalSignal(id, state){
+  const conversation = await getConversation(id);
+  conversation.setClosed(state);
+  const closed = conversation.get('isClosed');
+  const composer = $('.message_composer');
+  if (composer) {
+    closed ? composer.hide() : composer.show();
+  }
+}
 function addNotificationNotes(destination, msg) {
   return sendOfficeJsonMessage(destination, { type: 'note', msg });
 }
@@ -1582,4 +1586,9 @@ function addNotificationNotes(destination, msg) {
 function closeTicketBySignal(destination, msg) {
   console.log('closeTicketBySignal')
   return sendOfficeJsonMessage(destination, { type: 'closeTicket', msg });
+}
+
+function openTicketBySignal(destination, msg) {
+  console.log('openTicketBySignal')
+  return sendOfficeJsonMessage(destination, { type: 'openTicket', msg });
 }
