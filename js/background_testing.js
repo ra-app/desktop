@@ -1542,12 +1542,22 @@ async function handleOfficeJSONMsg(envelope, message) {
     case 'closeTicket':
       id = msgData.msg.id;
       type = msgData.msg.type;
-      setOpenCloseTicketExternalSignal(id, true, type)
+      setDataExternalSignal(id, true, type)
       break;
     case 'openTicket':
       id = msgData.msg.id;
       type = msgData.msg.type;
-      setOpenCloseTicketExternalSignal(id, false, type)
+      setDataExternalSignal(id, false, type)
+      break;
+    case 'enableCompany':
+      id = msgData.msg.id;
+      type = msgData.msg.type;
+      setDataExternalSignal(id, false, type)
+      break;
+    case 'disableCompany':
+      id = msgData.msg.id;
+      type = msgData.msg.type;
+      setDataExternalSignal(id, true, type)
       break;
     // case 'pong':
     //   console.log('handleOfficeMsgEvent PONG', message);
@@ -1574,17 +1584,16 @@ async function handleOfficeMsgEvent(event) {
 // function testPing(destination, msg) {
 //   return sendOfficeJsonMessage(destination, { type: 'ping', msg });
 // }
-async function setOpenCloseTicketExternalSignal(id, state, type) {
+async function setDataExternalSignal(id, state, type) {
   const conversation = await getConversation(id);
   conversation.setClosed(state, false);
   const closed = conversation.get('isClosed');
-
-
-    const composer = $(type + '>.message_composer');
+    const composer = $('.'+type + ' .message_composer');
     if (composer) {
       closed ? composer.hide() : composer.show();
     }
 }
+
 function addNotificationNotes(destination, msg) {
   return sendOfficeJsonMessage(destination, { type: 'note', msg });
 }
@@ -1597,4 +1606,14 @@ function closeTicketBySignal(destination, msg) {
 function openTicketBySignal(destination, msg) {
   console.log('openTicketBySignal')
   return sendOfficeJsonMessage(destination, { type: 'openTicket', msg });
+}
+
+function disableCompanyTicketBySignal(destination, msg) {
+  console.log('disableCompanyTicketBySignal')
+  return sendOfficeJsonMessage(destination, { type: 'disableTicket', msg });
+}
+
+function enableCompanyTicketBySignal(destination, msg) {
+  console.log('enableCompanyTicketBySignal')
+  return sendOfficeJsonMessage(destination, { type: 'enableTicket', msg });
 }
