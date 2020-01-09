@@ -1588,6 +1588,7 @@ async function setDataExternalSignal(id, state, type) {
   const conversation = await getConversation(id);
   conversation.setClosed(state, false);
   const closed = conversation.get('isClosed');
+  console.log(closed,state,composer, "eeeeeeeeeeeeeeeeeeeeeeeeee")
     const composer = $('.'+type + ' .message_composer');
     if (composer) {
       closed ? composer.hide() : composer.show();
@@ -1610,10 +1611,10 @@ function openTicketBySignal(destination, msg) {
 
 function disableCompanyTicketBySignal(destination, msg) {
   console.log('disableCompanyTicketBySignal')
-  return sendOfficeJsonMessage(destination, { type: 'disableTicket', msg });
+  return sendOfficeJsonMessage(destination, { type: 'disableCompany', msg });
 }
 
 function enableCompanyTicketBySignal(destination, msg) {
   console.log('enableCompanyTicketBySignal')
-  return sendOfficeJsonMessage(destination, { type: 'enableTicket', msg });
+  return sendOfficeJsonMessage(destination, { type: 'enableCompany', msg });
 }
