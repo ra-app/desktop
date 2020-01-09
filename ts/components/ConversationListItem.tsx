@@ -143,6 +143,7 @@ export class ConversationListItem extends React.PureComponent<Props> {
       name,
       phoneNumber,
       profileName,
+      type,
     } = this.props;
 
     return (
@@ -159,6 +160,7 @@ export class ConversationListItem extends React.PureComponent<Props> {
             i18n('noteToSelf')
           ) : (
               <ContactName
+                type={type}
                 phoneNumber={phoneNumber}
                 name={name}
                 profileName={profileName}

@@ -2817,3 +2817,12 @@ input[type=number] {
   width: 50px;
   margin-left: 50%;
 }
+
+.breakGroupName {
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-weight: 300;
+  color: #476077;
+  max-width: calc(100% - 0px);
+}
