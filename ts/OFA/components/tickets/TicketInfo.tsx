@@ -78,8 +78,8 @@ export class TicketInfo extends React.Component<Props, State> {
     const ticketDETAIL = await getTicketDetails(companyID, uuid);
     let message = '[![TICKETMSG]!]';
     const ownNumber = await getOwnNumber();
-    openTicketBySignal(phoneNumber, {id: ownNumber, update: true});
-    closeTicketBySignal(phoneNumber, {id: companyID});
+    openTicketBySignal(phoneNumber, {id: ownNumber, type: 'private'});
+    closeTicketBySignal(phoneNumber, {id: companyID, type: 'company'});
     ticketDETAIL.events.reverse().forEach((mssg: { json: string }) => {
       // tslint:disable-next-line:prefer-template
       message = message + '\n ' + JSON.parse(mssg.json).body;
