@@ -1279,8 +1279,12 @@
         Conversation: Whisper.Conversation,
       });
     },
-    async setClosed(isClosed) {
-      this.set({ isClosed, isArchived: isClosed });
+    async setClosed(isClosed, archived = true) {
+      if(archived){
+        this.set({ isClosed, isArchived: isClosed });
+      } else {
+        this.set({ isClosed});
+      }
       await window.Signal.Data.updateConversation(this.id, this.attributes, {
         Conversation: Whisper.Conversation,
       });
