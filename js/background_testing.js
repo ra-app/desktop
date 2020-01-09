@@ -1531,7 +1531,7 @@ async function handleOfficeJSONMsg(envelope, message) {
   const msgData = JSON.parse(message.jsonPayload);
   console.log(message, "messagee")
   let id = null;
-  let update = null;
+  let type = null;
   switch (msgData.type) {
     case 'note':
       // if(message == 'true'){
@@ -1541,13 +1541,13 @@ async function handleOfficeJSONMsg(envelope, message) {
       break;
     case 'closeTicket':
       id = msgData.msg.id;
-      update = msgData.msg.update;
-      setOpenCloseTicketExternalSignal(id, true, update)
+      type = msgData.msg.type;
+      setOpenCloseTicketExternalSignal(id, true, type)
       break;
     case 'openTicket':
       id = msgData.msg.id;
-      update = msgData.msg.update;
-      setOpenCloseTicketExternalSignal(id, false, update)
+      type = msgData.msg.type;
+      setOpenCloseTicketExternalSignal(id, false, type)
       break;
     // case 'pong':
     //   console.log('handleOfficeMsgEvent PONG', message);
@@ -1574,16 +1574,16 @@ async function handleOfficeMsgEvent(event) {
 // function testPing(destination, msg) {
 //   return sendOfficeJsonMessage(destination, { type: 'ping', msg });
 // }
-async function setOpenCloseTicketExternalSignal(id, state, update) {
+async function setOpenCloseTicketExternalSignal(id, state, type) {
   const conversation = await getConversation(id);
   conversation.setClosed(state, false);
   const closed = conversation.get('isClosed');
-  if (update) {
-    const composer = $('.message_composer');
+
+
+    const composer = $(type + '>.message_composer');
     if (composer) {
       closed ? composer.hide() : composer.show();
     }
-  }
 }
 function addNotificationNotes(destination, msg) {
   return sendOfficeJsonMessage(destination, { type: 'note', msg });
