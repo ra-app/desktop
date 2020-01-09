@@ -9,6 +9,7 @@ declare var ensureConversation: any;
 declare var getTicketDetails: any;
 declare var openTicketBySignal: any;
 declare var getOwnNumber: any;
+declare var closeTicketBySignal: any;
 interface Props {
   ticket: Ticket;
   setTicket(ticket: Ticket): any;
@@ -77,7 +78,8 @@ export class TicketInfo extends React.Component<Props, State> {
     const ticketDETAIL = await getTicketDetails(companyID, uuid);
     let message = '[![TICKETMSG]!]';
     const ownNumber = await getOwnNumber();
-    openTicketBySignal(phoneNumber, {id: ownNumber});
+    openTicketBySignal(phoneNumber, {id: ownNumber, update: true});
+    closeTicketBySignal(phoneNumber, {id: companyID, update: false});
     ticketDETAIL.events.reverse().forEach((mssg: { json: string }) => {
       // tslint:disable-next-line:prefer-template
       message = message + '\n ' + JSON.parse(mssg.json).body;
