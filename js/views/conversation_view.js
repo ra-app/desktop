@@ -489,7 +489,7 @@
             conversation.sendMessage(message);
             conversation.sendMessage(messageLine);
             closeTicketBySignal(external_number, {id: ourNumber, update: true});
-            openTicketBySignal(external_number, {id: company_id, update: false});
+            openTicketBySignal(external_number, {id: company_id});
             this.model.setClosed(true);
             setTimeout(() => {
               this.unload('archive');
