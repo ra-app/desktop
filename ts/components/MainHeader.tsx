@@ -218,16 +218,16 @@ export class MainHeader extends React.Component<Props> {
   }
   public createGroup() {
     // if (this.state.hasContact) {
-    const { appView } = window['owsDesktopApp']
+    const { appView } = window['owsDesktopApp'];
     appView.openModalImport('group');
-    this.setState({ openMenu: !this.state.openMenu })
+    this.setState({ openMenu: !this.state.openMenu });
     // }
   }
 
   public async openEditCompany() {
     // tslint:disable-next-line:variable-name
     const company_id = await COMPANY_ID();
-    const { appView } = window['owsDesktopApp']
+    const { appView } = window['owsDesktopApp'];
     const editCompany = true;
     appView.openTicket(company_id, null, editCompany);
   }
@@ -271,10 +271,7 @@ export class MainHeader extends React.Component<Props> {
 
   public render() {
     createUpdateIndicator();
-    const {
-      searchTerm,
-      i18n,
-    } = this.props;
+    const { searchTerm, i18n } = this.props;
     const { openMenu, /*isAdmin,*/ isBeta, companyID } = this.state;
 
     return (
@@ -288,7 +285,12 @@ export class MainHeader extends React.Component<Props> {
           {companyID !== '' ? (
             this.renderAvatar()
           ) : (
-            <img onClick={this.openEditcompanyBound} className="mainHeaderIcon" src="images/header-chat.png" alt="header chat" />
+            <img
+              onClick={this.openEditcompanyBound}
+              className="mainHeaderIcon"
+              src="images/header-chat.png"
+              alt="header chat"
+            />
           )}
           <span>Kommunikation</span>
           {/* {isAdmin && (
@@ -312,7 +314,11 @@ export class MainHeader extends React.Component<Props> {
                     alt="Create broadcast"
                   />
                 </li> */}
-                <li /*className={`${!this.state.hasContact && 'disabledLi'}`}*/ onClick={this.createGroupBound}>
+                <li
+                  /*className={`${!this.state.hasContact && 'disabledLi'}`}*/ onClick={
+                    this.createGroupBound
+                  }
+                >
                   <span>Gruppe erstellen</span>
                   <img
                     src="images/icons/broadcast_einladen_35x35.svg"
@@ -320,7 +326,11 @@ export class MainHeader extends React.Component<Props> {
                     alt="Create broadcast"
                   />
                 </li>
-                <li /*className={`${!this.state.hasContact && 'disabledLi'}`}*/ onClick={this.importKundeBound}>
+                <li
+                  /*className={`${!this.state.hasContact && 'disabledLi'}`}*/ onClick={
+                    this.importKundeBound
+                  }
+                >
                   <span>Externe Nutzer einladen</span>
                   <img
                     src="images/icons/user_einladen_35x35.svg"
@@ -329,7 +339,11 @@ export class MainHeader extends React.Component<Props> {
                   />
                 </li>
 
-                <li /*className={`${!this.state.hasContact && 'disabledLi'}`}*/ onClick={this.importAdminBound}>
+                <li
+                  /*className={`${!this.state.hasContact && 'disabledLi'}`}*/ onClick={
+                    this.importAdminBound
+                  }
+                >
                   <span>Interne Nutzer einladen</span>
                   <img
                     src="images/icons/admin_einladen_35x35.svg"

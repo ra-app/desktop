@@ -247,9 +247,7 @@ function openConversationExternal(
     },
   };
 }
-function openBlackboard(
-  id: string
-): SelectedConversationChangedActionType {
+function openBlackboard(id: string): SelectedConversationChangedActionType {
   trigger('showOpenBlackboard', id);
 
   return {

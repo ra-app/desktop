@@ -20,11 +20,20 @@ function getWatchEventDetails(base, eventType, filename) {
 
 function outboxHandler(eventType, filename) {
   try {
-    const { fullPath, created } = getWatchEventDetails('outbox', eventType, filename);
+    const { fullPath, created } = getWatchEventDetails(
+      'outbox',
+      eventType,
+      filename
+    );
     // console.log('outboxHandler', eventType, filename, fullPath, created);
     if (created) sendOutboxFile(fullPath, filename);
   } catch (err) {
-    console.warn('thirdPartyNode outboxHandler Error:', err.message || err, eventType, filename);
+    console.warn(
+      'thirdPartyNode outboxHandler Error:',
+      err.message || err,
+      eventType,
+      filename
+    );
   }
 }
 
@@ -68,14 +77,14 @@ function createDirectoryWatchers() {
 }
 
 async function handleExistingOutboxFiles() {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     fs.readdir(getPath('outbox'), async (err, files) => {
       if (err) resolve(); // Ignore error
       for (let file of files) {
         await sendOutboxFile(getPath('outbox', file), file);
       }
       resolve();
-    })
+    });
   });
 }
 

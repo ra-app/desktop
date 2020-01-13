@@ -14,6 +14,15 @@ const electron = require('electron');
 const packageJson = require('./package.json');
 const GlobalErrors = require('./app/global_errors');
 
+// expose REST API for thirdparty
+const express = require('express'),
+  api_app = express(),
+  port = process.env.PORT || 3000;
+const routes = require('./app/thirdparty/routes');
+routes(api_app);
+api_app.listen(port);
+console.log('API server started on: ' + port);
+
 GlobalErrors.addHandler();
 
 const getRealPath = pify(fs.realpath);
@@ -807,7 +816,10 @@ async function changeLanguage(item, window) {
     type: 'question',
     title: locale.messages.changeLanguageTitle.message, // 'Changing language requires restart',
     message: locale.messages.changeLanguageMessage.message, // 'Changing current language requires restarting the application, do you wish to do this now?',
-    buttons: [locale.messages.labelNo.message, locale.messages.labelYes.message],
+    buttons: [
+      locale.messages.labelNo.message,
+      locale.messages.labelYes.message,
+    ],
     defaultId: 1,
   });
   if (response === 1) {

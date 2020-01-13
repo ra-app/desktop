@@ -76,7 +76,12 @@ export class Avatar extends React.Component<Props, State> {
 
       if (this.isDead) return;
       if (this.state.srcImage !== avatar) {
-        if (avatar) this.setState({ srcImage: avatar, loading: false, imageBroken: false });
+        if (avatar)
+          this.setState({
+            srcImage: avatar,
+            loading: false,
+            imageBroken: false,
+          });
         else this.handleImageError();
       }
     } catch (err) {
@@ -100,7 +105,7 @@ export class Avatar extends React.Component<Props, State> {
 
     const title = `${name || phoneNumber}${
       !name && profileName ? ` ~${profileName}` : ''
-      }`;
+    }`;
 
     return (
       <img
@@ -152,13 +157,20 @@ export class Avatar extends React.Component<Props, State> {
   }
 
   public render() {
-    const { i18n, name, phoneNumber, profileName, size, conversationType } = this.props;
+    const {
+      i18n,
+      name,
+      phoneNumber,
+      profileName,
+      size,
+      conversationType,
+    } = this.props;
     const { imageBroken, srcImage, loading } = this.state;
 
     // const hasImage = !noteToSelf && avatarPath && !imageBroken;
     const title = `${name || phoneNumber}${
       !name && profileName ? ` ~${profileName}` : ''
-      }`;
+    }`;
     if (size !== 28 && size !== 36 && size !== 48 && size !== 80) {
       throw new Error(`Size ${size} is not supported!`);
     }
@@ -166,12 +178,18 @@ export class Avatar extends React.Component<Props, State> {
     return (
       <div
         onClick={this.props.onclick}
-        className={this.props.className ? this.props.className : classNames(
-          'module-avatar',
-          `module-avatar--${size}`,
-          !imageBroken ? 'module-avatar--with-image' : 'module-avatar--no-image'
-          // !hasImage ? `module-avatar--${color}` : null
-        )}
+        className={
+          this.props.className
+            ? this.props.className
+            : classNames(
+                'module-avatar',
+                `module-avatar--${size}`,
+                !imageBroken
+                  ? 'module-avatar--with-image'
+                  : 'module-avatar--no-image'
+                // !hasImage ? `module-avatar--${color}` : null
+              )
+        }
       >
         {!imageBroken && !loading ? (
           // this.renderImage()
@@ -183,9 +201,15 @@ export class Avatar extends React.Component<Props, State> {
             src={srcImage}
           />
         ) : (
-            // tslint:disable-next-line:use-simple-attributes
-            <img className={conversationType === 'company' ? 'companyAvatarDefault' : ''} src="images/firmen-logo.png" alt="Default img" />
-          )}
+          // tslint:disable-next-line:use-simple-attributes
+          <img
+            className={
+              conversationType === 'company' ? 'companyAvatarDefault' : ''
+            }
+            src="images/firmen-logo.png"
+            alt="Default img"
+          />
+        )}
       </div>
     );
   }

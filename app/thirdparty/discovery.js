@@ -5,7 +5,10 @@ const { getPath } = require('./util');
 async function getCompanyNamespaces() {
   const companies = await getCompaniesForMe();
   let ids = [];
-  if (companies && companies.admin && companies.admin.length) companies.admin.forEach((entry) => { ids.push(entry.company_id); });
+  if (companies && companies.admin && companies.admin.length)
+    companies.admin.forEach(entry => {
+      ids.push(entry.company_id);
+    });
   return ids;
 }
 
@@ -14,10 +17,14 @@ async function writeMetaFiles() {
   const companies = await getCompanyNamespaces();
 
   const data = {
-    self: metaInfo.ownPhoneNumber, companies,
+    self: metaInfo.ownPhoneNumber,
+    companies,
   };
 
-  fs.writeFileSync(getPath('discovery', 'meta.json'), JSON.stringify(data, null, 2));
+  fs.writeFileSync(
+    getPath('discovery', 'meta.json'),
+    JSON.stringify(data, null, 2)
+  );
   // fs.writeFileSync(getPath('discovery', 'meta.xml'), obj2xml(null, 'root', data));
 }
 

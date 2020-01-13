@@ -127,7 +127,7 @@ window.showSettings = () => ipc.send('show-settings');
 window.showPermissionsPopup = () => ipc.send('show-permissions-popup');
 
 window.clearCache = () => {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     ipc.once('clearedCache', resolve);
     ipc.send('clearCache');
   });

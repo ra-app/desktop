@@ -111,7 +111,7 @@ const missing = () => {
   Object.keys(locales).forEach(locale => {
     Object.assign({}, merged, locales[locale]);
   });
-}
+};
 
 const actions = {
   add,

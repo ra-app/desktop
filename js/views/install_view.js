@@ -293,12 +293,12 @@
         this.activateButtonCompanyInfo();
       }
 
-      if ( this.step === Steps.SETUP_BRANCHEN ){
-        document.getElementById('search-branch').focus()
+      if (this.step === Steps.SETUP_BRANCHEN) {
+        document.getElementById('search-branch').focus();
       }
 
-      if ( this.step === Steps.SETUP_PHONESLIST ){
-        document.getElementById('search-phones').focus()
+      if (this.step === Steps.SETUP_PHONESLIST) {
+        document.getElementById('search-phones').focus();
       }
 
       if (this.step === Steps.SETUP_USER_PROFILE) {
@@ -388,13 +388,17 @@
             await updateContact(result.info.company_number, this.contactsData);
           }
           // create card for blackboard
-          await createCardBlackboard(result.info.company_number)
+          await createCardBlackboard(result.info.company_number);
           // end create cad for blackboard
-          
+
           await ensureCompanyConversation(result.info.company_number);
           // create default group exterm and interm
           const members = [getOwnNumber()];
-          await updateGroup(result.info.company_number + '-intern', 'Intern', members);
+          await updateGroup(
+            result.info.company_number + '-intern',
+            'Intern',
+            members
+          );
           // await updateGroup(result.info.company_number + '-extern', 'Extern', members);
           // end default group exterm and interm
         } else if (this.setupType === 'admin') {
@@ -419,11 +423,11 @@
             name: userSetupInfo.name,
           };
           // logic for create automatic group interm
-          if(role === 'admin'){
-            const admins = await getAdminCompany(codeCompany)
+          if (role === 'admin') {
+            const admins = await getAdminCompany(codeCompany);
             let members = [getOwnNumber()];
             admins.admins.forEach(element => {
-              members.push(element.phone_number)
+              members.push(element.phone_number);
             });
             await updateGroup(codeCompany + '-intern', 'Intern', members);
           }
@@ -485,17 +489,17 @@
     onContactImportDone() {
       if (this.$('#contact-import-done').is('.disabled')) return;
       this.onSetupCompleted();
-      this.$('#contact-import-done').attr("disabled", true);
+      this.$('#contact-import-done').attr('disabled', true);
       this.$('#contact-import-done').addClass('disabled');
-      this.$('#contact-import-skip').attr("disabled", true);
+      this.$('#contact-import-skip').attr('disabled', true);
       this.$('#contact-import-skip').addClass('disabled');
     },
     onContactImportSkip() {
       this.contactsData = null;
       this.onSetupCompleted();
-      this.$('#contact-import-done').attr("disabled", true);
+      this.$('#contact-import-done').attr('disabled', true);
       this.$('#contact-import-done').addClass('disabled');
-      this.$('#contact-import-skip').attr("disabled", true);
+      this.$('#contact-import-skip').attr('disabled', true);
       this.$('#contact-import-skip').addClass('disabled');
     },
     async onCompanyProfileDone() {
@@ -503,7 +507,7 @@
                                                 <div class='dot'></div>
                                                 <div class='dot'></div>
                                                 <div class='dot'></div>
-                                              </div>`)
+                                              </div>`);
       const company = {
         taxNumber: this.$('#tax-number-input').val(),
         // taxID: this.$('#tax-id-input').val(),
@@ -512,7 +516,7 @@
         branch: this.$('#branch-select').val(),
       };
       await textsecure.storage.put('companySetupInfo', company);
-      this.$('#company-profile-done').html(i18n('continueButton'))
+      this.$('#company-profile-done').html(i18n('continueButton'));
       this.selectStep(Steps.SETUP_USER_PROFILE);
     },
     async onUserProfileDone() {
@@ -521,10 +525,10 @@
         companyName: this.$('#company-name-input').val(),
       };
       await textsecure.storage.put('userSetupInfo', profile);
-      if( this.setupType === 'admin'){
+      if (this.setupType === 'admin') {
         this.onSetupCompleted();
-      }else {
-        this.selectStep(Steps.SETUP_CONTACT_IMPORT)
+      } else {
+        this.selectStep(Steps.SETUP_CONTACT_IMPORT);
       }
     },
     async onBankDetailsDone() {
@@ -627,7 +631,10 @@
       // const codeCompany = textsecure.storage.get('companyNumber', false);
       // console.log('CODEEEEE', codeCompany)
       await textsecure.storage.put('setupType', this.setupType);
-      await textsecure.storage.put('codeInvitation', codeInvitation.toUpperCase());
+      await textsecure.storage.put(
+        'codeInvitation',
+        codeInvitation.toUpperCase()
+      );
       // await textsecure.storage.put('codeCompany', codeCompany);
 
       this.selectStep(Steps.SETUP_PHONE);
@@ -638,7 +645,7 @@
                                                 <div class='dot'></div>
                                                 <div class='dot'></div>
                                                 <div class='dot'></div>
-                                              </div>`)
+                                              </div>`);
       const number = this.validateNumber();
       const code = this.$('#phone-verification-code')
         .val()
@@ -663,7 +670,7 @@
             textsecure.storage.put('role', company.role);
             //  textsecure.storage.put('client_uuid', company.client_uuid);
           }
-          this.$('#verify-phone-code').html(i18n('verifyPhone'))
+          this.$('#verify-phone-code').html(i18n('verifyPhone'));
           this.selectStep(
             this.setupType === 'admin'
               ? Steps.SETUP_USER_PROFILE
@@ -715,7 +722,7 @@
       const fileField = this.$('#inputAvatar')[0].files[0];
       // const base64 = await toBase64(fileField);
       let base64 = '';
-      const imageType = 'image/png' // this.$('#inputAvatar')[0].files[0].type;
+      const imageType = 'image/png'; // this.$('#inputAvatar')[0].files[0].type;
 
       const width = 140;
       const height = 140;
@@ -733,7 +740,17 @@
           elem.height = height;
           const ctx = elem.getContext('2d');
           // img.width and img.height will contain the original dimensions
-          ctx.drawImage(img, ((img.naturalWidth/2)-(300/2)), ((img.naturalHeight/2)-(300/2)), 300, 300, 0, 0,width, height);
+          ctx.drawImage(
+            img,
+            img.naturalWidth / 2 - 300 / 2,
+            img.naturalHeight / 2 - 300 / 2,
+            300,
+            300,
+            0,
+            0,
+            width,
+            height
+          );
           ctx.canvas.toBlob(
             async blob => {
               base64 = new File([blob], fileName, {
@@ -768,7 +785,7 @@
     async onChoseCompanyAvatar() {
       const fileField = this.$('#inputCompanyAvatar')[0].files[0];
       let base64 = '';
-      const imageType = 'image/png' // this.$('#inputCompanyAvatar')[0].files[0].type;
+      const imageType = 'image/png'; // this.$('#inputCompanyAvatar')[0].files[0].type;
       const width = 140;
       const height = 140;
       const fileName = this.$('#inputCompanyAvatar')[0].files[0].name;
@@ -784,7 +801,17 @@
           elem.height = height;
           const ctx = elem.getContext('2d');
           // img.width and img.height will contain the original dimensions
-          ctx.drawImage(img, ((img.naturalWidth/2)-(300/2)), ((img.naturalHeight/2)-(300/2)), 300, 300, 0, 0,width, height);
+          ctx.drawImage(
+            img,
+            img.naturalWidth / 2 - 300 / 2,
+            img.naturalHeight / 2 - 300 / 2,
+            300,
+            300,
+            0,
+            0,
+            width,
+            height
+          );
           ctx.canvas.toBlob(
             async blob => {
               base64 = new File([blob], fileName, {
@@ -792,7 +819,7 @@
                 lastModified: Date.now(),
               });
               base64 = await toBase64(base64);
-              if(base64) {
+              if (base64) {
                 this.$('#previewCompanyAvatar').attr('src', base64);
               }
               // eslint-disable-next-line prefer-destructuring
@@ -879,7 +906,6 @@
         imprint: this.$el.find('#imprint-input')[0].value,
       };
       this.selectStep(Steps.SETUP_BRANCHEN);
-     
     },
     onSelectBranch(e) {
       this.selectStep(Steps.SETUP_COMPANY_PROFILE);
@@ -991,7 +1017,7 @@
     render_attributes() {
       return {
         appTagLine: i18n('appTagLine'),
-        appTagLineSecond:i18n('appTagLineSecond'),
+        appTagLineSecond: i18n('appTagLineSecond'),
         eulaTitle: i18n('eulaTitle'),
         eulaSubTitle: i18n('eulaSubTitle'),
         acceptEula: i18n('acceptEula'),

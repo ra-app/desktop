@@ -2,7 +2,7 @@
 /* global textsecure: false */
 
 // eslint-disable-next-line func-names
-(function () {
+(function() {
   'use strict';
 
   window.Whisper = window.Whisper || {};
@@ -15,7 +15,9 @@
       return {
         'send-message': i18n('sendMessage'),
         company_name: this.company_name,
-        company_avatar: getAvatar(textsecure.storage.get('companyNumber', null)),
+        company_avatar: getAvatar(
+          textsecure.storage.get('companyNumber', null)
+        ),
       };
     },
     initialize(options) {
@@ -44,10 +46,10 @@
       }
     },
     async onChooseAvatarFile() {
-      const company_id = textsecure.storage.get('companyNumber', null)
+      const company_id = textsecure.storage.get('companyNumber', null);
       const fileField = this.$('#inputNewAvatar')[0].files[0];
       let base64 = '';
-      const imageType = 'image/png' // this.$('#inputNewAvatar')[0].files[0].type;
+      const imageType = 'image/png'; // this.$('#inputNewAvatar')[0].files[0].type;
       const width = 140;
       const height = 140;
       const fileName = this.$('#inputNewAvatar')[0].files[0].name;
@@ -59,12 +61,22 @@
         // eslint-disable-next-line no-unused-expressions
         (img.onload = () => {
           const elem = document.createElement('canvas');
-           elem.width = width;
-           elem.height = height;
+          elem.width = width;
+          elem.height = height;
           const ctx = elem.getContext('2d');
 
           // img.width and img.height will contain the original dimensions
-          ctx.drawImage(img, ((img.naturalWidth/2)-(300/2)), ((img.naturalHeight/2)-(300/2)), 300, 300, 0, 0,width, height);
+          ctx.drawImage(
+            img,
+            img.naturalWidth / 2 - 300 / 2,
+            img.naturalHeight / 2 - 300 / 2,
+            300,
+            300,
+            0,
+            0,
+            width,
+            height
+          );
           ctx.canvas.toBlob(
             async blob => {
               base64 = new File([blob], fileName, {
@@ -83,9 +95,11 @@
               };
               textsecure.storage.put('dataCompanyAvatar', dataCompanyAvatar);
               this.newAvatar = true;
-              this.$('#buttonSaveEditCompany').removeClass('disabled')
+              this.$('#buttonSaveEditCompany').removeClass('disabled');
               // setCompanyAvatar(company_id, dataCompanyAvatar);
-            }, imageType, 1
+            },
+            imageType,
+            1
           );
           // eslint-disable-next-line no-sequences
         }),
@@ -98,7 +112,7 @@
       settingEditName.id = 'settingEditName';
 
       const textarea = document.createElement('textarea');
-      textarea.className = 'editTextareaCompanyName'
+      textarea.className = 'editTextareaCompanyName';
       textarea.id = 'newCompanyName';
       textarea.placeholder = 'new company name';
       // textarea.innerHTML = this.model[0].company_name;
@@ -107,38 +121,38 @@
       // doneIcon.id = 'doneIcon';
       // doneIcon.src = 'images/icons/edit-blue.svg'
       // doneIcon.className = 'editIcon'
-      textarea.onkeyup = (evt) => {
-        const nameCompany = evt.target.value
-        console.log(evt.target.value.length)
-        if(nameCompany.length > 0){
-          this.$('#buttonSaveEditCompany').removeClass('disabled')
-        }else {
-          this.$('#buttonSaveEditCompany').addClass('disabled')
+      textarea.onkeyup = evt => {
+        const nameCompany = evt.target.value;
+        console.log(evt.target.value.length);
+        if (nameCompany.length > 0) {
+          this.$('#buttonSaveEditCompany').removeClass('disabled');
+        } else {
+          this.$('#buttonSaveEditCompany').addClass('disabled');
         }
-      }
+      };
 
       settingEditName.append(textarea);
       // settingEditName.append(doneIcon);
-      this.$('#buttonSaveEditCompany').removeClass('disabled')
-      this.$('#edit_company_data').append(settingEditName)
+      this.$('#buttonSaveEditCompany').removeClass('disabled');
+      this.$('#edit_company_data').append(settingEditName);
     },
     async saveNewCompanyName() {
-      this.$('#buttonSaveEditCompany').addClass('disabled')
+      this.$('#buttonSaveEditCompany').addClass('disabled');
       const company_id = textsecure.storage.get('companyNumber', null);
       const newName = this.$('#newCompanyName').val();
-      if(this.newAvatar) {
+      if (this.newAvatar) {
         const dataCompanyAvatar = textsecure.storage.get('dataCompanyAvatar');
         setCompanyAvatar(company_id, dataCompanyAvatar);
       }
-      if(newName !== undefined){
-        await updateCompanyName(newName, company_id)
+      if (newName !== undefined) {
+        await updateCompanyName(newName, company_id);
       }
       await getCompany(company_id);
       this.$('#spanCompanyName').text(newName);
       this.$('#settingEditName').remove();
       this.$('#nameSection').show();
       window.clearCache();
-      if(this.newAvatar) {
+      if (this.newAvatar) {
         updateImagesByUrl(CENTRAL_IMG_ROOT + company_id);
       }
       // this.render();

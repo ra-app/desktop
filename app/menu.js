@@ -19,7 +19,7 @@ exports.createTemplate = (options, messages) => {
     showAbout,
     showDebugLog,
     showSettings,
-    changeLanguage
+    changeLanguage,
   } = options;
 
   const template = [
@@ -118,13 +118,15 @@ exports.createTemplate = (options, messages) => {
         },
         {
           label: messages.labelChangeLanguage.message,
-          submenu: getAvailableLocales().map(locale => {
-            return {
-              label: messages[`locale.${locale}`].message,
-              id: locale,
-              click: changeLanguage,
-            };
-          }).sort((a, b) => a.label.localeCompare(b.label)),
+          submenu: getAvailableLocales()
+            .map(locale => {
+              return {
+                label: messages[`locale.${locale}`].message,
+                id: locale,
+                click: changeLanguage,
+              };
+            })
+            .sort((a, b) => a.label.localeCompare(b.label)),
         },
       ],
     },

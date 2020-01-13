@@ -11,7 +11,7 @@
 */
 
 // eslint-disable-next-line func-names
-(function () {
+(function() {
   'use strict';
 
   window.Whisper = window.Whisper || {};
@@ -95,7 +95,7 @@
           unclaimed: this.model[0].isUnclaimed,
           closed: this.model[0].isClosed,
           avatarSrc: this.model[0].company_avatar,
-          searchText: i18n('search')
+          searchText: i18n('search'),
         };
       } else {
         if (
@@ -127,7 +127,7 @@
         this.$('#claim_' + element.uuid).click(() =>
           this.claimTicket(element.company_id, element.uuid)
         );
-        this.$('img').on('error', function () {
+        this.$('img').on('error', function() {
           $(this).attr('src', 'images/header-chat.png');
         });
       });
@@ -160,19 +160,19 @@
 
               const mainMssgDiv = `<div id="ticket_${
                 element.uuid
-                }" class="mainMssgDiv"></div>`;
+              }" class="mainMssgDiv"></div>`;
               this.$('#' + element.uuid).append(mainMssgDiv);
               ticketDETAIL.events.reverse().forEach(mssg => {
                 const mssgDiv = `<div class="received-message">
                                   <p class="mssgUsername">${
-                  element.name ? element.name : 'username'
-                  }</p>
+                                    element.name ? element.name : 'username'
+                                  }</p>
                                   <p class="ticket-message">${
-                  JSON.parse(mssg.json).body
-                  }</p>
+                                    JSON.parse(mssg.json).body
+                                  }</p>
                                   <p class="ticket-time">${
-                  days[new Date(mssg.ts).getDay()]
-                  } ${new Date(mssg.ts).getHours() -
+                                    days[new Date(mssg.ts).getDay()]
+                                  } ${new Date(mssg.ts).getHours() -
                   1}:${new Date(mssg.ts).getMinutes()}</p>
                                 </div>`;
                 this.$('#ticket_' + element.uuid).append(mssgDiv);
@@ -412,7 +412,7 @@
     },
 
     setupHeader() {
-      console.log(this.model.attributes, 'setupHeader')
+      console.log(this.model.attributes, 'setupHeader');
       const getHeaderProps = () => {
         const uuid = this.model.attributes.ticket_uuid;
         const company_id = this.model.attributes.company_id;
@@ -473,7 +473,7 @@
             this.unload('archive');
             this.model.setArchived(true);
           },
-           openEditGroup: ()=> {
+          openEditGroup: () => {
             const { appView } = window['owsDesktopApp'];
             appView.openModalEditGroup('group', group_name, group_id);
           },
@@ -2512,30 +2512,30 @@
         isMultiViewMode: this.isMultiViewMode,
         multiView: this.multiView,
         isAdmin: this.isAdmin,
-        showAddNote: this.showAddNote
-      }
+        showAddNote: this.showAddNote,
+      };
     },
     initialize(options) {
       this.isMultiViewMode = true;
       this.isViewMode = false;
       this.currentId = null;
       this.company_id = options.company_id;
-        this.isAdmin = options.isAdmin;
+      this.isAdmin = options.isAdmin;
       this.notes = [];
       this.emptyNotes = [];
       this.showAddNote = false;
       options.model.forEach(element => {
-        if(element.note_type == 'normal'){
-          element['isNoteNormal'] = true
-        }else {
-          element['isNoteNormal'] = false
+        if (element.note_type == 'normal') {
+          element['isNoteNormal'] = true;
+        } else {
+          element['isNoteNormal'] = false;
         }
         if (element.title !== '' && element.content !== '') {
-          this.notes.push(element)
+          this.notes.push(element);
           this.countNotes += 1;
         } else {
-          this.emptyNotes.push(element)
-          this.showAddNote = true
+          this.emptyNotes.push(element);
+          this.showAddNote = true;
         }
       });
       this.render();
@@ -2547,23 +2547,21 @@
       'click #addMoreNote': 'addMoreNotes',
       'click .editCardBlackboard': 'editCardIcon',
       'click .removeCardBlackboard': 'removeNoteModal',
-
-
     },
     async openDetailView(event, sendid = null) {
       try {
-        const admins = await getAdminCompany(this.company_id)
+        const admins = await getAdminCompany(this.company_id);
         if (admins.success) {
           this.isAdmin = true;
         } else {
           this.isAdmin = false;
         }
       } catch (error) {
-        this.isAdmin = false
+        this.isAdmin = false;
       }
-      let id = null
+      let id = null;
       if (sendid !== null) {
-        id = sendid
+        id = sendid;
       } else {
         id = event.currentTarget.id;
       }
@@ -2571,16 +2569,19 @@
       this.isViewMode = true;
       this.isMultiViewMode = false;
       const data = {
-        'note_id': this.currentId,
-      }
-      this.multiView = await getIndividualCardBlackboard(this.company_id, data)
-      const test = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig
-      this.multiView.textlink = this.multiView.content.replace(test, '<a target=\'_blank\' rel=\'noopener noreferrer nofollow\' href=\'$1\'>$1</a>');
-      console.log(this.multiView, "dddddddddddddddddddd");
-      if(this.multiView.note_type == 'normal'){
-        this.multiView.isNoteNormal = true
-      }else {
-        this.multiView.isNoteNormal = false
+        note_id: this.currentId,
+      };
+      this.multiView = await getIndividualCardBlackboard(this.company_id, data);
+      const test = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+      this.multiView.textlink = this.multiView.content.replace(
+        test,
+        "<a target='_blank' rel='noopener noreferrer nofollow' href='$1'>$1</a>"
+      );
+      console.log(this.multiView, 'dddddddddddddddddddd');
+      if (this.multiView.note_type == 'normal') {
+        this.multiView.isNoteNormal = true;
+      } else {
+        this.multiView.isNoteNormal = false;
       }
       this.render();
       if (this.isAdmin) {
@@ -2588,16 +2589,16 @@
       }
     },
     addMoreNotes() {
-      let id = this.emptyNotes[0].id
+      let id = this.emptyNotes[0].id;
       this.notes.push(this.emptyNotes[0]);
       this.emptyNotes.shift();
-      this.openDetailView(null, id)
+      this.openDetailView(null, id);
     },
     editCardIcon(event) {
       event.preventDefault();
       event.stopPropagation();
       const id = event.target.attributes.dataID.nodeValue;
-      this.openDetailView(null, id)
+      this.openDetailView(null, id);
     },
     removeNoteModal(event) {
       event.preventDefault();
@@ -2609,7 +2610,7 @@
       const modalContent = document.createElement('div');
       modalContent.className = 'modal-content';
       const modalText = document.createElement('span');
-      modalContent.append(modalText)
+      modalContent.append(modalText);
       modalDiv.append(modalContent);
       $('body').append(modalDiv);
       const secondThis = this;
@@ -2617,55 +2618,56 @@
       acceptButton.id = 'acceptRemoveButton';
       acceptButton.className = 'deleteNoteModalButton';
       acceptButton.textContent = 'Löschen';
-      acceptButton.onclick = function () {
+      acceptButton.onclick = function() {
         secondThis.removeCardIcon(id);
-      }
+      };
       const cancelButton = document.createElement('button');
       cancelButton.id = 'cancelRemoveButton';
       cancelButton.className = 'deleteNoteModalButton';
       cancelButton.textContent = 'Abbrechen';
-      cancelButton.onclick = function () {
+      cancelButton.onclick = function() {
         $('#modalDiv').remove();
-      }
+      };
       const actionsDiv = document.createElement('div');
-      actionsDiv.className = 'actionsDiv'
+      actionsDiv.className = 'actionsDiv';
       actionsDiv.append(acceptButton);
       actionsDiv.append(cancelButton);
       modalContent.append(actionsDiv);
-      modalText.textContent = 'Sind Sie sicher, dass Sie diese Notiz löschen möchten?';
+      modalText.textContent =
+        'Sind Sie sicher, dass Sie diese Notiz löschen möchten?';
     },
     removeCardIcon(id) {
       // this.openDetailView(null, id)
-      let indexToRemove = null
+      let indexToRemove = null;
       for (let index = 0; index < this.notes.length; index++) {
         if (id == this.notes[index].id) {
           const tmpNewElement = {
             id: this.notes[index].id,
-            title: "",
-            content: "",
+            title: '',
+            content: '',
             company_id: this.notes[index].company_id,
-            ts_created: this.notes[index].ts_created
-          }
+            ts_created: this.notes[index].ts_created,
+          };
           const data = {
-            'note_id': this.notes[index].id,
-            'title': '',
-            'content': '',
-            "note_type": "normal"
-          }
-          this.updateCard(data, this.notes[index].company_id)
-          this.emptyNotes.push(tmpNewElement)
+            note_id: this.notes[index].id,
+            title: '',
+            content: '',
+            note_type: 'normal',
+          };
+          this.updateCard(data, this.notes[index].company_id);
+          this.emptyNotes.push(tmpNewElement);
           indexToRemove = index;
         }
       }
       this.notes.splice(indexToRemove, 1);
       indexToRemove = null;
-      if(this.$('#modalDiv')){
+      if (this.$('#modalDiv')) {
         $('#modalDiv').remove();
       }
       this.render();
     },
     async updateCard(data, company_id) {
-      await editCardsBlackboard(company_id, data)
+      await editCardsBlackboard(company_id, data);
     },
     backMultiView() {
       this.isViewMode = false;
@@ -2680,17 +2682,17 @@
       if (document.getElementsByClassName('edit-card-blackboard')[0]) {
         document.getElementsByClassName('edit-card-blackboard')[0].remove();
       }
-      console.log(this.multiView, "11111111111111111111111111111111")
+      console.log(this.multiView, '11111111111111111111111111111111');
       const dialog = new Whisper.EditCardBlackboard({
         id: this.currentId,
         company_id: this.company_id,
-        data_to_edit: this.multiView
+        data_to_edit: this.multiView,
       });
       dialog.render();
       dialog.$el.insertBefore(
         document.getElementsByClassName('network-status-container')[0]
       );
-    }
+    },
   });
   Whisper.EditCardBlackboard = Whisper.View.extend({
     templateName: 'edit-card-blackboard',
@@ -2698,8 +2700,8 @@
     template: $('#edit-card-blackboard').html(),
     render_attributes() {
       return {
-        model: this.data_to_edit
-      }
+        model: this.data_to_edit,
+      };
     },
     initialize(options) {
       this.card_id = options.id;
@@ -2709,64 +2711,63 @@
       setTimeout(() => {
         switch (options.data_to_edit.note_type) {
           case 'normal':
-            this.$('#standardNote').prop("checked", true)
+            this.$('#standardNote').prop('checked', true);
             break;
           case 'calender':
-            this.$('#KalenderNote').prop("checked", true)
+            this.$('#KalenderNote').prop('checked', true);
             break;
 
           default:
             break;
         }
-          this.enableDisableButton();
-        }, 100);
+        this.enableDisableButton();
+      }, 100);
     },
     events: {
       'click #EditCardClosePanel': 'closePanel',
       'click #sendEditCard': 'saveEditCard',
       'click #cancelEditCard': 'cancelEditCard',
       'keyup #title-card, #textareaTextCard': 'enableDisableButton',
-      'click #squareNormalPreview, #squarecalenderPreview': 'selectTypeNote'
-
+      'click #squareNormalPreview, #squarecalenderPreview': 'selectTypeNote',
     },
     closePanel() {
       document.getElementsByClassName('edit-card-blackboard')[0].remove();
     },
-    selectTypeNote(event){
+    selectTypeNote(event) {
       const id = event.currentTarget.id;
-      if(id === 'squarecalenderPreview'){
+      if (id === 'squarecalenderPreview') {
         this.$('#KalenderNote').click();
-      }else if(id === 'squareNormalPreview'){
+      } else if (id === 'squareNormalPreview') {
         this.$('#standardNote').click();
       }
     },
-      cancelEditCard(){
-        this.closePanel();
-        window.Whisper.events.trigger('showOpenBlackboard', this.company_id);
-      },
-      enableDisableButton(){
-        const title =  this.$('#title-card').val();
-        const content =  this.$('#textareaTextCard').val();
-        if(title.length > 0 && content.length > 0){
-          this.$('#sendEditCard').removeClass('disabled')
-        }else {
-          this.$('#sendEditCard').addClass('disabled')
-        }
-      },
-      async saveEditCard(){
+    cancelEditCard() {
+      this.closePanel();
+      window.Whisper.events.trigger('showOpenBlackboard', this.company_id);
+    },
+    enableDisableButton() {
+      const title = this.$('#title-card').val();
+      const content = this.$('#textareaTextCard').val();
+      if (title.length > 0 && content.length > 0) {
+        this.$('#sendEditCard').removeClass('disabled');
+      } else {
+        this.$('#sendEditCard').addClass('disabled');
+      }
+    },
+    async saveEditCard() {
       const title = this.$('#title-card').val();
       const content = this.$('#textareaTextCard').val();
       const id = this.card_id;
-      const company_id = this.company_id
-        const type =  this.$('input[name=colors]:checked', '#myForm').val()
+      const company_id = this.company_id;
+      const type = this.$('input[name=colors]:checked', '#myForm').val();
       const data = {
-        'note_id': id,
-        'title': title,
-        'content': content,
-        "note_type": type,
+        note_id: id,
+        title: title,
+        content: content,
+        note_type: type,
       };
-      await editCardsBlackboard(company_id, data)
-      this.sendNotificationBlackboard(company_id)
+      await editCardsBlackboard(company_id, data);
+      this.sendNotificationBlackboard(company_id);
       this.closePanel();
       window.Whisper.events.trigger('showOpenBlackboard', company_id);
     },
@@ -2777,10 +2778,10 @@
       //   if(element.phone_number !== me){
       //     addNotificationNotes(element.phone_number, true);
       //   }
- 
+
       // });
       companyUsers.clients.forEach(element => {
-        if(element.phone_number !== me){
+        if (element.phone_number !== me) {
           addNotificationNotes(element.phone_number, true);
         }
       });
@@ -2789,17 +2790,17 @@
       const title = '';
       const content = '';
       const id = this.card_id;
-      const company_id = this.company_id
+      const company_id = this.company_id;
       const data = {
-        'note_id': id,
-        'title': title,
-        'content': content,
-        "note_type": "normal",
+        note_id: id,
+        title: title,
+        content: content,
+        note_type: 'normal',
       };
-      await editCardsBlackboard(company_id, data)
+      await editCardsBlackboard(company_id, data);
       this.closePanel();
       window.Whisper.events.trigger('showOpenBlackboard', company_id);
-    }
+    },
   });
 
   Whisper.ModalEditGroup = Whisper.View.extend({
@@ -2809,7 +2810,11 @@
 
     initialize(options) {
       if (options) {
-        console.log(options.group_id.includes('-intern'),options, "optionssssssssss")
+        console.log(
+          options.group_id.includes('-intern'),
+          options,
+          'optionssssssssss'
+        );
         // if (options.contact_data !== undefined) {
         this.contactListXml = prepareDataXml(options.contact_data);
         this.objectContact = [];
@@ -2817,25 +2822,24 @@
         this.canEdit = true;
         if (options.type === 'group') {
           if (options.admin_client) {
-            if(options.group_id.includes('-intern')){
+            if (options.group_id.includes('-intern')) {
               this.prepareUserInviteGroup(options, 'intern');
-            }
-            else if(options.group_id.includes('-extern')){
+            } else if (options.group_id.includes('-extern')) {
               this.prepareUserInviteGroup(options, 'extern');
-            } else{
+            } else {
               this.prepareUserInviteGroup(options, 'regular');
             }
           }
         }
         this.isEditingName = false;
         this.editGroupName = '';
-        var nameEdit = options.group_name.split('-')
+        var nameEdit = options.group_name.split('-');
         for (let index = 1; index < nameEdit.length; index++) {
           this.editGroupName += nameEdit[index];
         }
         this.groupName = options.group_name;
         this.group_id = options.group_id;
-        this.members = options.members
+        this.members = options.members;
         for (let f = 0; f < this.members.length; f++) {
           let id = this.members[f];
           dataUsersToInvitate[id] = {
@@ -2849,7 +2853,7 @@
     },
     render_attributes() {
       return {
-        'searchPlaceholder': i18n('search'),
+        searchPlaceholder: i18n('search'),
         'send-message': i18n('sendMessage'),
         typeAdmin: this.typeAdmin,
         typeKunde: this.typeKunde,
@@ -2872,12 +2876,12 @@
       'click  #editName': 'editNameGroup',
       'click #buttonEditGroup': 'saveEditGroup',
       'click #closeEditName': 'closeEditName',
-      'click .removeUserToGroup': 'removeUserGroup'
+      'click .removeUserToGroup': 'removeUserGroup',
       // 'click #countryCode, #dialCode' : 'showCountries',
     },
-    prepareUserInviteGroup(options, groupType){
+    prepareUserInviteGroup(options, groupType) {
       const myNumber = textsecure.storage.user.getNumber();
-      if(groupType == 'regular'){
+      if (groupType == 'regular') {
         this.canEdit = true;
         if (options.admin_client.admins) {
           for (let i = 0; i < options.admin_client.admins.length; i++) {
@@ -2890,8 +2894,8 @@
                 email: '',
                 phone: contact.phone_number,
                 ts: contact.ts_registration,
-              }
-              this.objectContact.push(tmpObj)
+              };
+              this.objectContact.push(tmpObj);
             }
           }
         }
@@ -2906,12 +2910,12 @@
                 email: '',
                 phone: contact.phone_number,
                 ts: contact.ts_registration,
-              }
-              this.objectContact.push(tmpObj)
+              };
+              this.objectContact.push(tmpObj);
             }
           }
         }
-      }else if(groupType == 'intern'){
+      } else if (groupType == 'intern') {
         this.canEdit = false;
         if (options.admin_client.admins) {
           for (let i = 0; i < options.admin_client.admins.length; i++) {
@@ -2924,12 +2928,12 @@
                 email: '',
                 phone: contact.phone_number,
                 ts: contact.ts_registration,
-              }
-              this.objectContact.push(tmpObj)
+              };
+              this.objectContact.push(tmpObj);
             }
           }
         }
-      } else if(groupType == 'extern'){
+      } else if (groupType == 'extern') {
         this.canEdit = false;
         if (options.admin_client.clients) {
           for (let i = 0; i < options.admin_client.clients.length; i++) {
@@ -2942,8 +2946,8 @@
                 email: '',
                 phone: contact.phone_number,
                 ts: contact.ts_registration,
-              }
-              this.objectContact.push(tmpObj)
+              };
+              this.objectContact.push(tmpObj);
             }
           }
         }
@@ -2951,8 +2955,12 @@
     },
     closePanel() {
       document.getElementsByClassName('edit-group-modal')[0].remove();
-      document.getElementsByClassName('conversation-header')[0].classList.remove('width3colum');
-      document.getElementsByClassName('panel')[0].classList.remove('width3colum');
+      document
+        .getElementsByClassName('conversation-header')[0]
+        .classList.remove('width3colum');
+      document
+        .getElementsByClassName('panel')[0]
+        .classList.remove('width3colum');
       dataUsersToInvitate = {};
     },
     closeEditName() {
@@ -2973,7 +2981,7 @@
     },
     searchContactList(e) {
       let value = e.target.value.toLowerCase();
-      $('#mainDivUserSendInvitation span').filter(function () {
+      $('#mainDivUserSendInvitation span').filter(function() {
         $(this).toggle(
           $(this)
             .text()
@@ -2993,17 +3001,18 @@
       this.render();
     },
     saveEditGroup() {
-      var nameEdit = this.groupName.split('-')
-      let nameToUpdate = this.groupName
+      var nameEdit = this.groupName.split('-');
+      let nameToUpdate = this.groupName;
       if (this.$('#editGroupNameInput').val() !== undefined) {
-        nameToUpdate = nameEdit[0] + ' - ' + this.$('#editGroupNameInput').val()
+        nameToUpdate =
+          nameEdit[0] + ' - ' + this.$('#editGroupNameInput').val();
       }
-      let users = []
+      let users = [];
 
       Object.keys(dataUsersToInvitate).forEach(element => {
         const id = dataUsersToInvitate[element].userid;
         users.push(id);
-      })
+      });
       updateGroup(this.group_id, nameToUpdate, users);
       this.closePanel();
     },
@@ -3019,34 +3028,40 @@
             if (id === contact.getElementsByTagName('phone')[0].textContent) {
               const data = this.contactListXml;
               const tmpObj = {
-                name: data.getElementsByTagName('name')[i].childNodes[0].nodeValue + ' ' + data.getElementsByTagName('surname')[i].childNodes[0].nodeValue,
-                phone: data.getElementsByTagName('phone')[i].childNodes[0].nodeValue,
-                id: data.getElementsByTagName('phone')[i].childNodes[0].nodeValue,
-              }
-              this.renderUserGroup.push(tmpObj)
+                name:
+                  data.getElementsByTagName('name')[i].childNodes[0].nodeValue +
+                  ' ' +
+                  data.getElementsByTagName('surname')[i].childNodes[0]
+                    .nodeValue,
+                phone: data.getElementsByTagName('phone')[i].childNodes[0]
+                  .nodeValue,
+                id: data.getElementsByTagName('phone')[i].childNodes[0]
+                  .nodeValue,
+              };
+              this.renderUserGroup.push(tmpObj);
             }
           });
         }
       } else {
         Object.keys(dataUsersToInvitate).forEach(element => {
           const id = dataUsersToInvitate[element].userid;
-          let tmpObj = {}
+          let tmpObj = {};
           if (id == getOwnNumber()) {
             tmpObj = {
               name: 'You',
               phone: id,
               id: id,
-            }
+            };
           } else {
-            let foundUser = false
+            let foundUser = false;
             for (let i = 0; i < this.objectContact.length; i++) {
               if (this.objectContact[i].phone == id) {
-                foundUser = true
+                foundUser = true;
                 tmpObj = {
                   name: this.objectContact[i].name,
                   phone: id,
                   id: id,
-                }
+                };
               }
             }
             if (!foundUser) {
@@ -3054,10 +3069,10 @@
                 name: 'Unknow User',
                 phone: id,
                 id: id,
-              }
+              };
             }
           }
-          this.renderUserGroup.push(tmpObj)
+          this.renderUserGroup.push(tmpObj);
         });
       }
       this.render();
@@ -3065,8 +3080,7 @@
     removeUserGroup(event) {
       const id = event.target.attributes.dataPhone.nodeValue;
       delete dataUsersToInvitate[id];
-      this.sendDataToModal()
-
+      this.sendDataToModal();
     },
 
     checkBoxevent(event) {
@@ -3081,5 +3095,4 @@
       }
     },
   });
-
 })();

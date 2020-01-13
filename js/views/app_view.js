@@ -191,8 +191,7 @@
         });
       }
     },
-    openBlackboard(id){
-
+    openBlackboard(id) {
       if (id) {
         this.openInbox().then(() => {
           this.inboxView.openBlackboard(id);
@@ -202,7 +201,13 @@
     openTicket(id, messageId, editCompany = null) {
       if (id) {
         this.openInbox().then(() => {
-          this.inboxView.openTicket(id, messageId, true, undefined, editCompany);
+          this.inboxView.openTicket(
+            id,
+            messageId,
+            true,
+            undefined,
+            editCompany
+          );
         });
       }
     },
@@ -252,7 +257,7 @@
         type: typeUser,
         admin_client: admin_client_data,
       });
-      console.log('DIALOG', dialog)
+      console.log('DIALOG', dialog);
       dialog.$el.insertBefore(
         document.getElementsByClassName('network-status-container')[0]
       );
@@ -260,51 +265,57 @@
         this.$('.titleSendInvitation')[0].textContent = 'Gruppe erstellen';
       }
       if (typeUser === 'kunde') {
-        this.$('.titleSendInvitation')[0].textContent = 'Externe Nutzer einladen';
+        this.$('.titleSendInvitation')[0].textContent =
+          'Externe Nutzer einladen';
       }
       if (typeUser === 'admin') {
-        this.$('.titleSendInvitation')[0].textContent = 'Interne Nutzer einladen';
+        this.$('.titleSendInvitation')[0].textContent =
+          'Interne Nutzer einladen';
       }
     },
     async openModalEditGroup(typeUser, name, id) {
-      console.log("holaaaaaaaaaaaaaaaaaaaaa")
-      if(document.getElementsByClassName('edit-group-modal').length === 0){
-      const companyNumber = textsecure.storage.get('companyNumber', null);
-      let admin_client_data = null;
-      if (typeUser === 'group') {
-        admin_client_data = await getClientAdminCompany(companyNumber);
-      }
-      const xml = await getXmlFile(companyNumber);
-      await waitForConversationController();
-      let conversation = await ConversationController.getOrCreateAndWait(
-        id,
-        'group'
-      );
-      // const InvitationList = await getClientAdminCompany(companyNumber);
-      // console.log(InvitationList.admins, "55555555555555")
-      // if(xml && InvitationList){
-      //   localStorage.setItem('InvitationList',JSON.stringify(InvitationList));
-      //   if(typeUser === 'admin'){
-      //     xml.InvitationList = InvitationList.admins
-      //   }
-      //   if(typeUser === 'kunde'){
-      //     xml.InvitationList = InvitationList.clients
-      //   }
-      //   xml.type = typeUser;
-      // }
-      const dialog = new Whisper.ModalEditGroup({
-        contact_data: xml,
-        type: typeUser,
-        admin_client: admin_client_data,
-        group_name: name,
-        group_id: id,
-        members: conversation.attributes.members,
-      });
-      document.getElementsByClassName('conversation-header')[0].classList.add('width3colum');
-      document.getElementsByClassName('panel')[0].classList.add('width3colum');
-      dialog.$el.insertAfter(
-        document.getElementsByClassName('conversation-header')[0]
-      );
+      console.log('holaaaaaaaaaaaaaaaaaaaaa');
+      if (document.getElementsByClassName('edit-group-modal').length === 0) {
+        const companyNumber = textsecure.storage.get('companyNumber', null);
+        let admin_client_data = null;
+        if (typeUser === 'group') {
+          admin_client_data = await getClientAdminCompany(companyNumber);
+        }
+        const xml = await getXmlFile(companyNumber);
+        await waitForConversationController();
+        let conversation = await ConversationController.getOrCreateAndWait(
+          id,
+          'group'
+        );
+        // const InvitationList = await getClientAdminCompany(companyNumber);
+        // console.log(InvitationList.admins, "55555555555555")
+        // if(xml && InvitationList){
+        //   localStorage.setItem('InvitationList',JSON.stringify(InvitationList));
+        //   if(typeUser === 'admin'){
+        //     xml.InvitationList = InvitationList.admins
+        //   }
+        //   if(typeUser === 'kunde'){
+        //     xml.InvitationList = InvitationList.clients
+        //   }
+        //   xml.type = typeUser;
+        // }
+        const dialog = new Whisper.ModalEditGroup({
+          contact_data: xml,
+          type: typeUser,
+          admin_client: admin_client_data,
+          group_name: name,
+          group_id: id,
+          members: conversation.attributes.members,
+        });
+        document
+          .getElementsByClassName('conversation-header')[0]
+          .classList.add('width3colum');
+        document
+          .getElementsByClassName('panel')[0]
+          .classList.add('width3colum');
+        dialog.$el.insertAfter(
+          document.getElementsByClassName('conversation-header')[0]
+        );
       }
     },
   });

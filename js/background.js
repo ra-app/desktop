@@ -721,7 +721,7 @@
       }
     });
 
-     Whisper.events.on('showOpenBlackboard', (id, messageId) => {
+    Whisper.events.on('showOpenBlackboard', (id, messageId) => {
       console.log(id, appView, 'iddddddddddddddddd');
       if (appView) {
         appView.openBlackboard(id, messageId);

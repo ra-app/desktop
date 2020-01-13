@@ -6,15 +6,15 @@ try {
   // https://stackoverflow.com/questions/18391212/is-it-not-possible-to-stringify-an-error-using-json-stringify
   if (!('toJSON' in Error.prototype)) {
     Object.defineProperty(Error.prototype, 'toJSON', {
-      value: function () {
+      value: function() {
         var alt = {};
-        Object.getOwnPropertyNames(this).forEach(function (key) {
+        Object.getOwnPropertyNames(this).forEach(function(key) {
           alt[key] = this[key];
         }, this);
         return alt;
       },
       configurable: true,
-      writable: true
+      writable: true,
     });
   }
 } catch (err) {
@@ -24,11 +24,11 @@ try {
 try {
   if (!('toJSON' in ArrayBuffer.prototype)) {
     Object.defineProperty(ArrayBuffer.prototype, 'toJSON', {
-      value: function () {
+      value: function() {
         return Array.from(new Uint8Array(this));
       },
       configurable: true,
-      writable: true
+      writable: true,
     });
   }
 } catch (err) {
@@ -40,7 +40,11 @@ function randomID() {
 }
 
 function getPath(...relativePath) {
-  return path.join(app ? app.getPath('userData') : __dirname, 'third_party', ...relativePath);
+  return path.join(
+    app ? app.getPath('userData') : __dirname,
+    'third_party',
+    ...relativePath
+  );
 }
 
 function exists(fullPath) {
@@ -56,7 +60,11 @@ function deleteFile(fullPath) {
   try {
     return fs.unlinkSync(fullPath);
   } catch (err) {
-    console.warn('thirdPartyNode deleteFile Error:', err.message || err, fullPath);
+    console.warn(
+      'thirdPartyNode deleteFile Error:',
+      err.message || err,
+      fullPath
+    );
     return false;
   }
 }

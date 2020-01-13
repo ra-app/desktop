@@ -156,7 +156,9 @@ function _createSocket(url, { certificateAuthority, proxyUrl }) {
   }
 
   // eslint-disable-next-line new-cap
-  return new WebSocket(url, null, null, null, requestOptions, { maxReceivedFrameSize: 2000000 }); // , maxReceivedMessageSize: 2000000 });
+  return new WebSocket(url, null, null, null, requestOptions, {
+    maxReceivedFrameSize: 2000000,
+  }); // , maxReceivedMessageSize: 2000000 });
 }
 
 const FIVE_MINUTES = 1000 * 60 * 5;
@@ -986,7 +988,6 @@ function initialize({
         urlParameters: '/' + id,
       });
 
-      
       // const id = response.location.match(/\/(\d*?)\?X/)[1];
       const cred = response.location.match(/X-Amz-Credential=(.*?)%/)[1];
       // const fullcred = decodeURIComponent(response.location.match(/X-Amz-Credential=(.*?)&/)[1]);
@@ -995,12 +996,12 @@ function initialize({
       // const algo = response.location.match(/X-Amz-Algorithm=(.*?)&/)[1];
       // const exp = response.location.match(/X-Amz-Expires=(.*?)&/)[1];
       // const hdr = decodeURIComponent(response.location.match(/X-Amz-SignedHeaders=(.*?)&/)[1]);
-      
+
       // console.log('delAttachment RESPONSE', response, cred, sig);
       // ${cdnUrl}/attachments/
       // await _outerAjax(response.location.split('?')[0], {
       const res = await _outerAjax(response.location, {
-      // await _outerAjax(`${cdnUrl}/attachments/${id}`, {
+        // await _outerAjax(`${cdnUrl}/attachments/${id}`, {
         // certificateAuthority,
         proxyUrl,
         timeout: 0,

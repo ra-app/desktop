@@ -67,9 +67,10 @@ const createUpdateIndicator = () => {
   const testUpdateIndicator = document.createElement('div');
   testUpdateIndicator.id = 'testUpdateIndicator';
   testUpdateIndicator.className = 'testUpdateIndicator';
-    $('#main_header').append(testUpdateIndicator);
-  if (lastSetUpdateDisplayState) setUpdateDisplayState(lastSetUpdateDisplayState);
-}
+  $('#main_header').append(testUpdateIndicator);
+  if (lastSetUpdateDisplayState)
+    setUpdateDisplayState(lastSetUpdateDisplayState);
+};
 
 function setTestUpdateIndicator(msg) {
   const indicator = document.getElementById('testUpdateIndicator');
@@ -88,9 +89,9 @@ function setUpdateFound() {
   actionsInput.id = 'actionsInput';
   actionsInput.className = 'actionsInput';
   actionsInput.textContent = 'Herunterladen';
-  actionsInput.onclick = function () {
+  actionsInput.onclick = function() {
     window.ipc.send('start-download', true);
-  }
+  };
 
   setTestUpdateIndicator('Update verfügbar');
   $('#testUpdateIndicator').append(actionsInput);
@@ -102,21 +103,21 @@ function setDownloadFinished() {
   acceptInstall.id = 'acceptInstall';
   acceptInstall.textContent = 'Installieren';
   acceptInstall.className = 'actionsInput';
-  acceptInstall.onclick = function () {
+  acceptInstall.onclick = function() {
     window.ipc.send('startInstall', true);
     localStorage.removeItem('existsUpdate');
     localStorage.removeItem('existsUpdateVersion');
     localStorage.removeItem('localStorageDataFileName');
-  }
+  };
 
   const cancelInstall = document.createElement('button');
   cancelInstall.id = 'acceptInstall';
   cancelInstall.textContent = 'Später installieren';
   cancelInstall.className = 'actionsInput';
-  cancelInstall.onclick = function () {
+  cancelInstall.onclick = function() {
     hideIndicator();
     window.ipc.send('startInstall', false);
-  }
+  };
 
   const buttonsDiv = document.createElement('div');
   buttonsDiv.append(acceptInstall);
@@ -131,24 +132,24 @@ function setInitInstall() {
   initInstall.id = 'acceptInstall';
   initInstall.className = 'actionsInput';
   initInstall.value = 'Installieren';
-  initInstall.onclick = function () {
+  initInstall.onclick = function() {
     window.ipc.send('startInstall', true);
     localStorage.removeItem('existsUpdate');
     localStorage.removeItem('existsUpdateVersion');
     localStorage.removeItem('localStorageDataFileName');
-  }
+  };
 
   const refuseInstall = document.createElement('button');
   refuseInstall.id = 'acceptInstall';
   refuseInstall.className = 'actionsInput';
   refuseInstall.textContent = 'Später installieren';
-  refuseInstall.onclick = function () {
+  refuseInstall.onclick = function() {
     window.ipc.send('startInstall', false);
-  }
+  };
 
   setTestUpdateIndicator('Installation available');
-  $('#testUpdateIndicator').append(initInstall)
-  $('#testUpdateIndicator').append(refuseInstall)
+  $('#testUpdateIndicator').append(initInstall);
+  $('#testUpdateIndicator').append(refuseInstall);
 }
 
 let lastSetUpdateDisplayState = undefined;
@@ -185,14 +186,24 @@ async function initUpdateIPC() {
     // setTestUpdateIndicator(msg.status);
 
     switch (msg.status) {
-      case 'checking' :
-        const localStorageData = localStorage.getItem('existsUpdate')
-        const localStorageDataVersion = localStorage.getItem('existsUpdateVersion')
-        const localStorageDataFileName = localStorage.getItem('existsUpdateFilename')
-        window.ipc.send('checkUpdate', {localStorageData, localStorageDataVersion, localStorageDataFileName});
+      case 'checking':
+        const localStorageData = localStorage.getItem('existsUpdate');
+        const localStorageDataVersion = localStorage.getItem(
+          'existsUpdateVersion'
+        );
+        const localStorageDataFileName = localStorage.getItem(
+          'existsUpdateFilename'
+        );
+        window.ipc.send('checkUpdate', {
+          localStorageData,
+          localStorageDataVersion,
+          localStorageDataFileName,
+        });
         break;
       case 'dl_progress':
-        setTestUpdateIndicator('Download-Prozess: ' + (msg.progress.percent * 100).toFixed(1) + '%');
+        setTestUpdateIndicator(
+          'Download-Prozess: ' + (msg.progress.percent * 100).toFixed(1) + '%'
+        );
         break;
       case 'download_finished':
         localStorage.setItem('existsUpdate', msg.updateFilePath);
@@ -289,11 +300,10 @@ const wrapFunctionForCaching = (func, maxAge = 60000) => {
 // const cachedGetClientDetails = wrapFunctionForCaching(getClientDetails);
 // const cachedGetClientPhone = wrapFunctionForCaching(getClientPhone);
 
-
 // ===
 
 const CURRENT_VERSION = window.getVersion();
-async function COMPANY_ID () {
+async function COMPANY_ID() {
   return textsecure.storage.get('companyNumber', null);
 }
 
@@ -444,13 +454,9 @@ const updateConversation = async (id, data, type = 'company') => {
   const conversation = await getConversation(id, type);
   if (!conversation) return undefined;
   conversation.set(data);
-  await window.Signal.Data.updateConversation(
-    id,
-    conversation.attributes,
-    {
-      Conversation: Whisper.Conversation,
-    }
-  );
+  await window.Signal.Data.updateConversation(id, conversation.attributes, {
+    Conversation: Whisper.Conversation,
+  });
   return conversation;
 };
 
@@ -466,7 +472,7 @@ const getConversation = async (id, type = 'company') => {
   }
 };
 
-const ensurePersonIsKnownImpl = async (phoneNumber) => {
+const ensurePersonIsKnownImpl = async phoneNumber => {
   try {
     console.log('ensurePersonIsKnown', phoneNumber);
     const client = await getClientPhone(phoneNumber);
@@ -481,9 +487,17 @@ const ensurePersonIsKnownImpl = async (phoneNumber) => {
       }
     }
 
-    if (conversation.get('name') !== conversationName || conversation.get('uuid') !== client.uuid) {
-      conversation.set({ 'name': conversationName, 'uuid': client.uuid });
-      console.log('ensurePersonIsKnown update', phoneNumber, conversation, client);
+    if (
+      conversation.get('name') !== conversationName ||
+      conversation.get('uuid') !== client.uuid
+    ) {
+      conversation.set({ name: conversationName, uuid: client.uuid });
+      console.log(
+        'ensurePersonIsKnown update',
+        phoneNumber,
+        conversation,
+        client
+      );
     }
   } catch (err) {
     console.error('ensurePersonIsKnown', phoneNumber, err);
@@ -491,9 +505,9 @@ const ensurePersonIsKnownImpl = async (phoneNumber) => {
 };
 
 const _ensurePersonIsKnownPromises = {};
-const ensurePersonIsKnown = (phoneNumber) => {
+const ensurePersonIsKnown = phoneNumber => {
   if (!_ensurePersonIsKnownPromises[phoneNumber]) {
-    const p = ensurePersonIsKnownImpl(phoneNumber).catch(async (err) => {
+    const p = ensurePersonIsKnownImpl(phoneNumber).catch(async err => {
       delete _ensurePersonIsKnownPromises[phoneNumber];
       throw err;
     });
@@ -506,7 +520,8 @@ const ensureConversation = async (phone_number, notUpdate = false) => {
   await waitForConversationController();
   console.log('ensureConversation', phone_number);
   let conversation = await ConversationController.get(phone_number, 'private');
-  if (conversation) { // && conversation.get('active_at')) {
+  if (conversation) {
+    // && conversation.get('active_at')) {
     console.log('ensureConversation existing', conversation);
     return conversation;
   }
@@ -649,9 +664,9 @@ const xhrReq = (url, postdata, authHeader) => {
           reject(
             new Error(
               'Network request returned bad status: ' +
-              req.status +
-              ' ' +
-              req.response
+                req.status +
+                ' ' +
+                req.response
             )
           );
         }
@@ -731,9 +746,9 @@ const updateAdmin = async (company_id, name) => {
 //   return (apiRequest('/public/img/' + company));
 // };
 
-const getClientPhoneImpl = async (phoneNum) => {
+const getClientPhoneImpl = async phoneNum => {
   return (await apiRequest('api/v1/client/getbyphone/' + phoneNum)).client;
-}
+};
 
 const getClientPhone = wrapFunctionForCaching(getClientPhoneImpl, 60000 * 30);
 
@@ -750,8 +765,10 @@ const setClientAvatar = async data => {
 };
 
 const updateCompanyName = async (company_name, company_id) => {
-  return apiRequest('/api/v1/companies/' + company_id + '/updatename', { company_name })
-}
+  return apiRequest('/api/v1/companies/' + company_id + '/updatename', {
+    company_name,
+  });
+};
 
 const updateClient = async data => {
   return apiRequest('api/v1/client/info', data);
@@ -877,21 +894,21 @@ const spamTickets = async company_id => {
 
 // blackboards
 const createCardBlackboard = async company_id => {
-  return (apiRequest('api/v1/admin/' + company_id + '/blackboard/dummy'));
+  return apiRequest('api/v1/admin/' + company_id + '/blackboard/dummy');
 };
 const getCardsBlackboard = async company_id => {
-  return (await apiRequest('/api/v1/client/blackboard/list/' + company_id)).note;
+  return (await apiRequest('/api/v1/client/blackboard/list/' + company_id))
+    .note;
 };
 const getIndividualCardBlackboard = async (company_id, data) => {
-  return (await apiRequest('/api/v1/client/blackboard/get/' + company_id, data)).note;
+  return (await apiRequest('/api/v1/client/blackboard/get/' + company_id, data))
+    .note;
 };
 
 const editCardsBlackboard = async (company_id, data) => {
-  return (apiRequest('/api/v1/admin/' + company_id + '/blackboard/update', data));
+  return apiRequest('/api/v1/admin/' + company_id + '/blackboard/update', data);
 };
 // end blackboard
-
-
 
 const exampleInfo = {
   name: 'Mega Corporate',
@@ -1033,7 +1050,7 @@ const createDeveloperInterface = () => {
           // ticketItem.innerHTML = JSON.stringify(ticket);
           ticketItem.innerHTML = `${ticket.uuid} ${ticket.state} ${
             ticket.client_uuid
-            }`;
+          }`;
 
           const detailsList = document.createElement('ul');
           const infoBtn = document.createElement('button');
@@ -1413,7 +1430,7 @@ const draggableHelper = (
       let pos = JSON.parse(localStorage.getItem(posMemoryKey));
       if (pos === null) pos = getInitialPosition();
       setElementPosition(pos);
-    } catch (err) { }
+    } catch (err) {}
   };
   recallPosition();
 
@@ -1484,7 +1501,8 @@ const draggableHelper = (
 };
 // === DRAGGABLE_HELPER END ===
 
-const CENTRAL_IMG_ROOT = 'https://luydm9sd26.execute-api.eu-central-1.amazonaws.com/latest/public/img/';
+const CENTRAL_IMG_ROOT =
+  'https://luydm9sd26.execute-api.eu-central-1.amazonaws.com/latest/public/img/';
 function updateImagesByUrl(url) {
   'use strict';
 
@@ -1501,7 +1519,7 @@ function updateImagesByUrl(url) {
     }
   }
   // for default image
-  const defaultSelector = 'img[class ^= "companyAvatarDefault"]'
+  const defaultSelector = 'img[class ^= "companyAvatarDefault"]';
   const elemsDefault = document.querySelectorAll(defaultSelector);
   for (let elem of elemsDefault) {
     try {
@@ -1513,7 +1531,10 @@ function updateImagesByUrl(url) {
 }
 
 async function sendOfficeJsonMessage(destination, data) {
-  const r = await textsecure.messaging.sendOfficeJsonMsg(destination, JSON.stringify(data));
+  const r = await textsecure.messaging.sendOfficeJsonMsg(
+    destination,
+    JSON.stringify(data)
+  );
   console.log('sendOfficeJsonMessage', destination, data, r);
 }
 
@@ -1521,11 +1542,11 @@ async function handleOfficeJSONMsg(envelope, message) {
   const source = envelope.source;
   const msgData = JSON.parse(message.jsonPayload);
 
-  switch(msgData.type) {
+  switch (msgData.type) {
     case 'note':
       console.log('handleOfficeMsgEvent note', message);
       // if(message == 'true'){
-        document.dispatchEvent(new CustomEvent('notificationNote'));
+      document.dispatchEvent(new CustomEvent('notificationNote'));
       // }
       // await sendOfficeJsonMessage(source, { type: 'pong', msg: msgData.msg });
       break;
@@ -1542,7 +1563,7 @@ async function handleOfficeMsgEvent(event) {
     // console.log('handleOfficeMsgEvent', envelope, message);
 
     if (message.type === 1 && message.jsonPayload) {
-      await handleOfficeJSONMsg(envelope, message)
+      await handleOfficeJSONMsg(envelope, message);
     }
 
     confirm();

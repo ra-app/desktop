@@ -12,12 +12,17 @@ async function handleInboxParcel(message, sourceAddr) {
   if (message.content) {
     data = Buffer.from(message.content);
   } else if (message.attachment) {
-    data = Buffer.from( (await handleAttachmentPointer(message.attachment)).data );
+    data = Buffer.from(
+      (await handleAttachmentPointer(message.attachment)).data
+    );
   } else {
     throw new Error('Invalid message!');
   }
 
-  fs.writeFileSync(getPath('inbox', Date.now() + '_' + sourceAddr + '_' + message.filename), data);
+  fs.writeFileSync(
+    getPath('inbox', Date.now() + '_' + sourceAddr + '_' + message.filename),
+    data
+  );
 
   if (message.attachment) await deleteAttachmentPointer(message.attachment);
 }

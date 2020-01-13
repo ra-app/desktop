@@ -1,5 +1,13 @@
-const { initRPC, thirdRPCTable, waitForWindowReady } = require('./thirdparty/ipc');
-const { ensureDirectoryStructure, createDirectoryWatchers, handleExistingOutboxFiles } = require('./thirdparty/watch');
+const {
+  initRPC,
+  thirdRPCTable,
+  waitForWindowReady,
+} = require('./thirdparty/ipc');
+const {
+  ensureDirectoryStructure,
+  createDirectoryWatchers,
+  handleExistingOutboxFiles,
+} = require('./thirdparty/watch');
 const { handleInboxParcel } = require('./thirdparty/receiving');
 const { initDiscovery } = require('./thirdparty/discovery');
 

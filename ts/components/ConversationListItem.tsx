@@ -57,8 +57,11 @@ export class ConversationListItem extends React.PureComponent<Props> {
   }
 
   public componentWillUnmount() {
-   this.cleanMyInterval();
-   document.removeEventListener('notificationNote', this._boundaddNotification);
+    this.cleanMyInterval();
+    document.removeEventListener(
+      'notificationNote',
+      this._boundaddNotification
+    );
   }
 
   public cleanMyInterval() {
@@ -72,11 +75,13 @@ export class ConversationListItem extends React.PureComponent<Props> {
   }
   public addNotification() {
     if (!this.interval) {
-      this.interval = setInterval(() => {this.updateImg(); }, 2000);
+      this.interval = setInterval(() => {
+        this.updateImg();
+      }, 2000);
     }
   }
 
-  public updateImg ()  {
+  public updateImg() {
     if (this.state.lastUpdated === 'images/icons/post-it-pin-icon.svg') {
       this.setState({
         lastUpdated: 'images/icons/post-it-pin-icon-red-corner.svg',
@@ -158,12 +163,12 @@ export class ConversationListItem extends React.PureComponent<Props> {
           {isMe ? (
             i18n('noteToSelf')
           ) : (
-              <ContactName
-                phoneNumber={phoneNumber}
-                name={name}
-                profileName={profileName}
-              />
-            )}
+            <ContactName
+              phoneNumber={phoneNumber}
+              name={name}
+              profileName={profileName}
+            />
+          )}
         </div>
         <div
           className={classNames(
@@ -214,20 +219,20 @@ export class ConversationListItem extends React.PureComponent<Props> {
           {isTyping ? (
             <TypingAnimation i18n={i18n} />
           ) : (
-              <MessageBody
-                text={text}
-                disableJumbomoji={true}
-                disableLinks={true}
-                i18n={i18n}
-              />
-            )}
+            <MessageBody
+              text={text}
+              disableJumbomoji={true}
+              disableLinks={true}
+              i18n={i18n}
+            />
+          )}
         </div>
         {lastMessage && lastMessage.status ? (
           <div
             className={classNames(
               'module-conversation-list-item__message__status-icon',
               `module-conversation-list-item__message__status-icon--${
-              lastMessage.status
+                lastMessage.status
               }`
             )}
           />
@@ -270,11 +275,22 @@ export class ConversationListItem extends React.PureComponent<Props> {
         <div className="module-conversation-list-item__content">
           {this.renderHeader()}
           {this.renderMessage()}
-          {(this.props.type === 'company' && openBlackboard) && (
-            <div onClick={(evt) => { evt.preventDefault(); evt.stopPropagation(); this.cleanMyInterval(); openBlackboard(id); }}>
-              <img className='iconOpenBlackboard' src={this.state.lastUpdated} />
-            </div>
-          )}
+          {this.props.type === 'company' &&
+            openBlackboard && (
+              <div
+                onClick={evt => {
+                  evt.preventDefault();
+                  evt.stopPropagation();
+                  this.cleanMyInterval();
+                  openBlackboard(id);
+                }}
+              >
+                <img
+                  className="iconOpenBlackboard"
+                  src={this.state.lastUpdated}
+                />
+              </div>
+            )}
         </div>
       </div>
     );

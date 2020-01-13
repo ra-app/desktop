@@ -162,7 +162,6 @@ export class Message extends React.PureComponent<Props, State> {
     this.textModified = '';
     this.isTicketLine = false;
 
-
     this.state = {
       expiring: false,
       expired: false,
@@ -776,22 +775,22 @@ export class Message extends React.PureComponent<Props, State> {
     }
 
     return (
-          <div
-            dir="auto"
-            className={classNames(
-              'module-message__text',
-              `module-message__text--${direction}`,
-              status === 'error' && direction === 'incoming'
-                ? 'module-message__text--error'
-                : null
-            )}
-          >
-          <MessageBody
+      <div
+        dir="auto"
+        className={classNames(
+          'module-message__text',
+          `module-message__text--${direction}`,
+          status === 'error' && direction === 'incoming'
+            ? 'module-message__text--error'
+            : null
+        )}
+      >
+        <MessageBody
           text={contents || ''}
           i18n={i18n}
           textPending={textPending}
-          />
-          </div>
+        />
+      </div>
     );
   }
 
@@ -1223,7 +1222,7 @@ export class Message extends React.PureComponent<Props, State> {
     let isTicketMsg = false;
     const magicWord = '[![TICKETMSG]!]';
     if (text && text.indexOf(magicWord) !== -1) {
-      this.textModified =  text.replace(magicWord, '');
+      this.textModified = text.replace(magicWord, '');
       isTicketMsg = true;
     }
 
@@ -1257,13 +1256,13 @@ export class Message extends React.PureComponent<Props, State> {
     return (
       <div>
         {!this.isTicketLine ? (
-            <div
+          <div
             className={classNames(
               'module-message',
               `module-message--${direction}`,
               expiring ? 'module-message--expired' : null
             )}
-            >
+          >
             {this.renderError(direction === 'incoming')}
             {this.renderMenu(direction === 'outgoing', triggerId)}
             <div
@@ -1272,7 +1271,9 @@ export class Message extends React.PureComponent<Props, State> {
                 isTicketMsg ? 'receivedTicketInformation' : null,
                 isSticker ? 'module-message__container--with-sticker' : null,
                 !isSticker ? `module-message__container--${direction}` : null,
-                isTapToView ? 'module-message__container--with-tap-to-view' : null,
+                isTapToView
+                  ? 'module-message__container--with-tap-to-view'
+                  : null,
                 isTapToView && isTapToViewExpired
                   ? 'module-message__container--with-tap-to-view-expired'
                   : null,
@@ -1302,7 +1303,7 @@ export class Message extends React.PureComponent<Props, State> {
             {this.renderError(direction === 'outgoing')}
             {this.renderMenu(direction === 'incoming', triggerId)}
             {this.renderContextMenu(triggerId)}
-            </div>
+          </div>
         ) : (
           <hr />
         )}

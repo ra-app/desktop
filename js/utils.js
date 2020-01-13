@@ -101,7 +101,7 @@ async function getListInvitation() {
   if (!invitationList) {
     const companyNumber = textsecure.storage.get('companyNumber', null);
     invitationList = await getClientAdminCompany(companyNumber);
-    invitationList = JSON.stringify(invitationList)
+    invitationList = JSON.stringify(invitationList);
     if (invitationList) {
       localStorage.setItem('InvitationList', invitationList);
     }

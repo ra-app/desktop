@@ -51,15 +51,15 @@
     createEmptyMessage() {
       const divNoContacts = document.createElement('div');
       divNoContacts.className = 'divNoContacts';
-      divNoContacts.innerText = 'Keine Kontakte.'
-      this.$('#contactTable').append(divNoContacts)
+      divNoContacts.innerText = 'Keine Kontakte.';
+      this.$('#contactTable').append(divNoContacts);
     },
     createTable(contactListXml) {
       const table = document.createElement('table');
       table.className = 'sortable';
 
       const headerTexts = {
-        'all': 'all',
+        all: 'all',
         name: 'name',
         surname: 'Nachname',
         position: 'position',
@@ -84,9 +84,9 @@
           ) {
             cell.className = 'no-sort';
           }
-          if(prop == 'all'){
+          if (prop == 'all') {
             cell.innerHTML = 'alle';
-          } else{
+          } else {
             cell.innerHTML = headerTexts[prop];
           }
           cell.id = headerTexts[prop];
@@ -126,9 +126,9 @@
       this.$('#contactTable').append(table);
       this.$('table').tablesort();
     },
-    selectAllContact () {
+    selectAllContact() {
       const checkboxList = this.$('.checkbox-user');
-      if(!selectedAll) {
+      if (!selectedAll) {
         selectedAll = true;
         for (let i = 0; i < checkboxList.length; i++) {
           if (!checkboxList[i].disabled && !checkboxList[i].checked) {
@@ -305,7 +305,7 @@
             // add element to object
             const getSelect = document.getElementById('selectUserType-' + id);
             if (checkbox.checked) {
-              const value =  getSelect.options[getSelect.selectedIndex].value;
+              const value = getSelect.options[getSelect.selectedIndex].value;
               getSelect.setAttribute('disabled', true);
               switch (value) {
                 case 'admin':
@@ -314,22 +314,22 @@
                     cell: contact.outerHTML,
                     position: 'admin',
                   };
-                break;
+                  break;
                 case 'client':
                   dataUsersToInvitate[id] = {
                     userid: id,
                     cell: contact.outerHTML,
                     position: 'kunde',
                   };
-                break;
+                  break;
                 case 'none':
                   dataUsersToInvitate[id] = {
                     userid: id,
                     cell: contact.outerHTML,
                     position: 'none',
                   };
-                break;
-              
+                  break;
+
                 default:
                   break;
               }
@@ -362,27 +362,27 @@
         }
         // eslint-disable-next-line no-case-declarations
         case 'type':
-          const array = ["none", "Intern","Extern"];
-          const selectList = document.createElement("select");
+          const array = ['none', 'Intern', 'Extern'];
+          const selectList = document.createElement('select');
           selectList.id = `selectUserType-${id}`;
           for (var i = 0; i < array.length; i++) {
-            var option = document.createElement("option");
+            var option = document.createElement('option');
             switch (array[i]) {
               case 'none':
                 option.value = 'none';
-                if(userType == 'none'){
+                if (userType == 'none') {
                   option.selected = true;
                 }
                 break;
               case 'Intern':
                 option.value = 'admin';
-                if(userType == 'admin'){
+                if (userType == 'admin') {
                   option.selected = true;
                 }
                 break;
               case 'Extern':
                 option.value = 'client';
-                if(userType == 'client'){
+                if (userType == 'client') {
                   option.selected = true;
                 }
                 break;
@@ -392,11 +392,11 @@
             option.text = array[i];
             selectList.appendChild(option);
           }
-          if(userType !== 'none'){
+          if (userType !== 'none') {
             selectList.disabled = true;
           }
-          selectList.addEventListener('input', (event) => {
-            console.log(event, "eventttttttttttttttttttttt")
+          selectList.addEventListener('input', event => {
+            console.log(event, 'eventttttttttttttttttttttt');
             switch (event.target.value) {
               case 'admin':
                 dataUsersToUpdate[id] = {
@@ -406,9 +406,15 @@
                 };
                 if (this.$('input:checkbox:checked').length <= 1) {
                   document.getElementById(`checkbox-${id}`).disabled = false;
-                  document.getElementById(`buttonSendInvitation-${id}`).disabled = false;
-                  document.getElementById(`buttonSendInvitation-${id}`).classList.remove('disabled');
-                  document.getElementById(`buttonSendInvitation-${id}`).classList.remove('none');
+                  document.getElementById(
+                    `buttonSendInvitation-${id}`
+                  ).disabled = false;
+                  document
+                    .getElementById(`buttonSendInvitation-${id}`)
+                    .classList.remove('disabled');
+                  document
+                    .getElementById(`buttonSendInvitation-${id}`)
+                    .classList.remove('none');
                 }
                 break;
               case 'client':
@@ -418,27 +424,37 @@
                   cell: contact.outerHTML,
                 };
                 if (this.$('input:checkbox:checked').length <= 1) {
-                  document.getElementById( `buttonSendInvitation-${id}`).disabled = false;
-                  document.getElementById(`checkbox-${id}`).disabled = false;
-                  document.getElementById(`buttonSendInvitation-${id}`).classList.remove('disabled');
-                  document.getElementById(`buttonSendInvitation-${id}`).classList.remove('none');
-                }
-                break;
-                case 'none':
-                  dataUsersToUpdate[id] = {
-                    position: 'none',
-                    userid: id,
-                    cell: contact.outerHTML,
-                  };
                   document.getElementById(
                     `buttonSendInvitation-${id}`
-                  ).disabled = true;
-                  document.getElementById(`checkbox-${id}`).disabled = true;
-                  document.getElementById(`checkbox-${id}`).checked = false;
-                  document.getElementById(`buttonSendInvitation-${id}`).classList.add('disabled');
-                  document.getElementById(`buttonSendInvitation-${id}`).classList.add('none');
+                  ).disabled = false;
+                  document.getElementById(`checkbox-${id}`).disabled = false;
+                  document
+                    .getElementById(`buttonSendInvitation-${id}`)
+                    .classList.remove('disabled');
+                  document
+                    .getElementById(`buttonSendInvitation-${id}`)
+                    .classList.remove('none');
+                }
                 break;
-            
+              case 'none':
+                dataUsersToUpdate[id] = {
+                  position: 'none',
+                  userid: id,
+                  cell: contact.outerHTML,
+                };
+                document.getElementById(
+                  `buttonSendInvitation-${id}`
+                ).disabled = true;
+                document.getElementById(`checkbox-${id}`).disabled = true;
+                document.getElementById(`checkbox-${id}`).checked = false;
+                document
+                  .getElementById(`buttonSendInvitation-${id}`)
+                  .classList.add('disabled');
+                document
+                  .getElementById(`buttonSendInvitation-${id}`)
+                  .classList.add('none');
+                break;
+
               default:
                 break;
             }
@@ -447,11 +463,9 @@
               userid: id,
               cell: contact.outerHTML,
             };
-          })
-          cellTd.setAttribute('data-sort-value', userType)
+          });
+          cellTd.setAttribute('data-sort-value', userType);
           cellTd.appendChild(selectList);
-
-
 
           // const spanSwitchKunde = document.createElement('span');
           // spanSwitchKunde.className = 'spanSwitch';
@@ -631,7 +645,7 @@
           }
           button.onclick = () => {
             const getSelect = document.getElementById('selectUserType-' + id);
-            const value =  getSelect.options[getSelect.selectedIndex].value;
+            const value = getSelect.options[getSelect.selectedIndex].value;
             switch (value) {
               case 'admin':
                 dataUsersToInvitate[id] = {
@@ -639,21 +653,21 @@
                   cell: contact.outerHTML,
                   position: 'admin',
                 };
-              break;
+                break;
               case 'client':
                 dataUsersToInvitate[id] = {
                   userid: id,
                   cell: contact.outerHTML,
                   position: 'kunde',
                 };
-              break;
+                break;
               case 'none':
                 dataUsersToInvitate[id] = {
                   userid: id,
                   cell: contact.outerHTML,
                   position: 'none',
                 };
-              break;
+                break;
               default:
                 break;
             }
@@ -693,14 +707,17 @@
           buttonRemove.setAttribute('src', 'images/icons/x-contact-list.svg');
           buttonRemove.classList = 'editIcon';
           buttonRemove.onclick = () => {
-            this.removeContact(id)
-          }
+            this.removeContact(id);
+          };
           const buttonOpenConversation = document.createElement('img');
-          buttonOpenConversation.setAttribute('src', 'images/icons/chat-contact-list.svg')
+          buttonOpenConversation.setAttribute(
+            'src',
+            'images/icons/chat-contact-list.svg'
+          );
           buttonOpenConversation.classList = 'editIcon';
           buttonOpenConversation.onclick = () => {
-            this.createConversation(id)
-          }
+            this.createConversation(id);
+          };
           cellTd.appendChild(buttonEdit);
           cellTd.appendChild(buttonRemove);
           if (hasInvitation.found) {
@@ -713,23 +730,23 @@
           break;
       }
     },
-    async createConversation(number){
+    async createConversation(number) {
       // await ensureConversation(number);
-      const client =  await  getClientPhone(number);
+      const client = await getClientPhone(number);
       const conversation = await ensureConversation(number);
       let conversationName = 'User without data';
 
-      if(client.name){
-        if(client.name && client.surname){
-          conversationName =  client.name + ' ' + client.surname;
-        }else {
+      if (client.name) {
+        if (client.name && client.surname) {
+          conversationName = client.name + ' ' + client.surname;
+        } else {
           conversationName = client.name;
         }
-      }else if(client.email){
+      } else if (client.email) {
         conversationName = client.email;
       }
 
-      conversation.set({ 'name': conversationName, 'uuid': client.uuid });
+      conversation.set({ name: conversationName, uuid: client.uuid });
       window.Whisper.events.trigger('showConversation', number);
     },
     async hasInvitation(id) {
@@ -786,8 +803,7 @@
       textarea.id = 'textareaSendeInvitation';
       // textarea.placeholder =
       //   'Lass uns mit OfficeApp kommunizieren: http://officeapp.eu';
-      textarea.value =
-        'Ihr Einladungscode für die OfficeApp lautet YYXXXXXX';
+      textarea.value = 'Ihr Einladungscode für die OfficeApp lautet YYXXXXXX';
       textarea.readOnly = true;
 
       const searchTab = document.createElement('div');
@@ -952,18 +968,20 @@
         };
         sendSms(companyNumber, dataSms);
 
-        document.getElementById(`buttonSendInvitation-${id}`).innerText = i18n('sendAgainInvitation')
-        if(type === 'admin'){
+        document.getElementById(`buttonSendInvitation-${id}`).innerText = i18n(
+          'sendAgainInvitation'
+        );
+        if (type === 'admin') {
           // document.getElementById(`admin-${id}`).checkeds = true;
           // document.getElementById(`admin-${id}`).setAttribute('checked', 'checked')
-          document.getElementById('selectUserType-'+id).value = "admin"
+          document.getElementById('selectUserType-' + id).value = 'admin';
         }
         if (type === 'kunde') {
           // document.getElementById(`kunde-${id}`).checked = true;
           // document.getElementById(`kunde-${id}`).setAttribute('checked', 'checked')
-          document.getElementById('selectUserType-'+id).value = "client"
+          document.getElementById('selectUserType-' + id).value = 'client';
         }
-      })
+      });
       dataUsersToInvitate = {};
       this.closeModal();
       localStorage.removeItem('InvitationList');
@@ -1219,50 +1237,50 @@
       buttonSaveChanges.classList = 'buttonSave buttonsModal';
       buttonSaveChanges.innerText = 'Speichern';
       buttonSaveChanges.onclick = () => {
-        if(!this.validateEmail(inputEmail.value)){
-          messageSpan.innerHTML = 'Ungültige Email Adresse'
-        }else{
-        cln.getElementsByTagName('name')[0].childNodes[0].nodeValue =
-          inputEditVorname.value;
-        cln.getElementsByTagName('surname')[0].childNodes[0].nodeValue =
-          inputNachName.value;
-        cln.getElementsByTagName('position')[0].childNodes[0].nodeValue =
-          inputPosition.value;
-        cln.getElementsByTagName('email')[0].childNodes[0].nodeValue =
-          inputEmail.value;
-        // if (!cln.getElementsByTagName('type')[0]) {
-        //   if (inputKundeEdit.checked) {
-        //     const newElement = document.createElementNS('', 'type');
-        //     const newText = document.createTextNode('client');
-        //     newElement.appendChild(newText);
-        //     cln.appendChild(newElement)
-        //     // xmlData.getElementsByTagName('contact')[positionXML].appendChild(newElement)
-        //   }
-        //   if (inputAdminEdit.checked) {
-        //     const newElement = document.createElementNS('', 'type');
-        //     const newText = document.createTextNode('admin');
-        //     newElement.appendChild(newText);
-        //     cln.appendChild(newElement)
-        //     // xmlData.getElementsByTagName('contact')[positionXML].appendChild(newElement)
-        //   }
-        // } else {
-        //   if (inputKundeEdit.checked) {
-        //     cln.getElementsByTagName('type')[0].childNodes[0].nodeValue = 'client'
-        //   }
-        //   if (inputAdminEdit.checked) {
-        //     cln.getElementsByTagName('type')[0].childNodes[0].nodeValue = 'admin'
-        //   }
-        // }
+        if (!this.validateEmail(inputEmail.value)) {
+          messageSpan.innerHTML = 'Ungültige Email Adresse';
+        } else {
+          cln.getElementsByTagName('name')[0].childNodes[0].nodeValue =
+            inputEditVorname.value;
+          cln.getElementsByTagName('surname')[0].childNodes[0].nodeValue =
+            inputNachName.value;
+          cln.getElementsByTagName('position')[0].childNodes[0].nodeValue =
+            inputPosition.value;
+          cln.getElementsByTagName('email')[0].childNodes[0].nodeValue =
+            inputEmail.value;
+          // if (!cln.getElementsByTagName('type')[0]) {
+          //   if (inputKundeEdit.checked) {
+          //     const newElement = document.createElementNS('', 'type');
+          //     const newText = document.createTextNode('client');
+          //     newElement.appendChild(newText);
+          //     cln.appendChild(newElement)
+          //     // xmlData.getElementsByTagName('contact')[positionXML].appendChild(newElement)
+          //   }
+          //   if (inputAdminEdit.checked) {
+          //     const newElement = document.createElementNS('', 'type');
+          //     const newText = document.createTextNode('admin');
+          //     newElement.appendChild(newText);
+          //     cln.appendChild(newElement)
+          //     // xmlData.getElementsByTagName('contact')[positionXML].appendChild(newElement)
+          //   }
+          // } else {
+          //   if (inputKundeEdit.checked) {
+          //     cln.getElementsByTagName('type')[0].childNodes[0].nodeValue = 'client'
+          //   }
+          //   if (inputAdminEdit.checked) {
+          //     cln.getElementsByTagName('type')[0].childNodes[0].nodeValue = 'admin'
+          //   }
+          // }
 
-        xmlData.replaceChild(
-          cln,
-          xmlData.getElementsByTagName('contact')[positionXML]
-        );
-        const dataToUpdate = prepareDataToUpdate(xmlData);
-        this.contactsData = dataToUpdate;
-        updateXmlDB(dataToUpdate);
-        this.closeModal();
-        this.refreshTable();
+          xmlData.replaceChild(
+            cln,
+            xmlData.getElementsByTagName('contact')[positionXML]
+          );
+          const dataToUpdate = prepareDataToUpdate(xmlData);
+          this.contactsData = dataToUpdate;
+          updateXmlDB(dataToUpdate);
+          this.closeModal();
+          this.refreshTable();
         }
       };
 
@@ -1288,7 +1306,7 @@
     },
     searchCountry(e) {
       var value = e.target.value.toLowerCase();
-      $('#divCountries p').filter(function () {
+      $('#divCountries p').filter(function() {
         $(this).toggle(
           $(this)
             .text()
@@ -1297,8 +1315,7 @@
         );
       });
     },
-    async showCountries(){
-      
+    async showCountries() {
       $.ajax({
         type: 'GET',
         url: 'config/countries_de.json', // Using our resources.json file to serve results
@@ -1309,11 +1326,11 @@
           const inputSearchCountry = document.createElement('input');
           inputSearchCountry.type = 'text';
           inputSearchCountry.id = 'inputSearchCountry';
-          inputSearchCountry.placeholder = i18n('search')
-          inputSearchCountry.addEventListener('keyup', (e) => {
-            this.searchCountry(e)
-          })
-          
+          inputSearchCountry.placeholder = i18n('search');
+          inputSearchCountry.addEventListener('keyup', e => {
+            this.searchCountry(e);
+          });
+
           const imageCloseCountries = document.createElement('img');
           imageCloseCountries.src = 'images/icons/back_24x24.svg';
           imageCloseCountries.id = 'closeCountries';
@@ -1321,18 +1338,17 @@
             this.closeCountriesPanel();
           });
 
-          divCountriesHeader.appendChild(imageCloseCountries)
+          divCountriesHeader.appendChild(imageCloseCountries);
           const divCountries = document.createElement('div');
           divCountries.className = 'divCountries';
           divCountries.id = 'divCountries';
           divCountries.appendChild(inputSearchCountry);
 
-
           countries.sort((a, b) => {
             return a['name'] > b['name'] ? 1 : a['name'] < b['name'] ? -1 : 0;
           });
-          countries.forEach((value) => {
-            console.log(value.code, value.name, value.dial_code)
+          countries.forEach(value => {
+            console.log(value.code, value.name, value.dial_code);
             const pItem = document.createElement('p');
             pItem.className = 'pCountry';
             pItem.setAttribute('data-country-code', value.code);
@@ -1344,13 +1360,13 @@
             pItem.appendChild(spanDialCode);
             divCountries.append(pItem);
 
-            pItem.addEventListener('click', (e) => {
-              this.onSelectPhone(e)
-            })
-          })
-         
-          this.$('#modalContact').append(divCountriesHeader)
-          this.$('#modalContact').append(divCountries)
+            pItem.addEventListener('click', e => {
+              this.onSelectPhone(e);
+            });
+          });
+
+          this.$('#modalContact').append(divCountriesHeader);
+          this.$('#modalContact').append(divCountries);
           this.$('.divMainContentEdit').addClass('hidden');
           this.$('.divModalHeader').addClass('hidden');
           document.getElementById('inputSearchCountry').focus();
@@ -1365,10 +1381,9 @@
         `${e.target.getAttribute('data-country-code')}`
       );
       this.$('#dialCode').text(` ${e.target.getAttribute('data-dial-code')}`);
-      this.closeCountriesPanel()
-      
+      this.closeCountriesPanel();
     },
-    closeCountriesPanel(){
+    closeCountriesPanel() {
       this.$('.divMainContentEdit').removeClass('hidden');
       this.$('.divModalHeader').removeClass('hidden');
       this.$('.divCountries').remove();
@@ -1439,15 +1454,15 @@
       labelTelephone.innerText = 'Telefonnummer';
 
       const divPhoneNumberCountry = document.createElement('div');
-      divPhoneNumberCountry.id = 'phone-number-country'
+      divPhoneNumberCountry.id = 'phone-number-country';
       const spanCountryCode = document.createElement('span');
       spanCountryCode.id = 'countryCode';
       spanCountryCode.className = 'countryCode';
       spanCountryCode.innerText = 'DE';
       const spanSeparator = document.createElement('span');
       spanSeparator.className = 'separator';
-      spanSeparator.innerHTML = '&nbsp;|&nbsp;'
-      const spanDialCode = document.createElement('span')
+      spanSeparator.innerHTML = '&nbsp;|&nbsp;';
+      const spanDialCode = document.createElement('span');
       spanDialCode.id = 'dialCode';
       spanDialCode.className = 'dialCode';
       spanDialCode.innerText = ' +49';
@@ -1456,19 +1471,19 @@
       inputTelephone.placeholder = 'Telefonnummer';
       inputTelephone.id = 'addTelephoneInput';
 
-      spanCountryCode.addEventListener('click', (e) => {
+      spanCountryCode.addEventListener('click', e => {
         this.showCountries();
       });
 
-      spanDialCode.addEventListener('click', (e) => {
+      spanDialCode.addEventListener('click', e => {
         this.showCountries();
-      })
+      });
 
       divPhoneNumberCountry.appendChild(spanCountryCode);
       divPhoneNumberCountry.appendChild(spanSeparator);
       divPhoneNumberCountry.appendChild(spanDialCode);
       divPhoneNumberCountry.appendChild(inputTelephone);
-      divTelephone.appendChild(labelTelephone)
+      divTelephone.appendChild(labelTelephone);
       divTelephone.appendChild(divPhoneNumberCountry);
 
       const divEmail = document.createElement('div');
@@ -1562,9 +1577,9 @@
       buttonSaveChanges.innerText = 'Speichern';
       buttonSaveChanges.id = 'addNewContactButton';
       buttonSaveChanges.onclick = () => {
-        if(!this.validateEmail(inputEmail.value)){
-          messageSpan.innerHTML = 'Ungültige Email Adresse'
-        }else{
+        if (!this.validateEmail(inputEmail.value)) {
+          messageSpan.innerHTML = 'Ungültige Email Adresse';
+        } else {
           // creating a news element
           const parentElement = document.createElementNS('', 'contact');
 
@@ -1581,8 +1596,10 @@
           positionElement.appendChild(positionText);
 
           const telephoneElement = document.createElementNS('', 'phone');
-          const telephoneText = document.createTextNode(spanDialCode.innerText + inputTelephone.value);
-          telephoneElement.appendChild(telephoneText)
+          const telephoneText = document.createTextNode(
+            spanDialCode.innerText + inputTelephone.value
+          );
+          telephoneElement.appendChild(telephoneText);
 
           const emailElement = document.createElementNS('', 'email');
           const emailText = document.createTextNode(inputEmail.value);
@@ -1617,7 +1634,9 @@
           if (finduser !== null) {
             let message = '';
             messageSpan.innerHTML = '';
-            message = document.createTextNode('Telefonnummer bereits vorhanden');
+            message = document.createTextNode(
+              'Telefonnummer bereits vorhanden'
+            );
             messageSpan.appendChild(message);
           } else {
             xmlData.appendChild(parentElement);
@@ -1868,73 +1887,79 @@
       }
       if (options) {
         // if (options.contact_data !== undefined) {
-          this.contactListXml = prepareDataXml(options.contact_data);
-          this.objectContact = [];
-          const myNumber = textsecure.storage.user.getNumber();
-          if (options.type === 'group') {
-            if(options.admin_client) {
-              if (options.admin_client.admins) {
-                for (let i = 0; i < options.admin_client.admins.length; i++) {
-                  const contact = options.admin_client.admins[i];
-                  if (contact.name !== null && myNumber !== contact.phone_number) {
-                    const tmpObj = {
-                      name: contact.name,
-                      surname: contact.surname,
-                      position: '',
-                      email: '',
-                      phone: contact.phone_number,
-                      ts: contact.ts_registration,
-                    }
-                    this.objectContact.push(tmpObj)
-                  }
-                }
-              }
-              if (options.admin_client.clients) {
-                for (let i = 0; i < options.admin_client.clients.length; i++) {
-                  const contact = options.admin_client.clients[i];
-                  if (contact.name !== null && myNumber !== contact.phone_number) {
-                    const tmpObj = {
-                      name: contact.name,
-                      surname: contact.surname,
-                      position: '',
-                      email: '',
-                      phone: contact.phone_number,
-                      ts: contact.ts_registration,
-                    }
-                    this.objectContact.push(tmpObj)
-                  }
+        this.contactListXml = prepareDataXml(options.contact_data);
+        this.objectContact = [];
+        const myNumber = textsecure.storage.user.getNumber();
+        if (options.type === 'group') {
+          if (options.admin_client) {
+            if (options.admin_client.admins) {
+              for (let i = 0; i < options.admin_client.admins.length; i++) {
+                const contact = options.admin_client.admins[i];
+                if (
+                  contact.name !== null &&
+                  myNumber !== contact.phone_number
+                ) {
+                  const tmpObj = {
+                    name: contact.name,
+                    surname: contact.surname,
+                    position: '',
+                    email: '',
+                    phone: contact.phone_number,
+                    ts: contact.ts_registration,
+                  };
+                  this.objectContact.push(tmpObj);
                 }
               }
             }
-          } else {
-            for (let i = 0; i < this.contactListXml.children.length; i++) {
-              const contact = this.contactListXml.children.item(i);
-              const tmpObj = {
-                name: contact.getElementsByTagName('name')[0].textContent,
-                surname: contact.getElementsByTagName('surname')[0].textContent,
-                position: contact.getElementsByTagName('position')[0].textContent,
-                email: contact.getElementsByTagName('email')[0].textContent,
-                phone: contact.getElementsByTagName('phone')[0].textContent,
-                ts: contact.getElementsByTagName('ts')[0].textContent,
+            if (options.admin_client.clients) {
+              for (let i = 0; i < options.admin_client.clients.length; i++) {
+                const contact = options.admin_client.clients[i];
+                if (
+                  contact.name !== null &&
+                  myNumber !== contact.phone_number
+                ) {
+                  const tmpObj = {
+                    name: contact.name,
+                    surname: contact.surname,
+                    position: '',
+                    email: '',
+                    phone: contact.phone_number,
+                    ts: contact.ts_registration,
+                  };
+                  this.objectContact.push(tmpObj);
+                }
               }
-              this.objectContact.push(tmpObj)
             }
           }
-          this.type = options.type;
-          console.log(this.type, "typeeeeeeeeeeeeeeeeeeeeee")
-          if (options.type === 'kunde') {
-            this.typeAdmin = true;
-            this.typeKunde = false;
-            this.isCreatingGroup = false;
-          } else if (options.type === 'admin') {
-            this.typeAdmin = false;
-            this.typeKunde = true;
-            this.isCreatingGroup = false;
-          }else if ( options.type === 'allUsers' || options.type === 'group'){
-            this.isCreatingGroup = true;
-            this.typeAdmin = false;
-            this.typeKunde = false;
+        } else {
+          for (let i = 0; i < this.contactListXml.children.length; i++) {
+            const contact = this.contactListXml.children.item(i);
+            const tmpObj = {
+              name: contact.getElementsByTagName('name')[0].textContent,
+              surname: contact.getElementsByTagName('surname')[0].textContent,
+              position: contact.getElementsByTagName('position')[0].textContent,
+              email: contact.getElementsByTagName('email')[0].textContent,
+              phone: contact.getElementsByTagName('phone')[0].textContent,
+              ts: contact.getElementsByTagName('ts')[0].textContent,
+            };
+            this.objectContact.push(tmpObj);
           }
+        }
+        this.type = options.type;
+        console.log(this.type, 'typeeeeeeeeeeeeeeeeeeeeee');
+        if (options.type === 'kunde') {
+          this.typeAdmin = true;
+          this.typeKunde = false;
+          this.isCreatingGroup = false;
+        } else if (options.type === 'admin') {
+          this.typeAdmin = false;
+          this.typeKunde = true;
+          this.isCreatingGroup = false;
+        } else if (options.type === 'allUsers' || options.type === 'group') {
+          this.isCreatingGroup = true;
+          this.typeAdmin = false;
+          this.typeKunde = false;
+        }
         // }
       }
       this.render();
@@ -1942,7 +1967,7 @@
     render_attributes() {
       // console.log('This model import contact view!!!! ', this.model)
       return {
-        'searchPlaceholder': i18n('search'),
+        searchPlaceholder: i18n('search'),
         'send-message': i18n('sendMessage'),
         typeAdmin: this.typeAdmin,
         typeKunde: this.typeKunde,
@@ -1967,7 +1992,7 @@
       dataUsersToInvitate = {};
     },
     showContactListPanel() {
-      if (this.objectContact === undefined || this.objectContact.length === 0 ) {
+      if (this.objectContact === undefined || this.objectContact.length === 0) {
         // this.$('#ptextNoContacts').html = i18n('noContactsImported');
         document.getElementById('ptextNoContacts').innerHTML = '';
         document.getElementById('ptextNoContacts').innerHTML = i18n(
@@ -1980,7 +2005,7 @@
     },
     searchContactList(e) {
       let value = e.target.value.toLowerCase();
-      $('#mainDivUserSendInvitation span').filter(function () {
+      $('#mainDivUserSendInvitation span').filter(function() {
         $(this).toggle(
           $(this)
             .text()
@@ -1989,7 +2014,7 @@
         );
       });
     },
-    goBack(){
+    goBack() {
       this.$('#modalContact').removeClass('hidden');
       this.$('#modalSearchUsers').addClass('hidden');
       this.$('#ptextNoContacts').innerText = '';
@@ -2085,9 +2110,9 @@
         this.$('#errorMessage').append(message);
       }
     },
-    async sendInvitations(){
-      await parallel(1, Object.keys(dataUsersToInvitate), async (element) => {
-        if ( dataUsersToInvitate[element] !== undefined ){
+    async sendInvitations() {
+      await parallel(1, Object.keys(dataUsersToInvitate), async element => {
+        if (dataUsersToInvitate[element] !== undefined) {
           const id = dataUsersToInvitate[element].userid;
           const type = dataUsersToInvitate[element].position;
           const companyNumber = textsecure.storage.get('companyNumber', null);
@@ -2107,12 +2132,10 @@
           const dataSms = {
             phone_number: id,
             code: result.code,
-          }
-          sendSms(companyNumber, dataSms)
-  
+          };
+          sendSms(companyNumber, dataSms);
         }
-        
-      })
+      });
       dataUsersToInvitate = {};
       this.closePanel();
     },

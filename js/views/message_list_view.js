@@ -55,7 +55,7 @@
       this.triggerLazyScroll();
     },
     atBottom() {
-      console.log('this.bottomOffset atBottom', this.bottomOffset)
+      console.log('this.bottomOffset atBottom', this.bottomOffset);
       return this.bottomOffset < 30;
     },
     measureScrollPosition() {
@@ -67,14 +67,20 @@
       this.scrollPosition = this.$el.scrollTop() + this.outerHeight;
       this.scrollHeight = this.el.scrollHeight;
       this.bottomOffset = this.scrollHeight - this.scrollPosition;
-      console.log('measure scroll position this.bottomOffset', this.bottomOffset);
+      console.log(
+        'measure scroll position this.bottomOffset',
+        this.bottomOffset
+      );
     },
     resetScrollPosition() {
       console.log('Reset scroll position');
       this.$el.scrollTop(this.scrollPosition - this.$el.outerHeight());
     },
     restoreBottomOffset() {
-      console.log('Reset bottom offset scroll, ', _.isNumber(this.bottomOffset))
+      console.log(
+        'Reset bottom offset scroll, ',
+        _.isNumber(this.bottomOffset)
+      );
       if (_.isNumber(this.bottomOffset)) {
         // + 10 is necessary to account for padding
         const height = this.$el.height() + 10;
@@ -89,13 +95,13 @@
       //   after we just made a change to the DOM: inserting a message, or an image
       //   finished loading. So if we were near the bottom before, we _need_ to be
       //   at the bottom again. So we scroll to the bottom.
-      console.log('Scroll to bottom if needed', this.atBottom())
+      console.log('Scroll to bottom if needed', this.atBottom());
       // if (this.atBottom()) {
-        this.scrollToBottom();
+      this.scrollToBottom();
       // }
     },
     scrollToBottom() {
-      console.log('Scroll to bottom', this.el.scrollHeight)
+      console.log('Scroll to bottom', this.el.scrollHeight);
       this.$el.scrollTop(this.el.scrollHeight);
       this.measureScrollPosition();
     },

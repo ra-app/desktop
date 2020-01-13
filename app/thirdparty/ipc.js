@@ -26,12 +26,12 @@ function ipcOnce(channel, listener) {
   return ipcMain.once(channel, listener);
 }
 
-
 const thirdRPCTable = {
-  'echo': (msg) => { return 'NODE-ECHO: ' + msg; },
+  echo: msg => {
+    return 'NODE-ECHO: ' + msg;
+  },
   // 'inboxParcel': handleInboxParcel, // Now set externally
 };
-
 
 let mainWindow = null;
 function initRPC(window) {
@@ -42,7 +42,14 @@ function initRPC(window) {
     try {
       result.data = await thirdRPCTable[type](...args);
     } catch (err) {
-      console.warn('ThirdIPC Node Handler Error:', err.message || err, event, ID, type, args);
+      console.warn(
+        'ThirdIPC Node Handler Error:',
+        err.message || err,
+        event,
+        ID,
+        type,
+        args
+      );
       result.error = err.message || err;
     }
     ipcSend(ID, JSON.stringify(result));
@@ -51,7 +58,7 @@ function initRPC(window) {
 }
 
 function waitForWindowReady(window) {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     window.webContents.once('did-finish-load', resolve);
   });
 }
@@ -74,7 +81,10 @@ function getCompaniesForMe() {
 }
 
 function createAttachmentPointer(buffer) {
-  return thirdIPC('createAttachmentPointer', typeof buffer === 'Buffer' ? buffer : new Uint8Array(buffer));
+  return thirdIPC(
+    'createAttachmentPointer',
+    typeof buffer === 'Buffer' ? buffer : new Uint8Array(buffer)
+  );
 }
 
 function handleAttachmentPointer(attachment) {

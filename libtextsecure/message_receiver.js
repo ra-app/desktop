@@ -1523,7 +1523,9 @@ textsecure.MessageReceiver = function MessageReceiverWrapper(
   this.stopProcessing = messageReceiver.stopProcessing.bind(messageReceiver);
 
   // this.handleAttachment = messageReceiver.handleAttachment.bind(messageReceiver);
-  this.deleteAttachment = messageReceiver.deleteAttachment.bind(messageReceiver);
+  this.deleteAttachment = messageReceiver.deleteAttachment.bind(
+    messageReceiver
+  );
 
   messageReceiver.connect();
 };

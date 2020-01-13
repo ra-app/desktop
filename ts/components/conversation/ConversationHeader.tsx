@@ -82,7 +82,10 @@ export class ConversationHeader extends React.Component<Props> {
   }
   public handleClickOutside(event: any) {
     const { openMenu } = this.state;
-    if (openMenu && (this.wrapperRef && (!this.wrapperRef.current.contains(event.target)))) {
+    if (
+      openMenu &&
+      (this.wrapperRef && !this.wrapperRef.current.contains(event.target))
+    ) {
       this.setState({ openMenu: false });
     }
   }
@@ -204,29 +207,29 @@ export class ConversationHeader extends React.Component<Props> {
   public renderGear() {
     // const { showBackButton } = this.props;
     return (
-    //   <ContextMenuTrigger id={triggerId} ref={this.menuTriggerRef}>
-    //   {/* <button
-    //     onClick={this.showMenuBound}
-    //     className={classNames(
-    //       'module-conversation-header__gear-icon',
-    //       showBackButton
-    //         ? null
-    //         : 'module-conversation-header__gear-icon--show'
-    //     )}
-    //     disabled={showBackButton}
-    //   /> */}
-    //   <button
-    //     onClick={this.showMenuBound}
-    //     className="chat_menu"
-    //     disabled={showBackButton}
-    //   >
-    //     <img
-    //       src="images/icons/menu_over_blue_24x24.svg"
-    //       className="chat_menu"
-    //       alt="Chat menu"
-    //     />
-    //   </button>
-    // </ContextMenuTrigger>
+      //   <ContextMenuTrigger id={triggerId} ref={this.menuTriggerRef}>
+      //   {/* <button
+      //     onClick={this.showMenuBound}
+      //     className={classNames(
+      //       'module-conversation-header__gear-icon',
+      //       showBackButton
+      //         ? null
+      //         : 'module-conversation-header__gear-icon--show'
+      //     )}
+      //     disabled={showBackButton}
+      //   /> */}
+      //   <button
+      //     onClick={this.showMenuBound}
+      //     className="chat_menu"
+      //     disabled={showBackButton}
+      //   >
+      //     <img
+      //       src="images/icons/menu_over_blue_24x24.svg"
+      //       className="chat_menu"
+      //       alt="Chat menu"
+      //     />
+      //   </button>
+      // </ContextMenuTrigger>
       <div className="menuButton">
         <span onClick={this.showMenuBound}>
           <img
@@ -314,32 +317,30 @@ export class ConversationHeader extends React.Component<Props> {
       //     </MenuItem>
       //   ) : null}
       // </ContextMenu>
-      <div className="module-main-header__info" style={{padding: 0}}>
+      <div className="module-main-header__info" style={{ padding: 0 }}>
         <div className="menuChat" ref={this.wrapperRef}>
           <ul className="ulMenuChat">
             {isArchived ? (
               <li onClick={onMoveToInbox}>
-                <span>
-                  {i18n('moveConversationToInbox')}
-                </span>
+                <span>{i18n('moveConversationToInbox')}</span>
               </li>
-            ) : !isCompany && (
-              <li onClick={onArchive}>
-                {i18n('archiveConversation')}
-              </li>
+            ) : (
+              !isCompany && (
+                <li onClick={onArchive}>{i18n('archiveConversation')}</li>
+              )
             )}
-            {(isGroup) && (
+            {isGroup && (
               <li>
                 <span onClick={this.openEditGroupBound}>Gruppe bearbeiten</span>
               </li>
             )}
-            {(!isCompany && !isClosed) && !isGroup && (
-              <li onClick={closeTicket}>
-                <span>
-                  {i18n('closeTicket')}
-                </span>
-              </li>
-            )}
+            {!isCompany &&
+              !isClosed &&
+              !isGroup && (
+                <li onClick={closeTicket}>
+                  <span>{i18n('closeTicket')}</span>
+                </li>
+              )}
           </ul>
         </div>
       </div>
@@ -362,11 +363,7 @@ export class ConversationHeader extends React.Component<Props> {
         {this.renderExpirationLength()}
         {/* {this.renderGear(triggerId)}
         {this.renderMenu(triggerId)} */}
-        {!this.state.openMenu ? (
-          this.renderGear()
-        ) : (
-          this.renderMenu()
-        )}
+        {!this.state.openMenu ? this.renderGear() : this.renderMenu()}
       </div>
     );
   }

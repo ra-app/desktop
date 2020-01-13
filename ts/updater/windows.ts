@@ -1,6 +1,10 @@
 import { dirname, join } from 'path';
 import { spawn as spawnEmitter, SpawnOptions } from 'child_process';
-import { readdir as readdirCallback, unlink as unlinkCallback, existsSync } from 'fs';
+import {
+  readdir as readdirCallback,
+  unlink as unlinkCallback,
+  existsSync,
+} from 'fs';
 
 import { app, BrowserWindow, ipcMain, IpcMessageEvent } from 'electron';
 import { get as getFromConfig } from 'config';
@@ -65,7 +69,9 @@ function waitForMessage(channel: string): Promise<any> {
       ipcMain.once(channel, (_: IpcMessageEvent, msg: Object) => {
         resolve(msg);
       });
-    } catch (err) { reject(err); }
+    } catch (err) {
+      reject(err);
+    }
   });
 }
 
@@ -85,15 +91,25 @@ async function checkDownloadAndInstall(
     const result = await checkForUpdates(logger);
     logger.info('checkDownloadAndInstall: Update result:', result);
     if (!result) {
-      return getMainWindow().webContents.send('update', { status: 'up-to-date' });
+      return getMainWindow().webContents.send('update', {
+        status: 'up-to-date',
+      });
     }
 
     const checkUpdatePromise = waitForMessage('checkUpdate');
     getMainWindow().webContents.send('update', { status: 'checking' });
     const checkUpdate = await checkUpdatePromise;
     // logger.info('checkUpdate', checkUpdate);
-    const shouldUsePrevious = checkUpdate.localStorageData !== undefined && typeof checkUpdate.localStorageData === 'string' && checkUpdate.localStorageData.indexOf(result.fileName) !== -1 && existsSync(checkUpdate.localStorageData);
-    logger.info('checkDownloadAndInstall: Existing update', checkUpdate, shouldUsePrevious);
+    const shouldUsePrevious =
+      checkUpdate.localStorageData !== undefined &&
+      typeof checkUpdate.localStorageData === 'string' &&
+      checkUpdate.localStorageData.indexOf(result.fileName) !== -1 &&
+      existsSync(checkUpdate.localStorageData);
+    logger.info(
+      'checkDownloadAndInstall: Existing update',
+      checkUpdate,
+      shouldUsePrevious
+    );
     if (shouldUsePrevious) {
       updateFilePath = checkUpdate.localStorageData;
       version = checkUpdate.localStorageDataVersion;
@@ -121,12 +137,17 @@ async function checkDownloadAndInstall(
       const startDownload = await startDownloadPromise;
       if (startDownload) {
         await deletePreviousInstallers(logger);
-        getMainWindow().webContents.send('update', { status: 'starting_download' });
+        getMainWindow().webContents.send('update', {
+          status: 'starting_download',
+        });
         let lastPercent = 0;
         function progressCB(progress: got.Progress) {
-          if ((progress.percent - lastPercent) > 0.001) {
+          if (progress.percent - lastPercent > 0.001) {
             lastPercent = progress.percent;
-            getMainWindow().webContents.send('update', { status: 'dl_progress', progress });
+            getMainWindow().webContents.send('update', {
+              status: 'dl_progress',
+              progress,
+            });
           }
         }
 
@@ -151,19 +172,30 @@ async function checkDownloadAndInstall(
           throw error;
         }
       } else {
-        return getMainWindow().webContents.send('update', { status: 'canceled' });
+        return getMainWindow().webContents.send('update', {
+          status: 'canceled',
+        });
       }
     }
 
     const startInstallPromise = waitForMessage('startInstall');
-    getMainWindow().webContents.send('update', { status: 'download_finished', updateFilePath, version, fileName });
+    getMainWindow().webContents.send('update', {
+      status: 'download_finished',
+      updateFilePath,
+      version,
+      fileName,
+    });
     const startInstall = await startInstallPromise;
     if (startInstall) {
-    // const shouldInstall = await waitForMessage('shouldInstall');
-    // if (shouldInstall === true) {
+      // const shouldInstall = await waitForMessage('shouldInstall');
+      // if (shouldInstall === true) {
       try {
         const publicKey = hexToBinary(getFromConfig('updatesPublicKey'));
-        const verified = await verifySignature(updateFilePath, version, publicKey);
+        const verified = await verifySignature(
+          updateFilePath,
+          version,
+          publicKey
+        );
         if (!verified) {
           // Note: We don't delete the cache here, because we don't want to continually
           //   re-download the broken release. We will download it only once per launch.
@@ -194,31 +226,29 @@ async function checkDownloadAndInstall(
     isChecking = false;
   }
 }
-  function quitHandler() {
-    // const test = false;
-    // if(test) {
-    //   if (updateFilePath && !installing) {
-    //     // tslint:disable-next-line:no-console
-    //     // console.log('EEEEEEEEEEEEEEEEE');
-    //     // getMainWindow().webContents.send('update', { status: 'initInstall' });
-    //     // const startInstall = await waitForMessage('startInstall');
-    //     // if(startInstall) {
-    //       verifyAndInstall(updateFilePath, version, loggerForQuitHandler).catch(
-    //         error => {
-    //           loggerForQuitHandler.error(
-    //             'quitHandler: error installing:',
-    //             getPrintableError(error)
-    //           );
-    //         }
-    //       );
-    //     // }
-    //   } else {
-    //     return;
-    //   }
-
-    // }
-  }
-
+function quitHandler() {
+  // const test = false;
+  // if(test) {
+  //   if (updateFilePath && !installing) {
+  //     // tslint:disable-next-line:no-console
+  //     // console.log('EEEEEEEEEEEEEEEEE');
+  //     // getMainWindow().webContents.send('update', { status: 'initInstall' });
+  //     // const startInstall = await waitForMessage('startInstall');
+  //     // if(startInstall) {
+  //       verifyAndInstall(updateFilePath, version, loggerForQuitHandler).catch(
+  //         error => {
+  //           loggerForQuitHandler.error(
+  //             'quitHandler: error installing:',
+  //             getPrintableError(error)
+  //           );
+  //         }
+  //       );
+  //     // }
+  //   } else {
+  //     return;
+  //   }
+  // }
+}
 
 // Helpers
 
@@ -245,7 +275,9 @@ async function deletePreviousInstallers(logger: LoggerType) {
         try {
           await unlink(fullPath);
         } catch (error) {
-          logger.error(`deletePreviousInstallers: couldn't delete file ${file}`);
+          logger.error(
+            `deletePreviousInstallers: couldn't delete file ${file}`
+          );
         }
       })
     );

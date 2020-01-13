@@ -21,7 +21,7 @@
 .sortBy {
   margin-bottom: 10px;
 }
-.general-container{
+.general-container {
   display: flex;
 }
 .container-ticket {
@@ -29,35 +29,35 @@
   cursor: pointer;
   width: 100%;
 }
-.edit-company-container{
-  width:30%;
+.edit-company-container {
+  width: 30%;
   padding: 120px 0px 21px;
   background: white;
   height: -webkit-fill-available;
-  & .companyAvatarContainer{
+  & .companyAvatarContainer {
     background: #b1c6de54;
     text-align: center;
     display: flex;
-    & .buttonEditCompany{
+    & .buttonEditCompany {
       width: 20%;
       text-align: center;
       align-items: flex-end;
-       /*display: flex;*/
+      /*display: flex;*/
       justify-content: center;
     }
-    & .avatarCompanyContainer{
+    & .avatarCompanyContainer {
       width: 80%;
     }
   }
-  & .containerDataEditCompany{
+  & .containerDataEditCompany {
     display: flex;
     margin-top: 10px;
-    & .companyNameEdit{
+    & .companyNameEdit {
       width: 80%;
       margin-left: 10px;
     }
-    & .buttonEditCompany{
-      width:20%;
+    & .buttonEditCompany {
+      width: 20%;
       text-align: center;
     }
   }
@@ -70,8 +70,7 @@
   background-image: url(./../images/desktop-blackboard.png);
   height: 100%;
   background-size: cover;
-  overflow:auto;
-
+  overflow: auto;
 }
 .main-ticket-container {
   min-height: 65px;
@@ -643,22 +642,22 @@ p.ticket-time {
     // width: 50%;
     min-width: 41%;
     padding: 20px;
-    width:100%;
-    max-width:100%;
-    text-align:center;
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
     @include backgroudGradient;
     span {
       font-family: $poppins-semibold;
       font-size: 17px;
-      color: $color-white
+      color: $color-white;
     }
   }
   .divSearchContact {
     // width: 50%;
     padding: 27px;
     display: flex;
-    .searchContact{
-      margin-top:8px;
+    .searchContact {
+      margin-top: 8px;
     }
     input {
       width: 240px;
@@ -743,33 +742,33 @@ tbody#myTable tr {
 .group {
   display: flex !important;
   flex-direction: row;
-  & .conversation-header{
+  & .conversation-header {
     // width: calc(100% - 300px);
     width: 100%;
   }
-  & .edit-group-modal{
-    width:300px;
+  & .edit-group-modal {
+    width: 300px;
   }
-  & .panel{
+  & .panel {
     // width: calc(100% - 300px);
     width: 100%;
   }
 }
-.width3colum{
-  width: calc(100% - 300px)!important;
+.width3colum {
+  width: calc(100% - 300px) !important;
 }
-.avatarEditGroup{
+.avatarEditGroup {
   width: 100%;
-    height: 140px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
+  height: 140px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
-.containerEditGroup{
+.containerEditGroup {
   width: 90%;
   margin-bottom: 10px;
 }
-.buttonEditGroup{
+.buttonEditGroup {
   @include backgroudGradient();
   position: absolute;
   bottom: 15px;
@@ -783,17 +782,17 @@ tbody#myTable tr {
   padding-right: 20px;
   min-width: 250px;
 }
-.containerDataEditGroup{
+.containerDataEditGroup {
   display: flex;
-  .groupNameEdit{
-    width:90%;
+  .groupNameEdit {
+    width: 90%;
   }
-  .buttonEditNameGroup{
-    width:10%;
+  .buttonEditNameGroup {
+    width: 10%;
   }
-  .closeEditNameGroup{
-    width:25px;
+  .closeEditNameGroup {
+    width: 25px;
     cursor: pointer;
-    margin-top:10px;
+    margin-top: 10px;
   }
 }

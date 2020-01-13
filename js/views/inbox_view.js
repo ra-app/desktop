@@ -8,7 +8,7 @@
 */
 
 // eslint-disable-next-line func-names
-(function () {
+(function() {
   'use strict';
   // variables
   let limitTicket = 12;
@@ -32,7 +32,7 @@
     className: 'conversation-stack',
     lastConversation: null,
     async open(conversation, isTicket, editCompany = null) {
-      console.log('1111111111111111111111111111111111111111111111')
+      console.log('1111111111111111111111111111111111111111111111');
       if (!isTicket) {
         const id = `conversation-${conversation.cid}`;
         if (id !== this.el.firstChild.id) {
@@ -74,11 +74,11 @@
         // Make sure poppers are positioned properly
         window.dispatchEvent(new Event('resize'));
       } else {
-        console.log('22222222222222222222222222222222222')
+        console.log('22222222222222222222222222222222222');
         const isAdmin = true;
         let admins = '';
         try {
-          admins = await getAdminCompany(conversation.id)
+          admins = await getAdminCompany(conversation.id);
           if (admins.success) {
             this.isAdmin = true;
           } else {
@@ -122,7 +122,7 @@
             const view = new Whisper.TicketScreen({
               model: conversation,
               window: this.model.window,
-              editCompany: editCompany
+              editCompany: editCompany,
             });
             // eslint-disable-next-line prefer-destructuring
             $el = view.$el;
@@ -146,7 +146,7 @@
     },
     render_attributes: {
       message: i18n('loading'),
-      versionFooter: window.getVersion()
+      versionFooter: window.getVersion(),
     },
   });
   // Whisper.TicketScreen = Whisper.View.extend({
@@ -181,7 +181,7 @@
           const view = new Whisper.BlackboardScreen({
             model: notes,
             company_id: conversation,
-            isAdmin: isAdmin
+            isAdmin: isAdmin,
           });
           // eslint-disable-next-line prefer-destructuring
           $el = view.$el;
@@ -208,7 +208,7 @@
 
       this.conversation_stack = new Whisper.ConversationStack({
         el: this.$('.conversation-stack'),
-        model: { window: options.window }
+        model: { window: options.window },
       });
 
       this.blackboard_stack = new Whisper.BlackboardStack({
@@ -370,7 +370,7 @@
     },
     searchTickets(e) {
       let value = e.target.value.toLowerCase();
-      $('#ticketList>div').filter(function () {
+      $('#ticketList>div').filter(function() {
         $(this).toggle(
           $(this)
             .text()
@@ -390,7 +390,7 @@
         }
         // tslint:disable-next-line:no-function-expression
         const secondThis = this;
-        ticketList.tickets.sort(function (a, b) {
+        ticketList.tickets.sort(function(a, b) {
           const aTime = secondThis.toTimestamp(a.date);
           const bTime = secondThis.toTimestamp(b.date);
           if (!secondThis.sorted) {
@@ -460,7 +460,7 @@
         // arrayList[index].date = new Date(element.ts_created)
         //   .toUTCString()
         //   .split('GMT')[0];
-        arrayList[index].date = this.setDate(element.ts_created)
+        arrayList[index].date = this.setDate(element.ts_created);
         arrayList[index].hasTicket = true;
         arrayList[index].company_name = list.company_name;
         if (id !== null || id !== undefined) {
@@ -503,12 +503,19 @@
 
       return arrayList;
     },
-    setDate(date){
-      const language = window.getpreferredLocale()
+    setDate(date) {
+      const language = window.getpreferredLocale();
       var d = new Date(date);
-      const  options = { weekday: "long", year: "numeric", month: "short",  
-      day: "numeric", hour: 'numeric', minute:'numeric', second:'numeric' }; 
-      const  n = d.toLocaleDateString(language, options);
+      const options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+      };
+      const n = d.toLocaleDateString(language, options);
       return n;
     },
     onTicketScroll(evt) {
@@ -528,32 +535,43 @@
       }
     },
     async getNewTickets(id, ticketList) {
-      if(!document.getElementsByClassName('tickets-view')[0]) {
+      if (!document.getElementsByClassName('tickets-view')[0]) {
         clearInterval(intervalNewTickets);
       }
       console.log('getNewTicketsgetNewTickets', ticketList);
 
       let ts;
-      if (ticketList.tickets && ticketList.tickets.length > 0 && ticketList.tickets[0].ts_created) ts = new Date(ticketList.tickets[0].ts_created).getTime();
+      if (
+        ticketList.tickets &&
+        ticketList.tickets.length > 0 &&
+        ticketList.tickets[0].ts_created
+      )
+        ts = new Date(ticketList.tickets[0].ts_created).getTime();
       else ts = gotTicketsAt;
 
       const data = {
         ts: ts,
         state: ticketState,
-      }
+      };
       const newTickets = await get_since(id, data);
       console.log('getNewTickets newTickets', newTickets);
-      if(newTickets && newTickets.tickets) {
+      if (newTickets && newTickets.tickets) {
         const temporal = this.changeListTicket(newTickets);
         temporal.forEach(element => {
           ticketList.tickets.unshift(element);
         });
         const isTicket = true;
         this.conversation_stack.open(ticketList.tickets, isTicket);
-      };
-      console.log('new ticket listtt',ticketList.tickets);
+      }
+      console.log('new ticket listtt', ticketList.tickets);
     },
-    async openTicket(id, messageId = null, resetCall = null, type, editCompany = null) {
+    async openTicket(
+      id,
+      messageId = null,
+      resetCall = null,
+      type,
+      editCompany = null
+    ) {
       console.log('open ticket', id, type, editCompany);
       this.$('.conversation-stack').on(
         'scroll',
@@ -562,7 +580,7 @@
       if (resetCall) {
         offsetTicket = 0;
       }
-      let data = []
+      let data = [];
       if (!editCompany) {
         data = {
           limit: limitTicket,
@@ -583,18 +601,20 @@
         const isTicket = true;
         // if(this.tmpticketId !== id){
         // this.conversation_stack.open(tickets, isTicket, clientDetails);
-        if(intervalNewTickets !== null) {
+        if (intervalNewTickets !== null) {
           clearInterval(intervalNewTickets);
         }
-        intervalNewTickets = setInterval(this.getNewTickets.bind(this, id, ticketList), 10000);
+        intervalNewTickets = setInterval(
+          this.getNewTickets.bind(this, id, ticketList),
+          10000
+        );
         // this.getNewTickets(id, ticketList);
         if (ticketList.tickets) {
           // ticketList.tickets.forEach((element, index) => {
           //   ticketList.tickets[index].avatarSrc = getAvatar(element.company_id);
           // });
           ticketList.tickets = this.changeListTicket(ticketList, id);
-        }
-        else {
+        } else {
           let tmpisClaimed = false;
           let tmpisUnclaimed = false;
           let tmpisClosed = false;
@@ -649,11 +669,13 @@
       try {
         notes = await getCardsBlackboard(id);
         try {
-          admins = await getAdminCompany(id)
+          admins = await getAdminCompany(id);
           if (notes == undefined) {
-            await createCardBlackboard(admins.admins[0].company_id).then(async resp => {
-              notes = await getCardsBlackboard(id);
-            })
+            await createCardBlackboard(admins.admins[0].company_id).then(
+              async resp => {
+                notes = await getCardsBlackboard(id);
+              }
+            );
           }
           if (admins.success) {
             isAdmin = true;
@@ -664,11 +686,9 @@
           isAdmin = false;
         }
         this.blackboard_stack.openBlackboard(id, notes, isAdmin);
-      }
-      catch (err) {
+      } catch (err) {
         console.warn('openTicker error', err);
       }
-
     },
 
     async loadMoreTickets() {
